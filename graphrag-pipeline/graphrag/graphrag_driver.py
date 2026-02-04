@@ -5,13 +5,15 @@ from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter i
 from neo4j_graphrag.experimental.pipeline.kg_builder import SimpleKGPipeline
 import os
 import glob
-from config import PROMPT_TEMPLATE, NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD
+from .config import PROMPT_TEMPLATE, NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD 
 import asyncio
 
 import sys
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
+# llama3.1:8b-instruct uses 8GB VRAM, while q4_K_M quantized version uses around 4GB-5GB VRAM so it's the only one I can run locally
+MODEL = "llama3.1:8b-instruct-q4_K_M"
 
 from llm import generate
 
@@ -23,7 +25,7 @@ neo4j_driver = neo4j.GraphDatabase.driver(
 def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     # keep_alive=0 unloads VRAM after each document processing
     encoder_llm = OllamaLLM(
-        model_name="llama3.1:8b-instruct",
+        model_name=MODEL,
         model_params={
             "num_ctx": 4096,
             "temperature": 0,
@@ -34,7 +36,7 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
 
     # 2. The Retriever: Logical synthesis for Prolog
     retriever_llm = OllamaLLM(
-        model_name="llama3.1:8b-instruct",
+        model_name=MODEL,
         model_params={
             "num_ctx": 2048, # Smaller window is faster for QA
             "temperature": 0.1, 
@@ -44,7 +46,7 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
 
     # 2. Initialize Embedder
     embedder = OllamaEmbeddings(
-        model="llama3.1:8b-instruct"
+        model=MODEL
     )
 
     print("Ollama loaded successfully.")
@@ -95,7 +97,7 @@ def test_extract_query_and_context(user_prompt: str):
     
 async def perform_tests():
     # 1. Initialize models and pipelines
-    llm, embedder = initialize_models()
+    llm, retriever_llm, embedder = initialize_models() # forgot retriever_llm here, but it's not used in the tests below, so it's fine for now
     kg_builder_pdf, kg_builder_text = setup_kg_pipeline(llm, embedder)
     
     # 2. Extract Phase (Synchronous)
