@@ -19,19 +19,32 @@ MODEL = "llama3.1:8b-instruct-q4_K_M"
 from llm import generate
 
 class DebugOllamaLLM(OllamaLLM):
-    """Wrapper to print raw LLM responses for debugging."""
+    """Wrapper to clean and print raw LLM responses for debugging."""
     
+    def _clean_response(self, response: str) -> str:
+        """Extracts the substring between the first { and the last }."""
+        start_index = response.find('{')
+        end_index = response.rfind('}')
+        
+        # If we found both, and the start is before the end
+        if start_index != -1 and end_index != -1 and start_index < end_index:
+            # +1 includes the closing bracket itself
+            return response[start_index : end_index + 1]
+            
+        # If no brackets found, return original 
+        return response
+
     def invoke(self, input: str, **kwargs) -> str:
         print(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{input[:200]}...\n----------------------------------")
         response = super().invoke(input, **kwargs)
         print(f"\n=== [DEBUG] RAW RESPONSE (Sync) ===\n{response}\n===================================")
-        return response
+        return self._clean_response(response)
 
     async def ainvoke(self, input: str, **kwargs) -> str:
         print(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{input[:200]}...\n----------------------------------")
         response = await super().ainvoke(input, **kwargs)
         print(f"\n=== [DEBUG] RAW RESPONSE (Async) ===\n{response}\n===================================")
-        return response
+        return self._clean_response(response)
 
 neo4j_driver = neo4j.GraphDatabase.driver(
     NEO4J_URI,
