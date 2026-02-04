@@ -8,6 +8,7 @@ PROMPT_TEMPLATE = '''
 You are an educational question answering model tasked with extracting information from papers
 and structuring it in a property graph to inform students about their potential academic questions.
 EXTRACT JSON ONLY. DO NOT TALK. NO PREAMBLE. NO MARKDOWN.
+Do not generate redundant relationships. Create only ONE relationship between any two nodes. Prioritize 'DEFINES' or 'PART_OF' over 'RULE' or 'EXCEPTION' unless strictly necessary.
 
 Extract the entities (nodes) and specify their type from the following Input text.
 Also extract the relationships between these nodes. the relationship direction goes from the start node to the end node.
@@ -27,12 +28,15 @@ Do respect the source and target node types for relationship and the relationshi
 
 Do not return any additional information other than the JSON in it.
 
+
 Examples:
 {examples}
 
 Input text:
 
 {text}
+
+AGAIN EXTRACT JSON ONLY. DO NOT TALK. NO PREAMBLE. NO MARKDOWN.
 '''
 
 PROMPT_TEMPLATE = '''
@@ -88,6 +92,7 @@ IDENTIFY THREE TYPES OF LOGIC:
 ### Input Text
 {text}
 
+FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble.
 '''
 
 RETRIEVAL_QUERY = '''
@@ -168,18 +173,18 @@ Analyze the user's input and structure it as follows:
 '''
 
 ENCODER_FEW_SHOT_EXAMPLES = [
-  # Example 1
-  {"role": "user", "content": "Hey so Alise is a docter and Bob is a nurce, so is Alise able to prescribe meds?"},
-  {"role": "assistant", "content": '''
-{
-  "rationale": "The user identifies two entities (Alice and Bob) and assigns them specific medical roles (Doctor and Nurse). The core of the query is a request for a permission check regarding Alice's ability to prescribe medication based on her professional status. To prepare this for the knowledge graph, I must fix the typos 'Alise' (Alice), 'docter' (doctor), 'nurce' (nurse), and 'meds' (medications).",
-  "cleaned_query": "Is Alice, who is a doctor, legally authorized to prescribe medications?",
-  "extracted_context": [
-    "Alice is a doctor.",
-    "Bob is a nurse."
-  ]
-}
-'''},
+#   # Example 1
+#   {"role": "user", "content": "Hey so Alise is a docter and Bob is a nurce, so is Alise able to prescribe meds?"},
+#   {"role": "assistant", "content": '''
+# {
+#   "rationale": "The user identifies two entities (Alice and Bob) and assigns them specific medical roles (Doctor and Nurse). The core of the query is a request for a permission check regarding Alice's ability to prescribe medication based on her professional status. To prepare this for the knowledge graph, I must fix the typos 'Alise' (Alice), 'docter' (doctor), 'nurce' (nurse), and 'meds' (medications).",
+#   "cleaned_query": "Is Alice, who is a doctor, legally authorized to prescribe medications?",
+#   "extracted_context": [
+#     "Alice is a doctor.",
+#     "Bob is a nurse."
+#   ]
+# }
+# '''},
   
   # Example 2
   {"role": "user", "content": "Assuming every human is mortal, what happens to socrates?"},
@@ -194,18 +199,18 @@ ENCODER_FEW_SHOT_EXAMPLES = [
 }
 '''},
   
-  # Example 3
-  {"role": "user", "content": "So, like, if most birds can fly but penguins are birds that can't, what happens to Pingu the penguin?"},
-  {"role": "assistant", "content": '''
-{
-  "rationale": "The user is asking about a specific entity 'Pingu' based on a general rule about birds and a specific exception for penguins.",
-  "cleaned_query": "What is the flight capability status of Pingu the penguin?",
-  "extracted_context": [
-    "Most birds have the ability to fly.",
-    "Penguins are a type of bird that cannot fly.",
-    "Pingu is a penguin."
-  ]
-}
-'''}
+#   # Example 3
+#   {"role": "user", "content": "So, like, if most birds can fly but penguins are birds that can't, what happens to Pingu the penguin?"},
+#   {"role": "assistant", "content": '''
+# {
+#   "rationale": "The user is asking about a specific entity 'Pingu' based on a general rule about birds and a specific exception for penguins.",
+#   "cleaned_query": "What is the flight capability status of Pingu the penguin?",
+#   "extracted_context": [
+#     "Most birds have the ability to fly.",
+#     "Penguins are a type of bird that cannot fly.",
+#     "Pingu is a penguin."
+#   ]
+# }
+# '''}
   
 ]
