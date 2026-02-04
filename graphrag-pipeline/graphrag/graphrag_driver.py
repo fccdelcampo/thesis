@@ -81,7 +81,7 @@ def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
 def generate_answer(query, retriever, llm) -> dict:
     return generate(llm, retriever, query)
 
-from encoder import process_pdf_documents, process_text_context, extract_query_and_context
+from .encoder import process_pdf_documents, process_text_context, extract_query_and_context
 
 async def test_process_pdf_context(kg_builder_pdf: SimpleKGPipeline):
     await process_pdf_documents(kg_builder_pdf)
