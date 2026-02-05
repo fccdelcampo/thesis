@@ -19,10 +19,20 @@ MODEL = "llama3.1:8b-instruct-q4_K_M"
 from llm import generate
 
 class DebugOllamaLLM(OllamaLLM):
-    """Wrapper to clean and print raw LLM responses for debugging."""
+    """Wrapper to clean input prompts and log raw LLM responses to debug.txt."""
     
-    def _clean_text(self, text: str) -> str:
-        """Helper: Extracts JSON from the text string."""
+    def _log_to_file(self, message: str):
+        """Appends a message to debug.txt with UTF-8 encoding."""
+        try:
+            # "a" mode appends to the file. Change to "w" if you want to overwrite every time.
+            with open("debug.txt", "a", encoding="utf-8") as f:
+                f.write(message + "\n")
+        except Exception as e:
+            # Fallback to console if file writing fails
+            print(f"[DebugOllamaLLM Error] Could not write to debug.txt: {e}")
+
+    def _clean_response_text(self, text: str) -> str:
+        """Helper: Extracts JSON from the response string."""
         if not text:
             return ""
         start_index = text.find('{')
@@ -31,38 +41,53 @@ class DebugOllamaLLM(OllamaLLM):
             return text[start_index : end_index + 1]
         return text
 
+    def _clean_prompt(self, text: str) -> str:
+        """Removes all newlines from the input prompt to fix PDF formatting."""
+        return text.replace('\n', ' ')
+
     def invoke(self, input: str, **kwargs) -> str:
-        # 1. Sync Call (Used by extract_query_and_context)
-        print(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{input}...\n----------------------------------")
+        # 1. Clean the input
+        clean_input = self._clean_prompt(input)
         
-        response = super().invoke(input, **kwargs)
+        # 2. LOG to file instead of print
+        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{clean_input}\n----------------------------------")
         
-        # Handle case where response is an object vs string
+        # 3. Send to LLM
+        response = super().invoke(clean_input, **kwargs)
+        
+        # 4. Handle response
         raw_content = response.content if hasattr(response, 'content') else str(response)
         
-        print(f"\n=== [DEBUG] RAW RESPONSE (Sync) ===\n{raw_content}\n===================================")
+        # 5. LOG to file
+        self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Sync) ===\n{raw_content}\n===================================")
         
-        # CRITICAL FIX: Return a STRING here so extract_query_and_context works
-        return self._clean_text(raw_content)
+        return self._clean_response_text(raw_content)
 
     async def ainvoke(self, input: str, **kwargs):
-        # 2. Async Call (Used by SimpleKGPipeline)
-        print(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{input}...\n----------------------------------")
+        # 1. Clean the input
+        clean_input = self._clean_prompt(input)
         
-        response = await super().ainvoke(input, **kwargs)
+        # 2. LOG to file
+        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{clean_input}\n----------------------------------")
         
-        # Extract content safely
+        # 3. Send to LLM
+        response = await super().ainvoke(clean_input, **kwargs)
+        
+        # 4. Extract content
         raw_content = response.content if hasattr(response, 'content') else str(response)
-        print(f"\n=== [DEBUG] RAW RESPONSE (Async) ===\n{raw_content}\n===================================")
         
-        clean_content = self._clean_text(raw_content)
+        # 5. LOG to file
+        self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Async) ===\n{raw_content}\n===================================")
         
-        # CRITICAL: Return the OBJECT (with updated content) so the Pipeline works
+        clean_content = self._clean_response_text(raw_content)
+        
+        # 6. Return Object or String
         if hasattr(response, 'content'):
             response.content = clean_content
             return response
         else:
             return clean_content
+        
 
 neo4j_driver = neo4j.GraphDatabase.driver(
     NEO4J_URI,
@@ -74,14 +99,14 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     encoder_llm = DebugOllamaLLM(
         model_name=MODEL,
         model_params={
-            "num_ctx": 4096,
+            "num_ctx": 2048,
             "temperature": 0,
             "format": "json",
             "keep_alive": 0,
             "seed": 42, # for reproducibility
             "options": { # in case parameters need to be nested
                 "temperature": 0,
-                "num_ctx": 4096,
+                "num_ctx": 2048,
                 "format": "json",
                 "repeat_penalty": 1.2
             }
