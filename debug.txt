@@ -163,3 +163,3398 @@
 --- [DEBUG] SENT PROMPT (Async) ---
  ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text behind it was a little door about fifteen inches  high: she tried the little golden key in the lock, and to her great delight it fitted! Alice opened  the door and found that it led into a small passage, not much larger than a rat-hole: she knelt  down and looked along the passage into the loveliest garden you ever saw. How she longed to  get out of that dark hall, and wander about among those beds of bright flowers and those cool  fountains, but she could not even get her head through the doorway; “and even if my head  would go through,” thought poor Alice, “it would be of very little use without my shoulders. Oh,  how I wish I could shut up like a telescope! I think I could, if I only knew how to begin.” For, you  see, so many out-of-the-way things had happened lately, that Alice had begun to think that very  few things indeed were really impossible. There seemed to be no use in waiting by the little  door, so she went back to the table, half hoping she might find another key on it, or at any rate a  book of rules for shutting people up like telescopes: this time she found a little bottle on it,  (“which certainly was not here before,” said Alice,) and round the neck of the   FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
 ----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "alice",
+            "label": "Person",
+            "properties": {"name": "Alice"}
+        },
+        {
+            "id": "latitude",
+            "label": "Concept",
+            "properties": {}
+        },
+        {
+            "id": "longitude",
+            "label": "Concept",
+            "properties": {}
+        },
+        {
+            "id": "earth",
+            "label": "Event",
+            "properties": {}
+        },
+        {
+            "id": "people",
+            "label": "Person",
+            "properties": {}
+        },
+        {
+            "id": "antipathies",
+            "label": "Concept",
+            "properties": {}
+        },
+        {
+            "id": "new_zealand",
+            "label": "Topic",
+            "properties": {}
+        },
+        {
+            "id": "australia",
+            "label": "Topic",
+            "properties": {}
+        },
+        {
+            "id": "dinah",
+            "label": "Person",
+            "properties": {"name": "Dinah"}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "IS_A",
+            "start_node_id": "alice",
+            "end_node_id": "person",
+            "properties": {
+                "natural_statement": "Alice is a person.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "person(alice)"
+            }
+        },
+        {
+            "type": "RELATED_TO",
+            "start_node_id": "alice",
+            "end_node_id": "latitude",
+            "properties": {
+                "natural_statement": "Alice wonders about latitude.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "wonder(alice, latitude)"
+            }
+        },
+        {
+            "type": "RELATED_TO",
+            "start_node_id": "alice",
+            "end_node_id": "longitude",
+            "properties": {
+                "natural_statement": "Alice wonders about longitude.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "wonder(alice, longitude)"
+            }
+        },
+        {
+            "type": "CAUSES",
+            "start_node_id": "alice",
+            "end_node_id": "earth",
+            "properties": {
+                "natural_statement": "Alice wonders if she will fall through the earth.",
+                "logic_intent": "RULE",
+                "logical_form_hint": "fall_through_earth(alice) :- wonder(alice, earth)"
+            }
+        },
+        {
+            "type": "PART_OF",
+            "start_node_id": "alice",
+            "end_node_id": "people",
+            "properties": {
+                "natural_statement": "Alice is among the people.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "among(alice, people)"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "antipathies",
+            "properties": {
+                "natural_statement": "Alice thinks about antipathies.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "think(alice, antipathies)"
+            }
+        },
+        {
+            "type": "RELATED_TO",
+            "start_node_id": "alice",
+            "end_node_id": "new_zealand",
+            "properties": {
+                "natural_statement": "Alice wonders if she is in New Zealand.",
+                "logic_intent": "RULE",
+                "logical_form_hint": "in(new_zealand) :- wonder(alice, new_zealand)"
+            }
+        },
+        {
+            "type": "RELATED_TO",
+            "start_node_id": "alice",
+            "end_node_id": "australia",
+            "properties": {
+                "natural_statement": "Alice wonders if she is in Australia.",
+                "logic_intent": "RULE",
+                "logical_form_hint": "in(australia) :- wonder(alice, australia)"
+            }
+        },
+        {
+            "type": "IS_A",
+            "start_node_id": "dinah",
+            "end_node_id": "person",
+            "properties": {
+                "natural_statement": "Dinah is a person.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "person(dinah)"
+            }
+        },
+        {
+            "type": "CAUSES",
+            "start_node_id": "alice",
+            "end_node_id": "dinah",
+            "properties": {
+                "natural_statement": "Alice wonders if Dinah will miss her.",
+                "logic_intent": "RULE",
+                "logical_form_hint": "miss(dinah) :- wonder(alice, dinah)"
+            }
+        },
+        {
+            "type": "CAUSES",
+            "start_node_id": "alice",
+            "end_node_id": "saucer_of_milk",
+            "properties": {
+                "natural_statement": "Alice wonders if Dinah will remember her saucer of milk.",
+                "logic_intent": "RULE",
+                "logical_form_hint": "remember(saucer_of_milk) :- wonder(alice, dinah)"
+            }
+        },
+        {
+            "type": "CAUSES",
+            "start_node_id": "alice",
+            "end_node_id": "earth",
+            "properties": {
+                "natural_statement": "Alice wonders if she will fall through the earth.",
+                "logic_intent": "RULE",
+                "logical_form_hint": "fall_through_earth(alice) :- wonder(alice, earth)"
+            }
+        }
+    ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text people up like telescopes: this time she found a little bottle on it,  (“which certainly was not here before,” said Alice,) and round the neck of the bottle was a paper  label, with the words “DRINK ME,” beautifully printed on it in large letters. It was all very well to  say “Drink me,” but the wise little Alice was not going to do that in a hurry. “No, I’ll look first,”  she said, “and see whether it’s marked ‘poison’ or not”; for she had read several nice little  histories about children who had got burnt, and eaten up by wild beasts and other unpleasant  things, all because they would not remember the simple rules their friends had taught them:  such as, that a red-hot poker will burn you if you hold it too long; and that if you cut your finger  very deeply with a knife, it usually bleeds; and she had never forgotten that, if you drink much  from a bottle marked “poison,” it is almost certain to disagree with you, sooner or later.  However, this bottle was not marked “poison,” so Alice ventured to taste it, and finding it very  nice, (it had, in fact, a sort of mixed flavour of cherry-tart, custard, pine-apple, roast turkey,  toffee, and hot buttered toast,) she very soon   FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "alice",
+            "label": "person",
+            "properties": {"name": "Alice"}
+        },
+        {
+            "id": "jar",
+            "label": "object",
+            "properties": {"name": "ORANGE MARMALADE"}
+        },
+        {
+            "id": "shelves",
+            "label": "location",
+            "properties": {}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "IS_A",
+            "start_node_id": "alice",
+            "end_node_id": "person",
+            "properties": {"natural_statement": "Alice is a person.", "logic_intent": "FACT", "logical_form_hint": "mortal(alice)"}
+        },
+        {
+            "type": "RELATED_TO",
+            "start_node_id": "jar",
+            "end_node_id": "shelves",
+            "properties": {"natural_statement": "The jar is related to the shelves.", "logic_intent": "FACT", "logical_form_hint": "on(shelves, jar)"}
+        },
+        {
+            "type": "CAUSES",
+            "start_node_id": "alice",
+            "end_node_id": "jar",
+            "properties": {"natural_statement": "Alice caused the jar to fall.", "logic_intent": "FACT", "logical_form_hint": "caused(alice, jar)"}
+        }
+    ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text nice, (it had, in fact, a sort of mixed flavour of cherry-tart, custard, pine-apple, roast turkey,  toffee, and hot buttered toast,) she very soon finished it off. “What a curious feeling!” said Alice;  “I must be shutting up like a telescope.” And so it was indeed: she was now only ten inches high,  and her face brightened up at the thought that she was now the right size for going through the  little door into that lovely garden. First, however, she waited for a few minutes to see if she was  going to shrink any further: she felt a little nervous about this; “for it might end, you know,” said  Alice to herself, “in my going out altogether, like a candle. I wonder what I should be like then?”  And she tried to fancy what the flame of a candle is like after the candle is blown out, for she  could not remember ever having seen such a thing. After a while, finding that nothing more  happened, she decided on going into the garden at once; but, alas for poor Alice! when she got  to the door, she found she had forgotten the little golden key, and when she went back to the  table for it, she found she could not possibly reach it: she could see it quite plainly through the  glass, and she  FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "alice",
+            "label": "person",
+            "properties": {"name": "Alice"}
+        },
+        {
+            "id": "rabbit",
+            "label": "animal",
+            "properties": {"name": "Rabbit"}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "IS_A",
+            "start_node_id": "alice",
+            "end_node_id": "person",
+            "properties": {
+                "natural_statement": "Alice is a person.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "person(alice)"
+            }
+        },
+        {
+            "type": "IS_A",
+            "start_node_id": "rabbit",
+            "end_node_id": "animal",
+            "properties": {
+                "natural_statement": "The rabbit is an animal.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "animal(rabbit)"
+            }
+        },
+        {
+            "type": "CAUSES",
+            "start_node_id": "rabbit",
+            "end_node_id": "alice",
+            "properties": {
+                "natural_statement": "The rabbit's actions caused Alice to start to her feet.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "causes(rabbit, alice)"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "daisy-chain",
+            "properties": {
+                "natural_statement": "Alice was considering whether the pleasure of making a daisy-chain would be worth the trouble.",
+                "logic_intent": "RULE",
+                "logical_form_hint": "defines(alice, daisy_chain)"
+            }
+        },
+        {
+            "type": "ILLUSTRATES",
+            "start_node_id": "rabbit",
+            "end_node_id": "watch",
+            "properties": {
+                "natural_statement": "The rabbit took a watch out of its waistcoat-pocket.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "illustrates(rabbit, watch)"
+            }
+        }
+    ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text ey, and when she went back to the  table for it, she found she could not possibly reach it: she could see it quite plainly through the  glass, and she tried her best to climb up one of the legs of the table, but it was too slippery; and  when she had tired herself out with trying, the poor little thing sat down and cried. “Come,  there’s no use in crying like that!” said Alice to herself, rather sharply; “I advise you to leave off  this minute!” She generally gave herself very good advice, (though she very seldom followed it),  and sometimes she scolded herself so severely as to bring tears into her eyes; and once she  remembered trying to box her own ears for having cheated herself in a game of croquet she was  playing against herself, for this curious child was very fond of pretending to be two people. “But  it’s no use now,” thought poor Alice, “to pretend to be two people! Why, there’s hardly enough  of me left to make one respectable person!” Soon her eye fell on a little glass box that was lying  under the table: she opened it, and found in it a very small cake, on which the words “EAT ME”  were beautifully marked in currants. “Well, I’ll eat it,” said Alice, “and if it makes  FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "object_found",
+            "label": "Concept",
+            "properties": {"name": "Object Found"}
+        },
+        {
+            "id": "solid_glass_table",
+            "label": "Event",
+            "properties": {"name": "Solid Glass Table"}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "IS_A",
+            "start_node_id": "object_found",
+            "end_node_id": "solid_glass_table",
+            "properties": {
+                "natural_statement": "An object was found on the solid glass table.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "found(X, Y) :- object(X), location(Y)"
+            }
+        }
+    ]
+}
+===================================
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "little_door",
+            "label": "Concept",
+            "properties": {"name": "Little Door"}
+        },
+        {
+            "id": "alice",
+            "label": "Person",
+            "properties": {"name": "Alice"}
+        },
+        {
+            "id": "garden",
+            "label": "Event",
+            "properties": {"name": "Garden"}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "IS_A",
+            "start_node_id": "little_door",
+            "end_node_id": "door",
+            "properties": {
+                "natural_statement": "The little door was a type of door.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "RELATED_TO",
+            "start_node_id": "alice",
+            "end_node_id": "little_door",
+            "properties": {
+                "natural_statement": "Alice was related to the little door.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "CAUSES",
+            "start_node_id": "garden",
+            "end_node_id": "alice",
+            "properties": {
+                "natural_statement": "The garden caused Alice's desire to get out of the dark hall.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "little_door",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The little door defined a path to the garden.",
+                "logic_intent": "RULE"
+            }
+        },
+        {
+            "type": "ILLUSTRATES",
+            "start_node_id": "alice",
+            "end_node_id": "little_door",
+            "properties": {
+                "natural_statement": "Alice's attempt to get out of the dark hall illustrated her desire for freedom.",
+                "logic_intent": "EXCEPTION"
+            }
+        }
+    ]
+}
+===================================
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "alice",
+            "label": "person",
+            "properties": {"name": "Alice"}
+        },
+        {
+            "id": "telescope",
+            "label": "object",
+            "properties": {}
+        },
+        {
+            "id": "bottle",
+            "label": "object",
+            "properties": {}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "related_to",
+            "start_node_id": "alice",
+            "end_node_id": "telescope",
+            "properties": {
+                "natural_statement": "Alice found a telescope.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "related_to",
+            "start_node_id": "alice",
+            "end_node_id": "bottle",
+            "properties": {
+                "natural_statement": "Alice found a bottle on the telescope.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "defines",
+            "start_node_id": "bottle",
+            "end_node_id": "label",
+            "properties": {
+                "natural_statement": "The label on the bottle said 'DRINK ME'.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "causes",
+            "start_node_id": "alice",
+            "end_node_id": "illness",
+            "properties": {
+                "natural_statement": "If you drink from a bottle marked 'poison', it is almost certain to disagree with you, sooner or later.",
+                "logic_intent": "RULE"
+            }
+        },
+        {
+            "type": "related_to",
+            "start_node_id": "alice",
+            "end_node_id": "illness",
+            "properties": {
+                "natural_statement": "Alice got sick after drinking from the bottle.",
+                "logic_intent": "FACT"
+            }
+        }
+    ]
+}
+===================================
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "alice",
+            "label": "person",
+            "properties": {"name": "Alice"}
+        },
+        {
+            "id": "table_leg",
+            "label": "object",
+            "properties": {}
+        },
+        {
+            "id": "glass_box",
+            "label": "object",
+            "properties": {}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "IS_A",
+            "start_node_id": "alice",
+            "end_node_id": "person",
+            "properties": {"natural_statement": "Alice is a person", "logic_intent": "FACT"}
+        },
+        {
+            "type": "PART_OF",
+            "start_node_id": "table_leg",
+            "end_node_id": "table",
+            "properties": {"natural_statement": "The table leg is part of the table", "logic_intent": "FACT"}
+        },
+        {
+            "type": "RELATED_TO",
+            "start_node_id": "alice",
+            "end_node_id": "glass_box",
+            "properties": {"natural_statement": "Alice found a glass box under the table", "logic_intent": "FACT"}
+        }
+    ]
+}
+===================================
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {
+      "id": "alice",
+      "label": "person",
+      "properties": {"name": "Alice"}
+    },
+    {
+      "id": "rabbit",
+      "label": "animal",
+      "properties": {"name": "Rabbit"}
+    },
+    {
+      "id": "hall",
+      "label": "location",
+      "properties": {}
+    }
+  ],
+  "relationships": [
+    {
+      "type": "IS_A",
+      "start_node_id": "rabbit",
+      "end_node_id": "animal",
+      "properties": {"natural_statement": "The Rabbit is an animal.", "logic_intent": "FACT", "logical_form_hint": "mortal(X) :- man(X)"}
+    },
+    {
+      "type": "IS_IN",
+      "start_node_id": "alice",
+      "end_node_id": "hall",
+      "properties": {"natural_statement": "Alice is in the hall.", "logic_intent": "FACT", "logical_form_hint": "at_location(X, Y)"}
+    },
+    {
+      "type": "CAUSES",
+      "start_node_id": "alice",
+      "end_node_id": "hall",
+      "properties": {"natural_statement": "Alice's arrival caused the hall to be lit up.", "logic_intent": "RULE", "logical_form_hint": "causes(X, Y) :- X arrives at Y"}
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "hall",
+      "end_node_id": "location",
+      "properties": {"natural_statement": "The hall is a location.", "logic_intent": "FACT", "logical_form_hint": "is_a(X, Y)"}
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text and found in it a very small cake, on which the words “EAT ME”  were beautifully marked in currants. “Well, I’ll eat it,” said Alice, “and if it makes me grow larger,  I can reach the key; and if it makes me grow smaller, I can creep under the door; so either way  I’ll get into the garden, and I don’t care which happens!” She ate a little bit, and said anxiously  to herself, “Which way? Which way?”, holding her hand on the top of her head to feel which  way it was growing, and she was quite surprised to find that she remained the same size: to be  sure, this generally happens when one eats cake, but Alice had got so much into the way of  expecting nothing but out-of-the-way things to happen, that it seemed quite dull and stupid for  life to go on in the common way. So she set to work, and very soon finished off the cake.     FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text The object has the ability to unlock the fifteen-inch door  FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "alice",
+            "label": "Person",
+            "properties": {"name": "Alice"}
+        },
+        {
+            "id": "garden",
+            "label": "Event",
+            "properties": {}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "IS_A",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "Alice is going into the garden.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "CAUSES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "Alice's shrinking causes her to go into the garden.",
+                "logic_intent": "RULE"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go through the little door into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a little golden key defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The size of Alice defines whether she can go into the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The presence of a lovely garden defines whether Alice can go into it.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to see the little golden key through the glass defines whether Alice can enter the garden.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "alice",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "The ability to reach the
+===================================
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "alice",
+            "label": "person",
+            "properties": {"name": "Alice"}
+        },
+        {
+            "id": "cake",
+            "label": "object",
+            "properties": {"name": "cake"}
+        },
+        {
+            "id": "key",
+            "label": "object",
+            "properties": {"name": "key"}
+        },
+        {
+            "id": "garden",
+            "label": "location",
+            "properties": {"name": "garden"}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "causes",
+            "start_node_id": "alice",
+            "end_node_id": "cake",
+            "properties": {
+                "natural_statement": "Alice ate a little bit of the cake.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "causes",
+            "start_node_id": "cake",
+            "end_node_id": "alice",
+            "properties": {
+                "natural_statement": "Eating the cake makes Alice grow larger or smaller.",
+                "logic_intent": "RULE"
+            }
+        },
+        {
+            "type": "causes",
+            "start_node_id": "cake",
+            "end_node_id": "key",
+            "properties": {
+                "natural_statement": "If eating the cake makes Alice grow larger, she can reach the key.",
+                "logic_intent": "RULE"
+            }
+        },
+        {
+            "type": "causes",
+            "start_node_id": "cake",
+            "end_node_id": "garden",
+            "properties": {
+                "natural_statement": "If eating the cake makes Alice grow smaller, she can creep under the door and get into the garden.",
+                "logic_intent": "RULE"
+            }
+        },
+        {
+            "type": "causes",
+            "start_node_id": "cake",
+            "end_node_id": "alice",
+            "properties": {
+                "natural_statement": "Eating cake generally makes one grow, but Alice remained the same size.",
+                "logic_intent": "EXCEPTION"
+            }
+        }
+    ]
+}
+===================================
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "unlock_ability",
+            "label": "concept",
+            "properties": {"name": "unlock ability"}
+        },
+        {
+            "id": "object",
+            "label": "concept",
+            "properties": {"name": "object"}
+        },
+        {
+            "id": "door",
+            "label": "concept",
+            "properties": {"name": "fifteen-inch door"}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "related_to",
+            "start_node_id": "unlock_ability",
+            "end_node_id": "object",
+            "properties": {
+                "natural_statement": "The object has the ability to unlock something.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "has_ability(X, Y)"
+            }
+        },
+        {
+            "type": "related_to",
+            "start_node_id": "unlock_ability",
+            "end_node_id": "door",
+            "properties": {
+                "natural_statement": "The object has the ability to unlock a door.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "has_ability(X, Y)"
+            }
+        },
+        {
+            "type": "is_a",
+            "start_node_id": "object",
+            "end_node_id": "door",
+            "properties": {
+                "natural_statement": "The object is a door.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "is_a(X, Y)"
+            }
+        }
+    ]
+}
+===================================
