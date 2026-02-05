@@ -104,7 +104,13 @@ RETURN node.text AS text,
        {entity: e.name, relationship: type(r), connected_to: target.name} AS graph_metadata
 """
 '''
+# Additional instructions if ever needed.
+# 1. Read the Context carefully.
+# 2. Identify which specific sentence supports your answer.
+# 3. If the context contains multiple objects or events, do NOT mix them up. 
+# 4. If the answer is not in the context, say "I don't know."
 GRAPHRAG_TEMPLATE = '''
+# INSTRUCTIONS:
 Answer the Question using the following Context. Only respond with information mentioned in the Context. Do not inject any speculative information not mentioned.
 
 # Question:

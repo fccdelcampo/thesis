@@ -58,13 +58,24 @@ def wait_for_indexes(driver, timeout=60):
         print(f"[{elapsed}s] Waiting for indexes... Status: {states}")
         time.sleep(2)
 
+class CleanTextRetriever(HybridRetriever):
+    # We override 'search' (Public API) instead of 'get_search_results' (Internal API)
+    def search(self, query_text, top_k=5, **kwargs):
+        result = super().search(query_text=query_text, top_k=top_k, **kwargs)
+        
+        # Now it is safe to iterate over .items
+        for item in result.items:
+            if item.content:
+                # Clean the text
+                item.content = item.content.replace('\n', ' ').replace('  ', ' ')
+        
+        return result
+
 def create_retriever(driver, embedder):
     if not check_db_health(driver):
         raise ConnectionError("Aborting initialization: Cannot connect to Neo4j.")
-
-    # 2. Reset Phase (Optional but recommended if changing dimensions)
-    # Uncomment these lines if you switched from Llama (4096) to Nomic (768)
-    # print("Clearing old indexes...")
+    
+    # 2. Cleanup Phase
     driver.execute_query("DROP INDEX documentsVectorIndex IF EXISTS")
     driver.execute_query("DROP INDEX documentsFulltextIndex IF EXISTS")
     
@@ -79,8 +90,7 @@ def create_retriever(driver, embedder):
         return None
 
     # 5. Initialization
-    # CHANGE 3: Use HybridRetriever with the EXACT names from your JSON
-    return HybridRetriever(
+    return CleanTextRetriever(
         driver=driver,
         vector_index_name="documentsVectorIndex",   # Matches ID 3 in your JSON
         fulltext_index_name="documentsFulltextIndex", # Matches ID 6 in your JSON
