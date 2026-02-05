@@ -187,12 +187,10 @@ async def perform_tests():
     # Pass the coroutines themselves to gather.
     print("\n--- Starting Knowledge Graph Ingestion ---")
     
-    # Removed asyncio, it does not speed up LLM generation process in any way.
-    print(">>> Processing PDF Context...")
-    await test_process_pdf_context(kg_builder_pdf)
-
-    print(">>> Processing Text Context...")
-    await process_text_context(kg_builder_text, context)
+    await asyncio.gather(
+        test_process_pdf_context(kg_builder_pdf),
+        process_text_context(kg_builder_text, context)
+    )
     
     print("\n--- All tests completed ---")
 
