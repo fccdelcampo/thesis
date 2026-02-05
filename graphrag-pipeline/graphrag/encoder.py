@@ -47,7 +47,7 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
             
             try:
                 extracted_data = json.loads(response)
-                return extracted_data["cleaned_query"], extracted_data["extracted_context"]
+                return extracted_data["question"], extracted_data["context"]
             except json.JSONDecodeError as e:
                 print(f"JSON decoding error: {e}")
                 raise ValueError("Failed to decode JSON response from Ollama.")

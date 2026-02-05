@@ -21,30 +21,48 @@ from llm import generate
 class DebugOllamaLLM(OllamaLLM):
     """Wrapper to clean and print raw LLM responses for debugging."""
     
-    def _clean_response(self, response: str) -> str:
-        """Extracts the substring between the first { and the last }."""
-        start_index = response.find('{')
-        end_index = response.rfind('}')
-        
-        # If we found both, and the start is before the end
+    def _clean_text(self, text: str) -> str:
+        """Helper: Extracts JSON from the text string."""
+        if not text:
+            return ""
+        start_index = text.find('{')
+        end_index = text.rfind('}')
         if start_index != -1 and end_index != -1 and start_index < end_index:
-            # +1 includes the closing bracket itself
-            return response[start_index : end_index + 1]
-            
-        # If no brackets found, return original 
-        return response
+            return text[start_index : end_index + 1]
+        return text
 
     def invoke(self, input: str, **kwargs) -> str:
-        print(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{input[:200]}...\n----------------------------------")
+        # 1. Sync Call (Used by extract_query_and_context)
+        print(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{input}...\n----------------------------------")
+        
         response = super().invoke(input, **kwargs)
-        print(f"\n=== [DEBUG] RAW RESPONSE (Sync) ===\n{response}\n===================================")
-        return self._clean_response(response)
+        
+        # Handle case where response is an object vs string
+        raw_content = response.content if hasattr(response, 'content') else str(response)
+        
+        print(f"\n=== [DEBUG] RAW RESPONSE (Sync) ===\n{raw_content}\n===================================")
+        
+        # CRITICAL FIX: Return a STRING here so extract_query_and_context works
+        return self._clean_text(raw_content)
 
-    async def ainvoke(self, input: str, **kwargs) -> str:
-        print(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{input[:200]}...\n----------------------------------")
+    async def ainvoke(self, input: str, **kwargs):
+        # 2. Async Call (Used by SimpleKGPipeline)
+        print(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{input}...\n----------------------------------")
+        
         response = await super().ainvoke(input, **kwargs)
-        print(f"\n=== [DEBUG] RAW RESPONSE (Async) ===\n{response}\n===================================")
-        return self._clean_response(response)
+        
+        # Extract content safely
+        raw_content = response.content if hasattr(response, 'content') else str(response)
+        print(f"\n=== [DEBUG] RAW RESPONSE (Async) ===\n{raw_content}\n===================================")
+        
+        clean_content = self._clean_text(raw_content)
+        
+        # CRITICAL: Return the OBJECT (with updated content) so the Pipeline works
+        if hasattr(response, 'content'):
+            response.content = clean_content
+            return response
+        else:
+            return clean_content
 
 neo4j_driver = neo4j.GraphDatabase.driver(
     NEO4J_URI,
@@ -158,7 +176,8 @@ async def perform_tests():
     
     # 2. Extract Phase (Synchronous)
     print("--- Testing extract_query_and_context ---")
-    question = "Which of the following sets is defined by the Well-Ordering Principle as having a guaranteed smallest element? A) Empty sets B) Sets of negative integers C) Nonempty sets of nonnegative integers D) Sets of positive rationals"
+    question = "What object found on the solid glass table was able to unlock the fifteen-inch door?"
+    # "Which of the following sets is defined by the Well-Ordering Principle as having a guaranteed smallest element? A) Empty sets B) Sets of negative integers C) Nonempty sets of nonnegative integers D) Sets of positive rationals"
     
     # Corrected: Removed the extra comma that was making this a tuple
     query, context = test_extract_query_and_context(question)
@@ -168,10 +187,12 @@ async def perform_tests():
     # Pass the coroutines themselves to gather.
     print("\n--- Starting Knowledge Graph Ingestion ---")
     
-    await asyncio.gather(
-        test_process_pdf_context(kg_builder_pdf),
-        process_text_context(kg_builder_text, context)
-    )
+    # Removed asyncio, it does not speed up LLM generation process in any way.
+    print(">>> Processing PDF Context...")
+    await test_process_pdf_context(kg_builder_pdf)
+
+    print(">>> Processing Text Context...")
+    await process_text_context(kg_builder_text, context)
     
     print("\n--- All tests completed ---")
 
