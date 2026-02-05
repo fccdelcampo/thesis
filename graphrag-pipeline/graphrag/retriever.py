@@ -1,15 +1,13 @@
 from .config import RETRIEVAL_QUERY, GRAPHRAG_TEMPLATE
-from neo4j_graphrag.retrievers import HybridCypherRetriever
+# CHANGE 1: Use the standard HybridRetriever (not HybridCypherRetriever)
+from neo4j_graphrag.retrievers import HybridRetriever
 import time
 from neo4j.exceptions import ServiceUnavailable, AuthError
 from neo4j_graphrag.generation import GraphRAG
 
 def check_db_health(driver):
-    """
-    Verifies the driver can connect to Neo4j before starting the pipeline.
-    """
+    """Verifies the driver can connect to Neo4j."""
     try:
-        # Test the credentials and database availability
         driver.verify_connectivity()
         print("Pre-flight check: Database connection verified.")
         return True
@@ -18,13 +16,17 @@ def check_db_health(driver):
         return False
 
 def create_indexes(driver):
-    driver.execute_query("""
+    embedding_dimension = 4096 
+
+    print(f"Creating indexes with dimension: {embedding_dimension}...")
+
+    driver.execute_query(f"""
         CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS
         FOR (n:Chunk) ON (n.embedding)
-        OPTIONS {indexConfig: {
-          `vector.dimensions`: 4096,
+        OPTIONS {{indexConfig: {{
+          `vector.dimensions`: {embedding_dimension},
           `vector.similarity_function`: 'cosine'
-        }}
+        }}}}
     """, database_="neo4j")
     
     driver.execute_query("""
@@ -34,14 +36,10 @@ def create_indexes(driver):
     print("Index creation commands sent.")
 
 def wait_for_indexes(driver, timeout=60):
-    """
-    Waits for indexes to go ONLINE, with a maximum wait time.
-    """
     target_indexes = ['documentsVectorIndex', 'documentsFulltextIndex']
     start_time = time.time()
     
     while True:
-        # Check if we have exceeded the timeout duration
         if time.time() - start_time > timeout:
             raise TimeoutError(f"Indexes failed to go ONLINE within {timeout} seconds.")
             
@@ -61,19 +59,19 @@ def wait_for_indexes(driver, timeout=60):
         time.sleep(2)
 
 def create_retriever(driver, embedder):
-    # 1. Immediate Health Check
     if not check_db_health(driver):
         raise ConnectionError("Aborting initialization: Cannot connect to Neo4j.")
 
-    # 2. Reset Phase
-    print("Clearing old indexes...")
+    # 2. Reset Phase (Optional but recommended if changing dimensions)
+    # Uncomment these lines if you switched from Llama (4096) to Nomic (768)
+    # print("Clearing old indexes...")
     driver.execute_query("DROP INDEX documentsVectorIndex IF EXISTS")
     driver.execute_query("DROP INDEX documentsFulltextIndex IF EXISTS")
     
     # 3. Recreate Phase
     create_indexes(driver)
     
-    # 4. Guarded Wait Phase (with 2-minute timeout for large graphs)
+    # 4. Guarded Wait Phase
     try:
         wait_for_indexes(driver, timeout=120) 
     except TimeoutError as e:
@@ -81,10 +79,11 @@ def create_retriever(driver, embedder):
         return None
 
     # 5. Initialization
-    return HybridCypherRetriever(
+    # CHANGE 3: Use HybridRetriever with the EXACT names from your JSON
+    return HybridRetriever(
         driver=driver,
-        vector_index_name="documentsVectorIndex",
-        fulltext_index_name="documentsFulltextIndex",
-        retrieval_query=RETRIEVAL_QUERY,
-        embedder=embedder
+        vector_index_name="documentsVectorIndex",   # Matches ID 3 in your JSON
+        fulltext_index_name="documentsFulltextIndex", # Matches ID 6 in your JSON
+        embedder=embedder,
+        return_properties=["text", "id"] # Hybrid retriever creates label itself
     )

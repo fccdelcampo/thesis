@@ -19,6 +19,8 @@ retriever = create_retriever(neo4j_driver, embedder)
 
 def run_pipeline(user_question):
     return generate(retriever_llm, retriever, user_question)
+
+run_pipeline("What object found on the solid glass table was able to unlock the fifteen-inch door?")
     
 # def load_test_cases(name: str, start: int, end: int) -> dict:
 #     test_cases = []

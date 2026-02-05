@@ -51,9 +51,13 @@ class DebugOllamaLLM(OllamaLLM):
         
         # 2. LOG to file instead of print
         self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{clean_input}\n----------------------------------")
+
+        print(f"  > Sending chunk to LLM ({len(input)} chars)...", end="", flush=True)
         
         # 3. Send to LLM
         response = super().invoke(clean_input, **kwargs)
+
+        print(" Done!")
         
         # 4. Handle response
         raw_content = response.content if hasattr(response, 'content') else str(response)
@@ -99,16 +103,13 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     encoder_llm = DebugOllamaLLM(
         model_name=MODEL,
         model_params={
-            "num_ctx": 2048,
-            "temperature": 0,
-            "format": "json",
-            "keep_alive": 0,
-            "seed": 42, # for reproducibility
+            "keep_alive": "20m",
             "options": { # in case parameters need to be nested
                 "temperature": 0,
                 "num_ctx": 2048,
                 "format": "json",
-                "repeat_penalty": 1.2
+                "repeat_penalty": 1.2,
+                "seed": 42 # for reproducibility
             }
         }
     )
@@ -117,9 +118,14 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     retriever_llm = OllamaLLM(
         model_name=MODEL,
         model_params={
-            "num_ctx": 2048, # Smaller window is faster for QA
-            "temperature": 0.1, 
             "keep_alive": "5m", # Keep it loaded during an active chat session
+            "options": {
+                "temperature": 0.1,
+                "num_ctx": 2048,
+                "format": "json",
+                "repeat_penalty": 1.2,
+                "seed": 42 # for reproducibility
+            }
         
         }
     )
@@ -215,7 +221,7 @@ async def perform_tests():
     
     await asyncio.gather(
         test_process_pdf_context(kg_builder_pdf),
-        process_text_context(kg_builder_text, context)
+        # process_text_context(kg_builder_text, context)
     )
     
     print("\n--- All tests completed ---")
