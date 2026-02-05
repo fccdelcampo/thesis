@@ -119,7 +119,8 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
         model_params={
             "num_ctx": 2048, # Smaller window is faster for QA
             "temperature": 0.1, 
-            "keep_alive": "5m" # Keep it loaded during an active chat session
+            "keep_alive": "5m", # Keep it loaded during an active chat session
+        
         }
     )
 

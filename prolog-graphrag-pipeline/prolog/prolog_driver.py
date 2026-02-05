@@ -4,13 +4,21 @@ from prolog_generator import generate_prolog_code, capture_db_and_query, capture
 from explainer import generate_safe_scasp_wrapper, generate_explanation
 import time
 
+import os, sys
+current_dir = os.path.dirname(os.path.abspath(__file__))
+parent_dir = os.path.dirname(current_dir)
+
+# Add the parent directory to the system path
+sys.path.append(parent_dir)
+
+import llm
+
 def use_scasp():
     list(janus.query("use_module(library(scasp))."))
     janus.query_once("use_module(library(scasp/human)).")
 
 def run_prolog_pipeline(user_question, retrieved_context) -> str:
     start_time = time.perf_counter()
-    use_scasp()
     print(f"**User Question:**\n{user_question}")
     print(f"**Retrieved Context:**\n{retrieved_context}")
     print("Generating Prolog...")
@@ -48,16 +56,14 @@ def run_prolog_pipeline(user_question, retrieved_context) -> str:
         print(f"Error: {e}")
         
     explainer_output = generate_explanation(user_question=user_question, retrieved_context=retrieved_context, database=database, query=query, retrieved_values=retrieved_values, human_readable_explanation=human_readable_explanation)
-    print(f"**Explainer Output:** \n{explainer_output}")
+    print(f"**Explainer Output:** \n{explainer_output["text_answer"]}")
+
+    print("\n**FINAL LLM OUTPUT:")
+    print(llm.generate(user_question, retrieved_context, explainer_output))
     end_time = time.perf_counter()
     duration = end_time - start_time
     print(f"====The Prolog pipeline executed in {duration:.4f} seconds.===")
 
-    import main_driver
-    print("\n**FINAL LLM OUTPUT:")
-    print(main_driver.generate(user_question, retrieved_context, explainer_output))
-
-        
         
 def run_prolog_pipeline_fake(user_question, retrieved_context, database, query) -> tuple[str, str]:
     print(f"Extracted database: \n{database}")
@@ -79,10 +85,9 @@ def run_prolog_pipeline_fake(user_question, retrieved_context, database, query) 
         retrieved_values = str()
         if result:
             for arg in result.keys():  
-                if arg.isupper() or arg == "truth":  # Check if it's a variable 
+                if arg.isupper() or arg == "truth":
                     print(f"{arg} Found: {result[arg]}")    
                     retrieved_values += f"{arg}: {result[arg]} "
-            # result['Tree'] will be a nested list/dictionary structure
             print("\n--- Human-Readable Explanation ---")
             human_readable_explanation = result['Explanation']
             print(human_readable_explanation)
@@ -98,7 +103,7 @@ tests = [
     {
         "question": "Who is Alice's brother?",
         "context": "Bob is Alice's brother. Amanda is Alice's sister.",
-        "database": """
+        "database": rf"""
 male(bob).
 female(alice).
 female(amanda).
@@ -108,52 +113,52 @@ parent(p1, amanda).
 sibling(Sibling1, Sibling2) :- parent(Parent, Sibling1), parent(Parent, Sibling2), Sibling1 \= Sibling2.
 brother(Brother, Sibling) :- male(Brother), sibling(Brother, Sibling).
         """,
-        "query": "brother(Brother, amanda)."
+        "query": rf"brother(Brother, amanda)."
     },
     
     # Example 2
     {
         "question": "Is Maria the grandmother of Dan?",
         "context": "Maria is the mother of Chloe. Chloe is the mother of Dan.",
-        "database": """
+        "database": rf"""
 parent(maria, chloe). 
 parent(chloe, dan). 
 grandmother(Grandmother, Grandchild) :- parent(Grandmother, IntermediateParent), parent(IntermediateParent, Grandchild). 
         """,
-        "query": "grandmother(maria, dan). "
+        "query": rf"grandmother(maria, dan). "
     },
     
     # Example 3
     {
         "question": "Who does Vito believe he should keep closer?",
         "context": "Tomasinno is the friend of Vito. Solozzo is the enemy of Vito. Vito believes that he should keep his enemies closer than his friends.",
-        "database": """
+        "database": rf"""
 friend(tomasinno, vito).
 enemy(solozzo, vito).
 closer_than(Enemy, Friend) :- enemy(Enemy, vito), friend(Friend, vito).
 vito_keeps_closer(Person) :- closer_than(Person, _). 
         """,
-        "query": "vito_keeps_closer(Who)."
+        "query": rf"vito_keeps_closer(Who)."
     },
     
     # Example 4:
     {
         "question": "Is every square a rectangle?",
         "context": "A square is a polygon with four equal sides and four right angles. A rectangle has four right angles.",
-        "database": """
+        "database": rf"""
 has_property(square, four_equal_sides). 
 has_property(square, four_right_angles). 
 is_a(square, polygon). 
 is_a(Shape, rectangle) :- has_property(Shape, four_right_angles). 
         """,
-        "query": "is_a(square, rectangle)."
+        "query": rf"is_a(square, rectangle)."
     },
     
     # Example 5
     {
         "question": "If the grass is contaminated, are the snakes affected?",
         "context": "In a food web, grass is a producer. Grasshoppers eat grass. Frogs eat grasshoppers. Snakes eat frogs.",
-        "database": """
+        "database": rf"""
 eats(grasshopper, grass). 
 eats(frog, grasshopper). 
 eats(snake, frog). 
@@ -162,7 +167,7 @@ is_contaminated(grass).
 affected(Species) :- is_contaminated(Species). 
 affected(Predator) :- eats(Predator, Prey), affected(Prey). 
         """,
-        "query": "affected(snake)."
+        "query": rf"affected(snake)."
     },
 ]
 
@@ -189,14 +194,7 @@ use_scasp()
     
 # Calculate the path to the directory you want to import from.
 # '..' refers to the parent directory.
-import os, sys
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
 
-# Add the parent directory to the system path
-sys.path.append(parent_dir)
-
-import main_driver
 for test in tests:
     decoder_explanation = run_prolog_pipeline(test["question"], test["context"])
     

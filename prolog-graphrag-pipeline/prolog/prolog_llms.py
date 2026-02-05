@@ -7,7 +7,7 @@ def generate(prompt: str, flag: str) -> dict:
     return generate_response(prompt=prompt, flag=flag)
     
 def generate_response(prompt: str, flag: str) -> dict:
-    from config import GENERATOR_LLM_MESSAGES, EXPLAINER_LLM_MESSAGES
+    from prolog_config import GENERATOR_LLM_MESSAGES, EXPLAINER_LLM_MESSAGES
     import ollama
     
     answer = dict()
@@ -25,7 +25,7 @@ def generate_response(prompt: str, flag: str) -> dict:
             model='llama3.1:8b-instruct-q4_K_M',
             messages=llm_messages,
             options={
-                'temperature': temperature  ,
+                'temperature': temperature,
                 'keep_alive': 0
             },
             logprobs=True     

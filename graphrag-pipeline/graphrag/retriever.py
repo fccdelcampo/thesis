@@ -1,8 +1,8 @@
-from .config import RETRIEVAL_QUERY
+from .config import RETRIEVAL_QUERY, GRAPHRAG_TEMPLATE
 from neo4j_graphrag.retrievers import HybridCypherRetriever
 import time
-from neo4j_graphrag.retrievers import HybridCypherRetriever
 from neo4j.exceptions import ServiceUnavailable, AuthError
+from neo4j_graphrag.generation import GraphRAG
 
 def check_db_health(driver):
     """
