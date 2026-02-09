@@ -18,7 +18,7 @@ from config import *
 from .visualizer_generator import generate_qq_grid_for_eval
 import pandas
 # Define target folder inside top-level directory
-IO_DIR = os.path.join(TOP_LEVEL_DIR, "hallucination-evaluation-results")
+IO_DIR = os.path.join(TOP_LEVEL_DIR, "hallucination_evaluation_results")
 
 def shapiro_test(data: np.ndarray, pipeline: Pipeline, eval: Metric):
     if len(data) < 3:
@@ -46,10 +46,10 @@ def computeNormalityTest(df: pandas.DataFrame, eval: Metric | Benchmark):
 
 def performNormalityTests():
     df_map = {
-        Metric.FAITHFULNESS: pd.read_csv(r"../../hallucination-evaluation-results/faithfulness_scores.csv"),
-        Metric.ANSWER_RELEVANCE: pd.read_csv(r"../../hallucination-evaluation-results/answer_relevance_scores.csv"),
-        Metric.CONTEXT_RECALL: pd.read_csv(r"../../hallucination-evaluation-results/context_recall_scores.csv"),
-        Benchmark.TRUTHFULQA: pd.read_csv(r"../../hallucination-evaluation-results/truthfulqa_scores.csv")
+        Metric.FAITHFULNESS: pd.read_csv(r"../../hallucination_evaluation_results/faithfulness_scores.csv"),
+        Metric.ANSWER_RELEVANCE: pd.read_csv(r"../../hallucination_evaluation_results/answer_relevance_scores.csv"),
+        Metric.CONTEXT_RECALL: pd.read_csv(r"../../hallucination_evaluation_results/context_recall_scores.csv"),
+        Benchmark.TRUTHFULQA: pd.read_csv(r"../../hallucination_evaluation_results/truthfulqa_scores.csv")
     }
 
     for eval, df in df_map.items():

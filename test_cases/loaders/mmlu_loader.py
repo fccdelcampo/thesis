@@ -10,7 +10,7 @@ class MMLULoader:
     """
     
     # --- Configuration ---
-    FILE_PATH = 'test-cases/mmlu.jsonl'
+    FILE_PATH = 'test_cases/mmlu.jsonl'
     SAMPLES_PER_SUBJECT = 10
     RANDOM_SEED = 42
     

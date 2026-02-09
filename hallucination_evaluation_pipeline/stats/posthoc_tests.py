@@ -12,7 +12,7 @@ from stats.visualizer_generator import generatePValueMatrix
 TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 # Define target folder inside top-level directory
-IO_DIR = os.path.join(TOP_LEVEL_DIR, "experimental-data")
+IO_DIR = os.path.join(TOP_LEVEL_DIR, "experimental_data")
 
 def computePostHocTestForContinuousMetric(results, is_normal: bool, eval: Metric):
     if is_normal:
@@ -75,7 +75,7 @@ def performPostHocTests():
         for pipeline in list(Pipeline):
             if eval in CONTINUOUS_EVALS:
              normality_test_results.append(normality_test_df.loc[(normality_test_df['eval_name'] == eval.value.lower().replace(" ", "_")) & (normality_test_df['pipeline'] == pipeline.value.lower().replace("-", "_").replace(" ", "_").replace("pipeline", "")),'normality'].values[0])
-            eval_df = pd.read_csv(rf"../../hallucination-evaluation-results/{eval.value.lower().replace(" ", "_")}_scores.csv")
+            eval_df = pd.read_csv(rf"../../hallucination_evaluation_results/{eval.value.lower().replace(" ", "_")}_scores.csv")
             pipeline_data = eval_df[pipeline.value.lower().replace("-", "_").replace(" ", "_").replace("pipeline", "")]
             results[pipeline.value] = pipeline_data.tolist()
             

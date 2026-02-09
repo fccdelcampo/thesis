@@ -30,7 +30,7 @@ def run_evaluation():
         HotpotQALoader()
     ]
     
-    results_dir = "test-cases/results"
+    results_dir = "test_cases/results"
     os.makedirs(results_dir, exist_ok=True)
     results_file = os.path.join(results_dir, "evaluation_log.csv")
     

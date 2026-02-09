@@ -12,7 +12,7 @@ from stats.visualizer_generator import generateBoxPlotGrids
 TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 # Define target folder inside top-level directory
-IO_DIR = os.path.join(TOP_LEVEL_DIR, "experimental-data")
+IO_DIR = os.path.join(TOP_LEVEL_DIR, "experimental_data")
 
 def computeHypothesisTestForContinuousEval(tuned_data: np.ndarray, graphrag_data: np.ndarray, prolog_graphrag_data: np.ndarray, eval: Metric | Benchmark):
     """
@@ -38,10 +38,10 @@ def computeHypothesisTestForContinuousEval(tuned_data: np.ndarray, graphrag_data
         
 def performContinuousHypothesisTests():
     df_map = {
-        Metric.FAITHFULNESS: pd.read_csv(r"../hallucination-evaluation-results/faithfulness_scores.csv"),
-        Metric.ANSWER_RELEVANCE: pd.read_csv(r"../hallucination-evaluation-results/answer_relevance_scores.csv"),
-        Metric.CONTEXT_RECALL: pd.read_csv(r"../hallucination-evaluation-results/context_recall_scores.csv"),
-        Benchmark.TRUTHFULQA: pd.read_csv(r"../hallucination-evaluation-results/truthfulqa_scores.csv")
+        Metric.FAITHFULNESS: pd.read_csv(r"../hallucination_evaluation_results/faithfulness_scores.csv"),
+        Metric.ANSWER_RELEVANCE: pd.read_csv(r"../hallucination_evaluation_results/answer_relevance_scores.csv"),
+        Metric.CONTEXT_RECALL: pd.read_csv(r"../hallucination_evaluation_results/context_recall_scores.csv"),
+        Benchmark.TRUTHFULQA: pd.read_csv(r"../hallucination_evaluation_results/truthfulqa_scores.csv")
     }
 
     for metric in list(Metric):
@@ -89,8 +89,8 @@ def computeHypothesisTestForDiscreteEval(tuned_data: np.ndarray, graphrag_data: 
         
 def performDiscreteHypothesisTests():
     df_map = {
-        Benchmark.MMLU: pd.read_csv(r"../hallucination-evaluation-results/mmlu_scores.csv"),
-        Benchmark.HOTPOTQA: pd.read_csv(r"../hallucination-evaluation-results/hotpotqa_scores.csv")
+        Benchmark.MMLU: pd.read_csv(r"../hallucination_evaluation_results/mmlu_scores.csv"),
+        Benchmark.HOTPOTQA: pd.read_csv(r"../hallucination_evaluation_results/hotpotqa_scores.csv")
     }
 
     for metric in list(Metric):

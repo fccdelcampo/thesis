@@ -4,7 +4,7 @@ import random
 from datasets import load_dataset
 
 class TruthfulQALoader:
-    FILE_PATH = 'test-cases/truthfulqa.jsonl'
+    FILE_PATH = 'test_cases/truthfulqa.jsonl'
     SAMPLE_SIZE = 100
     RANDOM_SEED = 42
     

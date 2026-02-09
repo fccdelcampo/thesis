@@ -18,7 +18,7 @@ from stats.hypothesis_tests import performHypothesisTests
 from stats.posthoc_tests import performPostHocTests
 
 # Define target folder inside top-level directory
-IO_DIR = os.path.join(TOP_LEVEL_DIR, "experimental-data")
+IO_DIR = os.path.join(TOP_LEVEL_DIR, "experimental_data")
 
 def generateDataFrames():
     dfs = {}

@@ -5,7 +5,7 @@ from datasets import load_dataset
 
 class HotpotQALoader:
     # --- Configuration ---
-    FILE_PATH = 'test-cases/hotpotqa.jsonl'
+    FILE_PATH = 'test_cases/hotpotqa.jsonl'
     SAMPLE_SIZE = 100
     RANDOM_SEED = 42
     SUBSET = "distractor" 
