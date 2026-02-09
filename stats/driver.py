@@ -22,19 +22,19 @@ IO_DIR = os.path.join(TOP_LEVEL_DIR, "experimental-data")
 
 def generateDataFrames():
     dfs = {}
-    for scheduler in list(Scheduler):
-        scheduler_data = pd.read_csv(os.path.join(IO_DIR, f"{scheduler.value.lower()}_results.csv"))
-        dfs[scheduler] = scheduler_data
+    for pipeline in list(Pipeline):
+        pipeline_data = pd.read_csv(os.path.join(IO_DIR, f"{pipeline.value.lower()}_results.csv"))
+        dfs[pipeline] = pipeline_data
     return dfs
     
 
 def ensureCsvHeaders():
     """Ensure all stats CSV files have their proper headers before writing data."""
     headers = {
-        "normality_test_results.csv": "scheduler,metric,workload,p_value,normality\n",
-        "hypothesis_test_results.csv": "workload,metric,other_scheduler,p_value,interpretation\n",
+        "normality_test_results.csv": "pipeline,metric,workload,p_value,normality\n",
+        "hypothesis_test_results.csv": "workload,metric,other_pipeline,p_value,interpretation\n",
         "posthoc_test_results.csv": "workload,metric,loser,winner\n",
-        "geometric_means.csv": "metric,scheduler,workload,gmean\n",
+        "geometric_means.csv": "metric,pipeline,workload,gmean\n",
         "negative_scoring_results.csv": "metric,workload,wins,losses,net_score\n"
     }
     
@@ -48,11 +48,11 @@ def performStatisticalTests():
     ensureCsvHeaders()
     
     dfs = generateDataFrames()
-    fcfs_df = dfs[Scheduler.FCFS]
-    rr_df = dfs[Scheduler.RR]
-    osjfdrr_df = dfs[Scheduler.oSJFDRR]
-    srr_df = dfs[Scheduler.SRR]
-    kdts_df = dfs[Scheduler.KDTS]
+    fcfs_df = dfs[Pipeline.FCFS]
+    rr_df = dfs[Pipeline.RR]
+    osjfdrr_df = dfs[Pipeline.oSJFDRR]
+    srr_df = dfs[Pipeline.SRR]
+    kdts_df = dfs[Pipeline.KDTS]
     
     # print("Starting Normality Tests...")
     # performNormalityTests(fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df)
@@ -68,13 +68,13 @@ def performStatisticalTests():
     print("Statistical Tests Completed.")
     
 def generateArtificialData():
-    # For <scheduler>_results.csv files
+    # For <pipeline>_results.csv files
     # workload,awt,art,throughput,cpu_utilization
     print("Generating artificial data...")
-    for scheduler in list(Scheduler):
+    for pipeline in list(Pipeline):
         for workload in list(Workload):
             for i in range(120):
-                with open(os.path.join(IO_DIR, f"{scheduler.value.lower()}_results.csv"), 'a', newline='') as f:
+                with open(os.path.join(IO_DIR, f"{pipeline.value.lower()}_results.csv"), 'a', newline='') as f:
                     writer = pd.DataFrame({
                         "workload": [workload.value],
                         "awt": [np.random.uniform(0.7, 1.0)],

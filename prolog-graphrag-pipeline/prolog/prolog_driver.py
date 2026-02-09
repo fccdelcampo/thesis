@@ -17,12 +17,14 @@ def use_scasp():
     list(janus.query("use_module(library(scasp))."))
     janus.query_once("use_module(library(scasp/human)).")
 
-def run_prolog_pipeline(user_question, retrieved_context) -> str:
+def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt: str) -> str:
     start_time = time.perf_counter()
     print(f"**User Question:**\n{user_question}")
     print(f"**Retrieved Context:**\n{retrieved_context}")
+    print(f"**Context from Prompt:**\n{context_from_prompt}")
     print("Generating Prolog...")
-    database, query = generate_prolog_code(user_question=user_question, retrieved_context=retrieved_context, most_recent_error=None)
+    final_context = retrieved_context+ "\n" +context_from_prompt
+    database, query = generate_prolog_code(user_question=user_question, retrieved_context=final_context, most_recent_error=None)
     print(f"**Extracted database:**\n{database}")
     print(f"**Extracted query:**\n{query}")
 
@@ -59,10 +61,12 @@ def run_prolog_pipeline(user_question, retrieved_context) -> str:
     print(f"**Explainer Output:** \n{explainer_output["text_answer"]}")
 
     print("\n**FINAL LLM OUTPUT:")
-    print(llm.generate(user_question, retrieved_context, explainer_output))
+    final_answer = llm.generate(user_question, retrieved_context, explainer_output)
+    print(final_answer["text_answer"])
     end_time = time.perf_counter()
     duration = end_time - start_time
     print(f"====The Prolog pipeline executed in {duration:.4f} seconds.===")
+    return final_answer["text_answer"]
 
         
 def run_prolog_pipeline_fake(user_question, retrieved_context, database, query) -> tuple[str, str]:
@@ -196,7 +200,7 @@ use_scasp()
 # '..' refers to the parent directory.
 
 for test in tests:
-    decoder_explanation = run_prolog_pipeline(test["question"], test["context"])
+    decoder_explanation = run_pipeline(test["question"], test["context"])
     
 # user_question = "Will prices go up if people are reluctant to take out loans?"
 # retrieved_context = "When interest rates are high, people will be less likely to take out loans. When people take less loan out, demand for goods decrease. When demand for goods decrease, interest rates spike up. Prices go down when demand is down."

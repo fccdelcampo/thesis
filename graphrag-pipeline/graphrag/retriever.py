@@ -1,6 +1,8 @@
-from .config import RETRIEVAL_QUERY, GRAPHRAG_TEMPLATE
+from .config import RETRIEVAL_QUERY, RETRIEVER
 # CHANGE 1: Use the standard HybridRetriever (not HybridCypherRetriever)
 from neo4j_graphrag.retrievers import HybridRetriever
+from neo4j_graphrag.retrievers import HybridCypherRetriever
+from neo4j_graphrag.retrievers import Text2CypherRetriever
 import time
 from neo4j.exceptions import ServiceUnavailable, AuthError
 from neo4j_graphrag.generation import GraphRAG
@@ -90,10 +92,21 @@ def create_retriever(driver, embedder):
         return None
 
     # 5. Initialization
-    return CleanTextRetriever(
-        driver=driver,
-        vector_index_name="documentsVectorIndex",   # Matches ID 3 in your JSON
-        fulltext_index_name="documentsFulltextIndex", # Matches ID 6 in your JSON
-        embedder=embedder,
-        return_properties=["text", "id"] # Hybrid retriever creates label itself
-    )
+    if RETRIEVER.value == "HybridRetriever":
+        return CleanTextRetriever(
+            driver=driver,
+            vector_index_name="documentsVectorIndex",   # Matches ID 3 in your JSON
+            fulltext_index_name="documentsFulltextIndex", # Matches ID 6 in your JSON
+            embedder=embedder,
+            return_properties=["text", "id"] # Hybrid retriever creates label itself
+        )
+    elif RETRIEVER.value == "HybridCypherRetriever":
+        return HybridCypherRetriever(
+            driver=driver,
+            vector_index_name="documentsVectorIndex",
+            fulltext_index_name="documentsFulltextIndex",
+            retrieval_query=RETRIEVAL_QUERY,
+            embedder=embedder
+        )
+    else:
+        raise ValueError(f"Retriever {RETRIEVER.name} is invalid.")

@@ -5,7 +5,7 @@ from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter i
 from neo4j_graphrag.experimental.pipeline.kg_builder import SimpleKGPipeline
 import os
 import glob
-from .config import PROMPT_TEMPLATE, NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD # added dot for relative import, assuming config.py is in the same directory as graphrag_driver.py
+from .config import PROMPT_TEMPLATE, NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD, SCHEMA_CONFIG, STATIC_SCHEMA # added dot for relative import, assuming config.py is in the same directory as graphrag_driver.py
 # However, this will fail when you run this file directly. For debugging purposes, you can run 'python -m graphrag-pipeline.graphrag.graphrag_driver' in the terminal.
 import asyncio
 
@@ -140,31 +140,16 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     return encoder_llm, retriever_llm, embedder
 
 def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
-    STATIC_SCHEMA = { # NOTE: Due to how 'EXTRACTED' works, the prompt used by SimpleKGPipeline is bad and does not constrain the output to only JSON format. We can create a custom KG Pipeline but for now we use this to skip it entirely.
-        "node_types": [
-            "Concept",      # The heavy lifter: covers Theorems, Ideas, Theories, Terms
-            "Person",       # Key figures: Socrates, Einstein, Historical Leaders
-            "Event",        # Occurrences: Wars, Experiments, Historical Periods
-            "Definition",   # Crucial for education: Explicit statements of meaning
-            "Example",      # Grounding: Specific instances (e.g., "Pingu" or "3")
-            "Topic"         # The Field: "Mathematics", "Philosophy", "Biology"
-        ],
-        "relationship_types": [
-            "RELATED_TO",   # Generic connection
-            "IS_A",         # Hierarchy: "Calculus IS_A Topic", "Penguin IS_A Bird"
-            "PART_OF",      # Composition: "Cell PART_OF Tissue"
-            "CAUSES",       # Logic/History: "War CAUSES Famine", "Premise CAUSES Conclusion"
-            "DEFINES",      # Concept -> Definition
-            "ILLUSTRATES"   # Example -> Concept ("Pingu ILLUSTRATES Non-flying bird")
-        ]
-    }
+    
     chunk_splitter = FixedSizeSplitter(chunk_size=1200, chunk_overlap=150) # changed from 2000 and 200 to smaller sizes for better context handling
+    
+    schema = STATIC_SCHEMA if SCHEMA_CONFIG.name == "STATIC" else "EXTRACTED"
 
     kg_builder_pdf = SimpleKGPipeline(
         llm=llm,
         driver=neo4j_driver,
         embedder=embedder,
-        schema=STATIC_SCHEMA, 
+        schema=schema, 
         prompt_template=PROMPT_TEMPLATE,
         from_pdf=True,
         text_splitter=chunk_splitter,
@@ -175,7 +160,7 @@ def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
         llm=llm,
         driver=neo4j_driver,
         embedder=embedder,
-        schema=STATIC_SCHEMA,
+        schema=schema,
         prompt_template=PROMPT_TEMPLATE,
         from_pdf=False,
         text_splitter=chunk_splitter,
@@ -192,14 +177,6 @@ from .encoder import process_pdf_documents, process_text_context, extract_query_
 async def test_process_pdf_context(kg_builder_pdf: SimpleKGPipeline):
     await process_pdf_documents(kg_builder_pdf)
     
-async def test_process_text_context(kg_builder_text: SimpleKGPipeline, query: str):
-    await process_text_context(kg_builder_text)
-    
-def test_extract_query_and_context(user_prompt: str):
-    query, context = extract_query_and_context(user_prompt)
-    print(f"Extracted query: {query}")
-    print(f"Extracted context: {context}")
-    return query, context
     
 async def perform_tests():
     # 1. Initialize models and pipelines
@@ -212,7 +189,6 @@ async def perform_tests():
     # "Which of the following sets is defined by the Well-Ordering Principle as having a guaranteed smallest element? A) Empty sets B) Sets of negative integers C) Nonempty sets of nonnegative integers D) Sets of positive rationals"
     
     # Corrected: Removed the extra comma that was making this a tuple
-    query, context = test_extract_query_and_context(question)
 
     # 3. Processing Phase (Asynchronous)
     # Corrected: Do NOT use 'await' INSIDE asyncio.gather. 

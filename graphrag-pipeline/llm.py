@@ -46,5 +46,3 @@ def generate(llm, retriever, query) -> dict:
         "answer": answer,
         "context": retrieved_context
     }
-    # Comment in Prolog-GraphRAG pipeline
-    # return answer # Uncomment in Prolog-GraphRAG pipeline

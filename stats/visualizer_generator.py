@@ -19,21 +19,21 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 # Append top-level directory to sys.path BEFORE importing from it
 sys.path.append(TOP_LEVEL_DIR)
 
-from classes import Metric, Scheduler, Workload, PostHocTest
+from classes import Metric, Pipeline, Workload, PostHocTest
 from config import ALPHA
 
 # Define target folder inside top-level directory
 OUTPUT_DIR = os.path.join(TOP_LEVEL_DIR, "visualizations")
 
-def generate_qq_grid_for_metric(metric, df_map):
+def generate_qq_grid_for_eval(eval, df_map):
     """
-    Generates a grid of Q-Q plots for each scheduler × workload combination for a given metric,
+    Generates a grid of Q-Q plots for each pipeline × workload combination for a given metric,
     runs Shapiro-Wilk normality test on each, and displays the p-value in the subplot.
     Saves the final grid in ../visualizations/ relative to this file.
     
     Args:
         metric: Metric enum value (e.g., Metric.FAIRNESS)
-        df_map: dict {Scheduler: DataFrame}
+        df_map: dict {Pipeline: DataFrame}
         workloads: list of Workload enum values
     """
 
@@ -44,17 +44,17 @@ def generate_qq_grid_for_metric(metric, df_map):
     out_folder = os.path.join(project_root, "visualizations")
     os.makedirs(out_folder, exist_ok=True)
 
-    # Grid layout: rows = number of schedulers, columns = number of test categories
-    schedulers = list(df_map.keys())
-    nrows, ncols = len(schedulers), len(workloads)
+    # Grid layout: rows = number of pipelines, columns = number of test categories
+    pipelines = list(df_map.keys())
+    nrows, ncols = len(pipelines), len(workloads)
     fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(4*ncols, 3*nrows), squeeze=False)
 
-    for i, scheduler in enumerate(schedulers):
-        df = df_map[scheduler]
+    for i, pipeline in enumerate(pipelines):
+        df = df_map[pipeline]
         for j, workload in enumerate(workloads):
             ax = axes[i, j]
 
-            # Extract values for this metric/workload/scheduler
+            # Extract values for this metric/workload/pipeline
             values = df.loc[df['workload'] == workload.value, metric.value.lower().replace(" ", "_")].dropna().to_numpy()
 
             # Skip empty datasets
@@ -81,7 +81,7 @@ def generate_qq_grid_for_metric(metric, df_map):
             # Q-Q using standardized values
             osm, osr = scipy_stats.probplot(z_values, dist="norm")[0]
 
-            print(f"Plotting QQ plot for Workload: {workload.value}, Scheduler: {scheduler.value}, Metric: {metric.value}")
+            print(f"Plotting QQ plot for Workload: {workload.value}, Pipeline: {pipeline.value}, Metric: {metric.value}")
 
             ax.scatter(osm, osr, s=10, color='black')
 
@@ -89,7 +89,7 @@ def generate_qq_grid_for_metric(metric, df_map):
             ax.plot([osm.min(), osm.max()], [osm.min(), osm.max()], 'r--', linewidth=0.8)
 
             # Title and axes
-            ax.set_title(f"{scheduler.value} | {workload.value}\n n={len(values)}", fontsize=9)
+            ax.set_title(f"{pipeline.value} | {workload.value}\n n={len(values)}", fontsize=9)
             ax.set_xlabel("Theoretical Quantiles", fontsize=8)
             ax.set_ylabel("Sample Quantiles", fontsize=8)
 
@@ -111,11 +111,11 @@ def generate_qq_grid_for_metric(metric, df_map):
 def generateBoxPlotGrids(fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df):
     """
     Generate one grid of boxplots per workload. Each grid compares, for each metric,
-    the distributions across the five schedulers (FCFS, RR, oSJFDRR, SRR, KDTS).
+    the distributions across the five pipelines (FCFS, RR, oSJFDRR, SRR, KDTS).
 
     Args:
         fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df : pandas.DataFrame
-            DataFrames for each scheduler. Each must have a 'workload' column and
+            DataFrames for each pipeline. Each must have a 'workload' column and
             columns named by metric.value (or the strings you pass in metrics).
         metrics : iterable of Enum or str
             Iterable of metric enum members (or objects with .value) or strings describing
@@ -134,7 +134,7 @@ def generateBoxPlotGrids(fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df):
     project_root = os.path.dirname(current_dir)
     out_folder = os.path.join(project_root, "visualizations")
     os.makedirs(out_folder, exist_ok=True)
-    # Map friendly scheduler labels to dataframes (preserves order)
+    # Map friendly pipeline labels to dataframes (preserves order)
     df_map = [
         ("FCFS", fcfs_df),
         ("RR", rr_df),
@@ -142,14 +142,14 @@ def generateBoxPlotGrids(fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df):
         ("SRR", srr_df),
         ("KDTS", kdts_df)
     ]
-    scheduler_labels = [label for label, _ in df_map]
+    pipeline_labels = [label for label, _ in df_map]
 
     saved_paths = []
 
     # Normalize metrics and workloads to strings (support Enum members)
     metric_names = [m.value.lower().replace(" ", "_") for m in list(Metric)]
     workload_names = [t.value for t in list(Workload)]
-    scheduler_names = [s.name for s in list(Scheduler)]
+    pipeline_names = [s.name for s in list(Pipeline)]
     
     
     for metric in metric_names:
@@ -166,7 +166,7 @@ def generateBoxPlotGrids(fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df):
             col = idx % ncols
             ax = axes[row][col]
 
-            # gather data arrays for each scheduler for the current metric & workload
+            # gather data arrays for each pipeline for the current metric & workload
             data_list = []
             sample_sizes = []
             for _, df in df_map:
@@ -174,7 +174,7 @@ def generateBoxPlotGrids(fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df):
                 data_list.append(vals if len(vals) > 0 else np.array([]))
                 sample_sizes.append(len(vals))
 
-            # If every scheduler has no data for this metric/workload, show placeholder
+            # If every pipeline has no data for this metric/workload, show placeholder
             if all(len(arr) == 0 for arr in data_list):
                 ax.text(0.5, 0.5, "No data", ha='center', va='center')
                 ax.set_title(metric.upper().replace("_", " "), fontsize=10)
@@ -183,7 +183,7 @@ def generateBoxPlotGrids(fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df):
                 continue
 
             # Create boxplot
-            bp = ax.boxplot(data_list, labels=[f"{lab}\n(n={n})" for lab, n in zip(scheduler_labels, sample_sizes)],
+            bp = ax.boxplot(data_list, labels=[f"{lab}\n(n={n})" for lab, n in zip(pipeline_labels, sample_sizes)],
                             patch_artist=True, showfliers=True)
 
             # Annotate median values above each box for clarity

@@ -1,7 +1,8 @@
 from scipy.stats import kruskal, mannwhitneyu
 from statsmodels.stats.multitest import multipletests
-from classes import *
+from config import *
 import numpy as np
+import pandas as pd
 import csv
 import os
 
@@ -13,35 +14,35 @@ TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 # Define target folder inside top-level directory
 IO_DIR = os.path.join(TOP_LEVEL_DIR, "experimental-data")
 
-def computeHypothesisTestForMetric(fcfs_ndarray, rr_ndarray, osjfdrr_ndarray, srr_ndarray, kdts_ndarray, metric: Metric, workload: Workload):
+def computeHypothesisTestForContinuousEval(fcfs_ndarray, rr_ndarray, osjfdrr_ndarray, srr_ndarray, kdts_ndarray, metric: Metric, workload: Workload):
     """
-    Performs hypothesis testing (e.g., t-test or Mann-Whitney U test) for a given metric
-    across different schedulers.
+    Performs hypothesis testing (e.g., t-test or Mann-Whitney U test) for a given continuous evaluation criterion
+    across different pipelines.
 
     Args:
-        fcfs_ndarray (np.ndarray): Data for FCFS scheduler.
-        rr_ndarray (np.ndarray): Data for RR scheduler.
-        osjfdrr_ndarray (np.ndarray): Data for oSJFDRR scheduler.
-        kdts_ndarray (np.ndarray): Data for KDTS scheduler.
+        fcfs_ndarray (np.ndarray): Data for FCFS pipeline.
+        rr_ndarray (np.ndarray): Data for RR pipeline.
+        osjfdrr_ndarray (np.ndarray): Data for oSJFDRR pipeline.
+        kdts_ndarray (np.ndarray): Data for KDTS pipeline.
         metric (Metric): The performance metric being tested.
     """
-    other_schedulers = []
+    other_pipelines = []
     print("Current metric: ", metric.value)
     match(metric):
         case Metric.AWT:
-            other_schedulers = [(Scheduler.FCFS, fcfs_ndarray), (Scheduler.RR, rr_ndarray), (Scheduler.oSJFDRR, osjfdrr_ndarray), (Scheduler.SRR, srr_ndarray)]
+            other_pipelines = [(Pipeline.FCFS, fcfs_ndarray), (Pipeline.RR, rr_ndarray), (Pipeline.oSJFDRR, osjfdrr_ndarray), (Pipeline.SRR, srr_ndarray)]
         case Metric.ART:
-            other_schedulers = [(Scheduler.FCFS, fcfs_ndarray)]
+            other_pipelines = [(Pipeline.FCFS, fcfs_ndarray)]
         case Metric.CPU_UTILIZATION:
-            other_schedulers = [(Scheduler.RR, rr_ndarray), (Scheduler.oSJFDRR, osjfdrr_ndarray), (Scheduler.SRR, srr_ndarray)]
+            other_pipelines = [(Pipeline.RR, rr_ndarray), (Pipeline.oSJFDRR, osjfdrr_ndarray), (Pipeline.SRR, srr_ndarray)]
         case default:
             raise ValueError(f"Unsupported metric: {metric}")
     print(f"METRIC: {metric.value}, WORKLOAD: {workload.value}")
         
-    # workload,metric,other_scheduler,p_value,interpretation
+    # workload,metric,other_pipeline,p_value,interpretation
     comparisons = []   # list of dicts
 
-    for other in other_schedulers:
+    for other in other_pipelines:
         # Expected-direction test
         if metric != Metric.CPU_UTILIZATION:          # lower is better (AWT)
             p_exp = mannwhitneyu(kdts_ndarray, other[1], alternative='less').pvalue
@@ -89,49 +90,40 @@ def computeHypothesisTestForMetric(fcfs_ndarray, rr_ndarray, osjfdrr_ndarray, sr
         with open(os.path.join(IO_DIR, "hypothesis_test_results.csv"), 'a', newline='') as f:
             writer = csv.DictWriter(
                 f,
-                fieldnames=["workload", "metric", "other_scheduler", "p_value", "interpretation"]
+                fieldnames=["workload", "metric", "other_pipeline", "p_value", "interpretation"]
             )
             writer.writerow({
                 "workload": workload.value,
                 "metric": metric.value.lower().replace(" ", "_"),
-                "other_scheduler": c["other"],
+                "other_pipeline": c["other"],
                 "p_value": final_p,
                 "interpretation": interpretation
             })
                 
         
-def performHypothesisTests(fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df):
+def performContinuousHypothesisTests():
     df_map = {
-        Scheduler.FCFS: fcfs_df,
-        Scheduler.RR: rr_df,
-        Scheduler.oSJFDRR: osjfdrr_df,
-        Scheduler.SRR: srr_df,
-        Scheduler.KDTS: kdts_df
+        Metric.FAITHFULNESS: pd.read_csv(r"../hallucination-evaluation-results/faithfulness_scores.csv"),
+        Metric.ANSWER_RELEVANCE: pd.read_csv(r"../hallucination-evaluation-results/answer_relevance_scores.csv"),
+        Metric.CONTEXT_RECALL: pd.read_csv(r"../hallucination-evaluation-results/context_recall_scores.csv"),
+        Benchmark.TRUTHFULQA: pd.read_csv(r"../hallucination-evaluation-results/truthfulqa_scores.csv")
     }
 
-    # for workload in list(Workload):
-    #     for metric in list(Metric):
-    #         fcfs_data = np.array(df_map[Scheduler.FCFS].loc[df_map[Scheduler.FCFS]['workload'] == workload.value, metric.value.lower().replace(" ", "_")])
-    #         rr_data = np.array(df_map[Scheduler.RR].loc[df_map[Scheduler.RR]['workload'] == workload.value, metric.value.lower().replace(" ", "_")])
-    #         osjfdrr_data = np.array(df_map[Scheduler.oSJFDRR].loc[df_map[Scheduler.oSJFDRR]['workload'] == workload.value, metric.value.lower().replace(" ", "_")])
-    #         srr_data = np.array(df_map[Scheduler.oSJFDRR].loc[df_map[Scheduler.oSJFDRR]['workload'] == workload.value, metric.value.lower().replace(" ", "_")])
-    #         kdts_data = np.array(df_map[Scheduler.KDTS].loc[df_map[Scheduler.KDTS]['workload'] == workload.value, metric.value.lower().replace(" ", "_")])
+    for metric in list(Metric):
+        tuned_data = np.array(df_map[Pipeline.TUNED]["tuned_score"])
+        graphrag_data = np.array(df_map[Pipeline.GRAPHRAG]["graphrag_score"])
+        prolog_graphrag_data = np.array(df_map[Pipeline.PROLOG_GRAPHRAG]["prolog_graphrag_score"]])
 
-    #         computeHypothesisTestForMetric(
-    #             fcfs_ndarray=fcfs_data,
-    #             rr_ndarray=rr_data,
-    #             osjfdrr_ndarray=osjfdrr_data,
-    #             srr_ndarray=srr_data,
-    #             kdts_ndarray=kdts_data,
-    #             metric=metric,
-    #             workload=workload
-    #         )
+        computeHypothesisTestForContinuousEval(
+            tuned_data=tuned_data,
+            graphrag_data=graphrag_data,
+            prolog_graphrag_data=prolog_graphrag_data,
+            metric=metric,
+        )
             
     generateBoxPlotGrids(
-        fcfs_df=fcfs_df,
-        rr_df=rr_df,
-        osjfdrr_df=osjfdrr_df,
-        srr_df=srr_df,
-        kdts_df=kdts_df
+        tuned_data=tuned_data,
+        graphrag_data=graphrag_data,
+        prolog_graphrag_data=prolog_graphrag_data,
     )
     
