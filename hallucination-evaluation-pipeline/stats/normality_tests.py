@@ -46,10 +46,10 @@ def computeNormalityTest(df: pandas.DataFrame, eval: Metric | Benchmark):
 
 def performNormalityTests():
     df_map = {
-        Metric.FAITHFULNESS: pd.read_csv(r"../hallucination-evaluation-results/faithfulness_scores.csv"),
-        Metric.ANSWER_RELEVANCE: pd.read_csv(r"../hallucination-evaluation-results/answer_relevance_scores.csv"),
-        Metric.CONTEXT_RECALL: pd.read_csv(r"../hallucination-evaluation-results/context_recall_scores.csv"),
-        Benchmark.TRUTHFULQA: pd.read_csv(r"../hallucination-evaluation-results/truthfulqa_scores.csv")
+        Metric.FAITHFULNESS: pd.read_csv(r"../../hallucination-evaluation-results/faithfulness_scores.csv"),
+        Metric.ANSWER_RELEVANCE: pd.read_csv(r"../../hallucination-evaluation-results/answer_relevance_scores.csv"),
+        Metric.CONTEXT_RECALL: pd.read_csv(r"../../hallucination-evaluation-results/context_recall_scores.csv"),
+        Benchmark.TRUTHFULQA: pd.read_csv(r"../../hallucination-evaluation-results/truthfulqa_scores.csv")
     }
 
     for eval, df in df_map.items():

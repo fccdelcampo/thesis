@@ -1,4 +1,5 @@
 from scipy.stats import kruskal, mannwhitneyu
+from statsmodels.stats.contingency_tables import cochrans_q
 from config import *
 import numpy as np
 import pandas as pd
@@ -13,14 +14,14 @@ TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 # Define target folder inside top-level directory
 IO_DIR = os.path.join(TOP_LEVEL_DIR, "experimental-data")
 
-def computeHypothesisTestForContinuousEval(tuned_data: numpy.ndarray, graphrag_data: numpy.ndarray, prolog_graphrag_data: numpy.ndarray, eval: Metric):
+def computeHypothesisTestForContinuousEval(tuned_data: np.ndarray, graphrag_data: np.ndarray, prolog_graphrag_data: np.ndarray, eval: Metric | Benchmark):
     """
     Performs hypothesis testing (e.g., t-test or Mann-Whitney U test) for a given continuous evaluation criterion
     across different pipelines.
     """
     
     stat, p_value = kruskal(tuned_data, graphrag_data, prolog_graphrag_data)
-    interpretation = "SIGNIFICANT" if p < ALPHA else "NON_SIGNIFICANT"
+    interpretation = "SIGNIFICANT" if p_value < ALPHA else "NON_SIGNIFICANT"
     
     # Save to CSV
     with open(os.path.join(IO_DIR, "hypothesis_test_results.csv"), 'a', newline='') as f:
@@ -29,7 +30,7 @@ def computeHypothesisTestForContinuousEval(tuned_data: numpy.ndarray, graphrag_d
             fieldnames=["eval_name", "p_value", "interpretation"]
         )
         writer.writerow({
-            "eval_name": eval_name.value.lower().replace(" ", "_"),
+            "eval_name": eval.value.lower().replace(" ", "_"),
             "p_value": p_value,
             "interpretation": interpretation
         })
@@ -62,14 +63,16 @@ def performContinuousHypothesisTests():
     )
     
     
-def computeHypothesisTestForDiscreteEval(tuned_data: numpy.ndarray, graphrag_data: numpy.ndarray, prolog_graphrag_data: numpy.ndarray, eval: Metric):
+def computeHypothesisTestForDiscreteEval(tuned_data: np.ndarray, graphrag_data: np.ndarray, prolog_graphrag_data: np.ndarray, eval: Metric):
     """
     Performs hypothesis testing (e.g., Cochran's Q test) for a given discrete evaluation criterion
     across different pipelines.
     """
+
+    data = np.array(tuned_data.tolist(), graphrag_data.tolist(), prolog_graphrag_data.tolist())
     
-    stat, p_value = kruskal(tuned_data, graphrag_data, prolog_graphrag_data)
-    interpretation = "SIGNIFICANT" if p < ALPHA else "NON_SIGNIFICANT"
+    stat, p_value, df = cochrans_q(data)
+    interpretation = "SIGNIFICANT" if p_value < ALPHA else "NON_SIGNIFICANT"
     
     # Save to CSV
     with open(os.path.join(IO_DIR, "hypothesis_test_results.csv"), 'a', newline='') as f:
@@ -78,7 +81,7 @@ def computeHypothesisTestForDiscreteEval(tuned_data: numpy.ndarray, graphrag_dat
             fieldnames=["eval_name", "p_value", "interpretation"]
         )
         writer.writerow({
-            "eval_name": eval_name.value.lower().replace(" ", "_"),
+            "eval_name": eval.value.lower().replace(" ", "_"),
             "p_value": p_value,
             "interpretation": interpretation
         })
@@ -107,3 +110,7 @@ def performDiscreteHypothesisTests():
         graphrag_data=graphrag_data,
         prolog_graphrag_data=prolog_graphrag_data,
     )
+
+def performHypothesisTests():
+    performContinuousHypothesisTests()
+    performDiscreteHypothesisTests()

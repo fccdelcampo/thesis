@@ -234,7 +234,7 @@ def generateBoxPlotGrids(fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df):
 
     return saved_paths
 
-def generatePValueMatrix(df: pd.DataFrame, test: PostHocTest, metric: Metric, workload: Workload):
+def generatePValueMatrix(df: pd.DataFrame, test: PostHocTest, eval: Metric | Benchmark):
     workload = workload.value
     if test == PostHocTest.DUNN:
         matrix = df
