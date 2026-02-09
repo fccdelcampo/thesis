@@ -13,13 +13,32 @@ from test_cases.loaders.mmlu_loader import MMLULoader
 from test_cases.loaders.truthfulqa_loader import TruthfulQALoader
 from test_cases.loaders.hotpotqa_loader import HotpotQALoader
 
+import sys
+
+# Ensure the pipeline modules can be imported
+pipeline_dir = os.path.join(os.path.dirname(__file__), 'prolog_graphrag_pipeline')
+sys.path.append(pipeline_dir)
+
+# Import the REAL pipeline driver
+try:
+    from main_driver import run_pipeline
+except ImportError as e:
+    print(f"CRITICAL ERROR: Could not import main_driver: {e}")
+    sys.exit(1)
+
 class GraphRAGSystem:
     def query(self, input_text):
-        # Placeholder mock
-        return {
-            "answer": "This is a mock answer from the GraphRAG system.",
-            "contexts": ["Mock context retrieved from the graph."]
-        }
+        try:
+            # Run the actual pipeline
+            # run_pipeline returns: {'answer': ..., 'contexts': ..., 'context_from_prompt': ..., 'prolog_explanation': ...}
+            return run_pipeline(input_text)
+        except Exception as e:
+            print(f"Error querying pipeline: {e}")
+            return {
+                "answer": "Error",
+                "contexts": [],
+                "error": str(e)
+            }
 
 def run_evaluation():
     # 1. Setup
