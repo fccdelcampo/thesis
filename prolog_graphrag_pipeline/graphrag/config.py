@@ -10,6 +10,88 @@ class RETRIEVER_OPTIONS(Enum):
   HybridRetriever = "HybridRetriever"
   
 
+
+class SCHEMA_TYPE(Enum):
+  STATIC = "Static Schema"
+  EXTRACTED = "Extracted Schema"
+  
+SCHEMA_CONFIG = SCHEMA_TYPE.STATIC
+
+STATIC_SCHEMA = { # NOTE: Due to how 'EXTRACTED' works, the prompt used by SimpleKGPipeline is bad and does not constrain the output to only JSON format. We can create a custom KG Pipeline but for now we use this to skip it entirely.
+        "node_types": [
+            "Concept",      # The heavy lifter: covers Theorems, Ideas, Theories, Terms
+            "Person",       # Key figures: Socrates, Einstein, Historical Leaders
+            "Event",        # Occurrences: Wars, Experiments, Historical Periods
+            "Definition",   # Crucial for education: Explicit statements of meaning
+            "Example",      # Grounding: Specific instances (e.g., "Pingu" or "3")
+            "Topic"         # The Field: "Mathematics", "Philosophy", "Biology"
+        ],
+        "relationship_types": [
+            "RELATED_TO",   # Generic connection
+            "IS_A",         # Hierarchy: "Calculus IS_A Topic", "Penguin IS_A Bird"
+            "PART_OF",      # Composition: "Cell PART_OF Tissue"
+            "CAUSES",       # Logic/History: "War CAUSES Famine", "Premise CAUSES Conclusion"
+            "DEFINES",      # Concept -> Definition
+            "ILLUSTRATES"   # Example -> Concept ("Pingu ILLUSTRATES Non-flying bird")
+        ]
+    }
+
+PROMPT_TEMPLATE = '''
+### Role
+You are a Knowledge Engineer specialized in Symbolic Logic. 
+Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph.
+</system>
+
+### Task
+Decompose the input text into entities and relationships. 
+For every relationship, you must provide a 'natural_statement' that preserves the full 
+nuance of the source text (modality, quantifiers, conditions).
+
+### Execution Flow
+IDENTIFY THREE TYPES OF LOGIC:
+1. FACT: A simple assertion (e.g., "X is a Y").
+2. RULE: A conditional implication (e.g., "If P then Q").
+3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").
+
+### STRICT JSON FORMAT:
+{{
+  "nodes": [
+    {{
+      "id": "unique_atom_id", 
+      "label": "PrologSafeLabel", 
+      "properties": {{"name": "Actual Name"}} 
+    }}
+  ],
+  "relationships": [
+    {{
+      "type": "PREDICATE_TYPE",
+      "start_node_id": "id1",
+      "end_node_id": "id2",
+      "properties": {{
+        "natural_statement": "The full natural language fact or rule extracted from text",
+        "logic_intent": "FACT | RULE | EXCEPTION",
+        "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"
+      }}
+    }}
+  ]
+}}
+</task>
+
+### Constraints
+- Use lowercase_with_underscores for IDs and Types (Prolog atom style).
+- Do not hallucinate. If no clear logic exists, return empty arrays.
+- {schema}
+</constraints>
+
+### Examples
+{examples}
+
+### Input Text
+{text}
+
+FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble.
+'''
+
 RETRIEVER = RETRIEVER_OPTIONS.HybridCypherRetriever
 
 RETRIEVAL_QUERY = '''

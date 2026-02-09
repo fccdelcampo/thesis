@@ -1,5 +1,4 @@
 from .config import RETRIEVAL_QUERY, RETRIEVER
-# CHANGE 1: Use the standard HybridRetriever (not HybridCypherRetriever)
 from neo4j_graphrag.retrievers import HybridRetriever
 from neo4j_graphrag.retrievers import HybridCypherRetriever
 from neo4j_graphrag.retrievers import Text2CypherRetriever
