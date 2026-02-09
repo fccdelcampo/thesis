@@ -3,7 +3,7 @@ from sched import pipeline
 import pandas as pd
 import os
 from classes import *
-from config import NUM_TRIALS, ALPHA
+from config import ALPHA
 from scikit_posthocs import posthoc_dunn
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
 
