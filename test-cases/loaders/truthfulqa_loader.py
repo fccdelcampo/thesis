@@ -2,7 +2,7 @@ import json
 import os
 
 class TruthfulQALoader:
-    def __init__(self, file_path="test-cases/truthfulqa_selected.jsonl"):
+    def __init__(self, file_path="test-cases/truthfulqa.jsonl"):
         self.file_path = file_path
 
     def load_data(self):

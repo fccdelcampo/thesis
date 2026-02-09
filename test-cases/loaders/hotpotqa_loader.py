@@ -2,7 +2,7 @@ import json
 import os
 
 class HotpotQALoader:
-    def __init__(self, file_path="test-cases/hotpotqa_selected.jsonl"):
+    def __init__(self, file_path="test-cases/hotpotqa.jsonl"):
         self.file_path = file_path
 
     def load_data(self):
