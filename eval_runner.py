@@ -4,7 +4,7 @@ import time
 
 # Metrics (Importing but relying on mock/existing system context)
 try:
-    from ragas.metrics import faithfulness, answer_relevancy, context_recall
+    from ragas.metrics.collections import faithfulness, answer_relevancy, context_recall
 except ImportError:
     try:
         from ragas.metrics.collections import faithfulness, answer_relevancy, context_recall
