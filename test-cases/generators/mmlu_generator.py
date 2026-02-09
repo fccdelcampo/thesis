@@ -31,22 +31,15 @@ def generate_mmlu_dataset():
     for subject in TARGET_SUBJECTS:
         try:
             print(f"Fetching subject: {subject}...")
-            # Removed trust_remote_code=True as it is no longer needed for cais/mmlu
             ds = load_dataset("cais/mmlu", subject, split="test")
-            
-            # SHUFFLE to avoid "Chapter 1 bias"
             shuffled_ds = ds.shuffle(seed=RANDOM_SEED)
-            
-            # Select the first N from the SHUFFLED list
             n_samples = min(len(ds), SAMPLES_PER_SUBJECT)
             samples = shuffled_ds.select(range(n_samples))
             
             for item in samples:
-                # Map integer answer (0-3) to Letter (A-D)
                 answer_key = ["A", "B", "C", "D"]
                 correct_char = answer_key[item['answer']]
                 
-                # Standardize
                 entry = {
                     "question": item['question'],
                     "options": item['choices'],
