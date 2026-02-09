@@ -9,9 +9,9 @@ except ImportError:
     print("Warning: ragas not installed. Evaluation logic will simulate calls or fail.")
 
 # Loaders
-from benchmarks.mmlu_loader import MMLULoader
-from benchmarks.truthfulqa_loader import TruthfulQALoader
-from benchmarks.hotpotqa_loader import HotpotQALoader
+from test_cases.loaders.mmlu_loader import MMLULoader
+from test_cases.loaders.truthfulqa_loader import TruthfulQALoader
+from test_cases.loaders.hotpotqa_loader import HotpotQALoader
 
 class GraphRAGSystem:
     def query(self, input_text):
