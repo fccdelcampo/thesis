@@ -74,7 +74,7 @@ def run_evaluation():
             test_cases = loader.load_data()
             
             for i, case in enumerate(test_cases):
-                print(f"  Processing {i+1}/{len(test_cases)}: {case['question'][:50]}...")
+                print(f"  Processing {i+1}/{len(test_cases)}: {case['question']}...")
                 
                 # 2. Query System
                 start_time = time.time()

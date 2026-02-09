@@ -56,13 +56,28 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
             
             try:
                 extracted_data = json.loads(response)
-                return extracted_data["question"], extracted_data["context"]
+                print(f"DEBUG: Parsed JSON: {extracted_data}")
+
+                if not isinstance(extracted_data, dict):
+                    raise ValueError(f"Expected dict, got {type(extracted_data)}")
+
+                # Normalize keys (handle case variations)
+                data = {k.lower(): v for k, v in extracted_data.items()}
+                print(f"DEBUG: Normalized keys: {list(data.keys())}")
+                
+                if "question" not in data or "context" not in data:
+                     raise ValueError(f"Missing required keys 'question' or 'context' in JSON response. Keys found: {list(data.keys())}")
+                
+                return data["question"], data["context"]
             except json.JSONDecodeError as e:
                 print(f"JSON decoding error: {e}")
                 current_messages.append({'role': 'assistant', 'content': response})
                 most_recent_error = f"JSON Decode Error: {e}"
                 
         except Exception as e:
+            print(f"DEBUG: Exception in loop: {type(e).__name__}: {e}")
+            import traceback
+            traceback.print_exc()
             most_recent_error = str(e)
             
     raise ValueError(f"Failed to extract query and context after 5 retries. Last error: {most_recent_error}")
