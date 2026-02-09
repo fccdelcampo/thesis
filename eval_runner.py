@@ -4,9 +4,12 @@ import time
 
 # Metrics (Importing but relying on mock/existing system context)
 try:
-    from ragas.metrics.collections import faithfulness, answer_relevancy, context_recall
+    from ragas.metrics import faithfulness, answer_relevancy, context_recall
 except ImportError:
-    print("Warning: ragas not installed. Evaluation logic will simulate calls or fail.")
+    try:
+        from ragas.metrics.collections import faithfulness, answer_relevancy, context_recall
+    except ImportError as e:
+        print(f"Warning: ragas not installed or import failed: {e}. Evaluation logic will simulate calls or fail.")
 
 # Loaders
 from test_cases.loaders.mmlu_loader import MMLULoader
@@ -19,19 +22,18 @@ import sys
 pipeline_dir = os.path.join(os.path.dirname(__file__), 'prolog_graphrag_pipeline')
 sys.path.append(pipeline_dir)
 
-# Import the REAL pipeline driver
+# Import the REAL pipeline driver (GraphRAG Only)
 try:
-    from main_driver import run_pipeline
+    from graphrag import graphrag_driver
 except ImportError as e:
-    print(f"CRITICAL ERROR: Could not import main_driver: {e}")
+    print(f"CRITICAL ERROR: Could not import graphrag_driver: {e}")
     sys.exit(1)
 
 class GraphRAGSystem:
     def query(self, input_text):
         try:
-            # Run the actual pipeline
-            # run_pipeline returns: {'answer': ..., 'contexts': ..., 'context_from_prompt': ..., 'prolog_explanation': ...}
-            return run_pipeline(input_text)
+            # Run the actual pipeline (GraphRAG Only)
+            return graphrag_driver.run_pipeline(input_text)
         except Exception as e:
             print(f"Error querying pipeline: {e}")
             return {

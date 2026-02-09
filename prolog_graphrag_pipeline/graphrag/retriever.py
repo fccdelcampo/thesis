@@ -155,4 +155,9 @@ def generate(llm, retriever, query) -> dict:
     print(f"Done. Check '{output_file}' for the context and answer.")
 
 
-    return answer # Uncomment in Prolog-GraphRAG pipeline
+    # Return both answer and contexts for evaluation
+    contexts = [item.content for item in retrieved_context.items]
+    return {
+        "answer": answer,
+        "contexts": contexts
+    }

@@ -199,13 +199,16 @@ def generate_answer(query, retriever, llm) -> dict:
     return generate(llm, retriever, query)
 
 def run_pipeline(user_question) -> dict:
-    query, text_context = extract_query_and_context(user_question, embedder)
+    query, text_context = extract_query_and_context(user_question)
     asyncio.run(process_context(kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
-    context = generate(llm=retriever_llm, retriever=retriever, query=query)
+    generation_result = generate(llm=retriever_llm, retriever=retriever, query=query)
+    # generation_result is now a dict: {'answer': str, 'contexts': list}
+    
     return {
         "query": query,
         "text_context": text_context,
-        "context": context
+        "answer": generation_result["answer"],
+        "contexts": generation_result["contexts"]
             }
 
 async def test_process_pdf_context(kg_builder_pdf: SimpleKGPipeline):
