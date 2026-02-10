@@ -6,7 +6,7 @@ import time
 from neo4j.exceptions import ServiceUnavailable, AuthError
 from neo4j_graphrag.generation import GraphRAG
 from neo4j_graphrag.generation.prompts import RagTemplate
-from graphrag.config import GRAPHRAG_TEMPLATE
+from .config import GRAPHRAG_TEMPLATE
 from neo4j_graphrag.generation import GraphRAG
 
 
@@ -76,32 +76,47 @@ class CleanTextRetriever(HybridRetriever):
         
         return result
 
+
+def create_yago_index(driver):
+    print("Ensuring YAGO Fulltext Index exists...")
+    try:
+        driver.execute_query("""
+            CREATE FULLTEXT INDEX yagoNameIndex IF NOT EXISTS 
+            FOR (n:Resource) ON EACH [n.rdfs__label]
+        """, database_="neo4j")
+        print("YAGO index check complete.")
+    except Exception as e:
+        print(f"Warning: Could not create YAGO index: {e}")
+
 def create_retriever(driver, embedder):
     if not check_db_health(driver):
         raise ConnectionError("Aborting initialization: Cannot connect to Neo4j.")
     
-    # 2. Cleanup Phase
+    # 2. Cleanup Phase (Only for local document indexes)
     driver.execute_query("DROP INDEX documentsVectorIndex IF EXISTS")
     driver.execute_query("DROP INDEX documentsFulltextIndex IF EXISTS")
     
-    # 3. Recreate Phase
+    # 3. YAGO Index creation (Static, do not drop)
+    create_yago_index(driver)
+
+    # 4. Recreate Phase
     create_indexes(driver)
     
-    # 4. Guarded Wait Phase
+    # 5. Guarded Wait Phase
     try:
         wait_for_indexes(driver, timeout=120) 
     except TimeoutError as e:
         print(f"Critical Error: {e}")
         return None
 
-    # 5. Initialization
+    # 6. Initialization
     if RETRIEVER.value == "HybridRetriever":
         return CleanTextRetriever(
             driver=driver,
-            vector_index_name="documentsVectorIndex",   # Matches ID 3 in your JSON
-            fulltext_index_name="documentsFulltextIndex", # Matches ID 6 in your JSON
+            vector_index_name="documentsVectorIndex",
+            fulltext_index_name="documentsFulltextIndex",
             embedder=embedder,
-            return_properties=["text", "id"] # Hybrid retriever creates label itself
+            return_properties=["text", "id"] 
         )
     elif RETRIEVER.value == "HybridCypherRetriever":
         return HybridCypherRetriever(
@@ -128,22 +143,36 @@ def generate(llm, retriever, query) -> dict:
     retrieved_context = graph_rag_results.retriever_result
     answer = graph_rag_results.answer
 
+    # Enrich context with metadata for the LLM
+    final_contexts = []
+    
     output_file = "debug_rag_output.txt"
     
-    with open(output_file, "w", encoding="utf-8") as f:
+    with open(output_file, "a", encoding="utf-8") as f:
         f.write("="*50 + "\n")
         f.write(f" QUERY: {query}\n")
         f.write("="*50 + "\n\n")
-
         f.write(f"--- RETRIEVED CONTEXT (Top {len(retrieved_context.items)} Chunks) ---\n")
         
         for i, item in enumerate(retrieved_context.items):
             score = item.metadata.get('score', 0.0) if item.metadata else 0.0
-            # Clean newlines for readability in the text file
-            clean_content = item.content.replace('\n', ' ')
+            clean_content = item.content.replace('\n', ' ').replace('  ', ' ')
             
+            # Extract YAGO info from metadata
+            metadata = item.metadata or {}
+            yago_match = metadata.get('yago_match')
+            yago_comment = metadata.get('yago_comment')
+            
+            # Construct enriched context string
+            enriched_content = clean_content
+            if yago_match and yago_comment:
+                yago_info = f" [Related Concept: {yago_match} - {yago_comment}]"
+                enriched_content += yago_info
+            
+            final_contexts.append(enriched_content)
+
             f.write(f"\n[Chunk {i+1} | Score: {score:.4f}]\n")
-            f.write(f"{clean_content}\n")
+            f.write(f"{enriched_content}\n")
             f.write("-" * 50 + "\n")
 
         f.write("\n" + "="*50 + "\n")
@@ -154,10 +183,7 @@ def generate(llm, retriever, query) -> dict:
 
     print(f"Done. Check '{output_file}' for the context and answer.")
 
-
-    # Return both answer and contexts for evaluation
-    contexts = [item.content for item in retrieved_context.items]
     return {
         "answer": answer,
-        "contexts": contexts
+        "contexts": final_contexts
     }

@@ -95,25 +95,34 @@ FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown,
 RETRIEVER = RETRIEVER_OPTIONS.HybridCypherRetriever
 
 RETRIEVAL_QUERY = '''
-MATCH (node)-[:EXTRACTS]->(e:Entity)
+OPTIONAL MATCH (node)-[:EXTRACTS]->(e)
 // 1. Traverse to Document-extracted entities
-OPTIONAL MATCH (e)-[r]->(target:Entity)
+OPTIONAL MATCH (e)-[r]->(target)
 
-// 2. Global KG Linkage (YAGO)
-// Link local entity 'e' to YAGO node 'y' by name matching
-OPTIONAL MATCH (y) 
-WHERE y.rdfs__label IS NOT NULL 
-  AND toLower(y.rdfs__label) = toLower(e.name)
+// 2. Global KG Linkage (YAGO) - Optimized Fulltext Lookup
+CALL {
+    WITH e
+    CALL db.index.fulltext.queryNodes("yagoNameIndex", e.name) YIELD node as candidate, score
+    WHERE score > 0.8
+    RETURN candidate.rdfs__label as y_label, candidate.rdfs__comment as y_comment, score as y_score
+    ORDER BY y_score DESC LIMIT 1
+    UNION
+    RETURN null as y_label, null as y_comment, 0.0 as y_score
+}
+WITH node, e, r, target, y_label, y_comment, y_score
+ORDER BY y_score DESC
+WITH node, e, r, target, collect({label: y_label, comment: y_comment, score: y_score})[0] as yago_info
 
-// 3. Retrieve YAGO context (e.g., Description/Comment)
+// 3. Return Context
 RETURN node.text AS text, 
        node.score AS score,
        {
            local_entity: e.name,
            local_relationship: type(r),
            local_target: target.name,
-           yago_match: y.rdfs__label,
-           yago_comment: y.rdfs__comment
+           yago_match: yago_info.label,
+           yago_comment: yago_info.comment,
+           yago_score: yago_info.score
        } AS metadata
 '''
 # Additional instructions if ever needed.
@@ -142,7 +151,7 @@ You are a Logic Discovery Agent. Your task is NOT to answer the user's question.
 ### TASK
 Analyze the Context and the Question. Extract the following information in a clear, bulleted list format. If a category has no relevant info, write "None".
 
-### CATEGORIES OF EVIDENCE TO EXTRACT:
+### CATEGORIES OF EVIDENCE TO EXTRACT (SHOW THIS AS NATURAL STATEMENT):
 1. **ATOMIC FACTS**: Simple, unconditional truths (e.g., "Socrates is a man").
 2. **CONDITIONAL RULES**: Implications or 'If-Then' relationships (e.g., "If X is a man, then X is mortal").
 3. **LOGICAL EXCEPTIONS**: Constraints, negations, or 'Unless' cases (e.g., "Penguins are birds but cannot fly").
@@ -194,8 +203,8 @@ ENCODER_FEW_SHOT_EXAMPLES = [
   {"role": "assistant", "content": '''
 {
   "rationale": "The user identifies two entities (Alice and Bob) and assigns them specific medical roles (Doctor and Nurse). The core of the query is a request for a permission check regarding Alice's ability to prescribe medication based on her professional status. To prepare this for the knowledge graph, I must fix the typos 'Alise' (Alice), 'docter' (doctor), 'nurce' (nurse), and 'meds' (medications).",
-  "cleaned_query": "Is Alice, who is a doctor, legally authorized to prescribe medications?",
-  "extracted_context": [
+  "question": "Is Alice, who is a doctor, legally authorized to prescribe medications?",
+  "context": [
     "Alice is a doctor.",
     "Bob is a nurse."
   ]
@@ -207,8 +216,8 @@ ENCODER_FEW_SHOT_EXAMPLES = [
   {"role": "assistant", "content": '''
 {
   "rationale": "The user is presenting a logical deduction problem. The phrase 'Assuming every human is mortal' is identified as a universal premise (Local Context) that must be added to the knowledge base to facilitate the reasoning process. The second part of the sentence identifies 'Socrates' as the subject of interest and poses a question regarding his eventual state, which constitutes the core query.",
-  "cleaned_query": "What is the logical consequence or fate of Socrates based on the provided premises?",
-  "extracted_context": [
+  "question": "What is the logical consequence or fate of Socrates based on the provided premises?",
+  "context": [
     "Every human is mortal.",
     "Socrates is a member of the human species."
   ]
@@ -220,8 +229,8 @@ ENCODER_FEW_SHOT_EXAMPLES = [
   {"role": "assistant", "content": '''
 {
   "rationale": "The user is asking about a specific entity 'Pingu' based on a general rule about birds and a specific exception for penguins.",
-  "cleaned_query": "What is the flight capability status of Pingu the penguin?",
-  "extracted_context": [
+  "question": "What is the flight capability status of Pingu the penguin?",
+  "context": [
     "Most birds have the ability to fly.",
     "Penguins are a type of bird that cannot fly.",
     "Pingu is a penguin."

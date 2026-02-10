@@ -1,22 +1,21 @@
 ==================================================
- QUERY: Which of the following can be determined using only the database?
+ QUERY: What specific information can be extracted from the database?
 ==================================================
 
---- RETRIEVED CONTEXT (Top 1 Chunks) ---
-
-[Chunk 1 | Score: 0.0000]
-<Record text='Socrates is a man. All men are mortal.' score=None metadata={'local_target': 'Man', 'local_entity': 'Socrates', 'yago_match': None, 'yago_comment': None, 'local_relationship': 'IS_A'}>
---------------------------------------------------
+--- RETRIEVED CONTEXT (Top 0 Chunks) ---
 
 ==================================================
  LLM ANSWER:
 ==================================================
-Here's the extracted evidence in clear, bulleted list format:
+**ATOMIC FACTS**
+* None
 
-* **ATOMIC FACTS**:
-	+ Socrates is a man.
-* **CONDITIONAL RULES**:
-	+ If X is a man, then X is mortal. (Note: This rule can be represented as "man(X) -> mortal(X)" or more formally in Prolog syntax)
-* **LOGICAL EXCEPTIONS**: None
-* **NUMERIC/MODAL DATA**: None
+**CONDITIONAL RULES**
+* None
+
+**LOGICAL EXCEPTIONS**
+* None
+
+**NUMERIC/MODAL DATA**
+* None
 ==================================================

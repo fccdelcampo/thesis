@@ -57,7 +57,7 @@ class TestGenerateWithOllama:
         generate_with_ollama("test prompt")
         
         call_kwargs = mock_chat.call_args[1]
-        assert call_kwargs['model'] == 'llama3:instruct'
+        assert call_kwargs['model'] == 'llama3.1:8b-instruct-q4_K_M'
     
     @patch('graphrag.encoder.ollama.chat')
     def test_generate_with_ollama_json_format_requested(self, mock_chat):

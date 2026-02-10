@@ -10,6 +10,7 @@ import glob
 from .config import PROMPT_TEMPLATE, NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD, SCHEMA_CONFIG, STATIC_SCHEMA # added dot for relative import, assuming config.py is in the same directory as graphrag_driver.py
 # However, this will fail when you run this file directly. For debugging purposes, you can run 'python -m graphrag-pipeline.graphrag.graphrag_driver' in the terminal.
 import asyncio
+import time
 
 import sys
 from pathlib import Path
@@ -119,7 +120,7 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     retriever_llm = OllamaLLM(
         model_name=MODEL,
         model_params={
-            "keep_alive": "5m", # Keep it loaded during an active chat session
+            "keep_alive": "20m", # Keep it loaded during an active chat session
             "options": {
                 "temperature": 0.1,
                 "num_ctx": 2048,
@@ -201,6 +202,7 @@ def generate_answer(query, retriever, llm) -> dict:
 def run_pipeline(user_question) -> dict:
     query, text_context = extract_query_and_context(user_question)
     asyncio.run(process_context(kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
+    time.sleep(2) # Allow vector index to update
     generation_result = generate(llm=retriever_llm, retriever=retriever, query=query)
     # generation_result is now a dict: {'answer': str, 'contexts': list}
     

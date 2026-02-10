@@ -17,7 +17,7 @@ BASE_OLLAMA_MESSAGES = [
 def generate_with_ollama(messages) -> str | None: 
     try:
         response = ollama.chat(
-            model='llama3:instruct',
+            model='llama3.1:8b-instruct-q4_K_M',
             messages=messages,
             options={
                 'temperature': 0  
@@ -64,6 +64,12 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
                 # Normalize keys (handle case variations)
                 data = {k.lower(): v for k, v in extracted_data.items()}
                 print(f"DEBUG: Normalized keys: {list(data.keys())}")
+                
+                # Map alternative keys to standard keys
+                if "cleaned_query" in data and "question" not in data:
+                    data["question"] = data["cleaned_query"]
+                if "extracted_context" in data and "context" not in data:
+                    data["context"] = data["extracted_context"]
                 
                 if "question" not in data or "context" not in data:
                      raise ValueError(f"Missing required keys 'question' or 'context' in JSON response. Keys found: {list(data.keys())}")
