@@ -1,21 +1,22 @@
 from enum import Enum
 
 class Pipeline(Enum):
-    PROLOG_GRAPHRAG = "Prolog-GraphRAG Pipeline"
-    GRAPHRAG = "GraphRAG Pipeline"
-    TUNED = "Instruction-Tuned LLM Pipeline"
+    PROLOG_GRAPHRAG = ("Prolog-GraphRAG Pipeline", "prolog_graphrag")
+    GRAPHRAG = ("GraphRAG Pipeline", "graphrag")
+    TUNED = ("Instruction-Tuned LLM Pipeline", "tuned")
     
 class Metric(Enum):
-    FAITHFULNESS = "Faithfulness"
-    ANSWER_RELEVANCE = "Answer Relevance"
-    CONTEXT_RECALL = "Context Recall"
+    FAITHFULNESS = ("Faithfulness", "faithfulness")
+    ANSWER_RELEVANCE = ("Answer Relevance", "answer_relevance")
+    CONTEXT_RECALL = ("Context Recall", "context_recall")
     
 class Benchmark(Enum):
-    MMLU = "MMLU"
-    HOTPOTQA = "HotpotQA"
-    TRUTHFULQA = "TruthfulQA" 
+    MMLU = ("MMLU", "mmlu")
+    HOTPOTQA = ("HotpotQA", "hotpotqa")
+    TRUTHFULQA = ("TruthfulQA", "truthfulqa")
     
-BINARY_EVALS = [Benchmark.MMLU, Benchmark.HOTPOTQA]
+DISCRETE_EVALS = [Benchmark.MMLU, Benchmark.HOTPOTQA]
 CONTINUOUS_EVALS = [Metric.FAITHFULNESS, Metric.ANSWER_RELEVANCE, Metric.CONTEXT_RECALL, Benchmark.TRUTHFULQA]
     
 ALPHA = 0.05
+NUM_TEST_CASES = 100
