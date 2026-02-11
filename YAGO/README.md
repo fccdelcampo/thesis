@@ -1,0 +1,1 @@
+yago-wd-facts.nt.gz and yago-wd-full-types.nt.gz are not included due to big file size.
