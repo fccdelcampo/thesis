@@ -1,3 +1,14 @@
+import sys
+
+# from pathlib import Path
+
+# ROOT = Path(__file__).resolve().parent
+# print(ROOT)
+
+# RESULTS_DIR = ROOT / "hallucination-evaluation-results"
+# sys.path.append(str(ROOT))
+# Define target folder inside top-level directory
+# IO_DIR = ROOT / "hallucination-evaluation-results"
 from config import LLM_MESSAGES
 import ollama
 

@@ -15,8 +15,14 @@ class Benchmark(Enum):
     HOTPOTQA = ("HotpotQA", "hotpotqa")
     TRUTHFULQA = ("TruthfulQA", "truthfulqa")
     
+class SampleSequencesFlags(Enum):
+    X = "x"
+    Q = "q"
+    X_C = "x\c"
+    
 DISCRETE_EVALS = [Benchmark.MMLU, Benchmark.HOTPOTQA]
 CONTINUOUS_EVALS = [Metric.FAITHFULNESS, Metric.ANSWER_RELEVANCE, Metric.CONTEXT_RECALL, Benchmark.TRUTHFULQA]
     
 ALPHA = 0.05
 NUM_TEST_CASES = 100
+ENTAILMENT_THRESHOLD = 0.8
