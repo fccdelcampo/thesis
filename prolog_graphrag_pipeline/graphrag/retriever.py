@@ -1,4 +1,4 @@
-from .config import RETRIEVAL_QUERY, RETRIEVER
+from .config import RETRIEVAL_QUERY, RETRIEVER, YAGO_FALLBACK_QUERY
 # CHANGE 1: Use the standard HybridRetriever (not HybridCypherRetriever)
 from neo4j_graphrag.retrievers import HybridRetriever
 from neo4j_graphrag.retrievers import HybridCypherRetriever
@@ -8,7 +8,13 @@ from neo4j_graphrag.generation import GraphRAG
 from neo4j_graphrag.generation.prompts import RagTemplate
 from .config import GRAPHRAG_TEMPLATE
 from neo4j_graphrag.generation import GraphRAG
+from langchain_core.documents import Document # Ensure this is available
 
+# ... (db health check omitted)
+
+# ... (create_yago_index omitted)
+
+# ... (create_retriever omitted)
 
 def check_db_health(driver):
     """Verifies the driver can connect to Neo4j."""
@@ -128,10 +134,68 @@ def create_retriever(driver, embedder):
         )
     else:
         raise ValueError(f"Retriever {RETRIEVER.name} is invalid.")
+    
+    # Monkey-patch driver if not present
+    if not hasattr(r, 'driver'):
+        r.driver = driver
+    return r
+
+
+# Helper classes for Fallback
+class SimpleItem:
+    def __init__(self, content, metadata=None):
+        self.content = content
+        self.metadata = metadata or {}
+
+class SimpleResult:
+    def __init__(self, items):
+        self.items = items
+        self.metadata = {}
+
+class FallbackRetriever:
+    def __init__(self, main_retriever):
+        self.main = main_retriever
+        self.driver = getattr(main_retriever, 'driver', None)
+
+    def search(self, query_text, top_k=5, **kwargs):
+        # 1. Try Main Retriever
+        try:
+            result = self.main.search(query_text=query_text, top_k=top_k, **kwargs)
+        except Exception as e:
+            print(f"DEBUG: Main retriever failed: {e}")
+            result = None
+            
+        # 2. Check if successful
+        if result and result.items and len(result.items) > 0:
+            return result
+            
+        # 3. Fallback to YAGO
+        print("DEBUG: 0 Chunks encountered. Executing YAGO Fallback...")
+        if not self.driver:
+            print("ERROR: No driver found on retriever for fallback.")
+            return SimpleResult([])
+
+        try:
+            with self.driver.session() as session:
+                records = session.run(YAGO_FALLBACK_QUERY, query_text=query_text)
+                items = []
+                for record in records:
+                    items.append(SimpleItem(
+                        content=record['text'],
+                        metadata=record['metadata']
+                    ))
+                print(f"DEBUG: YAGO Fallback found {len(items)} items.")
+                return SimpleResult(items)
+        except Exception as e:
+            print(f"DEBUG: YAGO Fallback error: {e}")
+            return SimpleResult([])
 
 def generate(llm, retriever, query) -> dict:
-    rag_template = RagTemplate(template=GRAPHRAG_TEMPLATE, expected_inputs=['query_text', 'context'])
+    # Wrap in Fallback
+    retriever = FallbackRetriever(retriever)
 
+    rag_template = RagTemplate(template=GRAPHRAG_TEMPLATE, expected_inputs=['query_text', 'context'])
+    
     graph_rag = GraphRAG(llm=llm, retriever=retriever, prompt_template=rag_template)
 
     graph_rag_results = graph_rag.search(

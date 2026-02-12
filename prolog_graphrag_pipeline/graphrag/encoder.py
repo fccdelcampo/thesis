@@ -74,6 +74,8 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
                 if "question" not in data or "context" not in data:
                      raise ValueError(f"Missing required keys 'question' or 'context' in JSON response. Keys found: {list(data.keys())}")
                 
+                print(f"DEBUG: EXTRACTED QUERY: {data.get('question', 'N/A')}")
+                print(f"DEBUG: EXTRACTED CONTEXT (Len: {len(data.get('context', []))}): {data.get('context', [])}")
                 return data["question"], data["context"]
             except json.JSONDecodeError as e:
                 print(f"JSON decoding error: {e}")

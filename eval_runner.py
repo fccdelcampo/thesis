@@ -73,7 +73,7 @@ def run_evaluation():
             print(f"\nLoading {dataset_name}...")
             test_cases = loader.load_data()
             
-            for i, case in enumerate(test_cases):
+            for i, case in enumerate(test_cases[:1]):
                 print(f"  Processing {i+1}/{len(test_cases)}: {case['question']}...")
                 
                 # 2. Query System

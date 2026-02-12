@@ -29,3 +29,5 @@ def run_pipeline(user_prompt: str, include_conclusion: bool = True) -> dict:
         "context_from_prompt": context_from_prompt,
         "prolog_explanation": explainer_output.get("text_answer", "")
     }
+
+run_pipeline("What object was used to unlock the fifteen-inch door?")

@@ -1,7 +1,7 @@
 import janus_swi as janus
 import re
-from prolog_generator import generate_prolog_code, capture_db_and_query, capture_predicate_and_arguments
-from explainer import generate_safe_scasp_wrapper, generate_explanation
+from .prolog_generator import generate_prolog_code, capture_db_and_query, capture_predicate_and_arguments
+from .explainer import generate_safe_scasp_wrapper, generate_explanation
 import time
 
 import os, sys
@@ -14,6 +14,7 @@ sys.path.append(parent_dir)
 import llm
 
 def use_scasp():
+    # install scasp
     list(janus.query("use_module(library(scasp))."))
     janus.query_once("use_module(library(scasp/human)).")
 
