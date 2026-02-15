@@ -16,11 +16,11 @@
 {'text': 'The patio has a length of 144 inches (12 feet * 12 inches/foot) and a width of 120 inches (10 feet * 12 inches/foot).', 'id': None}
 --------------------------------------------------
 
-[Chunk 4 | Score: 0.9795]
+[Chunk 4 | Score: 0.9797]
 {'text': 'P implies (Q or R).', 'id': None}
 --------------------------------------------------
 
-[Chunk 5 | Score: 0.9795]
+[Chunk 5 | Score: 0.9797]
 {'text': 'P implies (Q or R).', 'id': None}
 --------------------------------------------------
 
@@ -28,4 +28,65 @@
  LLM ANSWER:
 ==================================================
 The capital of France is Paris.
+==================================================
+==================================================
+ QUERY: What is the capital of France?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+[Item 1]
+[Chunk Score: 0.0000] <Record text='There are six possible outcomes for each die: {1, 2, 3, 4, 5, 6}.' score=1.0 metadata={'local_context': [{'source': 'Local Document', 'text': 'There are six possible outcomes for each die: {1, 2, 3, 4, 5, 6}.', 'relationship': None, 'entity': None, 'target': None}], 'global_context': [{'score': 5.903072357177734, 'concept': 'is part of', 'definition': 'Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of.', 'source': 'YAGO Knowledge Graph'}, {'score': 4.166510581970215, 'concept': 'parliamentary group of the Parliament of Catalonia', 'definition': 'grup polític al Parlament de Catalunya', 'source': 'YAGO Knowledge Graph'}, {'score': 4.166510581970215, 'concept': 'constituency of the Parliament of Northern Ireland', 'definition': 'constituency in the Northern Ireland House of Commons (1921-1972)', 'source': 'YAGO Knowledge Graph'}]}>
+  [Local Connections]:
+   - None None None
+  [Global Knowledge (YAGO)]:
+   - is part of: Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of. (Score: 5.90)
+   - parliamentary group of the Parliament of Catalonia: grup polític al Parlament de Catalunya (Score: 4.17)
+   - constituency of the Parliament of Northern Ireland: constituency in the Northern Ireland House of Commons (1921-1972) (Score: 4.17)
+
+--------------------------------------------------
+[Item 2]
+[Chunk Score: 0.0000] <Record text='France is a country in Europe. Its capital is Paris. Paris is a beautiful city.' score=1.0 metadata={'local_context': [{'source': 'Local Document', 'text': 'France is a country in Europe. Its capital is Paris. Paris is a beautiful city.', 'relationship': None, 'entity': None, 'target': None}], 'global_context': [{'score': 5.903072357177734, 'concept': 'is part of', 'definition': 'Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of.', 'source': 'YAGO Knowledge Graph'}, {'score': 4.166510581970215, 'concept': 'parliamentary group of the Parliament of Catalonia', 'definition': 'grup polític al Parlament de Catalunya', 'source': 'YAGO Knowledge Graph'}, {'score': 4.166510581970215, 'concept': 'constituency of the Parliament of Northern Ireland', 'definition': 'constituency in the Northern Ireland House of Commons (1921-1972)', 'source': 'YAGO Knowledge Graph'}]}>
+  [Local Connections]:
+   - None None None
+  [Global Knowledge (YAGO)]:
+   - is part of: Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of. (Score: 5.90)
+   - parliamentary group of the Parliament of Catalonia: grup polític al Parlament de Catalunya (Score: 4.17)
+   - constituency of the Parliament of Northern Ireland: constituency in the Northern Ireland House of Commons (1921-1972) (Score: 4.17)
+
+--------------------------------------------------
+[Item 3]
+[Chunk Score: 0.0000] <Record text='The patio has a length of 144 inches (12 feet * 12 inches/foot) and a width of 120 inches (10 feet * 12 inches/foot).' score=0.9875595393222084 metadata={'local_context': [{'source': 'Local Document', 'text': 'The patio has a length of 144 inches (12 feet * 12 inches/foot) and a width of 120 inches (10 feet * 12 inches/foot).', 'relationship': None, 'entity': None, 'target': None}], 'global_context': [{'score': 5.903072357177734, 'concept': 'is part of', 'definition': 'Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of.', 'source': 'YAGO Knowledge Graph'}, {'score': 4.166510581970215, 'concept': 'parliamentary group of the Parliament of Catalonia', 'definition': 'grup polític al Parlament de Catalunya', 'source': 'YAGO Knowledge Graph'}, {'score': 4.166510581970215, 'concept': 'constituency of the Parliament of Northern Ireland', 'definition': 'constituency in the Northern Ireland House of Commons (1921-1972)', 'source': 'YAGO Knowledge Graph'}]}>
+  [Local Connections]:
+   - None None None
+  [Global Knowledge (YAGO)]:
+   - is part of: Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of. (Score: 5.90)
+   - parliamentary group of the Parliament of Catalonia: grup polític al Parlament de Catalunya (Score: 4.17)
+   - constituency of the Parliament of Northern Ireland: constituency in the Northern Ireland House of Commons (1921-1972) (Score: 4.17)
+
+--------------------------------------------------
+[Item 4]
+[Chunk Score: 0.0000] <Record text='P implies (Q or R).' score=0.979687213411611 metadata={'local_context': [{'source': 'Local Document', 'text': 'P implies (Q or R).', 'relationship': None, 'entity': None, 'target': None}], 'global_context': [{'score': 5.903072357177734, 'concept': 'is part of', 'definition': 'Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of.', 'source': 'YAGO Knowledge Graph'}, {'score': 4.166510581970215, 'concept': 'parliamentary group of the Parliament of Catalonia', 'definition': 'grup polític al Parlament de Catalunya', 'source': 'YAGO Knowledge Graph'}, {'score': 4.166510581970215, 'concept': 'constituency of the Parliament of Northern Ireland', 'definition': 'constituency in the Northern Ireland House of Commons (1921-1972)', 'source': 'YAGO Knowledge Graph'}]}>
+  [Local Connections]:
+   - None None None
+  [Global Knowledge (YAGO)]:
+   - is part of: Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of. (Score: 5.90)
+   - parliamentary group of the Parliament of Catalonia: grup polític al Parlament de Catalunya (Score: 4.17)
+   - constituency of the Parliament of Northern Ireland: constituency in the Northern Ireland House of Commons (1921-1972) (Score: 4.17)
+
+--------------------------------------------------
+[Item 5]
+[Chunk Score: 0.0000] <Record text='P implies (Q or R).' score=0.979687213411611 metadata={'local_context': [{'source': 'Local Document', 'text': 'P implies (Q or R).', 'relationship': None, 'entity': None, 'target': None}], 'global_context': [{'score': 5.903072357177734, 'concept': 'is part of', 'definition': 'Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of.', 'source': 'YAGO Knowledge Graph'}, {'score': 4.166510581970215, 'concept': 'parliamentary group of the Parliament of Catalonia', 'definition': 'grup polític al Parlament de Catalunya', 'source': 'YAGO Knowledge Graph'}, {'score': 4.166510581970215, 'concept': 'constituency of the Parliament of Northern Ireland', 'definition': 'constituency in the Northern Ireland House of Commons (1921-1972)', 'source': 'YAGO Knowledge Graph'}]}>
+  [Local Connections]:
+   - None None None
+  [Global Knowledge (YAGO)]:
+   - is part of: Indicates an item or CreativeWork that this item, or CreativeWork (in some sense), is part of. (Score: 5.90)
+   - parliamentary group of the Parliament of Catalonia: grup polític al Parlament de Catalunya (Score: 4.17)
+   - constituency of the Parliament of Northern Ireland: constituency in the Northern Ireland House of Commons (1921-1972) (Score: 4.17)
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+The capital of France is Paris. This information can be found within a local document that explicitly states "France is a country in Europe. Its capital is Paris. Paris is a beautiful city." The definition provided by YAGO regarding the concept of being part of does not apply to this question, as we are looking for specific geographical information about France's capital rather than its relationship with other entities or works.
 ==================================================

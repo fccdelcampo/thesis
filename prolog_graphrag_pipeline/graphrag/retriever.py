@@ -141,6 +141,8 @@ def create_retriever(driver, embedder):
     return r
 
 
+from neo4j_graphrag.retrievers.base import Retriever
+
 # Helper classes for Fallback
 class SimpleItem:
     def __init__(self, content, metadata=None):
@@ -152,8 +154,9 @@ class SimpleResult:
         self.items = items
         self.metadata = {}
 
-class FallbackRetriever:
+class FallbackRetriever(Retriever):
     def __init__(self, main_retriever):
+        super().__init__(driver=getattr(main_retriever, 'driver', None)) # Base init might expect driver
         self.main = main_retriever
         self.driver = getattr(main_retriever, 'driver', None)
 
@@ -216,26 +219,32 @@ def generate(llm, retriever, query) -> dict:
         f.write("="*50 + "\n")
         f.write(f" QUERY: {query}\n")
         f.write("="*50 + "\n\n")
-        f.write(f"--- RETRIEVED CONTEXT (Top {len(retrieved_context.items)} Chunks) ---\n")
+        f.write(f"--- RETRIEVED CONTEXT (Top {len(retrieved_context.items)} Items) ---\n")
         
         for i, item in enumerate(retrieved_context.items):
             score = item.metadata.get('score', 0.0) if item.metadata else 0.0
             clean_content = item.content.replace('\n', ' ').replace('  ', ' ')
             
-            # Extract YAGO info from metadata
+            # Extract Local/Global Context from new query structure if present
             metadata = item.metadata or {}
-            yago_match = metadata.get('yago_match')
-            yago_comment = metadata.get('yago_comment')
+            local_ctx = metadata.get('local_context', [])
+            global_ctx = metadata.get('global_context', [])
             
-            # Construct enriched context string
-            enriched_content = clean_content
-            if yago_match and yago_comment:
-                yago_info = f" [Related Concept: {yago_match} - {yago_comment}]"
-                enriched_content += yago_info
+            enriched_content = f"[Chunk Score: {score:.4f}] {clean_content}\n"
             
+            if local_ctx:
+                enriched_content += "  [Local Connections]:\n"
+                for lc in local_ctx:
+                    enriched_content += f"   - {lc.get('entity')} {lc.get('relationship')} {lc.get('target')}\n"
+            
+            if global_ctx:
+                enriched_content += "  [Global Knowledge (YAGO)]:\n"
+                for gc in global_ctx:
+                     enriched_content += f"   - {gc.get('concept')}: {gc.get('definition')} (Score: {gc.get('score'):.2f})\n"
+
             final_contexts.append(enriched_content)
 
-            f.write(f"\n[Chunk {i+1} | Score: {score:.4f}]\n")
+            f.write(f"[Item {i+1}]\n")
             f.write(f"{enriched_content}\n")
             f.write("-" * 50 + "\n")
 

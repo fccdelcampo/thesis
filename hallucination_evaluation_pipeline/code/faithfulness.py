@@ -10,6 +10,12 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
+# Import RAGAS and Config
+from ragas import evaluate
+from ragas.metrics import faithfulness
+from datasets import Dataset
+import ragas_config
+
 from prolog_graphrag_pipeline.llm import generate as llm_generate
 from prolog_graphrag_pipeline.config import LLM_SYSTEM_PROMPT
 
@@ -34,59 +40,33 @@ def load_test_cases() -> list[dict]:
                     test_cases.append(json.loads(line))
     return test_cases
 
-def evaluate_faithfulness(question: str, answer: str, context: str) -> tuple[float, str]:
+def evaluate_with_ragas(question: str, answer: str, contexts: list[str]) -> float:
     """
-    Uses LLM-as-a-judge to evaluate faithfulness.
-    Returns a score (0.0 or 1.0) and a reason/label.
+    Evaluates Faithfulness using RAGAS.
     """
-    if not context:
-        return 0.0, "No context provided"
+    if not answer or not contexts:
+        return 0.0
 
-    prompt = f"""
-    You are a judge evaluating the faithfulness of an answer to a given context.
-    
-    QUESTION: {question}
-    CONTEXT: {context}
-    ANSWER: {answer}
-    
-    INSTRUCTION:
-    1. Extract all claims made in the ANSWER.
-    2. For each claim, check if it is supported by the CONTEXT.
-    3. If ALL claims are supported, the answer is FAITHFUL.
-    4. If ANY claim is contradicting or not found in the context, the answer is HALLUCINATED.
-    
-    OUTPUT FORMAT:
-    Return ONLY a JSON object with keys "score" (0 or 1) and "reason".
-    Example: {{"score": 1, "reason": "All claims supported."}}
-    """
+    # RAGAS expects a dataset
+    data = {
+        'question': [question],
+        'answer': [answer],
+        'contexts': [contexts],
+        'ground_truth': [""] # Faithfulness doesn't strictly need ground truth
+    }
+    dataset = Dataset.from_dict(data)
     
     try:
-        # We use a simple generation call here. 
-        # Ideally, we should use a separate 'judge' model or the same LLM with high temp.
-        # For simplicity, reusing the existing llm interface but we need to mock 'retrieved_context' arg
-        # or use the llm.generate raw logic. 
-        # Since llm.generate is tied to the RAG pipeline, we might need a direct call.
-        # But let's try to use the 'q' flag or similar if available, or just direct import.
-        import ollama
-        response = ollama.chat(
-            model='llama3:8b-instruct-fp16',
-            messages=[{'role': 'system', 'content': 'You are a strict evaluator.'}, 
-                      {'role': 'user', 'content': prompt}],
-            options={'temperature': 0}
+        results = evaluate(
+            dataset=dataset,
+            metrics=[faithfulness],
+            llm=ragas_config.get_ragas_llm(),
+            embeddings=ragas_config.get_ragas_embeddings()
         )
-        content = response['message']['content']
-        # Try to parse JSON
-        start = content.find('{')
-        end = content.rfind('}') + 1
-        if start != -1 and end != -1:
-            json_str = content[start:end]
-            data = json.loads(json_str)
-            return float(data.get("score", 0)), data.get("reason", "Parsed")
-        else:
-            return 0.0, "Failed to parse JSON"
+        return results['faithfulness']
     except Exception as e:
-        print(f"Error in evaluation: {e}")
-        return 0.0, "Error"
+        print(f"RAGAS Evaluation Failed: {e}")
+        return 0.0
 
 # GraphRAG
 from graphrag_pipeline.graphrag.graphrag_driver import run_pipeline as run_graphrag
@@ -114,10 +94,13 @@ def run_test_case(test_case: dict, test_case_id: int):
         # Expected return: dict with "answer", "context"
         graphrag_result = run_graphrag(question) 
         graphrag_answer = graphrag_result.get("answer", "")
-        graphrag_context = graphrag_result.get("context", "") # Assuming structure
+        # Ensure contexts is a list of strings
+        graphrag_context = graphrag_result.get("context", []) or graphrag_result.get("contexts", [])
+        if isinstance(graphrag_context, str):
+            graphrag_context = [graphrag_context]
         
         # Evaluate Faithfulness
-        gr_score, gr_reason = evaluate_faithfulness(question, graphrag_answer, graphrag_context)
+        gr_score = evaluate_with_ragas(question, graphrag_answer, graphrag_context)
     except Exception as e:
         print(f"GraphRAG Failed: {e}")
         gr_score = 0.0
@@ -130,10 +113,11 @@ def run_test_case(test_case: dict, test_case_id: int):
         prolog_answer = prolog_result.get("answer", "")
         # content is likely a list or string
         contexts = prolog_result.get("contexts", [])
-        prolog_context = "\n".join(contexts) if isinstance(contexts, list) else str(contexts)
+        if isinstance(contexts, str):
+            contexts = [contexts]
         
         # Evaluate Faithfulness
-        pgr_score, pgr_reason = evaluate_faithfulness(question, prolog_answer, prolog_context)
+        pgr_score = evaluate_with_ragas(question, prolog_answer, contexts)
     except Exception as e:
         print(f"Prolog GraphRAG Failed: {e}")
         pgr_score = 0.0

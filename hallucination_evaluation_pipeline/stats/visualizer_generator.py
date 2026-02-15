@@ -1,22 +1,29 @@
 import math
 import os
 import sys
-import matplotlib.pyplot as plt
-import scipy.stats as scipy_stats
-import numpy as np
-import seaborn as sns
-import pandas as pd
-import scikit_posthocs as sp
-from statsmodels.stats.multicomp import pairwise_tukeyhsd
-from matplotlib.colors import TwoSlopeNorm, LinearSegmentedColormap
-import matplotlib.patheffects as path_effects
-import matplotlib.patheffects as pe
 
-
-
-import math
-import os
-import sys
+# Optional visualization libraries
+try:
+    import matplotlib.pyplot as plt
+    import scipy.stats as scipy_stats
+    import numpy as np
+    import seaborn as sns
+    import pandas as pd
+    import scikit_posthocs as sp
+    from statsmodels.stats.multicomp import pairwise_tukeyhsd
+    from matplotlib.colors import TwoSlopeNorm, LinearSegmentedColormap
+    import matplotlib.patheffects as path_effects
+    import matplotlib.patheffects as pe
+    VISUALIZATION_AVAILABLE = True
+except ImportError as e:
+    print(f"Visualization libraries missing: {e}. Visualization will be skipped.")
+    VISUALIZATION_AVAILABLE = False
+    # Fallback for essential data libraries if they were the ones missing?
+    try:
+        import numpy as np
+        import pandas as pd
+    except ImportError:
+         print("Critical: Numpy/Pandas also missing.")
 
 try:
     from .config import ALPHA, CONTINUOUS_EVALS, DISCRETE_EVALS, Pipeline

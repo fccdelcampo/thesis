@@ -94,48 +94,59 @@ FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown,
 
 RETRIEVER = RETRIEVER_OPTIONS.HybridCypherRetriever
 
+# Optimized Query:
+# 1. Finds local document chunks via vector/fulltext search (handled by Retriever class, passed as `node` here if using HybridRetriever, but we are defining the pattern for HybridCypherRetriever)
+# WAIT: HybridCypherRetriever expects a query that takes `node` (the vector result) and traverses.
+# But we want to ALSO retrieve YAGO nodes even if `node` is null? 
+# HybridCypherRetriever DOES NOT support "Orphan" retrieval easily because it starts from the vector match `node`.
+# 
+# STRATEGY CHANGE: We will specificy a query that:
+# 1. Takes the vector-matched local node and finds its connections.
+# 2. SEPARATELY, we will perform a fulltext lookup on YAGO index using the user's query text (passed as $query_text).
+# 3. We UNION them.
+
 RETRIEVAL_QUERY = '''
+// Part A: Local Document Retrieval (Vector/Keyword matches passed as `node`)
+WITH node, score
 OPTIONAL MATCH (node)-[:EXTRACTS]->(e)
-// 1. Traverse to Document-extracted entities
 OPTIONAL MATCH (e)-[r]->(target)
+WITH node, score, collect(distinct {
+    source: "Local Document",
+    entity: e.name,
+    relationship: type(r),
+    target: target.name,
+    text: node.text
+}) as local_context
 
-// 2. Global KG Linkage (YAGO) - Optimized Fulltext Lookup
-CALL {
-    WITH e
-    CALL db.index.fulltext.queryNodes("yagoNameIndex", e.name) YIELD node as candidate, score
-    WHERE score > 0.8
-    RETURN candidate.rdfs__label as y_label, candidate.rdfs__comment as y_comment, score as y_score
-    ORDER BY y_score DESC LIMIT 1
-    UNION
-    RETURN null as y_label, null as y_comment, 0.0 as y_score
-}
-WITH node, e, r, target, y_label, y_comment, y_score
-ORDER BY y_score DESC
-WITH node, e, r, target, collect({label: y_label, comment: y_comment, score: y_score})[0] as yago_info
+// Part B: Global Knowledge Retrieval (YAGO) independent of Local Docs
+CALL db.index.fulltext.queryNodes("yagoNameIndex", $query_text) YIELD node as yago_node, score as y_score
+WHERE y_score > 0.5
+WITH node, score, local_context, collect(distinct {
+    source: "YAGO Knowledge Graph",
+    concept: yago_node.rdfs__label,
+    definition: COALESCE(yago_node.rdfs__comment, "No definition available."),
+    score: y_score
+})[..3] as global_context
 
-// 3. Return Context
-RETURN node.text AS text, 
-       node.score AS score,
-       {
-           local_entity: e.name,
-           local_relationship: type(r),
-           local_target: target.name,
-           yago_match: yago_info.label,
-           yago_comment: yago_info.comment,
-           yago_score: yago_info.score
-       } AS metadata
+RETURN 
+    node.text as text,
+    score,
+    {
+        local_context: local_context,
+        global_context: global_context
+    } as metadata
 '''
 
+# Fallback is no longer strictly needed if RETRIEVAL_QUERY handles it, but we keep it for safety.
 YAGO_FALLBACK_QUERY = '''
 CALL db.index.fulltext.queryNodes("yagoNameIndex", $query_text) YIELD node, score
 WHERE score > 0.5
 RETURN 
-    "YAGO Entity: " + node.rdfs__label + "\\nDefinition: " + COALESCE(node.rdfs__comment, "No definition available.") as text,
+    "YAGO Concept: " + node.rdfs__label + ". Definition: " + COALESCE(node.rdfs__comment, "No definition.") as text,
     score,
     {
-        source: "YAGO Knowledge Graph",
-        entity_name: node.rdfs__label,
-        yago_id: elementId(node)
+        source: "YAGO",
+        entity: node.rdfs__label
     } as metadata
 LIMIT 5
 '''
@@ -160,22 +171,18 @@ LIMIT 5
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are an expert Educational AI Assistant. Your goal is to answer the user's question accurately using the provided Context.
+You are an expert Educational AI Assistant. Your goal is to answer the user's question accurately by SYNTHESIZING the provided Context.
 
-### INSTRUCTIONS
-1. Read the Context carefully.
-2. If the question is a Multiple Choice Question (MMLU style with options A, B, C, D), you MUST:
-   - Analyze each option against the Context.
-   - Select the SINGLE best answer.
-   - Start your response with the correct letter (e.g., "A. " or "Answer: B").
-   - Then provide a concise explanation.
-3. If the Context contains "YAGO Knowledge", treat it as authoritative definitions.
-4. If the answer is not in the Context, use your general knowledge but mention that the context was insufficient.
+### STRICT INSTRUCTIONS
+1. **Answer the Question Directly**: Do NOT start by listing definitions. Start with the answer.
+2. **Synthesize, Don't List**: Use the definitions in the Context to explain *why* your answer is correct. Do not output a bulleted list of "Concept: Definition".
+3. **Use YAGO as Authority**: If YAGO definitions are present, use them to clarify terms, but integrate them naturally into sentences.
+4. **MMLU/Multiple Choice**: If options are provided (A, B, C, D), select the single best one and explain why.
 
 ### Question:
 {query_text}
 
-### Context:
+### Context (Local Documents & Global Knowledge):
 {context}
 
 ### Answer:

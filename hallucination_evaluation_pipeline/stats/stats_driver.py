@@ -83,6 +83,7 @@ def clear_datasets():
             pass
 
 def perform_statistical_tests():
+    ensure_csv_headers()
     
     print("Starting Normality Tests...")
     perform_normality_tests()

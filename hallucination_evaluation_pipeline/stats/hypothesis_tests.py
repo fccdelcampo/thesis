@@ -38,8 +38,13 @@ def compute_hypothesis_test_for_continuous_eval(tuned_data: np.ndarray, graphrag
     if not STATS_AVAILABLE:
         return
     
-    stat, p_value = kruskal(tuned_data, graphrag_data, prolog_graphrag_data)
-    interpretation = "SIGNIFICANT" if p_value < ALPHA else "NON_SIGNIFICANT"
+    try:
+        stat, p_value = kruskal(tuned_data, graphrag_data, prolog_graphrag_data)
+        interpretation = "SIGNIFICANT" if p_value < ALPHA else "NON_SIGNIFICANT"
+    except Exception as e:
+        print(f"Kruskal-Wallis test failed: {e}")
+        p_value = np.nan
+        interpretation = "ERROR"
     
     # Save to CSV
     with open(os.path.join(IO_DIR, "hypothesis_test_results.csv"), 'a', newline='') as f:
@@ -87,9 +92,14 @@ def compute_hypothesis_test_for_discrete_eval(tuned_data: np.ndarray, graphrag_d
 
     data = np.array([tuned_data.tolist(), graphrag_data.tolist(), prolog_graphrag_data.tolist()])
     
-    result = cochrans_q(data)
-    p_value = result.pvalue
-    interpretation = "SIGNIFICANT" if p_value < ALPHA else "NON_SIGNIFICANT"
+    try:
+        result = cochrans_q(data)
+        p_value = result.pvalue
+        interpretation = "SIGNIFICANT" if p_value < ALPHA else "NON_SIGNIFICANT"
+    except Exception as e:
+        print(f"Cochran's Q test failed: {e}")
+        p_value = np.nan
+        interpretation = "ERROR"
     
     # Save to CSV
     with open(os.path.join(IO_DIR, "hypothesis_test_results.csv"), 'a', newline='') as f:

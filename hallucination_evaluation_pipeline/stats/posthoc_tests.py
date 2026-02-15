@@ -58,10 +58,14 @@ def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Union[Metric
 
     if eval in CONTINUOUS_EVALS:
         if is_normal:
+            n_samples = len(results["tuned"])
+            if n_samples < 2:
+                print(f"Insufficient samples ({n_samples}) for {eval.value[1]}. Skipping.")
+                return
             df = pd.DataFrame(
                 {
                     'score': results["tuned"] + results["graphrag"] + results["prolog_graphrag"],
-                    'group': np.repeat(['tuned', 'graphrag', "prolog_graphrag"], repeats=NUM_TEST_CASES)
+                    'group': np.repeat(['tuned', 'graphrag', "prolog_graphrag"], repeats=n_samples)
                 }
             )
             result_df = pairwise_tukeyhsd(endog=df["score"], groups=df["group"], alpha=ALPHA)
@@ -71,16 +75,21 @@ def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Union[Metric
                 p_value = row[2]
                 all_scores = results[row[0]] + results[row[1]]
                 ranks = rankdata(all_scores)
-                pipeline1_mean_rank = np.mean(ranks[:NUM_TEST_CASES])
-                pipeline2_mean_rank = np.mean(ranks[NUM_TEST_CASES:])
+                current_n = len(results[row[0]])
+                pipeline1_mean_rank = np.mean(ranks[:current_n])
+                pipeline2_mean_rank = np.mean(ranks[current_n:])
                 winner = row[0] if pipeline1_mean_rank > pipeline2_mean_rank else row[1]
                 loser = row[1] if pipeline1_mean_rank < pipeline2_mean_rank else row[0]
                 log_posthoc_result(eval_name=eval.value[1], loser=loser, winner=winner, p_value=p_value)
         else:
+            n_samples = len(results["tuned"])
+            if n_samples < 2:
+                print(f"Insufficient samples ({n_samples}) for {eval.value[1]}. Skipping.")
+                return
             df = pd.DataFrame(
                 {
                     'score': results["tuned"] + results["graphrag"] + results["prolog_graphrag"],
-                    'group': np.repeat(['tuned', 'graphrag', "prolog_graphrag"], repeats=NUM_TEST_CASES)
+                    'group': np.repeat(['tuned', 'graphrag', "prolog_graphrag"], repeats=n_samples)
                 }
             )
             result_df = posthoc_dunn(df, val_col="score", group_col="group")
@@ -94,8 +103,9 @@ def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Union[Metric
                     if p_value < ALPHA:
                         all_scores = results[pipeline1_name] + results[pipeline2_name]
                         ranks = rankdata(all_scores)
-                        pipeline1_mean_rank = np.mean(ranks[:NUM_TEST_CASES])
-                        pipeline2_mean_rank = np.mean(ranks[NUM_TEST_CASES:])
+                        current_n = len(results[pipeline1_name])
+                        pipeline1_mean_rank = np.mean(ranks[:current_n])
+                        pipeline2_mean_rank = np.mean(ranks[current_n:])
                         winner, loser = (pipeline1_name, pipeline2_name) if pipeline1_mean_rank > pipeline2_mean_rank else (pipeline2_name, pipeline1_name)
                         log_posthoc_result(eval_name=eval.value[1], loser=loser, winner=winner, p_value=p_value)
     else:
@@ -119,12 +129,18 @@ def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Union[Metric
 def create_contingency_table(results: dict, pipeline1: Pipeline, pipeline2: Pipeline):
     if pipeline1 == pipeline2:
         raise ValueError(f"Pipelines 1 and 2 ({pipeline1.value}) are the same.")
-    if results[pipeline1.value].size != results[pipeline2.value].size:
-        raise ValueError(f"Binary data of {pipeline1.value} and {pipeline2.value} are unequal in size.")
+    p1_key = pipeline1.value[1]
+    p2_key = pipeline2.value[1]
+    
+    if len(results[p1_key]) != len(results[p2_key]):
+        raise ValueError(f"Binary data of {p1_key} and {p2_key} are unequal in size.")
+    
     both_correct, both_incorrect, pipeline1_only_correct, pipeline2_only_correct = 0, 0, 0, 0
-    for test_case_id in range(results[pipeline1.value].size):
-        pipeline1_score = results[pipeline1][test_case_id]
-        pipeline2_score = results[pipeline2][test_case_id]
+    size = len(results[p1_key])
+    
+    for test_case_id in range(size):
+        pipeline1_score = results[p1_key][test_case_id]
+        pipeline2_score = results[p2_key][test_case_id]
         if pipeline1_score == pipeline2_score:
             if pipeline1_score == 1:
                 both_correct += 1
@@ -164,7 +180,12 @@ def perform_posthoc_tests():
                 eval_name = eval.value[1]
                 pipeline_name = pipeline.value[1]
                 print(f"Eval name: {eval_name} | Pipeline name: {pipeline_name}")
-                normality = normality_test_df.loc[(normality_test_df['eval_name'] == eval_name) & (normality_test_df['pipeline'] == pipeline_name),'normality'].values[0]
+                row = normality_test_df.loc[(normality_test_df['eval_name'] == eval_name) & (normality_test_df['pipeline'] == pipeline_name),'normality']
+                if row.empty:
+                    print(f"Warning: No normality result for {eval_name} - {pipeline_name}. Assuming NOT normal.")
+                    normality = "NOT_NORMAL"
+                else:
+                    normality = row.values[0]
                 normality_test_results.append(normality)
             eval_df = pd.read_csv(IO_DIR / f'{eval.value[1]}_scores.csv')
             col_name = pipeline.value[1] + "_score"

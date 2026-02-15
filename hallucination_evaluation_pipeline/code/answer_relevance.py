@@ -3,13 +3,17 @@ import os
 import sys
 import pandas as pd
 from tqdm import tqdm
-from sklearn.metrics.pairwise import cosine_similarity
-import numpy as np
 
 # Add project root to sys.path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
+
+# Import RAGAS and Config
+from ragas import evaluate
+from ragas.metrics import answer_relevancy
+from datasets import Dataset
+import ragas_config
 
 # Import drivers
 # GraphRAG
@@ -45,69 +49,33 @@ def load_test_cases() -> list[dict]:
                         
     return test_cases
 
-def get_embedding(text: str):
+def evaluate_with_ragas(question: str, answer: str, contexts: list[str]) -> float:
     """
-    Get embedding for a text using Ollama (nomic-embed-text or similar).
+    Evaluates Answer Relevance using RAGAS.
     """
-    try:
-        import ollama
-        # Use a model that supports embeddings. 
-        # Verify if 'llama3' supports it or use 'nomic-embed-text' if available.
-        # Fallback to 'llama3:8b-instruct-fp16' if specific embed model not set,
-        # but llama3 is instructed model.
-        # Ideally use mxbai-embed-large or nomic-embed-text.
-        # For this env, let's try 'nomic-embed-text' or 'all-minilm'.
-        # If not, we might need to skip or use a simple overlap metric.
-        # Let's try to use the 'graphrag_pipeline.retriever.embedder' if possible.
-        
-        # Simple fix: Use ollama.embeddings
-        resp = ollama.embeddings(model='llama3:8b-instruct-fp16', prompt=text)
-        return resp['embedding']
-    except Exception as e:
-        # print(f"Embedding failed: {e}")
-        return [0.0] * 4096 # Dummy, size depends on model
+    if not answer:
+        return 0.0
 
-def evaluate_answer_relevance(question: str, answer: str) -> tuple[float, str]:
-    """
-    Evaluates Answer Relevance by generating artificial questions from the answer
-    and computing cosine similarity with the original question.
-    """
-    if not answer or len(answer) < 5:
-        return 0.0, "Answer too short"
-
-    prompt = f"""
-    Generate a question for which the following text is a suitable answer.
-    
-    ANSWER: {answer}
-    
-    OUTPUT: Return ONLY the generated question.
-    """
+    # RAGAS expects a dataset
+    data = {
+        'question': [question],
+        'answer': [answer],
+        'contexts': [contexts],
+        'ground_truth': [""] # Answer relevance doesn't strictly need ground truth
+    }
+    dataset = Dataset.from_dict(data)
     
     try:
-        import ollama
-        response = ollama.chat(
-            model='llama3:8b-instruct-fp16',
-            messages=[{'role': 'system', 'content': 'You are a question generator.'}, 
-                      {'role': 'user', 'content': prompt}],
-            options={'temperature': 0.7}
+        results = evaluate(
+            dataset=dataset,
+            metrics=[answer_relevancy],
+            llm=ragas_config.get_ragas_llm(),
+            embeddings=ragas_config.get_ragas_embeddings()
         )
-        generated_question = response['message']['content'].strip()
-        
-        # Calculate Cosine Similarity between Original Question and Generated Question
-        q_emb = get_embedding(question)
-        gq_emb = get_embedding(generated_question)
-        
-        if len(q_emb) == len(gq_emb) and len(q_emb) > 1:
-            similarity = cosine_similarity([q_emb], [gq_emb])[0][0]
-            # Normalize to 0-1 if needed, usually cosine is -1 to 1 but for embeddings usually 0-1
-            score = max(0.0, similarity)
-            return float(score), generated_question
-        else:
-            return 0.0, "Embedding Mismatch"
-            
+        return results['answer_relevancy']
     except Exception as e:
-        print(f"Evaluation Error: {e}")
-        return 0.0, "Error"
+        print(f"RAGAS Evaluation Failed: {e}")
+        return 0.0
 
 def run_test_case(test_case: dict, test_case_id: int):
     question = test_case.get("question")
@@ -120,7 +88,12 @@ def run_test_case(test_case: dict, test_case_id: int):
     try:
         gr_result = run_graphrag(question)
         gr_answer = gr_result.get("answer", "")
-        gr_score, gr_gen_q = evaluate_answer_relevance(question, gr_answer)
+        # Ensure contexts is a list of strings
+        gr_contexts = gr_result.get("contexts", [])
+        if isinstance(gr_contexts, str):
+            gr_contexts = [gr_contexts]
+            
+        gr_score = evaluate_with_ragas(question, gr_answer, gr_contexts)
     except Exception as e:
         print(f"GraphRAG Failed: {e}")
         gr_score = 0.0
@@ -129,7 +102,11 @@ def run_test_case(test_case: dict, test_case_id: int):
     try:
         pgr_result = run_prolog_graphrag(question, flag="prolog")
         pgr_answer = pgr_result.get("answer", "")
-        pgr_score, pgr_gen_q = evaluate_answer_relevance(question, pgr_answer)
+        pgr_contexts = pgr_result.get("contexts", [])
+        if isinstance(pgr_contexts, str):
+            pgr_contexts = [pgr_contexts]
+            
+        pgr_score = evaluate_with_ragas(question, pgr_answer, pgr_contexts)
     except Exception as e:
         print(f"Prolog GraphRAG Failed: {e}")
         pgr_score = 0.0

@@ -30,7 +30,10 @@ def reconstruct_prompt(user_question: str, retrieved_context: str, explainer_out
 
 ---
 ### INSTRUCTION:
-Provide a final, coherent response to the User Question. Use the Logical Evidence to explain the "why" behind the Conclusion. If the Conclusion is not explicitly specified, infer what the conclusion should be. Ensure the tone is natural and free of any technical jargon related to logic programming or databases.
+Provide a final, coherent response to the User Question.
+1. **Synthesize**: Use the Logical Evidence and Context to explain the answer.
+2. **Do Not List**: Do NOT simply list the retrieved facts or YAGO definitions. Integrate them into paragraphs.
+3. **Tone**: Ensure the tone is natural and free of technical jargon.
      """
      
 

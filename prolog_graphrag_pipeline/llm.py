@@ -22,7 +22,7 @@ def generate(user_question: str, retrieved_context: Optional[str], explainer_out
             try:
                 answer = dict()
                 response = ollama.chat(
-                        model='llama3:8b-instruct-fp16',
+                        model='llama3.1:8b-instruct-q4_K_M',
                         messages=LLM_MESSAGES + [{"role": "user", "content": final_prompt}],
                         options={
                             'temperature': 0.4,
@@ -43,7 +43,7 @@ def generate(user_question: str, retrieved_context: Optional[str], explainer_out
         try:
             answer = dict()
             response = ollama.chat(
-                    model='llama3:8b-instruct-fp16',
+                    model='llama3.1:8b-instruct-q4_K_M',
                     messages=LLM_MESSAGES + [{"role": "user", "content": final_prompt}],
                     options={
                         'temperature': 0.4,
