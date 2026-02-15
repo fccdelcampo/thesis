@@ -5,10 +5,10 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parent
 print(ROOT)
 
-# RESULTS_DIR = ROOT / "hallucination-evaluation-results"
+# RESULTS_DIR = ROOT / "hallucination_evaluation_results"
 sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
-# IO_DIR = ROOT / "hallucination-evaluation-results"
+# IO_DIR = ROOT / "hallucination_evaluation_results"
 
 from llm import generate
 

@@ -19,314 +19,214 @@ CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 # Append top-level directory to sys.path BEFORE importing from it
 sys.path.append(TOP_LEVEL_DIR)
 
-from classes import Metric, Pipeline, Workload, PostHocTest
 from config import ALPHA
 
-# Define target folder inside top-level directory
-OUTPUT_DIR = os.path.join(TOP_LEVEL_DIR, "visualizations")
+# Prefer results folder at workspace root: ../../hallucination_evaluation_results/visualizations
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+RESULTS_DATA_DIR = os.path.join(ROOT, "hallucination_evaluation_results", "data")
+OUTPUT_DIR = os.path.join(ROOT, "hallucination_evaluation_results", "visualizations")
 
-def generate_qq_grid_for_eval(eval, df_map):
+# Import additional config symbols used below
+from config import CONTINUOUS_EVALS, DISCRETE_EVALS, Pipeline
+
+# Ensure output directory exists
+os.makedirs(OUTPUT_DIR, exist_ok=True)
+
+def generate_qq_grids():
     """
-    Generates a grid of Q-Q plots for each pipeline × workload combination for a given metric,
-    runs Shapiro-Wilk normality test on each, and displays the p-value in the subplot.
+    Generates a grid of Q-Q plots for each pipeline for all continuous metric or benchmark
+    and displays the p-value in the subplot. First reads relevant CSV files in hallucination_evaluation_results/ 
+    to load data and normality test p-values.
     Saves the final grid in ../visualizations/ relative to this file.
-    
-    Args:
-        metric: Metric enum value (e.g., Metric.FAIRNESS)
-        df_map: dict {Pipeline: DataFrame}
-        workloads: list of Workload enum values
+
     """
-
-    # Determine output folder (visualizations/)
-    workloads = list(Workload)
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(current_dir)
-    out_folder = os.path.join(project_root, "visualizations")
-    os.makedirs(out_folder, exist_ok=True)
-
-    # Grid layout: rows = number of pipelines, columns = number of test categories
-    pipelines = list(df_map.keys())
-    nrows, ncols = len(pipelines), len(workloads)
-    fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(4*ncols, 3*nrows), squeeze=False)
-
-    for i, pipeline in enumerate(pipelines):
-        df = df_map[pipeline]
-        for j, workload in enumerate(workloads):
-            ax = axes[i, j]
-
-            # Extract values for this metric/workload/pipeline
-            values = df.loc[df['workload'] == workload.value, metric.value.lower().replace(" ", "_")].dropna().to_numpy()
-
-            # Skip empty datasets
-            if len(values) == 0:
-                ax.set_visible(False)
-                continue
-
-            # Run Shapiro-Wilk test
-            if len(values) < 3:
-                p_value = np.nan
-                normality = "n<3"
-            else:
-                _, p_value = scipy_stats.shapiro(values)
-                normality = "NORMAL" if p_value > ALPHA else "NOT NORMAL"
-
-            # Generate Q-Q plot
-            # Standardize sample values for visual comparability
-            std = np.std(values)
-            if std == 0:
-                z_values = np.zeros_like(values)  # avoid division by zero
-            else:
-                z_values = (values - np.mean(values)) / std
-
-            # Q-Q using standardized values
-            osm, osr = scipy_stats.probplot(z_values, dist="norm")[0]
-
-            print(f"Plotting QQ plot for Workload: {workload.value}, Pipeline: {pipeline.value}, Metric: {metric.value}")
-
-            ax.scatter(osm, osr, s=10, color='black')
-
-            # Optional reference diagonal line
-            ax.plot([osm.min(), osm.max()], [osm.min(), osm.max()], 'r--', linewidth=0.8)
-
-            # Title and axes
-            ax.set_title(f"{pipeline.value} | {workload.value}\n n={len(values)}", fontsize=9)
-            ax.set_xlabel("Theoretical Quantiles", fontsize=8)
-            ax.set_ylabel("Sample Quantiles", fontsize=8)
-
-            # Display p-value
-            if not np.isnan(p_value):
-                ax.text(0.95, 0.05, f"p={p_value:.3g}\n{normality}", ha='right', va='bottom', transform=ax.transAxes, fontsize=7)
-            else:
-                ax.text(0.95, 0.05, normality, ha='right', va='bottom', transform=ax.transAxes, fontsize=7)
-
-    # Layout and save
-    plt.suptitle(f"Q-Q Plots for {metric.value}", fontsize=14)
-    plt.tight_layout(rect=(0, 0, 1, 0.96))
-    filename = metric.value.lower().replace(" ", "_")
-    out_path = os.path.join(out_folder, f"normality_qq_grid_{filename}.png")
-    plt.savefig(out_path, dpi=300, bbox_inches='tight')
-    plt.close(fig)
-    print(f"[INFO] Saved Q-Q grid for {metric.value} at: {out_path}")
-
-def generateBoxPlotGrids(fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df):
-    """
-    Generate one grid of boxplots per workload. Each grid compares, for each metric,
-    the distributions across the five pipelines (FCFS, RR, oSJFDRR, SRR, KDTS).
-
-    Args:
-        fcfs_df, rr_df, osjfdrr_df, srr_df, kdts_df : pandas.DataFrame
-            DataFrames for each pipeline. Each must have a 'workload' column and
-            columns named by metric.value (or the strings you pass in metrics).
-        metrics : iterable of Enum or str
-            Iterable of metric enum members (or objects with .value) or strings describing
-            the metric column names to plot (order will be used).
-        workloads : iterable of Enum or str
-            Iterable of Workload enum members (or objects with .value) or strings for
-            each workload for which a separate grid will be produced.
-        out_folder : str or None
-            If None, the function will save to ../visualizations relative to this file.
-            Otherwise it will save to the provided path (created if necessary).
-
-    Returns:
-        list of str : paths of saved image files
-    """
-    current_dir = os.path.dirname(os.path.abspath(__file__))
-    project_root = os.path.dirname(current_dir)
-    out_folder = os.path.join(project_root, "visualizations")
-    os.makedirs(out_folder, exist_ok=True)
-    # Map friendly pipeline labels to dataframes (preserves order)
-    df_map = [
-        ("FCFS", fcfs_df),
-        ("RR", rr_df),
-        ("oSJFDRR", osjfdrr_df),
-        ("SRR", srr_df),
-        ("KDTS", kdts_df)
-    ]
-    pipeline_labels = [label for label, _ in df_map]
-
-    saved_paths = []
-
-    # Normalize metrics and workloads to strings (support Enum members)
-    metric_names = [m.value.lower().replace(" ", "_") for m in list(Metric)]
-    workload_names = [t.value for t in list(Workload)]
-    pipeline_names = [s.name for s in list(Pipeline)]
-    
-    
-    for metric in metric_names:
-        n_workloads = len(workload_names)
-        # layout: roughly square
-        
-        ncols = 2
-        nrows = 2
-        
-        fig, axes = plt.subplots(nrows=nrows, ncols=ncols, figsize=(4 * ncols, 3 * nrows), squeeze=False)
-
-        for idx, workload in enumerate(workload_names):
-            row = idx // ncols
-            col = idx % ncols
-            ax = axes[row][col]
-
-            # gather data arrays for each pipeline for the current metric & workload
-            data_list = []
-            sample_sizes = []
-            for _, df in df_map:
-                vals = df.loc[df['workload'] == workload, metric].dropna().to_numpy()
-                data_list.append(vals if len(vals) > 0 else np.array([]))
-                sample_sizes.append(len(vals))
-
-            # If every pipeline has no data for this metric/workload, show placeholder
-            if all(len(arr) == 0 for arr in data_list):
-                ax.text(0.5, 0.5, "No data", ha='center', va='center')
-                ax.set_title(metric.upper().replace("_", " "), fontsize=10)
-                ax.set_xticks([])
-                ax.set_yticks([])
-                continue
-
-            # Create boxplot
-            bp = ax.boxplot(data_list, labels=[f"{lab}\n(n={n})" for lab, n in zip(pipeline_labels, sample_sizes)],
-                            patch_artist=True, showfliers=True)
-
-            # Annotate median values above each box for clarity
-            medians = []
-            for i, d in enumerate(data_list):
-                if len(d) == 0:
-                    medians.append(np.nan)
-                else:
-                    medians.append(np.nanmedian(d))
-
-            for i, m in enumerate(medians):
-                if not np.isnan(m):
-                   ax.text(
-                        i + 1,
-                        m,
-                        f"{m:.3g}",
-                        ha='center',
-                        va='bottom',
-                        fontsize=8,
-                        color='black',
-                        weight='bold',
-                        path_effects=[path_effects.Stroke(linewidth=0.5, foreground='yellow'), path_effects.Normal()]
-                    )
-
-            ax.set_title(workload.upper().replace("_", " "), fontsize=10)
-            ax.tick_params(axis='x', labelsize=8)
-            ax.tick_params(axis='y', labelsize=8)
-
-        # Hide any unused subplots
-        total_subplots = nrows * ncols
-        for unused_idx in range(n_workloads, total_subplots):
-            r = unused_idx // ncols
-            c = unused_idx % ncols
-            axes[r][c].axis('off')
-
-        # Move the suptitle closer to the subplots by allowing subplots to
-        # occupy more vertical space (rect top closer to 1.0) and placing the
-        # suptitle slightly lower. This reduces the gap between the title and
-        # the first row of boxplots.
-        plt.suptitle(f"Boxplot Grid — Metric: {metric.upper().replace("_", " ")}", fontsize=14, y=0.98)
-        plt.tight_layout(rect=(0, 0, 1, 0.99))
-        
-        out_path = os.path.join(out_folder, f"hypothesis_boxgrid_{metric.lower()}.png")
-        print(f"[INFO] Saving boxplot grids to: {out_path}")
-        fig.savefig(out_path, dpi=300, bbox_inches='tight')
-        plt.close(fig)
-        saved_paths.append(out_path)
-
-    return saved_paths
-
-def generatePValueMatrix(df: pd.DataFrame, test: PostHocTest, eval: Metric | Benchmark):
-    workload = workload.value
-    if test == PostHocTest.DUNN:
-        matrix = df
-        test_name_label = "Dunn's"
-        test_name_file = "dunns"
+    # Read normality test results if available
+    normality_path = os.path.join(RESULTS_DATA_DIR, "normality_test_results.csv")
+    if os.path.exists(normality_path):
+        normal_df = pd.read_csv(normality_path)
     else:
-        matrix = make_full_tukey_matrix(df)
-        test_name_label = "Tukey's HSD"
-        test_name_file = "tukeyhsd"
-        
-    colors = [(0.8, 0.0, 0.0),  # dark red
-            (0.95, 0.95, 0.95),  # light gray (around alpha)
-            (0.2, 0.2, 0.8)]  # blue
-    custom_cmap = LinearSegmentedColormap.from_list("sigmap", colors, N=1024)
+        normal_df = pd.DataFrame()
 
-    # --- Force a sharp transition around alpha ---
-    norm = TwoSlopeNorm(vmin=0, vcenter=ALPHA, vmax=1)
+    for eval in CONTINUOUS_EVALS:
+        eval_name = eval.value[1]
+        scores_path = os.path.join(RESULTS_DATA_DIR, f"{eval_name}_scores.csv")
+        if not os.path.exists(scores_path):
+            continue
+        df = pd.read_csv(scores_path)
 
-    # Ensure the matrix contains numeric p-values. Coerce if possible and
-    # raise a clear error if non-numeric entries are present (helps catch
-    # upstream mistakes where a DataFrame of labels was passed accidentally).
-    raw_matrix = matrix.copy()
-    try:
-        numeric_matrix = matrix.astype(float)
-    except Exception:
-        numeric_matrix = matrix.apply(pd.to_numeric, errors='coerce')
-        # find first non-numeric entries (if any) in the original matrix
-        mask = numeric_matrix.isna() & ~raw_matrix.isna()
-        if mask.values.any():
-            coords = list(zip(*np.where(mask.values)))
-            sample = []
-            for (r, c) in coords[:6]:
-                sample.append({'row': raw_matrix.index[r], 'col': raw_matrix.columns[c], 'value': raw_matrix.iat[r, c]})
-            raise ValueError(
-                "Post-hoc p-value matrix contains non-numeric entries. "
-                f"First offending cells: {sample}.\nEnsure you pass a numeric matrix of p-values to generatePValueMatrix."
-            )
+        pipelines = list(Pipeline)
+        n = len(pipelines)
+        fig, axes = plt.subplots(1, n, figsize=(5 * n, 4))
+        if n == 1:
+            axes = [axes]
 
-    # --- Plot heatmap ---
-    plt.figure(figsize=(6, 5))
-    ax = sns.heatmap(
-        numeric_matrix,
-        annot=True,
-        fmt=".3f",
-        cmap=custom_cmap,
-        norm=norm,
-        cbar_kws={'label': f'p-value (α={ALPHA})'}
-    )
-    metric_name_label = metric.name.capitalize() if metric != Metric.CPU_UTILIZATION else "CPU Utilization"
-    metric_name_file = metric.name.lower() if metric != Metric.CPU_UTILIZATION else "cpu_utilization"
-    plt.title(f"{test_name_label} Test for {metric_name_label} - {workload} Workload")
+        for ax, pipeline in zip(axes, pipelines):
+            col = pipeline.value[1] + "_score"
+            if col not in df.columns:
+                ax.text(0.5, 0.5, "no data", ha="center", va="center")
+                continue
+            data = df[col].dropna().to_numpy()
+            if data.size == 0:
+                ax.text(0.5, 0.5, "no data", ha="center", va="center")
+                continue
+            # Create QQ plot
+            scipy_stats.probplot(data, dist="norm", plot=ax)
+            ax.set_title(pipeline.value[1])
+            # annotate p-value from normality test if available
+            p_val = None
+            if not normal_df.empty:
+                row = normal_df.loc[(normal_df['eval_name'] == eval_name) & (normal_df['pipeline'] == pipeline.value[1])]
+                if not row.empty:
+                    p_val = row['p_value'].values[0]
+            if p_val is not None and not (pd.isna(p_val)):
+                ax.text(0.05, 0.95, f"p={p_val:.3g}", transform=ax.transAxes, verticalalignment='top')
+
+        fig.suptitle(f"Q-Q plots for {eval.value[0]}")
+        fig.tight_layout(rect=[0, 0.03, 1, 0.95])
+        out_path = os.path.join(OUTPUT_DIR, f"qq_{eval_name}.png")
+        fig.savefig(out_path)
+        plt.close(fig)
+
+def generate_box_plot_grids():
+    """
+    Generate one grid of boxplots per continuous metric and benchmark. Each grid compares, for each metric,
+    the distributions across the three pipelines. Will read relevant files in hallucination_evaluation_results/
+
+    """
+    for eval in CONTINUOUS_EVALS:
+        eval_name = eval.value[1]
+        scores_path = os.path.join(RESULTS_DATA_DIR, f"{eval_name}_scores.csv")
+        if not os.path.exists(scores_path):
+            continue
+        df = pd.read_csv(scores_path)
+        generate_box_plot(eval_name, df)
+
+def generate_box_plot(eval_name: str, df: pd.DataFrame):
+    """
+    Create and save a boxplot comparing pipelines for `eval_name` using columns like 'tuned_score'.
+    """
+    melt_df = pd.melt(df, id_vars=[c for c in df.columns if not c.endswith("_score")], value_vars=[c for c in df.columns if c.endswith("_score")], var_name="pipeline", value_name="score")
+    # normalize pipeline names to match Pipeline.value[1]
+    melt_df['pipeline'] = melt_df['pipeline'].str.replace('_score', '')
+
+    plt.figure(figsize=(8, 6))
+    sns.boxplot(x='pipeline', y='score', data=melt_df)
+    plt.title(f"{eval_name} — score distribution by pipeline")
+    plt.xlabel("")
+    plt.ylabel("Score")
+    out_path = os.path.join(OUTPUT_DIR, f"boxplot_{eval_name}.png")
     plt.tight_layout()
-    plt.savefig(os.path.join(OUTPUT_DIR, f"posthoc_heatmap_{metric_name_file}_{test_name_file}_{workload.lower()}.png"), dpi=300)
+    plt.savefig(out_path)
+    plt.close()
     
-def make_full_tukey_matrix(tukey_df):
-    # Find the columns that contain the group names
-    possible_group_cols = [col for col in tukey_df.columns if 'group' in col.lower()]
-    if len(possible_group_cols) < 2:
-        raise ValueError("DataFrame must contain two group columns")
+def generate_bar_graph_grid():
+    """
+    Generate one grid of bar graphs per discrete metric and benchmark. Each grid compares, for each metric,
+    the number of 0 or 1 labels across the three pipelines. Will read relevant files in hallucination_evaluation_results/
 
-    g1_col, g2_col = possible_group_cols[:2]
+    """
+    # Use discrete evals (e.g., MMLU, HotpotQA)
+    for eval in DISCRETE_EVALS:
+        eval_name = eval.value[1]
+        scores_path = os.path.join(RESULTS_DATA_DIR, f"{eval_name}_scores.csv")
+        if not os.path.exists(scores_path):
+            continue
+        df = pd.read_csv(scores_path)
+        generate_bar_graph(eval_name, df)
+    
 
-    # Find p-value column
-    # Prefer an explicit 'p-adj' or similar column name; avoid accidentally
-    # matching columns like 'meandiff' which also contain the letter 'p'.
-    pval_candidates = [col for col in tukey_df.columns if 'p-adj' in col.lower() or 'p_adj' in col.lower() or col.lower() == 'p' or 'p-value' in col.lower() or 'p_value' in col.lower()]
-    if not pval_candidates:
-        # Fallback: any column containing 'p' but not 'meandiff'
-        pval_candidates = [col for col in tukey_df.columns if ('p' in col.lower()) and ('meandiff' not in col.lower())]
-    if not pval_candidates:
-        raise ValueError("Could not find a p-value column in the Tukey results DataFrame")
-    pval_col = pval_candidates[0]
+def generate_bar_graph(eval_name: str, df: pd.DataFrame):
+    """
+    Create and save a bar graph comparing pipelines for `eval_name` using columns like 'tuned_score'.
+    """
+    # select score columns
+    score_cols = [c for c in df.columns if c.endswith("_score")]
+    if len(score_cols) == 0:
+        return
 
-    groups = np.unique(tukey_df[[g1_col, g2_col]].values)
-    matrix = pd.DataFrame(1.0, index=groups, columns=groups)
+    # compute proportions and standard error for binary/discrete scores
+    stats = []
+    n = None
+    for col in score_cols:
+        values = df[col].dropna().to_numpy()
+        if n is None:
+            n = values.size
+        prop = np.nan
+        se = np.nan
+        if values.size > 0:
+            prop = np.mean(values)
+            se = math.sqrt(prop * (1 - prop) / max(1, values.size))
+        pipeline_name = col.replace('_score', '')
+        stats.append({'pipeline': pipeline_name, 'prop': prop, 'se': se})
 
-    for _, row in tukey_df.iterrows():
-        g1, g2, pval = row[g1_col], row[g2_col], row[pval_col]
-        matrix.loc[g1, g2] = pval
-        matrix.loc[g2, g1] = pval
+    stats_df = pd.DataFrame(stats)
 
-    return matrix
+    plt.figure(figsize=(8, 6))
+    ax = sns.barplot(x='pipeline', y='prop', data=stats_df, yerr=stats_df['se'])
+    ax.set_ylim(0, 1)
+    plt.title(f"{eval_name} — proportion correct by pipeline")
+    plt.ylabel('Proportion')
+    plt.xlabel('')
 
-# Example dataset
-np.random.seed(0)
-data = pd.DataFrame({
-    'group': np.repeat(['A', 'B', 'C', 'D'], 20),
-    'value': np.concatenate([
-        np.random.normal(5, 1, 20),
-        np.random.normal(6, 1, 20),
-        np.random.normal(8, 1, 20),
-        np.random.normal(9, 1, 20)
-    ])
-})
+    # annotate values
+    for i, row in stats_df.iterrows():
+        ax.text(i, row['prop'] + 0.02, f"{row['prop']:.3f}", ha='center')
 
+    out_path = os.path.join(OUTPUT_DIR, f"barplot_{eval_name}.png")
+    plt.tight_layout()
+    plt.savefig(out_path)
+    plt.close()
+   
+
+def generate_p_value_matrix(df: pd.DataFrame):
+    """
+    Will accept a DataFrame consisting of pairs of pipelines and their posthoc test p-value to construct a heatmap of p-values
+    """
+    # Accept rows of pairwise comparisons in either (loser,winner,p_value) or (pipeline1,pipeline2,pvalue)
+    if df.shape[0] == 0:
+        return None
+
+    # Normalize possible column names
+    if set(["pipeline1", "pipeline2", "pvalue"]).issubset(df.columns):
+        rows = df[['pipeline1', 'pipeline2', 'pvalue']].rename(columns={'pipeline1': 'p1', 'pipeline2': 'p2', 'pvalue': 'p'})
+    elif set(["loser", "winner", "p_value"]).issubset(df.columns):
+        rows = df[['loser', 'winner', 'p_value']].rename(columns={'loser': 'p1', 'winner': 'p2', 'p_value': 'p'})
+    else:
+        # Assume square matrix given
+        piv = df.copy()
+        piv = piv.astype(float)
+        np.fill_diagonal(piv.values, 0)
+        plt.figure(figsize=(6, 5))
+        sns.heatmap(piv, annot=True, fmt='.3f', cmap='viridis', cbar_kws={'label': 'p-value'})
+        plt.title('Post-hoc pairwise p-values')
+        out_path = os.path.join(OUTPUT_DIR, 'p_value_matrix.png')
+        plt.tight_layout()
+        plt.savefig(out_path)
+        plt.close()
+        return piv
+
+    # Build square matrix from rows
+    pipelines = sorted(pd.unique(rows[['p1', 'p2']].values.ravel('K')))
+    piv = pd.DataFrame(index=pipelines, columns=pipelines, data=np.nan, dtype=float)
+    for _, r in rows.iterrows():
+        p1 = r['p1']
+        p2 = r['p2']
+        p = float(r['p'])
+        piv.loc[p1, p2] = p
+        piv.loc[p2, p1] = p
+
+    for c in piv.columns:
+        if c not in piv.index:
+            piv.loc[c] = np.nan
+    piv = piv.reindex(index=piv.columns)
+    np.fill_diagonal(piv.values, 0)
+
+    plt.figure(figsize=(6, 5))
+    sns.heatmap(piv, annot=True, fmt='.3f', cmap='viridis', cbar_kws={'label': 'p-value'})
+    plt.title('Post-hoc pairwise p-values')
+    out_path = os.path.join(OUTPUT_DIR, 'p_value_matrix.png')
+    plt.tight_layout()
+    plt.savefig(out_path)
+    plt.close()
+    return piv
+    

@@ -75,8 +75,10 @@ def compute_semantic_entropy(test_case_id: int, prompt: str):
         r"q": None,
         r"x\c": None
     }
+    output_sequences = list()
     for flag in list(SampleSequencesFlags):
         sequences = sample_sequences(prompt=prompt, flag=flag.value)
+        output_sequences += [a["text_answer"] for a in sequences]
         clusters = cluster_sequences(sequences)
         semantic_entropy = 0
         sum_of_cluster_probabilities = sum(compute_likelihood(cluster) for cluster in clusters)

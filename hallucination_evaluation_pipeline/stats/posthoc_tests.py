@@ -8,6 +8,7 @@ from statsmodels.stats.multicomp import pairwise_tukeyhsd
 from statsmodels.stats.contingency_tables import mcnemar
 # from stats.visualizer_generator import generatePValueMatrix
 from scipy.stats import rankdata
+import visualizer_generator
 
 # Define top-level directory (one level up from current script)
 TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -16,10 +17,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-# RESULTS_DIR = ROOT / "hallucination-evaluation-results"
+# RESULTS_DIR = ROOT / "hallucination_evaluation_results"
 sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
-IO_DIR = ROOT / "hallucination-evaluation-results"
+IO_DIR = ROOT / "hallucination_evaluation_results"
 
 def log_posthoc_result(eval_name: str,loser: str, winner: str, p_value: float):
     with open(IO_DIR / "posthoc_test_results.csv", 'a', newline='') as f:
@@ -34,7 +35,7 @@ def log_posthoc_result(eval_name: str,loser: str, winner: str, p_value: float):
             "p_value": p_value,
         })
 
-def computePostHocTestForMetric(results, is_normal: bool, eval: Metric | Benchmark):
+def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Metric | Benchmark):
     print(f"RESULTS:\n{results}")
     if eval in CONTINUOUS_EVALS:
         if is_normal:
@@ -125,7 +126,7 @@ def create_contingency_table(results: dict, pipeline1: Pipeline, pipeline2: Pipe
 
     return contingency_table
 
-def performPostHocTests():
+def perform_posthoc_tests():
     hypothesis_test_df = pd.read_csv(IO_DIR / "hypothesis_test_results.csv")
     normality_test_df = pd.read_csv(IO_DIR / "normality_test_results.csv")
     print(normality_test_df)
@@ -154,4 +155,4 @@ def performPostHocTests():
         if eval in CONTINUOUS_EVALS:
             is_normal = all(nr == "NORMAL" for nr in normality_test_results)
         
-        computePostHocTestForMetric(results, is_normal, eval)
+        compute_posthoc_test_for_metric(results, is_normal, eval)

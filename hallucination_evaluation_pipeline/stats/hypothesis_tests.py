@@ -5,6 +5,7 @@ import numpy as np
 import pandas as pd
 import csv
 import os
+import visualizer_generator
 
 # from stats.visualizer_generator import generateBoxPlotGrids
 
@@ -12,12 +13,12 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-# RESULTS_DIR = ROOT / "hallucination-evaluation-results"
+# RESULTS_DIR = ROOT / "hallucination_evaluation_results"
 sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
-IO_DIR = ROOT / "hallucination-evaluation-results"
+IO_DIR = ROOT / "hallucination_evaluation_results"
 
-def computeHypothesisTestForContinuousEval(tuned_data: np.ndarray, graphrag_data: np.ndarray, prolog_graphrag_data: np.ndarray, eval: Metric | Benchmark):
+def compute_hypothesis_test_for_continuous_eval(tuned_data: np.ndarray, graphrag_data: np.ndarray, prolog_graphrag_data: np.ndarray, eval: Metric | Benchmark):
     """
     Performs hypothesis testing (e.g., t-test or Mann-Whitney U test) for a given continuous evaluation criterion
     across different pipelines.
@@ -39,7 +40,7 @@ def computeHypothesisTestForContinuousEval(tuned_data: np.ndarray, graphrag_data
         })
                 
         
-def performContinuousHypothesisTests():
+def perform_continuous_hypothesis_tests():
     df_map = {
         Metric.FAITHFULNESS: pd.read_csv(IO_DIR / "faithfulness_scores.csv"),
         Metric.ANSWER_RELEVANCE: pd.read_csv(IO_DIR / "answer_relevance_scores.csv"),
@@ -52,21 +53,17 @@ def performContinuousHypothesisTests():
         graphrag_data = np.array(df_map[eval]["graphrag_score"])
         prolog_graphrag_data = np.array(df_map[eval]["prolog_graphrag_score"])
 
-        computeHypothesisTestForContinuousEval(
+        compute_hypothesis_test_for_continuous_eval(
             tuned_data=tuned_data,
             graphrag_data=graphrag_data,
             prolog_graphrag_data=prolog_graphrag_data,
             eval=eval,
         )
             
-    # generateBoxPlotGrids(
-    #     tuned_data=tuned_data,
-    #     graphrag_data=graphrag_data,
-    #     prolog_graphrag_data=prolog_graphrag_data,
-    # )
+    visualizer_generator.generate_box_plot_grids()
     
     
-def computeHypothesisTestForDiscreteEval(tuned_data: np.ndarray, graphrag_data: np.ndarray, prolog_graphrag_data: np.ndarray, eval: Metric):
+def compute_hypothesis_test_for_discrete_eval(tuned_data: np.ndarray, graphrag_data: np.ndarray, prolog_graphrag_data: np.ndarray, eval: Metric):
     """
     Performs hypothesis testing (e.g., Cochran's Q test) for a given discrete evaluation criterion
     across different pipelines.
@@ -91,7 +88,7 @@ def computeHypothesisTestForDiscreteEval(tuned_data: np.ndarray, graphrag_data: 
         })
                 
         
-def performDiscreteHypothesisTests():
+def perform_discrete_hypothesis_tests():
     df_map = {
         Benchmark.MMLU: pd.read_csv(IO_DIR / "mmlu_scores.csv"),
         Benchmark.HOTPOTQA: pd.read_csv(IO_DIR / "hotpotqa_scores.csv")
@@ -102,7 +99,7 @@ def performDiscreteHypothesisTests():
         graphrag_data = np.array(df_map[eval]["graphrag_score"])
         prolog_graphrag_data = np.array(df_map[eval]["prolog_graphrag_score"])
 
-        computeHypothesisTestForDiscreteEval(
+        compute_hypothesis_test_for_discrete_eval(
             tuned_data=tuned_data,
             graphrag_data=graphrag_data,
             prolog_graphrag_data=prolog_graphrag_data,
@@ -115,6 +112,6 @@ def performDiscreteHypothesisTests():
     #     prolog_graphrag_data=prolog_graphrag_data,
     # )
 
-def performHypothesisTests():
-    performContinuousHypothesisTests()
-    performDiscreteHypothesisTests()
+def perform_hypothesis_tests():
+    perform_continuous_hypothesis_tests()
+    perform_discrete_hypothesis_tests()
