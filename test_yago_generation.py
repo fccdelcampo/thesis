@@ -25,8 +25,9 @@ def test_generation():
     print("Creating retriever...")
     retriever = create_retriever(driver, embedder)
     
-    query = "What is the capital of France?"
-    print(f"\nTesting Query: {query}")
+    # query = "What comes after 1?"
+    query = "What comes after the number 1?"
+    print(f"\nGenerative Test Query: {query}")
     
     try:
         # Calls the generate function in retriever.py which uses GRAPHRAG_TEMPLATE
@@ -37,7 +38,7 @@ def test_generation():
         
         print("\n--- Retrieved Context Summary ---")
         for ctx in result["contexts"]:
-            print(ctx[:200] + "...")
+            print(ctx[:1000] + "...")
             
     except Exception as e:
         import traceback

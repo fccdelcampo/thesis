@@ -133,7 +133,8 @@ RETURN
     score,
     {
         local_context: local_context,
-        global_context: global_context
+        global_context: global_context,
+        score: score
     } as metadata
 '''
 

@@ -142,6 +142,7 @@ def create_retriever(driver, embedder):
 
 
 from neo4j_graphrag.retrievers.base import Retriever
+from neo4j_graphrag.types import RetrieverResult, RetrieverResultItem
 
 # Helper classes for Fallback
 class SimpleItem:
@@ -161,9 +162,57 @@ class FallbackRetriever(Retriever):
         self.driver = getattr(main_retriever, 'driver', None)
 
     def search(self, query_text, top_k=5, **kwargs):
+        # 0. Clean Query for YAGO Search (Simple keyword extraction)
+        # Remove common stopwords to improve fulltext search relevance
+        stop_words = {'what', 'is', 'the', 'capital', 'of', 'who', 'where', 'when', 'how', 'a', 'an', 'in', 'on', 'at', 'to', 'for'}
+        keywords = [word for word in query_text.replace('?','').split() if word.lower() not in stop_words]
+        keyword_query = " ".join(keywords) if keywords else query_text
+        print(f"DEBUG: Original Query: '{query_text}' | Keyword Query: '{keyword_query}'")
+
         # 1. Try Main Retriever
         try:
+            # We pass keyword_query if the retriever uses it for fulltext, but vector index needs natural language.
+            # HybridCypherRetriever uses query_text for both. 
+            # Ideally we pass different queries, but here we prioritize global relevance for YAGO.
+            # Actually, let's keep original query for Vector/Main, but modify what we passed to YAGO in Cypher?
+            # We can't easily injection without modifying config.
+            # So we will pass the original query to main.search, assuming config.py handles it.
+            # WAIT: retrieval_query in config uses $query_text.
+            # If we pass original query, YAGO gets "What is...".
+            # If we pass keywords, Vector gets "France Paris".
+            # Let's try passing the cleaner query? 
+            # User complaint was about "irrelevant local chunks". Vector search on keywords might be better or worse.
+            # Let's try passing the original query first, but FIX THE FORMATTING.
+            
             result = self.main.search(query_text=query_text, top_k=top_k, **kwargs)
+            
+            # Post-process results to clean content and fix scores
+            if result and result.items:
+                for item in result.items:
+                    # Fix Content: Unwrap if it is a Neo4j Record string representation
+                    # Config returns `local_context` in metadata, which contains the clean text.
+                    if item.metadata and 'local_context' in item.metadata:
+                        local_ctx = item.metadata['local_context']
+                        if local_ctx and isinstance(local_ctx, list) and len(local_ctx) > 0:
+                            # Replace with the first chunk's text
+                            clean_text = local_ctx[0].get('text')
+                            if clean_text:
+                                item.content = clean_text
+
+                    # If metadata doesn't have it, try regex fallback
+                    elif item.content and "<Record" in str(item.content):
+                        try:
+                           import re
+                           match = re.search(r"text='(.*?)'", item.content)
+                           if match:
+                               item.content = match.group(1)
+                        except:
+                            pass
+                            
+                    # Fix Score: Ensure top-level metadata has score
+                    if item.metadata and 'score' in item.metadata:
+                         pass # Score is already there, nothing to do unless we want to move it to item.score (if supported)
+
         except Exception as e:
             print(f"DEBUG: Main retriever failed: {e}")
             result = None
@@ -180,18 +229,20 @@ class FallbackRetriever(Retriever):
 
         try:
             with self.driver.session() as session:
-                records = session.run(YAGO_FALLBACK_QUERY, query_text=query_text)
+                # Use keyword query for fallback to ensure better matching
+                records = session.run(YAGO_FALLBACK_QUERY, query_text=keyword_query)
                 items = []
                 for record in records:
-                    items.append(SimpleItem(
+                    # Convert to RetrieverResultItem which is expected by Pydantic
+                    items.append(RetrieverResultItem(
                         content=record['text'],
                         metadata=record['metadata']
                     ))
                 print(f"DEBUG: YAGO Fallback found {len(items)} items.")
-                return SimpleResult(items)
+                return RetrieverResult(items=items, metadata={})
         except Exception as e:
             print(f"DEBUG: YAGO Fallback error: {e}")
-            return SimpleResult([])
+            return RetrieverResult(items=[], metadata={})
 
 def generate(llm, retriever, query) -> dict:
     # Wrap in Fallback
@@ -222,11 +273,30 @@ def generate(llm, retriever, query) -> dict:
         f.write(f"--- RETRIEVED CONTEXT (Top {len(retrieved_context.items)} Items) ---\n")
         
         for i, item in enumerate(retrieved_context.items):
-            score = item.metadata.get('score', 0.0) if item.metadata else 0.0
-            clean_content = item.content.replace('\n', ' ').replace('  ', ' ')
-            
-            # Extract Local/Global Context from new query structure if present
+            # Fix Score: config.py now puts 'score' in metadata
             metadata = item.metadata or {}
+            score = metadata.get('score', 0.0) 
+            
+            # Fix Content: Unwrap if it is a Neo4j Record string representation or just use metadata text
+            # If item.content looks like "<Record ...>", we prefer metadata['text'] or parse it.
+            # However, our query returns `node.text as text`.
+            # Let's inspect content. If it starts with "<Record", we try to clean it.
+            clean_content = item.content
+            if clean_content and "<Record" in str(clean_content):
+                # Try to extract text='...'
+                import re
+                match = re.search(r"text='(.*?)'", clean_content)
+                if match:
+                    clean_content = match.group(1)
+                else:
+                    # Fallback: Check if local_context is present and has text
+                    local_ctx = metadata.get('local_context', [])
+                    if local_ctx and len(local_ctx) > 0:
+                         clean_content = local_ctx[0].get('text', clean_content)
+                    
+            clean_content = clean_content.replace('\n', ' ').replace('  ', ' ')
+            
+            # Extract Local/Global Context
             local_ctx = metadata.get('local_context', [])
             global_ctx = metadata.get('global_context', [])
             

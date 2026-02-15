@@ -259,8 +259,22 @@ async def perform_tests():
     
     print("\n--- All tests completed ---")
 
+def clear_local_data():
+    """
+    Deletes all Local Document and Chunk nodes from the database.
+    Preserves Global Knowledge (YAGO) nodes.
+    """
+    print("WARNING: Deleting all Local Documents and Chunks...")
+    with neo4j_driver.session() as session:
+        session.run("MATCH (d:Document) DETACH DELETE d")
+        session.run("MATCH (c:Chunk) DETACH DELETE c")
+    print("Local data cleared successfully.")
+
 def main():
+    # Uncomment to clear data before running tests
+    # clear_local_data() 
     asyncio.run(perform_tests())
+
 
 if __name__ == "__main__":
     main()

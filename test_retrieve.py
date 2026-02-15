@@ -21,9 +21,11 @@ def test_retrieval():
     driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USERNAME, NEO4J_PASSWORD))
     
     print("Creating retriever...")
-    retriever = create_retriever(driver, embedder)
+    base_retriever = create_retriever(driver, embedder)
+    from prolog_graphrag_pipeline.graphrag.retriever import FallbackRetriever
+    retriever = FallbackRetriever(base_retriever)
     
-    query = "What comes after 1?"
+    query = "When was the Golden Gate Bridge built in New York?"
     print(f"\nTesting Query: {query}")
     
     try:
@@ -31,11 +33,13 @@ def test_retrieval():
         
         print(f"\nFound {len(results.items)} items.")
         
-        for i, item in enumerate(results.items):
-            print(f"\n--- Item {i+1} ---")
-            import json
-            print(f"Content: {item.content[:100]}...")
-            print(f"Metadata: {json.dumps(item.metadata, indent=2)}")
+        import json
+        with open("test_retrieve_output.txt", "w", encoding="utf-8") as f:
+            for i, item in enumerate(results.items):
+                f.write(f"\n--- Item {i+1} ---\n")
+                f.write(f"Content: {item.content[:200]}...\n")
+                f.write(f"Metadata: {json.dumps(item.metadata, indent=2)}\n")
+        print("Done. Wrote results to test_retrieve_output.txt")
             
     except Exception as e:
         print(f"Retrieval failed: {e}")
