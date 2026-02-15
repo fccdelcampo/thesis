@@ -20,7 +20,7 @@ retriever = create_retriever(neo4j_driver, embedder)
 def run_pipeline(user_question):
     return generate(retriever_llm, retriever, user_question)
 
-run_pipeline("What physical obstacle prevented Alice from retrieving the item she found on the three-legged table, immediately after she obeyed the command printed on the bottle label?")
+run_pipeline("What is the capital of France?")
     
 # def load_test_cases(name: str, start: int, end: int) -> dict:
 #     test_cases = []

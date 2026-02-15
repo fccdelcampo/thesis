@@ -25,8 +25,8 @@ def test_generation():
     print("Creating retriever...")
     retriever = create_retriever(driver, embedder)
     
-    # query = "What comes after 1?"
-    query = "What comes after the number 1?"
+    query = "What is the capital of France?"
+    # query = "When was the Golden Gate Bridge built in New York?"
     print(f"\nGenerative Test Query: {query}")
     
     try:

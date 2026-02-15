@@ -94,7 +94,7 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
         #     continue
         except janus.PrologError as e:
             print(f"Iteration {i} | Prolog Error: {e}")
-            most_recent_error = str(e + " Ensure all Prolog syntax rules are followed. Enclose the final database within <database> and </database> tags, and the query within <query> and </query> tags.")
+            most_recent_error = f"{e} Ensure all Prolog syntax rules are followed. Enclose the final database within <database> and </database> tags, and the query within <query> and </query> tags."
             print(most_recent_error)
             continue
         

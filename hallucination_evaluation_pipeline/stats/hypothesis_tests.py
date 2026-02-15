@@ -68,9 +68,9 @@ def perform_continuous_hypothesis_tests():
     }
 
     for eval in CONTINUOUS_EVALS:
-        tuned_data = np.array(df_map[eval]["tuned_score"])
-        graphrag_data = np.array(df_map[eval]["graphrag_score"])
-        prolog_graphrag_data = np.array(df_map[eval]["prolog_graphrag_score"])
+        tuned_data = visualizer_generator.clean_data_column(df_map[eval], "tuned_score")
+        graphrag_data = visualizer_generator.clean_data_column(df_map[eval], "graphrag_score")
+        prolog_graphrag_data = visualizer_generator.clean_data_column(df_map[eval], "prolog_graphrag_score")
 
         compute_hypothesis_test_for_continuous_eval(
             tuned_data=tuned_data,
@@ -121,9 +121,9 @@ def perform_discrete_hypothesis_tests():
     }
 
     for eval in DISCRETE_EVALS:
-        tuned_data = np.array(df_map[eval]["tuned_score"])
-        graphrag_data = np.array(df_map[eval]["graphrag_score"])
-        prolog_graphrag_data = np.array(df_map[eval]["prolog_graphrag_score"])
+        tuned_data = visualizer_generator.clean_data_column(df_map[eval], "tuned_score")
+        graphrag_data = visualizer_generator.clean_data_column(df_map[eval], "graphrag_score")
+        prolog_graphrag_data = visualizer_generator.clean_data_column(df_map[eval], "prolog_graphrag_score")
 
         compute_hypothesis_test_for_discrete_eval(
             tuned_data=tuned_data,

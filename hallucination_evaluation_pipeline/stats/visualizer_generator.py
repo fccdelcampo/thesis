@@ -49,6 +49,58 @@ OUTPUT_DIR = os.path.join(ROOT, "hallucination_evaluation_results", "visualizati
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+import ast
+
+def parse_value_robust(x):
+    """Parses a single value robustly, handling stringified lists."""
+    try:
+        if pd.isna(x):
+            return np.nan
+        if isinstance(x, (int, float)):
+            return float(x)
+        if isinstance(x, str):
+            x = x.strip()
+            if x.startswith('[') and x.endswith(']'):
+                parsed = ast.literal_eval(x)
+                if isinstance(parsed, list):
+                    return float(parsed[0]) if parsed else np.nan
+                return float(parsed)
+            return float(x)
+    except (ValueError, SyntaxError):
+        return np.nan
+    return x
+
+def clean_data_column(df: pd.DataFrame, col_name: str) -> np.ndarray:
+    """
+    Robustly parses a dataframe column into a numpy array of floats, 
+    handling standard floats, strings, and stringified lists like '[0.83]'.
+    """
+    if col_name not in df.columns:
+        return np.array([])
+        
+    raw_data = df[col_name].dropna().tolist()
+    cleaned_data = []
+    
+    for x in raw_data:
+        try:
+            if isinstance(x, (int, float)):
+                cleaned_data.append(float(x))
+            elif isinstance(x, str):
+                # Try to parse stringified list like "[0.83]"
+                x = x.strip()
+                if x.startswith('[') and x.endswith(']'):
+                    parsed = ast.literal_eval(x)
+                    if isinstance(parsed, list):
+                        cleaned_data.extend([float(i) for i in parsed])
+                    else:
+                        cleaned_data.append(float(parsed))
+                else:
+                    cleaned_data.append(float(x))
+        except (ValueError, SyntaxError):
+            continue
+            
+    return np.array(cleaned_data)
+
 def generate_qq_grids():
     """
     Generates a grid of Q-Q plots for each pipeline for all continuous metric or benchmark
@@ -85,7 +137,7 @@ def generate_qq_grids():
             if col not in df.columns:
                 ax.text(0.5, 0.5, "no data", ha="center", va="center")
                 continue
-            data = df[col].dropna().to_numpy()
+            data = clean_data_column(df, col)
             if data.size == 0:
                 ax.text(0.5, 0.5, "no data", ha="center", va="center")
                 continue
@@ -125,7 +177,25 @@ def generate_box_plot(eval_name: str, df: pd.DataFrame):
     """
     Create and save a boxplot comparing pipelines for `eval_name` using columns like 'tuned_score'.
     """
-    melt_df = pd.melt(df, id_vars=[c for c in df.columns if not c.endswith("_score")], value_vars=[c for c in df.columns if c.endswith("_score")], var_name="pipeline", value_name="score")
+    # Clean data before melting
+    clean_df = df.copy()
+    score_cols = [c for c in df.columns if c.endswith("_score")]
+    for col in score_cols:
+        # We need to assign back to the dataframe. 
+        # clean_data_column returns np.ndarray.
+        # We need to respect the index or just assign if lengths match.
+        # However, clean_data_column drops NaNs. 
+        # For boxplot with melt, we want to keep structure but just convert types.
+        # If we drop NaNs, rows might misalign if we are not careful.
+        # Actually, clean_data_column drops NaNs, which might be an issue if we just replace the column.
+        # Better approach: Convert flexible, then drop NaNs specific to the plot if needed?
+        # Or just parse robustly without dropping NaNs yet?
+        
+        # Let's write a localized parsing loop that preserves NaNs/structure for the dataframe
+        # Or, just iterate and fix values.
+        clean_df[col] = clean_df[col].apply(lambda x: parse_value_robust(x))
+
+    melt_df = pd.melt(clean_df, id_vars=[c for c in df.columns if not c.endswith("_score")], value_vars=score_cols, var_name="pipeline", value_name="score")
     # normalize pipeline names to match Pipeline.value[1]
     melt_df['pipeline'] = melt_df['pipeline'].str.replace('_score', '')
 
@@ -168,7 +238,7 @@ def generate_bar_graph(eval_name: str, df: pd.DataFrame):
     stats = []
     n = None
     for col in score_cols:
-        values = df[col].dropna().to_numpy()
+        values = clean_data_column(df, col)
         if n is None:
             n = values.size
         prop = np.nan

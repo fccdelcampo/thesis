@@ -53,7 +53,31 @@ from typing import Union
 def compute_normality_test(df: pd.DataFrame, eval: Union[Metric, Benchmark]):
     for pipeline in list(Pipeline):
         col_name = pipeline.value[1] + "_score"
-        data = df[col_name].to_numpy()
+        
+        # Robust parsing for mixed types (floats, strings, stringified lists)
+        raw_data = df[col_name].dropna().tolist()
+        cleaned_data = []
+        
+        import ast
+        for x in raw_data:
+            try:
+                if isinstance(x, (int, float)):
+                    cleaned_data.append(float(x))
+                elif isinstance(x, str):
+                    # Try to parse stringified list like "[0.83]"
+                    x = x.strip()
+                    if x.startswith('[') and x.endswith(']'):
+                        parsed = ast.literal_eval(x)
+                        if isinstance(parsed, list):
+                            cleaned_data.extend([float(i) for i in parsed])
+                        else:
+                            cleaned_data.append(float(parsed))
+                    else:
+                        cleaned_data.append(float(x))
+            except (ValueError, SyntaxError):
+                continue
+                
+        data = np.array(cleaned_data)
         shapiro_test(data, pipeline, eval)
 
 def perform_normality_tests():

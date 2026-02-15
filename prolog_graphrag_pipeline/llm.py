@@ -14,7 +14,7 @@ except ImportError:
 
 from typing import Optional, Union, List
 
-def generate(user_question: str, retrieved_context: Optional[str], explainer_output: Optional[str], flag: str, sample_mode: bool = False) -> Union[dict, List[dict]]:
+def generate(user_question: str, retrieved_context: Optional[str], explainer_output: Optional[str], flag: str, sample_mode: bool = False, include_conclusion: bool = True) -> Union[dict, List[dict]]:
     final_prompt = reconstruct_prompt(user_question=user_question, retrieved_context=retrieved_context, explainer_output=explainer_output, flag=flag)
     if sample_mode:
         sequences = []

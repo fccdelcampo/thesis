@@ -27,6 +27,11 @@ def generate(llm, retriever, query) -> dict:
         
         for i, item in enumerate(retrieved_context.items):
             score = item.metadata.get('score', 0.0) if item.metadata else 0.0
+            
+            # Add Metadata Dump
+            import json
+            f.write(f"\n[Metadata Dump]\n{json.dumps(item.metadata, indent=2)}\n")
+            
             # Clean newlines for readability in the text file
             clean_content = item.content.replace('\n', ' ')
             
@@ -42,7 +47,10 @@ def generate(llm, retriever, query) -> dict:
 
     print(f"Done. Check '{output_file}' for the context and answer.")
 
+    # Extract text content from RetrieverResult items to ensure JSON serializability
+    contexts = [item.content for item in retrieved_context.items]
+
     return {
         "answer": answer,
-        "context": retrieved_context
+        "contexts": contexts
     }

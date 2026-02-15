@@ -147,7 +147,8 @@ RETURN
     score,
     {
         source: "YAGO",
-        entity: node.rdfs__label
+        entity: node.rdfs__label,
+        score: score
     } as metadata
 LIMIT 5
 '''

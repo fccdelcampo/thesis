@@ -156,18 +156,84 @@ class SimpleResult:
         self.metadata = {}
 
 class FallbackRetriever(Retriever):
-    def __init__(self, main_retriever):
+    def __init__(self, main_retriever, llm=None):
         super().__init__(driver=getattr(main_retriever, 'driver', None)) # Base init might expect driver
         self.main = main_retriever
         self.driver = getattr(main_retriever, 'driver', None)
+        self.llm = llm
+
+    def expand_query(self, query):
+        if not self.llm:
+            return query
+        
+        prompt = f"""
+        ### Task
+        Analyze the user's query and generate a list of **Specific, Distinct Concepts** or **Entities** for a Knowledge Graph lookup.
+        
+        ### User Query
+        "{query}"
+        
+        ### Instructions
+        1. Identify the core domain (e.g., "Number Theory").
+        2. List 3-5 specific concepts (e.g., "Integer", "Successor function").
+        3. **CRITICAL**: Exclude generic words like "Number", "Line", "System", "of", "the" unless they are part of a highly specific phrase (e.g. "Number Theory" is okay, "Number" is not).
+        4. **CRITICAL**: EXCLUDE irrelevant terms (e.g. "fax", "phone").
+        5. Format the output as a JSON object with a list of strings "concepts".
+        
+        ### Example
+        Query: "What comes after 1?"
+        {{
+            "concepts": ["Integer", "Successor function", "Natural number", "Counting"]
+        }}
+        
+        ### Output (JSON ONLY)
+        """
+        try:
+            response_text = self.llm.invoke(prompt).content.strip()
+            # Clean possible markdown code blocks
+            if "```json" in response_text:
+                response_text = response_text.split("```json")[1].split("```")[0].strip()
+            elif "```" in response_text:
+                response_text = response_text.split("```")[1].split("```")[0].strip()
+                
+            import json
+            data = json.loads(response_text)
+            concepts = data.get("concepts", [])
+            
+            # Filter concepts
+            filtered_concepts = []
+            stop_words = {'of', 'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'is', 'are', 'what', 'next'}
+            for c in concepts:
+                # Remove stopwords from within the concept string if it's just a stopword (unlikely) or if we want to be strict
+                # Actually, simply quoting them is safer IF they are good concepts.
+                # But LLM might output "next integer". "next" is generic.
+                # Let's trust the LLM's "Specific" instruction but use quotes.
+                if c.lower() not in stop_words:
+                    filtered_concepts.append(f'"{c}"')
+
+            if filtered_concepts:
+                lucene_query = " OR ".join(filtered_concepts)
+                print(f"DEBUG: LLM Expanded Concepts: {concepts}")
+                print(f"DEBUG: Lucene Query: '{lucene_query}'")
+                return lucene_query
+            
+            return query
+        except Exception as e:
+            print(f"DEBUG: Query expansion failed: {e}. Falling back to original.")
+            return query
 
     def search(self, query_text, top_k=5, **kwargs):
-        # 0. Clean Query for YAGO Search (Simple keyword extraction)
-        # Remove common stopwords to improve fulltext search relevance
-        stop_words = {'what', 'is', 'the', 'capital', 'of', 'who', 'where', 'when', 'how', 'a', 'an', 'in', 'on', 'at', 'to', 'for'}
-        keywords = [word for word in query_text.replace('?','').split() if word.lower() not in stop_words]
-        keyword_query = " ".join(keywords) if keywords else query_text
-        print(f"DEBUG: Original Query: '{query_text}' | Keyword Query: '{keyword_query}'")
+        # 0. Expand Query for YAGO Search
+        # If we have an LLM, we use it to generate better search terms. 
+        # Otherwise, we fallback to simple stopword removal.
+        if self.llm:
+            keyword_query = self.expand_query(query_text)
+        else:
+            stop_words = {'what', 'is', 'the', 'capital', 'of', 'who', 'where', 'when', 'how', 'a', 'an', 'in', 'on', 'at', 'to', 'for'}
+            keywords = [word for word in query_text.replace('?','').split() if word.lower() not in stop_words]
+            keyword_query = " ".join(keywords) if keywords else query_text
+            
+        print(f"DEBUG: Original Query: '{query_text}' | YAGO Query: '{keyword_query}'")
 
         # 1. Try Main Retriever
         try:
@@ -225,19 +291,23 @@ class FallbackRetriever(Retriever):
         print("DEBUG: 0 Chunks encountered. Executing YAGO Fallback...")
         if not self.driver:
             print("ERROR: No driver found on retriever for fallback.")
-            return SimpleResult([])
+            return RetrieverResult(items=[], metadata={})
 
         try:
             with self.driver.session() as session:
-                # Use keyword query for fallback to ensure better matching
+                # 1. Try Exact Phrase Match first (High Precision)
+                print(f"DEBUG: Trying YAGO Phrase Query: '{keyword_query}'")
                 records = session.run(YAGO_FALLBACK_QUERY, query_text=keyword_query)
-                items = []
-                for record in records:
-                    # Convert to RetrieverResultItem which is expected by Pydantic
-                    items.append(RetrieverResultItem(
-                        content=record['text'],
-                        metadata=record['metadata']
-                    ))
+                items = [RetrieverResultItem(content=r['text'], metadata=r['metadata']) for r in records]
+                
+                # 2. If no results, try unquoted Concept Match (High Recall)
+                if not items and '"' in keyword_query:
+                    # Remove quotes to allow partial matches of concepts
+                    relaxed_query = keyword_query.replace('"', '')
+                    print(f"DEBUG: No phrase matches. Trying Relaxed Query: '{relaxed_query}'")
+                    records = session.run(YAGO_FALLBACK_QUERY, query_text=relaxed_query)
+                    items = [RetrieverResultItem(content=r['text'], metadata=r['metadata']) for r in records]
+
                 print(f"DEBUG: YAGO Fallback found {len(items)} items.")
                 return RetrieverResult(items=items, metadata={})
         except Exception as e:
@@ -245,8 +315,8 @@ class FallbackRetriever(Retriever):
             return RetrieverResult(items=[], metadata={})
 
 def generate(llm, retriever, query) -> dict:
-    # Wrap in Fallback
-    retriever = FallbackRetriever(retriever)
+    # Wrap in Fallback, passing the LLM for query expansion
+    retriever = FallbackRetriever(retriever, llm=llm)
 
     rag_template = RagTemplate(template=GRAPHRAG_TEMPLATE, expected_inputs=['query_text', 'context'])
     
@@ -276,6 +346,10 @@ def generate(llm, retriever, query) -> dict:
             # Fix Score: config.py now puts 'score' in metadata
             metadata = item.metadata or {}
             score = metadata.get('score', 0.0) 
+
+            # Add Metadata Dump (requested by user)
+            import json
+            f.write(f"\n[Metadata Dump]\n{json.dumps(metadata, indent=2)}\n") 
             
             # Fix Content: Unwrap if it is a Neo4j Record string representation or just use metadata text
             # If item.content looks like "<Record ...>", we prefer metadata['text'] or parse it.
