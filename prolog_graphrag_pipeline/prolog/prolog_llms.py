@@ -7,7 +7,7 @@ def generate(prompt: str, flag: str) -> dict:
     return generate_response(prompt=prompt, flag=flag)
     
 def generate_response(prompt: str, flag: str) -> dict:
-    from prolog_config import GENERATOR_LLM_MESSAGES, EXPLAINER_LLM_MESSAGES
+    from .prolog_config import GENERATOR_LLM_MESSAGES, EXPLAINER_LLM_MESSAGES
     import ollama
     
     answer = dict()

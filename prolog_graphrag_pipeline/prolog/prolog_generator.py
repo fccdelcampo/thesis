@@ -64,7 +64,7 @@ Your recent Prolog database and query have errors. Fix them based on the followi
 def generate_prolog_code(user_question: str, retrieved_context: str, most_recent_error: None | str) -> tuple:
     for i in range(5):
         try:
-            from prolog_llms import generate
+            from .prolog_llms import generate
             answer = generate(prompt=generate_prolog_generation_prompt(user_question, retrieved_context, most_recent_error), flag="prolog")
             database, query = capture_db_and_query(answer['text_answer'])["database"], capture_db_and_query(answer['text_answer'])["query"]
             print(f"Iteration {i} | Extracted Database:\n{database}\n")

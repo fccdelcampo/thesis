@@ -58,7 +58,7 @@ Generate a coherent narrative of the proof above. Start with the conclusion, the
     return prompt
 
 def generate_explanation(user_question: str, retrieved_context: str, database: str, query: str, retrieved_values: str, human_readable_explanation: str) -> str:
-    from prolog_llms import generate
+    from .prolog_llms import generate
     explanation = generate(prompt=generate_explanation_prompt(user_question=user_question, retrieved_context=retrieved_context, database=database, query=query, retrieved_values=retrieved_values, human_readable_explanation=human_readable_explanation), flag="explanation")
     try:
         return explanation['text_answer']

@@ -4,19 +4,19 @@ from .prolog_generator import generate_prolog_code, capture_db_and_query, captur
 from .explainer import generate_safe_scasp_wrapper, generate_explanation
 import time
 
-import os, sys
-current_dir = os.path.dirname(os.path.abspath(__file__))
-parent_dir = os.path.dirname(current_dir)
+from .. import llm
 
-# Add the parent directory to the system path
-sys.path.append(parent_dir)
-
-import llm
+SCASP_AVAILABLE = True
 
 def use_scasp():
-    # install scasp
-    list(janus.query("use_module(library(scasp))."))
-    janus.query_once("use_module(library(scasp/human)).")
+    global SCASP_AVAILABLE
+    try:
+        list(janus.query("use_module(library(scasp))."))
+        janus.query_once("use_module(library(scasp/human)).")
+        print("s(CASP) loaded successfully.")
+    except Exception as e:
+        print(f"WARNING: s(CASP) not available: {e}. Falling back to standard Prolog.")
+        SCASP_AVAILABLE = False
 
 def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt: str) -> str:
     start_time = time.perf_counter()
@@ -29,13 +29,18 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
     print(f"**Extracted database:**\n{database}")
     print(f"**Extracted query:**\n{query}")
 
-    
-    print("Generating s(CASP) wrapper...")
-    wrapper = generate_safe_scasp_wrapper(query)
-    print(f"**Wrapper:** \n{wrapper}")
-    # final_query = f"explain({', '.join(arguments)}, Explanation)."
-    final_query = f"explain(Explanation)."
-    # print(f"Final query: \n{final_query}")
+    wrapper = ""
+    human_readable_explanation = "Explanation unavailable (s(CASP) missing)."
+    retrieved_values = ""
+
+    if SCASP_AVAILABLE:
+        print("Generating s(CASP) wrapper...")
+        wrapper = generate_safe_scasp_wrapper(query)
+        print(f"**Wrapper:** \n{wrapper}")
+        final_query = f"explain(Explanation)."
+    else:
+        print("Using standard Prolog query...")
+        final_query = query
     
     print("Consulting database...")
     janus.consult("user", database + "\n" + wrapper)
@@ -43,23 +48,24 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
         print("Querying database...")
         result = janus.query_once(final_query)
         print(f"**Query Results:** \n{result}")
-        retrieved_values = str()
+        
         if result:
             for arg in result.keys():  
-                if arg.isupper() or arg == "truth":  # Check if it's a variable 
+                if arg not in ["Explanation", "Tree", "Model"] and (arg.isupper() or arg == "truth"):  
                     print(f"{arg} Found: {result[arg]}")    
                     retrieved_values += f"{arg}: {result[arg]} "
-            # result['Tree'] will be a nested list/dictionary structure
-            print("**Human-Readable Explanation**")
-            human_readable_explanation = result['Explanation']
-            print(human_readable_explanation)
+            
+            if SCASP_AVAILABLE and 'Explanation' in result:
+                print("**Human-Readable Explanation**")
+                human_readable_explanation = result['Explanation']
+                print(human_readable_explanation)
         else:
             print("No solution found.")
     except Exception as e:
         print(f"Error: {e}")
         
     explainer_output = generate_explanation(user_question=user_question, retrieved_context=retrieved_context, database=database, query=query, retrieved_values=retrieved_values, human_readable_explanation=human_readable_explanation)
-    print(f"**Explainer Output:** \n{explainer_output["text_answer"]}")
+    print(f"**Explainer Output:** \n{explainer_output}")
 
     print("\n**FINAL LLM OUTPUT:")
     final_answer = llm.generate(user_question, retrieved_context, explainer_output)
@@ -200,8 +206,8 @@ use_scasp()
 # Calculate the path to the directory you want to import from.
 # '..' refers to the parent directory.
 
-for test in tests:
-    decoder_explanation = run_pipeline(test["question"], test["context"])
+for test in tests[:1]:
+    decoder_explanation = run_pipeline(test["question"], test["context"], "")
     
 # user_question = "Will prices go up if people are reluctant to take out loans?"
 # retrieved_context = "When interest rates are high, people will be less likely to take out loans. When people take less loan out, demand for goods decrease. When demand for goods decrease, interest rates spike up. Prices go down when demand is down."

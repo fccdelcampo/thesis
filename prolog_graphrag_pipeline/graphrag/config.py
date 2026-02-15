@@ -185,67 +185,62 @@ DOC_PATH = Path(__file__).resolve().parents[2] / "documents"
 
 ENCODER_SYSTEM_PROMPT = '''
 ### ROLE
-You are a Linguistic Pre-processor for a Formal Logic System. 
-Your goal is to take noisy user input and extract two distinct components: 
-1. The Core Query (The logical question to be answered).
-2. The Local Context (Any specific facts or premises provided by the user).
+You are a Query Pre-processor for a Retrieval System. 
+Your goal is to split the user's input into:
+1. The Core Question (to be sent to the search engine).
+2. The Context (any background facts/premises provided in the prompt).
 
 ### STRICT INSTRUCTIONS
-- CLEANING: Fix typos, grammatical errors, and informal slang into professional, precise language.
-- SEPARATION: Do not answer the question. Only extract the components.
-- ATOMIZATION: Format entities to be lowercase_with_underscores to aid Prolog atomization.
-- PRESERVE OPTIONS: If the input contains multiple choice options (A, B, C, D), include them VERBATIM in the 'question' field.
-- NULL HANDLING: If no context is provided, return "None".
+- IF MULTIPLE CHOICE (A, B, C, D): You MUST preserve the options VERBATIM in the 'question' field. Do NOT strip them.
+- CLEANING: Fix typos but keep the original meaning.
+- SEPARATION: 
+  - 'question': The actual question asked.
+  - 'context': A list of sentences/facts provided as background.
+- NULL HANDLING: If no context is provided, return an empty list [].
 - OUTPUT FORMAT: Return a valid JSON object.
 
 ### TASK
 Analyze the user's input and structure it as follows:
 {
-  "rationale": "Brief explanation of your extraction process",
-  "question": "The precise question for the Prolog engine",
-  "context": ["List of distinct facts found in the input"],
+  "rationale": "Brief explanation",
+  "question": "The precise question (including options if present)",
+  "context": ["Fact 1", "Fact 2"]
 }
 '''
 
 ENCODER_FEW_SHOT_EXAMPLES = [
-  # Example 1
-  {"role": "user", "content": "Hey so Alise is a docter and Bob is a nurce, so is Alise able to prescribe meds?"},
+  # Example 1: Standard QA
+  {"role": "user", "content": "Alise is a doctor and Bob is a nurse. Can Alise prescribe meds?"},
   {"role": "assistant", "content": '''
 {
-  "rationale": "The user identifies two entities (Alice and Bob) and assigns them specific medical roles (Doctor and Nurse). The core of the query is a request for a permission check regarding Alice's ability to prescribe medication based on her professional status. To prepare this for the knowledge graph, I must fix the typos 'Alise' (Alice), 'docter' (doctor), 'nurce' (nurse), and 'meds' (medications).",
-  "question": "Is Alice, who is a doctor, legally authorized to prescribe medications?",
+  "rationale": "Separating background facts about professions from the specific question about prescribing rights.",
+  "question": "Can Alise prescribe medications?",
   "context": [
-    "Alice is a doctor.",
+    "Alise is a doctor.",
     "Bob is a nurse."
   ]
 }
 '''},
   
-  # Example 2
-  {"role": "user", "content": "Assuming every human is mortal, what happens to socrates?"},
+  # Example 2: Logic Puzzle
+  {"role": "user", "content": "Assuming every human is mortal, what happens to Socrates?"},
   {"role": "assistant", "content": '''
 {
-  "rationale": "The user is presenting a logical deduction problem. The phrase 'Assuming every human is mortal' is identified as a universal premise (Local Context) that must be added to the knowledge base to facilitate the reasoning process. The second part of the sentence identifies 'Socrates' as the subject of interest and poses a question regarding his eventual state, which constitutes the core query.",
-  "question": "What is the logical consequence or fate of Socrates based on the provided premises?",
+  "rationale": "Extracting the premise about mortality as context and the specific inquiry about Socrates as the question.",
+  "question": "What happens to Socrates?",
   "context": [
-    "Every human is mortal.",
-    "Socrates is a member of the human species."
+    "Every human is mortal."
   ]
 }
 '''},
   
-  # Example 3
-  {"role": "user", "content": "So, like, if most birds can fly but penguins are birds that can't, what happens to Pingu the penguin?"},
+  # Example 3: Multiple Choice (MMLU Style)
+  {"role": "user", "content": "What is the capital of France? A) London B) Paris C) Berlin D) Madrid"},
   {"role": "assistant", "content": '''
 {
-  "rationale": "The user is asking about a specific entity 'Pingu' based on a general rule about birds and a specific exception for penguins.",
-  "question": "What is the flight capability status of Pingu the penguin?",
-  "context": [
-    "Most birds have the ability to fly.",
-    "Penguins are a type of bird that cannot fly.",
-    "Pingu is a penguin."
-  ]
+  "rationale": "This is a multiple choice question. The options must be preserved in the question field.",
+  "question": "What is the capital of France? A) London B) Paris C) Berlin D) Madrid",
+  "context": []
 }
 '''}
-  
 ]

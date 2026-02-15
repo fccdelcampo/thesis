@@ -1,8 +1,8 @@
-from config import LLM_SYSTEM_PROMPT, LLM_MESSAGES
+from .config import LLM_SYSTEM_PROMPT, LLM_MESSAGES
 import re
 import ollama
 
-from prompt_reconstructor import reconstruct_prompt
+from .prompt_reconstructor import reconstruct_prompt
 
 def generate(user_question: str, retrieved_context: str | None, explainer_output: str | None, flag: str, sample_mode: bool = False) -> dict | list[dict]:
     final_prompt = reconstruct_prompt(user_question=user_question, retrieved_context=retrieved_context, explainer_output=explainer_output, flag=flag)
