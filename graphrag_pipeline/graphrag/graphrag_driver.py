@@ -16,7 +16,12 @@ from pathlib import Path
 # llama3.1:8b-instruct uses 8GB VRAM, while q4_K_M quantized version uses around 4GB-5GB VRAM so it's the only one I can run locally
 MODEL = "llama3.1:8b-instruct-q4_K_M"
 
-from graphrag_pipeline.llm import generate
+try:
+    from graphrag_pipeline.llm import generate
+except ModuleNotFoundError:
+    # Fallback for direct script execution
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+    from llm import generate
 
 class DebugOllamaLLM(OllamaLLM):
     """Wrapper to clean input prompts and log raw LLM responses to debug.txt."""

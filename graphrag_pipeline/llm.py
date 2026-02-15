@@ -1,5 +1,8 @@
 from neo4j_graphrag.generation.prompts import RagTemplate
-from graphrag_pipeline.graphrag.config import GRAPHRAG_TEMPLATE
+try:
+    from graphrag_pipeline.graphrag.config import GRAPHRAG_TEMPLATE
+except ModuleNotFoundError:
+    from graphrag.config import GRAPHRAG_TEMPLATE
 from neo4j_graphrag.generation import GraphRAG
 
 def generate(llm, retriever, query) -> dict:
