@@ -125,6 +125,20 @@ RETURN node.text AS text,
            yago_score: yago_info.score
        } AS metadata
 '''
+
+YAGO_FALLBACK_QUERY = '''
+CALL db.index.fulltext.queryNodes("yagoNameIndex", $query_text) YIELD node, score
+WHERE score > 0.5
+RETURN 
+    "YAGO Entity: " + node.rdfs__label + "\\nDefinition: " + COALESCE(node.rdfs__comment, "No definition available.") as text,
+    score,
+    {
+        source: "YAGO Knowledge Graph",
+        entity_name: node.rdfs__label,
+        yago_id: elementId(node)
+    } as metadata
+LIMIT 5
+'''
 # Additional instructions if ever needed.
 # 1. Read the Context carefully.
 # 2. Identify which specific sentence supports your answer.
@@ -146,23 +160,17 @@ RETURN node.text AS text,
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are a Logic Discovery Agent. Your task is NOT to answer the user's question. Instead, you must extract all individual pieces of evidence from the provided Context that are necessary to answer the Question.
+You are an expert Educational AI Assistant. Your goal is to answer the user's question accurately using the provided Context.
 
-### TASK
-Analyze the Context and the Question. Extract the following information in a clear, bulleted list format. If a category has no relevant info, write "None".
-
-### CATEGORIES OF EVIDENCE TO EXTRACT (SHOW THIS AS NATURAL STATEMENT):
-1. **ATOMIC FACTS**: Simple, unconditional truths (e.g., "Socrates is a man").
-2. **CONDITIONAL RULES**: Implications or 'If-Then' relationships (e.g., "If X is a man, then X is mortal").
-3. **LOGICAL EXCEPTIONS**: Constraints, negations, or 'Unless' cases (e.g., "Penguins are birds but cannot fly").
-4. **NUMERIC/MODAL DATA**: Any specific quantities, dates, or degrees of certainty (e.g., "75% probability").
-
-### STRICT RULES:
-- DO NOT answer the question.
-- DO NOT use conversational filler.
-- ONLY include information found in the Context.
-- Use precise language that can be mapped to Prolog atoms.
-</task>
+### INSTRUCTIONS
+1. Read the Context carefully.
+2. If the question is a Multiple Choice Question (MMLU style with options A, B, C, D), you MUST:
+   - Analyze each option against the Context.
+   - Select the SINGLE best answer.
+   - Start your response with the correct letter (e.g., "A. " or "Answer: B").
+   - Then provide a concise explanation.
+3. If the Context contains "YAGO Knowledge", treat it as authoritative definitions.
+4. If the answer is not in the Context, use your general knowledge but mention that the context was insufficient.
 
 ### Question:
 {query_text}
@@ -170,6 +178,7 @@ Analyze the Context and the Question. Extract the following information in a cle
 ### Context:
 {context}
 
+### Answer:
 '''
 
 DOC_PATH = Path(__file__).resolve().parents[2] / "documents"
@@ -185,6 +194,7 @@ Your goal is to take noisy user input and extract two distinct components:
 - CLEANING: Fix typos, grammatical errors, and informal slang into professional, precise language.
 - SEPARATION: Do not answer the question. Only extract the components.
 - ATOMIZATION: Format entities to be lowercase_with_underscores to aid Prolog atomization.
+- PRESERVE OPTIONS: If the input contains multiple choice options (A, B, C, D), include them VERBATIM in the 'question' field.
 - NULL HANDLING: If no context is provided, return "None".
 - OUTPUT FORMAT: Return a valid JSON object.
 

@@ -13,7 +13,7 @@ def calculate_comprehensiveness(test_case_id: int, df: pd.DataFrame) -> float:
     score = se_x_c - se_x
     log_row(test_case_id=test_case_id, comprehensiveness=score)
 
-def log_row(test_case_id, comprehensiveness) -> None:
+def log_row(test_case_id: int, comprehensiveness: float) -> None:
     with open(IO_DIR / "comprehensiveness.csv", 'a', newline='') as f:
         writer = csv.DictWriter(
             f,

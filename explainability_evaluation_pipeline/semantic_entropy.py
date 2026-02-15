@@ -12,6 +12,13 @@ sys.path.append(str(ROOT))
 IO_DIR = ROOT / "explainability_evaluation_results"
 TEST_DIR = ROOT / "test_cases"
 
+import requests
+import json
+from config import ENTAILMENT_THRESHOLD, SampleSequencesFlags
+# from prolog_graphrag_pipeline import main_driver
+import math
+import csv
+
 API_URL = "https://api-inference.huggingface.co/models/microsoft/deberta-large-mnli"
 headers = {"Authorization": "Bearer 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"}
 

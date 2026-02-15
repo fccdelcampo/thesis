@@ -1,3 +1,10 @@
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.append(str(ROOT))
+IO_DIR = ROOT / "explainability_evaluation_results"
+
 import comprehensiveness, auroc, sufficiency, semantic_entropy
 import sys, os
 import csv
