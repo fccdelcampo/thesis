@@ -15,8 +15,9 @@ def use_scasp():
         janus.query_once("use_module(library(scasp/human)).")
         print("s(CASP) loaded successfully.")
     except Exception as e:
-        print(f"WARNING: s(CASP) not available: {e}. Falling back to standard Prolog.")
+        print(f"CRITICAL ERROR: s(CASP) library not found: {e}")
         SCASP_AVAILABLE = False
+        # Fallback disabled by user request.
 
 def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt: str) -> str:
     start_time = time.perf_counter()
@@ -29,18 +30,17 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
     print(f"**Extracted database:**\n{database}")
     print(f"**Extracted query:**\n{query}")
 
+    if not SCASP_AVAILABLE:
+        raise RuntimeError("s(CASP) library is specifically required for this pipeline. Execution aborted.")
+
     wrapper = ""
-    human_readable_explanation = "Explanation unavailable (s(CASP) missing)."
+    human_readable_explanation = ""
     retrieved_values = ""
 
-    if SCASP_AVAILABLE:
-        print("Generating s(CASP) wrapper...")
-        wrapper = generate_safe_scasp_wrapper(query)
-        print(f"**Wrapper:** \n{wrapper}")
-        final_query = f"explain(Explanation)."
-    else:
-        print("Using standard Prolog query...")
-        final_query = query
+    print("Generating s(CASP) wrapper...")
+    wrapper = generate_safe_scasp_wrapper(query)
+    print(f"**Wrapper:** \n{wrapper}")
+    final_query = f"explain(Explanation)."
     
     print("Consulting database...")
     janus.consult("user", database + "\n" + wrapper)
