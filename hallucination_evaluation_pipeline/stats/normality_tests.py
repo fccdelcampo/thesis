@@ -4,11 +4,10 @@ import numpy as np
 import csv
 import pandas as pd
 from pathlib import Path
-import visualizer_generator
 
 # Scipy imports FIRST (before wildcard import)
 from scipy.stats import gmean, shapiro
-import visualizer_generator
+
 # Define top-level directory (one level up from current script)
 TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -18,10 +17,16 @@ ROOT = Path(__file__).resolve().parents[2]
 # RESULTS_DIR = ROOT / "hallucination_evaluation_results"
 sys.path.append(str(ROOT))
 
-# Import classes and config (but this brings in stats from standard library)
-from config import *
-# from .visualizer_generator import generate_qq_grid_for_eval
-import pandas
+try:
+    from .config import *
+    from . import visualizer_generator
+except ImportError:
+    try:
+        from config import *
+        import visualizer_generator
+    except ImportError:
+        from stats.config import *
+        from stats import visualizer_generator
 # Define target folder inside top-level directory
 IO_DIR = ROOT / "hallucination_evaluation_results"
 
@@ -43,7 +48,9 @@ def shapiro_test(data: np.ndarray, pipeline: Pipeline, eval: Metric):
         writer = csv.DictWriter(f, fieldnames=normality_row.keys())
         writer.writerow(normality_row)
 
-def compute_normality_test(df: pandas.DataFrame, eval: Metric | Benchmark):
+from typing import Union
+
+def compute_normality_test(df: pd.DataFrame, eval: Union[Metric, Benchmark]):
     for pipeline in list(Pipeline):
         col_name = pipeline.value[1] + "_score"
         data = df[col_name].to_numpy()

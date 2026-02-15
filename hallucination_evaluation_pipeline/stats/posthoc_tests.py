@@ -2,13 +2,26 @@ import pandas as pd
 import numpy as np
 import os
 import csv
-from config import *
-from scikit_posthocs import posthoc_dunn
-from statsmodels.stats.multicomp import pairwise_tukeyhsd
-from statsmodels.stats.contingency_tables import mcnemar
-# from stats.visualizer_generator import generatePValueMatrix
-from scipy.stats import rankdata
-import visualizer_generator
+
+STATS_AVAILABLE = True
+try:
+    from scikit_posthocs import posthoc_dunn
+    from statsmodels.stats.multicomp import pairwise_tukeyhsd
+    from statsmodels.stats.contingency_tables import mcnemar
+    from scipy.stats import rankdata
+except ImportError:
+    STATS_AVAILABLE = False
+    print("Warning: statsmodels, scikit-posthocs, or scipy not found. Post-hoc tests will be skipped.")
+try:
+    from .config import *
+    from . import visualizer_generator
+except ImportError:
+    try:
+        from config import *
+        import visualizer_generator
+    except ImportError:
+        from stats.config import *
+        from stats import visualizer_generator
 
 # Define top-level directory (one level up from current script)
 TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -35,8 +48,14 @@ def log_posthoc_result(eval_name: str,loser: str, winner: str, p_value: float):
             "p_value": p_value,
         })
 
-def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Metric | Benchmark):
+from typing import Union
+
+def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Union[Metric, Benchmark]):
     print(f"RESULTS:\n{results}")
+    if not STATS_AVAILABLE:
+        print("Skipping compute_posthoc_test_for_metric: Stats libraries missing.")
+        return
+
     if eval in CONTINUOUS_EVALS:
         if is_normal:
             df = pd.DataFrame(

@@ -1,3 +1,6 @@
+import math
+import os
+import sys
 import matplotlib.pyplot as plt
 import scipy.stats as scipy_stats
 import numpy as np
@@ -7,29 +10,36 @@ import scikit_posthocs as sp
 from statsmodels.stats.multicomp import pairwise_tukeyhsd
 from matplotlib.colors import TwoSlopeNorm, LinearSegmentedColormap
 import matplotlib.patheffects as path_effects
+import matplotlib.patheffects as pe
+
+
+
 import math
 import os
 import sys
-import matplotlib.patheffects as pe
 
-# Define top-level directory (one level up from current script)
-TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
+try:
+    from .config import ALPHA, CONTINUOUS_EVALS, DISCRETE_EVALS, Pipeline
+except ImportError:
+    try:
+        from config import ALPHA, CONTINUOUS_EVALS, DISCRETE_EVALS, Pipeline
+    except ImportError:
+        from stats.config import ALPHA, CONTINUOUS_EVALS, DISCRETE_EVALS, Pipeline
 
-# Append top-level directory to sys.path BEFORE importing from it
-sys.path.append(TOP_LEVEL_DIR)
-
-from config import ALPHA
+import os
 
 # Prefer results folder at workspace root: ../../hallucination_evaluation_results/visualizations
 ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-RESULTS_DATA_DIR = os.path.join(ROOT, "hallucination_evaluation_results", "data")
+RESULTS_DATA_DIR = os.path.join(ROOT, "hallucination_evaluation_results", "data")  # Adjusted path
+# stats_driver says IO_DIR = ROOT / "hallucination_evaluation_results".
+# And csv files are there.
+# But original code said: RESULTS_DATA_DIR = os.path.join(ROOT, "hallucination_evaluation_results", "data")
+# visualizer_generator here expected "data" subdir.
+# visualizer_generator expected "data" subdir.
+
+RESULTS_DATA_DIR = os.path.join(ROOT, "hallucination_evaluation_results")
 OUTPUT_DIR = os.path.join(ROOT, "hallucination_evaluation_results", "visualizations")
 
-# Import additional config symbols used below
-from config import CONTINUOUS_EVALS, DISCRETE_EVALS, Pipeline
-
-# Ensure output directory exists
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
 def generate_qq_grids():
@@ -40,6 +50,9 @@ def generate_qq_grids():
     Saves the final grid in ../visualizations/ relative to this file.
 
     """
+    if not VISUALIZATION_AVAILABLE:
+        print("Skipping generate_qq_grids: Visualization libraries not installed.")
+        return
     # Read normality test results if available
     normality_path = os.path.join(RESULTS_DATA_DIR, "normality_test_results.csv")
     if os.path.exists(normality_path):

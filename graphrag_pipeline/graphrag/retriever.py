@@ -109,3 +109,27 @@ def create_retriever(driver, embedder):
         )
     else:
         raise ValueError(f"Retriever {RETRIEVER.name} is invalid.")
+
+def get_retriever(driver, embedder):
+    """
+    Instantiates the retriever without creating/dropping indexes.
+    Assumes indexes already exist.
+    """
+    if RETRIEVER.value == "HybridRetriever":
+        return CleanTextRetriever(
+            driver=driver,
+            vector_index_name="documentsVectorIndex",
+            fulltext_index_name="documentsFulltextIndex",
+            embedder=embedder,
+            return_properties=["text", "id"] 
+        )
+    elif RETRIEVER.value == "HybridCypherRetriever":
+        return HybridCypherRetriever(
+            driver=driver,
+            vector_index_name="documentsVectorIndex",
+            fulltext_index_name="documentsFulltextIndex",
+            retrieval_query=RETRIEVAL_QUERY,
+            embedder=embedder
+        )
+    else:
+        raise ValueError(f"Retriever {RETRIEVER.name} is invalid.")

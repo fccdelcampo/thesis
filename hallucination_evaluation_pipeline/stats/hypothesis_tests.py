@@ -1,15 +1,25 @@
-from scipy.stats import kruskal, mannwhitneyu
-from statsmodels.stats.contingency_tables import cochrans_q
-from config import *
+import sys
+import os
 import numpy as np
 import pandas as pd
 import csv
-import os
-import visualizer_generator
-
-# from stats.visualizer_generator import generateBoxPlotGrids
-
-import sys
+STATS_AVAILABLE = True
+try:
+    from scipy.stats import kruskal, mannwhitneyu
+    from statsmodels.stats.contingency_tables import cochrans_q
+except ImportError:
+    STATS_AVAILABLE = False
+    print("Warning: scipy or statsmodels not found. Hypothesis tests will be skipped.")
+try:
+    from .config import *
+    from . import visualizer_generator
+except ImportError:
+    try:
+        from config import *
+        import visualizer_generator
+    except ImportError:
+        from stats.config import *
+        from stats import visualizer_generator
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -18,11 +28,15 @@ sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
 IO_DIR = ROOT / "hallucination_evaluation_results"
 
-def compute_hypothesis_test_for_continuous_eval(tuned_data: np.ndarray, graphrag_data: np.ndarray, prolog_graphrag_data: np.ndarray, eval: Metric | Benchmark):
+from typing import Union
+
+def compute_hypothesis_test_for_continuous_eval(tuned_data: np.ndarray, graphrag_data: np.ndarray, prolog_graphrag_data: np.ndarray, eval: Union[Metric, Benchmark]):
     """
     Performs hypothesis testing (e.g., t-test or Mann-Whitney U test) for a given continuous evaluation criterion
     across different pipelines.
     """
+    if not STATS_AVAILABLE:
+        return
     
     stat, p_value = kruskal(tuned_data, graphrag_data, prolog_graphrag_data)
     interpretation = "SIGNIFICANT" if p_value < ALPHA else "NON_SIGNIFICANT"
@@ -68,6 +82,8 @@ def compute_hypothesis_test_for_discrete_eval(tuned_data: np.ndarray, graphrag_d
     Performs hypothesis testing (e.g., Cochran's Q test) for a given discrete evaluation criterion
     across different pipelines.
     """
+    if not STATS_AVAILABLE:
+        return
 
     data = np.array([tuned_data.tolist(), graphrag_data.tolist(), prolog_graphrag_data.tolist()])
     

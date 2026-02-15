@@ -1,7 +1,14 @@
-from graphrag import graphrag_driver
-from prolog import prolog_driver
-from llm import generate
-from prompt_reconstructor import reconstruct_prompt
+try:
+    from .graphrag import graphrag_driver
+    from .prolog import prolog_driver
+    from .llm import generate
+    from .prompt_reconstructor import reconstruct_prompt
+except ImportError:
+    # Fallback for direct script execution
+    from graphrag import graphrag_driver
+    from prolog import prolog_driver
+    from llm import generate
+    from prompt_reconstructor import reconstruct_prompt
 
 def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include_conclusion: bool = True) -> dict:
     graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None

@@ -8,7 +8,7 @@ def load_test_cases() -> list[dict]:
     Returns:
         list[dict]: A list of dict objects where each dict is a test case containing, at the minimum, the question and answer fields.
     """
-    pass
+    return []
 
 def run_test_case(test_case: dict):
     """
@@ -23,7 +23,9 @@ def run_test_case(test_case: dict):
     pass
 
 
-def log_results(test_case_id: int, tuned_score: float | int, graphrag_score: float | int, prolog_graphrag_score: float | int) -> None:
+from typing import Union
+
+def log_results(test_case_id: int, tuned_score: Union[float, int], graphrag_score: Union[float, int], prolog_graphrag_score: Union[float, int]) -> None:
     """
     Logs results of the evaluations in the appropriate CSV files in hallucination_evaluation_results/
     Must automatically infer the 0/1 label and also record them in the CSV files
@@ -39,7 +41,7 @@ def log_results(test_case_id: int, tuned_score: float | int, graphrag_score: flo
     pass
 
 
-def log_question_and_answer(test_case_id: int, question: str, answer: str, score: int | float, label: '0' | "1") -> None:
+def log_question_and_answer(test_case_id: int, question: str, answer: str, score: Union[int, float], label: str) -> None:
     """
     Logs the question and answer for a given test case ID to a CSV file in logs/{pipeline}_logs/.
     Each log is a JSON line.

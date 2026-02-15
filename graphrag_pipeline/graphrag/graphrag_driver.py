@@ -12,11 +12,11 @@ import asyncio
 import sys
 from pathlib import Path
 
-sys.path.append(str(Path(__file__).resolve().parents[1]))
+# sys.path.append(str(Path(__file__).resolve().parents[1]))
 # llama3.1:8b-instruct uses 8GB VRAM, while q4_K_M quantized version uses around 4GB-5GB VRAM so it's the only one I can run locally
 MODEL = "llama3.1:8b-instruct-q4_K_M"
 
-from llm import generate
+from graphrag_pipeline.llm import generate
 
 class DebugOllamaLLM(OllamaLLM):
     """Wrapper to clean input prompts and log raw LLM responses to debug.txt."""
@@ -210,3 +210,27 @@ if __name__ == "__main__":
     
 # def generate_context(query, retriever, llm) -> str:
 #     return generate(llm, retriever, query)
+
+from .retriever import get_retriever
+
+def run_pipeline(question: str) -> dict:
+    """
+    Runs the GraphRAG pipeline for a given question.
+    Returns a dictionary with 'answer' and 'context'.
+    """
+    try:
+        # 1. Initialize models
+        # Note: initialize_models prints "Ollama loaded successfully."
+        encoder_llm, retriever_llm, embedder = initialize_models()
+        
+        # 2. Get Retriever (without rebuilding indexes)
+        retriever = get_retriever(neo4j_driver, embedder)
+        
+        # 3. Generate Answer
+        # generate_answer calls llm.generate which returns {'answer': ..., 'context': ...}
+        result = generate_answer(question, retriever, retriever_llm)
+        
+        return result
+    except Exception as e:
+        print(f"Error in run_pipeline: {e}")
+        return {"answer": "Error", "context": ""}

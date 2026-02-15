@@ -1,22 +1,31 @@
 ==================================================
- QUERY: What is the correct definition of a budget deficit?
+ QUERY: What is the capital of France?
 ==================================================
 
---- RETRIEVED CONTEXT (Top 0 Chunks) ---
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Chunk 1 | Score: 1.0000]
+{'text': 'There are six possible outcomes for each die: {1, 2, 3, 4, 5, 6}.', 'id': None}
+--------------------------------------------------
+
+[Chunk 2 | Score: 1.0000]
+{'text': 'France is a country in Europe. Its capital is Paris. Paris is a beautiful city.', 'id': None}
+--------------------------------------------------
+
+[Chunk 3 | Score: 0.9876]
+{'text': 'The patio has a length of 144 inches (12 feet * 12 inches/foot) and a width of 120 inches (10 feet * 12 inches/foot).', 'id': None}
+--------------------------------------------------
+
+[Chunk 4 | Score: 0.9795]
+{'text': 'P implies (Q or R).', 'id': None}
+--------------------------------------------------
+
+[Chunk 5 | Score: 0.9795]
+{'text': 'P implies (Q or R).', 'id': None}
+--------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-Here are the extracted pieces of evidence:
-
-* **ATOMIC FACTS**:
-	+ None
-* **CONDITIONAL RULES**:
-	+ None
-* **LOGICAL EXCEPTIONS**:
-	+ None
-* **NUMERIC/MODAL DATA**:
-	+ None
-
-Note: There is no relevant information provided in the Context to answer the Question.
+The capital of France is Paris.
 ==================================================

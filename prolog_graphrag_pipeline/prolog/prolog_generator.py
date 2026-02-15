@@ -61,7 +61,9 @@ Your recent Prolog database and query have errors. Fix them based on the followi
 
     return prompt
 
-def generate_prolog_code(user_question: str, retrieved_context: str, most_recent_error: None | str) -> tuple:
+from typing import Optional
+
+def generate_prolog_code(user_question: str, retrieved_context: str, most_recent_error: Optional[str]) -> tuple:
     for i in range(5):
         try:
             try:

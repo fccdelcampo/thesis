@@ -21,10 +21,24 @@ sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
 IO_DIR = ROOT / "hallucination_evaluation_results"
 
-from config import *
-from normality_tests import perform_normality_tests
-from hypothesis_tests import perform_hypothesis_tests
-from posthoc_tests import perform_posthoc_tests
+try:
+    from .config import *
+    from .normality_tests import perform_normality_tests
+    from .hypothesis_tests import perform_hypothesis_tests
+    from .posthoc_tests import perform_posthoc_tests
+except ImportError as e:
+    print(f"Relative import failed: {e}")
+    try:
+        from config import *
+        from normality_tests import perform_normality_tests
+        from hypothesis_tests import perform_hypothesis_tests
+        from posthoc_tests import perform_posthoc_tests
+    except ImportError as e2:
+        print(f"Absolute import failed: {e2}")
+        from stats.config import *
+        from stats.normality_tests import perform_normality_tests
+        from stats.hypothesis_tests import perform_hypothesis_tests
+        from stats.posthoc_tests import perform_posthoc_tests
 
     
 
