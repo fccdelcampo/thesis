@@ -1,10 +1,22 @@
 import janus_swi as janus
 import re
-from .prolog_generator import generate_prolog_code, capture_db_and_query, capture_predicate_and_arguments
-from .explainer import generate_safe_scasp_wrapper, generate_explanation
 import time
-
-from .. import llm
+try:
+    from .prolog_generator import generate_prolog_code, capture_db_and_query, capture_predicate_and_arguments
+    from .explainer import generate_safe_scasp_wrapper, generate_explanation
+    from .. import llm
+except ImportError:
+    # Fallback: We are likely running as a standalone script
+    import sys
+    import os
+    # Add the project root to sys.path (two levels up from this file)
+    project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
+    if project_root not in sys.path:
+        sys.path.insert(0, project_root)
+        
+    from prolog_graphrag_pipeline.prolog.prolog_generator import generate_prolog_code, capture_db_and_query, capture_predicate_and_arguments
+    from prolog_graphrag_pipeline.prolog.explainer import generate_safe_scasp_wrapper, generate_explanation
+    import prolog_graphrag_pipeline.llm as llm
 
 SCASP_AVAILABLE = True
 
@@ -65,11 +77,18 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
         print(f"Error: {e}")
         
     explainer_output = generate_explanation(user_question=user_question, retrieved_context=retrieved_context, database=database, query=query, retrieved_values=retrieved_values, human_readable_explanation=human_readable_explanation)
-    print(f"**Explainer Output:** \n{explainer_output}")
+    if explainer_output:
+        print(f"**Explainer Output:** \n{explainer_output}")
+    else:
+        print("ERROR: Explainer failed to generate output.")
 
     print("\n**FINAL LLM OUTPUT:")
-    final_answer = llm.generate(user_question, retrieved_context, explainer_output)
-    print(final_answer["text_answer"])
+    final_answer = llm.generate(user_question, retrieved_context, explainer_output, flag="synthesis")
+    
+    if final_answer:
+        print(final_answer["text_answer"])
+    else:
+        print("ERROR: Final LLM failed to generate answer.")
     end_time = time.perf_counter()
     duration = end_time - start_time
     print(f"====The Prolog pipeline executed in {duration:.4f} seconds.===")

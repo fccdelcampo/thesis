@@ -22,7 +22,7 @@ def generate_response(prompt: str, flag: str) -> dict:
         raise ValueError(f"Flag {flag} is invalid. Only 'prolog' and 'explanation' are accepted.")
     try:
         response = ollama.chat(
-            model='llama3.1:8b-instruct-q4_K_M',
+            model='llama3:8b-instruct-fp16',
             messages=llm_messages,
             options={
                 'temperature': temperature,
