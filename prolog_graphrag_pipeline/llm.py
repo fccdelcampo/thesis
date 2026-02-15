@@ -1,3 +1,4 @@
+import ollama
 try:
     from .config import LLM_SYSTEM_PROMPT, LLM_MESSAGES
     from .prompt_reconstructor import reconstruct_prompt
