@@ -15,9 +15,9 @@ def capture_conclusion_and_logical_path(explainer_output):
 def reconstruct_prompt(user_question: str, retrieved_context: str, explainer_output: str, flag: str):
     conclusion, logical_evidence = "CONCLUSION", "LOGICAL EVIDENCE"
     # conclusion, logical_evidence = capture_conclusion_and_logical_path(explainer_output=explainer_output)
-    context_part = f"**CONTEXT:** {retrieved_context}" if flag is not r"q" else ""
-    conclusion_part = f"**CONCLUSION:** {conclusion}" if flag==r"x" else ""
-    logical_evidence_part = f"**LOGICAL EVIDENCE:** {logical_evidence}" if flag is not r"q" else ""
+    context_part = f"**CONTEXT:** {retrieved_context}" if flag != r"q" else ""
+    conclusion_part = f"**CONCLUSION:** {conclusion}" if flag == r"x" else ""
+    logical_evidence_part = f"**LOGICAL EVIDENCE:** {logical_evidence}" if flag != r"q" else ""
     return rf"""
 ### FINAL SYNTHESIS TASK
 

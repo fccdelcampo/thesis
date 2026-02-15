@@ -16,19 +16,19 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
-# RESULTS_DIR = ROOT / "hallucination-evaluation-results"
+# RESULTS_DIR = ROOT / "hallucination_evaluation_results"
 sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
-IO_DIR = ROOT / "hallucination-evaluation-results"
+IO_DIR = ROOT / "hallucination_evaluation_results"
 
 from config import *
-from normality_tests import performNormalityTests
-from hypothesis_tests import performHypothesisTests
-from posthoc_tests import performPostHocTests
+from normality_tests import perform_normality_tests
+from hypothesis_tests import perform_hypothesis_tests
+from posthoc_tests import perform_posthoc_tests
 
     
 
-def ensureCsvHeaders():
+def ensure_csv_headers():
     """Ensure all stats CSV files have their proper headers before writing data."""
     headers = {
         "answer_relevance_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
@@ -68,20 +68,21 @@ def clear_datasets():
         with open(path, 'w', encoding='utf-8', newline='') as f:
             pass
 
-def performStatisticalTests():
+def perform_statistical_tests():
     
     print("Starting Normality Tests...")
-    performNormalityTests()
+    perform_normality_tests()
     
     print("Starting Hypothesis Tests...")
-    performHypothesisTests()
+    perform_hypothesis_tests()
     
     print("Starting Post Hoc Tests...")
-    performPostHocTests()
+    perform_posthoc_tests()
     
     print("Statistical Tests Completed.")
     
-def generateArtificialData():
+    
+def generate_artificial_data():
     # For <pipeline>_results.csv files
     # workload,awt,art,throughput,cpu_utilization
     print("Generating artificial data...")
@@ -109,9 +110,9 @@ def generateArtificialData():
 def informal_tests():
     print("================Starting informal tests...================")
     clear_datasets()
-    ensureCsvHeaders()
-    generateArtificialData()
-    performStatisticalTests()
+    ensure_csv_headers()
+    generate_artificial_data()
+    perform_statistical_tests()
   
 if __name__ == "__main__":  
     informal_tests()

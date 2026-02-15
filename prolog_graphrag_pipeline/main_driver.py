@@ -4,11 +4,11 @@ from llm import generate
 from prompt_reconstructor import reconstruct_prompt
 
 def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False) -> dict:
-    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag is not "q" else None
-    query = graphrag_output["query"] if flag is not "q" else None
-    context_from_prompt = graphrag_output["text_context"] if flag is not "q" else None
-    retrieved_context = graphrag_output["context"] if flag is not "q" else None
-    explainer_output = prolog_driver.run_pipeline(user_question=query, retrieved_context=retrieved_context, context_from_prompt=context_from_prompt) if flag is not "q" else None
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+    query = graphrag_output["query"] if flag != "q" else None
+    context_from_prompt = graphrag_output["text_context"] if flag != "q" else None
+    retrieved_context = graphrag_output["context"] if flag != "q" else None
+    explainer_output = prolog_driver.run_pipeline(user_question=query, retrieved_context=retrieved_context, context_from_prompt=context_from_prompt) if flag != "q" else None
     # Pass explicitly named arguments to match llm.generate signature:
     # def generate(user_question: str, retrieved_context: str, explainer_output: str, include_conclusion: bool = True)
     
