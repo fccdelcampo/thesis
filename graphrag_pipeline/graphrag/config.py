@@ -8,8 +8,9 @@ NEO4J_PASSWORD = "graphrag"
 class RETRIEVER_OPTIONS(Enum):
   HybridCypherRetriever = "HybridCypherRetriever"
   HybridRetriever = "HybridRetriever"
+  VectorCypherRetriever = "VectorCypherRetriever"
   
-RETRIEVER = RETRIEVER_OPTIONS.HybridRetriever
+RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
 
 class SCHEMA_TYPE(Enum):
   STATIC = "Static Schema"
@@ -127,31 +128,54 @@ IDENTIFY THREE TYPES OF LOGIC:
 FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble.
 '''
 
+# Retrieval query for HybridCypherRetriever/VectorCypherRetriever:
+# Takes the vector-matched local node and finds its local connections.
 RETRIEVAL_QUERY = '''
-"""
-MATCH (node)-[:EXTRACTS]->(e:Entity)
-OPTIONAL MATCH (e)-[r]->(target:Entity)
-RETURN node.text AS text, 
-       node.score AS score,
-       {entity: e.name, relationship: type(r), connected_to: target.name} AS graph_metadata
-"""
+// Part A: Local Document Retrieval (Vector/Keyword matches passed as `node`)
+WITH node, score
+OPTIONAL MATCH (node)-[:EXTRACTS]->(e)
+OPTIONAL MATCH (e)-[r]->(target)
+WITH node, score, collect(distinct {
+    source: "Local Document",
+    entity: e.name,
+    relationship: type(r),
+    target: target.name,
+    text: node.text
+}) as local_context
+
+RETURN 
+    node.text as text,
+    score,
+    {
+        local_context: local_context,
+        score: score
+    } as metadata
 '''
+
 # Additional instructions if ever needed.
 # 1. Read the Context carefully.
 # 2. Identify which specific sentence supports your answer.
 # 3. If the context contains multiple objects or events, do NOT mix them up. 
 # 4. If the answer is not in the context, say "I don't know."
-GRAPHRAG_TEMPLATE = '''
-# INSTRUCTIONS:
-Answer the Question using the following Context. Only respond with information mentioned in the Context. Do not inject any speculative information not mentioned.
 
-# Question:
+GRAPHRAG_TEMPLATE = '''
+### ROLE
+You are an expert Educational AI Assistant. Answer the user's question accurately using the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer Directly**: Start with the answer. Do NOT begin with definitions or explanations of how you found it.
+2. **Sound Natural**: Write as if you already know the answer. NEVER say "the context states", "according to the provided information", "based on the evidence", or similar phrases.
+3. **Use Context Silently**: The Context helps you be accurate, but the user should not know you relied on it. Integrate facts naturally.
+4. **MMLU/Multiple Choice**: If options are provided (A, B, C, D), select the single best one and explain why.
+5. **Never Cite Sources**: Do NOT mention Wikidata, documents, or any source by name.
+
+### Question:
 {query_text}
 
-# Context:
+### Context (for your reference only — do NOT mention it):
 {context}
 
-# Answer:
+### Answer:
 '''
 
 DOC_PATH = Path(__file__).resolve().parents[2] / "documents"

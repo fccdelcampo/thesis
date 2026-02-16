@@ -53,10 +53,14 @@ class WikidataRetriever:
           ?val rdfs:label ?valLabel .
           ?prop rdfs:label ?propLabel .
           
-          # Filter for specific interesting properties or anything if we want broad context
-          # valid properties: P31 (instance of), P279 (subclass of), P361 (part of), 
-          # P1366 (replaced by), P1365 (replaces), P17 (country), P131 (located in)
-          VALUES ?p {{ wdt:P31 wdt:P279 wdt:P361 wdt:P1366 wdt:P1365 wdt:P17 wdt:P131 }}
+          # Filter for useful relationship properties 
+          # P31: instance of, P279: subclass of, P361: part of,
+          # P1366: replaced by, P1365: replaces, P17: country, P131: located in,
+          # P36: capital, P6: head of government, P159: headquarters location,
+          # P625: coordinate location, P571: inception/founded date,
+          # P856: official website, P1376: capital of, P527: has part,
+          # P2044: elevation above sea level
+          VALUES ?p {{ wdt:P31 wdt:P279 wdt:P361 wdt:P1366 wdt:P1365 wdt:P17 wdt:P131 wdt:P36 wdt:P6 wdt:P159 wdt:P571 wdt:P1376 wdt:P527 wdt:P2044 }}
           
           FILTER(LANG(?valLabel) = "{self.language}")
           FILTER(LANG(?propLabel) = "{self.language}")

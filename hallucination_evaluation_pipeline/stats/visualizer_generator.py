@@ -18,7 +18,6 @@ try:
 except ImportError as e:
     print(f"Visualization libraries missing: {e}. Visualization will be skipped.")
     VISUALIZATION_AVAILABLE = False
-    # Fallback for essential data libraries if they were the ones missing?
     try:
         import numpy as np
         import pandas as pd

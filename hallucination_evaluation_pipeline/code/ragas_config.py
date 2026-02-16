@@ -1,6 +1,5 @@
 import os
-from langchain_community.chat_models import ChatOllama
-from langchain_community.embeddings import OllamaEmbeddings
+from langchain_ollama import ChatOllama, OllamaEmbeddings
 
 # RAGAS 0.4.x requires wrapped LLM/Embeddings
 from ragas.llms import LangchainLLMWrapper

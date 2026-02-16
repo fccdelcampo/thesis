@@ -175,6 +175,10 @@ def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
     return kg_builder_pdf, kg_builder_text
 
 def generate_answer(query, retriever, llm) -> dict:
+    # Inject LLM into EnhancedRetriever for Wikidata entity extraction
+    from .retriever import EnhancedRetriever
+    if isinstance(retriever, EnhancedRetriever):
+        retriever.llm = llm
     return generate(llm, retriever, query)
 
 from .encoder import process_pdf_documents, process_text_context, extract_query_and_context

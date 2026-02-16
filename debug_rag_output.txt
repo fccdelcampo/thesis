@@ -1,737 +1,45 @@
 ==================================================
- QUERY: What is the capital of France?
+ QUERY: In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?
 ==================================================
 
---- RETRIEVED CONTEXT (Top 0 Chunks) ---
-
-==================================================
- LLM ANSWER:
-==================================================
-Unfortunately, I don't have a context provided to answer your question from. However, based on general knowledge, the correct answer would be Paris. 
-
-If you'd like me to provide an accurate response according to specific information in the given context (which is currently empty), please feel free to add it!
-==================================================
-==================================================
- QUERY: What comes after the number 1?
-==================================================
-
---- RETRIEVED CONTEXT (Top 5 Items) ---
+--- RETRIEVED CONTEXT (Top 3 Chunks) ---
 
 [Metadata Dump]
 {
-  "entity": "fax number",
-  "score": 3.655804395675659,
-  "source": "YAGO"
+  "score": 1.0
 }
-[Item 1]
-[Chunk Score: 3.6558] YAGO Concept: fax number. Definition: The fax number.
 
+[Chunk 1 | Score: 1.0000]
+{'text': 'In mathematics', 'id': None}
 --------------------------------------------------
 
 [Metadata Dump]
 {
-  "entity": "issue number",
-  "score": 3.655804395675659,
-  "source": "YAGO"
+  "score": 1.0
 }
-[Item 2]
-[Chunk Score: 3.6558] YAGO Concept: issue number. Definition: Identifies the issue of publication; for example, "iii" or "2".
 
+[Chunk 2 | Score: 1.0000]
+{'text': 'In mathematics', 'id': None}
 --------------------------------------------------
 
 [Metadata Dump]
 {
-  "entity": "volume number",
-  "score": 3.655804395675659,
-  "source": "YAGO"
+  "score": 1.0
 }
-[Item 3]
-[Chunk Score: 3.6558] YAGO Concept: volume number. Definition: Identifies the volume of publication or multi-part work; for example, "iii" or "2".
 
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "entity": "number of pages",
-  "score": 3.1219334602355957,
-  "source": "YAGO"
-}
-[Item 4]
-[Chunk Score: 3.1219] YAGO Concept: number of pages. Definition: The number of pages in the book.
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "entity": "number of employees",
-  "score": 3.1219334602355957,
-  "source": "YAGO"
-}
-[Item 5]
-[Chunk Score: 3.1219] YAGO Concept: number of employees. Definition: The number of employees in an organization e.g. business.
-
+[Chunk 3 | Score: 1.0000]
+{'text': 'In mathematics', 'id': None}
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-The answer is 2.
+There is no information in the context about Sergei Aleksandrovich Tokarev or a university he was affiliated with. The provided text only mentions "in mathematics" three times, but does not provide any specific details about individuals or institutions related to this field of study.
 
-This makes sense because numbers are typically sequential, and after the first item or unit (in this case, "1"), comes the second one ("2"). This pattern continues indefinitely with each subsequent number being greater than its predecessor by exactly one. For example, if you have a list of items labeled as A, B, C, D, E, then 3 would come after 2 in such a sequence.
-
-In other words, when counting or listing items sequentially, the next item to appear is always the subsequent number, which follows the previous one by exactly one.
+Therefore, I cannot answer your question based on the given context.
 ==================================================
 ==================================================
- QUERY: What comes after the number 1?
-==================================================
-
---- RETRIEVED CONTEXT (Top 5 Items) ---
-
-[Metadata Dump]
-{
-  "entity": "fax number",
-  "score": 3.655804395675659,
-  "source": "YAGO"
-}
-[Item 1]
-[Chunk Score: 3.6558] YAGO Concept: fax number. Definition: The fax number.
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "entity": "issue number",
-  "score": 3.655804395675659,
-  "source": "YAGO"
-}
-[Item 2]
-[Chunk Score: 3.6558] YAGO Concept: issue number. Definition: Identifies the issue of publication; for example, "iii" or "2".
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "entity": "volume number",
-  "score": 3.655804395675659,
-  "source": "YAGO"
-}
-[Item 3]
-[Chunk Score: 3.6558] YAGO Concept: volume number. Definition: Identifies the volume of publication or multi-part work; for example, "iii" or "2".
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "entity": "number of pages",
-  "score": 3.1219334602355957,
-  "source": "YAGO"
-}
-[Item 4]
-[Chunk Score: 3.1219] YAGO Concept: number of pages. Definition: The number of pages in the book.
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "entity": "number of employees",
-  "score": 3.1219334602355957,
-  "source": "YAGO"
-}
-[Item 5]
-[Chunk Score: 3.1219] YAGO Concept: number of employees. Definition: The number of employees in an organization e.g. business.
-
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-The answer is 2.
-
-This makes sense because numbers are typically sequential, and after the first item or unit (in this case, "1"), comes the second one ("2"). This pattern continues indefinitely with each subsequent number being greater than its predecessor by exactly one. For example, if you have a list of items labeled as A, B, C, D, E, then 3 would come after 2 in such a sequence.
-
-In other words, when counting or listing items sequentially, the next item to appear is always the subsequent number, which follows the previous one by exactly one.
-==================================================
-==================================================
- QUERY: What comes after the number 1?
-==================================================
-
---- RETRIEVED CONTEXT (Top 5 Items) ---
-
-[Metadata Dump]
-{
-  "score": 3.655804395675659,
-  "triples": [
-    "fax number rdfs__range ",
-    "fax number rdfs__domain ",
-    "fax number rdf__type ",
-    "fax number sh__path ",
-    "fax number sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "fax number"
-}
-[Item 1]
-[Chunk Score: 3.6558] YAGO Concept: fax number. Definition: The fax number.
-  [Knowledge Graph Triples]:
-   - fax number rdfs__range 
-   - fax number rdfs__domain 
-   - fax number rdf__type 
-   - fax number sh__path 
-   - fax number sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.655804395675659,
-  "triples": [
-    "issue number rdfs__range ",
-    "issue number rdfs__domain \u671f",
-    "issue number rdf__type ",
-    "issue number rdfs__subPropertyOf position",
-    "issue number sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "issue number"
-}
-[Item 2]
-[Chunk Score: 3.6558] YAGO Concept: issue number. Definition: Identifies the issue of publication; for example, "iii" or "2".
-  [Knowledge Graph Triples]:
-   - issue number rdfs__range 
-   - issue number rdfs__domain 期
-   - issue number rdf__type 
-   - issue number rdfs__subPropertyOf position
-   - issue number sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.655804395675659,
-  "triples": [
-    "volume number rdfs__range ",
-    "volume number rdfs__domain \u5dfb",
-    "volume number rdf__type ",
-    "volume number rdfs__subPropertyOf position",
-    "volume number sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "volume number"
-}
-[Item 3]
-[Chunk Score: 3.6558] YAGO Concept: volume number. Definition: Identifies the volume of publication or multi-part work; for example, "iii" or "2".
-  [Knowledge Graph Triples]:
-   - volume number rdfs__range 
-   - volume number rdfs__domain 巻
-   - volume number rdf__type 
-   - volume number rdfs__subPropertyOf position
-   - volume number sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.1219334602355957,
-  "triples": [
-    "number of pages rdfs__range ",
-    "number of pages rdfs__domain \ucc45",
-    "number of pages rdf__type ",
-    "number of pages rdf__type ",
-    "number of pages sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "number of pages"
-}
-[Item 4]
-[Chunk Score: 3.1219] YAGO Concept: number of pages. Definition: The number of pages in the book.
-  [Knowledge Graph Triples]:
-   - number of pages rdfs__range 
-   - number of pages rdfs__domain 책
-   - number of pages rdf__type 
-   - number of pages rdf__type 
-   - number of pages sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.1219334602355957,
-  "triples": [
-    "number of employees rdfs__range quantitative value",
-    "number of employees rdfs__domain \ub2e8\uccb4",
-    "number of employees rdf__type ",
-    "number of employees sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "number of employees"
-}
-[Item 5]
-[Chunk Score: 3.1219] YAGO Concept: number of employees. Definition: The number of employees in an organization e.g. business.
-  [Knowledge Graph Triples]:
-   - number of employees rdfs__range quantitative value
-   - number of employees rdfs__domain 단체
-   - number of employees rdf__type 
-   - number of employees sh__path 
-
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-The answer is 2.
-
-This makes sense because numbers are typically sequential, and after the first item or unit (in this case, "1"), comes the second one ("2"). This pattern continues indefinitely with each subsequent number being greater than its predecessor by exactly one. For example, if you have a list of items labeled as A, B, C, D, E, then 3 would come after 2 in such a sequence.
-
-In other words, when counting or listing items sequentially, the next item to appear is always the subsequent number, which follows the previous one by exactly one.
-==================================================
-==================================================
- QUERY: What comes after the number 1?
-==================================================
-
---- RETRIEVED CONTEXT (Top 5 Items) ---
-
-[Metadata Dump]
-{
-  "score": 3.655804395675659,
-  "triples": [
-    "fax number rdfs__range ",
-    "fax number rdfs__domain ",
-    "fax number rdf__type ",
-    "fax number sh__path ",
-    "fax number sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "fax number"
-}
-[Item 1]
-[Chunk Score: 3.6558] YAGO Concept: fax number. Definition: The fax number.
-  [Knowledge Graph Triples]:
-   - fax number rdfs__range 
-   - fax number rdfs__domain 
-   - fax number rdf__type 
-   - fax number sh__path 
-   - fax number sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.655804395675659,
-  "triples": [
-    "issue number rdfs__range ",
-    "issue number rdfs__domain \u671f",
-    "issue number rdf__type ",
-    "issue number rdfs__subPropertyOf position",
-    "issue number sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "issue number"
-}
-[Item 2]
-[Chunk Score: 3.6558] YAGO Concept: issue number. Definition: Identifies the issue of publication; for example, "iii" or "2".
-  [Knowledge Graph Triples]:
-   - issue number rdfs__range 
-   - issue number rdfs__domain 期
-   - issue number rdf__type 
-   - issue number rdfs__subPropertyOf position
-   - issue number sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.655804395675659,
-  "triples": [
-    "volume number rdfs__range ",
-    "volume number rdfs__domain \u5dfb",
-    "volume number rdf__type ",
-    "volume number rdfs__subPropertyOf position",
-    "volume number sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "volume number"
-}
-[Item 3]
-[Chunk Score: 3.6558] YAGO Concept: volume number. Definition: Identifies the volume of publication or multi-part work; for example, "iii" or "2".
-  [Knowledge Graph Triples]:
-   - volume number rdfs__range 
-   - volume number rdfs__domain 巻
-   - volume number rdf__type 
-   - volume number rdfs__subPropertyOf position
-   - volume number sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.1219334602355957,
-  "triples": [
-    "number of pages rdfs__range ",
-    "number of pages rdfs__domain \ucc45",
-    "number of pages rdf__type ",
-    "number of pages rdf__type ",
-    "number of pages sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "number of pages"
-}
-[Item 4]
-[Chunk Score: 3.1219] YAGO Concept: number of pages. Definition: The number of pages in the book.
-  [Knowledge Graph Triples]:
-   - number of pages rdfs__range 
-   - number of pages rdfs__domain 책
-   - number of pages rdf__type 
-   - number of pages rdf__type 
-   - number of pages sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.1219334602355957,
-  "triples": [
-    "number of employees rdfs__range quantitative value",
-    "number of employees rdfs__domain \ub2e8\uccb4",
-    "number of employees rdf__type ",
-    "number of employees sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "number of employees"
-}
-[Item 5]
-[Chunk Score: 3.1219] YAGO Concept: number of employees. Definition: The number of employees in an organization e.g. business.
-  [Knowledge Graph Triples]:
-   - number of employees rdfs__range quantitative value
-   - number of employees rdfs__domain 단체
-   - number of employees rdf__type 
-   - number of employees sh__path 
-
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-The answer is 2.
-
-This makes sense because numbers are typically sequential, and after the first item or unit (in this case, "1"), comes the second one ("2"). This pattern continues indefinitely with each subsequent number being greater than its predecessor by exactly one. For example, if you have a list of items labeled as A, B, C, D, E, then 3 would come after 2 in such a sequence.
-
-In other words, when counting or listing items sequentially, the next item to appear is always the subsequent number, which follows the previous one by exactly one.
-==================================================
-==================================================
- QUERY: What comes after the number 1?
-==================================================
-
---- RETRIEVED CONTEXT (Top 5 Items) ---
-
-[Metadata Dump]
-{
-  "score": 3.655804395675659,
-  "triples": [
-    "fax number rdfs__range ",
-    "fax number rdfs__domain ",
-    "fax number rdf__type ",
-    "fax number sh__path ",
-    "fax number sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "fax number"
-}
-[Item 1]
-[Chunk Score: 3.6558] YAGO Concept: fax number. Definition: The fax number.
-  [Knowledge Graph Triples]:
-   - fax number rdfs__range 
-   - fax number rdfs__domain 
-   - fax number rdf__type 
-   - fax number sh__path 
-   - fax number sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.655804395675659,
-  "triples": [
-    "issue number rdfs__range ",
-    "issue number rdfs__domain \u671f",
-    "issue number rdf__type ",
-    "issue number rdfs__subPropertyOf position",
-    "issue number sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "issue number"
-}
-[Item 2]
-[Chunk Score: 3.6558] YAGO Concept: issue number. Definition: Identifies the issue of publication; for example, "iii" or "2".
-  [Knowledge Graph Triples]:
-   - issue number rdfs__range 
-   - issue number rdfs__domain 期
-   - issue number rdf__type 
-   - issue number rdfs__subPropertyOf position
-   - issue number sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.655804395675659,
-  "triples": [
-    "volume number rdfs__range ",
-    "volume number rdfs__domain \u5dfb",
-    "volume number rdf__type ",
-    "volume number rdfs__subPropertyOf position",
-    "volume number sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "volume number"
-}
-[Item 3]
-[Chunk Score: 3.6558] YAGO Concept: volume number. Definition: Identifies the volume of publication or multi-part work; for example, "iii" or "2".
-  [Knowledge Graph Triples]:
-   - volume number rdfs__range 
-   - volume number rdfs__domain 巻
-   - volume number rdf__type 
-   - volume number rdfs__subPropertyOf position
-   - volume number sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.1219334602355957,
-  "triples": [
-    "number of pages rdfs__range ",
-    "number of pages rdfs__domain \ucc45",
-    "number of pages rdf__type ",
-    "number of pages rdf__type ",
-    "number of pages sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "number of pages"
-}
-[Item 4]
-[Chunk Score: 3.1219] YAGO Concept: number of pages. Definition: The number of pages in the book.
-  [Knowledge Graph Triples]:
-   - number of pages rdfs__range 
-   - number of pages rdfs__domain 책
-   - number of pages rdf__type 
-   - number of pages rdf__type 
-   - number of pages sh__path 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.1219334602355957,
-  "triples": [
-    "number of employees rdfs__range quantitative value",
-    "number of employees rdfs__domain \ub2e8\uccb4",
-    "number of employees rdf__type ",
-    "number of employees sh__path "
-  ],
-  "source": "YAGO",
-  "entity": "number of employees"
-}
-[Item 5]
-[Chunk Score: 3.1219] YAGO Concept: number of employees. Definition: The number of employees in an organization e.g. business.
-  [Knowledge Graph Triples]:
-   - number of employees rdfs__range quantitative value
-   - number of employees rdfs__domain 단체
-   - number of employees rdf__type 
-   - number of employees sh__path 
-
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-The answer is 2.
-
-This makes sense because numbers are typically sequential, and after the first item or unit (in this case, "1"), comes the second one ("2"). This pattern continues indefinitely with each subsequent number being greater than its predecessor by exactly one. For example, if you have a list of items labeled as A, B, C, D, E, then 3 would come after 2 in such a sequence.
-
-In other words, when counting or listing items sequentially, the next item to appear is always the subsequent number, which follows the previous one by exactly one.
-==================================================
-==================================================
- QUERY: What comes after the number 1?
-==================================================
-
---- RETRIEVED CONTEXT (Top 0 Items) ---
-
-==================================================
- LLM ANSWER:
-==================================================
-The answer is: Two.
-
-This is because in numerical sequences, each subsequent digit represents a higher value or position. After the number "one", which occupies the first and most basic unit of quantity, comes "two", occupying the second place in counting. This progression continues with three, four, five, and so on, as we incrementally move through the natural numbers (YAGO: A set of all positive integers).
-==================================================
-==================================================
- QUERY: The emission spectrum of the doubly ionized lithium atom Li++ (Z = 3, A = 7) is identical to that of a hydrogen atom in which all the wavelengths are decreased/increased by a factor of what?
-==================================================
-
---- RETRIEVED CONTEXT (Top 0 Items) ---
-
-==================================================
- LLM ANSWER:
-==================================================
-The emission spectrum of the doubly ionized lithium atom Li++ (Z = 3, A = 7) is identical to that of a hydrogen atom in which all the wavelengths are decreased/increased by a factor of **1/9**.
-
-This is because when an electron jumps from one energy level to another in both cases, it emits or absorbs radiation with specific energies. The Rydberg formula for calculating these energies shows that they depend on Z^2/A and 1/n_f - 1/n_i (where n_f and n_i are the final and initial principal quantum numbers). Since Li++ has a nuclear charge of +3e, its energy levels will be scaled by a factor of 9 compared to hydrogen. However, since we're considering doubly ionized lithium with Z = 3, this scaling effect is exactly cancelled out when comparing it directly to hydrogen (Z=1), resulting in an identical emission spectrum but shifted by the same amount as if all wavelengths were decreased/increased by a factor of **1/9**.
-==================================================
-==================================================
- QUERY: Which major international airport in south-east England ranks as the 8th busiest airport in Europe and replaced Croydon Airport?
-==================================================
-
---- RETRIEVED CONTEXT (Top 2 Items) ---
-
-[Metadata Dump]
-{
-  "score": 3.5967864990234375,
-  "triples": [
-    "Europe Badminton Circuit rdfs__subClassOf \uc0ac\uac74",
-    "Europe Badminton Circuit rdf__type ",
-    "Europe Badminton Circuit rdf__type ",
-    "Europe Badminton Circuit rdf__type ",
-    "Europe Badminton Circuit rdf__type "
-  ],
-  "source": "YAGO",
-  "entity": "Europe Badminton Circuit"
-}
-[Item 1]
-[Chunk Score: 3.5968] YAGO Concept: Europe Badminton Circuit. Definition: بطولة كرة الريشة
-  [Knowledge Graph Triples]:
-   - Europe Badminton Circuit rdfs__subClassOf 사건
-   - Europe Badminton Circuit rdf__type 
-   - Europe Badminton Circuit rdf__type 
-   - Europe Badminton Circuit rdf__type 
-   - Europe Badminton Circuit rdf__type 
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 3.5967864990234375,
-  "triples": [
-    "WDF Europe Cup rdfs__subClassOf \uc0ac\uac74",
-    "WDF Europe Cup rdf__type ",
-    "WDF Europe Cup rdf__type ",
-    "WDF Europe Cup rdf__type ",
-    "WDF Europe Cup rdf__type "
-  ],
-  "source": "YAGO",
-  "entity": "WDF Europe Cup"
-}
-[Item 2]
-[Chunk Score: 3.5968] YAGO Concept: WDF Europe Cup. Definition: No definition.
-  [Knowledge Graph Triples]:
-   - WDF Europe Cup rdfs__subClassOf 사건
-   - WDF Europe Cup rdf__type 
-   - WDF Europe Cup rdf__type 
-   - WDF Europe Cup rdf__type 
-   - WDF Europe Cup rdf__type 
-
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-Heathrow Airport is the major international airport in south-east England that ranks as the 8th busiest airport in Europe and replaced Croydon Airport. This ranking can be attributed to its strategic location, serving a significant portion of air travel within Europe, which aligns with YAGO's definition of "Europe" as a geographical region encompassing various countries including those involved in international aviation.
-
-Heathrow's status as the 8th busiest airport is also reflective of its role in connecting London and other parts of England to major European cities. The fact that it replaced Croydon Airport underscores Heathrow's importance in modern air travel, having taken over operational duties from a predecessor facility.
-==================================================
-==================================================
- QUERY: Which major international airport in south-east England ranks as the 8th busiest airport in Europe and replaced Croydon Airport?
-==================================================
-
---- RETRIEVED CONTEXT (Top 5 Items) ---
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "international airport",
-  "id": "Q644371",
-  "score": 1.0,
-  "triples": []
-}
-[Item 1]
-[Chunk Score: 1.0000] Wikidata Entity: international airport (Q644371). Description: airport serving international destinations.
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "International Airport",
-  "id": "Q55614529",
-  "score": 1.0,
-  "triples": []
-}
-[Item 2]
-[Chunk Score: 1.0000] Wikidata Entity: International Airport (Q55614529). Description: 1985 film directed by Don Chaffey.
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "International Airport station",
-  "id": "Q60307711",
-  "score": 1.0,
-  "triples": []
-}
-[Item 3]
-[Chunk Score: 1.0000] Wikidata Entity: International Airport station (Q60307711). Description: station of Urumqi Metro.
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "South East England",
-  "id": "Q48015",
-  "score": 1.0,
-  "triples": []
-}
-[Item 4]
-[Chunk Score: 1.0000] Wikidata Entity: South East England (Q48015). Description: region of England.
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "South East England",
-  "id": "Q7567115",
-  "score": 1.0,
-  "triples": []
-}
-[Item 5]
-[Chunk Score: 1.0000] Wikidata Entity: South East England (Q7567115). Description: constituency of the European Parliament.
-
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-Heathrow Airport is the major international airport in south-east England that ranks as the 8th busiest airport in Europe and replaced Croydon Airport. This ranking can be attributed to its extensive network of flights connecting London with various destinations worldwide, aligning with YAGO's definition of an "airport serving international destinations."
-==================================================
-==================================================
- QUERY: Which major international airport in south-east England ranks as the 8th busiest airport in Europe and replaced Croydon Airport?
-==================================================
-
---- RETRIEVED CONTEXT (Top 0 Items) ---
-
-==================================================
- LLM ANSWER:
-==================================================
-Heathrow Airport is the correct answer. It's located in London, which falls under south-east England, making it a major international airport in that region.
-
-According to YAGO definitions, Heathrow Airport has been ranked as one of Europe's busiest airports for several years now (YAGO: "Europe" - A continent). In fact, its passenger traffic makes it the 8th busiest airport on the European mainland. 
-
-Additionally, Croydon Airport was a major international airfield in south-east England before World War II but ceased operations due to safety concerns and noise pollution issues. Heathrow replaced Croydon as London's primary commercial airport after the war.
-
-Therefore, considering its ranking among Europe's airports and historical significance of replacing another prominent one like Croydon, it is clear that Heathrow Airport fits this description perfectly.
-==================================================
-==================================================
- QUERY: What comes after the number 1?
+ QUERY: In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?
 ==================================================
 
 --- RETRIEVED CONTEXT (Top 3 Items) ---
@@ -739,106 +47,35 @@ Therefore, considering its ranking among Europe's airports and historical signif
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "magnesium",
-  "id": "Q660",
+  "entity": "Sergei Aleksandrovich Tokarev",
+  "id": "Q974421",
   "score": 1.0,
   "triples": [
-    "instance of: chemical element",
-    "subclass of: period 3",
-    "subclass of: alkaline earth metal",
-    "part of: alkaline earth metal",
-    "instance of: lithophile",
-    "part of: period 3",
-    "subclass of: simple substance"
+    "instance of: human"
   ]
 }
 [Item 1]
-[Chunk Score: 1.0000] Wikidata Entity: magnesium. Description: chemical element, symbol Mg and atomic number 12.
+[Chunk Score: 1.0000] Wikidata Entity: Sergei Aleksandrovich Tokarev. Description: Russian historian (1899-1985). Facts:  - instance of: human
   [Knowledge Graph Triples]:
-   - instance of: chemical element
-   - subclass of: period 3
-   - subclass of: alkaline earth metal
-   - part of: alkaline earth metal
-   - instance of: lithophile
-   - part of: period 3
-   - subclass of: simple substance
+   - instance of: human
 
 --------------------------------------------------
 
 [Metadata Dump]
 {
-  "source": "Wikidata",
-  "entity": "1",
-  "id": "Q208994",
-  "score": 0.5,
-  "triples": [
-    "part of: The Beatles' albums in chronological order",
-    "part of: The Beatles compilation albums discography",
-    "instance of: album"
-  ]
-}
-[Item 2]
-[Chunk Score: 0.5000] Wikidata Entity: 1. Description: 2000 compilation album by The Beatles.
-  [Knowledge Graph Triples]:
-   - part of: The Beatles' albums in chronological order
-   - part of: The Beatles compilation albums discography
-   - instance of: album
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "1999",
-  "id": "Q2091",
-  "score": 0.3333333333333333,
-  "triples": [
-    "part of: Gregorian calendar",
-    "part of: 1990s",
-    "instance of: common year starting and ending on Friday",
-    "instance of: calendar year"
-  ]
-}
-[Item 3]
-[Chunk Score: 0.3333] Wikidata Entity: 1999. Description: year.
-  [Knowledge Graph Triples]:
-   - part of: Gregorian calendar
-   - part of: 1990s
-   - instance of: common year starting and ending on Friday
-   - instance of: calendar year
-
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-The answer is "2".
-
-This makes sense because numbers are a fundamental concept in mathematics, where each whole number represents a quantity or amount. After the first unit (1), comes two units, which we represent as the digit "2". This sequence continues indefinitely with 3, 4, and so on.
-
-In other words, when counting from one item to another, after reaching the initial point of unity, you naturally move onto representing a quantity that is double or twice in value.
-==================================================
-==================================================
- QUERY: What comes after the number 1?
-==================================================
-
---- RETRIEVED CONTEXT (Top 3 Items) ---
-
-[Metadata Dump]
-{
-  "score": 0.6781681776046753,
+  "score": 0.7898368835449219,
   "local_context": [
     {
       "entity": null,
       "relationship": null,
       "source": "Local Document",
       "target": null,
-      "text": "In mathematics"
+      "text": "Sergei Aleksandrovich Tokarev was a professor."
     }
   ]
 }
-[Item 1]
-[Chunk Score: 0.6782] In mathematics
+[Item 2]
+[Chunk Score: 0.7898] Sergei Aleksandrovich Tokarev was a professor.
   [Local Connections]:
    - None None None
 
@@ -846,27 +83,7 @@ In other words, when counting from one item to another, after reaching the initi
 
 [Metadata Dump]
 {
-  "score": 0.6781681776046753,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "In mathematics"
-    }
-  ]
-}
-[Item 2]
-[Chunk Score: 0.6782] In mathematics
-  [Local Connections]:
-   - None None None
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 0.6781681776046753,
+  "score": 0.6424951553344727,
   "local_context": [
     {
       "entity": null,
@@ -878,7 +95,7 @@ In other words, when counting from one item to another, after reaching the initi
   ]
 }
 [Item 3]
-[Chunk Score: 0.6782] In mathematics
+[Chunk Score: 0.6425] In mathematics
   [Local Connections]:
    - None None None
 
@@ -887,80 +104,7 @@ In other words, when counting from one item to another, after reaching the initi
 ==================================================
  LLM ANSWER:
 ==================================================
-2.
+Unfortunately, the provided context does not mention the university where Sergei Aleksandrovich Tokarev worked as a professor. However, based on my global knowledge, I can suggest that it might be possible to find this information through external sources.
 
-The answer is straightforward because in numerical sequences, each subsequent digit increases by one. Therefore, following the number 1 would naturally be the next integer, which is 2. This concept applies universally across various mathematical contexts and operations.
-==================================================
-==================================================
- QUERY: Which major international airport in south-east England ranks as the 8th busiest airport in Europe and replaced Croydon Airport?
-==================================================
-
---- RETRIEVED CONTEXT (Top 3 Items) ---
-
-[Metadata Dump]
-{
-  "score": 0.6082463264465332,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "In mathematics"
-    }
-  ]
-}
-[Item 1]
-[Chunk Score: 0.6082] In mathematics
-  [Local Connections]:
-   - None None None
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 0.6082463264465332,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "In mathematics"
-    }
-  ]
-}
-[Item 2]
-[Chunk Score: 0.6082] In mathematics
-  [Local Connections]:
-   - None None None
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 0.6082463264465332,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "In mathematics"
-    }
-  ]
-}
-[Item 3]
-[Chunk Score: 0.6082] In mathematics
-  [Local Connections]:
-   - None None None
-
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-Heathrow Airport. 
-
-The information provided does not directly relate to Heathrow, but based on global knowledge, it is known that London's Heathrow airport ranks as the 8th busiest in Europe and has replaced Croydon Airport which was a major international airport located near South Croydon in south-east England until its closure in 1959.
+If you provide more details or context about the specific university in question (e.g., its name), I would be happy to try and help further!
 ==================================================

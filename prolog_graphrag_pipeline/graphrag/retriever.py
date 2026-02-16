@@ -85,16 +85,7 @@ class CleanTextRetriever(HybridRetriever):
         return result
 
 
-def create_yago_index(driver):
-    print("Ensuring YAGO Fulltext Index exists...")
-    try:
-        driver.execute_query("""
-            CREATE FULLTEXT INDEX yagoNameIndex IF NOT EXISTS 
-            FOR (n:Resource) ON EACH [n.rdfs__label]
-        """, database_="neo4j")
-        print("YAGO index check complete.")
-    except Exception as e:
-        print(f"Warning: Could not create YAGO index: {e}")
+# YAGO index creation removed — YAGO is no longer used as a knowledge source.
 
 def create_retriever(driver, embedder):
     if not check_db_health(driver):
@@ -104,8 +95,7 @@ def create_retriever(driver, embedder):
     driver.execute_query("DROP INDEX documentsVectorIndex IF EXISTS")
     driver.execute_query("DROP INDEX documentsFulltextIndex IF EXISTS")
     
-    # 3. YAGO Index creation (Static, do not drop)
-    create_yago_index(driver)
+    # 3. (YAGO index removed — no longer needed)
 
     # 4. Recreate Phase
     create_indexes(driver)
@@ -135,7 +125,7 @@ def create_retriever(driver, embedder):
             embedder=embedder
         )
     elif RETRIEVER.value == "VectorCypherRetriever":
-        return FallbackRetriever(
+        return EnhancedRetriever(
             driver=driver,
             index_name="documentsVectorIndex",
             retrieval_query=RETRIEVAL_QUERY,
@@ -164,7 +154,7 @@ class SimpleResult:
         self.items = items
         self.metadata = {}
 
-class FallbackRetriever(VectorCypherRetriever):
+class EnhancedRetriever(VectorCypherRetriever):
     def __init__(self, driver, index_name, retrieval_query, embedder, llm=None):
         super().__init__(driver=driver, index_name=index_name, retrieval_query=retrieval_query, embedder=embedder)
         self.driver = driver
@@ -298,6 +288,8 @@ class FallbackRetriever(VectorCypherRetriever):
 
         # 2. Local Vector Search (Local Documents)
         local_items = []
+        MIN_SCORE = 0.4  # Minimum relevance threshold to filter noise
+        MIN_CONTENT_LENGTH = 20  # Reject chunks with very short content
         try:
             # We want to use the original query context for vector search
             local_result = super().search(query_text=query_text, top_k=top_k, **kwargs)
@@ -322,8 +314,27 @@ class FallbackRetriever(VectorCypherRetriever):
                                item.content = match.group(1)
                         except:
                             pass
-                local_items = local_result.items
-                print(f"DEBUG: Local Vector Search returned {len(local_items)} chunks.")
+                
+                # Filter out low-quality chunks
+                filtered_items = []
+                for item in local_result.items:
+                    score = item.metadata.get('score', 0.0) if item.metadata else 0.0
+                    content = (item.content or "").strip()
+                    
+                    # Skip chunks with scores below threshold
+                    if score < MIN_SCORE:
+                        print(f"DEBUG: Filtered out low-score chunk ({score:.4f}): '{content[:50]}...'")
+                        continue
+                    
+                    # Skip chunks with very short content (likely noise like 'In mathematics')
+                    if len(content) < MIN_CONTENT_LENGTH:
+                        print(f"DEBUG: Filtered out short chunk ({len(content)} chars): '{content}'")
+                        continue
+                    
+                    filtered_items.append(item)
+                
+                local_items = filtered_items
+                print(f"DEBUG: Local Vector Search returned {len(local_items)} chunks (after filtering).")
 
         except Exception as e:
             print(f"DEBUG: Main retriever failed: {e}")
@@ -364,8 +375,8 @@ class FallbackRetriever(VectorCypherRetriever):
         return RetrieverResult(items=unique_items[:final_top_k], metadata={})
 
 def generate(llm, retriever, query) -> dict:
-    # If the retriever is our FallbackRetriever, inject the LLM
-    if isinstance(retriever, FallbackRetriever):
+    # If the retriever is our EnhancedRetriever, inject the LLM
+    if isinstance(retriever, EnhancedRetriever):
         retriever.llm = llm
 
     rag_template = RagTemplate(template=GRAPHRAG_TEMPLATE, expected_inputs=['query_text', 'context'])
@@ -431,15 +442,15 @@ def generate(llm, retriever, query) -> dict:
                 for lc in local_ctx:
                     enriched_content += f"   - {lc.get('entity')} {lc.get('relationship')} {lc.get('target')}\n"
             
-            # Check for direct YAGO triples (from FallbackRetriever/VectorCypherRetriever)
-            yago_triples = metadata.get('triples', [])
-            if yago_triples:
+            # Check for knowledge graph triples (from Wikidata/VectorCypherRetriever)
+            kg_triples = metadata.get('triples', [])
+            if kg_triples:
                  enriched_content += "  [Knowledge Graph Triples]:\n"
-                 for t in yago_triples:
+                 for t in kg_triples:
                      enriched_content += f"   - {t}\n"
 
             if global_ctx:
-                enriched_content += "  [Global Knowledge (YAGO)]:\n"
+                enriched_content += "  [Global Knowledge]:\n"
                 for gc in global_ctx:
                      enriched_content += f"   - {gc.get('concept')}: {gc.get('definition')} (Score: {gc.get('score'):.2f})\n"
 

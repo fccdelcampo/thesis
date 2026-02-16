@@ -30,11 +30,12 @@ USER QUESTION: {user_question}
 
 ---
 ### INSTRUCTION:
-Provide a final, coherent response to the User Question.
-1. Synthesize: Use the Logical Evidence and Context to explain the answer.
-2. Do Not List: Do NOT simply list the retrieved facts. Integrate them into paragraphs.
-3. Tone: Ensure the tone is natural and free of technical jargon.
-     """
+Provide a direct, confident answer to the User Question.
+1. Answer Naturally: Respond as if you already know the answer. Do NOT mention "the context", "the provided information", or "based on the evidence".
+2. Be Direct: Lead with the answer, then elaborate if helpful.
+3. Never Cite Sources: Do NOT reference where you got the information from (no "according to...", "the context states...", "YAGO defines...", etc.).
+4. Smooth Tone: Write as a knowledgeable person would naturally explain something in conversation.
+    """
      
 
 print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag="q"), "\n")

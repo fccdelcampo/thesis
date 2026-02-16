@@ -6,8 +6,7 @@ NEO4J_USERNAME = "neo4j"
 NEO4J_PASSWORD = "graphrag"
 
 # Global Knowledge Source Configuration
-# Options: "YAGO" (Local Neo4j), "WIKIDATA" (Remote API)
-GLOBAL_KB = "WIKIDATA" 
+GLOBAL_KB = "WIKIDATA"
 
 
 class RETRIEVER_OPTIONS(Enum):
@@ -99,20 +98,8 @@ FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown,
 
 RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
 
-# Optimized Query:
-# 1. Finds local document chunks via vector/fulltext search (handled by Retriever class, passed as `node` here if using HybridRetriever, but we are defining the pattern for HybridCypherRetriever)
-# WAIT: HybridCypherRetriever expects a query that takes `node` (the vector result) and traverses.
-# But we want to ALSO retrieve YAGO nodes even if `node` is null? 
-# HybridCypherRetriever DOES NOT support "Orphan" retrieval easily because it starts from the vector match `node`.
-# 
-# STRATEGY CHANGE: We will specificy a query that:
-# 1. Takes the vector-matched local node and finds its connections.
-# 2. SEPARATELY, we will perform a fulltext lookup on YAGO index using the user's query text (passed as $query_text).
-# 3. We UNION them.
-
-# Global Knowledge Source Configuration
-# Options: "WIKIDATA" (Remote API)
-GLOBAL_KB = "WIKIDATA" 
+# Retrieval query for HybridCypherRetriever:
+# Takes the vector-matched local node and finds its local connections.
 
 
 RETRIEVAL_QUERY = '''
@@ -133,12 +120,9 @@ RETURN
     score,
     {
         local_context: local_context,
-        // global_context removed (YAGO deprecated)
         score: score
     } as metadata
 '''
-
-# Optimized YAGO Query Removed.
 
 # Additional instructions if ever needed.
 # 1. Read the Context carefully.
@@ -161,18 +145,19 @@ RETURN
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are an expert Educational AI Assistant. Your goal is to answer the user's question accurately by SYNTHESIZING the provided Context.
+You are an expert Educational AI Assistant. Answer the user's question accurately using the provided Context.
 
 ### STRICT INSTRUCTIONS
-1. **Answer the Question Directly**: Do NOT start by listing definitions. Start with the answer.
-2. **Synthesize, Don't List**: Use the definitions in the Context to explain *why* your answer is correct. Do not output a bulleted list of "Concept: Definition".
-3. **Use Global Knowledge as Authority**: If Wikidata/Global Knowledge definitions are present, use them to clarify terms, but integrate them naturally into sentences.
+1. **Answer Directly**: Start with the answer. Do NOT begin with definitions or explanations of how you found it.
+2. **Sound Natural**: Write as if you already know the answer. NEVER say "the context states", "according to the provided information", "based on the evidence", or similar phrases.
+3. **Use Context Silently**: The Context helps you be accurate, but the user should not know you relied on it. Integrate facts naturally.
 4. **MMLU/Multiple Choice**: If options are provided (A, B, C, D), select the single best one and explain why.
+5. **Never Cite Sources**: Do NOT mention Wikidata, YAGO, documents, or any source by name.
 
 ### Question:
 {query_text}
 
-### Context (Local Documents & Global Knowledge):
+### Context (for your reference only — do NOT mention it):
 {context}
 
 ### Answer:

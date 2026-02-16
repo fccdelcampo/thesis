@@ -18,8 +18,7 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_community.llms import Ollama
-from langchain_community.embeddings import OllamaEmbeddings
+from langchain_ollama import ChatOllama, OllamaEmbeddings
 
 def load_documents():
     """Load all PDFs from the unprocessed_documents directory."""
@@ -59,8 +58,8 @@ def generate_synthetic_testset(test_size: int = 10):
     from ragas.embeddings import LangchainEmbeddingsWrapper
     
     print("Initializing LLMs...")
-    generator_llm = LangchainLLMWrapper(Ollama(model="llama3.1:8b-instruct-q4_K_M"))
-    critic_llm = LangchainLLMWrapper(Ollama(model="llama3.1:8b-instruct-q4_K_M"))
+    generator_llm = LangchainLLMWrapper(ChatOllama(model="llama3.1:8b-instruct-q4_K_M"))
+    critic_llm = LangchainLLMWrapper(ChatOllama(model="llama3.1:8b-instruct-q4_K_M"))
     embeddings = LangchainEmbeddingsWrapper(OllamaEmbeddings(model="nomic-embed-text"))
     
     # 3. Create TestsetGenerator

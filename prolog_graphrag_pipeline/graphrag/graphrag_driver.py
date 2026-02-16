@@ -262,7 +262,6 @@ async def perform_tests():
 def clear_local_data():
     """
     Deletes all Local Document and Chunk nodes from the database.
-    Preserves Global Knowledge (YAGO) nodes.
     """
     print("WARNING: Deleting all Local Documents and Chunks...")
     with neo4j_driver.session() as session:
