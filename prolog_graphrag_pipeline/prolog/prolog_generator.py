@@ -80,7 +80,19 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             if not answer:
                 print(f"Iteration {i} | Error: LLM returned None.")
                 continue
-            database, query = capture_db_and_query(answer['text_answer'])["database"], capture_db_and_query(answer['text_answer'])["query"]
+            
+            db_query = capture_db_and_query(answer['text_answer'])
+            database = db_query["database"]
+            query = db_query["query"].strip()
+            
+            # VALIDATION: Ensure Query is not just a number
+            if re.match(r"^\d+\.?$", query):
+                 raise ValueError(f"Invalid Prolog Query: '{query}'. The query must be a Prolog predicate (e.g., 'successor(1, X).'), not a number.")
+            
+            # VALIDATION: Ensure Query ends with a period
+            if not query.endswith('.'):
+                query += "."
+
             print(f"Iteration {i} | Extracted Database:\n{database}\n")
             print(f"Iteration {i} | Extracted Query:\n{query}\n")
             janus.query_once("unload_file(user)")
@@ -89,13 +101,18 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             most_recent_error = None
             print(f"Iteration {i} | Prolog code generation success")
             return database, query
-        # except Exception as e:
-        #     print(f"Iteration {i} | Error during prompt generation or model interaction: {e}")
-        #     continue
+        except ValueError as e:
+            print(f"Iteration {i} | Validation Error: {e}")
+            most_recent_error = f"{e} Ensure the query is a valid Prolog predicate."
+            continue
         except janus.PrologError as e:
             print(f"Iteration {i} | Prolog Error: {e}")
             most_recent_error = f"{e} Ensure all Prolog syntax rules are followed. Enclose the final database within <database> and </database> tags, and the query within <query> and </query> tags."
             print(most_recent_error)
+            continue
+        except Exception as e:
+            print(f"Iteration {i} | General Error: {e}")
+            most_recent_error = f"Error: {e}. Please ensure valid Prolog syntax."
             continue
         
     if most_recent_error:

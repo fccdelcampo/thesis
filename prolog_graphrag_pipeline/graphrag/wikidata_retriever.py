@@ -146,7 +146,9 @@ class WikidataRetriever:
             triples = self.get_entity_triples(eid)
             
             # 3. Format as Context Item (Clean, no QID in text)
-            content = f"Wikidata Entity: {label}. Description: {desc}."
+            # CRITICAL: Include triples in content so LLM sees them!
+            triples_text = "\n".join([f"  - {t}" for t in triples])
+            content = f"Wikidata Entity: {label}.\nDescription: {desc}.\nFacts:\n{triples_text}"
             
             metadata = {
                 "source": "Wikidata",

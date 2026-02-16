@@ -32,7 +32,7 @@ USER QUESTION: {user_question}
 ### INSTRUCTION:
 Provide a final, coherent response to the User Question.
 1. Synthesize: Use the Logical Evidence and Context to explain the answer.
-2. Do Not List: Do NOT simply list the retrieved facts or YAGO definitions. Integrate them into paragraphs.
+2. Do Not List: Do NOT simply list the retrieved facts. Integrate them into paragraphs.
 3. Tone: Ensure the tone is natural and free of technical jargon.
      """
      

@@ -110,6 +110,11 @@ RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
 # 2. SEPARATELY, we will perform a fulltext lookup on YAGO index using the user's query text (passed as $query_text).
 # 3. We UNION them.
 
+# Global Knowledge Source Configuration
+# Options: "WIKIDATA" (Remote API)
+GLOBAL_KB = "WIKIDATA" 
+
+
 RETRIEVAL_QUERY = '''
 // Part A: Local Document Retrieval (Vector/Keyword matches passed as `node`)
 WITH node, score
@@ -123,49 +128,18 @@ WITH node, score, collect(distinct {
     text: node.text
 }) as local_context
 
-// Part B: Global Knowledge Retrieval (YAGO) independent of Local Docs
-CALL db.index.fulltext.queryNodes("yagoNameIndex", $query_text) YIELD node as yago_node, score as y_score
-WHERE y_score > 0.5
-WITH node, score, local_context, collect(distinct {
-    source: "YAGO Knowledge Graph",
-    concept: yago_node.rdfs__label,
-    definition: COALESCE(yago_node.rdfs__comment, "No definition available."),
-    score: y_score
-})[..3] as global_context
-
 RETURN 
     node.text as text,
     score,
     {
         local_context: local_context,
-        global_context: global_context,
+        // global_context removed (YAGO deprecated)
         score: score
     } as metadata
 '''
 
-# Fallback is no longer strictly needed if RETRIEVAL_QUERY handles it, but we keep it for safety.
-# Optimized YAGO Query that retrieves Triples
-YAGO_FALLBACK_QUERY = '''
-CALL db.index.fulltext.queryNodes("yagoNameIndex", $query_text) YIELD node, score
-WHERE score > 1.0 
-WITH node, score
-OPTIONAL MATCH (node)-[r]-(neighbor)
-WHERE NOT neighbor:Chunk AND neighbor <> node
-WITH node, score, collect(
-  node.rdfs__label + " " + type(r) + " " + COALESCE(neighbor.rdfs__label, "")
-)[0..5] as triples
+# Optimized YAGO Query Removed.
 
-RETURN 
-    "YAGO Concept: " + node.rdfs__label + ". Definition: " + COALESCE(node.rdfs__comment, "No definition.") as text,
-    score,
-    {
-        source: "YAGO",
-        entity: node.rdfs__label,
-        score: score,
-        triples: triples
-    } as metadata
-LIMIT 5
-'''
 # Additional instructions if ever needed.
 # 1. Read the Context carefully.
 # 2. Identify which specific sentence supports your answer.
@@ -192,7 +166,7 @@ You are an expert Educational AI Assistant. Your goal is to answer the user's qu
 ### STRICT INSTRUCTIONS
 1. **Answer the Question Directly**: Do NOT start by listing definitions. Start with the answer.
 2. **Synthesize, Don't List**: Use the definitions in the Context to explain *why* your answer is correct. Do not output a bulleted list of "Concept: Definition".
-3. **Use YAGO as Authority**: If YAGO definitions are present, use them to clarify terms, but integrate them naturally into sentences.
+3. **Use Global Knowledge as Authority**: If Wikidata/Global Knowledge definitions are present, use them to clarify terms, but integrate them naturally into sentences.
 4. **MMLU/Multiple Choice**: If options are provided (A, B, C, D), select the single best one and explain why.
 
 ### Question:

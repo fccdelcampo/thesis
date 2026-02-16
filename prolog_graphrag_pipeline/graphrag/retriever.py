@@ -1,4 +1,5 @@
-from .config import RETRIEVAL_QUERY, RETRIEVER, YAGO_FALLBACK_QUERY
+from .config import RETRIEVAL_QUERY, RETRIEVER
+from typing import List, Any
 # CHANGE 1: Use the standard HybridRetriever (not HybridCypherRetriever)
 from neo4j_graphrag.retrievers import HybridRetriever
 from neo4j_graphrag.retrievers import HybridCypherRetriever
@@ -236,49 +237,82 @@ class FallbackRetriever(VectorCypherRetriever):
             keywords = [word for word in query.replace('?','').split() if word.lower() not in stop_words]
             return " ".join(keywords) if keywords else query
 
-    def search(self, query_text, top_k=5, **kwargs):
-        # 0. Expand Query for YAGO Search
-        # If we have an LLM, we use it to generate better search terms. 
-        # Otherwise, we fallback to simple stopword removal.
-        
-        from .config import GLOBAL_KB
-        
-        if self.llm and GLOBAL_KB == "YAGO":
-            # For YAGO, we want specific concepts (e.g. "Number Theory")
-            keyword_query = self.expand_query(query_text)
-        else:
-            # For Wikidata (per user request), we want to avoid "splitting to Lucene" 
-            # and just search for the keywords in the query.
-            # Also fallback if no LLM.
+    def generate_wikidata_queries(self, query: str) -> List[str]:
+        """
+        Uses LLM to extract specific entities/concepts with minimal context.
+        Avoids broad topic expansion (e.g. 'Number Theory') in favor of precise entity targeting (e.g. '1 (number)').
+        """
+        if not self.llm:
+            return []
             
-            stop_words = {'what', 'is', 'the', 'capital', 'of', 'who', 'where', 'when', 'how', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'number', 'does', 'did', 'come', 'comes', 'after', 'which', 'ranks', 'as', 'busiest', 'replaced'}
-            keywords = [word for word in query_text.replace('?','').split() if word.lower() not in stop_words]
-            keyword_query = " ".join(keywords) if keywords else query_text
-            
-        print(f"DEBUG: Original Query: '{query_text}' | Generated Query: '{keyword_query}'")
-
-        if self.retrieval_query == YAGO_FALLBACK_QUERY:
-             print(f"DEBUG: Executing YAGO Query with: '{keyword_query}'")
+        prompt = f"""
+        ### Task
+        Extract the **Main Entities** from the user's query for a Wikidata search.
         
-        # 1. Try Main Retriever (VectorCypherRetriever logic via super)
+        ### Rules
+        1. **Specific Entities**: Extract the names of people, places, objects, or specific concepts mentioned.
+        2. **Disambiguate if needed**: If an entity is a common word or number (e.g., "1", "Apple"), include its **immediate context** from the query to verify what it is (e.g., "number 1", "Apple company").
+        3. **No Abstract Topics**: Do NOT infer broad academic fields like "Number Theory" or "Mathematics" unless explicitly mentioned.
+        4. **No Synonyms**: Use the exact words from the query where possible.
+        
+        ### User Query
+        "{query}"
+        
+        ### Output Format (JSON)
+        {{
+            "queries": ["ENTITY_1", "ENTITY_2 (CONTEXT)"]
+        }}
+        """
         try:
-            # VectorCypherRetriever uses query_text for embedding + cypher param
-            # We want to stick to query_text for vector search part to be semantic
-            result = super().search(query_text=query_text, top_k=top_k, **kwargs)
+            response_text = self.llm.invoke(prompt).content.strip()
+            # Clean possible markdown field
+            if "```json" in response_text:
+                response_text = response_text.split("```json")[1].split("```")[0].strip()
+            elif "```" in response_text:
+                response_text = response_text.split("```")[1].split("```")[0].strip()
+                
+            import json
+            data = json.loads(response_text)
+            return data.get("queries", [])
+        except Exception as e:
+            print(f"DEBUG: Smart selection failed: {e}")
+            return []
+
+    def search(self, query_text, top_k=5, **kwargs):
+        # 1. Smart Entity Extraction & Wikidata Search (Global Knowledge)
+        wikidata_items = []
+        if self.llm:
+            smart_terms = self.generate_wikidata_queries(query_text)
+            if smart_terms:
+                print(f"DEBUG: Triggering Wikidata Search for: {smart_terms}")
+                if not hasattr(self, 'wikidata_retriever'):
+                     from .wikidata_retriever import WikidataRetriever
+                     self.wikidata_retriever = WikidataRetriever()
+                
+                # Use " OR " to search for any of the terms
+                wd_search_query = " OR ".join([f'"{t}"' for t in smart_terms])
+                wd_result = self.wikidata_retriever.search(wd_search_query)
+                if wd_result and wd_result.items:
+                    wikidata_items = wd_result.items
+                    print(f"DEBUG: Wikidata returned {len(wikidata_items)} items.")
+
+        # 2. Local Vector Search (Local Documents)
+        local_items = []
+        try:
+            # We want to use the original query context for vector search
+            local_result = super().search(query_text=query_text, top_k=top_k, **kwargs)
             
             # Post-process results to clean content and fix scores
-            if result and result.items:
-                for item in result.items:
+            if local_result and local_result.items:
+                for item in local_result.items:
                     # Fix Content: Unwrap if it is a Neo4j Record string representation
-                    # Config returns `local_context` in metadata, which contains the clean text.
                     if item.metadata and 'local_context' in item.metadata:
                         local_ctx = item.metadata['local_context']
                         if local_ctx and isinstance(local_ctx, list) and len(local_ctx) > 0:
-                            # Replace with the first chunk's text
                             clean_text = local_ctx[0].get('text')
                             if clean_text:
                                 item.content = clean_text
-
+                                
                     # If metadata doesn't have it, try regex fallback
                     elif item.content and "<Record" in str(item.content):
                         try:
@@ -288,76 +322,46 @@ class FallbackRetriever(VectorCypherRetriever):
                                item.content = match.group(1)
                         except:
                             pass
-                            
-                    # Fix Score: Ensure top-level metadata has score
-                    if item.metadata and 'score' in item.metadata:
-                         pass # Score is already there, nothing to do unless we want to move it to item.score (if supported)
+                local_items = local_result.items
+                print(f"DEBUG: Local Vector Search returned {len(local_items)} chunks.")
+
         except Exception as e:
             print(f"DEBUG: Main retriever failed: {e}")
-            result = None
             
-        # 2. Check if successful
-        if result and result.items and len(result.items) > 0:
-            return result
-            
-        # 3. Fallback to YAGO
-        # 3. Fallback to Global KB (YAGO or WIKIDATA)
-        print("DEBUG: 0 Chunks encountered. Executing Global Fallback...")
+        # 3. Merge and Rerank
+        # We prioritize Wikidata Exact Matches (Score ~1.0) but also want Semantic Context from Local.
+        # We will interleave or just sort by score?
+        # Given "In mathematics" might have high semantic similarity but low relevance to "Heathrow", result merging is key.
         
-        from .config import GLOBAL_KB
-        if GLOBAL_KB == "WIKIDATA":
-             print("DEBUG: Using Wikidata as Global KB.")
-             if not hasattr(self, 'wikidata_retriever'):
-                 from .wikidata_retriever import WikidataRetriever
-                 self.wikidata_retriever = WikidataRetriever()
-             
-             # Use the expanded query or original? Wikidata search is often better with entities.
-             # self.search_entities uses the raw string.
-             # logic in WikidataRetriever.search uses whatever is passed.
-             # We should probably pass the ORIGINAL query logic, or the expanded one?
-             # Wikidata Search API ("wbsearchentities") works best with keywords/names, not full questions.
-             # So using `keyword_query` (which has stopwords removed or LLM expansion) is better.
-             return self.wikidata_retriever.search(keyword_query)
-
-        if not self.driver:
-            print("ERROR: No driver found on retriever for fallback.")
-            return RetrieverResult(items=[], metadata={})
-
-        try:
-            with self.driver.session() as session:
-                # 1. Try Exact Phrase Match first (High Precision)
-                print(f"DEBUG: Trying YAGO Phrase Query: '{keyword_query}'")
-                records = session.run(YAGO_FALLBACK_QUERY, query_text=keyword_query)
-                items = [RetrieverResultItem(content=r['text'], metadata=r['metadata']) for r in records]
+        # Combine lists
+        all_items = wikidata_items + local_items
+        
+        # Sort descending by score
+        # Ensure every item has a score
+        for item in all_items:
+            if 'score' not in item.metadata:
+                item.metadata['score'] = 0.0
                 
-                # 2. If no results, try unquoted Concept Match (High Recall)
-                if not items and '"' in keyword_query:
-                    # Remove quotes but enforce AND for multi-word concepts to avoid generic matching
-                    # e.g., "Number Theory" -> (Number AND Theory)
-                    import re
-                    concepts = re.findall(r'"(.*?)"', keyword_query)
-                    if concepts:
-                        relaxed_parts = []
-                        for c in concepts:
-                            # Split by space and join with AND
-                            parts = c.split()
-                            if len(parts) > 1:
-                                relaxed_parts.append(f"({' AND '.join(parts)})")
-                            else:
-                                relaxed_parts.append(c)
-                        relaxed_query = " OR ".join(relaxed_parts)
-                    else:
-                         relaxed_query = keyword_query.replace('"', '')
-
-                    print(f"DEBUG: No phrase matches. Trying Relaxed Query: '{relaxed_query}'")
-                    records = session.run(YAGO_FALLBACK_QUERY, query_text=relaxed_query)
-                    items = [RetrieverResultItem(content=r['text'], metadata=r['metadata']) for r in records]
-
-                print(f"DEBUG: YAGO Fallback found {len(items)} items.")
-                return RetrieverResult(items=items, metadata={})
-        except Exception as e:
-            print(f"DEBUG: YAGO Fallback error: {e}")
-            return RetrieverResult(items=[], metadata={})
+        # Sort by score descending
+        all_items.sort(key=lambda x: x.metadata.get('score', 0.0), reverse=True)
+        
+        # Deduplication (by content or ID?) - simplistic for now
+        seen_content = set()
+        unique_items = []
+        for item in all_items:
+            # Use a snippet of content as signature
+            sig = item.content[:50]
+            if sig not in seen_content:
+                seen_content.add(sig)
+                unique_items.append(item)
+        
+        print(f"DEBUG: Merged Result Count: {len(unique_items)}")
+        
+        # Return combined results. We increase top_k slightly to handle the mix.
+        # If we have BOTH local and global, we want to show both.
+        final_top_k = top_k * 2 if (wikidata_items and local_items) else top_k
+        
+        return RetrieverResult(items=unique_items[:final_top_k], metadata={})
 
 def generate(llm, retriever, query) -> dict:
     # If the retriever is our FallbackRetriever, inject the LLM
