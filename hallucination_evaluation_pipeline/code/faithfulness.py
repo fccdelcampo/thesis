@@ -149,11 +149,6 @@ def main():
     test_cases = load_test_cases()
     print(f"Loaded {len(test_cases)} test cases for Faithfulness.")
     
-    # Since we can't easily run all pipelines without circular imports or heavy setup in this snip,
-    # We will iterate and print for now, or assume we are called by main_driver which handles imports?
-    # No, main_driver calls this.main().
-    # So this script is responsible for driving the test.
-    
     for i, test_case in enumerate(tqdm(test_cases)):
         run_test_case(test_case, i)
         # pass
