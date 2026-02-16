@@ -5,11 +5,16 @@ NEO4J_URI = "neo4j://127.0.0.1:7687"
 NEO4J_USERNAME = "neo4j"
 NEO4J_PASSWORD = "graphrag"
 
+# Global Knowledge Source Configuration
+# Options: "YAGO" (Local Neo4j), "WIKIDATA" (Remote API)
+GLOBAL_KB = "WIKIDATA" 
+
+
 class RETRIEVER_OPTIONS(Enum):
   HybridCypherRetriever = "HybridCypherRetriever"
   HybridRetriever = "HybridRetriever"
+  VectorCypherRetriever = "VectorCypherRetriever"
   
-
 
 class SCHEMA_TYPE(Enum):
   STATIC = "Static Schema"
@@ -92,7 +97,7 @@ IDENTIFY THREE TYPES OF LOGIC:
 FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble.
 '''
 
-RETRIEVER = RETRIEVER_OPTIONS.HybridCypherRetriever
+RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
 
 # Optimized Query:
 # 1. Finds local document chunks via vector/fulltext search (handled by Retriever class, passed as `node` here if using HybridRetriever, but we are defining the pattern for HybridCypherRetriever)
@@ -139,16 +144,25 @@ RETURN
 '''
 
 # Fallback is no longer strictly needed if RETRIEVAL_QUERY handles it, but we keep it for safety.
+# Optimized YAGO Query that retrieves Triples
 YAGO_FALLBACK_QUERY = '''
 CALL db.index.fulltext.queryNodes("yagoNameIndex", $query_text) YIELD node, score
-WHERE score > 0.5
+WHERE score > 1.0 
+WITH node, score
+OPTIONAL MATCH (node)-[r]-(neighbor)
+WHERE NOT neighbor:Chunk AND neighbor <> node
+WITH node, score, collect(
+  node.rdfs__label + " " + type(r) + " " + COALESCE(neighbor.rdfs__label, "")
+)[0..5] as triples
+
 RETURN 
     "YAGO Concept: " + node.rdfs__label + ". Definition: " + COALESCE(node.rdfs__comment, "No definition.") as text,
     score,
     {
         source: "YAGO",
         entity: node.rdfs__label,
-        score: score
+        score: score,
+        triples: triples
     } as metadata
 LIMIT 5
 '''

@@ -2,6 +2,7 @@ from .config import RETRIEVAL_QUERY, RETRIEVER, YAGO_FALLBACK_QUERY
 # CHANGE 1: Use the standard HybridRetriever (not HybridCypherRetriever)
 from neo4j_graphrag.retrievers import HybridRetriever
 from neo4j_graphrag.retrievers import HybridCypherRetriever
+from neo4j_graphrag.retrievers import VectorCypherRetriever
 import time
 from neo4j.exceptions import ServiceUnavailable, AuthError
 from neo4j_graphrag.generation import GraphRAG
@@ -132,6 +133,13 @@ def create_retriever(driver, embedder):
             retrieval_query=RETRIEVAL_QUERY,
             embedder=embedder
         )
+    elif RETRIEVER.value == "VectorCypherRetriever":
+        return FallbackRetriever(
+            driver=driver,
+            index_name="documentsVectorIndex",
+            retrieval_query=RETRIEVAL_QUERY,
+            embedder=embedder
+        )
     else:
         raise ValueError(f"Retriever {RETRIEVER.name} is invalid.")
     
@@ -155,11 +163,10 @@ class SimpleResult:
         self.items = items
         self.metadata = {}
 
-class FallbackRetriever(Retriever):
-    def __init__(self, main_retriever, llm=None):
-        super().__init__(driver=getattr(main_retriever, 'driver', None)) # Base init might expect driver
-        self.main = main_retriever
-        self.driver = getattr(main_retriever, 'driver', None)
+class FallbackRetriever(VectorCypherRetriever):
+    def __init__(self, driver, index_name, retrieval_query, embedder, llm=None):
+        super().__init__(driver=driver, index_name=index_name, retrieval_query=retrieval_query, embedder=embedder)
+        self.driver = driver
         self.llm = llm
 
     def expand_query(self, query):
@@ -202,7 +209,7 @@ class FallbackRetriever(Retriever):
             
             # Filter concepts
             filtered_concepts = []
-            stop_words = {'of', 'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'is', 'are', 'what', 'next'}
+            stop_words = {'of', 'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'is', 'are', 'what', 'next', 'number'}
             for c in concepts:
                 # Remove stopwords from within the concept string if it's just a stopword (unlikely) or if we want to be strict
                 # Actually, simply quoting them is safer IF they are good concepts.
@@ -217,40 +224,47 @@ class FallbackRetriever(Retriever):
                 print(f"DEBUG: Lucene Query: '{lucene_query}'")
                 return lucene_query
             
-            return query
+            # If filtration resulted in empty list, use cleaned original query
+            print("DEBUG: Expansion resulted in empty concepts (all filtered). Using cleaned query.")
+            stop_words = {'what', 'is', 'the', 'capital', 'of', 'who', 'where', 'when', 'how', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'number'}
+            keywords = [word for word in query.replace('?','').split() if word.lower() not in stop_words]
+            return " ".join(keywords) if keywords else query
+
         except Exception as e:
-            print(f"DEBUG: Query expansion failed: {e}. Falling back to original.")
-            return query
+            print(f"DEBUG: Query expansion failed: {e}. Falling back to cleaned query.")
+            stop_words = {'what', 'is', 'the', 'capital', 'of', 'who', 'where', 'when', 'how', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'number'}
+            keywords = [word for word in query.replace('?','').split() if word.lower() not in stop_words]
+            return " ".join(keywords) if keywords else query
 
     def search(self, query_text, top_k=5, **kwargs):
         # 0. Expand Query for YAGO Search
         # If we have an LLM, we use it to generate better search terms. 
         # Otherwise, we fallback to simple stopword removal.
-        if self.llm:
+        
+        from .config import GLOBAL_KB
+        
+        if self.llm and GLOBAL_KB == "YAGO":
+            # For YAGO, we want specific concepts (e.g. "Number Theory")
             keyword_query = self.expand_query(query_text)
         else:
-            stop_words = {'what', 'is', 'the', 'capital', 'of', 'who', 'where', 'when', 'how', 'a', 'an', 'in', 'on', 'at', 'to', 'for'}
+            # For Wikidata (per user request), we want to avoid "splitting to Lucene" 
+            # and just search for the keywords in the query.
+            # Also fallback if no LLM.
+            
+            stop_words = {'what', 'is', 'the', 'capital', 'of', 'who', 'where', 'when', 'how', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'number', 'does', 'did', 'come', 'comes', 'after', 'which', 'ranks', 'as', 'busiest', 'replaced'}
             keywords = [word for word in query_text.replace('?','').split() if word.lower() not in stop_words]
             keyword_query = " ".join(keywords) if keywords else query_text
             
-        print(f"DEBUG: Original Query: '{query_text}' | YAGO Query: '{keyword_query}'")
+        print(f"DEBUG: Original Query: '{query_text}' | Generated Query: '{keyword_query}'")
 
-        # 1. Try Main Retriever
+        if self.retrieval_query == YAGO_FALLBACK_QUERY:
+             print(f"DEBUG: Executing YAGO Query with: '{keyword_query}'")
+        
+        # 1. Try Main Retriever (VectorCypherRetriever logic via super)
         try:
-            # We pass keyword_query if the retriever uses it for fulltext, but vector index needs natural language.
-            # HybridCypherRetriever uses query_text for both. 
-            # Ideally we pass different queries, but here we prioritize global relevance for YAGO.
-            # Actually, let's keep original query for Vector/Main, but modify what we passed to YAGO in Cypher?
-            # We can't easily injection without modifying config.
-            # So we will pass the original query to main.search, assuming config.py handles it.
-            # WAIT: retrieval_query in config uses $query_text.
-            # If we pass original query, YAGO gets "What is...".
-            # If we pass keywords, Vector gets "France Paris".
-            # Let's try passing the cleaner query? 
-            # User complaint was about "irrelevant local chunks". Vector search on keywords might be better or worse.
-            # Let's try passing the original query first, but FIX THE FORMATTING.
-            
-            result = self.main.search(query_text=query_text, top_k=top_k, **kwargs)
+            # VectorCypherRetriever uses query_text for embedding + cypher param
+            # We want to stick to query_text for vector search part to be semantic
+            result = super().search(query_text=query_text, top_k=top_k, **kwargs)
             
             # Post-process results to clean content and fix scores
             if result and result.items:
@@ -278,7 +292,6 @@ class FallbackRetriever(Retriever):
                     # Fix Score: Ensure top-level metadata has score
                     if item.metadata and 'score' in item.metadata:
                          pass # Score is already there, nothing to do unless we want to move it to item.score (if supported)
-
         except Exception as e:
             print(f"DEBUG: Main retriever failed: {e}")
             result = None
@@ -288,7 +301,24 @@ class FallbackRetriever(Retriever):
             return result
             
         # 3. Fallback to YAGO
-        print("DEBUG: 0 Chunks encountered. Executing YAGO Fallback...")
+        # 3. Fallback to Global KB (YAGO or WIKIDATA)
+        print("DEBUG: 0 Chunks encountered. Executing Global Fallback...")
+        
+        from .config import GLOBAL_KB
+        if GLOBAL_KB == "WIKIDATA":
+             print("DEBUG: Using Wikidata as Global KB.")
+             if not hasattr(self, 'wikidata_retriever'):
+                 from .wikidata_retriever import WikidataRetriever
+                 self.wikidata_retriever = WikidataRetriever()
+             
+             # Use the expanded query or original? Wikidata search is often better with entities.
+             # self.search_entities uses the raw string.
+             # logic in WikidataRetriever.search uses whatever is passed.
+             # We should probably pass the ORIGINAL query logic, or the expanded one?
+             # Wikidata Search API ("wbsearchentities") works best with keywords/names, not full questions.
+             # So using `keyword_query` (which has stopwords removed or LLM expansion) is better.
+             return self.wikidata_retriever.search(keyword_query)
+
         if not self.driver:
             print("ERROR: No driver found on retriever for fallback.")
             return RetrieverResult(items=[], metadata={})
@@ -302,8 +332,23 @@ class FallbackRetriever(Retriever):
                 
                 # 2. If no results, try unquoted Concept Match (High Recall)
                 if not items and '"' in keyword_query:
-                    # Remove quotes to allow partial matches of concepts
-                    relaxed_query = keyword_query.replace('"', '')
+                    # Remove quotes but enforce AND for multi-word concepts to avoid generic matching
+                    # e.g., "Number Theory" -> (Number AND Theory)
+                    import re
+                    concepts = re.findall(r'"(.*?)"', keyword_query)
+                    if concepts:
+                        relaxed_parts = []
+                        for c in concepts:
+                            # Split by space and join with AND
+                            parts = c.split()
+                            if len(parts) > 1:
+                                relaxed_parts.append(f"({' AND '.join(parts)})")
+                            else:
+                                relaxed_parts.append(c)
+                        relaxed_query = " OR ".join(relaxed_parts)
+                    else:
+                         relaxed_query = keyword_query.replace('"', '')
+
                     print(f"DEBUG: No phrase matches. Trying Relaxed Query: '{relaxed_query}'")
                     records = session.run(YAGO_FALLBACK_QUERY, query_text=relaxed_query)
                     items = [RetrieverResultItem(content=r['text'], metadata=r['metadata']) for r in records]
@@ -315,8 +360,9 @@ class FallbackRetriever(Retriever):
             return RetrieverResult(items=[], metadata={})
 
 def generate(llm, retriever, query) -> dict:
-    # Wrap in Fallback, passing the LLM for query expansion
-    retriever = FallbackRetriever(retriever, llm=llm)
+    # If the retriever is our FallbackRetriever, inject the LLM
+    if isinstance(retriever, FallbackRetriever):
+        retriever.llm = llm
 
     rag_template = RagTemplate(template=GRAPHRAG_TEMPLATE, expected_inputs=['query_text', 'context'])
     
@@ -381,6 +427,13 @@ def generate(llm, retriever, query) -> dict:
                 for lc in local_ctx:
                     enriched_content += f"   - {lc.get('entity')} {lc.get('relationship')} {lc.get('target')}\n"
             
+            # Check for direct YAGO triples (from FallbackRetriever/VectorCypherRetriever)
+            yago_triples = metadata.get('triples', [])
+            if yago_triples:
+                 enriched_content += "  [Knowledge Graph Triples]:\n"
+                 for t in yago_triples:
+                     enriched_content += f"   - {t}\n"
+
             if global_ctx:
                 enriched_content += "  [Global Knowledge (YAGO)]:\n"
                 for gc in global_ctx:

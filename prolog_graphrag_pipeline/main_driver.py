@@ -48,3 +48,11 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
         "context_from_prompt": context_from_prompt,
         "prolog_explanation": explainer_output.get("text_answer", "") if explainer_output else ""
     }
+
+if __name__ == "__main__":
+    prompt = "What comes after the number 1?"
+    print(f"--- Running Pipeline with prompt: '{prompt}' ---")
+    # flag default to empty string to run everything
+    output = run_pipeline(prompt, flag="", include_conclusion=True)
+    print("\n--- Final Answer ---")
+    print(output.get("answer"))

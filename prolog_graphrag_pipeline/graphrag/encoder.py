@@ -105,7 +105,7 @@ async def process_text_context(kg_builder_text: SimpleKGPipeline, texts: list[st
         print(f"Text context processed: {text_result}")
 
 async def process_context(kg_builder_pdf, kg_builder_text, texts):
-    await asyncio.gather(process_pdf_documents(kg_builder_pdf))
+    # await asyncio.gather(process_pdf_documents(kg_builder_pdf)) # DISABLE PDF INGESTION FOR SPEED
     if texts:
         await asyncio.gather(process_text_context(kg_builder_text, texts))
         

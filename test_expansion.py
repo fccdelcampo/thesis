@@ -13,10 +13,15 @@ from prolog_graphrag_pipeline.graphrag.retriever import create_retriever, Fallba
 def test_expansion_relevance():
     print("Initializing...")
     _, retriever_llm, embedder = initialize_models()
-    base_retriever = create_retriever(neo4j_driver, embedder)
-    
-    # Pass LLM to enable expansion
-    retriever = FallbackRetriever(base_retriever, llm=retriever_llm)
+    from prolog_graphrag_pipeline.graphrag.config import RETRIEVAL_QUERY
+    # Instantiate FallbackRetriever (which IS A VectorCypherRetriever now)
+    retriever = FallbackRetriever(
+        driver=neo4j_driver, 
+        index_name="documentsVectorIndex",
+        retrieval_query=RETRIEVAL_QUERY,
+        embedder=embedder,
+        llm=retriever_llm
+    )
     
     query = "What comes after 1?"
     print(f"\n--- Testing Query: {query} ---")
