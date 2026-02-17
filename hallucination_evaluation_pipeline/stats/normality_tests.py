@@ -4,7 +4,7 @@ import numpy as np
 import csv
 import pandas as pd
 from pathlib import Path
-import visualizer_generator
+from visualizer_generator import generate_qq_grids
 
 # Scipy imports FIRST (before wildcard import)
 from scipy.stats import gmean, shapiro
@@ -23,7 +23,7 @@ from config import *
 # from .visualizer_generator import generate_qq_grid_for_eval
 import pandas
 # Define target folder inside top-level directory
-IO_DIR = ROOT / "hallucination_evaluation_results"
+DATA_DIR = ROOT / "hallucination_evaluation_results/data"
 
 def shapiro_test(data: np.ndarray, pipeline: Pipeline, eval: Metric):
     if len(data) < 3:
@@ -39,7 +39,7 @@ def shapiro_test(data: np.ndarray, pipeline: Pipeline, eval: Metric):
         "normality": normality
     }
 
-    with open(os.path.join(IO_DIR, "normality_test_results.csv"), 'a') as f:
+    with open(os.path.join(DATA_DIR, "normality_test_results.csv"), 'a') as f:
         writer = csv.DictWriter(f, fieldnames=normality_row.keys())
         writer.writerow(normality_row)
 
@@ -51,13 +51,13 @@ def compute_normality_test(df: pandas.DataFrame, eval: Metric | Benchmark):
 
 def perform_normality_tests():
     df_map = {
-        Metric.FAITHFULNESS: pd.read_csv(IO_DIR / "faithfulness_scores.csv"),
-        Metric.ANSWER_RELEVANCE: pd.read_csv(IO_DIR / "answer_relevance_scores.csv"),
-        Metric.CONTEXT_RECALL: pd.read_csv(IO_DIR / "context_recall_scores.csv"),
-        Benchmark.TRUTHFULQA: pd.read_csv(IO_DIR / "truthfulqa_scores.csv")
+        Metric.FAITHFULNESS: pd.read_csv(DATA_DIR / "faithfulness_scores.csv"),
+        Metric.ANSWER_RELEVANCE: pd.read_csv(DATA_DIR / "answer_relevance_scores.csv"),
+        Metric.CONTEXT_RECALL: pd.read_csv(DATA_DIR / "context_recall_scores.csv"),
+        Benchmark.TRUTHFULQA: pd.read_csv(DATA_DIR / "truthfulqa_scores.csv")
     }
 
     for eval, df in df_map.items():
         compute_normality_test(df, eval)
-    visualizer_generator.generate_qq_grids()
+    generate_qq_grids()
     

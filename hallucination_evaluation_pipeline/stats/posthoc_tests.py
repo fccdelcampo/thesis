@@ -8,7 +8,7 @@ from statsmodels.stats.multicomp import pairwise_tukeyhsd
 from statsmodels.stats.contingency_tables import mcnemar
 # from stats.visualizer_generator import generatePValueMatrix
 from scipy.stats import rankdata
-import visualizer_generator
+from visualizer_generator import generate_p_value_matrix
 
 # Define top-level directory (one level up from current script)
 TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -20,10 +20,10 @@ ROOT = Path(__file__).resolve().parents[2]
 # RESULTS_DIR = ROOT / "hallucination_evaluation_results"
 sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
-IO_DIR = ROOT / "hallucination_evaluation_results"
+DATA_DIR = ROOT / "hallucination_evaluation_results/data"
 
 def log_posthoc_result(eval_name: str,loser: str, winner: str, p_value: float):
-    with open(IO_DIR / "posthoc_test_results.csv", 'a', newline='') as f:
+    with open(DATA_DIR / "posthoc_test_results.csv", 'a', newline='') as f:
         writer = csv.DictWriter(
             f,
             fieldnames=["eval_name", "loser", "winner", "p_value"]
@@ -37,6 +37,7 @@ def log_posthoc_result(eval_name: str,loser: str, winner: str, p_value: float):
 
 def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Metric | Benchmark):
     print(f"RESULTS:\n{results}")
+    p_value_dict = {}
     if eval in CONTINUOUS_EVALS:
         if is_normal:
             df = pd.DataFrame(
@@ -46,17 +47,22 @@ def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Metric | Ben
                 }
             )
             result_df = pairwise_tukeyhsd(endog=df["score"], groups=df["group"], alpha=ALPHA)
-            significant_rows = df.loc[df["reject"], ["group1", "group2", "p-adj"]].values.tolist()
+            significant_rows = result_df.loc[result_df["reject"], ["group1", "group2", "p-adj"]].values.tolist()
+            rows = result_df.loc[result_df["reject"], ["group1", "group2", "p-adj"]].values.tolist()
+
             print(f"SIG ROWS:\n {significant_rows}")
-            for row in significant_rows:
+            for row in rows:
                 p_value = row[2]
-                all_scores = results[row[0]] + results[row[1]]
-                ranks = rankdata(all_scores)
-                pipeline1_mean_rank = np.mean(ranks[:NUM_TEST_CASES])
-                pipeline2_mean_rank = np.mean(ranks[NUM_TEST_CASES:])
-                winner = row[0] if pipeline1_mean_rank > pipeline2_mean_rank else row[1]
-                loser = row[1] if pipeline1_mean_rank < pipeline2_mean_rank else row[0]
-                log_posthoc_result(eval_name=eval.value[1], loser=loser, winner=winner, p_value=p_value)
+                pipeline1_name, pipeline2_name = row[0], row[1]
+                p_value_dict[(pipeline1.value[0].replace(" Pipeline", ""), pipeline2.value[0].replace(" Pipeline", ""))] = p_value
+                if row in significant_rows:
+                    all_scores = results[pipeline1_name] + results[pipeline2_name]
+                    ranks = rankdata(all_scores)
+                    pipeline1_mean_rank = np.mean(ranks[:NUM_TEST_CASES])
+                    pipeline2_mean_rank = np.mean(ranks[NUM_TEST_CASES:])
+                    winner = pipeline1_name if pipeline1_mean_rank > pipeline2_mean_rank else pipeline2_name
+                    loser = pipeline2_name if pipeline1_mean_rank < pipeline2_mean_rank else pipeline1_name
+                    log_posthoc_result(eval_name=eval.value[1], loser=loser, winner=winner, p_value=p_value)
         else:
             df = pd.DataFrame(
                 {
@@ -72,6 +78,7 @@ def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Metric | Ben
                     pipeline2_name = pipeline2.value[1]
                     print(f"{pipeline1_name} | {pipeline2_name}")
                     p_value = result_df.loc[pipeline1_name, pipeline2_name]
+                    p_value_dict[(pipeline1.value[0].replace(" Pipeline", ""), pipeline2.value[0].replace(" Pipeline", ""))] = p_value
                     if p_value < ALPHA:
                         all_scores = results[pipeline1_name] + results[pipeline2_name]
                         ranks = rankdata(all_scores)
@@ -80,22 +87,25 @@ def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Metric | Ben
                         winner, loser = (pipeline1_name, pipeline2_name) if pipeline1_mean_rank > pipeline2_mean_rank else (pipeline2_name, pipeline1_name)
                         log_posthoc_result(eval_name=eval.value[1], loser=loser, winner=winner, p_value=p_value)
     else:
-        for pipeline1 in list(Pipeline):
-            for pipeline2 in list(Pipeline):
+        for i, pipeline1 in enumerate(list(Pipeline)):
+            for pipeline2 in list(Pipeline)[i+1:]:
+                pipeline1_name = pipeline1.value[1]
+                pipeline2_name = pipeline2.value[1]
                 if pipeline1 == pipeline2:
                     continue
                 contingency_table = create_contingency_table(results=results, pipeline1=pipeline1, pipeline2=pipeline2)
                 result = mcnemar(contingency_table, exact=True, correction=False)
                 stat, p_value = result.statistic, result.pvalue
+                p_value_dict[(pipeline1.value[0].replace(" Pipeline", ""), pipeline2.value[0].replace(" Pipeline", ""))] = p_value
                 if p_value < ALPHA:
                     if contingency_table[0, 1] > contingency_table[1, 0]:
-                        winner = pipeline1.lower().replace("-", "_").replace(" ", "_").replace("pipeline", "")
-                        loser = pipeline2.lower().replace("-", "_").replace(" ", "_").replace("pipeline", "")
+                        winner = pipeline1_name
+                        loser = pipeline2_name
                     else:
-                        winner = pipeline2.lower().replace("-", "_").replace(" ", "_").replace("pipeline", "")
-                        loser = pipeline1.lower().replace("-", "_").replace(" ", "_").replace("pipeline", "")
-        
-    # generatePValueMatrix(df=posthoc_df, test=test, metric=eval)
+                        winner = pipeline2_name
+                        loser = pipeline1_name
+                    log_posthoc_result(eval_name=eval.value[1], loser=loser, winner=winner, p_value=p_value)
+    generate_p_value_matrix(p_value_dict, eval)
 
 def create_contingency_table(results: dict, pipeline1: Pipeline, pipeline2: Pipeline):
     if pipeline1 == pipeline2:
@@ -127,14 +137,14 @@ def create_contingency_table(results: dict, pipeline1: Pipeline, pipeline2: Pipe
     return contingency_table
 
 def perform_posthoc_tests():
-    hypothesis_test_df = pd.read_csv(IO_DIR / "hypothesis_test_results.csv")
-    normality_test_df = pd.read_csv(IO_DIR / "normality_test_results.csv")
+    hypothesis_test_df = pd.read_csv(DATA_DIR / "hypothesis_test_results.csv")
+    normality_test_df = pd.read_csv(DATA_DIR / "normality_test_results.csv")
     print(normality_test_df)
     for eval in list(Metric) + list(Benchmark):
         results = {}
         hypothesis_test_interpretation = hypothesis_test_df.loc[hypothesis_test_df['eval_name'] == eval.value[1],'interpretation'].values[0]
         if hypothesis_test_interpretation == "NON_SIGNIFICANT":
-            print(f"No significant difference found for{eval.value} pair; skipping post-hoc test.")
+            print(f"No significant difference found for {eval.value[0]}; skipping post-hoc test.")
             continue  # No need for post-hoc test if not significant
         
         normality_test_results = []
@@ -147,7 +157,7 @@ def perform_posthoc_tests():
                 print(f"Eval name: {eval_name} | Pipeline name: {pipeline_name}")
                 normality = normality_test_df.loc[(normality_test_df['eval_name'] == eval_name) & (normality_test_df['pipeline'] == pipeline_name),'normality'].values[0]
                 normality_test_results.append(normality)
-            eval_df = pd.read_csv(IO_DIR / f'{eval.value[1]}_scores.csv')
+            eval_df = pd.read_csv(DATA_DIR / f'{eval.value[1]}_scores.csv')
             col_name = pipeline.value[1] + "_score"
             pipeline_data = eval_df[col_name]
             results[pipeline.value[1]] = pipeline_data.tolist()

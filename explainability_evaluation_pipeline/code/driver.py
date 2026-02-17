@@ -39,6 +39,7 @@ def interpret_results():
 SE(x) AUROC Score: {se_x_auroc}
 SE(x\\c) AUROC Score: {se_x_c_auroc}
 SE(q) AUROC Score: {se_q_auroc}
+
     """
     
     result_string += "============COMPREHENSIVENESS INTERPRETATION============"
@@ -46,6 +47,7 @@ SE(q) AUROC Score: {se_q_auroc}
     average_comprehensiveness = mean(comprehensiveness_values)
     result_string += fr"""
 Average Comprehensiveness Score: {average_comprehensiveness}
+
     """
     
     result_string += "============SUFFICIENCY INTERPRETATION============"
@@ -53,6 +55,7 @@ Average Comprehensiveness Score: {average_comprehensiveness}
     average_sufficiency = mean(sufficiency_values)
     result_string += fr"""
 Average Sufficiency Score: {average_sufficiency}
+
     """
 
 def generate_artificial_data():

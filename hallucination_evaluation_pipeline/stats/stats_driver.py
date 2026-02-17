@@ -19,7 +19,7 @@ ROOT = Path(__file__).resolve().parents[2]
 # RESULTS_DIR = ROOT / "hallucination_evaluation_results"
 sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
-IO_DIR = ROOT / "hallucination_evaluation_results"
+DATA_DIR = ROOT / "hallucination_evaluation_results/data"
 
 from config import *
 from normality_tests import perform_normality_tests
@@ -44,7 +44,7 @@ def ensure_csv_headers():
     }
     
     for filename, header in headers.items():
-        path = os.path.join(IO_DIR, filename)
+        path = os.path.join(DATA_DIR, filename)
         if not os.path.exists(path) or os.path.getsize(path) == 0:
             with open(path, 'w', encoding='utf-8', newline='') as f:
                 f.write(header)
@@ -64,7 +64,7 @@ def clear_datasets():
     }
     
     for filename, header in headers.items():
-        path = os.path.join(IO_DIR, filename)
+        path = os.path.join(DATA_DIR, filename)
         with open(path, 'w', encoding='utf-8', newline='') as f:
             pass
 
@@ -88,21 +88,29 @@ def generate_artificial_data():
     print("Generating artificial data...")
     for eval in list(Metric) + list(Benchmark):
         for i in range(NUM_TEST_CASES):
-            with open(rf"hallucination-evaluation-results/{eval.value[1]}_scores.csv", 'a', newline='') as f:
+            with open(DATA_DIR / f"{eval.value[1]}_scores.csv", 'a', newline='') as f:
                 # test_case_id,tuned_score,graphrag_score,prolog_graphrag_score
                 if eval in CONTINUOUS_EVALS:
+                    tuned_score, graphrag_score, prolog_graphrag_score = np.random.uniform(0, 1), np.random.uniform(0, 1), np.random.uniform(0, 1)
                     writer = pd.DataFrame({
                         "test_case_id": i,
-                        "tuned_score": [np.random.uniform(6, 7)],
-                        "graphrag_score": [np.random.uniform(0.7, 1.0)],
-                        "prolog_graphrag_score": [np.random.uniform(50, 150)]
+                        "tuned_score": [tuned_score],
+                        "tuned_label": [0 if tuned_score > 0.7 else 1],
+                        "graphrag_score": [graphrag_score],
+                        "graphrag_label": [0 if graphrag_score > 0.7 else 1],
+                        "prolog_graphrag_score": [prolog_graphrag_score],
+                        "prolog_graphrag_label": [0 if prolog_graphrag_score > 0.7 else 1],
                     })
                 else:
+                    tuned_score, graphrag_score, prolog_graphrag_score = random.randint(0, 1), random.randint(0, 1), random.randint(0, 1)
                     writer = pd.DataFrame({
                         "test_case_id": i,
-                        "tuned_score": [random.randint(0, 1)],
-                        "graphrag_score": [random.randint(0, 1)],
-                        "prolog_graphrag_score": [random.randint(0, 1)]
+                        "tuned_score": [tuned_score],
+                        "tuned_label": [0 if tuned_score == 1 else 1],
+                        "graphrag_score": [graphrag_score],
+                        "graphrag_label": [0 if graphrag_score == 1 else 1],
+                        "prolog_graphrag_score": [prolog_graphrag_score],
+                        "prolog_graphrag_label": [0 if prolog_graphrag_score == 1 else 1]
                     })
                 writer.to_csv(f, header=f.tell()==0, index=False)
     print("Done generating artificial data.")

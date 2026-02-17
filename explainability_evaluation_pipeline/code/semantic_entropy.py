@@ -5,12 +5,14 @@ from config import ENTAILMENT_THRESHOLD, SampleSequencesFlags, CORRECTNESS_THRES
 import math
 import csv
 import sys
+import json
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.append(str(ROOT))
 IO_DIR = ROOT / "explainability_evaluation_results"
 TEST_DIR = ROOT / "test_cases"
+LOGS_DIR = ROOT / "logs/prolog_graphrag_pipeline_logs"
 
 import requests
 import json
@@ -22,7 +24,10 @@ import csv
 API_URL = "https://api-inference.huggingface.co/models/microsoft/deberta-large-mnli"
 headers = {"Authorization": "Bearer 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"}
 
-def sample_sequences(prompt: str, flag: str) -> list[dict]:
+def evaluate(prompt: str, answer: str) -> float:
+    return 0.5
+
+def sample_sequences(prompt: str, flag: str) -> dict:
     # return main_driver.run_pipeline(prompt=prompt, flag=flag, sample_mode=True)
     return None
 
@@ -75,10 +80,32 @@ def compute_semantic_entropy(test_case_id: int, prompt: str):
         r"q": None,
         r"x\c": None
     }
-    output_sequences = list()
+    output_sequences = {
+        "se_x": {
+            "prompt": None,
+            "sequences": [],
+            "se": None
+            },
+        "se_q": {
+            "prompt": None,
+            "sequences": [],
+            "se": None
+            },
+        "se_x_c": {
+            "prompt": None,
+            "sequences": [],
+            "se": None
+            }
+    }
     for flag in list(SampleSequencesFlags):
-        sequences = sample_sequences(prompt=prompt, flag=flag.value)
-        output_sequences += [a["text_answer"] for a in sequences]
+        output = sample_sequences(prompt=prompt, flag=flag.value[1])
+        reconstructed_prompt: str = output["prompt"]
+        output_sequences["se_" + flag.value[1]]["prompt"] = reconstructed_prompt
+        sequences = output["sequences"]
+        for i, seq in enumerate(sequences):
+            score = evaluate(prompt=reconstructed_prompt, answer=seq["text_answer"])
+            d = {f"se_{flag.value[1]}_sequence_{i}": seq["text_answer"], f"se_{flag.value[1]}_sequence_{i}_label": score}
+            output_sequences["se_" + flag.value[1]]["sequences"].append(d)
         clusters = cluster_sequences(sequences)
         semantic_entropy = 0
         sum_of_cluster_probabilities = sum(compute_likelihood(cluster) for cluster in clusters)
@@ -86,7 +113,8 @@ def compute_semantic_entropy(test_case_id: int, prompt: str):
             p_Ci_x = compute_likelihood(cluster) / sum_of_cluster_probabilities
             semantic_entropy += p_Ci_x * math.log(p_Ci_x)
         semantic_entropy *= -1
-        semantic_entropies[flag.value] = semantic_entropy
+        semantic_entropies[flag.value[1]] = semantic_entropy
+        output_sequences["se_" + flag.value[1]]["se"] = semantic_entropy
         
     for key in semantic_entropies.keys():
         if not semantic_entropies[key]:
@@ -118,3 +146,22 @@ def log_result(test_case_id: int, semantic_entropies: dict) -> None:
             "se_x_c": semantic_entropies[r"x\c"],
             "se_x_c_label": int(semantic_entropies[r"x\c"] < CORRECTNESS_THRESHOLD)
         })
+    
+
+
+def log_sequences(test_case_id: int, output_sequences: dict) -> None:
+    row = dict()
+    
+    row["test_case_id"] = test_case_id
+    for flag in list(SampleSequencesFlags):
+        row[f"se_{flag.value[1]}_prompt"] = output_sequences[f"se_{flag.value[1]}"]["prompt"]
+        sequences = output_sequences[f"se_{flag.value[1]}"]["sequences"]
+        for i, seq in enumerate(sequences):
+            row[f"se_{flag.value[1]}_sequence_{i+1}"] = seq[f"se_{flag.value[1]}_sequence_{i+1}"]
+            row[f"se_{flag.value[1]}_sequence_{i+1}_label"] = seq[f"se_{flag.value[1]}_sequence_{i+1}_label"]
+        row[f"se_{flag.value[1]}"] = output_sequences[f"se_{flag.value[1]}"]["se"]
+        
+    
+    with open(LOGS_DIR / "explainability.jsonl", 'a', newline='') as f:
+        f.write(json.dumps(row) + "\n")
+        

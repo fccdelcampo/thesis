@@ -3,7 +3,7 @@ from enum import Enum
 class Pipeline(Enum):
     PROLOG_GRAPHRAG = ("Prolog-GraphRAG Pipeline", "prolog_graphrag")
     GRAPHRAG = ("GraphRAG Pipeline", "graphrag")
-    TUNED = ("Instruction-Tuned LLM Pipeline", "tuned")
+    TUNED =    ("llama3.1:instruct", "tuned")
     
 class Metric(Enum):
     FAITHFULNESS = ("Faithfulness", "faithfulness")
@@ -16,9 +16,9 @@ class Benchmark(Enum):
     TRUTHFULQA = ("TruthfulQA", "truthfulqa")
     
 class SampleSequencesFlags(Enum):
-    X = "x"
-    Q = "q"
-    X_C = r"x\c"
+    X = ("x", "x")
+    Q = ("q", "q")
+    X_C = ("x\\c", "x_c")
     
 DISCRETE_EVALS = [Benchmark.MMLU, Benchmark.HOTPOTQA]
 CONTINUOUS_EVALS = [Metric.FAITHFULNESS, Metric.ANSWER_RELEVANCE, Metric.CONTEXT_RECALL, Benchmark.TRUTHFULQA]
