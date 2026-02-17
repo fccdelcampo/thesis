@@ -25,11 +25,9 @@ class DebugOllamaLLM(OllamaLLM):
     def _log_to_file(self, message: str):
         """Appends a message to debug.txt with UTF-8 encoding."""
         try:
-            # "a" mode appends to the file. Change to "w" if you want to overwrite every time.
             with open("debug.txt", "a", encoding="utf-8") as f:
                 f.write(message + "\n")
         except Exception as e:
-            # Fallback to console if file writing fails
             print(f"[DebugOllamaLLM Error] Could not write to debug.txt: {e}")
 
     def _clean_response_text(self, text: str) -> str:
@@ -192,14 +190,25 @@ def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
     
     return kg_builder_pdf, kg_builder_text
 
-encoder_llm, retriever_llm, embedder = initialize_models()
-kg_builder_pdf, kg_builder_text = setup_kg_pipeline(encoder_llm, embedder)
-retriever = create_retriever(neo4j_driver, embedder)
+encoder_llm = None
+retriever_llm = None
+embedder = None
+kg_builder_pdf = None
+kg_builder_text = None
+retriever = None
+
+def init_globals():
+    global encoder_llm, retriever_llm, embedder, kg_builder_pdf, kg_builder_text, retriever
+    if encoder_llm is None:
+        encoder_llm, retriever_llm, embedder = initialize_models()
+        kg_builder_pdf, kg_builder_text = setup_kg_pipeline(encoder_llm, embedder)
+        retriever = create_retriever(neo4j_driver, embedder)
 
 def generate_answer(query, retriever, llm) -> dict:
     return generate(llm, retriever, query)
 
 def run_pipeline(user_question) -> dict:
+    init_globals()
     query, text_context = extract_query_and_context(user_question)
     asyncio.run(process_context(kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
     time.sleep(2) # Allow vector index to update
@@ -250,8 +259,21 @@ async def perform_tests():
     
     print("\n--- All tests completed ---")
 
+def clear_local_data():
+    """
+    Deletes all Local Document and Chunk nodes from the database.
+    """
+    print("WARNING: Deleting all Local Documents and Chunks...")
+    with neo4j_driver.session() as session:
+        session.run("MATCH (d:Document) DETACH DELETE d")
+        session.run("MATCH (c:Chunk) DETACH DELETE c")
+    print("Local data cleared successfully.")
+
 def main():
+    # Uncomment to clear data before running tests
+    # clear_local_data() 
     asyncio.run(perform_tests())
+
 
 if __name__ == "__main__":
     main()

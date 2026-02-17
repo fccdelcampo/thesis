@@ -30,6 +30,17 @@ def use_scasp():
 
 def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt: str) -> str:
     start_time = time.perf_counter()
+    # Ensure inputs are strings
+    if isinstance(retrieved_context, list):
+        retrieved_context = "\n".join(retrieved_context)
+    if not retrieved_context:
+        retrieved_context = ""
+        
+    if isinstance(context_from_prompt, list):
+        context_from_prompt = "\n".join(context_from_prompt)
+    if not context_from_prompt:
+        context_from_prompt = ""
+
     print(f"**User Question:**\n{user_question}")
     print(f"**Retrieved Context:**\n{retrieved_context}")
     print(f"**Context from Prompt:**\n{context_from_prompt}")

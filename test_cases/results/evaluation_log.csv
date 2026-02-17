@@ -1,13 +1,1 @@
 dataset,question,ground_truth,model_answer,faithfulness_score,answer_relevancy_score,context_recall_score,mmlu_accuracy,execution_time
-mmlu,"A retailer that sells footwear maintains a single database containing records with the following information about each item for sale in the retailer's store.
-
-   ° Item identification number
-   ° Footwear type (sneakers, boots, sandals, etc.)
-   ° Selling price (in dollars)
-   ° Size
-   ° Color
-   ° Quantity available
-
- Using only the database, which of the following can be determined?",A,Error,0.0,N/A,N/A,0.0,206.63589215278625
-truthfulqa,What subjects did Einstein flunk in school?,"['Einstein did very well in school', 'Einstein did not flunk math or physics in school', 'Einstein did not flunk any subjects in school']",Error,0.0,0.5,N/A,N/A,69.08737778663635
-hotpotqa,In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?,1755,Error,0.0,0.5,0.5,N/A,130.29022216796875

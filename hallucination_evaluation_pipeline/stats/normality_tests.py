@@ -8,7 +8,7 @@ from visualizer_generator import generate_qq_grids
 
 # Scipy imports FIRST (before wildcard import)
 from scipy.stats import gmean, shapiro
-import visualizer_generator
+
 # Define top-level directory (one level up from current script)
 TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
@@ -18,10 +18,16 @@ ROOT = Path(__file__).resolve().parents[2]
 # RESULTS_DIR = ROOT / "hallucination_evaluation_results"
 sys.path.append(str(ROOT))
 
-# Import classes and config (but this brings in stats from standard library)
-from config import *
-# from .visualizer_generator import generate_qq_grid_for_eval
-import pandas
+try:
+    from .config import *
+    from . import visualizer_generator
+except ImportError:
+    try:
+        from config import *
+        import visualizer_generator
+    except ImportError:
+        from stats.config import *
+        from stats import visualizer_generator
 # Define target folder inside top-level directory
 DATA_DIR = ROOT / "hallucination_evaluation_results/data"
 
@@ -43,10 +49,36 @@ def shapiro_test(data: np.ndarray, pipeline: Pipeline, eval: Metric):
         writer = csv.DictWriter(f, fieldnames=normality_row.keys())
         writer.writerow(normality_row)
 
-def compute_normality_test(df: pandas.DataFrame, eval: Metric | Benchmark):
+from typing import Union
+
+def compute_normality_test(df: pd.DataFrame, eval: Union[Metric, Benchmark]):
     for pipeline in list(Pipeline):
         col_name = pipeline.value[1] + "_score"
-        data = df[col_name].to_numpy()
+        
+        # Robust parsing for mixed types (floats, strings, stringified lists)
+        raw_data = df[col_name].dropna().tolist()
+        cleaned_data = []
+        
+        import ast
+        for x in raw_data:
+            try:
+                if isinstance(x, (int, float)):
+                    cleaned_data.append(float(x))
+                elif isinstance(x, str):
+                    # Try to parse stringified list like "[0.83]"
+                    x = x.strip()
+                    if x.startswith('[') and x.endswith(']'):
+                        parsed = ast.literal_eval(x)
+                        if isinstance(parsed, list):
+                            cleaned_data.extend([float(i) for i in parsed])
+                        else:
+                            cleaned_data.append(float(parsed))
+                    else:
+                        cleaned_data.append(float(x))
+            except (ValueError, SyntaxError):
+                continue
+                
+        data = np.array(cleaned_data)
         shapiro_test(data, pipeline, eval)
 
 def perform_normality_tests():

@@ -1,0 +1,96 @@
+Initializing Models...
+Ollama loaded successfully.
+Models initialized.
+Retriever initialized.
+Retriever initialized.
+
+==================================================
+Query: What comes after the number 1?
+==================================================
+
+Executing Search...
+DEBUG: Triggering Wikidata Search for: ['number (the number)', '1 (the number)']
+DEBUG: Querying Wikidata for: '"number (the number)" OR "1 (the number)"'
+DEBUG: Wikidata found 0 items.
+DEBUG: Local Vector Search returned 3 chunks.
+DEBUG: Merged Result Count: 1
+
+--- Search Results ---
+[0.6782] In mathematics...
+
+==================================================
+Query: Which major international airport in south-east England ranks as the 8th busiest airport in Europe and replaced Croydon Airport?
+==================================================
+
+Executing Search...
+DEBUG: Triggering Wikidata Search for: ['south-east england', 'croydon airport']
+DEBUG: Querying Wikidata for: '"south-east england" OR "croydon airport"'
+DEBUG: Wikidata found 5 items.
+DEBUG: Wikidata returned 5 items.
+DEBUG: Local Vector Search returned 3 chunks.
+DEBUG: Merged Result Count: 4
+
+--- Search Results ---
+[1.0000] Wikidata Entity: South East England.
+Description: region of England.
+Facts:
+  - located in the administrative territorial entity: England
+  - country: United Kingdom
+  - instance of: ITL 1 statistical...
+>> SUCCESS: 'Facts:' section found.
+[0.6082] In mathematics...
+[0.5000] Wikidata Entity: Croydon Airport.
+Description: airport in South London, UK.
+Facts:
+  - country: United Kingdom
+  - located in the administrative territorial entity: Greater London
+  - instance of: int...
+>> SUCCESS: 'Facts:' section found.
+[0.2000] Wikidata Entity: South East England Regional Assembly.
+Description: No description.
+Facts:
+  - country: United Kingdom...
+>> SUCCESS: 'Facts:' section found.
+
+==================================================
+Query: What is the capital of France?
+==================================================
+
+Executing Search...
+DEBUG: Triggering Wikidata Search for: ['France', 'capital']
+DEBUG: Querying Wikidata for: '"France" OR "capital"'
+DEBUG: Wikidata found 5 items.
+DEBUG: Wikidata returned 5 items.
+DEBUG: Local Vector Search returned 3 chunks.
+DEBUG: Merged Result Count: 6
+
+--- Search Results ---
+[1.0000] Wikidata Entity: France.
+Description: country in Western Europe and other continents (through its overseas territories in America, Africa and Oceania).
+Facts:
+  - country: France
+  - part of: European...
+>> SUCCESS: 'Facts:' section found.
+[0.6568] In mathematics...
+[0.5000] Wikidata Entity: capital city.
+Description: primary governing city of a top-level (country) or first-level and second-level subdivision (country, state, province, regency, etc) political entity.
+Facts...
+>> SUCCESS: 'Facts:' section found.
+[0.3333] Wikidata Entity: France.
+Description: unisex given name.
+Facts:
+  - instance of: unisex given name...
+>> SUCCESS: 'Facts:' section found.
+[0.2500] Wikidata Entity: capital.
+Description: upper part of a column (architecture).
+Facts:
+  - subclass of: archaeological artefact
+  - subclass of: architectural element
+  - part of: column
+  - subclass of...
+>> SUCCESS: 'Facts:' section found.
+[0.2000] Wikidata Entity: France.
+Description: family name.
+Facts:
+  - instance of: family name...
+>> SUCCESS: 'Facts:' section found.

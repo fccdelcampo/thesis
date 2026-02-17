@@ -14,7 +14,9 @@ BASE_OLLAMA_MESSAGES = [
             
         ] + ENCODER_FEW_SHOT_EXAMPLES
 
-def generate_with_ollama(messages) -> str | None: 
+from typing import Optional
+
+def generate_with_ollama(messages) -> Optional[str]: 
     try:
         response = ollama.chat(
             model='llama3.1:8b-instruct-q4_K_M',
@@ -33,12 +35,10 @@ def generate_with_ollama(messages) -> str | None:
 def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
     most_recent_error = None
     
-    # Create a fresh conversation history for this specific extraction attempt
     current_messages = list(BASE_OLLAMA_MESSAGES)
 
     for i in range(5):
         try:
-            # Construct the prompt
             prompt_content = user_prompt
             if most_recent_error:
                 prompt_content += f"\nYour latest output had error/s. Fix them according to the following error message:\n{most_recent_error}"
@@ -90,7 +90,7 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
             
     raise ValueError(f"Failed to extract query and context after 5 retries. Last error: {most_recent_error}")
 
-async def process_pdf_documents(kg_builder_pdf: None | SimpleKGPipeline):
+async def process_pdf_documents(kg_builder_pdf: Optional[SimpleKGPipeline]):
     paths = glob.glob(os.path.join(DOC_PATH, "*.pdf"))
     
     for path in paths:
@@ -105,7 +105,7 @@ async def process_text_context(kg_builder_text: SimpleKGPipeline, texts: list[st
         print(f"Text context processed: {text_result}")
 
 async def process_context(kg_builder_pdf, kg_builder_text, texts):
-    await asyncio.gather(process_pdf_documents(kg_builder_pdf))
+    # await asyncio.gather(process_pdf_documents(kg_builder_pdf)) # DISABLE PDF INGESTION FOR SPEED
     if texts:
         await asyncio.gather(process_text_context(kg_builder_text, texts))
         

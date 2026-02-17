@@ -17,21 +17,25 @@ def reconstruct_prompt(user_question: str, retrieved_context: str, explainer_out
     # Use the provided explainer_output as the evidence
     conclusion = "See Logical Evidence"
     logical_evidence = explainer_output if explainer_output else "No logical evidence available."
-    context_part = f"**CONTEXT:** {retrieved_context}" if flag != r"q" else ""
-    conclusion_part = f"**CONCLUSION:** {conclusion}" if flag == r"x" else ""
-    logical_evidence_part = f"**LOGICAL EVIDENCE:** {logical_evidence}" if flag != r"q" else ""
-    return rf"""
+    context_part = f"CONTEXT: {retrieved_context}" if flag != r"q" else ""
+    conclusion_part = f"CONCLUSION: {conclusion}" if flag == r"x" else ""
+    logical_evidence_part = f"**LOGICAL EVIDENCE: {logical_evidence}" if flag != r"q" else ""
+    return f"""
 ### FINAL SYNTHESIS TASK
 
-**USER QUESTION:** {user_question}
+USER QUESTION: {user_question}
 {context_part}
 {conclusion_part}
 {logical_evidence_part}
 
 ---
 ### INSTRUCTION:
-Provide a final, coherent response to the User Question. Use the Logical Evidence to explain the "why" behind the Conclusion. If the Conclusion is not explicitly specified, infer what the conclusion should be. Ensure the tone is natural and free of any technical jargon related to logic programming or databases.
-     """
+Provide a direct, confident answer to the User Question.
+1. Answer Naturally: Respond as if you already know the answer. Do NOT mention "the context", "the provided information", or "based on the evidence".
+2. Be Direct: Lead with the answer, then elaborate if helpful.
+3. Never Cite Sources: Do NOT reference where you got the information from (no "according to...", "the context states...", "YAGO defines...", etc.).
+4. Smooth Tone: Write as a knowledgeable person would naturally explain something in conversation.
+    """
      
 
 print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag="q"), "\n")

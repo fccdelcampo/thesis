@@ -12,7 +12,9 @@ except ImportError:
     from prolog_graphrag_pipeline.config import LLM_SYSTEM_PROMPT, LLM_MESSAGES
     from prolog_graphrag_pipeline.prompt_reconstructor import reconstruct_prompt
 
-def generate(user_question: str, retrieved_context: str | None, explainer_output: str | None, flag: str, sample_mode: bool = False) -> dict | list[dict]:
+from typing import Optional, Union, List
+
+def generate(user_question: str, retrieved_context: Optional[str], explainer_output: Optional[str], flag: str, sample_mode: bool = False, include_conclusion: bool = True) -> Union[dict, List[dict]]:
     final_prompt = reconstruct_prompt(user_question=user_question, retrieved_context=retrieved_context, explainer_output=explainer_output, flag=flag)
     if sample_mode:
         sequences = []
@@ -20,7 +22,7 @@ def generate(user_question: str, retrieved_context: str | None, explainer_output
             try:
                 answer = dict()
                 response = ollama.chat(
-                        model='llama3:8b-instruct-fp16',
+                        model='llama3.1:8b-instruct-q4_K_M',
                         messages=LLM_MESSAGES + [{"role": "user", "content": final_prompt}],
                         options={
                             'temperature': 0.4,
@@ -41,7 +43,7 @@ def generate(user_question: str, retrieved_context: str | None, explainer_output
         try:
             answer = dict()
             response = ollama.chat(
-                    model='llama3:8b-instruct-fp16',
+                    model='llama3.1:8b-instruct-q4_K_M',
                     messages=LLM_MESSAGES + [{"role": "user", "content": final_prompt}],
                     options={
                         'temperature': 0.4,

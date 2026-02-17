@@ -5,11 +5,15 @@ NEO4J_URI = "neo4j://127.0.0.1:7687"
 NEO4J_USERNAME = "neo4j"
 NEO4J_PASSWORD = "graphrag"
 
+# Global Knowledge Source Configuration
+GLOBAL_KB = "WIKIDATA"
+
+
 class RETRIEVER_OPTIONS(Enum):
   HybridCypherRetriever = "HybridCypherRetriever"
   HybridRetriever = "HybridRetriever"
+  VectorCypherRetriever = "VectorCypherRetriever"
   
-
 
 class SCHEMA_TYPE(Enum):
   STATIC = "Static Schema"
@@ -92,53 +96,34 @@ IDENTIFY THREE TYPES OF LOGIC:
 FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble.
 '''
 
-RETRIEVER = RETRIEVER_OPTIONS.HybridCypherRetriever
+RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
+
+# Retrieval query for HybridCypherRetriever:
+# Takes the vector-matched local node and finds its local connections.
+
 
 RETRIEVAL_QUERY = '''
+// Part A: Local Document Retrieval (Vector/Keyword matches passed as `node`)
+WITH node, score
 OPTIONAL MATCH (node)-[:EXTRACTS]->(e)
-// 1. Traverse to Document-extracted entities
 OPTIONAL MATCH (e)-[r]->(target)
+WITH node, score, collect(distinct {
+    source: "Local Document",
+    entity: e.name,
+    relationship: type(r),
+    target: target.name,
+    text: node.text
+}) as local_context
 
-// 2. Global KG Linkage (YAGO) - Optimized Fulltext Lookup
-CALL {
-    WITH e
-    CALL db.index.fulltext.queryNodes("yagoNameIndex", e.name) YIELD node as candidate, score
-    WHERE score > 0.8
-    RETURN candidate.rdfs__label as y_label, candidate.rdfs__comment as y_comment, score as y_score
-    ORDER BY y_score DESC LIMIT 1
-    UNION
-    RETURN null as y_label, null as y_comment, 0.0 as y_score
-}
-WITH node, e, r, target, y_label, y_comment, y_score
-ORDER BY y_score DESC
-WITH node, e, r, target, collect({label: y_label, comment: y_comment, score: y_score})[0] as yago_info
-
-// 3. Return Context
-RETURN node.text AS text, 
-       node.score AS score,
-       {
-           local_entity: e.name,
-           local_relationship: type(r),
-           local_target: target.name,
-           yago_match: yago_info.label,
-           yago_comment: yago_info.comment,
-           yago_score: yago_info.score
-       } AS metadata
-'''
-
-YAGO_FALLBACK_QUERY = '''
-CALL db.index.fulltext.queryNodes("yagoNameIndex", $query_text) YIELD node, score
-WHERE score > 0.5
 RETURN 
-    "YAGO Entity: " + node.rdfs__label + "\\nDefinition: " + COALESCE(node.rdfs__comment, "No definition available.") as text,
+    node.text as text,
     score,
     {
-        source: "YAGO Knowledge Graph",
-        entity_name: node.rdfs__label,
-        yago_id: elementId(node)
+        local_context: local_context,
+        score: score
     } as metadata
-LIMIT 5
 '''
+
 # Additional instructions if ever needed.
 # 1. Read the Context carefully.
 # 2. Identify which specific sentence supports your answer.
@@ -160,22 +145,19 @@ LIMIT 5
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are an expert Educational AI Assistant. Your goal is to answer the user's question accurately using the provided Context.
+You are an expert Educational AI Assistant. Answer the user's question accurately using the provided Context.
 
-### INSTRUCTIONS
-1. Read the Context carefully.
-2. If the question is a Multiple Choice Question (MMLU style with options A, B, C, D), you MUST:
-   - Analyze each option against the Context.
-   - Select the SINGLE best answer.
-   - Start your response with the correct letter (e.g., "A. " or "Answer: B").
-   - Then provide a concise explanation.
-3. If the Context contains "YAGO Knowledge", treat it as authoritative definitions.
-4. If the answer is not in the Context, use your general knowledge but mention that the context was insufficient.
+### STRICT INSTRUCTIONS
+1. **Answer Directly**: Start with the answer. Do NOT begin with definitions or explanations of how you found it.
+2. **Sound Natural**: Write as if you already know the answer. NEVER say "the context states", "according to the provided information", "based on the evidence", or similar phrases.
+3. **Use Context Silently**: The Context helps you be accurate, but the user should not know you relied on it. Integrate facts naturally.
+4. **MMLU/Multiple Choice**: If options are provided (A, B, C, D), select the single best one and explain why.
+5. **Never Cite Sources**: Do NOT mention Wikidata, YAGO, documents, or any source by name.
 
 ### Question:
 {query_text}
 
-### Context:
+### Context (for your reference only — do NOT mention it):
 {context}
 
 ### Answer:
