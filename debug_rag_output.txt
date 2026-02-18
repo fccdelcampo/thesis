@@ -1,227 +1,12 @@
 ==================================================
- QUERY: In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
 ==================================================
 
---- RETRIEVED CONTEXT (Top 3 Chunks) ---
+--- RETRIEVED CONTEXT (Top 2 Items) ---
 
 [Metadata Dump]
 {
-  "score": 1.0
-}
-
-[Chunk 1 | Score: 1.0000]
-{'text': 'In mathematics', 'id': None}
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 1.0
-}
-
-[Chunk 2 | Score: 1.0000]
-{'text': 'In mathematics', 'id': None}
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 1.0
-}
-
-[Chunk 3 | Score: 1.0000]
-{'text': 'In mathematics', 'id': None}
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-There is no information in the context about Sergei Aleksandrovich Tokarev or a university he was affiliated with. The provided text only mentions "in mathematics" three times, but does not provide any specific details about individuals or institutions related to this field of study.
-
-Therefore, I cannot answer your question based on the given context.
-==================================================
-==================================================
- QUERY: In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?
-==================================================
-
---- RETRIEVED CONTEXT (Top 3 Items) ---
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "Sergei Aleksandrovich Tokarev",
-  "id": "Q974421",
-  "score": 1.0,
-  "triples": [
-    "instance of: human"
-  ]
-}
-[Item 1]
-[Chunk Score: 1.0000] Wikidata Entity: Sergei Aleksandrovich Tokarev. Description: Russian historian (1899-1985). Facts:  - instance of: human
-  [Knowledge Graph Triples]:
-   - instance of: human
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 0.7898368835449219,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "Sergei Aleksandrovich Tokarev was a professor."
-    }
-  ]
-}
-[Item 2]
-[Chunk Score: 0.7898] Sergei Aleksandrovich Tokarev was a professor.
-  [Local Connections]:
-   - None None None
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 0.6424951553344727,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "In mathematics"
-    }
-  ]
-}
-[Item 3]
-[Chunk Score: 0.6425] In mathematics
-  [Local Connections]:
-   - None None None
-
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-Unfortunately, the provided context does not mention the university where Sergei Aleksandrovich Tokarev worked as a professor. However, based on my global knowledge, I can suggest that it might be possible to find this information through external sources.
-
-If you provide more details or context about the specific university in question (e.g., its name), I would be happy to try and help further!
-==================================================
-==================================================
- QUERY: Using only the database, which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
-==================================================
-
---- RETRIEVED CONTEXT (Top 4 Items) ---
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "Items",
-  "id": "Q27715352",
-  "score": 1.0,
-  "triples": [
-    "instance of: scientific journal"
-  ]
-}
-[Item 1]
-[Chunk Score: 1.0000] Wikidata Entity: Items. Description: journal. Facts:  - instance of: scientific journal
-  [Knowledge Graph Triples]:
-   - instance of: scientific journal
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 0.6293056607246399,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "Sergei Aleksandrovich Tokarev was a professor."
-    }
-  ]
-}
-[Item 2]
-[Chunk Score: 0.6293] Sergei Aleksandrovich Tokarev was a professor.
-  [Local Connections]:
-   - None None None
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "Item",
-  "id": "Q121033050",
-  "score": 0.5,
-  "triples": [
-    "subclass of: item"
-  ]
-}
-[Item 3]
-[Chunk Score: 0.5000] Wikidata Entity: Item. Description: class of fictional entities in the 2007 video game Team Fortress 2. Facts:  - subclass of: item
-  [Knowledge Graph Triples]:
-   - subclass of: item
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "Wikidata items that need to be split",
-  "id": "Q91615393",
-  "score": 0.3333333333333333,
-  "triples": [
-    "instance of: WikiProject focus list",
-    "subclass of: conflation",
-    "part of: WikiProject Data Quality"
-  ]
-}
-[Item 4]
-[Chunk Score: 0.3333] Wikidata Entity: Wikidata items that need to be split. Description: Items that describe more than one thing and that need to be split into multiple items. Facts:  - instance of: WikiProject focus list  - subclass of: conflation  - part of: WikiProject Data Quality
-  [Knowledge Graph Triples]:
-   - instance of: WikiProject focus list
-   - subclass of: conflation
-   - part of: WikiProject Data Quality
-
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-A) Which items listed in the database are not currently in the store.
-
-This can be determined because it's a straightforward query that involves checking inventory levels. The other options require more complex analysis or data manipulation, such as comparing popularity trends between men and women (B), identifying most popular footwear types among adults (C), or calculating sales figures for specific time periods (D).
-==================================================
-==================================================
- QUERY: What subjects did Einstein flunk in school?
-==================================================
-
---- RETRIEVED CONTEXT (Top 7 Items) ---
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "Einstein",
-  "id": "Q16834800",
-  "score": 1.0,
-  "triples": [
-    "instance of: family name"
-  ]
-}
-[Item 1]
-[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
-  [Knowledge Graph Triples]:
-   - instance of: family name
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 0.8363418579101562,
+  "score": 0.6743379235267639,
   "local_context": [
     {
       "entity": null,
@@ -232,8 +17,8 @@ This can be determined because it's a straightforward query that involves checki
     }
   ]
 }
-[Item 2]
-[Chunk Score: 0.8363] Einstein was a student.
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
   [Local Connections]:
    - None None None
 
@@ -241,7 +26,7 @@ This can be determined because it's a straightforward query that involves checki
 
 [Metadata Dump]
 {
-  "score": 0.7529116868972778,
+  "score": 0.6372109055519104,
   "local_context": [
     {
       "entity": null,
@@ -252,105 +37,19 @@ This can be determined because it's a straightforward query that involves checki
     }
   ]
 }
-[Item 3]
-[Chunk Score: 0.7529] Sergei Aleksandrovich Tokarev was a professor.
+[Item 2]
+[Chunk Score: 0.6372] Sergei Aleksandrovich Tokarev was a professor.
   [Local Connections]:
    - None None None
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "subject",
-  "id": "Q830077",
-  "score": 0.5,
-  "triples": [
-    "part of: psychological terminology",
-    "part of: subject and object",
-    "subclass of: independent continuant"
-  ]
-}
-[Item 4]
-[Chunk Score: 0.5000] Wikidata Entity: subject. Description: being who has a unique consciousness and/or unique personal experiences, or an entity that has a relationship with another entity that exists outside of itself. Facts:  - part of: psychological terminology  - part of: subject and object  - subclass of: independent continuant
-  [Knowledge Graph Triples]:
-   - part of: psychological terminology
-   - part of: subject and object
-   - subclass of: independent continuant
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "school",
-  "id": "Q3914",
-  "score": 0.3333333333333333,
-  "triples": [
-    "has part(s): schoolchild",
-    "has part(s): school subject",
-    "instance of: geographical feature",
-    "has part(s): school library",
-    "has part(s): school building",
-    "has part(s): school teacher",
-    "instance of: ambiguous Wikidata item",
-    "subclass of: educational institution",
-    "subclass of: educational organization"
-  ]
-}
-[Item 5]
-[Chunk Score: 0.3333] Wikidata Entity: school. Description: institution for the education of students by teachers. Facts:  - has part(s): schoolchild  - has part(s): school subject  - instance of: geographical feature  - has part(s): school library  - has part(s): school building  - has part(s): school teacher  - instance of: ambiguous Wikidata item  - subclass of: educational institution  - subclass of: educational organization
-  [Knowledge Graph Triples]:
-   - has part(s): schoolchild
-   - has part(s): school subject
-   - instance of: geographical feature
-   - has part(s): school library
-   - has part(s): school building
-   - has part(s): school teacher
-   - instance of: ambiguous Wikidata item
-   - subclass of: educational institution
-   - subclass of: educational organization
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "Albert Einstein",
-  "id": "Q937",
-  "score": 0.25,
-  "triples": [
-    "instance of: human"
-  ]
-}
-[Item 6]
-[Chunk Score: 0.2500] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
-  [Knowledge Graph Triples]:
-   - instance of: human
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "SUBJECTS",
-  "id": "Q135064878",
-  "score": 0.2,
-  "triples": [
-    "instance of: video game"
-  ]
-}
-[Item 7]
-[Chunk Score: 0.2000] Wikidata Entity: SUBJECTS. Description: video game developed by Cemil Buğra Uzunkaya. Facts:  - instance of: video game
-  [Knowledge Graph Triples]:
-   - instance of: video game
 
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-Einstein flunked French and geometry.
+D) The total number of shoes sold in a particular month. 
+
+This can be determined because sales data is typically tracked and recorded, allowing for the calculation of totals such as monthly shoe sales.
 ==================================================
 ==================================================
  QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
@@ -404,4 +103,2384 @@ Einstein flunked French and geometry.
 D) The total number of shoes sold in a particular month. 
 
 This can be determined because sales data is typically tracked and recorded, allowing for the calculation of totals such as monthly shoe sales.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8389036059379578,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8389] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7529116868972778,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Sergei Aleksandrovich Tokarev was a professor."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.7529] Sergei Aleksandrovich Tokarev was a professor.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: mountain",
+    "country: Austria",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 5]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - instance of: mountain  - country: Austria  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - instance of: mountain
+   - country: Austria
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6372109055519104,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Sergei Aleksandrovich Tokarev was a professor."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.6372] Sergei Aleksandrovich Tokarev was a professor.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+D) The total number of shoes sold in a particular month. 
+
+This can be determined because sales data is typically tracked and recorded, allowing for the calculation of totals such as monthly shoe sales.
+==================================================
+==================================================
+ QUERY: Using only the database, which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "database",
+  "id": "Q8513",
+  "score": 1.0,
+  "triples": [
+    "has part(s): data",
+    "subclass of: work",
+    "has part(s): database management system",
+    "subclass of: data",
+    "subclass of: digital object",
+    "subclass of: data set",
+    "part of: host",
+    "has part(s): record",
+    "has part(s): data base",
+    "has part(s): integrity constraints"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: database. Description: organized collection of data in computing. Facts:  - has part(s): data  - subclass of: work  - has part(s): database management system  - subclass of: data  - subclass of: digital object  - subclass of: data set  - part of: host  - has part(s): record  - has part(s): data base  - has part(s): integrity constraints
+  [Knowledge Graph Triples]:
+   - has part(s): data
+   - subclass of: work
+   - has part(s): database management system
+   - subclass of: data
+   - subclass of: digital object
+   - subclass of: data set
+   - part of: host
+   - has part(s): record
+   - has part(s): data base
+   - has part(s): integrity constraints
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6641324758529663,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.6641] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6293056607246399,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Sergei Aleksandrovich Tokarev was a professor."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.6293] Sergei Aleksandrovich Tokarev was a professor.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "COLORS",
+  "id": "Q76098391",
+  "score": 0.5,
+  "triples": [
+    "instance of: music track with vocals"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.5000] Wikidata Entity: COLORS. Description: vocal track by Hikaru Utada; 2003 studio recording. Facts:  - instance of: music track with vocals
+  [Knowledge Graph Triples]:
+   - instance of: music track with vocals
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "shoe",
+  "id": "Q22676",
+  "score": 0.3333333333333333,
+  "triples": [
+    "subclass of: footwear",
+    "has part(s): shoe component"
+  ]
+}
+[Item 5]
+[Chunk Score: 0.3333] Wikidata Entity: shoe. Description: footwear. Facts:  - subclass of: footwear  - has part(s): shoe component
+  [Knowledge Graph Triples]:
+   - subclass of: footwear
+   - has part(s): shoe component
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "data set",
+  "id": "Q1172284",
+  "score": 0.25,
+  "triples": [
+    "subclass of: manifestation",
+    "subclass of: collection",
+    "has part(s): data",
+    "subclass of: scientific work",
+    "subclass of: intellectual work"
+  ]
+}
+[Item 6]
+[Chunk Score: 0.2500] Wikidata Entity: data set. Description: collection of data, publication type. Facts:  - subclass of: manifestation  - subclass of: collection  - has part(s): data  - subclass of: scientific work  - subclass of: intellectual work
+  [Knowledge Graph Triples]:
+   - subclass of: manifestation
+   - subclass of: collection
+   - has part(s): data
+   - subclass of: scientific work
+   - subclass of: intellectual work
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Colors",
+  "id": "Q5149078",
+  "score": 0.2,
+  "triples": [
+    "instance of: video game"
+  ]
+}
+[Item 7]
+[Chunk Score: 0.2000] Wikidata Entity: Colors. Description: 2006 video game. Facts:  - instance of: video game
+  [Knowledge Graph Triples]:
+   - instance of: video game
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+A) Which items listed in the database are not currently in the store. 
+
+This can be determined because a database is an organized collection of data, and it's possible to track which items are present or absent from the inventory based on its contents. The other options cannot be directly inferred from what we know about databases.
+==================================================
+==================================================
+ QUERY: Using only the database, which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "database",
+  "id": "Q8513",
+  "score": 1.0,
+  "triples": [
+    "has part(s): data",
+    "subclass of: work",
+    "has part(s): database management system",
+    "subclass of: data",
+    "subclass of: digital object",
+    "subclass of: data set",
+    "part of: host",
+    "has part(s): record",
+    "has part(s): data base",
+    "has part(s): integrity constraints"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: database. Description: organized collection of data in computing. Facts:  - has part(s): data  - subclass of: work  - has part(s): database management system  - subclass of: data  - subclass of: digital object  - subclass of: data set  - part of: host  - has part(s): record  - has part(s): data base  - has part(s): integrity constraints
+  [Knowledge Graph Triples]:
+   - has part(s): data
+   - subclass of: work
+   - has part(s): database management system
+   - subclass of: data
+   - subclass of: digital object
+   - subclass of: data set
+   - part of: host
+   - has part(s): record
+   - has part(s): data base
+   - has part(s): integrity constraints
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6641324758529663,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.6641] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6293056607246399,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Sergei Aleksandrovich Tokarev was a professor."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.6293] Sergei Aleksandrovich Tokarev was a professor.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "COLORS",
+  "id": "Q76098391",
+  "score": 0.5,
+  "triples": [
+    "instance of: music track with vocals"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.5000] Wikidata Entity: COLORS. Description: vocal track by Hikaru Utada; 2003 studio recording. Facts:  - instance of: music track with vocals
+  [Knowledge Graph Triples]:
+   - instance of: music track with vocals
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "shoe",
+  "id": "Q22676",
+  "score": 0.3333333333333333,
+  "triples": [
+    "subclass of: footwear",
+    "has part(s): shoe component"
+  ]
+}
+[Item 5]
+[Chunk Score: 0.3333] Wikidata Entity: shoe. Description: footwear. Facts:  - subclass of: footwear  - has part(s): shoe component
+  [Knowledge Graph Triples]:
+   - subclass of: footwear
+   - has part(s): shoe component
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "data set",
+  "id": "Q1172284",
+  "score": 0.25,
+  "triples": [
+    "subclass of: manifestation",
+    "subclass of: collection",
+    "has part(s): data",
+    "subclass of: scientific work",
+    "subclass of: intellectual work"
+  ]
+}
+[Item 6]
+[Chunk Score: 0.2500] Wikidata Entity: data set. Description: collection of data, publication type. Facts:  - subclass of: manifestation  - subclass of: collection  - has part(s): data  - subclass of: scientific work  - subclass of: intellectual work
+  [Knowledge Graph Triples]:
+   - subclass of: manifestation
+   - subclass of: collection
+   - has part(s): data
+   - subclass of: scientific work
+   - subclass of: intellectual work
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Colors",
+  "id": "Q5149078",
+  "score": 0.2,
+  "triples": [
+    "instance of: video game"
+  ]
+}
+[Item 7]
+[Chunk Score: 0.2000] Wikidata Entity: Colors. Description: 2006 video game. Facts:  - instance of: video game
+  [Knowledge Graph Triples]:
+   - instance of: video game
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+A) Which items listed in the database are not currently in the store. 
+
+This can be determined because a database is an organized collection of data, and it's possible to track which items are present or absent from the inventory based on its contents. The other options cannot be directly inferred from what we know about databases.
+==================================================
+==================================================
+ QUERY: Using only the database, which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "database",
+  "id": "Q8513",
+  "score": 1.0,
+  "triples": [
+    "has part(s): data",
+    "subclass of: work",
+    "has part(s): database management system",
+    "subclass of: data",
+    "subclass of: digital object",
+    "subclass of: data set",
+    "part of: host",
+    "has part(s): record",
+    "has part(s): data base",
+    "has part(s): integrity constraints"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: database. Description: organized collection of data in computing. Facts:  - has part(s): data  - subclass of: work  - has part(s): database management system  - subclass of: data  - subclass of: digital object  - subclass of: data set  - part of: host  - has part(s): record  - has part(s): data base  - has part(s): integrity constraints
+  [Knowledge Graph Triples]:
+   - has part(s): data
+   - subclass of: work
+   - has part(s): database management system
+   - subclass of: data
+   - subclass of: digital object
+   - subclass of: data set
+   - part of: host
+   - has part(s): record
+   - has part(s): data base
+   - has part(s): integrity constraints
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6641324758529663,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.6641] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6293056607246399,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Sergei Aleksandrovich Tokarev was a professor."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.6293] Sergei Aleksandrovich Tokarev was a professor.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "COLORS",
+  "id": "Q76098391",
+  "score": 0.5,
+  "triples": [
+    "instance of: music track with vocals"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.5000] Wikidata Entity: COLORS. Description: vocal track by Hikaru Utada; 2003 studio recording. Facts:  - instance of: music track with vocals
+  [Knowledge Graph Triples]:
+   - instance of: music track with vocals
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "shoe",
+  "id": "Q22676",
+  "score": 0.3333333333333333,
+  "triples": [
+    "subclass of: footwear",
+    "has part(s): shoe component"
+  ]
+}
+[Item 5]
+[Chunk Score: 0.3333] Wikidata Entity: shoe. Description: footwear. Facts:  - subclass of: footwear  - has part(s): shoe component
+  [Knowledge Graph Triples]:
+   - subclass of: footwear
+   - has part(s): shoe component
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "data set",
+  "id": "Q1172284",
+  "score": 0.25,
+  "triples": [
+    "subclass of: manifestation",
+    "subclass of: collection",
+    "has part(s): data",
+    "subclass of: scientific work",
+    "subclass of: intellectual work"
+  ]
+}
+[Item 6]
+[Chunk Score: 0.2500] Wikidata Entity: data set. Description: collection of data, publication type. Facts:  - subclass of: manifestation  - subclass of: collection  - has part(s): data  - subclass of: scientific work  - subclass of: intellectual work
+  [Knowledge Graph Triples]:
+   - subclass of: manifestation
+   - subclass of: collection
+   - has part(s): data
+   - subclass of: scientific work
+   - subclass of: intellectual work
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Colors",
+  "id": "Q5149078",
+  "score": 0.2,
+  "triples": [
+    "instance of: video game"
+  ]
+}
+[Item 7]
+[Chunk Score: 0.2000] Wikidata Entity: Colors. Description: 2006 video game. Facts:  - instance of: video game
+  [Knowledge Graph Triples]:
+   - instance of: video game
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+A) Which items listed in the database are not currently in the store. 
+
+This can be determined because a database is an organized collection of data, and it's possible to track which items are present or absent from the inventory based on its contents. The other options cannot be directly inferred from what we know about databases.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8389036059379578,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8389] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "country: Austria",
+    "instance of: mountain",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - country: Austria  - instance of: mountain  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - country: Austria
+   - instance of: mountain
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C) Which type of footwear is most popular among adults. 
+
+This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8389036059379578,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8389] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "country: Austria",
+    "instance of: mountain",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - country: Austria  - instance of: mountain  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - country: Austria
+   - instance of: mountain
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C) Which type of footwear is most popular among adults. 
+
+This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8389036059379578,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8389] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "country: Austria",
+    "instance of: mountain",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - country: Austria  - instance of: mountain  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - country: Austria
+   - instance of: mountain
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C) Which type of footwear is most popular among adults. 
+
+This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.
+==================================================
+==================================================
+ QUERY: Using only the database, which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "database",
+  "id": "Q8513",
+  "score": 1.0,
+  "triples": [
+    "has part(s): database management system",
+    "has part(s): data",
+    "subclass of: work",
+    "subclass of: data",
+    "part of: host",
+    "subclass of: data set",
+    "subclass of: digital object",
+    "has part(s): integrity constraints",
+    "has part(s): data dictionary",
+    "has part(s): record"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: database. Description: organized collection of data in computing. Facts:  - has part(s): database management system  - has part(s): data  - subclass of: work  - subclass of: data  - part of: host  - subclass of: data set  - subclass of: digital object  - has part(s): integrity constraints  - has part(s): data dictionary  - has part(s): record
+  [Knowledge Graph Triples]:
+   - has part(s): database management system
+   - has part(s): data
+   - subclass of: work
+   - subclass of: data
+   - part of: host
+   - subclass of: data set
+   - subclass of: digital object
+   - has part(s): integrity constraints
+   - has part(s): data dictionary
+   - has part(s): record
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6641324758529663,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.6641] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "COLORS",
+  "id": "Q76098391",
+  "score": 0.5,
+  "triples": [
+    "instance of: music track with vocals"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: COLORS. Description: vocal track by Hikaru Utada; 2003 studio recording. Facts:  - instance of: music track with vocals
+  [Knowledge Graph Triples]:
+   - instance of: music track with vocals
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "shoe",
+  "id": "Q22676",
+  "score": 0.3333333333333333,
+  "triples": [
+    "has part(s): shoe component",
+    "subclass of: footwear"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: shoe. Description: footwear. Facts:  - has part(s): shoe component  - subclass of: footwear
+  [Knowledge Graph Triples]:
+   - has part(s): shoe component
+   - subclass of: footwear
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "data set",
+  "id": "Q1172284",
+  "score": 0.25,
+  "triples": [
+    "subclass of: manifestation",
+    "subclass of: collection",
+    "has part(s): data",
+    "subclass of: scientific work",
+    "subclass of: intellectual work"
+  ]
+}
+[Item 5]
+[Chunk Score: 0.2500] Wikidata Entity: data set. Description: collection of data, publication type. Facts:  - subclass of: manifestation  - subclass of: collection  - has part(s): data  - subclass of: scientific work  - subclass of: intellectual work
+  [Knowledge Graph Triples]:
+   - subclass of: manifestation
+   - subclass of: collection
+   - has part(s): data
+   - subclass of: scientific work
+   - subclass of: intellectual work
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Colors",
+  "id": "Q5149078",
+  "score": 0.2,
+  "triples": [
+    "instance of: video game"
+  ]
+}
+[Item 6]
+[Chunk Score: 0.2000] Wikidata Entity: Colors. Description: 2006 video game. Facts:  - instance of: video game
+  [Knowledge Graph Triples]:
+   - instance of: video game
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+B) Which colors are more popular among men than women.
+
+This option is not directly related to the provided context, which focuses on a database and its properties. However, since there's no information about color preferences in the given facts, this question seems unrelated or too specific for what can be determined from the database alone.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8389036059379578,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8389] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: mountain",
+    "country: Austria",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - instance of: mountain  - country: Austria  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - instance of: mountain
+   - country: Austria
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C) Which type of footwear is most popular among adults. 
+
+This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8413797616958618,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8414] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: mountain",
+    "country: Austria",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - instance of: mountain  - country: Austria  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - instance of: mountain
+   - country: Austria
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C) Which type of footwear is most popular among adults. 
+
+This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8413797616958618,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8414] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: mountain",
+    "country: Austria",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - instance of: mountain  - country: Austria  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - instance of: mountain
+   - country: Austria
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C) Which type of footwear is most popular among adults. 
+
+This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8413797616958618,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8414] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "country: Austria",
+    "instance of: mountain",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - country: Austria  - instance of: mountain  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - country: Austria
+   - instance of: mountain
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C) Which type of footwear is most popular among adults. 
+
+This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8413797616958618,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8414] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "country: Austria",
+    "instance of: mountain",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - country: Austria  - instance of: mountain  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - country: Austria
+   - instance of: mountain
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C) Which type of footwear is most popular among adults. 
+
+This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8413797616958618,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8414] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "country: Austria",
+    "instance of: mountain",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - country: Austria  - instance of: mountain  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - country: Austria
+   - instance of: mountain
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C) Which type of footwear is most popular among adults. 
+
+This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8413797616958618,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8414] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: mountain",
+    "country: Austria",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - instance of: mountain  - country: Austria  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - instance of: mountain
+   - country: Austria
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C) Which type of footwear is most popular among adults. 
+
+This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8413797616958618,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8414] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: mountain",
+    "country: Austria",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - instance of: mountain  - country: Austria  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - instance of: mountain
+   - country: Austria
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================
+==================================================
+ QUERY: Which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.6743379235267639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.6743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C) Which type of footwear is most popular among adults. 
+
+This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8413797616958618,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8414] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human
+  [Knowledge Graph Triples]:
+   - instance of: human
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "country: Austria",
+    "instance of: mountain",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - country: Austria  - instance of: mountain  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle
+  [Knowledge Graph Triples]:
+   - country: Austria
+   - instance of: mountain
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
 ==================================================

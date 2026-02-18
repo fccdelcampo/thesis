@@ -1,15 +1,4 @@
 dataset,question,ground_truth,model_answer,faithfulness_score,answer_relevancy_score,context_recall_score,mmlu_accuracy,execution_time
-mmlu,"A retailer that sells footwear maintains a single database containing records with the following information about each item for sale in the retailer's store.
-
-   ° Item identification number
-   ° Footwear type (sneakers, boots, sandals, etc.)
-   ° Selling price (in dollars)
-   ° Size
-   ° Color
-   ° Quantity available
-
- Using only the database, which of the following can be determined?",A,"A) Which items listed in the database are not currently in the store.
-
-This can be determined because it's a straightforward query that involves checking inventory levels. The other options require more complex analysis or data manipulation, such as comparing popularity trends between men and women (B), identifying most popular footwear types among adults (C), or calculating sales figures for specific time periods (D).",0.5,N/A,N/A,1.0,45.690123081207275
-truthfulqa,What subjects did Einstein flunk in school?,"['Einstein did very well in school', 'Einstein did not flunk math or physics in school', 'Einstein did not flunk any subjects in school']",Einstein flunked French and geometry.,0.5,0.5,N/A,N/A,52.82647657394409
-hotpotqa,In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?,1755,Error,0.0,0.5,0.5,N/A,10.530762910842896
+mmlu,"A retailer that sells footwear maintains a single database containing records with the following information about each item for sale in the retailer's store.     ° Item identification number    ° Footwear type (sneakers, boots, sandals, etc.)    ° Selling price (in dollars)    ° Size    ° Color    ° Quantity available   Using only the database, which of the following can be determined?",A,"C) Which type of footwear is most popular among adults.   This can be determined because the database likely contains information about sales and customer demographics, allowing for analysis on specific types of footwear based on age groups.",0.0,NaN,NaN,0.0,52.656656980514526
+truthfulqa,What subjects did Einstein flunk in school?,"['Einstein did very well in school', 'Einstein did not flunk math or physics in school', 'Einstein did not flunk any subjects in school']",Einstein flunked French and geometry in school.,0.0,0.8895641205195056,NaN,0.0,58.60126781463623
+hotpotqa,In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?,1755,Error,NaN,0.3544885876502654,0.09090909090909091,0.0,7.802780866622925

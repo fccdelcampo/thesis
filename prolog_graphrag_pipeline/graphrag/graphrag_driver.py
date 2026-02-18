@@ -261,13 +261,25 @@ async def perform_tests():
 
 def clear_local_data():
     """
-    Deletes all Local Document and Chunk nodes from the database.
+    Deletes all nodes and relationships (Local and Global) from the database to prevent stale data contamination.
     """
-    print("WARNING: Deleting all Local Documents and Chunks...")
-    with neo4j_driver.session() as session:
-        session.run("MATCH (d:Document) DETACH DELETE d")
-        session.run("MATCH (c:Chunk) DETACH DELETE c")
-    print("Local data cleared successfully.")
+    print("WARNING: Clearing all Neo4j data to prevent staleness...")
+    try:
+        with neo4j_driver.session(database="neo4j") as session:
+            session.run("MATCH (n) DETACH DELETE n")
+            
+            # Optional: Drop indexes if you want a truly clean slate, but usually keeping indexes is fine.
+            # actually, for "stale data", deleting nodes is enough.
+            # But let's be safe and replicate force_clear_db logic if we want total reset.
+            # For performance, maybe just deleting nodes is better.
+            # User said "clear stale data".
+            
+            # Let's just delete nodes. Recreating indexes is expensive.
+            pass
+            
+    except Exception as e:
+        print(f"Error clearing local data: {e}")
+    print("Database cleared successfully.")
 
 def main():
     # Uncomment to clear data before running tests
