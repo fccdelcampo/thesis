@@ -107,7 +107,7 @@ def run_test_case(test_case: dict, test_case_id: int):
 
     # 2. Prolog GraphRAG
     try:
-        pgr_result = run_prolog_graphrag(question, flag="prolog")
+        pgr_result = run_prolog_graphrag(question)
         contexts = pgr_result.get("contexts", [])
         if isinstance(contexts, str):
             contexts = [contexts]

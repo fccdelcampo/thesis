@@ -10,7 +10,7 @@ if project_root not in sys.path:
 from prolog_graphrag_pipeline.graphrag.graphrag_driver import initialize_models, neo4j_driver
 from prolog_graphrag_pipeline.graphrag.retriever import create_retriever, FallbackRetriever
 
-def test_expansion_relevance():
+def test_expansion_relevancy():
     print("Initializing...")
     _, retriever_llm, embedder = initialize_models()
     from prolog_graphrag_pipeline.graphrag.config import RETRIEVAL_QUERY
@@ -40,4 +40,4 @@ def test_expansion_relevance():
         print(f"[{score:.4f}] {item.content[:100]}...")
 
 if __name__ == "__main__":
-    test_expansion_relevance()
+    test_expansion_relevancy()

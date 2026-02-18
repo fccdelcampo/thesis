@@ -86,6 +86,7 @@ def generate_qq_grids():
         if not scores_path.exists():
             continue
         df = pd.read_csv(scores_path)
+        
 
         pipelines = list(Pipeline)
         n = len(pipelines)
@@ -104,15 +105,23 @@ def generate_qq_grids():
                 continue
 
             scipy_stats.probplot(data, dist="norm", plot=ax)
-            ax.set_title(pipeline.value[1])
+            ax.set_title(pipeline.value[0])
 
             # annotate p-value from normality test if available
             if not normal_df.empty:
                 row = normal_df.loc[(normal_df['eval_name'] == eval_name) & (normal_df['pipeline'] == pipeline.value[1])]
                 if not row.empty:
                     p_val = row['p_value'].values[0]
+                    # display p-value and interpret normality under it
                     if not pd.isna(p_val):
-                        ax.text(0.05, 0.95, f"p={p_val:.3g}", transform=ax.transAxes, verticalalignment='top')
+                        try:
+                            p_float = float(p_val)
+                        except Exception:
+                            p_float = np.nan
+                        ax.text(0.05, 0.95, f"p={p_float:.3g}", transform=ax.transAxes, verticalalignment='top')
+                        interp = 'NON-NORMAL' if (not pd.isna(p_float) and p_float < ALPHA) else 'NORMAL'
+                        props = dict(boxstyle='round', facecolor='white', alpha=0.85)
+                        ax.text(0.05, 0.88, interp, transform=ax.transAxes, verticalalignment='top', bbox=props)
 
         fig.suptitle(f"Q-Q plots for {eval.value[0]}")
         fig.tight_layout(rect=[0, 0.03, 1, 0.95])
@@ -131,63 +140,83 @@ def generate_box_plot_grids():
         if not scores_path.exists():
             continue
         df = pd.read_csv(scores_path)
-        generate_box_plot(eval_name, df)
+        generate_box_plot(eval, df)
 
+def file_to_plain(pipeline_name: str):
+    if pipeline_name in ["prolog_graphrag_score", "prolog_graphrag"]:
+        return "Prolog-GraphRAG"
+    if pipeline_name in ["graphrag_score", "graphrag"]:
+        return "GraphRAG"
+    if pipeline_name in ["tuned_score", "tuned"]:
+        return "LLaMa 3.1 Instruct"
+    raise ValueError(f"Invalid pipeline name: {pipeline_name}")
 
-def generate_box_plot(eval_name: str, df: pd.DataFrame):
+def generate_box_plot(eval: str, df: pd.DataFrame):
     """
     Create and save a boxplot comparing pipelines for `eval_name` using columns like 'tuned_score'.
     Adds a textbox with pipelines' mean rank (higher score => better rank).
     """
-<<<<<<< HEAD
     score_cols = [c for c in df.columns if c.endswith("_score")]
     if not score_cols:
         return
+    
+    print("SCORE COLS: ", score_cols)
+    print(f"{eval.value[0]} BEFORE MELT DF: ")
+    print(df[score_cols])
+    print()
 
     # Compute per-row ranks (higher score -> higher rank) and average
-    ranks = df[score_cols].rank(axis=1, method='average', ascending=False)
+    ranks = df[score_cols].rank(axis=1, method='average')
+    
     mean_ranks = ranks.mean(skipna=True)
-    pipelines = [c.replace('_score', '') for c in score_cols]
+    pipelines = [c for c in score_cols]
     mean_ranks.index = pipelines
 
     melt_df = pd.melt(df, value_vars=score_cols, var_name='pipeline', value_name='score')
-=======
-    # Clean data before melting
-    clean_df = df.copy()
-    score_cols = [c for c in df.columns if c.endswith("_score")]
-    for col in score_cols:
-        # We need to assign back to the dataframe. 
-        # clean_data_column returns np.ndarray.
-        # We need to respect the index or just assign if lengths match.
-        # However, clean_data_column drops NaNs. 
-        # For boxplot with melt, we want to keep structure but just convert types.
-        # If we drop NaNs, rows might misalign if we are not careful.
-        # Actually, clean_data_column drops NaNs, which might be an issue if we just replace the column.
-        # Better approach: Convert flexible, then drop NaNs specific to the plot if needed?
-        # Or just parse robustly without dropping NaNs yet?
-        
-        # Let's write a localized parsing loop that preserves NaNs/structure for the dataframe
-        # Or, just iterate and fix values.
-        clean_df[col] = clean_df[col].apply(lambda x: parse_value_robust(x))
-
-    melt_df = pd.melt(clean_df, id_vars=[c for c in df.columns if not c.endswith("_score")], value_vars=score_cols, var_name="pipeline", value_name="score")
-    # normalize pipeline names to match Pipeline.value[1]
->>>>>>> 05c205073d980aca902a3c2efcf4793c25770ff6
-    melt_df['pipeline'] = melt_df['pipeline'].str.replace('_score', '')
-
+    melt_df['pipeline'] = melt_df['pipeline'].str.replace('_score', '').replace("tuned", "LLaMa 3.1 Instruct").replace("prolog_graphrag", "Prolog-GraphRAG").replace("graphrag", "GraphRAG")
+    
+    print(f"{eval.value[0]} MELT DF: ")
+    print(melt_df)
+    print()
     plt.figure(figsize=(8, 6))
-    ax = sns.boxplot(x='pipeline', y='score', data=melt_df, order=pipelines)
-    plt.title(f"{eval_name} — score distribution by pipeline")
+    print('pipelines variable:', pipelines)
+    print('unique pipelines in melt_df:', melt_df['pipeline'].unique())
+    print('counts:', melt_df['pipeline'].value_counts().to_dict())
+    ax = sns.boxplot(x='pipeline', y='score', data=melt_df)
+    plt.title(f"{eval.value[0]} — score distribution by pipeline")
     plt.xlabel("")
     plt.ylabel("Score")
 
-    rank_lines = [f"{p}: {mean_ranks[p]:.3f}" for p in pipelines]
+    rank_lines = [f"{file_to_plain(p)} Mean Rank: {mean_ranks[p]:.3f}" for p in pipelines]
     rank_text = "\n".join(rank_lines)
     props = dict(boxstyle='round', facecolor='white', alpha=0.85)
     ax.text(0.98, 0.98, rank_text, transform=ax.transAxes, fontsize=9,
             verticalalignment='top', horizontalalignment='right', bbox=props)
 
-    out_path = OUTPUT_DIR / f"boxplot_{eval_name}.png"
+    # add hypothesis test p-value and interpretation textbox (if available)
+    hypothesis_path = RESULTS_DIR / "hypothesis_test_results.csv"
+    hyp_text = "p=NA\nUNKNOWN"
+    if hypothesis_path.exists():
+        try:
+            hyp_df = pd.read_csv(hypothesis_path)
+            row = hyp_df.loc[hyp_df['eval_name'] == eval.value[1]]
+            if not row.empty:
+                raw_p = row['p_value'].values[0]
+                p_val = parse_value_robust(raw_p)
+                interp = row['interpretation'].values[0] if 'interpretation' in row.columns else (
+                    'SIGNIFICANT' if (not pd.isna(p_val) and float(p_val) < ALPHA) else 'NON-SIGNIFICANT'
+                )
+                if pd.isna(p_val):
+                    hyp_text = "p=NA\nERROR"
+                else:
+                    hyp_text = f"p={float(p_val):.3g}\n{interp}"
+        except Exception:
+            hyp_text = "p=NA\nERROR"
+
+    ax.text(0.02, 0.98, hyp_text, transform=ax.transAxes, fontsize=10,
+            verticalalignment='top', horizontalalignment='left', bbox=props)
+
+    out_path = OUTPUT_DIR / f"boxplot_{eval.value[1]}.png"
     plt.tight_layout()
     plt.savefig(out_path)
     plt.close()
@@ -203,10 +232,10 @@ def generate_bar_graph_grid():
         if not scores_path.exists():
             continue
         df = pd.read_csv(scores_path)
-        generate_bar_graph(eval_name, df)
+        generate_bar_graph(eval, df)
 
 
-def generate_bar_graph(eval_name: str, df: pd.DataFrame):
+def generate_bar_graph(eval, df: pd.DataFrame):
     """
     Create and save a bar graph comparing pipelines for `eval_name` using columns like '<pipeline>_score'.
     Computes proportion (mean) and standard error for binary/discrete scores and draws errorbars.
@@ -217,13 +246,7 @@ def generate_bar_graph(eval_name: str, df: pd.DataFrame):
 
     stats = []
     for col in score_cols:
-<<<<<<< HEAD
         values = df[col].dropna().to_numpy()
-=======
-        values = clean_data_column(df, col)
-        if n is None:
-            n = values.size
->>>>>>> 05c205073d980aca902a3c2efcf4793c25770ff6
         prop = np.nan
         se = np.nan
         if values.size > 0:
@@ -233,12 +256,12 @@ def generate_bar_graph(eval_name: str, df: pd.DataFrame):
         stats.append({'pipeline': pipeline_name, 'prop': prop, 'se': se})
 
     stats_df = pd.DataFrame(stats)
-    order = stats_df['pipeline'].tolist()
+    stats_df['pipeline'] = stats_df['pipeline'].str.replace('_score', '').replace("tuned", "LLaMa 3.1 Instruct").replace("prolog_graphrag", "Prolog-GraphRAG").replace("graphrag", "GraphRAG")
 
     plt.figure(figsize=(8, 6))
-    ax = sns.barplot(x='pipeline', y='prop', data=stats_df, order=order, ci=None)
+    ax = sns.barplot(x='pipeline', y='prop', data=stats_df, ci=None)
     ax.set_ylim(0, 1)
-    plt.title(f"{eval_name} — proportion correct by pipeline")
+    plt.title(f"{eval.value[0]} — proportion correct by pipeline")
     plt.ylabel('Proportion')
     plt.xlabel('')
 
@@ -247,10 +270,38 @@ def generate_bar_graph(eval_name: str, df: pd.DataFrame):
     ses = stats_df['se'].values
     ax.errorbar(xcoords, props, yerr=ses, fmt='none', ecolor='k', capsize=5)
 
+    # place the mean value centered inside each bar with larger font
     for i, val in enumerate(props):
-        ax.text(i, val + 0.02, f"{val:.3f}", ha='center')
+        # y position at middle of the bar; ensure a small offset for extremely small bars
+        y = val / 2.0
+        y = y if y > 0.02 else 0.02
+        ax.text(i, y, f"{val:.3f}", ha='center', va='center', fontsize=11, fontweight='bold', color='white')
 
-    out_path = OUTPUT_DIR / f"barplot_{eval_name}.png"
+    # add hypothesis test p-value and interpretation textbox (if available)
+    hypothesis_path = RESULTS_DIR / "hypothesis_test_results.csv"
+    hyp_text = "p=NA\nUNKNOWN"
+    if hypothesis_path.exists():
+        try:
+            hyp_df = pd.read_csv(hypothesis_path)
+            row = hyp_df.loc[hyp_df['eval_name'] == eval.value[1]]
+            if not row.empty:
+                raw_p = row['p_value'].values[0]
+                p_val = parse_value_robust(raw_p)
+                interp = row['interpretation'].values[0] if 'interpretation' in row.columns else (
+                    'SIGNIFICANT' if (not pd.isna(p_val) and float(p_val) < ALPHA) else 'NON-SIGNIFICANT'
+                )
+                if pd.isna(p_val):
+                    hyp_text = "p=NA\nERROR"
+                else:
+                    hyp_text = f"p={float(p_val):.3g}\n{interp}"
+        except Exception:
+            hyp_text = "p=NA\nERROR"
+
+    props = dict(boxstyle='round', facecolor='white', alpha=0.85)
+    ax.text(0.02, 0.95, hyp_text, transform=ax.transAxes, fontsize=10,
+            verticalalignment='top', horizontalalignment='left', bbox=props)
+
+    out_path = OUTPUT_DIR / f"barplot_{eval.value[1]}.png"
     plt.tight_layout()
     plt.savefig(out_path)
     plt.close()

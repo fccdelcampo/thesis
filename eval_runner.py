@@ -12,9 +12,9 @@ except ImportError:
         print(f"Warning: ragas not installed or import failed: {e}. Evaluation logic will simulate calls or fail.")
 
 # Loaders
-from test_cases.loaders.mmlu_loader import MMLULoader
-from test_cases.loaders.truthfulqa_loader import TruthfulQALoader
-from test_cases.loaders.hotpotqa_loader import HotpotQALoader
+from loaders.mmlu_loader import MMLULoader
+from loaders.truthfulqa_loader import TruthfulQALoader
+from loaders.hotpotqa_loader import HotpotQALoader
 
 import sys
 
@@ -24,7 +24,7 @@ sys.path.append(pipeline_dir)
 
 # Import the REAL pipeline driver (GraphRAG Only)
 try:
-    from graphrag import graphrag_driver
+    from graphrag_pipeline import graphrag_driver
 except ImportError as e:
     print(f"CRITICAL ERROR: Could not import graphrag_driver: {e}")
     sys.exit(1)
@@ -41,6 +41,10 @@ class GraphRAGSystem:
                 "contexts": [],
                 "error": str(e)
             }
+            
+def load_cases():
+    data = MMLULoader().load_data()
+    print(data)
 
 def run_evaluation():
     # 1. Setup
@@ -137,4 +141,5 @@ def run_evaluation():
     print(f"\nEvaluation complete. Results saved to {results_file}")
 
 if __name__ == "__main__":
-    run_evaluation()
+    # run_evaluation()
+    load_cases()

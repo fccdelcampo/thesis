@@ -3,7 +3,7 @@ Hallucination Evaluation Pipeline - Main Driver
 
 Orchestrates the full evaluation pipeline:
 1. (Optional) Generate synthetic testset from documents
-2. Run hallucination metrics (Faithfulness, Answer Relevance, Context Recall)
+2. Run hallucination metrics (Faithfulness, Answer Relevancy, Context Recall)
 3. Run benchmark evaluators (HotpotQA, MMLU, TruthfulQA)
 4. Run statistical analysis
 
@@ -28,7 +28,7 @@ if pipeline_root not in sys.path:
 if current_dir not in sys.path:
     sys.path.append(current_dir)
 
-import answer_relevance
+import answer_relevancy
 import context_recall
 import faithfulness
 
@@ -52,11 +52,11 @@ def run_hallucination_metrics():
     except Exception as e:
         print(f"Faithfulness failed: {e}")
     
-    print("\n--- Answer Relevance ---")
+    print("\n--- Answer Relevancy ---")
     try:
-        answer_relevance.main()
+        answer_relevancy.main()
     except Exception as e:
-        print(f"Answer Relevance failed: {e}")
+        print(f"Answer Relevancy failed: {e}")
     
     print("\n--- Context Recall ---")
     try:
