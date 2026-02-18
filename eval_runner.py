@@ -3,17 +3,18 @@ import os
 import time
 import math
 import requests
+import traceback
 
 # Metrics
 try:
-    from ragas.metrics import faithfulness, answer_relevancy, context_recall
+    from ragas.metrics.collections import faithfulness, answer_relevancy, context_recall
     from ragas import evaluate
     from datasets import Dataset
     from langchain_community.chat_models import ChatOllama
     from langchain_community.embeddings import OllamaEmbeddings
 except ImportError:
     try:
-        from ragas.metrics import faithfulness, answer_relevancy, context_recall
+        from ragas.metrics.collections import faithfulness, answer_relevancy, context_recall
         from ragas import evaluate
         from datasets import Dataset
         from langchain_community.chat_models import ChatOllama
@@ -110,32 +111,42 @@ import sys
 pipeline_dir = os.path.join(os.path.dirname(__file__), 'prolog_graphrag_pipeline')
 sys.path.append(pipeline_dir)
 
-# Import the REAL pipeline driver (GraphRAG Only)
+# Import the REAL pipeline driver (Full Prolog GraphRAG)
 try:
-    from graphrag import graphrag_driver
+    import main_driver
 except ImportError as e:
-    print(f"CRITICAL ERROR: Could not import graphrag_driver: {e}")
+    print(f"CRITICAL ERROR: Could not import main_driver: {e}")
     sys.exit(1)
 
 class GraphRAGSystem:
     def query(self, input_text):
         try:
-            # Run the actual pipeline (GraphRAG Only)
-            return graphrag_driver.run_pipeline(input_text)
+            # Run the actual pipeline (Prolog GraphRAG)
+            # flag="" means run everything (GraphRAG -> Prolog -> LLM)
+            return main_driver.run_pipeline(input_text, flag="", include_conclusion=True)
         except Exception as e:
-            print(f"Error querying pipeline: {e}")
+            error_msg = f"Error querying pipeline: {e}\n{traceback.format_exc()}"
+            print(error_msg)
+            # Write to error log
+            with open("eval_error.log", "a") as f: # Append mode, not write
+                f.write(error_msg + "\n" + "="*50 + "\n")
             return {
                 "answer": "Error",
                 "contexts": [],
                 "error": str(e)
             }
 
+def sanitize(text):
+    if isinstance(text, str):
+        return text.replace('\n', ' ').strip()
+    return text
+
 def run_evaluation():
     # 1. Setup
     graph_rag = GraphRAGSystem()
     loaders = [
-        MMLULoader(),
-        TruthfulQALoader(),
+        # MMLULoader(),
+        # TruthfulQALoader(),
         HotpotQALoader()
     ]
     
@@ -172,14 +183,27 @@ def run_evaluation():
                 answer = response.get('answer', '')
                 contexts = response.get('contexts', [])
                 
+                # If the pipeline failed, skip Ragas to avoid confusing metrics (like 0.09 context recall on empty context)
+                if answer == "Error":
+                    print(f"  Skipping Ragas for {case['question']} due to pipeline error.")
+                    row = {
+                        "dataset": case['dataset'],
+                        "question": sanitize(case['question']),
+                        "ground_truth": sanitize(case['ground_truth']),
+                        "model_answer": "Error",
+                        "faithfulness_score": "NaN",
+                        "answer_relevancy_score": "NaN",
+                        "context_recall_score": "NaN",
+                        "mmlu_accuracy": 0.0,
+                        "execution_time": duration
+                    }
+                    writer.writerow(row)
+                    continue
+
                 # Unload GraphRAG model from VRAM before RAGAS evaluation
                 unload_ollama_model()
                 
                 # Sanitize fields by removing newlines
-                def sanitize(text):
-                    if isinstance(text, str):
-                        return text.replace('\n', ' ').strip()
-                    return text
 
                 # 4. Batched Evaluation Setup
                 # Ragas works best when evaluating a dataset of multiple samples.

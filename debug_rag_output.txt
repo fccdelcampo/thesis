@@ -2782,3 +2782,946 @@ This is a correct answer because it can be determined from the context that a "d
 ==================================================
 Einstein flunked French and geometry in school.
 ==================================================
+==================================================
+ QUERY: Using only the database, which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "database",
+  "id": "Q8513",
+  "score": 1.0,
+  "triples": [
+    "subclass of: work",
+    "subclass of: data",
+    "subclass of: digital object",
+    "subclass of: data set",
+    "part of: host",
+    "topic's main category: Category:Databases"
+  ],
+  "category": "General"
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: database. Description: organized collection of data in computing. Category: General Facts:  - subclass of: work  - subclass of: data  - subclass of: digital object  - subclass of: data set  - part of: host  - topic's main category: Category:Databases
+  [Knowledge Graph Triples]:
+   - subclass of: work
+   - subclass of: data
+   - subclass of: digital object
+   - subclass of: data set
+   - part of: host
+   - topic's main category: Category:Databases
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6641324758529663,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.6641] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "COLORS",
+  "id": "Q76098391",
+  "score": 0.5,
+  "triples": [
+    "instance of: music track with vocals"
+  ],
+  "category": "General"
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: COLORS. Description: vocal track by Hikaru Utada; 2003 studio recording. Category: General Facts:  - instance of: music track with vocals
+  [Knowledge Graph Triples]:
+   - instance of: music track with vocals
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "shoe",
+  "id": "Q22676",
+  "score": 0.3333333333333333,
+  "triples": [
+    "topic's main category: Category:Shoes",
+    "subclass of: footwear"
+  ],
+  "category": "General"
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: shoe. Description: footwear. Category: General Facts:  - topic's main category: Category:Shoes  - subclass of: footwear
+  [Knowledge Graph Triples]:
+   - topic's main category: Category:Shoes
+   - subclass of: footwear
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "data set",
+  "id": "Q1172284",
+  "score": 0.25,
+  "triples": [
+    "subclass of: scientific work",
+    "subclass of: intellectual work",
+    "subclass of: manifestation",
+    "subclass of: collection",
+    "topic's main category: Category:Datasets"
+  ],
+  "category": "General"
+}
+[Item 5]
+[Chunk Score: 0.2500] Wikidata Entity: data set. Description: collection of data, publication type. Category: General Facts:  - subclass of: scientific work  - subclass of: intellectual work  - subclass of: manifestation  - subclass of: collection  - topic's main category: Category:Datasets
+  [Knowledge Graph Triples]:
+   - subclass of: scientific work
+   - subclass of: intellectual work
+   - subclass of: manifestation
+   - subclass of: collection
+   - topic's main category: Category:Datasets
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Colors",
+  "id": "Q5149078",
+  "score": 0.2,
+  "triples": [
+    "instance of: video game"
+  ],
+  "category": "General"
+}
+[Item 6]
+[Chunk Score: 0.2000] Wikidata Entity: Colors. Description: 2006 video game. Category: General Facts:  - instance of: video game
+  [Knowledge Graph Triples]:
+   - instance of: video game
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+A) Which items listed in the database are not currently in the store.
+
+This can be determined because a database is an organized collection of data, and it's possible to track which items are present or absent from the inventory. The other options require additional information that may not be available in this context.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ],
+  "category": "General"
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Category: General Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8389036059379578,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8389] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human",
+    "place of birth: Ulm",
+    "educated at: ETH Zurich",
+    "educated at: University of Zurich",
+    "educated at: old Kantonsschule (Albert Einstein House)",
+    "educated at: Luitpold-Gymnasium",
+    "academic degree: Doctor of Philosophy in Physics",
+    "topic's main category: Category:Albert Einstein"
+  ],
+  "category": "General"
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Category: General Facts:  - instance of: human  - place of birth: Ulm  - educated at: ETH Zurich  - educated at: University of Zurich  - educated at: old Kantonsschule (Albert Einstein House)  - educated at: Luitpold-Gymnasium  - academic degree: Doctor of Philosophy in Physics  - topic's main category: Category:Albert Einstein
+  [Knowledge Graph Triples]:
+   - instance of: human
+   - place of birth: Ulm
+   - educated at: ETH Zurich
+   - educated at: University of Zurich
+   - educated at: old Kantonsschule (Albert Einstein House)
+   - educated at: Luitpold-Gymnasium
+   - academic degree: Doctor of Philosophy in Physics
+   - topic's main category: Category:Albert Einstein
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: mountain",
+    "country: Austria",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge"
+  ],
+  "category": "General"
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Category: General Facts:  - instance of: mountain  - country: Austria  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge
+  [Knowledge Graph Triples]:
+   - instance of: mountain
+   - country: Austria
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry.
+==================================================
+==================================================
+ QUERY: In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergey",
+  "id": "Q12902079",
+  "score": 1.0,
+  "triples": [
+    "instance of: male given name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Sergey. Description: male given name (Сергей). Facts:  - instance of: male given name
+  [Knowledge Graph Triples]:
+   - instance of: male given name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7920116186141968,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Sergei Aleksandrovich Tokarev was a professor."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.7920] Sergei Aleksandrovich Tokarev was a professor.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7547620534896851,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.7548] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergei",
+  "id": "Q111621149",
+  "score": 0.5,
+  "triples": [
+    "instance of: human",
+    "occupation: mangaka"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.5000] Wikidata Entity: Sergei. Description: Japanese mangaka. Facts:  - instance of: human  - occupation: mangaka
+  [Knowledge Graph Triples]:
+   - instance of: human
+   - occupation: mangaka
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergei",
+  "id": "Q106455137",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 5]
+[Chunk Score: 0.3333] Wikidata Entity: Sergei. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### EVIDENCE EXTRACTED FROM CONTEXT:
+
+* **ATOMIC FACTS**
+	+ None
+* **CONDITIONAL RULES**
+	+ None
+* **LOGICAL EXCEPTIONS**
+	+ None
+* **NUMERIC/MODAL DATA**
+	+ None
+
+Note: There is no relevant information in the provided Context to answer the Question. The context only provides facts about individuals named Sergei, but does not mention a university or any specific year related to Tokarev's professorship.
+==================================================
+==================================================
+ QUERY: In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergey",
+  "id": "Q12902079",
+  "score": 1.0,
+  "triples": [
+    "instance of: male given name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Sergey. Description: male given name (Сергей). Facts:  - instance of: male given name
+  [Knowledge Graph Triples]:
+   - instance of: male given name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7920116186141968,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Sergei Aleksandrovich Tokarev was a professor."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.7920] Sergei Aleksandrovich Tokarev was a professor.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7547620534896851,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.7548] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergei",
+  "id": "Q111621149",
+  "score": 0.5,
+  "triples": [
+    "instance of: human",
+    "occupation: mangaka"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.5000] Wikidata Entity: Sergei. Description: Japanese mangaka. Facts:  - instance of: human  - occupation: mangaka
+  [Knowledge Graph Triples]:
+   - instance of: human
+   - occupation: mangaka
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergei",
+  "id": "Q106455137",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 5]
+[Chunk Score: 0.3333] Wikidata Entity: Sergei. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### EVIDENCE EXTRACTED FROM CONTEXT:
+
+* **ATOMIC FACTS**
+	+ None
+* **CONDITIONAL RULES**
+	+ None
+* **LOGICAL EXCEPTIONS**
+	+ None
+* **NUMERIC/MODAL DATA**
+	+ None
+
+Note: There is no relevant information in the provided Context to answer the Question. The context only provides facts about individuals named Sergei, but does not mention a university or any specific year related to Tokarev's professorship.
+==================================================
+==================================================
+ QUERY: What is 2+2?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "coxed pair",
+  "id": "Q232557",
+  "score": 1.0,
+  "triples": [
+    "instance of: boat class in rowing",
+    "subclass of: sweep rowing boat",
+    "subclass of: pair",
+    "subclass of: coxed rowing boat"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: coxed pair. Description: boat class in rowing. Facts:  - instance of: boat class in rowing  - subclass of: sweep rowing boat  - subclass of: pair  - subclass of: coxed rowing boat
+  [Knowledge Graph Triples]:
+   - instance of: boat class in rowing
+   - subclass of: sweep rowing boat
+   - subclass of: pair
+   - subclass of: coxed rowing boat
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7743065357208252,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.7743] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "2+1",
+  "id": "Q11186384",
+  "score": 0.5,
+  "triples": [
+    "country of origin: Russia",
+    "instance of: musical group"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: 2+1. Description: Russian musical group. Facts:  - country of origin: Russia  - instance of: musical group
+  [Knowledge Graph Triples]:
+   - country of origin: Russia
+   - instance of: musical group
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "dication",
+  "id": "Q5272330",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: structural class of chemical entities",
+    "subclass of: cation",
+    "follows: monocation",
+    "subclass of: polyion",
+    "followed by: trication",
+    "opposite of: dianion"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: dication. Description: divalent positive ion. Facts:  - instance of: structural class of chemical entities  - subclass of: cation  - follows: monocation  - subclass of: polyion  - followed by: trication  - opposite of: dianion
+  [Knowledge Graph Triples]:
+   - instance of: structural class of chemical entities
+   - subclass of: cation
+   - follows: monocation
+   - subclass of: polyion
+   - followed by: trication
+   - opposite of: dianion
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+* **ATOMIC FACTS**
+	+ None
+* **CONDITIONAL RULES**
+	+ None
+* **LOGICAL EXCEPTIONS**
+	+ None
+* **NUMERIC/MODAL DATA**
+	+ None (Note: There is a mention of "2" in the context, but it's not related to arithmetic operations. The question about 2+2 seems unrelated to the provided context.)
+==================================================
+==================================================
+ QUERY: What happens if you smash a mirror?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "mirror",
+  "id": "Q35197",
+  "score": 1.0,
+  "triples": [
+    "described by source: Brockhaus and Efron Encyclopedic Dictionary",
+    "described by source: Encyclop\u00e6dia Britannica 11th edition",
+    "has part(s): glass",
+    "described by source: Gujin Tushu Jicheng",
+    "subclass of: material",
+    "subclass of: product",
+    "part of: light bulb",
+    "part of: optical instrument",
+    "subclass of: optical component",
+    "subclass of: artificial physical object",
+    "has use: mirror image",
+    "described by source: Metropolitan Museum of Art Tagging Vocabulary",
+    "has part(s): tain",
+    "subclass of: art material",
+    "instance of: product category",
+    "described by source: Bible Encyclopedia of Archimandrite Nicephorus",
+    "described by source: Jewish Encyclopedia of Brockhaus and Efron",
+    "described by source: Small Brockhaus and Efron Encyclopedic Dictionary",
+    "described by source: Meyers Konversations-Lexikon, 4th edition (1885\u20131890)",
+    "described by source: Explanatory Dictionary of the Living Great Russian Language, Second Edition",
+    "described by source: Russian translation of L\u00fcbker's Antiquity Lexicon"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: mirror. Description: surface, typically glass coated with a metal amalgam, which reflects a clear image. Facts:  - described by source: Brockhaus and Efron Encyclopedic Dictionary  - described by source: Encyclopædia Britannica 11th edition  - has part(s): glass  - described by source: Gujin Tushu Jicheng  - subclass of: material  - subclass of: product  - part of: light bulb  - part of: optical instrument  - subclass of: optical component  - subclass of: artificial physical object  - has use: mirror image  - described by source: Metropolitan Museum of Art Tagging Vocabulary  - has part(s): tain  - subclass of: art material  - instance of: product category  - described by source: Bible Encyclopedia of Archimandrite Nicephorus  - described by source: Jewish Encyclopedia of Brockhaus and Efron  - described by source: Small Brockhaus and Efron Encyclopedic Dictionary  - described by source: Meyers Konversations-Lexikon, 4th edition (1885–1890)  - described by source: Explanatory Dictionary of the Living Great Russian Language, Second Edition  - described by source: Russian translation of Lübker's Antiquity Lexicon
+  [Knowledge Graph Triples]:
+   - described by source: Brockhaus and Efron Encyclopedic Dictionary
+   - described by source: Encyclopædia Britannica 11th edition
+   - has part(s): glass
+   - described by source: Gujin Tushu Jicheng
+   - subclass of: material
+   - subclass of: product
+   - part of: light bulb
+   - part of: optical instrument
+   - subclass of: optical component
+   - subclass of: artificial physical object
+   - has use: mirror image
+   - described by source: Metropolitan Museum of Art Tagging Vocabulary
+   - has part(s): tain
+   - subclass of: art material
+   - instance of: product category
+   - described by source: Bible Encyclopedia of Archimandrite Nicephorus
+   - described by source: Jewish Encyclopedia of Brockhaus and Efron
+   - described by source: Small Brockhaus and Efron Encyclopedic Dictionary
+   - described by source: Meyers Konversations-Lexikon, 4th edition (1885–1890)
+   - described by source: Explanatory Dictionary of the Living Great Russian Language, Second Edition
+   - described by source: Russian translation of Lübker's Antiquity Lexicon
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7944769263267517,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.7945] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "mirror storage",
+  "id": "Q654822",
+  "score": 0.5,
+  "triples": [
+    "instance of: computer storage media",
+    "instance of: process",
+    "subclass of: artwork copy"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: mirror storage. Description: exact copy of data stored at another physical location and regularly updated. Facts:  - instance of: computer storage media  - instance of: process  - subclass of: artwork copy
+  [Knowledge Graph Triples]:
+   - instance of: computer storage media
+   - instance of: process
+   - subclass of: artwork copy
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Mirror",
+  "id": "Q12498608",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: album",
+    "genre: indie pop"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Mirror. Description: 2012 studio album by Sarasvati. Facts:  - instance of: album  - genre: indie pop
+  [Knowledge Graph Triples]:
+   - instance of: album
+   - genre: indie pop
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+**ATOMIC FACTS**
+
+* A mirror is a surface that reflects a clear image. 
+* Mirrors are typically made of glass coated with metal amalgam.
+
+**CONDITIONAL RULES**
+None
+
+**LOGICAL EXCEPTIONS**
+None
+
+**NUMERIC/MODAL DATA**
+None
+==================================================
+==================================================
+ QUERY: In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergey",
+  "id": "Q12902079",
+  "score": 1.0,
+  "triples": [
+    "instance of: male given name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Sergey. Description: male given name (Сергей). Facts:  - instance of: male given name
+  [Knowledge Graph Triples]:
+   - instance of: male given name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7920116186141968,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Sergei Aleksandrovich Tokarev was a professor."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.7920] Sergei Aleksandrovich Tokarev was a professor.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7547620534896851,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.7548] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergei",
+  "id": "Q111621149",
+  "score": 0.5,
+  "triples": [
+    "instance of: human",
+    "occupation: mangaka"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.5000] Wikidata Entity: Sergei. Description: Japanese mangaka. Facts:  - instance of: human  - occupation: mangaka
+  [Knowledge Graph Triples]:
+   - instance of: human
+   - occupation: mangaka
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergei",
+  "id": "Q106455137",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 5]
+[Chunk Score: 0.3333] Wikidata Entity: Sergei. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### EVIDENCE EXTRACTED FROM CONTEXT:
+
+* **ATOMIC FACTS**
+	+ None
+* **CONDITIONAL RULES**
+	+ None
+* **LOGICAL EXCEPTIONS**
+	+ None
+* **NUMERIC/MODAL DATA**
+	+ None
+
+Note: There is no relevant information in the provided Context to answer the Question. The context only provides facts about individuals named Sergei, but does not mention a university or any specific year related to Tokarev's professorship.
+==================================================
+==================================================
+ QUERY: In what year was the university where Sergei Aleksandrovich Tokarev was a professor founded?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergey",
+  "id": "Q12902079",
+  "score": 1.0,
+  "triples": [
+    "instance of: male given name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Sergey. Description: male given name (Сергей). Facts:  - instance of: male given name
+  [Knowledge Graph Triples]:
+   - instance of: male given name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7920116186141968,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Sergei Aleksandrovich Tokarev was a professor."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.7920] Sergei Aleksandrovich Tokarev was a professor.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergei",
+  "id": "Q111621149",
+  "score": 0.5,
+  "triples": [
+    "instance of: human",
+    "occupation: mangaka"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Sergei. Description: Japanese mangaka. Facts:  - instance of: human  - occupation: mangaka
+  [Knowledge Graph Triples]:
+   - instance of: human
+   - occupation: mangaka
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Sergei",
+  "id": "Q106455137",
+  "score": 0.3333333333333333,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Sergei. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### EVIDENCE EXTRACTED FROM CONTEXT:
+
+* **ATOMIC FACTS**
+	+ None
+* **CONDITIONAL RULES**
+	+ None
+* **LOGICAL EXCEPTIONS**
+	+ None
+* **NUMERIC/MODAL DATA**
+	+ None
+==================================================
