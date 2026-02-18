@@ -1,4 +1,5 @@
 import re
+
 def capture_conclusion_and_logical_path(explainer_output):
     pattern = r"\*\*(?:Conclusion|CONCLUSION):\*\*\s*(.*)"
 
@@ -46,6 +47,7 @@ Provide a direct, confident answer to the User Question.
     """
      
 
-print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag="q"), "\n")
-print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag="x\c"), "\n")
-print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag="x"), "\n")
+if __name__ == "__main__":
+    print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag="q"), "\n")
+    print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag="x\c"), "\n")
+    print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag="x"), "\n")
