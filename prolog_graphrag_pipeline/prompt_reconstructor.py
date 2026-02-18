@@ -33,7 +33,7 @@ USER QUESTION: {user_question}
 Provide a direct, confident answer to the User Question.
 1. Answer Naturally: Respond as if you already know the answer. Do NOT mention "the context", "the provided information", or "based on the evidence".
 2. Be Direct: Lead with the answer, then elaborate if helpful.
-3. Never Cite Sources: Do NOT reference where you got the information from (no "according to...", "the context states...", "YAGO defines...", etc.).
+3. Never Cite Sources: Do NOT reference where you got the information from (no "according to...", "the context states...", "Wikidata defines...", etc.).
 4. Smooth Tone: Write as a knowledgeable person would naturally explain something in conversation.
     """
      

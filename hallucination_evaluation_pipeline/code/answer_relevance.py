@@ -3,7 +3,7 @@ import os
 import sys
 import pandas as pd
 from tqdm import tqdm
-
+import time
 # Add project root to sys.path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 if project_root not in sys.path:
@@ -66,12 +66,15 @@ def evaluate_with_ragas(question: str, answer: str, contexts: list[str]) -> floa
     dataset = Dataset.from_dict(data)
     
     try:
+        start_time = time.time()
         results = evaluate(
             dataset=dataset,
             metrics=[answer_relevancy],
             llm=ragas_config.get_ragas_llm(),
             embeddings=ragas_config.get_ragas_embeddings()
         )
+        end_time = time.time()
+        print(f"RAGAS Answer Relevance Evaluation took {end_time - start_time:.2f} seconds.")
         return results['answer_relevancy']
     except Exception as e:
         print(f"RAGAS Evaluation Failed: {e}")

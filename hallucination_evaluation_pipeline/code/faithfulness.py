@@ -57,12 +57,15 @@ def evaluate_with_ragas(question: str, answer: str, contexts: list[str]) -> floa
     dataset = Dataset.from_dict(data)
     
     try:
+        start_time = time.time()
         results = evaluate(
             dataset=dataset,
             metrics=[faithfulness],
             llm=ragas_config.get_ragas_llm(),
             embeddings=ragas_config.get_ragas_embeddings()
         )
+        end_time = time.time()
+        print(f"RAGAS Faithfulness Evaluation took {end_time - start_time:.2f} seconds.")
         return results['faithfulness']
     except Exception as e:
         print(f"RAGAS Evaluation Failed: {e}")
