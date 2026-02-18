@@ -1,52 +1,20 @@
+import os
 import math
-import os
-import sys
+from pathlib import Path
 
-# Optional visualization libraries
-try:
-    import matplotlib.pyplot as plt
-    import scipy.stats as scipy_stats
-    import numpy as np
-    import seaborn as sns
-    import pandas as pd
-    import scikit_posthocs as sp
-    from statsmodels.stats.multicomp import pairwise_tukeyhsd
-    from matplotlib.colors import TwoSlopeNorm, LinearSegmentedColormap
-    import matplotlib.patheffects as path_effects
-    import matplotlib.patheffects as pe
-    VISUALIZATION_AVAILABLE = True
-except ImportError as e:
-    print(f"Visualization libraries missing: {e}. Visualization will be skipped.")
-    VISUALIZATION_AVAILABLE = False
-    try:
-        import numpy as np
-        import pandas as pd
-    except ImportError:
-         print("Critical: Numpy/Pandas also missing.")
+import matplotlib.pyplot as plt
+from matplotlib.colors import ListedColormap, BoundaryNorm
+import scipy.stats as scipy_stats
+import numpy as np
+import seaborn as sns
+import pandas as pd
 
-try:
-    from .config import ALPHA, CONTINUOUS_EVALS, DISCRETE_EVALS, Pipeline
-except ImportError:
-    try:
-        from config import ALPHA, CONTINUOUS_EVALS, DISCRETE_EVALS, Pipeline
-    except ImportError:
-        from stats.config import ALPHA, CONTINUOUS_EVALS, DISCRETE_EVALS, Pipeline
+from config import ALPHA, CONTINUOUS_EVALS, DISCRETE_EVALS, Pipeline
 
-import os
-
-# Prefer results folder at workspace root: ../../hallucination_evaluation_results/visualizations
-ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
-RESULTS_DATA_DIR = os.path.join(ROOT, "hallucination_evaluation_results", "data")  # Adjusted path
-# stats_driver says IO_DIR = ROOT / "hallucination_evaluation_results".
-# And csv files are there.
-# But original code said: RESULTS_DATA_DIR = os.path.join(ROOT, "hallucination_evaluation_results", "data")
-# visualizer_generator here expected "data" subdir.
-# visualizer_generator expected "data" subdir.
-
-RESULTS_DATA_DIR = os.path.join(ROOT, "hallucination_evaluation_results")
-OUTPUT_DIR = os.path.join(ROOT, "hallucination_evaluation_results", "visualizations")
-
-os.makedirs(OUTPUT_DIR, exist_ok=True)
+# Project root and results/visualizations paths
+ROOT = Path(__file__).resolve().parents[2]
+RESULTS_DIR = ROOT / "hallucination_evaluation_results/data"
+OUTPUT_DIR = ROOT / "hallucination_evaluation_results/visualizations"
 
 import ast
 
@@ -103,25 +71,19 @@ def clean_data_column(df: pd.DataFrame, col_name: str) -> np.ndarray:
 def generate_qq_grids():
     """
     Generates a grid of Q-Q plots for each pipeline for all continuous metric or benchmark
-    and displays the p-value in the subplot. First reads relevant CSV files in hallucination_evaluation_results/ 
-    to load data and normality test p-values.
-    Saves the final grid in ../visualizations/ relative to this file.
+    and displays the p-value in the subplot. Reads CSVs written by the stats pipeline
+    (e.g. `faithfulness_scores.csv`) and the `normality_test_results.csv` file for
+    annotated p-values.
 
+    Saves each grid as `visualizations/qq_<eval_name>.png`.
     """
-    if not VISUALIZATION_AVAILABLE:
-        print("Skipping generate_qq_grids: Visualization libraries not installed.")
-        return
-    # Read normality test results if available
-    normality_path = os.path.join(RESULTS_DATA_DIR, "normality_test_results.csv")
-    if os.path.exists(normality_path):
-        normal_df = pd.read_csv(normality_path)
-    else:
-        normal_df = pd.DataFrame()
+    normality_path = RESULTS_DIR / "normality_test_results.csv"
+    normal_df = pd.read_csv(normality_path) if normality_path.exists() else pd.DataFrame()
 
     for eval in CONTINUOUS_EVALS:
         eval_name = eval.value[1]
-        scores_path = os.path.join(RESULTS_DATA_DIR, f"{eval_name}_scores.csv")
-        if not os.path.exists(scores_path):
+        scores_path = RESULTS_DIR / f"{eval_name}_scores.csv"
+        if not scores_path.exists():
             continue
         df = pd.read_csv(scores_path)
 
@@ -140,42 +102,56 @@ def generate_qq_grids():
             if data.size == 0:
                 ax.text(0.5, 0.5, "no data", ha="center", va="center")
                 continue
-            # Create QQ plot
+
             scipy_stats.probplot(data, dist="norm", plot=ax)
             ax.set_title(pipeline.value[1])
+
             # annotate p-value from normality test if available
-            p_val = None
             if not normal_df.empty:
                 row = normal_df.loc[(normal_df['eval_name'] == eval_name) & (normal_df['pipeline'] == pipeline.value[1])]
                 if not row.empty:
                     p_val = row['p_value'].values[0]
-            if p_val is not None and not (pd.isna(p_val)):
-                ax.text(0.05, 0.95, f"p={p_val:.3g}", transform=ax.transAxes, verticalalignment='top')
+                    if not pd.isna(p_val):
+                        ax.text(0.05, 0.95, f"p={p_val:.3g}", transform=ax.transAxes, verticalalignment='top')
 
         fig.suptitle(f"Q-Q plots for {eval.value[0]}")
         fig.tight_layout(rect=[0, 0.03, 1, 0.95])
-        out_path = os.path.join(OUTPUT_DIR, f"qq_{eval_name}.png")
+        out_path = OUTPUT_DIR / f"qq_{eval_name}.png"
         fig.savefig(out_path)
         plt.close(fig)
 
+
 def generate_box_plot_grids():
     """
-    Generate one grid of boxplots per continuous metric and benchmark. Each grid compares, for each metric,
-    the distributions across the three pipelines. Will read relevant files in hallucination_evaluation_results/
-
+    Generate one boxplot figure per continuous metric/benchmark and save to `visualizations/`.
     """
     for eval in CONTINUOUS_EVALS:
         eval_name = eval.value[1]
-        scores_path = os.path.join(RESULTS_DATA_DIR, f"{eval_name}_scores.csv")
-        if not os.path.exists(scores_path):
+        scores_path = RESULTS_DIR / f"{eval_name}_scores.csv"
+        if not scores_path.exists():
             continue
         df = pd.read_csv(scores_path)
         generate_box_plot(eval_name, df)
 
+
 def generate_box_plot(eval_name: str, df: pd.DataFrame):
     """
     Create and save a boxplot comparing pipelines for `eval_name` using columns like 'tuned_score'.
+    Adds a textbox with pipelines' mean rank (higher score => better rank).
     """
+<<<<<<< HEAD
+    score_cols = [c for c in df.columns if c.endswith("_score")]
+    if not score_cols:
+        return
+
+    # Compute per-row ranks (higher score -> higher rank) and average
+    ranks = df[score_cols].rank(axis=1, method='average', ascending=False)
+    mean_ranks = ranks.mean(skipna=True)
+    pipelines = [c.replace('_score', '') for c in score_cols]
+    mean_ranks.index = pipelines
+
+    melt_df = pd.melt(df, value_vars=score_cols, var_name='pipeline', value_name='score')
+=======
     # Clean data before melting
     clean_df = df.copy()
     score_cols = [c for c in df.columns if c.endswith("_score")]
@@ -196,50 +172,58 @@ def generate_box_plot(eval_name: str, df: pd.DataFrame):
 
     melt_df = pd.melt(clean_df, id_vars=[c for c in df.columns if not c.endswith("_score")], value_vars=score_cols, var_name="pipeline", value_name="score")
     # normalize pipeline names to match Pipeline.value[1]
+>>>>>>> 05c205073d980aca902a3c2efcf4793c25770ff6
     melt_df['pipeline'] = melt_df['pipeline'].str.replace('_score', '')
 
     plt.figure(figsize=(8, 6))
-    sns.boxplot(x='pipeline', y='score', data=melt_df)
+    ax = sns.boxplot(x='pipeline', y='score', data=melt_df, order=pipelines)
     plt.title(f"{eval_name} — score distribution by pipeline")
     plt.xlabel("")
     plt.ylabel("Score")
-    out_path = os.path.join(OUTPUT_DIR, f"boxplot_{eval_name}.png")
+
+    rank_lines = [f"{p}: {mean_ranks[p]:.3f}" for p in pipelines]
+    rank_text = "\n".join(rank_lines)
+    props = dict(boxstyle='round', facecolor='white', alpha=0.85)
+    ax.text(0.98, 0.98, rank_text, transform=ax.transAxes, fontsize=9,
+            verticalalignment='top', horizontalalignment='right', bbox=props)
+
+    out_path = OUTPUT_DIR / f"boxplot_{eval_name}.png"
     plt.tight_layout()
     plt.savefig(out_path)
     plt.close()
-    
+
+
 def generate_bar_graph_grid():
     """
-    Generate one grid of bar graphs per discrete metric and benchmark. Each grid compares, for each metric,
-    the number of 0 or 1 labels across the three pipelines. Will read relevant files in hallucination_evaluation_results/
-
+    Generate one bar graph per discrete benchmark and save to `visualizations/`.
     """
-    # Use discrete evals (e.g., MMLU, HotpotQA)
     for eval in DISCRETE_EVALS:
         eval_name = eval.value[1]
-        scores_path = os.path.join(RESULTS_DATA_DIR, f"{eval_name}_scores.csv")
-        if not os.path.exists(scores_path):
+        scores_path = RESULTS_DIR / f"{eval_name}_scores.csv"
+        if not scores_path.exists():
             continue
         df = pd.read_csv(scores_path)
         generate_bar_graph(eval_name, df)
-    
+
 
 def generate_bar_graph(eval_name: str, df: pd.DataFrame):
     """
-    Create and save a bar graph comparing pipelines for `eval_name` using columns like 'tuned_score'.
+    Create and save a bar graph comparing pipelines for `eval_name` using columns like '<pipeline>_score'.
+    Computes proportion (mean) and standard error for binary/discrete scores and draws errorbars.
     """
-    # select score columns
     score_cols = [c for c in df.columns if c.endswith("_score")]
-    if len(score_cols) == 0:
+    if not score_cols:
         return
 
-    # compute proportions and standard error for binary/discrete scores
     stats = []
-    n = None
     for col in score_cols:
+<<<<<<< HEAD
+        values = df[col].dropna().to_numpy()
+=======
         values = clean_data_column(df, col)
         if n is None:
             n = values.size
+>>>>>>> 05c205073d980aca902a3c2efcf4793c25770ff6
         prop = np.nan
         se = np.nan
         if values.size > 0:
@@ -249,73 +233,100 @@ def generate_bar_graph(eval_name: str, df: pd.DataFrame):
         stats.append({'pipeline': pipeline_name, 'prop': prop, 'se': se})
 
     stats_df = pd.DataFrame(stats)
+    order = stats_df['pipeline'].tolist()
 
     plt.figure(figsize=(8, 6))
-    ax = sns.barplot(x='pipeline', y='prop', data=stats_df, yerr=stats_df['se'])
+    ax = sns.barplot(x='pipeline', y='prop', data=stats_df, order=order, ci=None)
     ax.set_ylim(0, 1)
     plt.title(f"{eval_name} — proportion correct by pipeline")
     plt.ylabel('Proportion')
     plt.xlabel('')
 
-    # annotate values
-    for i, row in stats_df.iterrows():
-        ax.text(i, row['prop'] + 0.02, f"{row['prop']:.3f}", ha='center')
+    xcoords = np.arange(len(stats_df))
+    props = stats_df['prop'].values
+    ses = stats_df['se'].values
+    ax.errorbar(xcoords, props, yerr=ses, fmt='none', ecolor='k', capsize=5)
 
-    out_path = os.path.join(OUTPUT_DIR, f"barplot_{eval_name}.png")
+    for i, val in enumerate(props):
+        ax.text(i, val + 0.02, f"{val:.3f}", ha='center')
+
+    out_path = OUTPUT_DIR / f"barplot_{eval_name}.png"
     plt.tight_layout()
     plt.savefig(out_path)
     plt.close()
-   
 
-def generate_p_value_matrix(df: pd.DataFrame):
+
+def generate_p_value_matrix(p_value_dict: dict, eval):
     """
-    Will accept a DataFrame consisting of pairs of pipelines and their posthoc test p-value to construct a heatmap of p-values
+    Build and save a symmetric p-value matrix heatmap from a mapping of pipeline-pair -> p-value.
+
+    - Keys are tuples (`(p1, p2)`).
+    - Self-comparisons are not expected in the input; the function sets diagonal entries to 1.0.
+    - Missing comparisons remain NaN.
+
+    Returns the square pandas DataFrame of p-values.
     """
-    # Accept rows of pairwise comparisons in either (loser,winner,p_value) or (pipeline1,pipeline2,pvalue)
-    if df.shape[0] == 0:
+    if p_value_dict is None:
+        return None
+    if not isinstance(p_value_dict, dict):
+        raise TypeError("p_value_dict must be a dict mapping pipeline-pairs to p-values")
+
+    if len(p_value_dict) == 0:
         return None
 
-    # Normalize possible column names
-    if set(["pipeline1", "pipeline2", "pvalue"]).issubset(df.columns):
-        rows = df[['pipeline1', 'pipeline2', 'pvalue']].rename(columns={'pipeline1': 'p1', 'pipeline2': 'p2', 'pvalue': 'p'})
-    elif set(["loser", "winner", "p_value"]).issubset(df.columns):
-        rows = df[['loser', 'winner', 'p_value']].rename(columns={'loser': 'p1', 'winner': 'p2', 'p_value': 'p'})
-    else:
-        # Assume square matrix given
-        piv = df.copy()
-        piv = piv.astype(float)
-        np.fill_diagonal(piv.values, 0)
-        plt.figure(figsize=(6, 5))
-        sns.heatmap(piv, annot=True, fmt='.3f', cmap='viridis', cbar_kws={'label': 'p-value'})
-        plt.title('Post-hoc pairwise p-values')
-        out_path = os.path.join(OUTPUT_DIR, 'p_value_matrix.png')
-        plt.tight_layout()
-        plt.savefig(out_path)
-        plt.close()
-        return piv
+    # collect pipeline names
+    pipelines = set()
+    for key in p_value_dict.keys():
+        if isinstance(key, (list, tuple)):
+            p1, p2 = key
+        else:
+            parts = str(key).split('|')
+            if len(parts) != 2:
+                raise ValueError(f"Invalid key format: {key}")
+            p1, p2 = parts
+        pipelines.add(p1)
+        pipelines.add(p2)
 
-    # Build square matrix from rows
-    pipelines = sorted(pd.unique(rows[['p1', 'p2']].values.ravel('K')))
+    pipelines = sorted(pipelines)
     piv = pd.DataFrame(index=pipelines, columns=pipelines, data=np.nan, dtype=float)
-    for _, r in rows.iterrows():
-        p1 = r['p1']
-        p2 = r['p2']
-        p = float(r['p'])
-        piv.loc[p1, p2] = p
-        piv.loc[p2, p1] = p
 
-    for c in piv.columns:
-        if c not in piv.index:
-            piv.loc[c] = np.nan
-    piv = piv.reindex(index=piv.columns)
-    np.fill_diagonal(piv.values, 0)
+    # fill provided values symmetrically
+    for key, p in p_value_dict.items():
+        if isinstance(key, (list, tuple)):
+            p1, p2 = key
+        else:
+            p1, p2 = str(key).split('|')
+        piv.loc[p1, p2] = float(p)
+        piv.loc[p2, p1] = float(p)
 
-    plt.figure(figsize=(6, 5))
-    sns.heatmap(piv, annot=True, fmt='.3f', cmap='viridis', cbar_kws={'label': 'p-value'})
-    plt.title('Post-hoc pairwise p-values')
-    out_path = os.path.join(OUTPUT_DIR, 'p_value_matrix.png')
+    # set diagonal to 1.0 (self-comparison)
+    for p in pipelines:
+        piv.loc[p, p] = 1.0
+
+    piv = piv.reindex(index=pipelines, columns=pipelines)
+
+    # build a colormap that has a sharp color transition at p=0.05
+    # allocate more discrete colors on both sides but ensure a hard boundary at 0.05
+    n_low = 50
+    n_high = 206
+    # gradient for significant (p <= 0.05) and non-significant (p > 0.05)
+    low_colors = sns.color_palette("Reds", n_low)
+    high_colors = sns.color_palette("Blues", n_high)
+    colors = list(low_colors) + list(high_colors)
+    cmap = ListedColormap(colors)
+
+    # boundaries: create edges such that there's an exact boundary at 0.05
+    low_bounds = np.linspace(0.0, 0.05, n_low, endpoint=False)
+    high_bounds = np.linspace(0.05, 1.0, n_high + 1)
+    boundaries = np.concatenate([low_bounds, high_bounds])
+    norm = BoundaryNorm(boundaries, ncolors=len(colors))
+
+    plt.figure(figsize=(7, 5))
+    sns.heatmap(piv, annot=True, fmt='.3f', cmap=cmap, norm=norm,
+                cbar_kws={'label': 'p-value'})
+    plt.title(f'Heatmap of the P-Values of the Post-Hoc Tests for {eval.value[0]}')
+    out_path = OUTPUT_DIR / f'p_value_matrix_{eval.value[1]}.png'
     plt.tight_layout()
     plt.savefig(out_path)
     plt.close()
     return piv
-    

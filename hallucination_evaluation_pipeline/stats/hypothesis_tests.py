@@ -26,7 +26,7 @@ ROOT = Path(__file__).resolve().parents[2]
 # RESULTS_DIR = ROOT / "hallucination_evaluation_results"
 sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
-IO_DIR = ROOT / "hallucination_evaluation_results"
+DATA_DIR = ROOT / "hallucination_evaluation_results/data"
 
 from typing import Union
 
@@ -47,7 +47,7 @@ def compute_hypothesis_test_for_continuous_eval(tuned_data: np.ndarray, graphrag
         interpretation = "ERROR"
     
     # Save to CSV
-    with open(os.path.join(IO_DIR, "hypothesis_test_results.csv"), 'a', newline='') as f:
+    with open(os.path.join(DATA_DIR, "hypothesis_test_results.csv"), 'a', newline='') as f:
         writer = csv.DictWriter(
             f,
             fieldnames=["eval_name", "p_value", "interpretation"]
@@ -61,10 +61,10 @@ def compute_hypothesis_test_for_continuous_eval(tuned_data: np.ndarray, graphrag
         
 def perform_continuous_hypothesis_tests():
     df_map = {
-        Metric.FAITHFULNESS: pd.read_csv(IO_DIR / "faithfulness_scores.csv"),
-        Metric.ANSWER_RELEVANCE: pd.read_csv(IO_DIR / "answer_relevance_scores.csv"),
-        Metric.CONTEXT_RECALL: pd.read_csv(IO_DIR / "context_recall_scores.csv"),
-        Benchmark.TRUTHFULQA: pd.read_csv(IO_DIR / "truthfulqa_scores.csv")
+        Metric.FAITHFULNESS: pd.read_csv(DATA_DIR / "faithfulness_scores.csv"),
+        Metric.ANSWER_RELEVANCE: pd.read_csv(DATA_DIR / "answer_relevance_scores.csv"),
+        Metric.CONTEXT_RECALL: pd.read_csv(DATA_DIR / "context_recall_scores.csv"),
+        Benchmark.TRUTHFULQA: pd.read_csv(DATA_DIR / "truthfulqa_scores.csv")
     }
 
     for eval in CONTINUOUS_EVALS:
@@ -79,7 +79,7 @@ def perform_continuous_hypothesis_tests():
             eval=eval,
         )
             
-    visualizer_generator.generate_box_plot_grids()
+    generate_box_plot_grids()
     
     
 def compute_hypothesis_test_for_discrete_eval(tuned_data: np.ndarray, graphrag_data: np.ndarray, prolog_graphrag_data: np.ndarray, eval: Metric):
@@ -102,7 +102,7 @@ def compute_hypothesis_test_for_discrete_eval(tuned_data: np.ndarray, graphrag_d
         interpretation = "ERROR"
     
     # Save to CSV
-    with open(os.path.join(IO_DIR, "hypothesis_test_results.csv"), 'a', newline='') as f:
+    with open(os.path.join(DATA_DIR, "hypothesis_test_results.csv"), 'a', newline='') as f:
         writer = csv.DictWriter(
             f,
             fieldnames=["eval_name", "p_value", "interpretation"]
@@ -116,8 +116,8 @@ def compute_hypothesis_test_for_discrete_eval(tuned_data: np.ndarray, graphrag_d
         
 def perform_discrete_hypothesis_tests():
     df_map = {
-        Benchmark.MMLU: pd.read_csv(IO_DIR / "mmlu_scores.csv"),
-        Benchmark.HOTPOTQA: pd.read_csv(IO_DIR / "hotpotqa_scores.csv")
+        Benchmark.MMLU: pd.read_csv(DATA_DIR / "mmlu_scores.csv"),
+        Benchmark.HOTPOTQA: pd.read_csv(DATA_DIR / "hotpotqa_scores.csv")
     }
 
     for eval in DISCRETE_EVALS:
@@ -132,11 +132,7 @@ def perform_discrete_hypothesis_tests():
             eval=eval,
         )
             
-    # generateBoxPlotGrids(
-    #     tuned_data=tuned_data,
-    #     graphrag_data=graphrag_data,
-    #     prolog_graphrag_data=prolog_graphrag_data,
-    # )
+    generate_bar_graph_grid()
 
 def perform_hypothesis_tests():
     perform_continuous_hypothesis_tests()
