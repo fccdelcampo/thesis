@@ -12,12 +12,20 @@ def capture_conclusion_and_logical_path(explainer_output):
         logical_evidence = explainer_output
     return conclusion, logical_evidence
 
-def reconstruct_prompt(user_question: str, retrieved_context: str, explainer_output: str, flag: str):
+def reconstruct_prompt(user_question: str, retrieved_context: str, explainer_output: str, flag: str, context_from_prompt: str = ""):
     # conclusion, logical_evidence = "CONCLUSION", "LOGICAL EVIDENCE"
     # Use the provided explainer_output as the evidence
     conclusion = "See Logical Evidence"
     logical_evidence = explainer_output if explainer_output else "No logical evidence available."
-    context_part = f"CONTEXT: {retrieved_context}" if flag != r"q" else ""
+    
+    # Combine user-provided context (from prompt) with retrieved context
+    full_context = ""
+    if context_from_prompt:
+        full_context += f"USER PROVIDED CONTEXT:\n{context_from_prompt}\n\n"
+    if retrieved_context:
+        full_context += f"RETRIEVED KNOWLEDGE:\n{retrieved_context}"
+        
+    context_part = f"CONTEXT: {full_context}" if flag != r"q" else ""
     conclusion_part = f"CONCLUSION: {conclusion}" if flag == r"x" else ""
     logical_evidence_part = f"**LOGICAL EVIDENCE: {logical_evidence}" if flag != r"q" else ""
     return f"""

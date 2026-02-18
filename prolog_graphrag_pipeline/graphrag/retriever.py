@@ -240,10 +240,11 @@ class EnhancedRetriever(VectorCypherRetriever):
         Extract the **Main Entities** from the user's query for a Wikidata search.
         
         ### Rules
-        1. **Specific Entities**: Extract the names of people, places, objects, or specific concepts mentioned.
-        2. **Disambiguate if needed**: If an entity is a common word or number (e.g., "1", "Apple"), include its **immediate context** from the query to verify what it is (e.g., "number 1", "Apple company").
-        3. **No Abstract Topics**: Do NOT infer broad academic fields like "Number Theory" or "Mathematics" unless explicitly mentioned.
-        4. **No Synonyms**: Use the exact words from the query where possible.
+        1. **Specific Entities**: Extract the names of people, places, objects, or specific concepts mentioned in the **Question Body**.
+        2. **IGNORE Options**: If the query contains multiple-choice options (e.g., A), B), I., II.), IGNORE THEM completely. Do NOT extract terms from the answer choices.
+        3. **Disambiguate if needed**: If an entity is a common word or number (e.g., "1", "Apple"), include its **immediate context** from the query to verify what it is.
+        4. **No Abstract Topics**: Do NOT infer broad academic fields like "Number Theory" or "Mathematics" unless explicitly mentioned.
+        5. **No Synonyms**: Use the exact words from the query where possible.
         
         ### User Query
         "{query}"

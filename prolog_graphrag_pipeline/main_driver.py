@@ -39,7 +39,8 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
         retrieved_context=retrieved_context_str, 
         explainer_output=explainer_output["text_answer"] if explainer_output else "", 
         flag=flag,
-        include_conclusion=include_conclusion
+        include_conclusion=include_conclusion,
+        context_from_prompt=context_from_prompt
     )
     
     return {
