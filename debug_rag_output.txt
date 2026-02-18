@@ -2484,3 +2484,301 @@ This can be determined because the database likely contains information about sa
 ==================================================
 Einstein flunked French and geometry in school.
 ==================================================
+==================================================
+ QUERY: Using only the database, which of the following can be determined? A) Which items listed in the database are not currently in the store B) Which colors are more popular among men than women C) Which type of footwear is most popular among adults D) The total number of shoes sold in a particular month
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "database",
+  "id": "Q8513",
+  "score": 1.0,
+  "triples": [
+    "subclass of: data",
+    "subclass of: work",
+    "has part(s): data",
+    "subclass of: data set",
+    "has part(s): database management system",
+    "has part(s): integrity constraints",
+    "has part(s): data dictionary",
+    "has part(s): record",
+    "subclass of: digital object",
+    "has part(s): data base",
+    "part of: host"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: database. Description: organized collection of data in computing. Facts:  - subclass of: data  - subclass of: work  - has part(s): data  - subclass of: data set  - has part(s): database management system  - has part(s): integrity constraints  - has part(s): data dictionary  - has part(s): record  - subclass of: digital object  - has part(s): data base  - part of: host
+  [Knowledge Graph Triples]:
+   - subclass of: data
+   - subclass of: work
+   - has part(s): data
+   - subclass of: data set
+   - has part(s): database management system
+   - has part(s): integrity constraints
+   - has part(s): data dictionary
+   - has part(s): record
+   - subclass of: digital object
+   - has part(s): data base
+   - part of: host
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6641324758529663,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.6641] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "COLORS",
+  "id": "Q76098391",
+  "score": 0.5,
+  "triples": [
+    "instance of: music track with vocals"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: COLORS. Description: vocal track by Hikaru Utada; 2003 studio recording. Facts:  - instance of: music track with vocals
+  [Knowledge Graph Triples]:
+   - instance of: music track with vocals
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "shoe",
+  "id": "Q22676",
+  "score": 0.3333333333333333,
+  "triples": [
+    "subclass of: footwear",
+    "has part(s): shoe component"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: shoe. Description: footwear. Facts:  - subclass of: footwear  - has part(s): shoe component
+  [Knowledge Graph Triples]:
+   - subclass of: footwear
+   - has part(s): shoe component
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "data set",
+  "id": "Q1172284",
+  "score": 0.25,
+  "triples": [
+    "subclass of: manifestation",
+    "subclass of: collection",
+    "subclass of: intellectual work",
+    "subclass of: scientific work",
+    "has part(s): data"
+  ]
+}
+[Item 5]
+[Chunk Score: 0.2500] Wikidata Entity: data set. Description: collection of data, publication type. Facts:  - subclass of: manifestation  - subclass of: collection  - subclass of: intellectual work  - subclass of: scientific work  - has part(s): data
+  [Knowledge Graph Triples]:
+   - subclass of: manifestation
+   - subclass of: collection
+   - subclass of: intellectual work
+   - subclass of: scientific work
+   - has part(s): data
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Colors",
+  "id": "Q5149078",
+  "score": 0.2,
+  "triples": [
+    "instance of: video game"
+  ]
+}
+[Item 6]
+[Chunk Score: 0.2000] Wikidata Entity: Colors. Description: 2006 video game. Facts:  - instance of: video game
+  [Knowledge Graph Triples]:
+   - instance of: video game
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+A) Which items listed in the database are not currently in the store.
+
+This is a correct answer because it can be determined from the context that a "database" refers to an organized collection of data, which implies that it contains information about what's available or stored. Therefore, one could infer whether certain items (in this case, shoes) listed in the database are not currently in stock by checking their status within the database.
+==================================================
+==================================================
+ QUERY: What subjects did Einstein flunk in school?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q16834800",
+  "score": 1.0,
+  "triples": [
+    "instance of: family name"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: Einstein. Description: family name. Facts:  - instance of: family name
+  [Knowledge Graph Triples]:
+   - instance of: family name
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8389036059379578,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8389] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Albert Einstein",
+  "id": "Q937",
+  "score": 0.5,
+  "triples": [
+    "instance of: human",
+    "country of citizenship: Switzerland",
+    "country of citizenship: United States",
+    "employer: Bern",
+    "country of citizenship: Germany",
+    "notable work: quantum mechanics",
+    "notable work: general relativity",
+    "place of birth: Ulm",
+    "notable work: special relativity",
+    "educated at: ETH Zurich",
+    "field of work: theoretical physics",
+    "employer: ETH Zurich",
+    "employer: Princeton University",
+    "employer: Charles University",
+    "award received: Copley Medal",
+    "notable work: mass\u2013energy equivalence",
+    "award received: Nobel Prize in Physics",
+    "country of citizenship: Weimar Republic",
+    "notable work: theory of relativity",
+    "notable work: photoelectric effect",
+    "student: Ernst G. Straus",
+    "doctoral advisor: Heinrich Burkhardt",
+    "doctoral advisor: Heinrich Friedrich Weber",
+    "employer: Humboldt-Universit\u00e4t zu Berlin",
+    "award received: Pour le M\u00e9rite"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Albert Einstein. Description: German-born theoretical physicist (1879–1955). Facts:  - instance of: human  - country of citizenship: Switzerland  - country of citizenship: United States  - employer: Bern  - country of citizenship: Germany  - notable work: quantum mechanics  - notable work: general relativity  - place of birth: Ulm  - notable work: special relativity  - educated at: ETH Zurich  - field of work: theoretical physics  - employer: ETH Zurich  - employer: Princeton University  - employer: Charles University  - award received: Copley Medal  - notable work: mass–energy equivalence  - award received: Nobel Prize in Physics  - country of citizenship: Weimar Republic  - notable work: theory of relativity  - notable work: photoelectric effect  - student: Ernst G. Straus  - doctoral advisor: Heinrich Burkhardt  - doctoral advisor: Heinrich Friedrich Weber  - employer: Humboldt-Universität zu Berlin  - award received: Pour le Mérite
+  [Knowledge Graph Triples]:
+   - instance of: human
+   - country of citizenship: Switzerland
+   - country of citizenship: United States
+   - employer: Bern
+   - country of citizenship: Germany
+   - notable work: quantum mechanics
+   - notable work: general relativity
+   - place of birth: Ulm
+   - notable work: special relativity
+   - educated at: ETH Zurich
+   - field of work: theoretical physics
+   - employer: ETH Zurich
+   - employer: Princeton University
+   - employer: Charles University
+   - award received: Copley Medal
+   - notable work: mass–energy equivalence
+   - award received: Nobel Prize in Physics
+   - country of citizenship: Weimar Republic
+   - notable work: theory of relativity
+   - notable work: photoelectric effect
+   - student: Ernst G. Straus
+   - doctoral advisor: Heinrich Burkhardt
+   - doctoral advisor: Heinrich Friedrich Weber
+   - employer: Humboldt-Universität zu Berlin
+   - award received: Pour le Mérite
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Einstein",
+  "id": "Q1309274",
+  "score": 0.3333333333333333,
+  "triples": [
+    "country: Austria",
+    "instance of: mountain",
+    "instance of: one-thousander",
+    "instance of: main peak",
+    "located in the administrative territorial entity: Tannheim",
+    "part of: Tannheim Mountains",
+    "part of: Sch\u00f6nkahler-Einstein Ridge",
+    "has part(s): Mittelberg",
+    "has part(s): Rappenschrofen",
+    "has part(s): Lachenk\u00f6pfle",
+    "has part(s): P.1557"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Einstein. Description: mountain of the Allgäu Alps in Tyrol, Austria. Facts:  - country: Austria  - instance of: mountain  - instance of: one-thousander  - instance of: main peak  - located in the administrative territorial entity: Tannheim  - part of: Tannheim Mountains  - part of: Schönkahler-Einstein Ridge  - has part(s): Mittelberg  - has part(s): Rappenschrofen  - has part(s): Lachenköpfle  - has part(s): P.1557
+  [Knowledge Graph Triples]:
+   - country: Austria
+   - instance of: mountain
+   - instance of: one-thousander
+   - instance of: main peak
+   - located in the administrative territorial entity: Tannheim
+   - part of: Tannheim Mountains
+   - part of: Schönkahler-Einstein Ridge
+   - has part(s): Mittelberg
+   - has part(s): Rappenschrofen
+   - has part(s): Lachenköpfle
+   - has part(s): P.1557
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Einstein flunked French and geometry in school.
+==================================================

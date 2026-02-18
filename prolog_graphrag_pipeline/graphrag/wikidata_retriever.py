@@ -53,18 +53,44 @@ class WikidataRetriever:
           ?val rdfs:label ?valLabel .
           ?prop rdfs:label ?propLabel .
           
-          # Filter for useful relationship properties 
+          # Structural properties
           # P31: instance of, P279: subclass of, P361: part of,
-          # P1366: replaced by, P1365: replaces, P17: country, P131: located in,
-          # P36: capital, P6: head of government, P159: headquarters location,
-          # P625: coordinate location, P571: inception/founded date,
-          # P856: official website, P1376: capital of, P527: has part,
-          # P2044: elevation above sea level
-          VALUES ?p {{ wdt:P31 wdt:P279 wdt:P361 wdt:P1366 wdt:P1365 wdt:P17 wdt:P131 wdt:P36 wdt:P6 wdt:P159 wdt:P571 wdt:P1376 wdt:P527 wdt:P2044 }}
+          # P1366: replaced by, P1365: replaces, P527: has part
+          #
+          # Geographic properties
+          # P17: country, P131: located in, P36: capital, P159: HQ location,
+          # P1376: capital of, P625: coordinates, P2044: elevation
+          #
+          # Government/Organization
+          # P6: head of government
+          #
+          # Education & Academic properties  
+          # P69: educated at, P512: academic degree, P812: academic major,
+          # P184: doctoral advisor, P802: student
+          #
+          # Biographical properties
+          # P106: occupation, P108: employer, P19: place of birth,
+          # P20: place of death, P27: country of citizenship,
+          # P569: date of birth, P570: date of death
+          #
+          # Academic/Professional
+          # P101: field of work, P800: notable work, P166: award received
+          #
+          # Temporal
+          # P571: inception/founded date, P856: official website
+          VALUES ?p {{
+            wdt:P31 wdt:P279 wdt:P361 wdt:P1366 wdt:P1365 wdt:P527
+            wdt:P17 wdt:P131 wdt:P36 wdt:P159 wdt:P1376 wdt:P2044
+            wdt:P6
+            wdt:P69 wdt:P512 wdt:P812 wdt:P184 wdt:P802
+            wdt:P106 wdt:P108 wdt:P19 wdt:P20 wdt:P27 wdt:P569 wdt:P570
+            wdt:P101 wdt:P800 wdt:P166
+            wdt:P571 wdt:P856
+          }}
           
           FILTER(LANG(?valLabel) = "{self.language}")
           FILTER(LANG(?propLabel) = "{self.language}")
-        }} LIMIT 10
+        }} LIMIT 25
         """
         
         # If specific query returns nothing, we could fallback to generic, but let's stick to high-quality specific ones first.
