@@ -11,6 +11,9 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 # Import RAGAS and Config
+from hallucination_evaluation_pipeline.code.fix_multiprocess_patch import apply_patch
+apply_patch()
+
 from ragas import evaluate
 from ragas.metrics import faithfulness
 from datasets import Dataset

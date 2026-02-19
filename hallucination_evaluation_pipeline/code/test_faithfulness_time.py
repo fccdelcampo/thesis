@@ -8,6 +8,9 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
 if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
+from hallucination_evaluation_pipeline.code.fix_multiprocess_patch import apply_patch
+apply_patch()
+
 from hallucination_evaluation_pipeline.code.faithfulness import evaluate_with_ragas
 
 def main():
