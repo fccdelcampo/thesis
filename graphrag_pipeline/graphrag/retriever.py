@@ -101,21 +101,22 @@ class EnhancedRetriever(VectorCypherRetriever):
         self.driver = driver
         self.llm = llm
 
-    def generate_wikidata_queries(self, query: str) -> List[str]:
+    def generate_wikidata_queries(self, query: str) -> dict:
         """
         Uses LLM to extract specific entities/concepts for Wikidata search.
+        Returns: {"queries": [...]}
         """
         if not self.llm:
-            return []
+            return {"queries": []}
             
         prompt = f"""
         ### Task
-        Extract the **Main Entities** from the user's query for a Wikidata search.
+        Extract the **Main Entities and Concepts** from the user's educational query for a Wikidata search.
         
         ### Rules
-        1. **Specific Entities**: Extract the names of people, places, objects, or specific concepts mentioned.
-        2. **Disambiguate if needed**: If an entity is a common word or number (e.g., "1", "Apple"), include its **immediate context** from the query to verify what it is (e.g., "number 1", "Apple company").
-        3. **No Abstract Topics**: Do NOT infer broad academic fields like "Number Theory" or "Mathematics" unless explicitly mentioned.
+        1. **Specific Entities**: Extract names of people, places, theories, formulas, or specific concepts.
+        2. **Disambiguate**: If an entity is ambiguous (e.g., "Apple"), include context (e.g., "Apple company" or "Apple fruit").
+        3. **Concepts**: Include scientific terms, mathematical concepts, or literary works if they are the focus.
         4. **No Synonyms**: Use the exact words from the query where possible.
         
         ### User Query
@@ -136,16 +137,20 @@ class EnhancedRetriever(VectorCypherRetriever):
                 
             import json
             data = json.loads(response_text)
-            return data.get("queries", [])
+            return {
+                "queries": data.get("queries", [])
+            }
         except Exception as e:
             print(f"DEBUG: Smart selection failed: {e}")
-            return []
+            return {"queries": []}
 
     def search(self, query_text, top_k=5, **kwargs):
         # 1. Smart Entity Extraction & Wikidata Search (Global Knowledge)
         wikidata_items = []
         if self.llm:
-            smart_terms = self.generate_wikidata_queries(query_text)
+            extraction_result = self.generate_wikidata_queries(query_text)
+            smart_terms = extraction_result.get("queries", [])
+            
             if smart_terms:
                 print(f"DEBUG: Triggering Wikidata Search for: {smart_terms}")
                 if not hasattr(self, 'wikidata_retriever'):
@@ -155,6 +160,7 @@ class EnhancedRetriever(VectorCypherRetriever):
                 
                 # Use " OR " to search for any of the terms
                 wd_search_query = " OR ".join([f'"{t}"' for t in smart_terms])
+                # Search using Unified Educational Property Set (no category needed)
                 wd_result = self.wikidata_retriever.search(wd_search_query)
                 if wd_result and wd_result.items:
                     wikidata_items = wd_result.items

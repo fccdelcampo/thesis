@@ -1,0 +1,419 @@
+Error querying pipeline: Unable to retrieve routing information
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\eval_runner.py", line 126, in query
+    return main_driver.run_pipeline(input_text, flag="", include_conclusion=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 211, in run_pipeline
+    init_globals()
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 204, in init_globals
+    kg_builder_pdf, kg_builder_text = setup_kg_pipeline(encoder_llm, embedder)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 165, in setup_kg_pipeline
+    kg_builder_pdf = SimpleKGPipeline(
+                     ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\kg_builder.py", line 145, in __init__
+    self.runner = PipelineRunner.from_config(config)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\runner.py", line 114, in from_config
+    return cls(wrapper.parse(), config=wrapper.config, do_cleaning=do_cleaning)
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\runner.py", line 78, in parse
+    return self.config.parse(resolved_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\pipeline_config.py", line 151, in parse
+    components=self._get_components(),
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\template_pipeline\base.py", line 57, in _get_components
+    comp = self._get_component(component_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\template_pipeline\base.py", line 41, in _get_component
+    component = method()
+                ^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\template_pipeline\simple_kg_builder.py", line 233, in _get_writer
+    return Neo4jWriter(
+           ^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\components\kg_writer.py", line 125, in __init__
+    version_tuple, _, _ = get_version(self.driver, self.neo4j_database)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\utils\version_utils.py", line 37, in get_version
+    records, _, _ = driver.execute_query(
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\driver.py", line 978, in execute_query
+    return session._run_transaction(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 627, in _run_transaction
+    raise errors[-1]
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 577, in _run_transaction
+    self._open_transaction(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 443, in _open_transaction
+    self._connect(access_mode=access_mode)
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 136, in _connect
+    super()._connect(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 186, in _connect
+    target_db = self._get_routing_target_database(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 260, in _get_routing_target_database
+    self._pool.update_routing_table(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 1025, in update_routing_table
+    raise ServiceUnavailable("Unable to retrieve routing information")
+neo4j.exceptions.ServiceUnavailable: Unable to retrieve routing information
+
+==================================================
+Error querying pipeline: Unable to retrieve routing information
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\eval_runner.py", line 126, in query
+    return main_driver.run_pipeline(input_text, flag="", include_conclusion=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 211, in run_pipeline
+    init_globals()
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 204, in init_globals
+    kg_builder_pdf, kg_builder_text = setup_kg_pipeline(encoder_llm, embedder)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 165, in setup_kg_pipeline
+    kg_builder_pdf = SimpleKGPipeline(
+                     ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\kg_builder.py", line 145, in __init__
+    self.runner = PipelineRunner.from_config(config)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\runner.py", line 114, in from_config
+    return cls(wrapper.parse(), config=wrapper.config, do_cleaning=do_cleaning)
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\runner.py", line 78, in parse
+    return self.config.parse(resolved_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\pipeline_config.py", line 151, in parse
+    components=self._get_components(),
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\template_pipeline\base.py", line 57, in _get_components
+    comp = self._get_component(component_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\template_pipeline\base.py", line 41, in _get_component
+    component = method()
+                ^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\template_pipeline\simple_kg_builder.py", line 233, in _get_writer
+    return Neo4jWriter(
+           ^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\components\kg_writer.py", line 125, in __init__
+    version_tuple, _, _ = get_version(self.driver, self.neo4j_database)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\utils\version_utils.py", line 37, in get_version
+    records, _, _ = driver.execute_query(
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\driver.py", line 978, in execute_query
+    return session._run_transaction(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 627, in _run_transaction
+    raise errors[-1]
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 577, in _run_transaction
+    self._open_transaction(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 443, in _open_transaction
+    self._connect(access_mode=access_mode)
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 136, in _connect
+    super()._connect(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 186, in _connect
+    target_db = self._get_routing_target_database(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 260, in _get_routing_target_database
+    self._pool.update_routing_table(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 1025, in update_routing_table
+    raise ServiceUnavailable("Unable to retrieve routing information")
+neo4j.exceptions.ServiceUnavailable: Unable to retrieve routing information
+
+==================================================
+Error querying pipeline: Unable to retrieve routing information
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\eval_runner.py", line 126, in query
+    return main_driver.run_pipeline(input_text, flag="", include_conclusion=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 211, in run_pipeline
+    init_globals()
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 200, in init_globals
+    ensure_driver_connected()
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 280, in ensure_driver_connected
+    raise e
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 275, in ensure_driver_connected
+    neo4j_driver.verify_connectivity()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\driver.py", line 1090, in verify_connectivity
+    self._get_server_info(session_config)
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\driver.py", line 1305, in _get_server_info
+    return session._get_server_info()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 183, in _get_server_info
+    self._connect(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 136, in _connect
+    super()._connect(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 186, in _connect
+    target_db = self._get_routing_target_database(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 260, in _get_routing_target_database
+    self._pool.update_routing_table(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 1025, in update_routing_table
+    raise ServiceUnavailable("Unable to retrieve routing information")
+neo4j.exceptions.ServiceUnavailable: Unable to retrieve routing information
+
+==================================================
+Error querying pipeline: Unable to retrieve routing information
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\eval_runner.py", line 126, in query
+    return main_driver.run_pipeline(input_text, flag="", include_conclusion=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 212, in run_pipeline
+    init_globals()
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 200, in init_globals
+    driver_recreated = ensure_driver_connected()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 282, in ensure_driver_connected
+    raise e
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 276, in ensure_driver_connected
+    neo4j_driver.verify_connectivity()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\driver.py", line 1090, in verify_connectivity
+    self._get_server_info(session_config)
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\driver.py", line 1305, in _get_server_info
+    return session._get_server_info()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 183, in _get_server_info
+    self._connect(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 136, in _connect
+    super()._connect(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 186, in _connect
+    target_db = self._get_routing_target_database(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 260, in _get_routing_target_database
+    self._pool.update_routing_table(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 1025, in update_routing_table
+    raise ServiceUnavailable("Unable to retrieve routing information")
+neo4j.exceptions.ServiceUnavailable: Unable to retrieve routing information
+
+==================================================
+Error querying pipeline: Unable to retrieve routing information
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\eval_runner.py", line 126, in query
+    return main_driver.run_pipeline(input_text, flag="", include_conclusion=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 212, in run_pipeline
+    init_globals()
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 200, in init_globals
+    driver_recreated = ensure_driver_connected()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 282, in ensure_driver_connected
+    raise e
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 276, in ensure_driver_connected
+    neo4j_driver.verify_connectivity()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\driver.py", line 1090, in verify_connectivity
+    self._get_server_info(session_config)
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\driver.py", line 1305, in _get_server_info
+    return session._get_server_info()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 183, in _get_server_info
+    self._connect(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 136, in _connect
+    super()._connect(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 186, in _connect
+    target_db = self._get_routing_target_database(
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 260, in _get_routing_target_database
+    self._pool.update_routing_table(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 1025, in update_routing_table
+    raise ServiceUnavailable("Unable to retrieve routing information")
+neo4j.exceptions.ServiceUnavailable: Unable to retrieve routing information
+
+==================================================
+Error querying pipeline: Couldn't connect to 127.0.0.1:7687 (resolved to ('127.0.0.1:7687',)):
+Failed to read four byte Bolt handshake response from server ResolvedIPv4Address(('127.0.0.1', 7687)) (deadline Deadline(timeout=60.0))
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 167, in _handshake_read
+    response = self.recv(n)
+               ^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_async_compat\network\_bolt_socket.py", line 366, in recv
+    return self._wait_for_io(self._socket.recv, n)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_async_compat\network\_bolt_socket.py", line 344, in _wait_for_io
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 335, in connect
+    agreed_version, handshake, response = s._handshake(
+                                          ^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 262, in _handshake
+    response = self._handshake_read(ctx, 4)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 170, in _handshake_read
+    raise ServiceUnavailable(
+neo4j.exceptions.ServiceUnavailable: Failed to read four byte Bolt handshake response from server ResolvedIPv4Address(('127.0.0.1', 7687)) (deadline Deadline(timeout=60.0))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\eval_runner.py", line 126, in query
+    return main_driver.run_pipeline(input_text, flag="", include_conclusion=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 212, in run_pipeline
+    init_globals()
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 200, in init_globals
+    driver_recreated = ensure_driver_connected()
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 282, in ensure_driver_connected
+    raise e
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 276, in ensure_driver_connected
+    neo4j_driver.verify_connectivity()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\driver.py", line 1090, in verify_connectivity
+    self._get_server_info(session_config)
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\driver.py", line 1305, in _get_server_info
+    return session._get_server_info()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 183, in _get_server_info
+    self._connect(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 136, in _connect
+    super()._connect(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 199, in _connect
+    self._connection = self._pool.acquire(**acquire_kwargs_)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 676, in acquire
+    return self._acquire(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 417, in _acquire
+    return connection_creator()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 230, in connection_creator
+    connection = self.opener(
+                 ^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 637, in opener
+    return Bolt.open(
+           ^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt.py", line 368, in open
+    s, protocol_version, handshake, data = BoltSocket.connect(
+                                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 380, in connect
+    raise ServiceUnavailable(
+neo4j.exceptions.ServiceUnavailable: Couldn't connect to 127.0.0.1:7687 (resolved to ('127.0.0.1:7687',)):
+Failed to read four byte Bolt handshake response from server ResolvedIPv4Address(('127.0.0.1', 7687)) (deadline Deadline(timeout=60.0))
+
+==================================================
+Error querying pipeline: Couldn't connect to 127.0.0.1:7687 (resolved to ('127.0.0.1:7687',)):
+Failed to read four byte Bolt handshake response from server ResolvedIPv4Address(('127.0.0.1', 7687)) (deadline Deadline(timeout=60.0))
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 167, in _handshake_read
+    response = self.recv(n)
+               ^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_async_compat\network\_bolt_socket.py", line 366, in recv
+    return self._wait_for_io(self._socket.recv, n)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_async_compat\network\_bolt_socket.py", line 344, in _wait_for_io
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 335, in connect
+    agreed_version, handshake, response = s._handshake(
+                                          ^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 262, in _handshake
+    response = self._handshake_read(ctx, 4)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 170, in _handshake_read
+    raise ServiceUnavailable(
+neo4j.exceptions.ServiceUnavailable: Failed to read four byte Bolt handshake response from server ResolvedIPv4Address(('127.0.0.1', 7687)) (deadline Deadline(timeout=60.0))
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\eval_runner.py", line 126, in query
+    return main_driver.run_pipeline(input_text, flag="", include_conclusion=True)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 212, in run_pipeline
+    init_globals()
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 205, in init_globals
+    kg_builder_pdf, kg_builder_text = setup_kg_pipeline(encoder_llm, embedder)
+                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 162, in setup_kg_pipeline
+    kg_builder_pdf = SimpleKGPipeline(
+                     ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\kg_builder.py", line 145, in __init__
+    self.runner = PipelineRunner.from_config(config)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\runner.py", line 114, in from_config
+    return cls(wrapper.parse(), config=wrapper.config, do_cleaning=do_cleaning)
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\runner.py", line 78, in parse
+    return self.config.parse(resolved_data)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\pipeline_config.py", line 151, in parse
+    components=self._get_components(),
+               ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\template_pipeline\base.py", line 57, in _get_components
+    comp = self._get_component(component_name)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\template_pipeline\base.py", line 41, in _get_component
+    component = method()
+                ^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\pipeline\config\template_pipeline\simple_kg_builder.py", line 233, in _get_writer
+    return Neo4jWriter(
+           ^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\experimental\components\kg_writer.py", line 125, in __init__
+    version_tuple, _, _ = get_version(self.driver, self.neo4j_database)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\utils\version_utils.py", line 37, in get_version
+    records, _, _ = driver.execute_query(
+                    ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\driver.py", line 978, in execute_query
+    return session._run_transaction(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 627, in _run_transaction
+    raise errors[-1]
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 577, in _run_transaction
+    self._open_transaction(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 443, in _open_transaction
+    self._connect(access_mode=access_mode)
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\session.py", line 136, in _connect
+    super()._connect(
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\work\workspace.py", line 199, in _connect
+    self._connection = self._pool.acquire(**acquire_kwargs_)
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 676, in acquire
+    return self._acquire(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 417, in _acquire
+    return connection_creator()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 230, in connection_creator
+    connection = self.opener(
+                 ^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_pool.py", line 637, in opener
+    return Bolt.open(
+           ^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt.py", line 368, in open
+    s, protocol_version, handshake, data = BoltSocket.connect(
+                                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j\_sync\io\_bolt_socket.py", line 380, in connect
+    raise ServiceUnavailable(
+neo4j.exceptions.ServiceUnavailable: Couldn't connect to 127.0.0.1:7687 (resolved to ('127.0.0.1:7687',)):
+Failed to read four byte Bolt handshake response from server ResolvedIPv4Address(('127.0.0.1', 7687)) (deadline Deadline(timeout=60.0))
+
+==================================================

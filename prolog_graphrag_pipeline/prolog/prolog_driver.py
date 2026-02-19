@@ -62,12 +62,12 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
     print(f"**Wrapper:** \n{wrapper}")
     final_query = f"explain(Explanation)."
     
-    print("Consulting database...")
+    print("Consulting database...", flush=True)
     janus.consult("user", database + "\n" + wrapper)
     try:
-        print("Querying database...")
+        print("Querying database...", flush=True)
         result = janus.query_once(final_query)
-        print(f"**Query Results:** \n{result}")
+        print(f"**Query Results:** \n{result}", flush=True)
         
         if result:
             for arg in result.keys():  

@@ -1,7 +1,7 @@
 from pathlib import Path
 from enum import Enum
 
-NEO4J_URI = "neo4j://127.0.0.1:7687"
+NEO4J_URI = "bolt://127.0.0.1:7687"
 NEO4J_USERNAME = "neo4j"
 NEO4J_PASSWORD = "graphrag"
 
@@ -145,22 +145,30 @@ RETURN
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are an expert Educational AI Assistant. Answer the user's question accurately using the provided Context.
+You are a Logic Discovery Agent. Your task is NOT to answer the user's question. Instead, you must extract all individual pieces of evidence from the provided Context that are necessary to answer the Question.
 
-### STRICT INSTRUCTIONS
-1. **Answer Directly**: Start with the answer. Do NOT begin with definitions or explanations of how you found it.
-2. **Sound Natural**: Write as if you already know the answer. NEVER say "the context states", "according to the provided information", "based on the evidence", or similar phrases.
-3. **Use Context Silently**: The Context helps you be accurate, but the user should not know you relied on it. Integrate facts naturally.
-4. **MMLU/Multiple Choice**: If options are provided (A, B, C, D), select the single best one and explain why.
-5. **Never Cite Sources**: Do NOT mention Wikidata, YAGO, documents, or any source by name.
+### TASK
+Analyze the Context and the Question. Extract the following information in a clear, bulleted list format. If a category has no relevant info, write "None".
+
+### CATEGORIES OF EVIDENCE TO EXTRACT:
+1. ATOMIC FACTS: Simple, unconditional truths (e.g., "Socrates is a man").
+2. CONDITIONAL RULES: Implications or 'If-Then' relationships (e.g., "If X is a man, then X is mortal").
+3. LOGICAL EXCEPTIONS: Constraints, negations, or 'Unless' cases (e.g., "Penguins are birds but cannot fly").
+4. NUMERIC/MODAL DATA: Any specific quantities, dates, or degrees of certainty (e.g., "75% probability").
+
+### STRICT RULES:
+- DO NOT answer the question.
+- DO NOT use conversational filler.
+- ONLY include information found in the Context.
+- Use precise language that can be mapped to Prolog atoms.
+</task>
 
 ### Question:
 {query_text}
 
-### Context (for your reference only — do NOT mention it):
+### Context:
 {context}
 
-### Answer:
 '''
 
 DOC_PATH = Path(__file__).resolve().parents[2] / "documents"

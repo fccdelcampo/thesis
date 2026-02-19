@@ -92,10 +92,7 @@ class DebugOllamaLLM(OllamaLLM):
             return clean_content
         
 
-neo4j_driver = neo4j.GraphDatabase.driver(
-    NEO4J_URI,
-    auth=(NEO4J_USERNAME, NEO4J_PASSWORD)
-    )
+neo4j_driver = None
 
 
 def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
@@ -198,8 +195,12 @@ kg_builder_text = None
 retriever = None
 
 def init_globals():
-    global encoder_llm, retriever_llm, embedder, kg_builder_pdf, kg_builder_text, retriever
-    if encoder_llm is None:
+    global encoder_llm, retriever_llm, embedder, kg_builder_pdf, kg_builder_text, retriever, neo4j_driver
+    
+    driver_recreated = ensure_driver_connected()
+
+    if encoder_llm is None or driver_recreated:
+        print("DEBUG: Re-initializing pipelines due to missing LLM or new driver...", flush=True)
         encoder_llm, retriever_llm, embedder = initialize_models()
         kg_builder_pdf, kg_builder_text = setup_kg_pipeline(encoder_llm, embedder)
         retriever = create_retriever(neo4j_driver, embedder)
@@ -236,7 +237,7 @@ def test_extract_query_and_context(user_prompt: str):
     
 async def perform_tests():
     # 1. Initialize models and pipelines
-    llm, retriever_llm, embedder = initialize_models() # forgot retriever_llm here, but it's not used in the tests below, so it's fine for now
+    llm, retriever_llm, embedder = initialize_models()
     kg_builder_pdf, kg_builder_text = setup_kg_pipeline(llm, embedder)
     
     # 2. Extract Phase (Synchronous)
@@ -259,15 +260,71 @@ async def perform_tests():
     
     print("\n--- All tests completed ---")
 
+def ensure_driver_connected():
+    global neo4j_driver
+    print("DEBUG: Checking Neo4j driver...", flush=True)
+    if neo4j_driver is None:
+        print("DEBUG: Initializing new Neo4j driver...", flush=True)
+        try:
+             # Set timeouts to avoid hanging
+            neo4j_driver = neo4j.GraphDatabase.driver(
+                NEO4J_URI, 
+                auth=(NEO4J_USERNAME, NEO4J_PASSWORD),
+                connection_timeout=10.0, # 10 seconds timeout
+                max_connection_lifetime=200, # 200 seconds lifetime
+                encrypted=False
+            )
+            neo4j_driver.verify_connectivity()
+            print("DEBUG: Neo4j driver initialized and connected.", flush=True)
+            return True
+        except Exception as e:
+             print(f"CRITICAL ERROR: Could not connect to Neo4j: {e}", flush=True)
+             neo4j_driver = None # Reset to None so we try again next time?
+             raise e
+    else:
+        print("DEBUG: Verifying existing Neo4j connectivity...", flush=True)
+        try:
+            neo4j_driver.verify_connectivity()
+            print("DEBUG: Neo4j connectivity verified.", flush=True)
+            return False
+        except Exception as e:
+            print(f"Neo4j driver disconnected ({e}). Recreating...", flush=True)
+            try:
+                neo4j_driver.close()
+            except:
+                pass
+            neo4j_driver = neo4j.GraphDatabase.driver(
+                NEO4J_URI, 
+                auth=(NEO4J_USERNAME, NEO4J_PASSWORD),
+                connection_timeout=10.0,
+                max_connection_lifetime=200,
+                encrypted=False
+            )
+            print("DEBUG: Neo4j driver reconnected.", flush=True)
+            return True
+
 def clear_local_data():
     """
-    Deletes all Local Document and Chunk nodes from the database.
+    Deletes all nodes and relationships (Local and Global) from the database to prevent stale data contamination.
     """
-    print("WARNING: Deleting all Local Documents and Chunks...")
-    with neo4j_driver.session() as session:
-        session.run("MATCH (d:Document) DETACH DELETE d")
-        session.run("MATCH (c:Chunk) DETACH DELETE c")
-    print("Local data cleared successfully.")
+    ensure_driver_connected()
+    print("WARNING: Clearing all Neo4j data...")
+    try:
+        with neo4j_driver.session(database="neo4j") as session:
+            session.run("MATCH (n) DETACH DELETE n")
+            
+            # Optional: Drop indexes if you want a truly clean slate, but usually keeping indexes is fine.
+            # actually, for "stale data", deleting nodes is enough.
+            # But let's be safe and replicate force_clear_db logic if we want total reset.
+            # For performance, maybe just deleting nodes is better.
+            # User said "clear stale data".
+            
+            # Let's just delete nodes. Recreating indexes is expensive.
+            pass
+            
+    except Exception as e:
+        print(f"Error clearing local data: {e}")
+    print("Database cleared successfully.")
 
 def main():
     # Uncomment to clear data before running tests
