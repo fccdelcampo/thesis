@@ -1,30 +1,51 @@
 ==================================================
- QUERY: Ken Pruitt  was a Republican member of an upper house of the legislature with how many members ?
+ QUERY: A retailer that sells footwear maintains a single database containing records with the following information about each item for sale in the retailer's store.
+
+   ° Item identification number
+   ° Footwear type (sneakers, boots, sandals, etc.)
+   ° Selling price (in dollars)
+   ° Size
+   ° Color
+   ° Quantity available
+
+ Using only the database, which of the following can be determined?
+
+A. Which items listed in the database are not currently in the store
+B. Which colors are more popular among men than women
+C. Which type of footwear is most popular among adults
+D. The total number of shoes sold in a particular month
+
+Answer with the letter only (A, B, C, or D).
 ==================================================
 
---- RETRIEVED CONTEXT (Top 2 Chunks) ---
+--- RETRIEVED CONTEXT (Top 6 Chunks) ---
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "Ken Pruitt",
-  "id": "Q16189457",
+  "entity": "shop",
+  "id": "Q213441",
   "score": 1.0,
   "triples": [
-    "occupation: politician",
-    "instance of: human",
-    "educated at: Miami Carol City Senior High School",
-    "place of birth: Miami"
+    "subclass of: commercial building",
+    "has use: storage",
+    "subclass of: workplace",
+    "described by source: Gujin Tushu Jicheng",
+    "has use: retail",
+    "used by: salesperson",
+    "subclass of: retail location",
+    "described by source: Metropolitan Museum of Art Tagging Vocabulary",
+    "described by source: Kartographer icon"
   ]
 }
 
 [Chunk 1 | Score: 1.0000]
-Wikidata Entity: Ken Pruitt. Description: American politician. Facts:   - occupation: politician   - instance of: human   - educated at: Miami Carol City Senior High School   - place of birth: Miami
+Wikidata Entity: shop. Description: place where items or services are sold. Facts:   - subclass of: commercial building   - has use: storage   - subclass of: workplace   - described by source: Gujin Tushu Jicheng   - has use: retail   - used by: salesperson   - subclass of: retail location   - described by source: Metropolitan Museum of Art Tagging Vocabulary   - described by source: Kartographer icon
 --------------------------------------------------
 
 [Metadata Dump]
 {
-  "score": 0.684988260269165,
+  "score": 0.6053358316421509,
   "local_context": [
     {
       "entity": null,
@@ -36,12 +57,94 @@ Wikidata Entity: Ken Pruitt. Description: American politician. Facts:   - occupa
   ]
 }
 
-[Chunk 2 | Score: 0.6850]
+[Chunk 2 | Score: 0.6053]
 Einstein was a student.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "database",
+  "id": "Q8513",
+  "score": 0.5,
+  "triples": [
+    "has part(s): database management system",
+    "has part(s): data",
+    "part of: host",
+    "subclass of: work",
+    "has part(s): record",
+    "subclass of: data",
+    "subclass of: digital object",
+    "subclass of: data set",
+    "has part(s): data base",
+    "has part(s): integrity constraints",
+    "has part(s): data dictionary",
+    "described by source: Dictionnaire des biens communs",
+    "studied by: database theory"
+  ]
+}
+
+[Chunk 3 | Score: 0.5000]
+Wikidata Entity: database. Description: organized collection of data in computing. Facts:   - has part(s): database management system   - has part(s): data   - part of: host   - subclass of: work   - has part(s): record   - subclass of: data   - subclass of: digital object   - subclass of: data set   - has part(s): data base   - has part(s): integrity constraints   - has part(s): data dictionary   - described by source: Dictionnaire des biens communs   - studied by: database theory
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "size",
+  "id": "Q322481",
+  "score": 0.3333333333333333,
+  "triples": [
+    "described by source: Encyclop\u00e6dia Britannica 11th edition",
+    "described by source: Lean Logic",
+    "subclass of: magnitude"
+  ]
+}
+
+[Chunk 4 | Score: 0.3333]
+Wikidata Entity: size. Description: magnitude or dimension of a thing; concept abstracted from the process of measuring by comparing a longer to a shorter or vice versa. Facts:   - described by source: Encyclopædia Britannica 11th edition   - described by source: Lean Logic   - subclass of: magnitude
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "color",
+  "id": "Q22006653",
+  "score": 0.25,
+  "triples": [
+    "instance of: color",
+    "instance of: cinematic technique",
+    "instance of: color scheme",
+    "opposite of: black-and-white",
+    "opposite of: black-and-white photographic film",
+    "subclass of: cinematic technique",
+    "subclass of: photographic technique"
+  ]
+}
+
+[Chunk 5 | Score: 0.2500]
+Wikidata Entity: color. Description: filmed or drawn in color, the opposite of black-and-white. Facts:   - instance of: color   - instance of: cinematic technique   - instance of: color scheme   - opposite of: black-and-white   - opposite of: black-and-white photographic film   - subclass of: cinematic technique   - subclass of: photographic technique
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "retail worker",
+  "id": "Q12049274",
+  "score": 0.2,
+  "triples": [
+    "employer: retailer",
+    "instance of: profession",
+    "subclass of: businessperson"
+  ]
+}
+
+[Chunk 6 | Score: 0.2000]
+Wikidata Entity: retail worker. Description: person who works in the retail industry or business activity that generally sells to the public (consumer). Facts:   - employer: retailer   - instance of: profession   - subclass of: businessperson
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-I do not have enough information to answer this question.
+A.
 ==================================================

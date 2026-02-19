@@ -98,10 +98,51 @@ class DebugOllamaLLM(OllamaLLM):
             return clean_content
         
 
-neo4j_driver = neo4j.GraphDatabase.driver(
-    NEO4J_URI,
-    auth=(NEO4J_USERNAME, NEO4J_PASSWORD)
-    )
+
+neo4j_driver = None
+
+def ensure_driver_connected():
+    global neo4j_driver
+    while True:
+        # print("DEBUG: Checking Neo4j driver...", flush=True)
+        try:
+            if neo4j_driver is not None:
+                # print("DEBUG: Verifying existing Neo4j connectivity...", flush=True)
+                neo4j_driver.verify_connectivity()
+                # print("DEBUG: Neo4j connectivity verified.", flush=True)
+                return False
+
+
+
+            print("DEBUG: Initializing new Neo4j driver...", flush=True)
+            neo4j_driver = neo4j.GraphDatabase.driver(
+                NEO4J_URI, 
+                auth=(NEO4J_USERNAME, NEO4J_PASSWORD),
+                connection_timeout=10.0, 
+                max_connection_lifetime=200, 
+                encrypted=False
+            )
+            # raise Exception("Mock Connection Failure")
+            neo4j_driver.verify_connectivity()
+            print("DEBUG: Neo4j driver initialized and connected.", flush=True)
+            return True
+
+
+        except Exception as e:
+            print(f"CRITICAL ERROR: Could not connect to Neo4j: {e}", flush=True)
+            if neo4j_driver:
+                try:
+                    neo4j_driver.close()
+                except:
+                    pass
+            neo4j_driver = None 
+            
+            print(f"Error: {e}")
+            print("The process is paused. Please ensure Neo4j is running.")
+            user_response = input("Press Enter to retry connecting... (or type 'q' to raise error): ")
+            if user_response.lower().strip() == 'q':
+                raise e
+            print("Retrying connection...", flush=True)
 
 def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     # keep_alive=0 unloads VRAM after each document processing
@@ -189,6 +230,7 @@ async def test_process_pdf_context(kg_builder_pdf: SimpleKGPipeline):
     
 async def perform_tests():
     # 1. Initialize models and pipelines
+    ensure_driver_connected() # Added ensures connected
     llm, retriever_llm, embedder = initialize_models() # forgot retriever_llm here, but it's not used in the tests below, so it's fine for now
     kg_builder_pdf, kg_builder_text = setup_kg_pipeline(llm, embedder)
     
@@ -228,6 +270,8 @@ def run_pipeline(question: str) -> dict:
     Returns a dictionary with 'answer' and 'context'.
     """
     try:
+        ensure_driver_connected() # Ensure safe
+        
         # 1. Initialize models
         # Note: initialize_models prints "Ollama loaded successfully."
         encoder_llm, retriever_llm, embedder = initialize_models()
