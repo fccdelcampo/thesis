@@ -1,51 +1,29 @@
 ==================================================
- QUERY: A retailer that sells footwear maintains a single database containing records with the following information about each item for sale in the retailer's store.
-
-   ° Item identification number
-   ° Footwear type (sneakers, boots, sandals, etc.)
-   ° Selling price (in dollars)
-   ° Size
-   ° Color
-   ° Quantity available
-
- Using only the database, which of the following can be determined?
-
-A. Which items listed in the database are not currently in the store
-B. Which colors are more popular among men than women
-C. Which type of footwear is most popular among adults
-D. The total number of shoes sold in a particular month
-
-Answer with the letter only (A, B, C, or D).
+ QUERY: Black Book starred the actress and writer of what heritage?
 ==================================================
 
---- RETRIEVED CONTEXT (Top 6 Chunks) ---
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "shop",
-  "id": "Q213441",
+  "entity": "The Black Book",
+  "id": "Q2224789",
   "score": 1.0,
   "triples": [
-    "subclass of: commercial building",
-    "has use: storage",
-    "subclass of: workplace",
-    "described by source: Gujin Tushu Jicheng",
-    "has use: retail",
-    "used by: salesperson",
-    "subclass of: retail location",
-    "described by source: Metropolitan Museum of Art Tagging Vocabulary",
-    "described by source: Kartographer icon"
+    "instance of: Wikimedia information list",
+    "author: Schutzstaffel",
+    "author: Walter Schellenberg"
   ]
 }
 
 [Chunk 1 | Score: 1.0000]
-Wikidata Entity: shop. Description: place where items or services are sold. Facts:   - subclass of: commercial building   - has use: storage   - subclass of: workplace   - described by source: Gujin Tushu Jicheng   - has use: retail   - used by: salesperson   - subclass of: retail location   - described by source: Metropolitan Museum of Art Tagging Vocabulary   - described by source: Kartographer icon
+Wikidata Entity: The Black Book. Description: list of prominent British residents to be arrested as part of the preparation for the proposed invasion of Britain; produced in 1940 by the SS. Facts:   - instance of: Wikimedia information list   - author: Schutzstaffel   - author: Walter Schellenberg
 --------------------------------------------------
 
 [Metadata Dump]
 {
-  "score": 0.6053358316421509,
+  "score": 0.7819463014602661,
   "local_context": [
     {
       "entity": null,
@@ -57,94 +35,196 @@ Wikidata Entity: shop. Description: place where items or services are sold. Fact
   ]
 }
 
-[Chunk 2 | Score: 0.6053]
+[Chunk 2 | Score: 0.7819]
 Einstein was a student.
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "database",
-  "id": "Q8513",
+  "entity": "Actress and writer Carrie Fisher dies at 60",
+  "id": "Q28062411",
   "score": 0.5,
   "triples": [
-    "has part(s): database management system",
-    "has part(s): data",
-    "part of: host",
-    "subclass of: work",
-    "has part(s): record",
-    "subclass of: data",
-    "subclass of: digital object",
-    "subclass of: data set",
-    "has part(s): data base",
-    "has part(s): integrity constraints",
-    "has part(s): data dictionary",
-    "described by source: Dictionnaire des biens communs",
-    "studied by: database theory"
+    "instance of: Wikinews article"
   ]
 }
 
 [Chunk 3 | Score: 0.5000]
-Wikidata Entity: database. Description: organized collection of data in computing. Facts:   - has part(s): database management system   - has part(s): data   - part of: host   - subclass of: work   - has part(s): record   - subclass of: data   - subclass of: digital object   - subclass of: data set   - has part(s): data base   - has part(s): integrity constraints   - has part(s): data dictionary   - described by source: Dictionnaire des biens communs   - studied by: database theory
+Wikidata Entity: Actress and writer Carrie Fisher dies at 60. Description: Wikinews article. Facts:   - instance of: Wikinews article
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "size",
-  "id": "Q322481",
+  "entity": "Black Book",
+  "id": "Q85747486",
   "score": 0.3333333333333333,
   "triples": [
-    "described by source: Encyclop\u00e6dia Britannica 11th edition",
-    "described by source: Lean Logic",
-    "subclass of: magnitude"
+    "country of origin: Russia",
+    "instance of: video game",
+    "genre: role-playing video game"
   ]
 }
 
 [Chunk 4 | Score: 0.3333]
-Wikidata Entity: size. Description: magnitude or dimension of a thing; concept abstracted from the process of measuring by comparing a longer to a shorter or vice versa. Facts:   - described by source: Encyclopædia Britannica 11th edition   - described by source: Lean Logic   - subclass of: magnitude
+Wikidata Entity: Black Book. Description: 2021 video game developed by Morteshka. Facts:   - country of origin: Russia   - instance of: video game   - genre: role-playing video game
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "color",
-  "id": "Q22006653",
+  "entity": "Black Book",
+  "id": "Q163549",
   "score": 0.25,
   "triples": [
-    "instance of: color",
-    "instance of: cinematic technique",
-    "instance of: color scheme",
-    "opposite of: black-and-white",
-    "opposite of: black-and-white photographic film",
-    "subclass of: cinematic technique",
-    "subclass of: photographic technique"
+    "country of origin: Belgium",
+    "country of origin: United Kingdom",
+    "country of origin: Netherlands",
+    "country of origin: Germany",
+    "instance of: film",
+    "genre: thriller film",
+    "genre: drama film",
+    "genre: historical film",
+    "genre: war film",
+    "award received: Golden Calf for Best Feature Film",
+    "award received: Platinum Film",
+    "participant in: 20th European Film Awards"
   ]
 }
 
 [Chunk 5 | Score: 0.2500]
-Wikidata Entity: color. Description: filmed or drawn in color, the opposite of black-and-white. Facts:   - instance of: color   - instance of: cinematic technique   - instance of: color scheme   - opposite of: black-and-white   - opposite of: black-and-white photographic film   - subclass of: cinematic technique   - subclass of: photographic technique
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "retail worker",
-  "id": "Q12049274",
-  "score": 0.2,
-  "triples": [
-    "employer: retailer",
-    "instance of: profession",
-    "subclass of: businessperson"
-  ]
-}
-
-[Chunk 6 | Score: 0.2000]
-Wikidata Entity: retail worker. Description: person who works in the retail industry or business activity that generally sells to the public (consumer). Facts:   - employer: retailer   - instance of: profession   - subclass of: businessperson
+Wikidata Entity: Black Book. Description: 2006 film by Paul Verhoeven. Facts:   - country of origin: Belgium   - country of origin: United Kingdom   - country of origin: Netherlands   - country of origin: Germany   - instance of: film   - genre: thriller film   - genre: drama film   - genre: historical film   - genre: war film   - award received: Golden Calf for Best Feature Film   - award received: Platinum Film   - participant in: 20th European Film Awards
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-A.
+Carrie Fisher. She was an American actress and writer of Jewish heritage, but the question only asks about her being "the actress and writer" without specifying nationality or ethnicity other than that she is a woman who acted and wrote for The Black Book.
+==================================================
+==================================================
+ QUERY: What heritage does the actress and writer starring in Black Book belong to?
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "The Black Book",
+  "id": "Q2224789",
+  "score": 1.0,
+  "triples": [
+    "instance of: Wikimedia information list",
+    "author: Schutzstaffel",
+    "author: Walter Schellenberg"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] Wikidata Entity: The Black Book. Description: list of prominent British residents to be arrested as part of the preparation for the proposed invasion of Britain; produced in 1940 by the SS. Facts:  - instance of: Wikimedia information list  - author: Schutzstaffel  - author: Walter Schellenberg
+  [Knowledge Graph Triples]:
+   - instance of: Wikimedia information list
+   - author: Schutzstaffel
+   - author: Walter Schellenberg
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8120938539505005,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Einstein was a student."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.8121] Einstein was a student.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Black Book",
+  "id": "Q85747486",
+  "score": 0.5,
+  "triples": [
+    "country of origin: Russia",
+    "instance of: video game",
+    "genre: role-playing video game"
+  ]
+}
+[Item 3]
+[Chunk Score: 0.5000] Wikidata Entity: Black Book. Description: 2021 video game developed by Morteshka. Facts:  - country of origin: Russia  - instance of: video game  - genre: role-playing video game
+  [Knowledge Graph Triples]:
+   - country of origin: Russia
+   - instance of: video game
+   - genre: role-playing video game
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Black Book",
+  "id": "Q163549",
+  "score": 0.3333333333333333,
+  "triples": [
+    "country of origin: Belgium",
+    "country of origin: United Kingdom",
+    "country of origin: Netherlands",
+    "country of origin: Germany",
+    "instance of: film",
+    "genre: thriller film",
+    "genre: drama film",
+    "genre: historical film",
+    "genre: war film",
+    "award received: Golden Calf for Best Feature Film",
+    "award received: Platinum Film",
+    "participant in: 20th European Film Awards"
+  ]
+}
+[Item 4]
+[Chunk Score: 0.3333] Wikidata Entity: Black Book. Description: 2006 film by Paul Verhoeven. Facts:  - country of origin: Belgium  - country of origin: United Kingdom  - country of origin: Netherlands  - country of origin: Germany  - instance of: film  - genre: thriller film  - genre: drama film  - genre: historical film  - genre: war film  - award received: Golden Calf for Best Feature Film  - award received: Platinum Film  - participant in: 20th European Film Awards
+  [Knowledge Graph Triples]:
+   - country of origin: Belgium
+   - country of origin: United Kingdom
+   - country of origin: Netherlands
+   - country of origin: Germany
+   - instance of: film
+   - genre: thriller film
+   - genre: drama film
+   - genre: historical film
+   - genre: war film
+   - award received: Golden Calf for Best Feature Film
+   - award received: Platinum Film
+   - participant in: 20th European Film Awards
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+**ATOMIC FACTS**
+* None
+
+**CONDITIONAL RULES**
+None
+
+**LOGICAL EXCEPTIONS**
+None
+
+**NUMERIC/MODAL DATA**
+None
+
+However, there is a relevant piece of information that can be used to answer the question: The context mentions "Black Book" as a 2006 film by Paul Verhoeven.
 ==================================================

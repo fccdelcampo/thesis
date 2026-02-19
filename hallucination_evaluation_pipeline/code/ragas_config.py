@@ -13,6 +13,10 @@ from ragas.embeddings import LangchainEmbeddingsWrapper
 MODEL_NAME = "llama3.1:8b-instruct-q4_K_M"
 EMBED_MODEL_NAME = "nomic-embed-text"
 
+# Add aliases for RAGAS
+RAGAS_LLM_MODEL = MODEL_NAME
+RAGAS_EMBEDDINGS_MODEL = EMBED_MODEL_NAME
+
 def get_ragas_llm():
     """
     Returns a RAGAS-compatible wrapped LLM instance.

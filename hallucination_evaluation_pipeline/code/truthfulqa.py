@@ -24,9 +24,16 @@ if project_root not in sys.path:
 # Import pipeline drivers
 from graphrag_pipeline.graphrag.graphrag_driver import run_pipeline as run_graphrag
 from prolog_graphrag_pipeline.main_driver import run_pipeline as run_prolog_graphrag
+try:
+    from tuned_pipeline.main_driver import run_pipeline as run_tuned_pipeline
+except ImportError:
+    print("Warning: Could not import tuned_pipeline. Check sys.path and dependencies.")
+    def run_tuned_pipeline(q): return {"text_answer": "Error: Pipeline not found"}
 
 # Import LLM for judge evaluation
 import ragas_config
+# Import shared utilities
+from hallucination_evaluation_pipeline.code.pipeline_utils import CleanOutputChatOllama
 
 # Paths
 TEST_CASES_DIR = os.path.join(project_root, "test_cases")
@@ -55,21 +62,23 @@ Rate the model's answer on a scale of 0.0 to 1.0:
 Respond with ONLY a single float number between 0.0 and 1.0. Nothing else."""
 
 
-def load_test_cases() -> list[dict]:
+def load_test_cases(limit: int = 1000) -> list[dict]:
     """
     Reads .jsonl files in test_cases/ and turns each JSON line into a dict.
 
     Args:
-        None. Path must be defined in the function itself.
+        limit (int): Max number of test cases to load.
 
     Returns:
-        list[dict]: A list of dict objects where each dict is a test case containing, at the minimum, the question and answer fields.
+        list[dict]: A list of dict objects where each dict is a test case.
     """
     file_path = os.path.join(TEST_CASES_DIR, "truthfulqa.jsonl")
     test_cases = []
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
-            for line in f:
+            for i, line in enumerate(f):
+                if i >= limit:
+                    break
                 if line.strip():
                     test_cases.append(json.loads(line))
     return test_cases
@@ -92,10 +101,10 @@ def judge_truthfulness(question: str, ground_truth: list, answer: str) -> float:
     )
     
     try:
-        llm = ragas_config.get_ragas_llm()
-        # LangchainLLMWrapper wraps a ChatOllama; invoke returns an LLMResult
-        response = llm.langchain_llm.invoke(prompt)
-        score_text = response.content.strip() if hasattr(response, 'content') else str(response).strip()
+        # Use CleanOutputChatOllama for robust output (same as in hotpotqa.py)
+        llm = CleanOutputChatOllama(model=ragas_config.RAGAS_LLM_MODEL, keep_alive="5m")
+        response = llm.invoke(prompt)
+        score_text = response.content.strip()
         
         # Extract float from response
         import re
@@ -109,13 +118,13 @@ def judge_truthfulness(question: str, ground_truth: list, answer: str) -> float:
         return 0.0
 
 
-def run_pipeline_safe(pipeline_fn, question: str, **kwargs) -> dict:
+def run_pipeline_safe(pipeline_fn, *args, **kwargs) -> dict:
     """Safely run a pipeline, returning empty dict on failure."""
     try:
-        return pipeline_fn(question, **kwargs)
+        return pipeline_fn(*args, **kwargs)
     except Exception as e:
         print(f"  Pipeline error: {e}")
-        return {"answer": "", "contexts": []}
+        return {"answer": "", "text_answer": ""}
 
 
 def run_test_case(test_case: dict, test_case_id: int):
@@ -144,13 +153,17 @@ def run_test_case(test_case: dict, test_case_id: int):
     print(f"  GraphRAG Score: {gr_score:.2f}")
     
     # 2. Prolog GraphRAG Pipeline
-    pgr_result = run_pipeline_safe(run_prolog_graphrag, question)
+    # FIX: Added flag="prolog" as required by main_driver.run_pipeline
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, question, flag="prolog")
     pgr_answer = pgr_result.get("answer", "")
     pgr_score = judge_truthfulness(question, ground_truth, pgr_answer)
     print(f"  Prolog-GraphRAG Score: {pgr_score:.2f}")
     
-    # 3. Tuned Pipeline (Placeholder)
-    tuned_score = 0.0
+    # 3. Tuned Pipeline
+    tuned_result = run_pipeline_safe(run_tuned_pipeline, question)
+    tuned_answer = tuned_result.get("text_answer", "")
+    tuned_score = judge_truthfulness(question, ground_truth, tuned_answer)
+    print(f"  Tuned Pipeline Score: {tuned_score:.2f}")
     
     # Log scores
     log_results(test_case_id, tuned_score, gr_score, pgr_score)
@@ -158,8 +171,11 @@ def run_test_case(test_case: dict, test_case_id: int):
     # Log Q&A details per pipeline
     gr_label = "1" if gr_score >= THRESHOLD else "0"
     pgr_label = "1" if pgr_score >= THRESHOLD else "0"
+    tuned_label = "1" if tuned_score >= THRESHOLD else "0"
+    
     log_question_and_answer(test_case_id, "graphrag", question, gr_answer, gr_score, gr_label)
     log_question_and_answer(test_case_id, "prolog_graphrag", question, pgr_answer, pgr_score, pgr_label)
+    log_question_and_answer(test_case_id, "tuned_pipeline", question, tuned_answer, tuned_score, tuned_label)
 
 
 def log_results(test_case_id: int, tuned_score: Union[float, int], 
@@ -226,7 +242,7 @@ def log_question_and_answer(test_case_id: int, pipeline: str, question: str,
 
 def run_test_cases(test_cases: list[dict]):
     """
-    Runs all 100 test cases for the present metric / benchmark.
+    Runs test cases for the present metric / benchmark.
 
     Args:
         test_cases (list[dict]): The list of dicts returned by load_test_cases()
@@ -235,8 +251,8 @@ def run_test_cases(test_cases: list[dict]):
         run_test_case(t, i)
 
 
-def main():
-    test_cases = load_test_cases()
+def main(test_size: int = 1000):
+    test_cases = load_test_cases(limit=test_size)
     print(f"Loaded {len(test_cases)} TruthfulQA test cases.")
     if not test_cases:
         print("No TruthfulQA test cases found. Skipping.")
@@ -246,4 +262,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--test-size", type=int, default=1000, help="Number of test cases to run")
+    args = parser.parse_args()
+    main(test_size=args.test_size)
