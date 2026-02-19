@@ -34,7 +34,7 @@ class HotpotQALoader:
             
             formatted_data = []
             
-            for item in samples:
+            for idx, item in enumerate(samples):
                 # HotpotQA Structure:
                 # 'question': str
                 # 'answer': str
@@ -65,8 +65,17 @@ class HotpotQALoader:
                     "type": item['type'],
                     "level": item['level']
                 }
-                if approve(item['question']):
+                # Start logging to file
+                with open("hotpotqa_approval.log", "a", encoding="utf-8") as log_file:
+                    items_left = len(samples) - idx
+                    currently_approved = len(formatted_data)
+                    log_file.write(f"Approving: {item['question']} (Sample left: {items_left}, Currently Approved: {currently_approved})\n")
+                    log_file.flush()
+                    
+                    if approve(item['question']):
                         formatted_data.append(entry)
+                        log_file.write(f"Approved: {item['question']}\n")
+                        log_file.flush()
 
             # Save to disk
             os.makedirs(os.path.dirname(self.file_path), exist_ok=True)

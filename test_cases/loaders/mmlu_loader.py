@@ -60,7 +60,7 @@ class MMLULoader:
                 
                 samples = ds.select(random_indices)
                 
-                for item in samples:
+                for idx, item in enumerate(samples):
                     # Map 0-3 to A-D
                     answer_key = ["A", "B", "C", "D"]
                     correct_char = answer_key[item['answer']]
@@ -71,8 +71,17 @@ class MMLULoader:
                         "answer": correct_char,
                         "subject": subject
                     }
-                    if approve(item['question']):
-                        all_selected_data.append(entry)
+                    # Start logging to file
+                    with open("mmlu_approval.log", "a", encoding="utf-8") as log_file:
+                        items_left = len(samples) - idx
+                        currently_approved = len(all_selected_data)
+                        log_file.write(f"Approving: {item['question']} (Sample left: {items_left}, Currently Approved: {currently_approved})\n")
+                        log_file.flush()
+                        
+                        if approve(item['question']):
+                            all_selected_data.append(entry)
+                            log_file.write(f"Approved: {item['question']}\n")
+                            log_file.flush()
                     
             except Exception as e:
                 print(f"[MMLULoader] FAILED to load {subject}: {e}")

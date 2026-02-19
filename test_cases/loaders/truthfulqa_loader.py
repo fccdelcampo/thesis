@@ -28,8 +28,17 @@ class TruthfulQALoader:
             samples = ds.select(indices)
             
             formatted_data = []
-            for item in samples:
-                if approve(item['question']):
+            for idx, item in enumerate(samples):
+                # Start logging to file
+                with open("truthfulqa_approval.log", "a", encoding="utf-8") as log_file:
+                    items_left = len(samples) - idx
+                    currently_approved = len(formatted_data)
+                    log_file.write(f"Approving: {item['question']} (Sample left: {items_left}, Currently Approved: {currently_approved})\n")
+                    log_file.flush()
+
+                    if approve(item['question']):
+                        log_file.write(f"Approved: {item['question']}\n")
+                        log_file.flush()
                         formatted_data.append({
                             "dataset": "truthfulqa",
                             "question": item['question'],
