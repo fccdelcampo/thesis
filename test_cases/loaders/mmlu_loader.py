@@ -2,6 +2,7 @@ import os
 import json
 import random
 from datasets import load_dataset
+from test_case_chooser import approve
 
 class MMLULoader:
     """
@@ -11,21 +12,21 @@ class MMLULoader:
     
     # --- Configuration ---
     FILE_PATH = 'test_cases/mmlu.jsonl'
-    SAMPLES_PER_SUBJECT = 10
+    SAMPLES_PER_SUBJECT = 50
     RANDOM_SEED = 42
     
     # The "Prolog-Educational" Subject List (Reasoning & Logic Focus)
     TARGET_SUBJECTS = [
-        "formal_logic", 
-        "abstract_algebra", 
-        "college_computer_science", 
-        "high_school_computer_science",
-        "college_mathematics", 
-        "high_school_mathematics",
-        "college_physics", 
-        "high_school_physics",
-        "high_school_statistics", 
-        "high_school_macroeconomics"    
+        "machine_learning",
+        "computer_security",
+        "college_computer_science",
+        "formal_logic",
+        "high_school_microeconomics",
+        "nutrition",
+        "professional_medicine",
+        "conceptual_physics",
+        "high_school_chemistry",
+        "logical_fallacies"    
     ]
 
     def __init__(self):
@@ -50,6 +51,7 @@ class MMLULoader:
                 
                 total_in_subject = len(ds)
                 n_samples = min(total_in_subject, self.SAMPLES_PER_SUBJECT)
+                print(f"[MMLULoader] Fetching {n_samples} samples from subject '{subject}' (total: {total_in_subject})")
                 
                 if n_samples == 0:
                     continue
@@ -69,7 +71,8 @@ class MMLULoader:
                         "answer": correct_char,
                         "subject": subject
                     }
-                    all_selected_data.append(entry)
+                    if approve(item['question']):
+                        all_selected_data.append(entry)
                     
             except Exception as e:
                 print(f"[MMLULoader] FAILED to load {subject}: {e}")
@@ -82,6 +85,9 @@ class MMLULoader:
                 f.write(json.dumps(entry) + '\n')
         
         print(f"[MMLULoader] Successfully saved {len(all_selected_data)} questions to {self.file_path}")
+    
+    def generate_dataset(self):
+        self._generate_dataset()
 
     def load_data(self):
         # 1. Auto-Generate if missing
@@ -122,8 +128,4 @@ class MMLULoader:
 
 if __name__ == "__main__":
     loader = MMLULoader()
-    data = loader.load_data()
-    print(f"Loaded {len(data)} items.")
-    if data:
-        print("Sample Item:")
-        print(json.dumps(data[0], indent=2))
+    test_cases = loader.generate_dataset()

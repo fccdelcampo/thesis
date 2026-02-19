@@ -101,9 +101,9 @@ class CleanOutputChatOllama(ChatOllama):
         return result
 
 # Loaders
-from loaders.mmlu_loader import MMLULoader
-from loaders.truthfulqa_loader import TruthfulQALoader
-from loaders.hotpotqa_loader import HotpotQALoader
+from test_cases.loaders.mmlu_loader import MMLULoader
+from test_cases.loaders.truthfulqa_loader import TruthfulQALoader
+from test_cases.loaders.hotpotqa_loader import HotpotQALoader
 
 import sys
 
@@ -113,7 +113,7 @@ sys.path.append(pipeline_dir)
 
 # Import the REAL pipeline driver (Full Prolog GraphRAG)
 try:
-    import main_driver
+    from prolog_graphrag_pipeline import main_driver
 except ImportError as e:
     print(f"CRITICAL ERROR: Could not import main_driver: {e}")
     sys.exit(1)
@@ -330,4 +330,4 @@ def run_evaluation():
 
 if __name__ == "__main__":
     # run_evaluation()
-    load_cases()
+    MMLULoader.load_cases()

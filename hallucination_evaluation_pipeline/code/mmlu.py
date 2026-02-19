@@ -112,6 +112,7 @@ def run_pipeline_safe(pipeline_fn, question: str, **kwargs) -> dict:
     except Exception as e:
         print(f"  Pipeline error: {e}")
         return {"answer": "", "contexts": []}
+    
 
 
 def run_test_case(test_case: dict, test_case_id: int):

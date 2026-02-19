@@ -2,6 +2,7 @@ import os
 import json
 import random
 from datasets import load_dataset
+from test_case_chooser import approve
 
 class TruthfulQALoader:
     FILE_PATH = 'test_cases/truthfulqa.jsonl'
@@ -28,13 +29,14 @@ class TruthfulQALoader:
             
             formatted_data = []
             for item in samples:
-                formatted_data.append({
-                    "dataset": "truthfulqa",
-                    "question": item['question'],
-                    "formatted_input": item['question'],
-                    "ground_truth": item['correct_answers'], 
-                    "ground_truth_context": None
-                })
+                if approve(item['question']):
+                        formatted_data.append({
+                            "dataset": "truthfulqa",
+                            "question": item['question'],
+                            "formatted_input": item['question'],
+                            "ground_truth": item['correct_answers'], 
+                            "ground_truth_context": None
+                        })
 
             os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
             with open(self.file_path, 'w', encoding='utf-8') as f:
@@ -46,6 +48,9 @@ class TruthfulQALoader:
         except Exception as e:
             print(f"[TruthfulQALoader] Error: {e}")
             raise e
+        
+    def generate_dataset(self):
+        self._generate_dataset()
 
     def load_data(self):
         self.ensure_data_exists()
@@ -65,5 +70,4 @@ class TruthfulQALoader:
 if __name__ == "__main__":
     loader = TruthfulQALoader()
     data = loader.load_data()
-    print(f"Loaded {len(data)} items.")
-    print("Example Ground Truth (List):", data[0]['ground_truth'])
+    test_cases = loader.generate_dataset()

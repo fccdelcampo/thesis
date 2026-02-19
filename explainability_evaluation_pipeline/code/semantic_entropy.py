@@ -1,7 +1,9 @@
 import requests
 import json
 from config import ENTAILMENT_THRESHOLD, SampleSequencesFlags, CORRECTNESS_THRESHOLD
-# from prolog_graphrag_pipeline import main_driver
+from prolog_graphrag_pipeline import main_driver
+from hallucination_evaluation_pipeline.code.metrics import evaluate_with_ragas as evaluate
+
 import math
 import csv
 import sys
@@ -17,19 +19,24 @@ LOGS_DIR = ROOT / "logs/prolog_graphrag_pipeline_logs"
 import requests
 import json
 from config import ENTAILMENT_THRESHOLD, SampleSequencesFlags
-# from prolog_graphrag_pipeline import main_driver
+from prolog_graphrag_pipeline import main_driver
 import math
 import csv
 
 API_URL = "https://api-inference.huggingface.co/models/microsoft/deberta-large-mnli"
 headers = {"Authorization": "Bearer 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"}
 
-def evaluate(prompt: str, answer: str) -> float:
-    return 0.5
+def evaluate(prompt: str, answer: str, eval_name: str) -> float:
+    if eval_name == "faithfulness":
+        return evaluate_faithfulness(prompt, answer)
+    if eval_name == "answer_relevancy":
+        return evaluate_answer_relevancy(prompt, answer)
+    if eval_name == "context_recall":
+        return evaluate_context_recall(prompt, answer)
+    raise ValueError(f"eval_name {eval_name} not allowed.")
 
 def sample_sequences(prompt: str, flag: str) -> dict:
-    # return main_driver.run_pipeline(prompt=prompt, flag=flag, sample_mode=True)
-    return None
+    return main_driver.run_pipeline(prompt=prompt, flag=flag, sample_mode=True)
 
 def query_deberta(seq1: str, seq2: str):
     input = {
@@ -74,7 +81,7 @@ def compute_aggregated_logprobs(response: dict) -> float:
     return sequence_probability
     
 
-def compute_semantic_entropy(test_case_id: int, prompt: str):
+def compute_semantic_entropy(test_case_id: int, prompt: str, eval_name: str):
     semantic_entropies = {
         r"x": None,
         r"q": None,
@@ -102,16 +109,20 @@ def compute_semantic_entropy(test_case_id: int, prompt: str):
         reconstructed_prompt: str = output["prompt"]
         output_sequences["se_" + flag.value[1]]["prompt"] = reconstructed_prompt
         sequences = output["sequences"]
+        
         for i, seq in enumerate(sequences):
-            score = evaluate(prompt=reconstructed_prompt, answer=seq["text_answer"])
+            faithfulness_score, answer_relevancy_score, context_recall_score = evaluate(prompt=reconstructed_prompt, answer=seq["text_answer"], eval_name=eval_name)
             d = {f"se_{flag.value[1]}_sequence_{i}": seq["text_answer"], f"se_{flag.value[1]}_sequence_{i}_label": score}
             output_sequences["se_" + flag.value[1]]["sequences"].append(d)
+            
         clusters = cluster_sequences(sequences)
         semantic_entropy = 0
         sum_of_cluster_probabilities = sum(compute_likelihood(cluster) for cluster in clusters)
+        
         for cluster in clusters:
             p_Ci_x = compute_likelihood(cluster) / sum_of_cluster_probabilities
             semantic_entropy += p_Ci_x * math.log(p_Ci_x)
+            
         semantic_entropy *= -1
         semantic_entropies[flag.value[1]] = semantic_entropy
         output_sequences["se_" + flag.value[1]]["se"] = semantic_entropy
@@ -128,8 +139,10 @@ def run_semantic_entropy_computations():
             test_case = json.loads(line)
             test_case_id = test_case["test_case_id"]
             prompt = test_case["question"]
+            eval_name = test_case["eval_name"]
         
-            compute_semantic_entropy(test_case_id=test_case_id, prompt=prompt)
+            compute_semantic_entropy(test_case_id=test_case_id, prompt=prompt, eval_name=eval_name)
+    
     
 def log_result(test_case_id: int, semantic_entropies: dict) -> None:
     with open(IO_DIR / "semantic_entropy.csv", 'a', newline='') as f:
@@ -146,7 +159,6 @@ def log_result(test_case_id: int, semantic_entropies: dict) -> None:
             "se_x_c": semantic_entropies[r"x\c"],
             "se_x_c_label": int(semantic_entropies[r"x\c"] < CORRECTNESS_THRESHOLD)
         })
-    
 
 
 def log_sequences(test_case_id: int, output_sequences: dict) -> None:

@@ -11,6 +11,7 @@ import os
 import sys
 import json
 import argparse
+from test_case_chooser import approve
 
 # Add project root to path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
@@ -100,8 +101,10 @@ def generate_synthetic_testset(test_size: int = 10):
     faithfulness_path = os.path.join(test_cases_dir, "faithfulness.jsonl")
     with open(faithfulness_path, 'w', encoding='utf-8') as f:
         for _, row in df.iterrows():
-            entry = {"question": row.get("question", "")}
-            f.write(json.dumps(entry) + "\n")
+            question = row.get("question, ")
+            if approve(question):
+                entry = {"question": question}
+                f.write(json.dumps(entry) + "\n")
     print(f"Saved: {faithfulness_path} ({len(df)} entries)")
     
     # Answer Relevancy: needs question

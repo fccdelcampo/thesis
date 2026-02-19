@@ -2,6 +2,7 @@ import os
 import json
 import random
 from datasets import load_dataset
+from test_case_chooser import approve
 
 class HotpotQALoader:
     # --- Configuration ---
@@ -64,7 +65,8 @@ class HotpotQALoader:
                     "type": item['type'],
                     "level": item['level']
                 }
-                formatted_data.append(entry)
+                if approve(item['question']):
+                        formatted_data.append(entry)
 
             # Save to disk
             os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
@@ -77,6 +79,9 @@ class HotpotQALoader:
         except Exception as e:
             print(f"[HotpotQALoader] CRITICAL ERROR: {e}")
             raise e
+        
+    def generate_dataset(self):
+        self._generate_dataset()
 
     def load_data(self):
         # 1. Auto-Generate if missing
@@ -99,8 +104,4 @@ class HotpotQALoader:
 
 if __name__ == "__main__":
     loader = HotpotQALoader()
-    data = loader.load_data()
-    print(f"Loaded {len(data)} items.")
-    if data:
-        print("Sample Question:", data[0]['question'])
-        print("Sample Context Length:", len(data[0]['ground_truth_context']))
+    test_cases = loader.generate_dataset()
