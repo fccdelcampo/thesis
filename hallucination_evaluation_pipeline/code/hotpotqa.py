@@ -61,12 +61,16 @@ A correct answer should demonstrate this reasoning chain.
 Respond with ONLY a single float number between 0.0 and 1.0. Nothing else."""
 
 
-def load_test_cases() -> list[dict]:
+
+# Import shared utilities
+from hallucination_evaluation_pipeline.code.pipeline_utils import unload_ollama_model, CleanOutputChatOllama
+
+def load_test_cases(limit: int = 10) -> list[dict]:
     """
     Reads .jsonl files in test_cases/ and turns each JSON line into a dict.
 
     Args:
-        None. Path must be defined in the function itself.
+        limit (int): Maximum number of test cases to load.
 
     Returns:
         list[dict]: A list of dict objects where each dict is a test case containing, at the minimum, the question and answer fields.
@@ -75,7 +79,9 @@ def load_test_cases() -> list[dict]:
     test_cases = []
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
-            for line in f:
+            for i, line in enumerate(f):
+                if i >= limit:
+                    break
                 if line.strip():
                     test_cases.append(json.loads(line))
     return test_cases
@@ -107,7 +113,15 @@ def judge_answer(question: str, ground_truth: str, context: str, answer: str) ->
     )
     
     try:
+        # Unload model before judge evaluation to free VRAM
+        unload_ollama_model()
+        
         llm = ragas_config.get_ragas_llm()
+        # Use CleanOutputChatOllama logic if not already applied in ragas_config
+        # But ragas_config might use standard ChatOllama. 
+        # For judge_answer, we are invoking directly, so we can wrap it or just use it.
+        # Ideally ragas_config should return a clean LLM, but here we just invoke.
+        
         response = llm.langchain_llm.invoke(prompt)
         score_text = response.content.strip() if hasattr(response, 'content') else str(response).strip()
         
@@ -126,6 +140,8 @@ def judge_answer(question: str, ground_truth: str, context: str, answer: str) ->
 def run_pipeline_safe(pipeline_fn, question: str, **kwargs) -> dict:
     """Safely run a pipeline, returning empty dict on failure."""
     try:
+        # Ensure model is fresh or unloaded before heavy run if needed
+        # unload_ollama_model() 
         return pipeline_fn(question, **kwargs)
     except Exception as e:
         print(f"  Pipeline error: {e}")
@@ -138,7 +154,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     Calls necessary LLM-as-judge evaluations after pipeline returns answer dict.
     Calls log_question_and_answer() to log the question and answer for each test case.
     Calls log_results() after all evaluations have returned scores
-
+    
     Args:
         test_case (dict): A test case's dict
         test_case_id (int): The ID of the test case
@@ -255,8 +271,8 @@ def run_test_cases(test_cases: list[dict]):
         run_test_case(t, i)
 
 
-def main():
-    test_cases = load_test_cases()
+def main(test_size: int = 10):
+    test_cases = load_test_cases(limit=test_size)
     print(f"Loaded {len(test_cases)} HotpotQA test cases.")
     if not test_cases:
         print("No HotpotQA test cases found. Skipping.")
@@ -266,4 +282,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--test-size", type=int, default=10, help="Number of test cases to run")
+    args = parser.parse_args()
+    main(test_size=args.test_size)
