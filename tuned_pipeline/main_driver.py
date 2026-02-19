@@ -15,8 +15,10 @@ from llm import generate
 def run_pipeline(user_question: str):
     return generate(user_question)
 
-result = run_pipeline("What is the meaning of life in one sentence.")
-print(f"RESULT\n{result}\n\n")
 
-print(f"TEXT ANSWER\n{result["text_answer"]}\n\n")
-print(f"LOGPROBS\n{result["logprobs"]}\n\n")
+if __name__ == "__main__":
+    result = run_pipeline("What is the meaning of life in one sentence.")
+    print(f"RESULT\n{result}\n\n")
+    
+    print(f"TEXT ANSWER\n{result['text_answer']}\n\n")
+    print(f"LOGPROBS\n{result['logprobs']}\n\n")
