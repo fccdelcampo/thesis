@@ -51,12 +51,34 @@ Context:
 
 User Question: 
 {user_question}
+
+---
+### RULES:
+1. **Strict Prolog Syntax**: 
+   - End every fact and rule with a period `.`.
+   - Predicates must be lowercase (e.g., `professor(john).` NOT `Professor(John).`).
+   - Variables must be uppercase (e.g., `X`, `Person`).
+   - Do NOT use hyphens `-` or bullets `*` at the beginning of lines.
+   - Do NOT use valid Prolog operators like spaces in invalid ways.
+2. **Structure**:
+   - Provide the **Database** inside `<database>` tags.
+   - Provide the **Query** inside `<query>` tags.
+3. **Completeness**:
+   - Ensure all predicates used in the query or rules are defined in the database.
+   - Do not leave placeholders like `...`.
+
 """
 
     if most_recent_error:
         prompt += f"""
-Your recent Prolog database and query have errors. Fix them based on the following error message:
+### CORRECTION REQUIRED:
+Your previous attempt failed with this error:
 {most_recent_error}
+
+FIX CODE:
+1. If "Operator priority clash", remove any leading hyphens `-` or bullets.
+2. If "Singleton variables", ensure variables appear more than once or use `_` for unused ones.
+3. If "Unknown procedure", ensure you defined the facts/rules in the database.
 """
 
     return prompt
@@ -66,22 +88,50 @@ from typing import Optional
 def generate_prolog_code(user_question: str, retrieved_context: str, most_recent_error: Optional[str]) -> tuple:
     for i in range(5):
         try:
+            # Robust Import Logic
             try:
                 from .prolog_llms import generate
             except ImportError:
                 import sys
                 import os
-                # Add the project root to sys.path
                 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
                 if project_root not in sys.path:
                     sys.path.insert(0, project_root)
-                from prolog_graphrag_pipeline.prolog.prolog_llms import generate
-            answer = generate(prompt=generate_prolog_generation_prompt(user_question, retrieved_context, most_recent_error), flag="prolog")
+                try:
+                    from prolog_graphrag_pipeline.prolog.prolog_llms import generate
+                except ImportError:
+                    # Fallback if the package structure is flattened (e.g., tests)
+                    from prolog.prolog_llms import generate
+            
+            prompt = generate_prolog_generation_prompt(user_question, retrieved_context, most_recent_error)
+            
+            # Explicitly checking signature or arguments is hard here without inspect, but we assume the import worked.
+            try:
+                answer = generate(prompt=prompt, flag="prolog")
+            except TypeError as e:
+                # Catch the specific error reported by user if it happens here
+                print(f"CRITICAL ERROR calling generate: {e}")
+                raise e
+
             if not answer:
                 print(f"Iteration {i} | Error: LLM returned None.")
                 continue
             
-            db_query = capture_db_and_query(answer['text_answer'])
+            answer_text = answer['text_answer']
+            
+            # CLEANING: Remove markdown bullets if LLM hallucinates them
+            lines = answer_text.split('\n')
+            cleaned_lines = []
+            for line in lines:
+                clean = line.strip()
+                if clean.startswith("- "):
+                    clean = clean[2:]
+                elif clean.startswith("* "):
+                    clean = clean[2:]
+                cleaned_lines.append(clean)
+            answer_text = "\n".join(cleaned_lines)
+
+            db_query = capture_db_and_query(answer_text)
             database = db_query["database"]
             query = db_query["query"].strip()
             
@@ -97,6 +147,10 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             print(f"Iteration {i} | Extracted Query:\n{query}\n")
             janus.query_once("unload_file(user)")
             janus.consult("user", database)
+            
+            # Additional Syntax Check: Try to read the query term before executing
+            # janus.query_once(f"read_term_from_atom('{query}', Term, [])") 
+            
             janus.query_once(query)
             most_recent_error = None
             print(f"Iteration {i} | Prolog code generation success")
@@ -107,11 +161,12 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             continue
         except janus.PrologError as e:
             print(f"Iteration {i} | Prolog Error: {e}")
-            most_recent_error = f"{e} Ensure all Prolog syntax rules are followed. Enclose the final database within <database> and </database> tags, and the query within <query> and </query> tags."
-            print(most_recent_error)
+            most_recent_error = f"{e} Ensure strict Prolog syntax. No bullets/hyphens. Enclose database in <database>...</database>."
             continue
         except Exception as e:
             print(f"Iteration {i} | General Error: {e}")
+            if "missing 3 required positional arguments" in str(e):
+                raise e # Re-raise this specific error to stop the loop and alert the user
             most_recent_error = f"Error: {e}. Please ensure valid Prolog syntax."
             continue
         

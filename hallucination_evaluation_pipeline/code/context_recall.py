@@ -26,7 +26,11 @@ from prolog_graphrag_pipeline.main_driver import run_pipeline as run_prolog_grap
 TEST_CASES_DIR = os.path.join(project_root, "test_cases")
 RESULTS_DIR = os.path.join(project_root, "hallucination_evaluation_results")
 
-def load_test_cases() -> list[dict]:
+
+# Import shared utilities
+from hallucination_evaluation_pipeline.code.pipeline_utils import unload_ollama_model, CleanOutputChatOllama
+
+def load_test_cases(limit: int = 10) -> list[dict]:
     """
     Reads context_recall.jsonl.
     If empty, we might need a fallback or just return empty.
@@ -36,7 +40,9 @@ def load_test_cases() -> list[dict]:
     test_cases = []
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
-            for line in f:
+            for i, line in enumerate(f):
+                if i >= limit:
+                    break
                 if line.strip():
                     test_cases.append(json.loads(line))
     
@@ -45,7 +51,9 @@ def load_test_cases() -> list[dict]:
         tqa_path = os.path.join(TEST_CASES_DIR, "truthfulqa.jsonl")
         if os.path.exists(tqa_path):
             with open(tqa_path, 'r', encoding='utf-8') as f:
-                for line in f:
+                for i, line in enumerate(f):
+                    if i >= limit:
+                        break
                     if line.strip():
                         test_cases.append(json.loads(line))
                         
@@ -73,15 +81,27 @@ def evaluate_with_ragas(question: str, ground_truth: str, contexts: list[str]) -
     
     try:
         start_time = time.time()
+        
+        # Unload model before Ragas evaluation to free VRAM
+        unload_ollama_model()
+        
+        # Initialize CleanOutputChatOllama
+        llm = CleanOutputChatOllama(model=ragas_config.RAGAS_LLM_MODEL, keep_alive="0")
+        embeddings = ragas_config.get_ragas_embeddings()
+
         results = evaluate(
             dataset=dataset,
             metrics=[context_recall],
-            llm=ragas_config.get_ragas_llm(),
-            embeddings=ragas_config.get_ragas_embeddings()
+            llm=llm,
+            embeddings=embeddings,
+            raise_exceptions=False
         )
         end_time = time.time()
         print(f"RAGAS Context Recall Evaluation took {end_time - start_time:.2f} seconds.")
-        return results['context_recall']
+        val = results['context_recall']
+        if val is None or str(val).lower() == 'nan':
+             return 0.0
+        return float(val)
     except Exception as e:
         print(f"RAGAS Evaluation Failed: {e}")
         return 0.0
@@ -137,12 +157,16 @@ def log_results(test_case_id: int, tuned_score: float, graphrag_score: float, pr
     header = not os.path.exists(file_path) or os.path.getsize(file_path) == 0
     new_row.to_csv(file_path, mode='a', header=header, index=False)
 
-def main():
-    test_cases = load_test_cases()
+def main(test_size: int = 10):
+    test_cases = load_test_cases(limit=test_size)
     print(f"Loaded {len(test_cases)} test cases for Context Recall.")
     for i, test_case in enumerate(tqdm(test_cases)):
         run_test_case(test_case, i)
         # pass
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--test-size", type=int, default=10, help="Number of test cases to run")
+    args = parser.parse_args()
+    main(test_size=args.test_size)

@@ -27,7 +27,11 @@ from prolog_graphrag_pipeline.config import LLM_SYSTEM_PROMPT
 TEST_CASES_DIR = os.path.join(project_root, "test_cases")
 RESULTS_DIR = os.path.join(project_root, "hallucination_evaluation_results")
 
-def load_test_cases() -> list[dict]:
+
+# Import shared utilities
+from hallucination_evaluation_pipeline.code.pipeline_utils import unload_ollama_model, CleanOutputChatOllama
+
+def load_test_cases(limit: int = 10) -> list[dict]:
     """
     Reads .jsonl files in test_cases/ and turns each JSON line into a dict.
     Specifically targets faithfulness.jsonl (or creates synthetic ones if empty).
@@ -38,7 +42,9 @@ def load_test_cases() -> list[dict]:
     test_cases = []
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
-            for line in f:
+            for i, line in enumerate(f):
+                if i >= limit:
+                    break
                 if line.strip():
                     test_cases.append(json.loads(line))
     return test_cases
@@ -61,15 +67,29 @@ def evaluate_with_ragas(question: str, answer: str, contexts: list[str]) -> floa
     
     try:
         start_time = time.time()
+        
+        # Unload model before Ragas evaluation to free VRAM
+        unload_ollama_model()
+        
+        # Initialize CleanOutputChatOllama
+        # Note: we are passing this instance to Ragas.
+        # Ensure we use keep_alive=0 to free VRAM after
+        llm = CleanOutputChatOllama(model=ragas_config.RAGAS_LLM_MODEL, keep_alive="0")
+        embeddings = ragas_config.get_ragas_embeddings()
+
         results = evaluate(
             dataset=dataset,
             metrics=[faithfulness],
-            llm=ragas_config.get_ragas_llm(),
-            embeddings=ragas_config.get_ragas_embeddings()
+            llm=llm,
+            embeddings=embeddings,
+            raise_exceptions=False
         )
         end_time = time.time()
         print(f"RAGAS Faithfulness Evaluation took {end_time - start_time:.2f} seconds.")
-        return results['faithfulness']
+        val = results['faithfulness']
+        if val is None or str(val).lower() == 'nan':
+             return 0.0
+        return float(val)
     except Exception as e:
         print(f"RAGAS Evaluation Failed: {e}")
         return 0.0
@@ -78,7 +98,6 @@ def evaluate_with_ragas(question: str, answer: str, contexts: list[str]) -> floa
 from graphrag_pipeline.graphrag.graphrag_driver import run_pipeline as run_graphrag
 
 # Prolog GraphRAG
-# Import as package from project root
 from prolog_graphrag_pipeline.main_driver import run_pipeline as run_prolog_graphrag
 
 # Tuned Pipeline (Assuming it exists or we skip)
@@ -165,8 +184,8 @@ def log_results(test_case_id: int, tuned_score: float, graphrag_score: float, pr
     header = not os.path.exists(file_path) or os.path.getsize(file_path) == 0
     new_row.to_csv(file_path, mode='a', header=header, index=False)
 
-def main():
-    test_cases = load_test_cases()
+def main(test_size: int = 10):
+    test_cases = load_test_cases(limit=test_size)
     print(f"Loaded {len(test_cases)} test cases for Faithfulness.")
     
     for i, test_case in enumerate(tqdm(test_cases)):
@@ -174,4 +193,8 @@ def main():
         # pass
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--test-size", type=int, default=10, help="Number of test cases to run")
+    args = parser.parse_args()
+    main(test_size=args.test_size)

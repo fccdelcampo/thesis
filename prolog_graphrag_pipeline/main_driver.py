@@ -13,11 +13,13 @@ except ImportError:
 def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include_conclusion: bool = True) -> dict:
     # Auto-clear stale data as per user request
     if flag != "q":
-        try:
-            print("Auto-clearing stale data...")
-            graphrag_driver.clear_local_data()
-        except Exception as e:
-            print(f"Warning: Failed to auto-clear data: {e}")
+
+        pass
+        # try:
+            # print("Auto-clearing stale data...")
+            # graphrag_driver.clear_local_data()
+        # except Exception as e:
+        #     print(f"Warning: Failed to auto-clear data: {e}")
 
     graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
     

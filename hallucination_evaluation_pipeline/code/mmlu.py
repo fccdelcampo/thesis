@@ -25,6 +25,12 @@ if project_root not in sys.path:
 # Import pipeline drivers
 from graphrag_pipeline.graphrag.graphrag_driver import run_pipeline as run_graphrag
 from prolog_graphrag_pipeline.main_driver import run_pipeline as run_prolog_graphrag
+try:
+    from tuned_pipeline.main_driver import run_pipeline as run_tuned_pipeline
+except ImportError:
+    print("Warning: Could not import tuned_pipeline. Check sys.path and dependencies.")
+    def run_tuned_pipeline(q): return {"text_answer": "Error: Pipeline not found"}
+
 
 # Paths
 TEST_CASES_DIR = os.path.join(project_root, "test_cases")
@@ -35,21 +41,23 @@ LOGS_DIR = os.path.join(project_root, "logs")
 THRESHOLD = 0.7
 
 
-def load_test_cases() -> list[dict]:
+def load_test_cases(limit: int = 1000) -> list[dict]:
     """
     Reads .jsonl files in test_cases/ and turns each JSON line into a dict.
 
     Args:
-        None. Path must be defined in the function itself.
+        limit (int): Max number of test cases.
 
     Returns:
-        list[dict]: A list of dict objects where each dict is a test case containing, at the minimum, the question and answer fields.
+        list[dict]: A list of dict objects where each dict is a test case.
     """
     file_path = os.path.join(TEST_CASES_DIR, "mmlu.jsonl")
     test_cases = []
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
-            for line in f:
+            for i, line in enumerate(f):
+                if i >= limit:
+                    break
                 if line.strip():
                     test_cases.append(json.loads(line))
     return test_cases
@@ -140,13 +148,17 @@ def run_test_case(test_case: dict, test_case_id: int):
     print(f"  GraphRAG: {gr_letter} (Score: {gr_score})")
     
     # 2. Prolog GraphRAG Pipeline
+    # FIX: Added flag="prolog"
     pgr_result = run_pipeline_safe(run_prolog_graphrag, formatted_question, flag="prolog")
     pgr_letter = extract_answer_letter(pgr_result.get("answer", ""))
     pgr_score = score_answer(pgr_letter, correct_answer)
     print(f"  Prolog-GraphRAG: {pgr_letter} (Score: {pgr_score})")
     
-    # 3. Tuned Pipeline (Placeholder — uses direct LLM without RAG)
-    tuned_score = 0.0
+    # 3. Tuned Pipeline 
+    tuned_result = run_pipeline_safe(run_tuned_pipeline, formatted_question)
+    tuned_letter = extract_answer_letter(tuned_result.get("text_answer", ""))
+    tuned_score = score_answer(tuned_letter, correct_answer)
+    print(f"  Tuned Pipeline: {tuned_letter} (Score: {tuned_score})")
     
     # Log scores
     log_results(test_case_id, tuned_score, gr_score, pgr_score)
@@ -154,8 +166,11 @@ def run_test_case(test_case: dict, test_case_id: int):
     # Log Q&A details per pipeline
     gr_label = "1" if gr_score >= THRESHOLD else "0"
     pgr_label = "1" if pgr_score >= THRESHOLD else "0"
+    tuned_label = "1" if tuned_score >= THRESHOLD else "0"
+    
     log_question_and_answer(test_case_id, "graphrag", raw_question, gr_result.get("answer", ""), gr_score, gr_label)
     log_question_and_answer(test_case_id, "prolog_graphrag", raw_question, pgr_result.get("answer", ""), pgr_score, pgr_label)
+    log_question_and_answer(test_case_id, "tuned_pipeline", raw_question, tuned_result.get("text_answer", ""), tuned_score, tuned_label)
 
 
 def log_results(test_case_id: int, tuned_score: Union[float, int], 
@@ -222,7 +237,7 @@ def log_question_and_answer(test_case_id: int, pipeline: str, question: str,
 
 def run_test_cases(test_cases: list[dict]):
     """
-    Runs all 100 test cases for the present metric / benchmark.
+    Runs test cases for the present metric / benchmark.
 
     Args:
         test_cases (list[dict]): The list of dicts returned by load_test_cases()
@@ -231,8 +246,8 @@ def run_test_cases(test_cases: list[dict]):
         run_test_case(t, i)
 
 
-def main():
-    test_cases = load_test_cases()
+def main(test_size: int = 1000):
+    test_cases = load_test_cases(limit=test_size)
     print(f"Loaded {len(test_cases)} MMLU test cases.")
     if not test_cases:
         print("No MMLU test cases found. Skipping.")
@@ -242,4 +257,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--test-size", type=int, default=1000, help="Number of test cases to run")
+    args = parser.parse_args()
+    main(test_size=args.test_size)

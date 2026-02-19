@@ -11,6 +11,8 @@ Usage:
     python main_driver.py                    # Run full pipeline
     python main_driver.py --generate-testset # Generate testset first, then run
     python main_driver.py --metrics-only     # Run only hallucination metrics
+    python main_driver.py --benchmarks-only  # Run only benchmarks
+    python main_driver.py --test-size n      # Run with n test cases
 """
 import os
 import sys
@@ -40,7 +42,8 @@ def run_testset_generation(test_size: int = 10):
     import generate_testset
     generate_testset.generate_synthetic_testset(test_size=test_size)
 
-def run_hallucination_metrics():
+
+def run_hallucination_metrics(test_size: int = 10):
     """Run all hallucination evaluation metrics."""
     print("\n" + "=" * 60)
     print("STEP 1: Running Hallucination Metrics")
@@ -48,23 +51,23 @@ def run_hallucination_metrics():
     
     print("\n--- Faithfulness ---")
     try:
-        faithfulness.main()
+        faithfulness.main(test_size=test_size)
     except Exception as e:
         print(f"Faithfulness failed: {e}")
     
     print("\n--- Answer Relevancy ---")
     try:
-        answer_relevancy.main()
+        answer_relevance.main(test_size=test_size)
     except Exception as e:
         print(f"Answer Relevancy failed: {e}")
     
     print("\n--- Context Recall ---")
     try:
-        context_recall.main()
+        context_recall.main(test_size=test_size)
     except Exception as e:
         print(f"Context Recall failed: {e}")
 
-def run_benchmarks():
+def run_benchmarks(test_size: int = 10):
     """Run benchmark evaluators."""
     print("\n" + "=" * 60)
     print("STEP 2: Running Benchmark Evaluators")
@@ -73,20 +76,24 @@ def run_benchmarks():
     try:
         import hotpotqa
         print("\n--- HotpotQA ---")
-        hotpotqa.main()
+        hotpotqa.main(test_size=test_size)
     except Exception as e:
         print(f"HotpotQA failed: {e}")
     
     try:
         import mmlu
         print("\n--- MMLU ---")
-        mmlu.main()
+        # MMLU loader probably needs update too if we want test_size support, 
+        # but focused on hallucination pipeline for now. 
+        # mmlu.main(test_size=test_size) 
+        mmlu.main() 
     except Exception as e:
         print(f"MMLU failed: {e}")
     
     try:
         import truthfulqa
         print("\n--- TruthfulQA ---")
+        # truthfulqa.main(test_size=test_size)
         truthfulqa.main()
     except Exception as e:
         print(f"TruthfulQA failed: {e}")
@@ -103,23 +110,27 @@ def run_statistical_analysis():
     except Exception as e:
         print(f"Statistical analysis failed: {e}")
 
+
 def run_hallucination_evaluation_pipeline(generate_testset: bool = False, 
                                            metrics_only: bool = False,
+                                           benchmarks_only: bool = False,
                                            test_size: int = 10):
     """
     Run the complete hallucination evaluation pipeline.
     """
     # Create results directory if it doesn't exist
     results_dir = os.path.join(project_root, "hallucination_evaluation_results")
-    os.makedirs(results_dir, exist_ok=True)
+    if not os.path.exists(results_dir):
+        os.makedirs(results_dir, exist_ok=True)
     
     if generate_testset:
         run_testset_generation(test_size=test_size)
     
-    run_hallucination_metrics()
+    if not benchmarks_only:
+        run_hallucination_metrics(test_size=test_size)
     
     if not metrics_only:
-        run_benchmarks()
+        run_benchmarks(test_size=test_size)
     
     run_statistical_analysis()
     
@@ -133,12 +144,15 @@ if __name__ == "__main__":
                        help="Generate synthetic testset before evaluation")
     parser.add_argument("--metrics-only", action="store_true",
                        help="Run only hallucination metrics (skip benchmarks)")
+    parser.add_argument("--benchmarks-only", action="store_true",
+                       help="Run only benchmarks (skip hallucination metrics)")
     parser.add_argument("--test-size", type=int, default=10,
-                       help="Number of synthetic test cases to generate")
+                       help="Number of test cases to run/generate")
     args = parser.parse_args()
     
     run_hallucination_evaluation_pipeline(
         generate_testset=args.generate_testset,
         metrics_only=args.metrics_only,
+        benchmarks_only=args.benchmarks_only,
         test_size=args.test_size
     )

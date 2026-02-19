@@ -25,6 +25,13 @@ if project_root not in sys.path:
 # Import pipeline drivers
 from graphrag_pipeline.graphrag.graphrag_driver import run_pipeline as run_graphrag
 from prolog_graphrag_pipeline.main_driver import run_pipeline as run_prolog_graphrag
+try:
+    from tuned_pipeline.main_driver import run_pipeline as run_tuned_pipeline
+except ImportError:
+    # Handle case where tuned_pipeline module might not be found or has dependencies missing
+    print("Warning: Could not import tuned_pipeline. Check sys.path and dependencies.")
+    def run_tuned_pipeline(q): return {"text_answer": "Error: Pipeline not found"}
+
 
 # Import LLM for judge evaluation
 import ragas_config
@@ -61,12 +68,16 @@ A correct answer should demonstrate this reasoning chain.
 Respond with ONLY a single float number between 0.0 and 1.0. Nothing else."""
 
 
-def load_test_cases() -> list[dict]:
+
+# Import shared utilities
+from hallucination_evaluation_pipeline.code.pipeline_utils import unload_ollama_model, CleanOutputChatOllama
+
+def load_test_cases(limit: int = 10) -> list[dict]:
     """
     Reads .jsonl files in test_cases/ and turns each JSON line into a dict.
 
     Args:
-        None. Path must be defined in the function itself.
+        limit (int): Maximum number of test cases to load.
 
     Returns:
         list[dict]: A list of dict objects where each dict is a test case containing, at the minimum, the question and answer fields.
@@ -75,7 +86,9 @@ def load_test_cases() -> list[dict]:
     test_cases = []
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
-            for line in f:
+            for i, line in enumerate(f):
+                if i >= limit:
+                    break
                 if line.strip():
                     test_cases.append(json.loads(line))
     return test_cases
@@ -93,7 +106,7 @@ def judge_answer(question: str, ground_truth: str, context: str, answer: str) ->
     if isinstance(context, list):
         context = "\n".join(context)
     if not context:
-        context = "(No supporting context provided)"
+        context = "No context provided."
     
     # Format ground truth
     if isinstance(ground_truth, list):
@@ -107,30 +120,30 @@ def judge_answer(question: str, ground_truth: str, context: str, answer: str) ->
     )
     
     try:
-        llm = ragas_config.get_ragas_llm()
-        response = llm.langchain_llm.invoke(prompt)
-        score_text = response.content.strip() if hasattr(response, 'content') else str(response).strip()
+        # Use our clean LLM wrapper
+        llm = CleanOutputChatOllama(model=ragas_config.RAGAS_LLM_MODEL, keep_alive="5m")
+        response = llm.invoke(prompt)
+        content = response.content.strip()
         
-        # Extract float from response
+        # Try to parse float
         import re
-        match = re.search(r'(\d+\.?\d*)', score_text)
+        match = re.search(r"(\d+(\.\d+)?)", content)
         if match:
-            score = float(match.group(1))
-            return min(max(score, 0.0), 1.0)  # Clamp to [0, 1]
+            return float(match.group(1))
         return 0.0
     except Exception as e:
-        print(f"  Judge evaluation failed: {e}")
+        print(f"Judge error: {e}")
         return 0.0
 
-
-def run_pipeline_safe(pipeline_fn, question: str, **kwargs) -> dict:
-    """Safely run a pipeline, returning empty dict on failure."""
+def run_pipeline_safe(pipeline_func, *args, **kwargs):
+    """
+    Helper to run a pipeline function and catch any exceptions so the whole eval doesn't crash.
+    """
     try:
-        return pipeline_fn(question, **kwargs)
+        return pipeline_func(*args, **kwargs)
     except Exception as e:
-        print(f"  Pipeline error: {e}")
-        return {"answer": "", "contexts": []}
-
+        print(f"Pipeline failed: {e}")
+        return {}
 
 def run_test_case(test_case: dict, test_case_id: int):
     """
@@ -138,7 +151,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     Calls necessary LLM-as-judge evaluations after pipeline returns answer dict.
     Calls log_question_and_answer() to log the question and answer for each test case.
     Calls log_results() after all evaluations have returned scores
-
+    
     Args:
         test_case (dict): A test case's dict
         test_case_id (int): The ID of the test case
@@ -166,8 +179,11 @@ def run_test_case(test_case: dict, test_case_id: int):
     pgr_score = judge_answer(question, ground_truth, gt_context, pgr_answer)
     print(f"  Prolog-GraphRAG Score: {pgr_score:.2f}")
     
-    # 3. Tuned Pipeline (Placeholder)
-    tuned_score = 0.0
+    # 3. Tuned Pipeline
+    tuned_result = run_pipeline_safe(run_tuned_pipeline, question)
+    tuned_answer = tuned_result.get("text_answer", "")
+    tuned_score = judge_answer(question, ground_truth, gt_context, tuned_answer)
+    print(f"  Tuned Pipeline Score: {tuned_score:.2f}")
     
     # Log scores
     log_results(test_case_id, tuned_score, gr_score, pgr_score)
@@ -175,8 +191,11 @@ def run_test_case(test_case: dict, test_case_id: int):
     # Log Q&A details per pipeline
     gr_label = "1" if gr_score >= THRESHOLD else "0"
     pgr_label = "1" if pgr_score >= THRESHOLD else "0"
+    tuned_label = "1" if tuned_score >= THRESHOLD else "0"
+    
     log_question_and_answer(test_case_id, "graphrag", question, gr_answer, gr_score, gr_label, q_type, q_level)
     log_question_and_answer(test_case_id, "prolog_graphrag", question, pgr_answer, pgr_score, pgr_label, q_type, q_level)
+    log_question_and_answer(test_case_id, "tuned_pipeline", question, tuned_answer, tuned_score, tuned_label, q_type, q_level)
 
 
 def log_results(test_case_id: int, tuned_score: Union[float, int], 
@@ -255,8 +274,8 @@ def run_test_cases(test_cases: list[dict]):
         run_test_case(t, i)
 
 
-def main():
-    test_cases = load_test_cases()
+def main(test_size: int = 10):
+    test_cases = load_test_cases(limit=test_size)
     print(f"Loaded {len(test_cases)} HotpotQA test cases.")
     if not test_cases:
         print("No HotpotQA test cases found. Skipping.")
@@ -266,4 +285,8 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--test-size", type=int, default=10, help="Number of test cases to run")
+    args = parser.parse_args()
+    main(test_size=args.test_size)

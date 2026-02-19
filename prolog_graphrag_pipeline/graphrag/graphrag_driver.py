@@ -260,48 +260,45 @@ async def perform_tests():
     
     print("\n--- All tests completed ---")
 
+
 def ensure_driver_connected():
     global neo4j_driver
-    print("DEBUG: Checking Neo4j driver...", flush=True)
-    if neo4j_driver is None:
-        print("DEBUG: Initializing new Neo4j driver...", flush=True)
+    while True:
+        # print("DEBUG: Checking Neo4j driver...", flush=True)
         try:
-             # Set timeouts to avoid hanging
+            if neo4j_driver is not None:
+                # print("DEBUG: Verifying existing Neo4j connectivity...", flush=True)
+                neo4j_driver.verify_connectivity()
+                # print("DEBUG: Neo4j connectivity verified.", flush=True)
+                return False
+
+            print("DEBUG: Initializing new Neo4j driver...", flush=True)
             neo4j_driver = neo4j.GraphDatabase.driver(
                 NEO4J_URI, 
                 auth=(NEO4J_USERNAME, NEO4J_PASSWORD),
-                connection_timeout=10.0, # 10 seconds timeout
-                max_connection_lifetime=200, # 200 seconds lifetime
+                connection_timeout=10.0, 
+                max_connection_lifetime=200, 
                 encrypted=False
             )
             neo4j_driver.verify_connectivity()
             print("DEBUG: Neo4j driver initialized and connected.", flush=True)
             return True
         except Exception as e:
-             print(f"CRITICAL ERROR: Could not connect to Neo4j: {e}", flush=True)
-             neo4j_driver = None # Reset to None so we try again next time?
-             raise e
-    else:
-        print("DEBUG: Verifying existing Neo4j connectivity...", flush=True)
-        try:
-            neo4j_driver.verify_connectivity()
-            print("DEBUG: Neo4j connectivity verified.", flush=True)
-            return False
-        except Exception as e:
-            print(f"Neo4j driver disconnected ({e}). Recreating...", flush=True)
-            try:
-                neo4j_driver.close()
-            except:
-                pass
-            neo4j_driver = neo4j.GraphDatabase.driver(
-                NEO4J_URI, 
-                auth=(NEO4J_USERNAME, NEO4J_PASSWORD),
-                connection_timeout=10.0,
-                max_connection_lifetime=200,
-                encrypted=False
-            )
-            print("DEBUG: Neo4j driver reconnected.", flush=True)
-            return True
+            print(f"CRITICAL ERROR: Could not connect to Neo4j: {e}", flush=True)
+            if neo4j_driver:
+                try:
+                    neo4j_driver.close()
+                except:
+                    pass
+            neo4j_driver = None 
+            
+            print(f"Error: {e}")
+            print("The process is paused. Please ensure Neo4j is running.")
+            user_response = input("Press Enter to retry connecting... (or type 'q' to raise error): ")
+            if user_response.lower().strip() == 'q':
+                raise e
+            print("Retrying connection...", flush=True)
+
 
 def clear_local_data():
     """

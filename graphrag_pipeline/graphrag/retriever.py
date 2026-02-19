@@ -306,9 +306,11 @@ def get_retriever(driver, embedder):
             embedder=embedder
         )
     elif RETRIEVER.value == "VectorCypherRetriever":
-        return FallbackRetriever(
+
+        return EnhancedRetriever(
             driver=driver,
             index_name="documentsVectorIndex",
+
             retrieval_query=RETRIEVAL_QUERY,
             embedder=embedder
         )
