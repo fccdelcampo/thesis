@@ -2,26 +2,27 @@ import pandas as pd
 import numpy as np
 import os
 import csv
-
+from visualizer_generator import *
+from config import *
 STATS_AVAILABLE = True
-try:
-    from scikit_posthocs import posthoc_dunn
-    from statsmodels.stats.multicomp import pairwise_tukeyhsd
-    from statsmodels.stats.contingency_tables import mcnemar
-    from scipy.stats import rankdata
-except ImportError:
-    STATS_AVAILABLE = False
-    print("Warning: statsmodels, scikit-posthocs, or scipy not found. Post-hoc tests will be skipped.")
-try:
-    from .config import *
-    from . import visualizer_generator
-except ImportError:
-    try:
-        from config import *
-        import visualizer_generator
-    except ImportError:
-        from stats.config import *
-        from stats import visualizer_generator
+# try:
+from scikit_posthocs import posthoc_dunn
+from statsmodels.stats.multicomp import pairwise_tukeyhsd
+from statsmodels.stats.contingency_tables import mcnemar
+from scipy.stats import rankdata
+# except ImportError:
+#     STATS_AVAILABLE = False
+#     print("Warning: statsmodels, scikit-posthocs, or scipy not found. Post-hoc tests will be skipped.")
+# try:
+#     from .config import *
+#     from . import visualizer_generator
+# except ImportError:
+#     try:
+#         from config import *
+#         import visualizer_generator
+#     except ImportError:
+#         from stats.config import *
+#         from stats import visualizer_generator
 
 # Define top-level directory (one level up from current script)
 TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -51,7 +52,7 @@ def log_posthoc_result(eval_name: str,loser: str, winner: str, p_value: float):
 from typing import Union
 
 def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Union[Metric, Benchmark]):
-    print(f"RESULTS:\n{results}")
+    # print(f"RESULTS:\n{results}")
     p_value_dict = {}
     if eval in CONTINUOUS_EVALS:
         if is_normal:
@@ -94,14 +95,16 @@ def compute_posthoc_test_for_metric(results, is_normal: bool, eval: Union[Metric
                 }
             )
             result_df = posthoc_dunn(df, val_col="score", group_col="group")
-            print("DUNN'S TEST DATAFRAME:\n", result_df)
+            # print("DUNN'S TEST DATAFRAME:\n", result_df)
             for i, pipeline1 in enumerate(list(Pipeline)):
                 for pipeline2 in list(Pipeline)[i+1:]:
                     pipeline1_name = pipeline1.value[1]
                     pipeline2_name = pipeline2.value[1]
-                    print(f"{pipeline1_name} | {pipeline2_name}")
+                    # print(f"{pipeline1_name} | {pipeline2_name}")
                     p_value = result_df.loc[pipeline1_name, pipeline2_name]
-                    p_value_dict[(pipeline1.value[0].replace(" Pipeline", ""), pipeline2.value[0].replace(" Pipeline", ""))] = p_value
+                    # print(f"pipeline1: {pipeline1}")
+                    # print(f" pipeline1.value[0]: {pipeline1.value[0]}")
+                    p_value_dict[((pipeline1.value[0]).replace(" Pipeline", ""), (pipeline2.value[0]).replace(" Pipeline", ""))] = p_value
                     if p_value < ALPHA:
                         all_scores = results[pipeline1_name] + results[pipeline2_name]
                         ranks = rankdata(all_scores)
@@ -184,7 +187,7 @@ def perform_posthoc_tests():
             if eval in CONTINUOUS_EVALS:
                 eval_name = eval.value[1]
                 pipeline_name = pipeline.value[1]
-                print(f"Eval name: {eval_name} | Pipeline name: {pipeline_name}")
+                # print(f"Eval name: {eval_name} | Pipeline name: {pipeline_name}")
                 row = normality_test_df.loc[(normality_test_df['eval_name'] == eval_name) & (normality_test_df['pipeline'] == pipeline_name),'normality']
                 if row.empty:
                     print(f"Warning: No normality result for {eval_name} - {pipeline_name}. Assuming NOT normal.")

@@ -45,12 +45,12 @@ except ImportError as e:
 def ensure_csv_headers():
     """Ensure all stats CSV files have their proper headers before writing data."""
     headers = {
-        "answer_relevance_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
-        "context_recall_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
-        "faithfulness_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
-        "hotpotqa_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
-        "mmlu_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
-        "truthfulqa_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
+        "answer_relevancy_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "context_recall_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "faithfulness_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "hotpotqa_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "mmlu_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "truthfulqa_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
         "normality_test_results.csv": "pipeline,eval_name,p_value,normality\n",
         "hypothesis_test_results.csv": "eval_name,p_value,interpretation\n",
         "posthoc_test_results.csv": "eval_name,loser,winner,p_value\n",
@@ -65,7 +65,7 @@ def ensure_csv_headers():
                 
 def clear_datasets():
     headers = {
-        "answer_relevance_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
+        "answer_relevancy_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
         "context_recall_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
         "faithfulness_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
         "hotpotqa_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
@@ -106,7 +106,7 @@ def generate_artificial_data():
             with open(DATA_DIR / f"{eval.value[1]}_scores.csv", 'a', newline='') as f:
                 # test_case_id,tuned_score,graphrag_score,prolog_graphrag_score
                 if eval in CONTINUOUS_EVALS:
-                    tuned_score, graphrag_score, prolog_graphrag_score = np.random.uniform(0, 1), np.random.uniform(0, 1), np.random.uniform(0, 1)
+                    tuned_score, graphrag_score, prolog_graphrag_score = np.random.uniform(0, 0.33), np.random.uniform(0.34, 0.66), np.random.uniform(0.67, 1)
                     writer = pd.DataFrame({
                         "test_case_id": i,
                         "tuned_score": [tuned_score],
@@ -117,7 +117,7 @@ def generate_artificial_data():
                         "prolog_graphrag_label": [0 if prolog_graphrag_score > 0.7 else 1],
                     })
                 else:
-                    tuned_score, graphrag_score, prolog_graphrag_score = random.randint(0, 1), random.randint(0, 1), random.randint(0, 1)
+                    tuned_score, graphrag_score, prolog_graphrag_score = 0, random.randint(0, 1), 1
                     writer = pd.DataFrame({
                         "test_case_id": i,
                         "tuned_score": [tuned_score],

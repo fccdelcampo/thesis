@@ -100,6 +100,9 @@ from graphrag_pipeline.graphrag.graphrag_driver import run_pipeline as run_graph
 # Prolog GraphRAG
 from prolog_graphrag_pipeline.main_driver import run_pipeline as run_prolog_graphrag
 
+# Tuned Pipeline (Assuming it exists or we skip)
+from tuned_pipeline.main_driver import run_pipeline as run_tuned
+
 def run_test_case(test_case: dict, test_case_id: int):
     """
     Runs a test case by calling each pipeline's run_pipeline function.
@@ -130,7 +133,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     try:
         # Expected return: dict with "answer", "contexts" (list)
         # run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include_conclusion: bool = True)
-        prolog_result = run_prolog_graphrag(question, flag="prolog") # using 'prolog' flag as default
+        prolog_result = run_prolog_graphrag(question) # using 'prolog' flag as default
         prolog_answer = prolog_result.get("answer", "")
         # content is likely a list or string
         contexts = prolog_result.get("contexts", [])
@@ -144,6 +147,21 @@ def run_test_case(test_case: dict, test_case_id: int):
         pgr_score = 0.0
 
     # 3. Tuned Pipeline (Placeholder)
+    try:
+        # Expected return: dict with "answer", "contexts" (list)
+        # run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include_conclusion: bool = True)
+        tuned_result = run_tuned(question)
+        tuned_answer = tuned_result.get("answer", "")
+        # content is likely a list or string
+        contexts = tuned_result.get("contexts", [])
+        if isinstance(contexts, str):
+            contexts = [contexts]
+        
+        # Evaluate Faithfulness
+        tuned_score = evaluate_with_ragas(question, tuned_answer, contexts)
+    except Exception as e:
+        print(f"Tuned Pipeline Failed: {e}")
+        tuned_score = 0.0
     tuned_score = 0.0 
     
     # Log Results

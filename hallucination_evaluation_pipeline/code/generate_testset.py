@@ -104,8 +104,8 @@ def generate_synthetic_testset(test_size: int = 10):
             f.write(json.dumps(entry) + "\n")
     print(f"Saved: {faithfulness_path} ({len(df)} entries)")
     
-    # Answer Relevance: needs question
-    ar_path = os.path.join(test_cases_dir, "answer_relevance.jsonl")
+    # Answer Relevancy: needs question
+    ar_path = os.path.join(test_cases_dir, "answer_relevancy.jsonl")
     with open(ar_path, 'w', encoding='utf-8') as f:
         for _, row in df.iterrows():
             entry = {"question": row.get("question", "")}

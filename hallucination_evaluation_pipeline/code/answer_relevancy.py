@@ -32,9 +32,9 @@ from hallucination_evaluation_pipeline.code.pipeline_utils import unload_ollama_
 
 def load_test_cases(limit: int = 10) -> list[dict]:
     """
-    Reads answer_relevance.jsonl or fallback.
+    Reads answer_relevancy.jsonl or fallback.
     """
-    file_path = os.path.join(TEST_CASES_DIR, "answer_relevance.jsonl")
+    file_path = os.path.join(TEST_CASES_DIR, "answer_relevancy.jsonl")
     test_cases = []
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -59,7 +59,7 @@ def load_test_cases(limit: int = 10) -> list[dict]:
 
 def evaluate_with_ragas(question: str, answer: str, contexts: list[str]) -> float:
     """
-    Evaluates Answer Relevance using RAGAS.
+    Evaluates Answer Relevancy using RAGAS.
     """
     if not answer:
         return 0.0
@@ -69,7 +69,7 @@ def evaluate_with_ragas(question: str, answer: str, contexts: list[str]) -> floa
         'question': [question],
         'answer': [answer],
         'contexts': [contexts],
-        'ground_truth': [""] # Answer relevance doesn't strictly need ground truth
+        'ground_truth': [""] # Answer relevancy doesn't strictly need ground truth
     }
     dataset = Dataset.from_dict(data)
     
@@ -105,7 +105,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     if not question:
         return
 
-    print(f"Running Answer Relevance {test_case_id}: {question[:50]}...")
+    print(f"Running Answer Relevancy {test_case_id}: {question[:50]}...")
 
     # 1. GraphRAG
     try:
@@ -123,7 +123,7 @@ def run_test_case(test_case: dict, test_case_id: int):
 
     # 2. Prolog GraphRAG
     try:
-        pgr_result = run_prolog_graphrag(question, flag="prolog")
+        pgr_result = run_prolog_graphrag(question)
         pgr_answer = pgr_result.get("answer", "")
         pgr_contexts = pgr_result.get("contexts", [])
         if isinstance(pgr_contexts, str):
@@ -140,7 +140,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     log_results(test_case_id, tuned_score, gr_score, pgr_score)
 
 def log_results(test_case_id: int, tuned_score: float, graphrag_score: float, prolog_graphrag_score: float) -> None:
-    file_path = os.path.join(RESULTS_DIR, "answer_relevance_scores.csv")
+    file_path = os.path.join(RESULTS_DIR, "answer_relevancy_scores.csv")
     new_row = pd.DataFrame({
         "test_case_id": [test_case_id],
         "tuned_score": [tuned_score],

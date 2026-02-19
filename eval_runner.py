@@ -101,9 +101,9 @@ class CleanOutputChatOllama(ChatOllama):
         return result
 
 # Loaders
-from test_cases.loaders.mmlu_loader import MMLULoader
-from test_cases.loaders.truthfulqa_loader import TruthfulQALoader
-from test_cases.loaders.hotpotqa_loader import HotpotQALoader
+from loaders.mmlu_loader import MMLULoader
+from loaders.truthfulqa_loader import TruthfulQALoader
+from loaders.hotpotqa_loader import HotpotQALoader
 
 import sys
 
@@ -329,4 +329,5 @@ def run_evaluation():
     print(f"\nEvaluation complete. Results saved to {results_file}")
 
 if __name__ == "__main__":
-    run_evaluation()
+    # run_evaluation()
+    load_cases()

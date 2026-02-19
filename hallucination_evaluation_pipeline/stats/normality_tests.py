@@ -84,7 +84,7 @@ def compute_normality_test(df: pd.DataFrame, eval: Union[Metric, Benchmark]):
 def perform_normality_tests():
     df_map = {
         Metric.FAITHFULNESS: pd.read_csv(DATA_DIR / "faithfulness_scores.csv"),
-        Metric.ANSWER_RELEVANCE: pd.read_csv(DATA_DIR / "answer_relevance_scores.csv"),
+        Metric.ANSWER_RELEVANCY: pd.read_csv(DATA_DIR / "answer_relevancy_scores.csv"),
         Metric.CONTEXT_RECALL: pd.read_csv(DATA_DIR / "context_recall_scores.csv"),
         Benchmark.TRUTHFULQA: pd.read_csv(DATA_DIR / "truthfulqa_scores.csv")
     }

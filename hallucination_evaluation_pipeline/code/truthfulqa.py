@@ -144,7 +144,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     print(f"  GraphRAG Score: {gr_score:.2f}")
     
     # 2. Prolog GraphRAG Pipeline
-    pgr_result = run_pipeline_safe(run_prolog_graphrag, question, flag="prolog")
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, question)
     pgr_answer = pgr_result.get("answer", "")
     pgr_score = judge_truthfulness(question, ground_truth, pgr_answer)
     print(f"  Prolog-GraphRAG Score: {pgr_score:.2f}")

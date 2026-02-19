@@ -4,23 +4,23 @@ ALPHA = 0.05
 NUM_TEST_CASES = 100
 
 class Pipeline(Enum):
-    TUNED = (0, "tuned")
-    GRAPHRAG = (1, "graphrag")
-    PROLOG_GRAPHRAG = (2, "prolog_graphrag")
+    PROLOG_GRAPHRAG = ("Prolog-GraphRAG Pipeline", "prolog_graphrag")
+    GRAPHRAG = ("GraphRAG Pipeline", "graphrag")
+    TUNED = ("llama3.1:instruct", "tuned")
 
 class Metric(Enum):
-    FAITHFULNESS = (0, "faithfulness")
-    ANSWER_RELEVANCE = (1, "answer_relevance")
-    CONTEXT_RECALL = (2, "context_recall")
-
+    FAITHFULNESS = ("Faithfulness", "faithfulness")
+    ANSWER_RELEVANCY = ("Answer Relevancy", "answer_relevancy")
+    CONTEXT_RECALL = ("Context Recall", "context_recall")
+    
 class Benchmark(Enum):
-    MMLU = (0, "mmlu")
-    TRUTHFULQA = (1, "truthfulqa")
-    HOTPOTQA = (2, "hotpotqa")
+    MMLU = ("MMLU", "mmlu")
+    HOTPOTQA = ("HotpotQA", "hotpotqa")
+    TRUTHFULQA = ("TruthfulQA", "truthfulqa")
 
 CONTINUOUS_EVALS = [
     Metric.FAITHFULNESS,
-    Metric.ANSWER_RELEVANCE,
+    Metric.ANSWER_RELEVANCY,
     Metric.CONTEXT_RECALL,
     Benchmark.TRUTHFULQA
 ]
