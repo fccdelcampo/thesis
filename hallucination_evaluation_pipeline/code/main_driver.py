@@ -11,6 +11,8 @@ Usage:
     python main_driver.py                    # Run full pipeline
     python main_driver.py --generate-testset # Generate testset first, then run
     python main_driver.py --metrics-only     # Run only hallucination metrics
+    python main_driver.py --benchmarks-only  # Run only benchmarks
+    python main_driver.py --test-size n      # Run with n test cases
 """
 import os
 import sys

@@ -9,7 +9,7 @@ import sys
 # sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
 # IO_DIR = ROOT / "hallucination_evaluation_results"
-from config import LLM_MESSAGES
+from .config import LLM_MESSAGES
 import ollama
 
 def generate(user_question: str):
