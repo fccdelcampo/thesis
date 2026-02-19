@@ -29,8 +29,10 @@ class MMLULoader:
         "logical_fallacies"    
     ]
 
-    def __init__(self):
+    def __init__(self, samples_per_subject=None):
         self.file_path = self.FILE_PATH
+        if samples_per_subject is not None:
+            self.SAMPLES_PER_SUBJECT = samples_per_subject
 
     def ensure_data_exists(self):
         if os.path.exists(self.file_path) and os.path.getsize(self.file_path) > 0:
@@ -50,38 +52,64 @@ class MMLULoader:
                 ds = load_dataset("cais/mmlu", subject, split="test")
                 
                 total_in_subject = len(ds)
-                n_samples = min(total_in_subject, self.SAMPLES_PER_SUBJECT)
-                print(f"[MMLULoader] Fetching {n_samples} samples from subject '{subject}' (total: {total_in_subject})")
+                total_in_subject = len(ds)
+                print(f"[MMLULoader] Subject '{subject}': Total available {total_in_subject}. Goal: {self.SAMPLES_PER_SUBJECT} approved.")
                 
-                if n_samples == 0:
-                    continue
+                subject_approved_count = 0
+                seen_indices = set()
+                
+                while subject_approved_count < self.SAMPLES_PER_SUBJECT:
+                    # Stop if we've seen everyone
+                    if len(seen_indices) >= total_in_subject:
+                        print(f"[MMLULoader] Exhausted subject '{subject}'! Found {subject_approved_count} approved.")
+                        break
 
-                random_indices = random.sample(range(total_in_subject), n_samples)
-                
-                samples = ds.select(random_indices)
-                
-                for idx, item in enumerate(samples):
-                    # Map 0-3 to A-D
-                    answer_key = ["A", "B", "C", "D"]
-                    correct_char = answer_key[item['answer']]
+                    needed = self.SAMPLES_PER_SUBJECT - subject_approved_count
+                    fetch_size = min(needed * 3, total_in_subject - len(seen_indices))
+                    fetch_size = max(fetch_size, min(10, total_in_subject - len(seen_indices)))
+
+                    batch_indices = []
+                    while len(batch_indices) < fetch_size:
+                        cand = random.randint(0, total_in_subject - 1)
+                        if cand not in seen_indices and cand not in batch_indices:
+                            batch_indices.append(cand)
                     
-                    entry = {
-                        "question": item['question'],
-                        "options": item['choices'],
-                        "answer": correct_char,
-                        "subject": subject
-                    }
-                    # Start logging to file
-                    with open("mmlu_approval.log", "a", encoding="utf-8") as log_file:
-                        items_left = len(samples) - idx
-                        currently_approved = len(all_selected_data)
-                        log_file.write(f"Approving: {item['question']} (Sample left: {items_left}, Currently Approved: {currently_approved})\n")
-                        log_file.flush()
+                    seen_indices.update(batch_indices)
+                    
+                    samples = ds.select(batch_indices)
+                    
+                    for idx_in_batch, item in enumerate(samples):
+                        if subject_approved_count >= self.SAMPLES_PER_SUBJECT:
+                            break
+
+                        # Map 0-3 to A-D
+                        answer_key = ["A", "B", "C", "D"]
+                        correct_char = answer_key[item['answer']]
                         
-                        if approve(item['question']):
-                            all_selected_data.append(entry)
-                            log_file.write(f"Approved: {item['question']}\n")
+                        entry = {
+                            "question": item['question'],
+                            "options": item['choices'],
+                            "answer": correct_char,
+                            "subject": subject
+                        }
+                        # Start logging to file
+                        with open("mmlu_approval.log", "a", encoding="utf-8") as log_file:
+                            items_left = self.SAMPLES_PER_SUBJECT - subject_approved_count
+                            # curently_approved across ALL subjects? Or just this one? 
+                            # The user prompt wanted "hits the 100 approved wanted size" (implied per benchmark or total?)
+                            # For MMLU it is per subject. 
+                            # Let's log totals.
+                            total_approved_so_far = len(all_selected_data) + subject_approved_count
+                            
+                            log_file.write(f"Approving ({subject}): {item['question']} (Needed: {items_left}, Total Approved: {total_approved_so_far})\n")
                             log_file.flush()
+                            
+                            if approve(item['question']):
+                                all_selected_data.append(entry)
+                                subject_approved_count += 1
+                                log_file.write(f"Approved: {item['question']}\n")
+                                log_file.flush()
+                                print(f"   [+] Approved ({subject}). Subject count: {subject_approved_count}/{self.SAMPLES_PER_SUBJECT}")
                     
             except Exception as e:
                 print(f"[MMLULoader] FAILED to load {subject}: {e}")

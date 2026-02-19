@@ -11,8 +11,10 @@ class HotpotQALoader:
     RANDOM_SEED = 42
     SUBSET = "distractor" 
 
-    def __init__(self):
+    def __init__(self, sample_size=None):
         self.file_path = self.FILE_PATH
+        if sample_size is not None:
+             self.SAMPLE_SIZE = sample_size
 
     def ensure_data_exists(self):
         if os.path.exists(self.file_path) and os.path.getsize(self.file_path) > 0:
@@ -28,54 +30,82 @@ class HotpotQALoader:
             print(f"[HotpotQALoader] Fetching HotpotQA ({self.SUBSET}) from Hugging Face...")
             ds = load_dataset("hotpot_qa", self.SUBSET, split="validation", trust_remote_code=False)
             total_size = len(ds)
-            print(f"[HotpotQALoader] Dataset loaded. Total size: {total_size}. Sampling {self.SAMPLE_SIZE}...")
-            random_indices = random.sample(range(total_size), self.SAMPLE_SIZE)
-            samples = ds.select(random_indices)
+            print(f"[HotpotQALoader] Dataset loaded. Total size: {total_size}. Sampling until {self.SAMPLE_SIZE} approved items...")
             
             formatted_data = []
+            seen_indices = set()
             
-            for idx, item in enumerate(samples):
-                # HotpotQA Structure:
-                # 'question': str
-                # 'answer': str
-                # 'context': {'title': [str, ...], 'sentences': [[str, ...], ...]} 
-                # Note: In the HF 'hotpotqa' dataset, context is often a struct with parallel lists
-                
-                # Standardize Context immediately during generation
-                # The HF dataset usually gives context as:
-                # { 'title': ['Title A', 'Title B'], 'sentences': [['Sent A1', 'Sent A2'], ['Sent B1']] }
-                
-                raw_context = item['context']
-                titles = raw_context['title']
-                sentences_list = raw_context['sentences']
-                
-                flattened_context = []
-                
-                # Zip them together to create "Title: Sentence" strings
-                for title, sentences in zip(titles, sentences_list):
-                    for sent in sentences:
-                        flattened_context.append(f"{title}: {sent}")
+            # Loop until we have enough samples or exhausted the dataset
+            while len(formatted_data) < self.SAMPLE_SIZE:
+                # Stop if we've seen everyone
+                if len(seen_indices) >= total_size:
+                    print(f"[HotpotQALoader] Exhausted dataset! Only found {len(formatted_data)} approved items.")
+                    break
 
-                entry = {
-                    "dataset": "hotpotqa",
-                    "question": item['question'],
-                    "formatted_input": item['question'], # For Hotpot, input is just the question
-                    "ground_truth": item['answer'],
-                    "ground_truth_context": flattened_context,
-                    "type": item['type'],
-                    "level": item['level']
-                }
-                # Start logging to file
-                with open("hotpotqa_approval.log", "a", encoding="utf-8") as log_file:
-                    items_left = len(samples) - idx
-                    currently_approved = len(formatted_data)
-                    log_file.write(f"Approving: {item['question']} (Sample left: {items_left}, Currently Approved: {currently_approved})\n")
-                    log_file.flush()
+                needed = self.SAMPLE_SIZE - len(formatted_data)
+                # Heuristic: Fetch 3x what we need to account for rejections, but don't over-fetch too wildly
+                fetch_size = min(needed * 3, total_size - len(seen_indices))
+                # Clamp fetch_size to distinct reasonable chunks (e.g., at least 10 if possible)
+                fetch_size = max(fetch_size, min(10, total_size - len(seen_indices)))
+                
+                # Generate unique indices
+                # Note: For very large done sets, this random picking might get slower, but for 100/7000 it's fine.
+                batch_indices = []
+                while len(batch_indices) < fetch_size:
+                     cand = random.randint(0, total_size - 1)
+                     if cand not in seen_indices and cand not in batch_indices:
+                         batch_indices.append(cand)
+                
+                seen_indices.update(batch_indices)
+                
+                print(f"[HotpotQALoader] Fetching batch of {len(batch_indices)}... (Progress: {len(formatted_data)}/{self.SAMPLE_SIZE})")
+                
+                # Load the actual data for this batch
+                samples = ds.select(batch_indices)
+                
+                for idx_in_batch, item in enumerate(samples):
+                    if len(formatted_data) >= self.SAMPLE_SIZE:
+                        break
+
+                    # HotpotQA Structure:
+                    # 'question': str
+                    # 'answer': str
+                    # 'context': {'title': [str, ...], 'sentences': [[str, ...], ...]} 
                     
-                    if approve(item['question']):
-                        formatted_data.append(entry)
-                        log_file.write(f"Approved: {item['question']}\n")
+                    raw_context = item['context']
+                    titles = raw_context['title']
+                    sentences_list = raw_context['sentences']
+                    
+                    flattened_context = []
+                    
+                    for title, sentences in zip(titles, sentences_list):
+                        for sent in sentences:
+                            flattened_context.append(f"{title}: {sent}")
+
+                    entry = {
+                        "dataset": "hotpotqa",
+                        "question": item['question'],
+                        "formatted_input": item['question'], 
+                        "ground_truth": item['answer'],
+                        "ground_truth_context": flattened_context,
+                        "type": item['type'],
+                        "level": item['level']
+                    }
+                    
+                    # Log approval process
+                    # Note: 'items_left' is now relative to the target, not the batch
+                    items_left = self.SAMPLE_SIZE - len(formatted_data)
+                    currently_approved = len(formatted_data)
+                    
+                    with open("hotpotqa_approval.log", "a", encoding="utf-8") as log_file:
+                        log_file.write(f"Approving: {item['question']} (Needed: {items_left}, Approved: {currently_approved})\n")
                         log_file.flush()
+                        
+                        if approve(item['question']):
+                            formatted_data.append(entry)
+                            log_file.write(f"Approved: {item['question']}\n")
+                            log_file.flush()
+                            print(f"   [+] Approved. Total: {len(formatted_data)}/{self.SAMPLE_SIZE}")
 
             # Save to disk
             os.makedirs(os.path.dirname(self.file_path), exist_ok=True)

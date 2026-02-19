@@ -9,8 +9,10 @@ class TruthfulQALoader:
     SAMPLE_SIZE = 100
     RANDOM_SEED = 42
     
-    def __init__(self):
+    def __init__(self, sample_size=None):
         self.file_path = self.FILE_PATH
+        if sample_size is not None:
+             self.SAMPLE_SIZE = sample_size
 
     def ensure_data_exists(self):
         if os.path.exists(self.file_path) and os.path.getsize(self.file_path) > 0:
@@ -24,28 +26,53 @@ class TruthfulQALoader:
             ds = load_dataset("truthful_qa", "generation", split="validation")
             
             total = len(ds)
-            indices = random.sample(range(total), min(self.SAMPLE_SIZE, total))
-            samples = ds.select(indices)
+            print(f"[TruthfulQALoader] Dataset loaded. Total: {total}. Goal: {self.SAMPLE_SIZE} approved.")
             
             formatted_data = []
-            for idx, item in enumerate(samples):
-                # Start logging to file
-                with open("truthfulqa_approval.log", "a", encoding="utf-8") as log_file:
-                    items_left = len(samples) - idx
-                    currently_approved = len(formatted_data)
-                    log_file.write(f"Approving: {item['question']} (Sample left: {items_left}, Currently Approved: {currently_approved})\n")
-                    log_file.flush()
+            seen_indices = set()
+            
+            while len(formatted_data) < self.SAMPLE_SIZE:
+                 if len(seen_indices) >= total:
+                     print(f"[TruthfulQALoader] Exhausted dataset! Found {len(formatted_data)}.")
+                     break
+                 
+                 needed = self.SAMPLE_SIZE - len(formatted_data)
+                 fetch_size = min(needed * 3, total - len(seen_indices))
+                 fetch_size = max(fetch_size, min(10, total - len(seen_indices)))
+                 
+                 batch_indices = []
+                 while len(batch_indices) < fetch_size:
+                     cand = random.randint(0, total - 1)
+                     if cand not in seen_indices and cand not in batch_indices:
+                         batch_indices.append(cand)
+                 
+                 seen_indices.update(batch_indices)
+                 
+                 samples = ds.select(batch_indices)
+                 
+                 for idx_in_batch, item in enumerate(samples):
+                        if len(formatted_data) >= self.SAMPLE_SIZE:
+                            break
+                        
+                        # Start logging to file
+                        with open("truthfulqa_approval.log", "a", encoding="utf-8") as log_file:
+                            items_left = self.SAMPLE_SIZE - len(formatted_data)
+                            currently_approved = len(formatted_data)
+                            
+                            log_file.write(f"Approving: {item['question']} (Needed: {items_left}, Approved: {currently_approved})\n")
+                            log_file.flush()
 
-                    if approve(item['question']):
-                        log_file.write(f"Approved: {item['question']}\n")
-                        log_file.flush()
-                        formatted_data.append({
-                            "dataset": "truthfulqa",
-                            "question": item['question'],
-                            "formatted_input": item['question'],
-                            "ground_truth": item['correct_answers'], 
-                            "ground_truth_context": None
-                        })
+                            if approve(item['question']):
+                                log_file.write(f"Approved: {item['question']}\n")
+                                log_file.flush()
+                                formatted_data.append({
+                                    "dataset": "truthfulqa",
+                                    "question": item['question'],
+                                    "formatted_input": item['question'],
+                                    "ground_truth": item['correct_answers'], 
+                                    "ground_truth_context": None
+                                })
+                                print(f"   [+] Approved. Total: {len(formatted_data)}/{self.SAMPLE_SIZE}")
 
             os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
             with open(self.file_path, 'w', encoding='utf-8') as f:

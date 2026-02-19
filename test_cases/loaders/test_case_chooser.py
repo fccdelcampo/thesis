@@ -59,14 +59,48 @@ Output a single, valid JSON object only. No conversational filler.
         }
 ]
 
+import re
+
 def approve(question: str) -> bool:
-    response = ollama.chat(
-            model='llama3.1:8b-instruct-q4_K_M',
-            messages=LLM_MESSAGES + [{"role": "user", "content": question}],
-            options={
-                'temperature': 0.7,
-            },
-            logprobs=True     
-        )
-    answer = json.loads(response['message']['content'])
-    return answer['verdict'] == 'YES'.lower()   
+    max_retries = 3
+    for attempt in range(max_retries):
+        try:
+            response = ollama.chat(
+                model='llama3.1:8b-instruct-q4_K_M',
+                messages=LLM_MESSAGES + [{"role": "user", "content": question}],
+                options={
+                    'temperature': 0.7,
+                },
+                logprobs=True     
+            )
+            content = response['message']['content']
+            
+            # Try parsing directly
+            try:
+                answer = json.loads(content)
+            except json.JSONDecodeError:
+                # Fallback: Try identifying a code block
+                match = re.search(r'```json\s*(\{.*?\})\s*```', content, re.DOTALL)
+                if match:
+                    answer = json.loads(match.group(1))
+                else:
+                    # Fallback: Try identifying just a raw JSON start/end even without blocks
+                    match = re.search(r'(\{.*\})', content, re.DOTALL)
+                    if match:
+                         answer = json.loads(match.group(1))
+                    else:
+                        raise ValueError("No JSON found")
+
+            return answer.get('verdict', '').lower() == 'yes'
+            
+        except Exception as e:
+            # On final retry, log error and fail open or closed?
+            # It's better to fail closed (False) so we don't pollute data
+            if attempt == max_retries - 1:
+                print(f"[test_case_chooser] Error parsing LLM response for '{question[:30]}...': {e}")
+                print(f"[test_case_chooser] Raw Content: {content if 'content' in locals() else 'N/A'}")
+                return False
+            else:
+                pass # Retry
+    
+    return False   
