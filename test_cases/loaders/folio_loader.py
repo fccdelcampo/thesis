@@ -1,6 +1,6 @@
 # Authenticate Hugging Face
 from huggingface_hub import login
-login()
+login(token="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")
 
 import os
 import json
