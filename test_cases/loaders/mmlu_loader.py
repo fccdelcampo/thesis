@@ -104,10 +104,10 @@ class MMLULoader:
                             log_file.write(f"Approving ({subject}): {item['question']} (Needed: {items_left}, Total Approved: {total_approved_so_far})\n")
                             log_file.flush()
                             
-                            if approve(item['question']):
+                            if approve(item['question'] + "? Choices: " + " ".join(item['choices'])):
                                 all_selected_data.append(entry)
                                 subject_approved_count += 1
-                                log_file.write(f"Approved: {item['question']}\n")
+                                log_file.write(f"Approved: {item['question'] + '? Choices: ' + ' '.join(item['choices'])}\n")
                                 log_file.flush()
                                 print(f"   [+] Approved ({subject}). Subject count: {subject_approved_count}/{self.SAMPLES_PER_SUBJECT}")
                     
