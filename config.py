@@ -5,12 +5,6 @@ class Pipeline(Enum):
     GRAPHRAG = ("GraphRAG Pipeline", "graphrag")
     TUNED = ("llama3.1:instruct", "tuned")
     
-for i, pipeline1 in enumerate(list(Pipeline)):
-    print(f"pipeline: {pipeline1}")
-    print(f"pipeline.value: {pipeline1.value}")
-    print(f"p.value[0]: {pipeline1.value[0]}")
-    print(f"p.value[1]: {pipeline1.value[1]}\n")
-    
 class Metric(Enum):
     FAITHFULNESS = ("Faithfulness", "faithfulness")
     ANSWER_RELEVANCY = ("Answer Relevancy", "answer_relevancy")
@@ -20,6 +14,8 @@ class Benchmark(Enum):
     MMLU = ("MMLU", "mmlu")
     HOTPOTQA = ("HotpotQA", "hotpotqa")
     TRUTHFULQA = ("TruthfulQA", "truthfulqa")
+    AI2_ARC = ("AI2 ARC", "ai2_arc")
+    OPENBOOKQA = ("OpenBookQA", "openbookqa")
     
 class SampleSequencesFlags(Enum):
     X = ("x", "x")

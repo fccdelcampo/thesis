@@ -103,7 +103,7 @@ class HotpotQALoader:
                         
                         if approve(item['question']):
                             formatted_data.append(entry)
-                            log_file.write(f"Approved: {item['question']}\n")
+                            log_file.write(f"Approved.\n")
                             log_file.flush()
                             print(f"   [+] Approved. Total: {len(formatted_data)}/{self.SAMPLE_SIZE}")
 

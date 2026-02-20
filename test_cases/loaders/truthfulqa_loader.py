@@ -63,7 +63,7 @@ class TruthfulQALoader:
                             log_file.flush()
 
                             if approve(item['question']):
-                                log_file.write(f"Approved: {item['question']}\n")
+                                log_file.write(f"Approved\n")
                                 log_file.flush()
                                 formatted_data.append({
                                     "dataset": "truthfulqa",

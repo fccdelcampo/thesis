@@ -5,27 +5,40 @@ LLM_MESSAGES = [
     # System Prompt
     {"role": "system",
      "content": """
-You are an expert Educational Assessment Evaluator. Your task is to filter a dataset of educational test cases (from benchmarks like MMLU) to identify "High-Order Thinking" questions.
+### ROLE:
+You are an expert Educational Assessment Evaluator and Logic Architect. Your task is to filter a dataset of educational test cases (e.g., MMLU, HotpotQA) to identify questions specifically suited for a "Knowledge Graph + Logic Programming" (Prolog-GraphRAG) pipeline.
 
 ### EVALUATION CRITERIA:
-To receive a "yes" verdict, a test case must require BOTH of the following:
+To receive a "yes" verdict, a test case must satisfy ALL of the following conditions:
 
-1. FACT-RETRIEVAL (Knowledge Recall): 
-   The question requires the retrieval of specific, established facts from a knowledge base (e.g., historical dates, scientific definitions, or entity properties).
+1. COMPOSITIONAL FACT-RETRIEVAL:
+   The question requires retrieving multiple distinct entities or properties from a knowledge base. It should not be a "common knowledge" question that a model can answer purely through parametric memory without external grounding.
 
-2. LOGICAL REASONING (Rule Application): 
-   The question cannot be solved by a single lookup. It requires the application of rules, "if-then" logic, or multi-step synthesis. 
-   - Rule Example: "If a planet is closer to the sun than Earth, then its orbital period is shorter than 365 days."
-   - Multi-hop Example: "Does [Entity A] share a property with [Entity B]?" (Requires retrieving properties for both and comparing them).
+2. PREDICATE LOGIC & RULE APPLICATION:
+   The question must require a "logical bridge" to move from retrieved facts to a final answer. 
+   - Acceptable: Categorical reasoning (e.g., "Is X a member of Y?"), Transitive properties (e.g., "If A relates to B and B to C..."), or Constraint Satisfaction (e.g., "Which entity satisfies property P but NOT property Q?").
+   - Multi-hop Requirement: The answer must be derived by joining at least two separate pieces of information through a logical rule.
+
+3. DISCRETE SYMBOLIC REASONING (NO QUANTITATIVE COMPUTATION):
+   Strictly exclude any question that requires:
+   - Arithmetic/Calculations: Solving for a numerical variable (even if the steps are logical).
+   - Mathematical Proofs: Formal derivations of identities or theorems.
+   - Spatial/Visual Reasoning: Reasoning about geometry or physical orientation that cannot be expressed as a logical triple.
+   - Constant-Finding: Do not accept questions asking for specific values like "What is the speed of light?" or "Calculate the molar mass."
+
+### REJECTION GUIDELINES (VERDICT: "NO"):
+- If the question can be answered by a single Wikipedia snippet: NO.
+- If the question contains numbers and asks for a result (e.g., "How many...", "Find the value..."): NO.
+- If the reasoning is purely linguistic/semantic rather than logical: NO.
 
 ### OUTPUT FORMAT:
 Output a single, valid JSON object only. No conversational filler.
 
 ### JSON SCHEMA:
 {
-  "rationale": "A concise explanation of the facts required and the 'if-then' logic or rules needed to reach the conclusion.",
+  "rationale": "Identify the specific facts to be retrieved and the explicit 'if-then' or categorical rules required to bridge them.",
   "verdict": "yes" | "no"
-}     
+}   
      """},
     
     # Few-Shot Example 1:
