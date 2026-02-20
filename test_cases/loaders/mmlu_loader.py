@@ -1,6 +1,7 @@
 import os
 import json
 import random
+import math
 from datasets import load_dataset
 from test_case_chooser import approve
 
@@ -12,7 +13,7 @@ class MMLULoader:
     
     # --- Configuration ---
     FILE_PATH = 'test_cases/mmlu.jsonl'
-    SAMPLES_PER_SUBJECT = 50
+    SAMPLE_SIZE = 100
     RANDOM_SEED = 42
     
     # The "Prolog-Educational" Subject List (Reasoning & Logic Focus)
@@ -29,10 +30,10 @@ class MMLULoader:
         "logical_fallacies"    
     ]
 
-    def __init__(self, samples_per_subject=None):
+    def __init__(self, sample_size=None):
         self.file_path = self.FILE_PATH
-        if samples_per_subject is not None:
-            self.SAMPLES_PER_SUBJECT = samples_per_subject
+        if sample_size is not None:
+            self.SAMPLE_SIZE = sample_size
 
     def ensure_data_exists(self):
         if os.path.exists(self.file_path) and os.path.getsize(self.file_path) > 0:
@@ -47,24 +48,26 @@ class MMLULoader:
 
         print(f"[MMLULoader] Fetching {len(self.TARGET_SUBJECTS)} subjects from Hugging Face...")
         
+        target_per_subject = math.ceil(self.SAMPLE_SIZE / len(self.TARGET_SUBJECTS))
+        print(f"[MMLULoader] Total Goal: {self.SAMPLE_SIZE}, Target per subject: {target_per_subject}")
+
         for subject in self.TARGET_SUBJECTS:
             try:
                 ds = load_dataset("cais/mmlu", subject, split="test")
                 
                 total_in_subject = len(ds)
-                total_in_subject = len(ds)
-                print(f"[MMLULoader] Subject '{subject}': Total available {total_in_subject}. Goal: {self.SAMPLES_PER_SUBJECT} approved.")
+                print(f"[MMLULoader] Subject '{subject}': Total available {total_in_subject}. Goal: {target_per_subject} approved.")
                 
                 subject_approved_count = 0
                 seen_indices = set()
                 
-                while subject_approved_count < self.SAMPLES_PER_SUBJECT:
+                while subject_approved_count < target_per_subject:
                     # Stop if we've seen everyone
                     if len(seen_indices) >= total_in_subject:
                         print(f"[MMLULoader] Exhausted subject '{subject}'! Found {subject_approved_count} approved.")
                         break
 
-                    needed = self.SAMPLES_PER_SUBJECT - subject_approved_count
+                    needed = target_per_subject - subject_approved_count
                     fetch_size = min(needed * 3, total_in_subject - len(seen_indices))
                     fetch_size = max(fetch_size, min(10, total_in_subject - len(seen_indices)))
 
@@ -79,7 +82,7 @@ class MMLULoader:
                     samples = ds.select(batch_indices)
                     
                     for idx_in_batch, item in enumerate(samples):
-                        if subject_approved_count >= self.SAMPLES_PER_SUBJECT:
+                        if subject_approved_count >= target_per_subject:
                             break
 
                         # Map 0-3 to A-D
@@ -94,7 +97,7 @@ class MMLULoader:
                         }
                         # Start logging to file
                         with open("mmlu_approval.log", "a", encoding="utf-8") as log_file:
-                            items_left = self.SAMPLES_PER_SUBJECT - subject_approved_count
+                            items_left = target_per_subject - subject_approved_count
                             # curently_approved across ALL subjects? Or just this one? 
                             # The user prompt wanted "hits the 100 approved wanted size" (implied per benchmark or total?)
                             # For MMLU it is per subject. 
@@ -109,7 +112,7 @@ class MMLULoader:
                                 subject_approved_count += 1
                                 log_file.write(f"Approved: {item['question'] + '? Choices: ' + ' '.join(item['choices'])}\n")
                                 log_file.flush()
-                                print(f"   [+] Approved ({subject}). Subject count: {subject_approved_count}/{self.SAMPLES_PER_SUBJECT}")
+                                print(f"   [+] Approved ({subject}). Subject count: {subject_approved_count}/{target_per_subject}")
                     
             except Exception as e:
                 print(f"[MMLULoader] FAILED to load {subject}: {e}")
