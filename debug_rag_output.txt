@@ -1,262 +1,145 @@
 ==================================================
- QUERY:  Which of the given formulas of PL is the best symbolization of the following sentence?
-If either George enrolls or Harry enrolls, then Ira does not enroll.
-
-A. (G ⊃ H) ∨ I
-B. (G ∨ H) ⊃ I
-C. (G ⊃ H) ∨ ~I
-D. (G ∨ H) ⊃ ~I
-
-Answer with the letter only (A, B, C, or D).
+ QUERY: 
 ==================================================
 
---- RETRIEVED CONTEXT (Top 2 Chunks) ---
-
-[Metadata Dump]
-{
-  "score": 0.6525210738182068,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "0.25 mol of a weak, monoprotic acid is dissolved in 0.25 L of distilled water."
-    }
-  ]
-}
-
-[Chunk 1 | Score: 0.6525]
-0.25 mol of a weak, monoprotic acid is dissolved in 0.25 L of distilled water.
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 0.6089195013046265,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "Einstein was a student."
-    }
-  ]
-}
-
-[Chunk 2 | Score: 0.6089]
-Einstein was a student.
---------------------------------------------------
-
-==================================================
- LLM ANSWER:
-==================================================
-D
-==================================================
-==================================================
- QUERY: Which of the following formulas symbolizes: If either George enrolls or Harry enrolls, then Ira does not enroll? A) (G ⊃ H) ∨ I B) (G ∨ H) ⊃ I C) (G ⊃ H) ∨ ~I D) (G ∨ H) ⊃ ~I
-==================================================
-
---- RETRIEVED CONTEXT (Top 6 Items) ---
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "George",
-  "id": "Q15921732",
+  "entity": "climate change",
+  "id": "Q125928",
   "score": 1.0,
   "triples": [
-    "instance of: male given name"
+    "studied by: climatology",
+    "has part(s): global warming",
+    "has effect: extinction event",
+    "subclass of: change",
+    "part of: environmental issue",
+    "instance of: human impact on the environment",
+    "instance of: global problem",
+    "has effect: economic impacts of climate change",
+    "part of: meteorological phenomenon",
+    "has part(s): global climate change",
+    "described by source: Encyclopedia of Global Justice",
+    "described by source: Lean Logic",
+    "described by source: Red Blue Translator",
+    "described by source: Dresdner Hefte",
+    "described by source: Encyclopedia of Armenian Nature",
+    "described by source: Encyclopedia of Political Theory",
+    "has effect: effects of climate change",
+    "has effect: climate apocalypse",
+    "has effect: climate migration"
   ]
 }
-[Item 1]
-[Chunk Score: 1.0000] Wikidata Entity: George. Description: male given name. Facts:  - instance of: male given name
-  [Knowledge Graph Triples]:
-   - instance of: male given name
 
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 0.6603211164474487,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "0.25 mol of a weak, monoprotic acid is dissolved in 0.25 L of distilled water."
-    }
-  ]
-}
-[Item 2]
-[Chunk Score: 0.6603] 0.25 mol of a weak, monoprotic acid is dissolved in 0.25 L of distilled water.
-  [Local Connections]:
-   - None None None
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 0.6295381188392639,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "The pH was then measured as 4.26."
-    }
-  ]
-}
-[Item 3]
-[Chunk Score: 0.6295] The pH was then measured as 4.26.
-  [Local Connections]:
-   - None None None
-
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "score": 0.6281677484512329,
-  "local_context": [
-    {
-      "entity": null,
-      "relationship": null,
-      "source": "Local Document",
-      "target": null,
-      "text": "Einstein was a student."
-    }
-  ]
-}
-[Item 4]
-[Chunk Score: 0.6282] Einstein was a student.
-  [Local Connections]:
-   - None None None
-
+[Chunk 1 | Score: 1.0000]
+Wikidata Entity: climate change. Description: human-caused changes to climate on Earth. Facts:   - studied by: climatology   - has part(s): global warming   - has effect: extinction event   - subclass of: change   - part of: environmental issue   - instance of: human impact on the environment   - instance of: global problem   - has effect: economic impacts of climate change   - part of: meteorological phenomenon   - has part(s): global climate change   - described by source: Encyclopedia of Global Justice   - described by source: Lean Logic   - described by source: Red Blue Translator   - described by source: Dresdner Hefte   - described by source: Encyclopedia of Armenian Nature   - described by source: Encyclopedia of Political Theory   - has effect: effects of climate change   - has effect: climate apocalypse   - has effect: climate migration
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "George",
-  "id": "Q1260558",
+  "entity": "biodiversity",
+  "id": "Q47041",
   "score": 0.5,
   "triples": [
-    "instance of: family name",
-    "described by source: Atlas der Familiennamen von Bayern"
+    "has part(s): species diversity",
+    "has part(s): ecosystem diversity",
+    "has part(s): biodiversity hotspot",
+    "instance of: scientific concept",
+    "has effect: ecosystem service",
+    "has part(s): genetic variability",
+    "described by source: Dictionnaire des biens communs",
+    "described by source: Encyclopedia of Global Justice",
+    "has effect: Ecological effects of biodiversity",
+    "subclass of: biology",
+    "subclass of: diversity",
+    "studied by: biodiversity science"
   ]
 }
-[Item 5]
-[Chunk Score: 0.5000] Wikidata Entity: George. Description: family name. Facts:  - instance of: family name  - described by source: Atlas der Familiennamen von Bayern
-  [Knowledge Graph Triples]:
-   - instance of: family name
-   - described by source: Atlas der Familiennamen von Bayern
 
+[Chunk 2 | Score: 0.5000]
+Wikidata Entity: biodiversity. Description: degree of variation of life forms. Facts:   - has part(s): species diversity   - has part(s): ecosystem diversity   - has part(s): biodiversity hotspot   - instance of: scientific concept   - has effect: ecosystem service   - has part(s): genetic variability   - described by source: Dictionnaire des biens communs   - described by source: Encyclopedia of Global Justice   - has effect: Ecological effects of biodiversity   - subclass of: biology   - subclass of: diversity   - studied by: biodiversity science
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "George Sand",
-  "id": "Q3816",
+  "entity": "Amazon rainforest",
+  "id": "Q177567",
   "score": 0.3333333333333333,
   "triples": [
-    "instance of: human",
-    "occupation: composer",
-    "occupation: writer",
-    "occupation: playwright",
-    "occupation: author",
-    "described by source: Brockhaus and Efron Encyclopedic Dictionary",
-    "occupation: journalist",
-    "place of death: Nohant-Vic",
-    "notable work: Consuelo",
-    "notable work: Indiana",
-    "described by source: Encyclop\u00e6dia Britannica 11th edition",
-    "notable work: Lelia",
-    "place of birth: former 6th arrondissement of Paris",
-    "occupation: salonni\u00e8re",
-    "occupation: librettist",
-    "notable work: La Petite Fadette",
-    "notable work: Histoire de ma vie",
-    "notable work: La Mare au diable",
-    "notable work: Le Meunier d'Angibault",
-    "notable work: Les Ma\u00eetres sonneurs",
-    "notable work: Mauprat",
-    "notable work: A Winter in Majorca",
-    "described by source: The Nuttall Encyclop\u00e6dia",
-    "occupation: women's rights activist",
-    "occupation: novelist",
-    "occupation: diarist",
-    "described by source: Concise Literary Encyclopedia",
-    "described by source: Encyclopedic Lexicon",
-    "described by source: Library of the World's Best Literature",
-    "described by source: Small Brockhaus and Efron Encyclopedic Dictionary",
-    "described by source: Ob\u00e1lky knih",
-    "notable work: Lettres d'un voyageur",
-    "described by source: Lexikon deutschsprachiger Epik und Dramatik von Autorinnen 1730\u20131900",
-    "described by source: Medvik",
-    "described by source: Albert Edelfelt's letters",
-    "described by source: Armenian Soviet Encyclopedia, vol. 10",
-    "described by source: Olomouc City Library regional database"
+    "country: France",
+    "country: Brazil",
+    "part of: South America",
+    "country: Peru",
+    "country: Venezuela",
+    "country: Ecuador",
+    "country: Suriname",
+    "country: Guyana",
+    "country: Colombia",
+    "instance of: tropical forest",
+    "country: Bolivia"
   ]
 }
-[Item 6]
-[Chunk Score: 0.3333] Wikidata Entity: George Sand. Description: French novelist and memoirist (1804–1876). Facts:  - instance of: human  - occupation: composer  - occupation: writer  - occupation: playwright  - occupation: author  - described by source: Brockhaus and Efron Encyclopedic Dictionary  - occupation: journalist  - place of death: Nohant-Vic  - notable work: Consuelo  - notable work: Indiana  - described by source: Encyclopædia Britannica 11th edition  - notable work: Lelia  - place of birth: former 6th arrondissement of Paris  - occupation: salonnière  - occupation: librettist  - notable work: La Petite Fadette  - notable work: Histoire de ma vie  - notable work: La Mare au diable  - notable work: Le Meunier d'Angibault  - notable work: Les Maîtres sonneurs  - notable work: Mauprat  - notable work: A Winter in Majorca  - described by source: The Nuttall Encyclopædia  - occupation: women's rights activist  - occupation: novelist  - occupation: diarist  - described by source: Concise Literary Encyclopedia  - described by source: Encyclopedic Lexicon  - described by source: Library of the World's Best Literature  - described by source: Small Brockhaus and Efron Encyclopedic Dictionary  - described by source: Obálky knih  - notable work: Lettres d'un voyageur  - described by source: Lexikon deutschsprachiger Epik und Dramatik von Autorinnen 1730–1900  - described by source: Medvik  - described by source: Albert Edelfelt's letters  - described by source: Armenian Soviet Encyclopedia, vol. 10  - described by source: Olomouc City Library regional database
-  [Knowledge Graph Triples]:
-   - instance of: human
-   - occupation: composer
-   - occupation: writer
-   - occupation: playwright
-   - occupation: author
-   - described by source: Brockhaus and Efron Encyclopedic Dictionary
-   - occupation: journalist
-   - place of death: Nohant-Vic
-   - notable work: Consuelo
-   - notable work: Indiana
-   - described by source: Encyclopædia Britannica 11th edition
-   - notable work: Lelia
-   - place of birth: former 6th arrondissement of Paris
-   - occupation: salonnière
-   - occupation: librettist
-   - notable work: La Petite Fadette
-   - notable work: Histoire de ma vie
-   - notable work: La Mare au diable
-   - notable work: Le Meunier d'Angibault
-   - notable work: Les Maîtres sonneurs
-   - notable work: Mauprat
-   - notable work: A Winter in Majorca
-   - described by source: The Nuttall Encyclopædia
-   - occupation: women's rights activist
-   - occupation: novelist
-   - occupation: diarist
-   - described by source: Concise Literary Encyclopedia
-   - described by source: Encyclopedic Lexicon
-   - described by source: Library of the World's Best Literature
-   - described by source: Small Brockhaus and Efron Encyclopedic Dictionary
-   - described by source: Obálky knih
-   - notable work: Lettres d'un voyageur
-   - described by source: Lexikon deutschsprachiger Epik und Dramatik von Autorinnen 1730–1900
-   - described by source: Medvik
-   - described by source: Albert Edelfelt's letters
-   - described by source: Armenian Soviet Encyclopedia, vol. 10
-   - described by source: Olomouc City Library regional database
 
+[Chunk 3 | Score: 0.3333]
+Wikidata Entity: Amazon rainforest. Description: large rainforest in South America. Facts:   - country: France   - country: Brazil   - part of: South America   - country: Peru   - country: Venezuela   - country: Ecuador   - country: Suriname   - country: Guyana   - country: Colombia   - instance of: tropical forest   - country: Bolivia
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "climate change adaptation",
+  "id": "Q260607",
+  "score": 0.25,
+  "triples": [
+    "subclass of: politics of climate change",
+    "subclass of: process",
+    "subclass of: adaptation"
+  ]
+}
+
+[Chunk 4 | Score: 0.2500]
+Wikidata Entity: climate change adaptation. Description: process of adjustment to actual or expected climate change and its effects, seeking to moderate or avoid harm or exploit beneficial opportunities. Facts:   - subclass of: politics of climate change   - subclass of: process   - subclass of: adaptation
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Biodiversity Heritage Library",
+  "id": "Q172266",
+  "score": 0.2,
+  "triples": [
+    "country: United States",
+    "headquarters location: Washington, D.C.",
+    "instance of: web portal",
+    "instance of: website",
+    "award received: Charles Robert Long Award",
+    "award received: Internet Archive Hero award",
+    "instance of: digital library",
+    "instance of: digital archive",
+    "instance of: bibliographic database",
+    "instance of: biological database",
+    "instance of: online database",
+    "instance of: open-access repository",
+    "has part(s): Biodiversity Heritage Library Australia",
+    "has part(s): Biodiversity Heritage Library for Europe",
+    "described by source: Open GLAM Survey"
+  ]
+}
+
+[Chunk 5 | Score: 0.2000]
+Wikidata Entity: Biodiversity Heritage Library. Description: digital library, online database and large-scale digitization project for biodiversity literature. Facts:   - country: United States   - headquarters location: Washington, D.C.   - instance of: web portal   - instance of: website   - award received: Charles Robert Long Award   - award received: Internet Archive Hero award   - instance of: digital library   - instance of: digital archive   - instance of: bibliographic database   - instance of: biological database   - instance of: online database   - instance of: open-access repository   - has part(s): Biodiversity Heritage Library Australia   - has part(s): Biodiversity Heritage Library for Europe   - described by source: Open GLAM Survey
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-### Predicates:
-1. george_enrolls(George)
-2. harry_enrolls(Harry)
-3. ira_does_not_enroll(Ira)
+Climate change is a human-caused phenomenon that affects biodiversity, leading to extinction events and economic impacts. It's also linked to climate migration and the effects of climate apocalypse.
 
-### Facts (Ground Truths):
-None extracted from the provided context.
+Biodiversity refers to the degree of variation in life forms on Earth, which includes species diversity, ecosystem diversity, genetic variability, and more. The loss of biodiversity can have severe ecological consequences.
 
-### Rules (Horn Clauses / Implications):
-1. ((george_enrolls(George) ∨ harry_enrolls(Harry)) ⊃ ¬ira_does_not_enroll(Ira))
-
-Note: The rule is a direct translation of the given statement "If either George enrolls or Harry enrolls, then Ira does not enroll."
+The Amazon rainforest is a large tropical forest that spans across several countries in South America, including Brazil, Peru, Colombia, Venezuela, Ecuador, Suriname, Guyana, French Guiana (an overseas department of France), Bolivia, and parts of Argentina and Paraguay.
 ==================================================

@@ -95,29 +95,28 @@ def run_test_case(test_case: dict, test_case_id: int):
     Runs a test case by calling each pipeline's run_pipeline function. 
     """
     # Build formatted question incorporating the premises
-    raw_question = test_case.get("question", "")
-    premises = test_case.get("ground_truth_context", "")
+    question = test_case.get("question", "")
+    premises = test_case.get("premises", "")
     
-    formatted_question = f"{raw_question}\nPremises:\n{premises}\n\nAnswer with True, False, or Unknown."
-    correct_answer = test_case.get("label", "")
+    correct_answer = test_case.get("answer", "")
     
-    print(f"\n[FOLIO #{test_case_id}] {raw_question[:60]}...")
+    print(f"\n[FOLIO #{test_case_id}] {question[:60]}...")
     print(f"  Correct: {correct_answer}")
 
     # 1. GraphRAG Pipeline
-    gr_result = run_pipeline_safe(run_graphrag, formatted_question)
+    gr_result = run_pipeline_safe(run_graphrag, question)
     gr_ans = extract_answer(gr_result.get("answer", ""))
     gr_score = score_answer(gr_ans, correct_answer)
     print(f"  GraphRAG: {gr_ans} (Score: {gr_score})")
     
     # 2. Prolog GraphRAG Pipeline
-    pgr_result = run_pipeline_safe(run_prolog_graphrag, formatted_question, flag="prolog")
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, question, flag="prolog")
     pgr_ans = extract_answer(pgr_result.get("answer", ""))
     pgr_score = score_answer(pgr_ans, correct_answer)
     print(f"  Prolog-GraphRAG: {pgr_ans} (Score: {pgr_score})")
     
     # 3. Tuned Pipeline 
-    tuned_result = run_pipeline_safe(run_tuned_pipeline, formatted_question)
+    tuned_result = run_pipeline_safe(run_tuned_pipeline, question)
     tuned_ans = extract_answer(tuned_result.get("answer", ""))
     tuned_score = score_answer(tuned_ans, correct_answer)
     print(f"  Tuned Pipeline: {tuned_ans} (Score: {tuned_score})")
@@ -130,9 +129,9 @@ def run_test_case(test_case: dict, test_case_id: int):
     pgr_label = "1" if pgr_score >= THRESHOLD else "0"
     tuned_label = "1" if tuned_score >= THRESHOLD else "0"
     
-    log_question_and_answer(test_case_id, "graphrag", raw_question, gr_result.get("answer", ""), gr_score, gr_label)
-    log_question_and_answer(test_case_id, "prolog_graphrag", raw_question, pgr_result.get("answer", ""), pgr_score, pgr_label)
-    log_question_and_answer(test_case_id, "tuned_pipeline", raw_question, tuned_result.get("answer", ""), tuned_score, tuned_label)
+    log_question_and_answer(test_case_id, "graphrag", question, gr_result.get("answer", ""), gr_score, gr_label)
+    log_question_and_answer(test_case_id, "prolog_graphrag", question, pgr_result.get("answer", ""), pgr_score, pgr_label)
+    log_question_and_answer(test_case_id, "tuned_pipeline", question, tuned_result.get("answer", ""), tuned_score, tuned_label)
 
 
 def log_results(test_case_id: int, tuned_score: Union[float, int], 
@@ -197,6 +196,6 @@ def main(test_size: int = 1000):
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--test-size", type=int, default=1000, help="Number of test cases to run")
+    parser.add_argument("--test-size", type=int, default=100, help="Number of test cases to run")
     args = parser.parse_args()
     main(test_size=args.test_size)

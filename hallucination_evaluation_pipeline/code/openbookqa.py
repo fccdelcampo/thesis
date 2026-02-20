@@ -109,9 +109,14 @@ def run_test_case(test_case: dict, test_case_id: int):
     """
     Runs a test case by calling each pipeline's run_pipeline function. 
     """
-    formatted_question = test_case.get("formatted_input", "")
-    correct_answer = test_case.get("ground_truth", "")
     raw_question = test_case.get("question", "")
+    options = test_case.get("options", [])
+    labels = test_case.get("labels", ["A", "B", "C", "D"])
+    correct_answer = test_case.get("answer", "")
+    
+    # Format question with options (e.g., "A) hover a magnet over it\nB) take the rock home")
+    formatted_options = "\n".join([f"{labels[i]}) {opt}" for i, opt in enumerate(options)])
+    formatted_question = f"{raw_question}\n{formatted_options}"
     
     print(f"\n[OpenBookQA #{test_case_id}] {raw_question[:60]}...")
     print(f"  Correct: {correct_answer}")

@@ -13,6 +13,7 @@ Usage:
     python hallucination_evaluation_pipeline\code\main_driver.py --metrics-only     # Run only hallucination metrics
     python hallucination_evaluation_pipeline\code\main_driver.py --benchmarks-only  # Run only benchmarks
     python hallucination_evaluation_pipeline\code\main_driver.py --test-size n      # Run with n test cases
+    python hallucination_evaluation_pipeline\code\main_driver.py --benchmarks mmlu folio openbookqa      # Run with n test cases
 """
 import os
 import sys
@@ -34,7 +35,7 @@ import answer_relevancy
 import context_recall
 import faithfulness
 
-def run_testset_generation(test_size: int = 10):
+def run_testset_generation(test_size: int = 100):
     """Generate synthetic test cases using RAGAS."""
     print("=" * 60)
     print("STEP 0: Generating Synthetic Testset (RAGAS)")
@@ -43,7 +44,7 @@ def run_testset_generation(test_size: int = 10):
     generate_testset.generate_synthetic_testset(test_size=test_size)
 
 
-def run_hallucination_metrics(test_size: int = 10):
+def run_hallucination_metrics(test_size: int = 100):
     """Run all hallucination evaluation metrics."""
     print("\n" + "=" * 60)
     print("STEP 1: Running Hallucination Metrics")
@@ -67,7 +68,7 @@ def run_hallucination_metrics(test_size: int = 10):
     except Exception as e:
         print(f"Context Recall failed: {e}")
 
-def run_benchmarks(test_size: int = 10, benchmarks: list[str] = None):
+def run_benchmarks(test_size: int = 100, benchmarks: list[str] = None):
     """Run benchmark evaluators."""
     if benchmarks is None:
         benchmarks = ["mmlu", "openbookqa", "folio"]
@@ -132,7 +133,7 @@ def run_statistical_analysis():
 def run_hallucination_evaluation_pipeline(generate_testset: bool = False, 
                                            metrics_only: bool = False,
                                            benchmarks_only: bool = False,
-                                           test_size: int = 10,
+                                           test_size: int = 100,
                                            benchmarks: list[str] = None):
     """
     Run the complete hallucination evaluation pipeline.
@@ -165,7 +166,7 @@ if __name__ == "__main__":
                        help="Run only hallucination metrics (skip benchmarks)")
     parser.add_argument("--benchmarks-only", action="store_true",
                        help="Run only benchmarks (skip hallucination metrics)")
-    parser.add_argument("--test-size", type=int, default=10,
+    parser.add_argument("--test-size", type=int, default=100,
                        help="Number of test cases to run/generate")
     parser.add_argument("--benchmarks", nargs='+', default=["mmlu", "openbookqa", "folio"],
                        help="List of benchmarks to run (e.g. mmlu openbookqa folio truthfulqa hotpotqa)")

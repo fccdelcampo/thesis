@@ -151,7 +151,10 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             match = re.search(r"([~⊃∨∧]|\s\+\s|\\\+)", unquoted_code)
             if match:
                 invalid_symbol = match.group(1).strip()
-                raise ValueError(f"Invalid symbol '{invalid_symbol}' found unquoted. You MUST completely enclose mathematical formulas or symbols in single quotes (e.g., '(G ∨ H) ⊃ ~I').")
+                hint_msg = f"Invalid symbol '{invalid_symbol}' found unquoted.\n"
+                hint_msg += "If this is a NEGATION operator, you MUST use 'not' for negation by failure, or '-' for classical negation. NEVER use '~' as an operator.\n"
+                hint_msg += "If this is part of a logical formula string (like '(G ∨ H) ⊃ ~I'), you MUST wrap the ENTIRE formula in single quotes to make it a valid Prolog atom (e.g., `formula('(G ∨ H) ⊃ ~I').`)."
+                raise ValueError(hint_msg)
 
             print(f"Iteration {i} | Extracted Database:\n{database}\n")
             print(f"Iteration {i} | Extracted Query:\n{query}\n")

@@ -39,7 +39,7 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
     if isinstance(context_from_prompt, list):
         context_from_prompt = "\n".join(context_from_prompt)
     if not context_from_prompt:
-        context_from_prompt = ""
+        context_from_prompt = "NONE"
 
     print(f"**User Question:**\n{user_question}")
     print(f"**Retrieved Context:**\n{retrieved_context}")

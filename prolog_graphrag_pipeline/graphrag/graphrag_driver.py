@@ -210,7 +210,19 @@ def generate_answer(query, retriever, llm) -> dict:
 
 def run_pipeline(user_question) -> dict:
     init_globals()
+    
+    # 1. Clear stale Neo4j data from previous questions to prevent irrelevant retrieval
+    clear_local_data()
+    
+    # 2. Extract query and context from user input
     query, text_context = extract_query_and_context(user_question)
+    
+    # 3. If context is empty (common for self-contained MCQ benchmarks),
+    #    inject the question text itself as context so the retriever has material to work with
+    if not text_context:
+        print("DEBUG: Encoder returned empty context. Injecting question text as fallback context.")
+        text_context = [user_question]
+    
     asyncio.run(process_context(kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
     time.sleep(2) # Allow vector index to update
     generation_result = generate(llm=retriever_llm, retriever=retriever, query=query)
