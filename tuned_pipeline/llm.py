@@ -9,7 +9,17 @@ import sys
 # sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
 # IO_DIR = ROOT / "hallucination_evaluation_results"
-from .config import LLM_MESSAGES
+try:
+    from .config import LLM_MESSAGES
+except ImportError:
+    try:
+        from config import LLM_MESSAGES
+    except ImportError:
+        # Fallback if config is in the same directory but not found (e.g. shadowed)
+        import sys
+        from pathlib import Path
+        sys.path.append(str(Path(__file__).parent))
+        from config import LLM_MESSAGES
 import ollama
 
 def generate(user_question: str):

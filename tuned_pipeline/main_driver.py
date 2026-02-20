@@ -10,7 +10,10 @@ sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
 # IO_DIR = ROOT / "hallucination_evaluation_results"
 
-from .llm import generate
+try:
+    from .llm import generate
+except ImportError:
+    from llm import generate
 
 def run_pipeline(user_question: str, flag: str = "", sample_mode: bool = False, include_conclusion: bool = True):
     result = generate(user_question)
