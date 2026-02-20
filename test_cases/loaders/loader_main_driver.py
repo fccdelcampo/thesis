@@ -49,7 +49,7 @@ def main():
     parser.add_argument("--folio-size", type=int, default=100, help="Target approved sample size for FOLIO (default: 100)")
     parser.add_argument("--openbook-size", type=int, default=100, help="Target approved sample size for OpenBookQA (default: 100)")
     parser.add_argument("--all-size", type=int, help="Override all benchmark sizes with this value")
-    parser.add_argument("--benchmarks", nargs='+', default=["hotpotqa", "truthfulqa", "mmlu", "folio", "openbookqa"], help="List of benchmarks to run (e.g. hotpotqa truthfulqa mmlu folio openbookqa)")
+    parser.add_argument("--benchmarks", nargs='+', default=["mmlu", "folio", "openbookqa"], help="List of benchmarks to run (e.g. hotpotqa truthfulqa mmlu folio openbookqa)")
     
     args = parser.parse_args()
     
