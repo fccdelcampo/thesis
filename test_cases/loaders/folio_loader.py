@@ -88,11 +88,23 @@ class FolioLoader:
                 
                 user_prompt = f"Approving FOLIO:\nQ: {question_text}\nA: {conclusion} (Label: {label})"
                 
-                # Interactive approval
-                if approve(user_prompt):
-                    all_selected_data.append(entry)
-                    approved_count += 1
-                    print(f"   [+] Approved. Count: {approved_count}/{self.SAMPLE_SIZE}")
+                os.makedirs("test_cases/logs", exist_ok=True)
+                with open("test_cases/logs/folio_approval.log", "a", encoding="utf-8") as log_file:
+                    log_file.write(f"Question: {question_text}\n")
+                    log_file.flush()
+                    
+                    # Interactive approval
+                    if approve(user_prompt):
+                        all_selected_data.append(entry)
+                        approved_count += 1
+                        items_left = self.SAMPLE_SIZE - approved_count
+                        log_file.write(f"[Approved!] (Needed: {items_left}, Approved: {approved_count})\n")
+                        log_file.flush()
+                        print(f"   [+] Approved. Count: {approved_count}/{self.SAMPLE_SIZE}")
+                    else:
+                        items_left = self.SAMPLE_SIZE - approved_count
+                        log_file.write(f"[Rejected!] (Needed: {items_left}, Approved: {approved_count})\n")
+                        log_file.flush()
                     
         except Exception as e:
             print(f"[FolioLoader] FAILED to load: {e}")

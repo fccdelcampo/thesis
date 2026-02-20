@@ -66,16 +66,12 @@ class OpenBookQALoader:
                 approval_prompt = f"{question_stem}? Choices: {formatted_options_approve}"
                 
                 # Start logging to file
-                with open("openbookqa_approval.log", "a", encoding="utf-8") as log_file:
-                    items_left = self.SAMPLE_SIZE - approved_count
-                    
-                    log_file.write(f"Approving: {approval_prompt} (Needed: {items_left}, Approved: {approved_count})\n")
+                os.makedirs("test_cases/logs", exist_ok=True)
+                with open("test_cases/logs/openbookqa_approval.log", "a", encoding="utf-8") as log_file:
+                    log_file.write(f"Question: {question_stem}\n")
                     log_file.flush()
 
                     if approve(approval_prompt):
-                        log_file.write(f"Approved: {approval_prompt}\n")
-                        log_file.flush()
-
                         entry = {
                             "question": question_stem,
                             "options": choices_text,
@@ -85,7 +81,14 @@ class OpenBookQALoader:
                         
                         all_selected_data.append(entry)
                         approved_count += 1
+                        items_left = self.SAMPLE_SIZE - approved_count
+                        log_file.write(f"[Approved!] (Needed: {items_left}, Approved: {approved_count})\n")
+                        log_file.flush()
                         print(f"   [+] Approved. Count: {approved_count}/{self.SAMPLE_SIZE}")
+                    else:
+                        items_left = self.SAMPLE_SIZE - approved_count
+                        log_file.write(f"[Rejected!] (Needed: {items_left}, Approved: {approved_count})\n")
+                        log_file.flush()
 
         except Exception as e:
             print(f"[OpenBookQALoader] FAILED to load: {e}")

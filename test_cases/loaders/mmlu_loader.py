@@ -96,23 +96,24 @@ class MMLULoader:
                             "subject": subject
                         }
                         # Start logging to file
-                        with open("mmlu_approval.log", "a", encoding="utf-8") as log_file:
-                            items_left = target_per_subject - subject_approved_count
-                            # curently_approved across ALL subjects? Or just this one? 
-                            # The user prompt wanted "hits the 100 approved wanted size" (implied per benchmark or total?)
-                            # For MMLU it is per subject. 
-                            # Let's log totals.
-                            total_approved_so_far = len(all_selected_data) + subject_approved_count
-                            
-                            log_file.write(f"Approving ({subject}): {item['question']} (Needed: {items_left}, Total Approved: {total_approved_so_far})\n")
+                        os.makedirs("test_cases/logs", exist_ok=True)
+                        with open("test_cases/logs/mmlu_approval.log", "a", encoding="utf-8") as log_file:
+                            log_file.write(f"Question: {item['question']}\n")
                             log_file.flush()
                             
                             if approve(item['question'] + "? Choices: " + " ".join(item['choices'])):
                                 all_selected_data.append(entry)
                                 subject_approved_count += 1
-                                log_file.write(f"Approved: {item['question'] + '? Choices: ' + ' '.join(item['choices'])}\n")
+                                currently_approved = len(all_selected_data)
+                                items_left = self.SAMPLE_SIZE - currently_approved
+                                log_file.write(f"[Approved!] (Needed: {items_left}, Approved: {currently_approved})\n")
                                 log_file.flush()
                                 print(f"   [+] Approved ({subject}). Subject count: {subject_approved_count}/{target_per_subject}")
+                            else:
+                                currently_approved = len(all_selected_data)
+                                items_left = self.SAMPLE_SIZE - currently_approved
+                                log_file.write(f"[Rejected!] (Needed: {items_left}, Approved: {currently_approved})\n")
+                                log_file.flush()
                     
             except Exception as e:
                 print(f"[MMLULoader] FAILED to load {subject}: {e}")
