@@ -62,9 +62,10 @@ Translate the provided Context into a formal Prolog database to answer the User 
 ### Syntactic Requirements (s(CASP) Specific)
 - Negation: You MUST use the keyword not for Negation as Failure. NEVER use \+.
 - Classical Negation: Use the - prefix (e.g., -mortal(X).) for explicit falsehood.
-- Atoms: All Prolog atoms must be lowercase.
+- Atoms & Predicates: All Prolog atoms and predicates must be entirely lowercase. If you must refer to a mathematical formula, logical symbol, or option choice with special characters (like ⊃, ∨, ∧, ~, +, -, (, )), you MUST completely enclose it in single quotes to make it a valid Prolog atom (e.g., `'(G ∨ H) ⊃ ~I'`). NEVER use them unquoted.
 - Variables: Use CamelCase for Variables (e.g., PersonName). No single-letter variables.
-- Punctuation: Every Prolog line must end with a period (.).
+- Singleton Variables: Every named variable in a rule must appear at least twice. If a variable is only used once, use the anonymous variable `_` instead.
+- Punctuation: Every Prolog line must end with a period (.). No standalone bullets or hyphens at the start of a line.
 
 ### Structural Output Format (Strict)
 

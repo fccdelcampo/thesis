@@ -118,7 +118,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     
     # 3. Tuned Pipeline 
     tuned_result = run_pipeline_safe(run_tuned_pipeline, formatted_question)
-    tuned_ans = extract_answer(tuned_result.get("text_answer", ""))
+    tuned_ans = extract_answer(tuned_result.get("answer", ""))
     tuned_score = score_answer(tuned_ans, correct_answer)
     print(f"  Tuned Pipeline: {tuned_ans} (Score: {tuned_score})")
     
@@ -132,7 +132,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     
     log_question_and_answer(test_case_id, "graphrag", raw_question, gr_result.get("answer", ""), gr_score, gr_label)
     log_question_and_answer(test_case_id, "prolog_graphrag", raw_question, pgr_result.get("answer", ""), pgr_score, pgr_label)
-    log_question_and_answer(test_case_id, "tuned_pipeline", raw_question, tuned_result.get("text_answer", ""), tuned_score, tuned_label)
+    log_question_and_answer(test_case_id, "tuned_pipeline", raw_question, tuned_result.get("answer", ""), tuned_score, tuned_label)
 
 
 def log_results(test_case_id: int, tuned_score: Union[float, int], 

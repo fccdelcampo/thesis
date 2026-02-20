@@ -1,29 +1,38 @@
 ==================================================
- QUERY: Black Book starred the actress and writer of what heritage?
+ QUERY:  Which of the given formulas of PL is the best symbolization of the following sentence?
+If either George enrolls or Harry enrolls, then Ira does not enroll.
+
+A. (G ⊃ H) ∨ I
+B. (G ∨ H) ⊃ I
+C. (G ⊃ H) ∨ ~I
+D. (G ∨ H) ⊃ ~I
+
+Answer with the letter only (A, B, C, or D).
 ==================================================
 
---- RETRIEVED CONTEXT (Top 5 Chunks) ---
+--- RETRIEVED CONTEXT (Top 2 Chunks) ---
 
 [Metadata Dump]
 {
-  "source": "Wikidata",
-  "entity": "The Black Book",
-  "id": "Q2224789",
-  "score": 1.0,
-  "triples": [
-    "instance of: Wikimedia information list",
-    "author: Schutzstaffel",
-    "author: Walter Schellenberg"
+  "score": 0.6525210738182068,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "0.25 mol of a weak, monoprotic acid is dissolved in 0.25 L of distilled water."
+    }
   ]
 }
 
-[Chunk 1 | Score: 1.0000]
-Wikidata Entity: The Black Book. Description: list of prominent British residents to be arrested as part of the preparation for the proposed invasion of Britain; produced in 1940 by the SS. Facts:   - instance of: Wikimedia information list   - author: Schutzstaffel   - author: Walter Schellenberg
+[Chunk 1 | Score: 0.6525]
+0.25 mol of a weak, monoprotic acid is dissolved in 0.25 L of distilled water.
 --------------------------------------------------
 
 [Metadata Dump]
 {
-  "score": 0.7819463014602661,
+  "score": 0.6089195013046265,
   "local_context": [
     {
       "entity": null,
@@ -35,103 +44,81 @@ Wikidata Entity: The Black Book. Description: list of prominent British resident
   ]
 }
 
-[Chunk 2 | Score: 0.7819]
+[Chunk 2 | Score: 0.6089]
 Einstein was a student.
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "Actress and writer Carrie Fisher dies at 60",
-  "id": "Q28062411",
-  "score": 0.5,
-  "triples": [
-    "instance of: Wikinews article"
-  ]
-}
-
-[Chunk 3 | Score: 0.5000]
-Wikidata Entity: Actress and writer Carrie Fisher dies at 60. Description: Wikinews article. Facts:   - instance of: Wikinews article
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "Black Book",
-  "id": "Q85747486",
-  "score": 0.3333333333333333,
-  "triples": [
-    "genre: role-playing video game",
-    "country of origin: Russia",
-    "instance of: video game"
-  ]
-}
-
-[Chunk 4 | Score: 0.3333]
-Wikidata Entity: Black Book. Description: 2021 video game developed by Morteshka. Facts:   - genre: role-playing video game   - country of origin: Russia   - instance of: video game
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "Black Book",
-  "id": "Q163549",
-  "score": 0.25,
-  "triples": [
-    "country of origin: Belgium",
-    "country of origin: Netherlands",
-    "country of origin: United Kingdom",
-    "country of origin: Germany",
-    "instance of: film",
-    "genre: drama film",
-    "genre: historical film",
-    "genre: thriller film",
-    "genre: war film",
-    "award received: Golden Calf for Best Feature Film",
-    "award received: Platinum Film",
-    "participant in: 20th European Film Awards"
-  ]
-}
-
-[Chunk 5 | Score: 0.2500]
-Wikidata Entity: Black Book. Description: 2006 film by Paul Verhoeven. Facts:   - country of origin: Belgium   - country of origin: Netherlands   - country of origin: United Kingdom   - country of origin: Germany   - instance of: film   - genre: drama film   - genre: historical film   - genre: thriller film   - genre: war film   - award received: Golden Calf for Best Feature Film   - award received: Platinum Film   - participant in: 20th European Film Awards
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-Dutch. The Black Book starred the actress and writer of Dutch heritage, Carrie Fisher was not associated with this film but another one named "Black Book" (2006) starring Carice van Houten who is a Dutch actress.
+D
 ==================================================
 ==================================================
- QUERY: What heritage does the actress and writer starring in Black Book belong to?
+ QUERY: Which of the following formulas symbolizes: If either George enrolls or Harry enrolls, then Ira does not enroll? A) (G ⊃ H) ∨ I B) (G ∨ H) ⊃ I C) (G ⊃ H) ∨ ~I D) (G ∨ H) ⊃ ~I
 ==================================================
 
---- RETRIEVED CONTEXT (Top 4 Items) ---
+--- RETRIEVED CONTEXT (Top 6 Items) ---
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "The Black Book",
-  "id": "Q2224789",
+  "entity": "George",
+  "id": "Q15921732",
   "score": 1.0,
   "triples": [
-    "instance of: Wikimedia information list",
-    "author: Schutzstaffel",
-    "author: Walter Schellenberg"
+    "instance of: male given name"
   ]
 }
 [Item 1]
-[Chunk Score: 1.0000] Wikidata Entity: The Black Book. Description: list of prominent British residents to be arrested as part of the preparation for the proposed invasion of Britain; produced in 1940 by the SS. Facts:  - instance of: Wikimedia information list  - author: Schutzstaffel  - author: Walter Schellenberg
+[Chunk Score: 1.0000] Wikidata Entity: George. Description: male given name. Facts:  - instance of: male given name
   [Knowledge Graph Triples]:
-   - instance of: Wikimedia information list
-   - author: Schutzstaffel
-   - author: Walter Schellenberg
+   - instance of: male given name
 
 --------------------------------------------------
 
 [Metadata Dump]
 {
-  "score": 0.8120938539505005,
+  "score": 0.6603211164474487,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "0.25 mol of a weak, monoprotic acid is dissolved in 0.25 L of distilled water."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.6603] 0.25 mol of a weak, monoprotic acid is dissolved in 0.25 L of distilled water.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6295381188392639,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "The pH was then measured as 4.26."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.6295] The pH was then measured as 4.26.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6281677484512329,
   "local_context": [
     {
       "entity": null,
@@ -142,8 +129,8 @@ Dutch. The Black Book starred the actress and writer of Dutch heritage, Carrie F
     }
   ]
 }
-[Item 2]
-[Chunk Score: 0.8121] Einstein was a student.
+[Item 4]
+[Chunk Score: 0.6282] Einstein was a student.
   [Local Connections]:
    - None None None
 
@@ -152,76 +139,124 @@ Dutch. The Black Book starred the actress and writer of Dutch heritage, Carrie F
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "Black Book",
-  "id": "Q85747486",
+  "entity": "George",
+  "id": "Q1260558",
   "score": 0.5,
   "triples": [
-    "genre: role-playing video game",
-    "country of origin: Russia",
-    "instance of: video game"
+    "instance of: family name",
+    "described by source: Atlas der Familiennamen von Bayern"
   ]
 }
-[Item 3]
-[Chunk Score: 0.5000] Wikidata Entity: Black Book. Description: 2021 video game developed by Morteshka. Facts:  - genre: role-playing video game  - country of origin: Russia  - instance of: video game
+[Item 5]
+[Chunk Score: 0.5000] Wikidata Entity: George. Description: family name. Facts:  - instance of: family name  - described by source: Atlas der Familiennamen von Bayern
   [Knowledge Graph Triples]:
-   - genre: role-playing video game
-   - country of origin: Russia
-   - instance of: video game
+   - instance of: family name
+   - described by source: Atlas der Familiennamen von Bayern
 
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "Black Book",
-  "id": "Q163549",
+  "entity": "George Sand",
+  "id": "Q3816",
   "score": 0.3333333333333333,
   "triples": [
-    "country of origin: Belgium",
-    "country of origin: Netherlands",
-    "country of origin: United Kingdom",
-    "country of origin: Germany",
-    "instance of: film",
-    "genre: drama film",
-    "genre: historical film",
-    "genre: thriller film",
-    "genre: war film",
-    "award received: Golden Calf for Best Feature Film",
-    "award received: Platinum Film",
-    "participant in: 20th European Film Awards"
+    "instance of: human",
+    "occupation: composer",
+    "occupation: writer",
+    "occupation: playwright",
+    "occupation: author",
+    "described by source: Brockhaus and Efron Encyclopedic Dictionary",
+    "occupation: journalist",
+    "place of death: Nohant-Vic",
+    "notable work: Consuelo",
+    "notable work: Indiana",
+    "described by source: Encyclop\u00e6dia Britannica 11th edition",
+    "notable work: Lelia",
+    "place of birth: former 6th arrondissement of Paris",
+    "occupation: salonni\u00e8re",
+    "occupation: librettist",
+    "notable work: La Petite Fadette",
+    "notable work: Histoire de ma vie",
+    "notable work: La Mare au diable",
+    "notable work: Le Meunier d'Angibault",
+    "notable work: Les Ma\u00eetres sonneurs",
+    "notable work: Mauprat",
+    "notable work: A Winter in Majorca",
+    "described by source: The Nuttall Encyclop\u00e6dia",
+    "occupation: women's rights activist",
+    "occupation: novelist",
+    "occupation: diarist",
+    "described by source: Concise Literary Encyclopedia",
+    "described by source: Encyclopedic Lexicon",
+    "described by source: Library of the World's Best Literature",
+    "described by source: Small Brockhaus and Efron Encyclopedic Dictionary",
+    "described by source: Ob\u00e1lky knih",
+    "notable work: Lettres d'un voyageur",
+    "described by source: Lexikon deutschsprachiger Epik und Dramatik von Autorinnen 1730\u20131900",
+    "described by source: Medvik",
+    "described by source: Albert Edelfelt's letters",
+    "described by source: Armenian Soviet Encyclopedia, vol. 10",
+    "described by source: Olomouc City Library regional database"
   ]
 }
-[Item 4]
-[Chunk Score: 0.3333] Wikidata Entity: Black Book. Description: 2006 film by Paul Verhoeven. Facts:  - country of origin: Belgium  - country of origin: Netherlands  - country of origin: United Kingdom  - country of origin: Germany  - instance of: film  - genre: drama film  - genre: historical film  - genre: thriller film  - genre: war film  - award received: Golden Calf for Best Feature Film  - award received: Platinum Film  - participant in: 20th European Film Awards
+[Item 6]
+[Chunk Score: 0.3333] Wikidata Entity: George Sand. Description: French novelist and memoirist (1804–1876). Facts:  - instance of: human  - occupation: composer  - occupation: writer  - occupation: playwright  - occupation: author  - described by source: Brockhaus and Efron Encyclopedic Dictionary  - occupation: journalist  - place of death: Nohant-Vic  - notable work: Consuelo  - notable work: Indiana  - described by source: Encyclopædia Britannica 11th edition  - notable work: Lelia  - place of birth: former 6th arrondissement of Paris  - occupation: salonnière  - occupation: librettist  - notable work: La Petite Fadette  - notable work: Histoire de ma vie  - notable work: La Mare au diable  - notable work: Le Meunier d'Angibault  - notable work: Les Maîtres sonneurs  - notable work: Mauprat  - notable work: A Winter in Majorca  - described by source: The Nuttall Encyclopædia  - occupation: women's rights activist  - occupation: novelist  - occupation: diarist  - described by source: Concise Literary Encyclopedia  - described by source: Encyclopedic Lexicon  - described by source: Library of the World's Best Literature  - described by source: Small Brockhaus and Efron Encyclopedic Dictionary  - described by source: Obálky knih  - notable work: Lettres d'un voyageur  - described by source: Lexikon deutschsprachiger Epik und Dramatik von Autorinnen 1730–1900  - described by source: Medvik  - described by source: Albert Edelfelt's letters  - described by source: Armenian Soviet Encyclopedia, vol. 10  - described by source: Olomouc City Library regional database
   [Knowledge Graph Triples]:
-   - country of origin: Belgium
-   - country of origin: Netherlands
-   - country of origin: United Kingdom
-   - country of origin: Germany
-   - instance of: film
-   - genre: drama film
-   - genre: historical film
-   - genre: thriller film
-   - genre: war film
-   - award received: Golden Calf for Best Feature Film
-   - award received: Platinum Film
-   - participant in: 20th European Film Awards
+   - instance of: human
+   - occupation: composer
+   - occupation: writer
+   - occupation: playwright
+   - occupation: author
+   - described by source: Brockhaus and Efron Encyclopedic Dictionary
+   - occupation: journalist
+   - place of death: Nohant-Vic
+   - notable work: Consuelo
+   - notable work: Indiana
+   - described by source: Encyclopædia Britannica 11th edition
+   - notable work: Lelia
+   - place of birth: former 6th arrondissement of Paris
+   - occupation: salonnière
+   - occupation: librettist
+   - notable work: La Petite Fadette
+   - notable work: Histoire de ma vie
+   - notable work: La Mare au diable
+   - notable work: Le Meunier d'Angibault
+   - notable work: Les Maîtres sonneurs
+   - notable work: Mauprat
+   - notable work: A Winter in Majorca
+   - described by source: The Nuttall Encyclopædia
+   - occupation: women's rights activist
+   - occupation: novelist
+   - occupation: diarist
+   - described by source: Concise Literary Encyclopedia
+   - described by source: Encyclopedic Lexicon
+   - described by source: Library of the World's Best Literature
+   - described by source: Small Brockhaus and Efron Encyclopedic Dictionary
+   - described by source: Obálky knih
+   - notable work: Lettres d'un voyageur
+   - described by source: Lexikon deutschsprachiger Epik und Dramatik von Autorinnen 1730–1900
+   - described by source: Medvik
+   - described by source: Albert Edelfelt's letters
+   - described by source: Armenian Soviet Encyclopedia, vol. 10
+   - described by source: Olomouc City Library regional database
 
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-### Extracted Evidence:
+### Predicates:
+1. george_enrolls(George)
+2. harry_enrolls(Harry)
+3. ira_does_not_enroll(Ira)
 
-* **ATOMIC FACTS**
-	+ None
-* **CONDITIONAL RULES**
-	+ None
-* **LOGICAL EXCEPTIONS**
-	+ None
-* **NUMERIC/MODAL DATA**
-	+ None
+### Facts (Ground Truths):
+None extracted from the provided context.
 
-Note: There is no relevant information in the Context to answer the Question about the heritage of the actress and writer starring in Black Book.
+### Rules (Horn Clauses / Implications):
+1. ((george_enrolls(George) ∨ harry_enrolls(Harry)) ⊃ ¬ira_does_not_enroll(Ira))
+
+Note: The rule is a direct translation of the given statement "If either George enrolls or Harry enrolls, then Ira does not enroll."
 ==================================================

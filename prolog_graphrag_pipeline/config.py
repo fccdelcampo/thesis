@@ -366,6 +366,30 @@ The impact flows through the ecosystem as follows:
 
 By following these individual eating relationships, we can see a clear path of impact starting from the grass and ending with the snake.
      """
+     },
+    
+    # Example 6 - Multiple Choice
+    {"role": "user", "content": rf"""
+### FINAL SYNTHESIS TASK
+
+**USER QUESTION:** What is the capital of France?
+A. London
+B. Paris
+C. Berlin
+D. Madrid
+Answer with the letter only (A, B, C, or D).
+**CONTEXT:** Paris is the capital and most populous city of France.
+**LOGICAL EVIDENCE:**
+The solver identified Paris as the capital of France based on geographical records.
+---
+### INSTRUCTION:
+Provide a final, coherent response to the User Question. Use the Logical Evidence to explain the "why" behind the Conclusion. If the Conclusion is not explicitly specified, infer what the conclusion should be. Ensure the tone is natural and free of any technical jargon related to logic programming or databases.
+     """},
+    {"role": "assistant", "content": rf"""
+**B. Paris**
+
+This is because Paris is officially recognized as the capital and most populous city of France, making it the correct choice among the provided options.
+     """
      }
     
 ]

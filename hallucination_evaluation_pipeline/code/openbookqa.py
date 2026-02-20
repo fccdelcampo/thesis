@@ -73,20 +73,20 @@ def extract_answer_letter(response: str) -> str:
     
     response = response.strip()
     
-    # Pattern 1: Standalone letter at the start
-    match = re.match(r'^([A-D])\b', response.upper())
-    if match:
-        return match.group(1)
-    
-    # Pattern 2: "Answer: X" or "The answer is X"
-    match = re.search(r'(?:answer|choice)[\s:is]*([A-D])\b', response, re.IGNORECASE)
+    # Pattern 1: Standalone letter at the start (ignoring markdown *, spaces, etc.)
+    match = re.match(r'^[\*\s]*([A-D])(?:[\.\)]|\b)', response, re.IGNORECASE)
     if match:
         return match.group(1).upper()
     
-    # Pattern 3: Any standalone A-D in the response
-    match = re.search(r'\b([A-D])\b', response.upper())
+    # Pattern 2: "Answer: X" or "The answer is X"
+    match = re.search(r'(?:answer|choice)[^A-Za-z]*([A-D])\b', response, re.IGNORECASE)
     if match:
-        return match.group(1)
+        return match.group(1).upper()
+    
+    # Pattern 3: Any standalone A-D bounded by markdown or punctuation
+    match = re.search(r'(?:\*\*|\*|\s|^)([A-D])(?:\*\*|\*|\s|\.|\)|$)', response, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
     
     return ""
 
@@ -130,7 +130,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     
     # 3. Tuned Pipeline 
     tuned_result = run_pipeline_safe(run_tuned_pipeline, formatted_question)
-    tuned_letter = extract_answer_letter(tuned_result.get("text_answer", ""))
+    tuned_letter = extract_answer_letter(tuned_result.get("answer", ""))
     tuned_score = score_answer(tuned_letter, correct_answer)
     print(f"  Tuned Pipeline: {tuned_letter} (Score: {tuned_score})")
     
@@ -144,7 +144,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     
     log_question_and_answer(test_case_id, "graphrag", raw_question, gr_result.get("answer", ""), gr_score, gr_label)
     log_question_and_answer(test_case_id, "prolog_graphrag", raw_question, pgr_result.get("answer", ""), pgr_score, pgr_label)
-    log_question_and_answer(test_case_id, "tuned_pipeline", raw_question, tuned_result.get("text_answer", ""), tuned_score, tuned_label)
+    log_question_and_answer(test_case_id, "tuned_pipeline", raw_question, tuned_result.get("answer", ""), tuned_score, tuned_label)
 
 
 def log_results(test_case_id: int, tuned_score: Union[float, int], 
