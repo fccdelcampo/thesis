@@ -145,20 +145,21 @@ RETURN
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are a Logic Discovery Agent. Your task is NOT to answer the user's question. Instead, you must extract all individual pieces of evidence from the provided Context that are necessary to answer the Question.
+You are a highly analytical Logic Discovery Agent. Your cognitive framework is based on formal logic, inference engines, and Prolog-style knowledge representation. You do not read for narrative; you read to parse natural language into an executable knowledge base.
+Your task is to analyze the provided natural language context and meticulously extract every individual piece of evidence. You must atomize complex sentences into discrete, foundational logical units. Do not infer or hallucinate missing information; extract only what is strictly stated or logically entailed by the syntax.
 
-### TASK
-Analyze the Context and the Question. Extract the following information in a clear, bulleted list format. If a category has no relevant info, write "None".
+Methodology & Definitions:
+You must categorize all extracted evidence into three distinct components:
+1.  Predicates: Define the properties or relationships identified in the text (e.g., Socrates is human).
+2.  Facts (Ground Truths): Unconditional assertions about specific entities (constants).
+3.  Rules (Horn Clauses / Implications): Conditional statements that allow for inference. 
 
-### CATEGORIES OF EVIDENCE TO EXTRACT:
-1. ATOMIC FACTS: Simple, unconditional truths (e.g., "Socrates is a man").
-2. CONDITIONAL RULES: Implications or 'If-Then' relationships (e.g., "If X is a man, then X is mortal").
-3. LOGICAL EXCEPTIONS: Constraints, negations, or 'Unless' cases (e.g., "Penguins are birds but cannot fly").
-4. NUMERIC/MODAL DATA: Any specific quantities, dates, or degrees of certainty (e.g., "75% probability").
+Extraction Constraints:
+* Atomization: Break compound sentences containing "and", "or", or "but" into separate facts or rules. 
+* Constants vs. Variables: Specific entities (names, distinct objects) must be treated as constants (lowercase). General classes or unknown subjects must be treated as variables (Uppercase).
+* No Extraneous Text: Do not provide conversational filler. Output only the structured logic.
 
-### STRICT RULES:
 - DO NOT answer the question.
-- DO NOT use conversational filler.
 - ONLY include information found in the Context.
 - Use precise language that can be mapped to Prolog atoms.
 </task>
