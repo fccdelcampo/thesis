@@ -1268,3 +1268,53 @@
     ]
 }
 ===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text Which of the following describes the fallacy of appeal to common practice?  A. eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source B. reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences C. drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim D. arguing that something is the right thing to do based only on evidence that other people are already doing it.  Answer with the letter only (A, B, C, or D).  FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "logic_id_1",
+            "label": "Concept",
+            "properties": {"name": "Fallacy of Appeal to Common Practice"}
+        },
+        {
+            "id": "option_a_id",
+            "label": "Definition",
+            "properties": {"name": "A. eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source"}
+        },
+        {
+            "id": "option_b_id",
+            "label": "Definition",
+            "properties": {"name": "B. reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences"}
+        },
+        {
+            "id": "option_c_id",
+            "label": "Definition",
+            "properties": {"name": "C. drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim"}
+        },
+        {
+            "id": "option_d_id",
+            "label": "Definition",
+            "properties": {"name": "D. arguing that something is the right thing to do based only on evidence that other people are already doing it."}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "DEFINES",
+            "start_node_id": "logic_id_1",
+            "end_node_id": "option_d_id",
+            "properties": {"natural_statement": "The fallacy of appeal to common practice is described as arguing that something is the right thing to do based only on evidence that other people are already doing it.", "logic_intent": "FACT", "logical_form_hint": "defines(fallacy_of_appeal_to_common_practice, arguing_that_something_is_the_right_thing_to_do_based_only_on_evidence_that_other_people_are_already_doing_it)"}
+        },
+        {
+            "type": "IS_A",
+            "start_node_id": "logic_id_1",
+            "end_node_id": "option_d_id",
+            "properties": {"natural_statement": "The fallacy of appeal to common practice is a type of argumentation that involves appealing to the fact that other people are doing something.", "logic_intent": "FACT", "logical_form_hint": "is_a(fallacy_of_appeal_to_common_practice, type_of_argumentation)"}
+        }
+    ]
+}
+===================================
