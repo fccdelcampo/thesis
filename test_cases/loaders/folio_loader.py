@@ -1,8 +1,15 @@
-# Authenticate Hugging Face
-from huggingface_hub import login
-login(token="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")
-
 import os
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
+hf_token = os.getenv("HF_TOKEN") # PUT YOUR TOKEN IN .ENV FILE
+if hf_token:
+    # Authenticate Hugging Face
+    from huggingface_hub import login
+    login(token=hf_token)
+else:
+    print("[FolioLoader] Warning: HF_TOKEN not found in environment variables. Hugging Face authentication skipped.")
 import json
 import random
 from datasets import load_dataset
@@ -23,7 +30,7 @@ class FolioLoader:
     # Default path relative to project root or wherever it's run
     # If run from root, 'test_cases/folio.jsonl'
     FILE_PATH = 'test_cases/folio.jsonl'
-    SAMPLE_SIZE = 50
+    SAMPLE_SIZE = 100
     RANDOM_SEED = 42
 
     def __init__(self, sample_size=None):
@@ -65,12 +72,11 @@ class FolioLoader:
                 
                 item = ds[idx]
                 
-                premises = item.get('premises', [])
-                premises_text = " ".join(premises)
+                premises = item.get('premises', '')
+                premises_text = premises.replace('\n', ' ')
                 conclusion = item.get('conclusion', '')
                 label = item.get('label', 'UNKNOWN')
                 
-                # Format: "What can be concluded following the given premises? " + premises
                 question_text = f"What can be concluded following the given premises? {premises_text}"
                 
                 entry = {
