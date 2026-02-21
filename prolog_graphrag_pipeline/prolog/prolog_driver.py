@@ -16,14 +16,17 @@ except ImportError:
     from prolog_graphrag_pipeline.prolog.explainer import generate_safe_scasp_wrapper, generate_explanation
     import prolog_graphrag_pipeline.llm as llm
 
-SCASP_AVAILABLE = True
+SCASP_AVAILABLE = False
 
 def use_scasp():
     global SCASP_AVAILABLE
+    if not SCASP_AVAILABLE:
+        janus.query("pack_install(scasp, [interactive(false)]).")
     try:
         list(janus.query("use_module(library(scasp))."))
         janus.query_once("use_module(library(scasp/human)).")
         print("s(CASP) loaded successfully.")
+        SCASP_AVAILABLE = True
     except Exception as e:
         print(f"CRITICAL ERROR: s(CASP) library not found: {e}")
         SCASP_AVAILABLE = False
