@@ -193,11 +193,11 @@ def log_results(test_case_id: int, tuned_score: Union[float, int],
     new_row = pd.DataFrame({
         "test_case_id": [test_case_id],
         "tuned_score": [tuned_score],
-        "tuned_label": [1 if tuned_score >= THRESHOLD else 0],
+        "tuned_label": [0 if tuned_score >= THRESHOLD else 1],
         "graphrag_score": [graphrag_score],
-        "graphrag_label": [1 if graphrag_score >= THRESHOLD else 0],
+        "graphrag_label": [0 if graphrag_score >= THRESHOLD else 1],
         "prolog_graphrag_score": [prolog_graphrag_score],
-        "prolog_graphrag_label": [1 if prolog_graphrag_score >= THRESHOLD else 0]
+        "prolog_graphrag_label": [0 if prolog_graphrag_score >= THRESHOLD else 1]
     })
     
     header = not os.path.exists(file_path) or os.path.getsize(file_path) == 0
