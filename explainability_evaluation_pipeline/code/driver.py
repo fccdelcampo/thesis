@@ -1,22 +1,17 @@
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.append(str(ROOT))
-IO_DIR = ROOT / "explainability_evaluation_results"
-
-import comprehensiveness, auroc, sufficiency, semantic_entropy
+from . import comprehensiveness, auroc, sufficiency, semantic_entropy
 import sys, os
 import csv
 import random
 import pandas as pd
 from pathlib import Path
-from config import DATA_CLEARANCE_PASSWORD
+from config import CLEAR_DATA_PASSWORD
 from statistics import mean
 
-ROOT = Path(__file__).resolve().parents[1]
-sys.path.append(str(ROOT))
-IO_DIR = ROOT / "explainability_evaluation_results"
+ROOT = Path(__file__).resolve().parents[2]
+IO_DIR = ROOT / "explainability_evaluation_results/data"
 
 def run_pipeline():
     semantic_entropy.run_semantic_entropy_computations()
@@ -77,7 +72,7 @@ def generate_artificial_data():
             
 def clear_datasets():
     password = input("You're about to clear all datasets under explainability_evaluation_results. Enter data clearance password -> ")
-    if password == DATA_CLEARANCE_PASSWORD:
+    if password == CLEAR_DATA_PASSWORD:
         headers = {
             "auroc.csv": "se_x,se_x_c,se_q\n",
             "comprehensiveness.csv": "test_case_id,comprehensiveness\n",

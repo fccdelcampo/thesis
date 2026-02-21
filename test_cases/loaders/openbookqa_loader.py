@@ -27,7 +27,7 @@ class OpenBookQALoader:
         random.seed(self.RANDOM_SEED)
         
         try:
-            print(f"[OpenBookQALoader] Fetching AI2 ARC from Hugging Face...")
+            print(f"[OpenBookQALoader] Fetching OpenBookQA from Hugging Face...")
             ds = load_dataset("openbookqa", "additional", split="validation", trust_remote_code=False)
             total_size = len(ds)
             print(f"[OpenBookQALoader] Dataset loaded. Total size: {total_size}. Sampling until {self.SAMPLE_SIZE} approved items...")
@@ -39,7 +39,7 @@ class OpenBookQALoader:
             while len(formatted_data) < self.SAMPLE_SIZE:
                 # Stop if we've seen everyone
                 if len(seen_indices) >= total_size:
-                    print(f"[AI2ARCLoader] Exhausted dataset! Only found {len(formatted_data)} approved items.")
+                    print(f"[OpenBookQALoader] Exhausted dataset! Only found {len(formatted_data)} approved items.")
                     break
 
                 needed = self.SAMPLE_SIZE - len(formatted_data)
@@ -67,7 +67,7 @@ class OpenBookQALoader:
                     if len(formatted_data) >= self.SAMPLE_SIZE:
                         break
 
-                    # AI2 ARC Structure:
+                    # OpenBookQA ARC Structure:
                     # {
                     #     'id': '7-980',
                     #     'question_stem': 'The sun is responsible for',
@@ -101,14 +101,16 @@ class OpenBookQALoader:
                     currently_approved = len(formatted_data)
                     
                     with open("openbookqa_approval.log", "a", encoding="utf-8") as log_file:
+                        print(f"\nApproving: {formatted_input} (Needed: {items_left}, Approved: {currently_approved})\n")
                         log_file.write(f"Approving: {formatted_input} (Needed: {items_left}, Approved: {currently_approved})\n")
                         log_file.flush()
                         
-                        if approve(formatted_input):
+                        approval_result = approve(formatted_input)
+                        if approval_result:
                             formatted_data.append(entry)
-                            log_file.write(f"Approved.\n")
+                            log_file.write(f"Approved.\n\n")
                             log_file.flush()
-                            print(f"   [+] Approved. Total: {len(formatted_data)}/{self.SAMPLE_SIZE}")
+                            print(f"   [+] Approved. Total: {len(formatted_data)}/{self.SAMPLE_SIZE}\n")
 
             # Save to disk
             os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
@@ -116,10 +118,10 @@ class OpenBookQALoader:
                 for entry in formatted_data:
                     f.write(json.dumps(entry) + '\n')
             
-            print(f"[HotpotQALoader] Successfully saved {len(formatted_data)} items to {self.file_path}")
+            print(f"[OpenBookQALoader] Successfully saved {len(formatted_data)} items to {self.file_path}")
                 
         except Exception as e:
-            print(f"[HotpotQALoader] CRITICAL ERROR: {e}")
+            print(f"[OpenBookQALoader] CRITICAL ERROR: {e}")
             raise e
         
     def generate_dataset(self):
@@ -139,7 +141,7 @@ class OpenBookQALoader:
                     except json.JSONDecodeError:
                         continue
         except Exception as e:
-            print(f"[HotpotQALoader] Error reading file: {e}")
+            print(f"[OpenBookQALoader] Error reading file: {e}")
             return []
             
         return data

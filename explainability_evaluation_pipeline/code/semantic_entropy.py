@@ -2,12 +2,13 @@ import requests
 import json
 from config import ENTAILMENT_THRESHOLD, SampleSequencesFlags, CORRECTNESS_THRESHOLD
 from prolog_graphrag_pipeline import main_driver
-from hallucination_evaluation_pipeline.code.metrics import evaluate_with_ragas as evaluate
+from hallucination_evaluation_pipeline.code.metrics import evaluate_with_ragas as evaluate_metrics
 
 import math
 import csv
 import sys
 import json
+import numpy as np
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -18,37 +19,31 @@ LOGS_DIR = ROOT / "logs/prolog_graphrag_pipeline_logs"
 
 import requests
 import json
-from config import ENTAILMENT_THRESHOLD, SampleSequencesFlags
 from prolog_graphrag_pipeline import main_driver
 import math
 import csv
+from .llm import generate as query_llm
 
-API_URL = "https://api-inference.huggingface.co/models/microsoft/deberta-large-mnli"
-headers = {"Authorization": "Bearer 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"}
+def evaluate(prompt: str, answer: str) -> float:
+    return evaluate_metrics(prompt, answer)
 
-def evaluate(prompt: str, answer: str, eval_name: str) -> float:
-    if eval_name == "faithfulness":
-        return evaluate_faithfulness(prompt, answer)
-    if eval_name == "answer_relevancy":
-        return evaluate_answer_relevancy(prompt, answer)
-    if eval_name == "context_recall":
-        return evaluate_context_recall(prompt, answer)
-    raise ValueError(f"eval_name {eval_name} not allowed.")
 
 def sample_sequences(prompt: str, flag: str) -> dict:
-    return main_driver.run_pipeline(prompt=prompt, flag=flag, sample_mode=True)
+    return main_driver.run_pipeline(user_prompt=prompt, flag=flag, sample_mode=True)
 
-def query_deberta(seq1: str, seq2: str):
-    input = {
-        "inputs": f"{seq1} [SEP] {seq2}",
-    }
-    judgment = requests.post(API_URL, headers=headers, json=input)
-    return judgment.json()
-    
 def check_entailment(seq1: str, seq2: str) -> bool:
-    entailment_1 = query_deberta(seq1, seq2)
-    entailment_2 = query_deberta(seq2, seq1)
-    return entailment_1 >= ENTAILMENT_THRESHOLD and entailment_2 >= ENTAILMENT_THRESHOLD
+    prompt = f"""
+Given the following two responses to the same question, determine if they are semantically equivalent.
+
+Response 1: {seq1}
+Response 2: {seq2}
+    """
+    
+    answer = query_llm(prompt)
+    answer_dict = json.loads(answer)
+    verdict = answer_dict.get("verdict", "").lower()
+    return verdict.lower() == "yes"
+
 
 def cluster_sequences(sequences: list[dict]) -> list[list[dict]]:
     C = [[sequences[0]]]
@@ -66,11 +61,13 @@ def cluster_sequences(sequences: list[dict]) -> list[list[dict]]:
             C.append([sequences[m]["text_answer"]])
     return C
 
+
 def compute_likelihood(cluster: list[dict]) -> float:
     likelihood = 0
     for seq in cluster:
         likelihood += compute_aggregated_logprobs(seq)
     return likelihood
+
 
 def compute_aggregated_logprobs(response: dict) -> float:
     sequence_probability = 0
@@ -81,7 +78,7 @@ def compute_aggregated_logprobs(response: dict) -> float:
     return sequence_probability
     
 
-def compute_semantic_entropy(test_case_id: int, prompt: str, eval_name: str):
+def compute_semantic_entropy(test_case_id: int, prompt: str):
     semantic_entropies = {
         r"x": None,
         r"q": None,
@@ -111,7 +108,8 @@ def compute_semantic_entropy(test_case_id: int, prompt: str, eval_name: str):
         sequences = output["sequences"]
         
         for i, seq in enumerate(sequences):
-            faithfulness_score, answer_relevancy_score, context_recall_score = evaluate(prompt=reconstructed_prompt, answer=seq["text_answer"], eval_name=eval_name)
+            faithfulness_score, answer_relevancy_score, context_recall_score = evaluate(prompt=reconstructed_prompt, answer=seq["text_answer"])
+            score = np.mean([faithfulness_score, answer_relevancy_score, context_recall_score])
             d = {f"se_{flag.value[1]}_sequence_{i}": seq["text_answer"], f"se_{flag.value[1]}_sequence_{i}_label": score}
             output_sequences["se_" + flag.value[1]]["sequences"].append(d)
             
@@ -133,15 +131,88 @@ def compute_semantic_entropy(test_case_id: int, prompt: str, eval_name: str):
         
     log_result(test_case_id=test_case_id, semantic_entropies=semantic_entropies)
     
+
+def compute_semantic_entropy_fake(test_case_id: int, prompt: str):
+    semantic_entropies = {
+        r"x": None,
+        r"q": None,
+        r"x\c": None
+    }
+    output_sequences = {
+        "se_x": {
+            "prompt": None,
+            "sequences": [],
+            "se": None
+            },
+        "se_q": {
+            "prompt": None,
+            "sequences": [],
+            "se": None
+            },
+        "se_x_c": {
+            "prompt": None,
+            "sequences": [],
+            "se": None
+            }
+    }
+    for flag in list(SampleSequencesFlags):
+        output = sample_sequences(prompt=prompt, flag=flag.value[1])
+        print(f"""
+Flag: {flag.value[1]}
+Sequences:
+{[seq["text_answer"] + "\n" for seq in output["sequences"]]}
+              """)
+        reconstructed_prompt: str = output["prompt"]
+        output_sequences["se_" + flag.value[1]]["prompt"] = reconstructed_prompt
+        sequences = output["sequences"]
+        
+        for i, seq in enumerate(sequences):
+            faithfulness_score = np.random.uniform(0, 1)
+            answer_relevancy_score = np.random.uniform(0, 1)
+            context_recall_score = np.random.uniform(0, 1)
+            score = np.mean([faithfulness_score, answer_relevancy_score, context_recall_score])
+            d = {f"se_{flag.value[1]}_sequence_{i}": seq["text_answer"], f"se_{flag.value[1]}_sequence_{i}_label": score}
+            output_sequences["se_" + flag.value[1]]["sequences"].append(d)
+            
+        clusters = cluster_sequences(sequences)
+        semantic_entropy = 0
+        sum_of_cluster_probabilities = sum(compute_likelihood(cluster) for cluster in clusters)
+        
+        for cluster in clusters:
+            p_Ci_x = compute_likelihood(cluster) / sum_of_cluster_probabilities
+            semantic_entropy += p_Ci_x * math.log(p_Ci_x)
+            
+        semantic_entropy *= -1
+        semantic_entropies[flag.value[1]] = semantic_entropy
+        output_sequences["se_" + flag.value[1]]["se"] = semantic_entropy
+        
+    for key in semantic_entropies.keys():
+        if not semantic_entropies[key]:
+            raise ValueError(f"Semantic entropy for {key} is missing.")
+        
+    log_result(test_case_id=test_case_id, semantic_entropies=semantic_entropies)
+    
+    
 def run_semantic_entropy_computations():
     with open(TEST_DIR / "explainability_test_cases.jsonl", "r") as f:
         for line in f:
             test_case = json.loads(line)
             test_case_id = test_case["test_case_id"]
             prompt = test_case["question"]
-            eval_name = test_case["eval_name"]
         
-            compute_semantic_entropy(test_case_id=test_case_id, prompt=prompt, eval_name=eval_name)
+            compute_semantic_entropy(test_case_id=test_case_id, prompt=prompt)
+            
+def run_semantic_entropy_computations_fake():
+    f = [
+        {"test_case_id": 1, "question": "If an algorithm is deterministic, can its output be predicted?"},
+        # {"test_case_id": 2, "question": "If a function is continuous, is it differentiable?"},
+        # {"test_case_id": 3, "question": "Under what circumstances is a function not integrable?"}
+    ]
+    for test_case in f:
+        test_case_id = test_case["test_case_id"]
+        prompt = test_case["question"]
+    
+        compute_semantic_entropy_fake(test_case_id=test_case_id, prompt=prompt)
     
     
 def log_result(test_case_id: int, semantic_entropies: dict) -> None:
@@ -176,4 +247,7 @@ def log_sequences(test_case_id: int, output_sequences: dict) -> None:
     
     with open(LOGS_DIR / "explainability.jsonl", 'a', newline='') as f:
         f.write(json.dumps(row) + "\n")
+        
+if __name__ == "__main__":
+    run_semantic_entropy_computations_fake()
         

@@ -14,7 +14,7 @@ if project_root not in sys.path:
 from ragas import evaluate
 from ragas.metrics import faithfulness, answer_relevancy, context_recall
 from datasets import Dataset
-import ragas_config
+from . import ragas_config
 
 from prolog_graphrag_pipeline.llm import generate as llm_generate
 from prolog_graphrag_pipeline.config import LLM_SYSTEM_PROMPT

@@ -7,9 +7,10 @@ import pandas as pd
 
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.append(str(ROOT))
-IO_DIR = ROOT / "explainability_evaluation_results"
+DATA_DIR = ROOT / "explainability_evaluation_results/data"
+VISUALIZATIONS_DIR = ROOT / "explainability_evaluation_results/visualizations"
 
 def compute_auroc_score(true_labels: dict, semantic_entropies: dict) -> None:
     print(F"\nTRUE LABELS\n{true_labels["SE(x)"]}\nSIZE: {len(true_labels["SE(x)"])}")
@@ -22,7 +23,7 @@ def compute_auroc_score(true_labels: dict, semantic_entropies: dict) -> None:
     log_results(se_results)
     
 def log_results(se_results: dict) -> None:
-    with open(IO_DIR / "auroc.csv", 'a', newline='') as f:
+    with open(DATA_DIR / "auroc.csv", 'a', newline='') as f:
         writer = csv.DictWriter(
             f,
             fieldnames=["se_x", "se_x_c", "se_q"]
@@ -89,11 +90,11 @@ def generate_roc_graph(true_labels: dict, semantic_entropies: dict) -> None:
               fancybox=True, shadow=True, ncol=1)
 
     plt.tight_layout(rect=[0, 0.05, 1, 0.92])
-    plt.savefig("auroc.png", dpi=300, bbox_inches='tight')
+    plt.savefig(VISUALIZATIONS_DIR / "auroc.png", dpi=300, bbox_inches='tight')
     plt.show()
     
 def run_auroc_computations():
-    df = pd.read_csv(IO_DIR / "semantic_entropy.csv")
+    df = pd.read_csv(DATA_DIR / "semantic_entropy.csv")
     true_labels = {
         'SE(x)': df["se_x_label"].tolist(),
         'SE(x\\c)': df["se_x_c_label"].tolist(),

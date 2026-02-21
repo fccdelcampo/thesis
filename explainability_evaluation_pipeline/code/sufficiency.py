@@ -3,9 +3,9 @@ import csv
 import pandas as pd
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 sys.path.append(str(ROOT))
-IO_DIR = ROOT / "explainability_evaluation_results"
+DATA_DIR = ROOT / "explainability_evaluation_results/data"
 
 def calculate_sufficiency(test_case_id: int, df: pd.DataFrame) -> float:
     se_q = df.loc[df["test_case_id"] == test_case_id, "se_q"].values[0]
@@ -14,7 +14,7 @@ def calculate_sufficiency(test_case_id: int, df: pd.DataFrame) -> float:
     log_row(test_case_id=test_case_id, sufficiency=score)
 
 def log_row(test_case_id, sufficiency) -> None:
-    with open(IO_DIR / "sufficiency.csv", 'a', newline='') as f:
+    with open(DATA_DIR / "sufficiency.csv", 'a', newline='') as f:
         writer = csv.DictWriter(
             f,
             fieldnames=["test_case_id", "sufficiency"]
@@ -25,7 +25,7 @@ def log_row(test_case_id, sufficiency) -> None:
         })
 
 def run_sufficiency_computations() -> None:
-    df = pd.read_csv(IO_DIR / "semantic_entropy.csv")
+    df = pd.read_csv(DATA_DIR / "semantic_entropy.csv")
     test_case_ids = df["test_case_id"].tolist()
     for id in test_case_ids:
         calculate_sufficiency(test_case_id=id, df=df)

@@ -6,49 +6,61 @@ LLM_MESSAGES = [
     {"role": "system",
      "content": """
 ### ROLE:
-You are an expert Educational Assessment Evaluator and Logic Architect. Your task is to filter a dataset of educational test cases (e.g., MMLU, HotpotQA) to identify questions specifically suited for a "Knowledge Graph + Logic Programming" (Prolog-GraphRAG) pipeline.
+You are an expert Logical Architect and Knowledge Engineer. Your task is to evaluate educational test cases (MMLU, HotpotQA) to determine if they are suitable for a Symbolic Reasoning pipeline (Prolog-GraphRAG). 
 
-### EVALUATION CRITERIA:
-To receive a "yes" verdict, a test case must satisfy ALL of the following conditions:
+### CORE OBJECTIVE:
+Identify "Symbolic-Friendly" questions that require retrieving facts AND applying at least two discrete "if-then" logical rules to reach a conclusion.
 
-1. COMPOSITIONAL FACT-RETRIEVAL:
-   The question requires retrieving multiple distinct entities or properties from a knowledge base. It should not be a "common knowledge" question that a model can answer purely through parametric memory without external grounding.
+### INCLUSION CRITERIA (VERDICT: "YES"):
+To be accepted, the question MUST satisfy these three pillars:
 
-2. PREDICATE LOGIC & RULE APPLICATION:
-   The question must require a "logical bridge" to move from retrieved facts to a final answer. 
-   - Acceptable: Categorical reasoning (e.g., "Is X a member of Y?"), Transitive properties (e.g., "If A relates to B and B to C..."), or Constraint Satisfaction (e.g., "Which entity satisfies property P but NOT property Q?").
-   - Multi-hop Requirement: The answer must be derived by joining at least two separate pieces of information through a logical rule.
+1. MULTI-HOP FACT RETRIEVAL:
+   - The question cannot be answered by a single entity lookup. 
+   - It must require connecting at least two distinct entities or concepts via a shared property or relation (e.g., A → B → C).
 
-3. DISCRETE SYMBOLIC REASONING (NO QUANTITATIVE COMPUTATION):
-   Strictly exclude any question that requires:
-   - Arithmetic/Calculations: Solving for a numerical variable (even if the steps are logical).
-   - Mathematical Proofs: Formal derivations of identities or theorems.
-   - Spatial/Visual Reasoning: Reasoning about geometry or physical orientation that cannot be expressed as a logical triple.
-   - Constant-Finding: Do not accept questions asking for specific values like "What is the speed of light?" or "Calculate the molar mass."
+2. MULTI-STEP RULE APPLICATION (IF-THEN):
+   - The reasoning must require at least TWO logical rules/predicates.
+   - Example Rules: Transitivity (If A > B and B > C, then A > C), Class Inheritance (If X is a Y, and all Ys have Z...), or Negation (If P is true, then Q cannot be R).
+   - The "rationale" field must explicitly list these rules.
 
-### REJECTION GUIDELINES (VERDICT: "NO"):
-- If the question can be answered by a single Wikipedia snippet: NO.
-- If the question contains numbers and asks for a result (e.g., "How many...", "Find the value..."): NO.
-- If the reasoning is purely linguistic/semantic rather than logical: NO.
+3. PURELY SYMBOLIC / NON-COMPUTATIONAL:
+   - The question must be "educational" (Science, Law, Medicine, Philosophy).
+   - It must deal with discrete categories and relationships, NOT continuous values or math.
+   
+4. DIFFICULTY:
+   - The question should be difficult for an LLM to answer correctly without symbolic reasoning.
+   - It should not be a simple fact recall or a straightforward multi-hop that doesn't require complex rule application.
+
+### EXCLUSION CRITERIA (VERDICT: "NO"):
+- CALCULATIONS: Any question requiring arithmetic, statistics, or numerical solving (even simple addition).
+- PROOFS: Formal mathematical derivations or algebraic manipulations.
+- SINGLE-STEP: "What is the capital of X?" or "Who wrote Y?"
+- SEMANTIC ONLY: Questions about word definitions or grammar that don't involve logical "world rules."
 
 ### OUTPUT FORMAT:
-Output a single, valid JSON object only. No conversational filler.
+Return ONLY a JSON object. No preamble.
 
 ### JSON SCHEMA:
 {
-  "rationale": "Identify the specific facts to be retrieved and the explicit 'if-then' or categorical rules required to bridge them.",
+  "rationale": "1. Facts to retrieve: [List facts]. 2. Rule 1: [If-Then statement]. 3. Rule 2: [If-Then statement]. 4. Connection: [How they lead to the answer].",
   "verdict": "yes" | "no"
-}   
+}  
      """},
     
     # Few-Shot Example 1:
     {
         "role": "user", 
-        "content": "Which organelle is known as the powerhouse of the cell?"
+        "content": """
+In a specific ecosystem, the population of wolves (Predator A) keeps the deer population (Herbivore B) in check. The deer primarily feed on young willow trees (Producer C). If a disease significantly reduces the wolf population, what is the most likely secondary effect on the ecosystem?
+(A) The deer population will decrease.
+(B) The willow tree population will decrease.
+(C) The soil nutrients will increase immediately.
+(D) The deer will become carnivores.
+        """
         },
     {
         "role": "assistant", 
-        "content": '{"rationale": "This is a Level 1 (Remembering) question. It requires only the retrieval of a single factual definition (Mitochondria) without any if-then logical processing or rule-based deduction.", "verdict": "no"}'
+        "content": '{"rationale": "1. Facts: Wolves prey on Deer; Deer eat Willows. 2. Rule 1 (Inverse Correlation): If predator population decreases, prey population increases. 3. Rule 2 (Consumption): If herbivore population increases, producer population decreases. 4. Connection: Chains the reduction of wolves to the increase of deer, which leads to the depletion of willows (B).", "verdict": "yes"}'
         },
     
     # Few-Shot Example 2:
@@ -69,7 +81,53 @@ Output a single, valid JSON object only. No conversational filler.
     {
         "role": "assistant", 
         "content": '{"rationale": "Requires retrieving three facts: the Treaty of Paris date (1783), the start of the French Revolution (1789), and the reign of George III. It then requires a logical intersection rule to see if both dates fall within the same temporal range.", "verdict": "yes"}'
-        }
+        },
+    
+    # Few-Shot Example 4:
+    {
+        "role": "user", 
+        "content": "True or False: The Battle of Hastings took place in the year 1066."
+        },
+    {
+        "role": "assistant",
+        "content": '{"rationale": "This is a single-hop historical fact retrieval. It does not require a logical \'if-then\' bridge or multi-hop reasoning across distinct entities; it is a direct attribute lookup for a single event.", "verdict": "no"}'
+        },
+    
+    # Few-Shot Example 5:
+    {
+        "role": "user", 
+        "content": "Under a specific jurisdiction, a contract is 'voidable' if it was signed under duress. Person A signed a deed while being physically threatened by Person B. True or False: Person A has the legal right to rescind this deed."
+        },
+    {
+        "role": "assistant",
+        "content": """{"rationale": "1. Facts: The deed is a contract; Person A was physically threatened; Physical threats constitute 'duress'. 2. Rule 1: If an action is performed under duress, the resulting contract is voidable. 3. Rule 2: If a contract is voidable, the signer has the right to rescind. 4. Connection: Maps the specific instance (threat) to the legal category (duress) to derive the right to rescind.", "verdict": "yes"}"""
+        },
+    
+    # Few-Shot Example 6:
+    {
+        "role": "user", 
+        "content": "A solution has a pH of 4.0. What is the hydrogen ion concentration [H+] in moles per liter? (A) 10^-4 (B) 10^4 (C) 4.0 (D) 0.0004"
+        },
+    {
+        "role": "assistant",
+        "content": '{"rationale": "This question requires a numerical calculation based on the formula pH = -log[H+]. It is a quantitative mathematical operation rather than a symbolic logical derivation between predicates.", "verdict": "no"}'
+        },
+    
+    # Few-Shot Example 7:
+    {
+        "role": "user", 
+        "content": """
+All cephalopods have tentacles. An octopus is a type of cephalopod. Blue-ringed octopuses are a subset of the octopus family. What can be logically inferred?
+(A) Only some octopuses have tentacles.
+(B) Blue-ringed octopuses do not have tentacles.
+(C) Blue-ringed octopuses have tentacles.
+(D) Cephalopods are a subset of octopuses.
+"""
+        },
+    {
+        "role": "assistant",
+        "content": '{"rationale": "1. Facts: Blue-ringed Octopus is-a Octopus; Octopus is-a Cephalopod; Cephalopod has-property Tentacles. 2. Rule 1 (Transitive Inheritance): If A is-a B and B is-a C, then A is-a C. 3. Rule 2 (Property Inheritance): If X is-a Y, then X inherits all universal properties of Y. 4. Connection: Derives that Blue-ringed octopuses have tentacles (C) via a multi-level class hierarchy.", "verdict": "yes"}'
+        },
 ]
 
 import re
@@ -103,8 +161,13 @@ def approve(question: str) -> bool:
                          answer = json.loads(match.group(1))
                     else:
                         raise ValueError("No JSON found")
-
-            return answer.get('verdict', '').lower() == 'yes'
+            verdict = answer.get('verdict', '').lower() == 'yes'
+            
+            if verdict:
+                print(f"[test_case_chooser] APPROVED. (Rationale: {answer.get('rationale', 'N/A')})")
+            else:
+                print(f"[test_case_chooser] ~NOT APPROVED~. (Rationale: {answer.get('rationale', 'N/A')})")
+            return verdict
             
         except Exception as e:
             # On final retry, log error and fail open or closed?

@@ -115,10 +115,10 @@ class AI2_ARC_Loader:
                 for entry in formatted_data:
                     f.write(json.dumps(entry) + '\n')
             
-            print(f"[HotpotQALoader] Successfully saved {len(formatted_data)} items to {self.file_path}")
+            print(f"[AI2_ARC_Loader] Successfully saved {len(formatted_data)} items to {self.file_path}")
                 
         except Exception as e:
-            print(f"[HotpotQALoader] CRITICAL ERROR: {e}")
+            print(f"[AI2_ARC_Loader] CRITICAL ERROR: {e}")
             raise e
         
     def generate_dataset(self):
@@ -138,7 +138,7 @@ class AI2_ARC_Loader:
                     except json.JSONDecodeError:
                         continue
         except Exception as e:
-            print(f"[HotpotQALoader] Error reading file: {e}")
+            print(f"[AI2_ARC_Loader] Error reading file: {e}")
             return []
             
         return data

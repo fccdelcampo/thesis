@@ -3,6 +3,7 @@ import sys
 import pandas as pd
 import numpy as np
 import random
+from config import CLEAR_DATA_PASSWORD
 
 # Define top-level directory (one level up from current script)
 TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -64,13 +65,16 @@ def ensure_csv_headers():
                 f.write(header)
                 
 def clear_datasets():
+    password = input("You're about to clear all datasets under explainability_evaluation_results. Enter data clearance password -> ")
+    if password != CLEAR_DATA_PASSWORD:
+        sys.exit("Incorrect password.")
     headers = {
-        "answer_relevancy_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
-        "context_recall_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
-        "faithfulness_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
-        "hotpotqa_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
-        "mmlu_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
-        "truthfulqa_scores.csv": "test_case_id,tuned_score,graphrag_score,prolog_graphrag_score\n",
+        "answer_relevancy_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "context_recall_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "faithfulness_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "hotpotqa_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "mmlu_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "truthfulqa_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
         "normality_test_results.csv": "pipeline,eval_name,p_value,normality\n",
         "hypothesis_test_results.csv": "eval_name,p_value,interpretation\n",
         "posthoc_test_results.csv": "eval_name,loser,winner,p_value\n",
