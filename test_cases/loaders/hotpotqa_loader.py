@@ -92,20 +92,23 @@ class HotpotQALoader:
                         "level": item['level']
                     }
                     
-                    # Log approval process
-                    # Note: 'items_left' is now relative to the target, not the batch
-                    items_left = self.SAMPLE_SIZE - len(formatted_data)
-                    currently_approved = len(formatted_data)
-                    
-                    with open("hotpotqa_approval.log", "a", encoding="utf-8") as log_file:
-                        log_file.write(f"Approving: {item['question']} (Needed: {items_left}, Approved: {currently_approved})\n")
+                    os.makedirs("test_cases/logs", exist_ok=True)
+                    with open("test_cases/logs/hotpotqa_approval.log", "a", encoding="utf-8") as log_file:
+                        log_file.write(f"Question: {item['question']}\n")
                         log_file.flush()
                         
                         if approve(item['question']):
                             formatted_data.append(entry)
-                            log_file.write(f"Approved.\n")
+                            currently_approved = len(formatted_data)
+                            items_left = self.SAMPLE_SIZE - currently_approved
+                            log_file.write(f"[Approved!] (Needed: {items_left}, Approved: {currently_approved})\n")
                             log_file.flush()
-                            print(f"   [+] Approved. Total: {len(formatted_data)}/{self.SAMPLE_SIZE}")
+                            print(f"   [+] Approved. Total: {currently_approved}/{self.SAMPLE_SIZE}")
+                        else:
+                            currently_approved = len(formatted_data)
+                            items_left = self.SAMPLE_SIZE - currently_approved
+                            log_file.write(f"[Rejected!] (Needed: {items_left}, Approved: {currently_approved})\n")
+                            log_file.flush()
 
             # Save to disk
             os.makedirs(os.path.dirname(self.file_path), exist_ok=True)

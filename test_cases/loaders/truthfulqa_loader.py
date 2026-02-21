@@ -55,16 +55,12 @@ class TruthfulQALoader:
                             break
                         
                         # Start logging to file
-                        with open("truthfulqa_approval.log", "a", encoding="utf-8") as log_file:
-                            items_left = self.SAMPLE_SIZE - len(formatted_data)
-                            currently_approved = len(formatted_data)
-                            
-                            log_file.write(f"Approving: {item['question']} (Needed: {items_left}, Approved: {currently_approved})\n")
+                        os.makedirs("test_cases/logs", exist_ok=True)
+                        with open("test_cases/logs/truthfulqa_approval.log", "a", encoding="utf-8") as log_file:
+                            log_file.write(f"Question: {item['question']}\n")
                             log_file.flush()
 
                             if approve(item['question']):
-                                log_file.write(f"Approved\n")
-                                log_file.flush()
                                 formatted_data.append({
                                     "dataset": "truthfulqa",
                                     "question": item['question'],
@@ -72,7 +68,16 @@ class TruthfulQALoader:
                                     "ground_truth": item['correct_answers'], 
                                     "ground_truth_context": None
                                 })
-                                print(f"   [+] Approved. Total: {len(formatted_data)}/{self.SAMPLE_SIZE}")
+                                currently_approved = len(formatted_data)
+                                items_left = self.SAMPLE_SIZE - currently_approved
+                                log_file.write(f"[Approved!] (Needed: {items_left}, Approved: {currently_approved})\n")
+                                log_file.flush()
+                                print(f"   [+] Approved. Total: {currently_approved}/{self.SAMPLE_SIZE}")
+                            else:
+                                currently_approved = len(formatted_data)
+                                items_left = self.SAMPLE_SIZE - currently_approved
+                                log_file.write(f"[Rejected!] (Needed: {items_left}, Approved: {currently_approved})\n")
+                                log_file.flush()
 
             os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
             with open(self.file_path, 'w', encoding='utf-8') as f:

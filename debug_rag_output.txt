@@ -1,149 +1,136 @@
 ==================================================
- QUERY: Black Book starred the actress and writer of what heritage?
+ QUERY: The false analogy fallacy is
+
+A. a specific type of false cause fallacy that argues that since two event happened at the same time one event must have caused the other
+B. arguing that an event that preceded another event necessarily is the cause of the second event
+C. arguing that since something is new it is necessarily good
+D. drawing a conclusion based on a comparison when the items being compared are not similar enough to support the conclusion.
+
+Answer with the letter only (A, B, C, or D).
 ==================================================
 
---- RETRIEVED CONTEXT (Top 5 Chunks) ---
+--- RETRIEVED CONTEXT (Top 4 Chunks) ---
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "The Black Book",
-  "id": "Q2224789",
+  "entity": "Fallacies",
+  "id": "Q122860480",
   "score": 1.0,
   "triples": [
-    "instance of: Wikimedia information list",
-    "author: Schutzstaffel",
-    "author: Walter Schellenberg"
+    "instance of: chapter"
   ]
 }
 
 [Chunk 1 | Score: 1.0000]
-Wikidata Entity: The Black Book. Description: list of prominent British residents to be arrested as part of the preparation for the proposed invasion of Britain; produced in 1940 by the SS. Facts:   - instance of: Wikimedia information list   - author: Schutzstaffel   - author: Walter Schellenberg
+Wikidata Entity: Fallacies. Description: book section published in 2023. Facts:   - instance of: chapter
 --------------------------------------------------
 
 [Metadata Dump]
 {
-  "score": 0.7819463014602661,
   "local_context": [
     {
       "entity": null,
       "relationship": null,
       "source": "Local Document",
       "target": null,
-      "text": "Einstein was a student."
+      "text": "When the production or consumption of a good creates a positive externality, it is deemed a market failure because at the market quantity\n\nA. the marginal social benefit exceeds the marginal social cost.\nB. the marginal social cost exceeds the marginal social benefit.\nC. society produces too much of the good.\nD. the private benefits from consuming the good exceed the social benefits.\n\nAnswer with the letter only (A, B, C, or D)."
     }
-  ]
+  ],
+  "score": 0.9423408508300781
 }
 
-[Chunk 2 | Score: 0.7819]
-Einstein was a student.
+[Chunk 2 | Score: 0.9423]
+When the production or consumption of a good creates a positive externality, it is deemed a market failure because at the market quantity  A. the marginal social benefit exceeds the marginal social cost. B. the marginal social cost exceeds the marginal social benefit. C. society produces too much of the good. D. the private benefits from consuming the good exceed the social benefits.  Answer with the letter only (A, B, C, or D).
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "Actress and writer Carrie Fisher dies at 60",
-  "id": "Q28062411",
+  "entity": "accident fallacy",
+  "id": "Q2456273",
   "score": 0.5,
   "triples": [
-    "instance of: Wikinews article"
+    "subclass of: syllogistic fallacy",
+    "subclass of: a dicto simpliciter",
+    "subclass of: relevance fallacy",
+    "opposite of: converse accident"
   ]
 }
 
 [Chunk 3 | Score: 0.5000]
-Wikidata Entity: Actress and writer Carrie Fisher dies at 60. Description: Wikinews article. Facts:   - instance of: Wikinews article
+Wikidata Entity: accident fallacy. Description: informal fallacy. Facts:   - subclass of: syllogistic fallacy   - subclass of: a dicto simpliciter   - subclass of: relevance fallacy   - opposite of: converse accident
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "Black Book",
-  "id": "Q85747486",
+  "entity": "irrelevant conclusion",
+  "id": "Q737677",
   "score": 0.3333333333333333,
   "triples": [
-    "genre: role-playing video game",
-    "country of origin: Russia",
-    "instance of: video game"
+    "has part(s): tu quoque",
+    "instance of: Latin phrase",
+    "described by source: Brockhaus and Efron Encyclopedic Dictionary",
+    "has part(s): straw man argument",
+    "subclass of: relevance fallacy",
+    "has part(s): gohan ronpo",
+    "described by source: Meyers Konversations-Lexikon, 4th edition (1885\u20131890)"
   ]
 }
 
 [Chunk 4 | Score: 0.3333]
-Wikidata Entity: Black Book. Description: 2021 video game developed by Morteshka. Facts:   - genre: role-playing video game   - country of origin: Russia   - instance of: video game
---------------------------------------------------
-
-[Metadata Dump]
-{
-  "source": "Wikidata",
-  "entity": "Black Book",
-  "id": "Q163549",
-  "score": 0.25,
-  "triples": [
-    "country of origin: Belgium",
-    "country of origin: Netherlands",
-    "country of origin: United Kingdom",
-    "country of origin: Germany",
-    "instance of: film",
-    "genre: drama film",
-    "genre: historical film",
-    "genre: thriller film",
-    "genre: war film",
-    "award received: Golden Calf for Best Feature Film",
-    "award received: Platinum Film",
-    "participant in: 20th European Film Awards"
-  ]
-}
-
-[Chunk 5 | Score: 0.2500]
-Wikidata Entity: Black Book. Description: 2006 film by Paul Verhoeven. Facts:   - country of origin: Belgium   - country of origin: Netherlands   - country of origin: United Kingdom   - country of origin: Germany   - instance of: film   - genre: drama film   - genre: historical film   - genre: thriller film   - genre: war film   - award received: Golden Calf for Best Feature Film   - award received: Platinum Film   - participant in: 20th European Film Awards
+Wikidata Entity: irrelevant conclusion. Description: informal fallacy of presenting an argument that fails to address the issue in question. Facts:   - has part(s): tu quoque   - instance of: Latin phrase   - described by source: Brockhaus and Efron Encyclopedic Dictionary   - has part(s): straw man argument   - subclass of: relevance fallacy   - has part(s): gohan ronpo   - described by source: Meyers Konversations-Lexikon, 4th edition (1885–1890)
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-Dutch. The Black Book starred the actress and writer of Dutch heritage, Carrie Fisher was not associated with this film but another one named "Black Book" (2006) starring Carice van Houten who is a Dutch actress.
+D. drawing a conclusion based on a comparison when the items being compared are not similar enough to support the conclusion.
 ==================================================
 ==================================================
- QUERY: What heritage does the actress and writer starring in Black Book belong to?
+ QUERY: The false analogy fallacy is
+D. drawing a conclusion based on a comparison when the items being compared are not similar enough to support the conclusion.
 ==================================================
 
---- RETRIEVED CONTEXT (Top 4 Items) ---
+--- RETRIEVED CONTEXT (Top 5 Items) ---
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "The Black Book",
-  "id": "Q2224789",
+  "entity": "false analogy",
+  "id": "Q2915297",
   "score": 1.0,
   "triples": [
-    "instance of: Wikimedia information list",
-    "author: Schutzstaffel",
-    "author: Walter Schellenberg"
+    "subclass of: faulty generalization",
+    "subclass of: argument from analogy",
+    "described by source: Lean Logic"
   ]
 }
 [Item 1]
-[Chunk Score: 1.0000] Wikidata Entity: The Black Book. Description: list of prominent British residents to be arrested as part of the preparation for the proposed invasion of Britain; produced in 1940 by the SS. Facts:  - instance of: Wikimedia information list  - author: Schutzstaffel  - author: Walter Schellenberg
+[Chunk Score: 1.0000] Wikidata Entity: false analogy. Description: faulty instance of the argument from analogy. Facts:  - subclass of: faulty generalization  - subclass of: argument from analogy  - described by source: Lean Logic
   [Knowledge Graph Triples]:
-   - instance of: Wikimedia information list
-   - author: Schutzstaffel
-   - author: Walter Schellenberg
+   - subclass of: faulty generalization
+   - subclass of: argument from analogy
+   - described by source: Lean Logic
 
 --------------------------------------------------
 
 [Metadata Dump]
 {
-  "score": 0.8120938539505005,
   "local_context": [
     {
       "entity": null,
       "relationship": null,
       "source": "Local Document",
       "target": null,
-      "text": "Einstein was a student."
+      "text": "The false analogy fallacy is\n\nA. a specific type of false cause fallacy that argues that since two event happened at the same time one event must have caused the other\nB. arguing that an event that preceded another event necessarily is the cause of the second event\nC. arguing that since something is new it is necessarily good\nD. drawing a conclusion based on a comparison when the items being compared are not similar enough to support the conclusion.\n\nAnswer with the letter only (A, B, C, or D)."
     }
-  ]
+  ],
+  "score": 0.7792224884033203
 }
 [Item 2]
-[Chunk Score: 0.8121] Einstein was a student.
+[Chunk Score: 0.7792] The false analogy fallacy is A. a specific type of false cause fallacy that argues that since two event happened at the same time one event must have caused the other B. arguing that an event that preceded another event necessarily is the cause of the second event C. arguing that since something is new it is necessarily good D. drawing a conclusion based on a comparison when the items being compared are not similar enough to support the conclusion. Answer with the letter only (A, B, C, or D).
   [Local Connections]:
    - None None None
 
@@ -152,76 +139,97 @@ Dutch. The Black Book starred the actress and writer of Dutch heritage, Carrie F
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "Black Book",
-  "id": "Q85747486",
+  "entity": "fallacy",
+  "id": "Q186150",
   "score": 0.5,
   "triples": [
-    "genre: role-playing video game",
-    "country of origin: Russia",
-    "instance of: video game"
+    "subclass of: error",
+    "subclass of: argument",
+    "instance of: deprecation",
+    "has use: persuasion",
+    "has use: manipulation",
+    "instance of: Wikibase reason for deprecated rank",
+    "instance of: type of error",
+    "described by source: Armenian Soviet Encyclopedia",
+    "has part(s): non sequitur",
+    "has part(s): informal fallacy",
+    "described by source: Lean Logic",
+    "described by source: Meyers Konversations-Lexikon, 4th edition (1885\u20131890)"
   ]
 }
 [Item 3]
-[Chunk Score: 0.5000] Wikidata Entity: Black Book. Description: 2021 video game developed by Morteshka. Facts:  - genre: role-playing video game  - country of origin: Russia  - instance of: video game
+[Chunk Score: 0.5000] Wikidata Entity: fallacy. Description: use of invalid or otherwise faulty reasoning in the construction of an argument. Facts:  - subclass of: error  - subclass of: argument  - instance of: deprecation  - has use: persuasion  - has use: manipulation  - instance of: Wikibase reason for deprecated rank  - instance of: type of error  - described by source: Armenian Soviet Encyclopedia  - has part(s): non sequitur  - has part(s): informal fallacy  - described by source: Lean Logic  - described by source: Meyers Konversations-Lexikon, 4th edition (1885–1890)
   [Knowledge Graph Triples]:
-   - genre: role-playing video game
-   - country of origin: Russia
-   - instance of: video game
+   - subclass of: error
+   - subclass of: argument
+   - instance of: deprecation
+   - has use: persuasion
+   - has use: manipulation
+   - instance of: Wikibase reason for deprecated rank
+   - instance of: type of error
+   - described by source: Armenian Soviet Encyclopedia
+   - has part(s): non sequitur
+   - has part(s): informal fallacy
+   - described by source: Lean Logic
+   - described by source: Meyers Konversations-Lexikon, 4th edition (1885–1890)
 
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "Wikidata",
-  "entity": "Black Book",
-  "id": "Q163549",
+  "entity": "Fallacy",
+  "id": "Q13632733",
   "score": 0.3333333333333333,
   "triples": [
-    "country of origin: Belgium",
-    "country of origin: Netherlands",
-    "country of origin: United Kingdom",
-    "country of origin: Germany",
-    "instance of: film",
-    "genre: drama film",
-    "genre: historical film",
-    "genre: thriller film",
-    "genre: war film",
-    "award received: Golden Calf for Best Feature Film",
-    "award received: Platinum Film",
-    "participant in: 20th European Film Awards"
+    "instance of: television series episode",
+    "follows: Dominance",
+    "followed by: Futility"
   ]
 }
 [Item 4]
-[Chunk Score: 0.3333] Wikidata Entity: Black Book. Description: 2006 film by Paul Verhoeven. Facts:  - country of origin: Belgium  - country of origin: Netherlands  - country of origin: United Kingdom  - country of origin: Germany  - instance of: film  - genre: drama film  - genre: historical film  - genre: thriller film  - genre: war film  - award received: Golden Calf for Best Feature Film  - award received: Platinum Film  - participant in: 20th European Film Awards
+[Chunk Score: 0.3333] Wikidata Entity: Fallacy. Description: episode of Law & Order: Special Victims Unit. Facts:  - instance of: television series episode  - follows: Dominance  - followed by: Futility
   [Knowledge Graph Triples]:
-   - country of origin: Belgium
-   - country of origin: Netherlands
-   - country of origin: United Kingdom
-   - country of origin: Germany
-   - instance of: film
-   - genre: drama film
-   - genre: historical film
-   - genre: thriller film
-   - genre: war film
-   - award received: Golden Calf for Best Feature Film
-   - award received: Platinum Film
-   - participant in: 20th European Film Awards
+   - instance of: television series episode
+   - follows: Dominance
+   - followed by: Futility
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "Wikidata",
+  "entity": "Goomba fallacy",
+  "id": "Q131631673",
+  "score": 0.25,
+  "triples": [
+    "instance of: fallacy"
+  ]
+}
+[Item 5]
+[Chunk Score: 0.2500] Wikidata Entity: Goomba fallacy. Description: a phenomenon in which two groups with contradictory views are perceived as one group that contradicts itself. Facts:  - instance of: fallacy
+  [Knowledge Graph Triples]:
+   - instance of: fallacy
 
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-### Extracted Evidence:
+### Predicates:
 
-* **ATOMIC FACTS**
-	+ None
-* **CONDITIONAL RULES**
-	+ None
-* **LOGICAL EXCEPTIONS**
-	+ None
-* **NUMERIC/MODAL DATA**
-	+ None
+1. false_analogy(faulty_instance_of(argument_from_analogy)).
+2. faulty_generalization(subclass_of(false_analogy)).
+3. argument_from_analogy(subclass_of(false_analogy)).
+4. lean_logic(described_by_source(false_analogy)).
 
-Note: There is no relevant information in the Context to answer the Question about the heritage of the actress and writer starring in Black Book.
+### Facts (Ground Truths):
+
+1. false_analogy.
+2. subclass_of(faulty_generalization, false_analogy).
+3. subclass_of(argument_from_analogy, false_analogy).
+
+### Rules (Horn Clauses / Implications): 
+
+None
 ==================================================

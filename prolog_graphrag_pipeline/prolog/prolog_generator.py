@@ -142,6 +142,19 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             # VALIDATION: Ensure Query ends with a period
             if not query.endswith('.'):
                 query += "."
+                
+            # VALIDATION: Ensure no unquoted logic symbols exist
+            combined_code = database + "\n" + query
+            # Remove anything inside single quotes to avoid false positives
+            unquoted_code = re.sub(r"'[^']*'", "''", combined_code)
+            # Find disallowed symbols outside quotes
+            match = re.search(r"([~⊃∨∧]|\s\+\s|\\\+)", unquoted_code)
+            if match:
+                invalid_symbol = match.group(1).strip()
+                hint_msg = f"Invalid symbol '{invalid_symbol}' found unquoted.\n"
+                hint_msg += "If this is a NEGATION operator, you MUST use 'not' for negation by failure, or '-' for classical negation. NEVER use '~' as an operator.\n"
+                hint_msg += "If this is part of a logical formula string (like '(G ∨ H) ⊃ ~I'), you MUST wrap the ENTIRE formula in single quotes to make it a valid Prolog atom (e.g., `formula('(G ∨ H) ⊃ ~I').`)."
+                raise ValueError(hint_msg)
 
             print(f"Iteration {i} | Extracted Database:\n{database}\n")
             print(f"Iteration {i} | Extracted Query:\n{query}\n")
@@ -161,7 +174,14 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             continue
         except janus.PrologError as e:
             print(f"Iteration {i} | Prolog Error: {e}")
-            most_recent_error = f"{e} Ensure strict Prolog syntax. No bullets/hyphens. Enclose database in <database>...</database>."
+            error_str = str(e)
+            if "Singleton variables" in error_str:
+                hint = "Fix the singleton variables by ensuring each variable appears at least twice in a rule (e.g., replace an unused variable with an underscore '_', or reuse it in the body)."
+            elif "Syntax error: Operator expected" in error_str:
+                hint = "Wrap any mathematical/logical symbols (=>, ⊃, ∨, ∧, ~, +, -, (, )) entirely in single quotes (like `'(G ∨ H) ⊃ ~I'`) to make them valid Prolog atoms. Do not leave them unquoted."
+            else:
+                hint = "Ensure strict Prolog syntax. No bullets/hyphens. Predicates must be lowercase."
+            most_recent_error = f"Prolog Error: {e}\nHint: {hint}"
             continue
         except Exception as e:
             print(f"Iteration {i} | General Error: {e}")

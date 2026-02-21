@@ -11,7 +11,6 @@ import os
 import sys
 import json
 import argparse
-from test_case_chooser import approve
 
 # Add project root to path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
@@ -20,6 +19,15 @@ if project_root not in sys.path:
 
 from langchain_community.document_loaders import PyPDFLoader
 from langchain_ollama import ChatOllama, OllamaEmbeddings
+
+# Import our new interactive loaders
+metrics_loaders_dir = os.path.join(project_root, "test_cases", "metrics_loaders")
+if metrics_loaders_dir not in sys.path:
+    sys.path.append(metrics_loaders_dir)
+
+from faithfulness_loader import FaithfulnessLoader
+from context_recall_loader import ContextRecallLoader
+from answer_relevancy_loader import AnswerRelevancyLoader
 
 def load_documents():
     """Load all PDFs from the unprocessed_documents directory."""
@@ -74,11 +82,12 @@ def generate_synthetic_testset(test_size: int = 10):
         embeddings
     )
     
-    # 4. Generate
-    print(f"Generating {test_size} test cases...")
+    # 4. Generate - We generate 2x the requested size to allow room for user rejections
+    generation_size = test_size * 2
+    print(f"Generating {generation_size} synthetic test cases (Target approved: {test_size})...")
     testset = generator.generate_with_langchain_docs(
         documents,
-        test_size=test_size,
+        test_size=generation_size,
         distributions={
             simple: 0.5,
             reasoning: 0.25,
@@ -94,44 +103,26 @@ def generate_synthetic_testset(test_size: int = 10):
     df.to_csv(output_csv, index=False)
     print(f"Saved master dataset: {output_csv}")
     
-    # 6. Generate per-metric JSONL files
-    test_cases_dir = os.path.join(project_root, "test_cases")
+    # 6. Route to interactive loaders
+    print("\nStarting Interactive Approval Process...")
     
-    # Faithfulness: needs question (answer & context come from pipeline at eval time)
-    faithfulness_path = os.path.join(test_cases_dir, "faithfulness.jsonl")
-    with open(faithfulness_path, 'w', encoding='utf-8') as f:
-        for _, row in df.iterrows():
-            question = row.get("question, ")
-            if approve(question):
-                entry = {"question": question}
-                f.write(json.dumps(entry) + "\n")
-    print(f"Saved: {faithfulness_path} ({len(df)} entries)")
+    # Faithfulness
+    f_loader = FaithfulnessLoader(sample_size=test_size)
+    f_loader.generate_dataset(df)
     
-    # Answer Relevancy: needs question
-    ar_path = os.path.join(test_cases_dir, "answer_relevancy.jsonl")
-    with open(ar_path, 'w', encoding='utf-8') as f:
-        for _, row in df.iterrows():
-            entry = {"question": row.get("question", "")}
-            f.write(json.dumps(entry) + "\n")
-    print(f"Saved: {ar_path} ({len(df)} entries)")
+    # Answer Relevancy
+    ar_loader = AnswerRelevancyLoader(sample_size=test_size)
+    ar_loader.generate_dataset(df)
     
-    # Context Recall: needs question + ground_truth
-    cr_path = os.path.join(test_cases_dir, "context_recall.jsonl")
-    with open(cr_path, 'w', encoding='utf-8') as f:
-        for _, row in df.iterrows():
-            entry = {
-                "question": row.get("question", ""),
-                "ground_truth": row.get("ground_truth", "")
-            }
-            f.write(json.dumps(entry) + "\n")
-    print(f"Saved: {cr_path} ({len(df)} entries)")
+    # Context Recall
+    cr_loader = ContextRecallLoader(sample_size=test_size)
+    cr_loader.generate_dataset(df)
     
-    print("\nDone! Testset generation complete.")
-    print(f"Generated {len(df)} test cases across 3 metric files.")
+    print("\nDone! Metrics datasets generation complete.")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Generate RAGAS synthetic testset")
-    parser.add_argument("--test_size", type=int, default=10, help="Number of test cases to generate")
+    parser.add_argument("--test_size", type=int, default=10, help="Target approved sample size for the metrics")
     args = parser.parse_args()
     
     generate_synthetic_testset(test_size=args.test_size)

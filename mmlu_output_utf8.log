@@ -1,0 +1,189 @@
+﻿C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+Loaded 1 MMLU test cases.
+python : 
+At line:1 char:1
++ python hallucination_eval
+uation_pipeline/code/mmlu.p
+y --test-size 1 > ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+    + CategoryInfo         
+     : NotSpecifi    ed: 
+(:String) [],     
+RemoteException
+    + FullyQualifiedEr    
+rorId : NativeComm    
+andError
+ 
+
+[MMLU #0]  Which of the given formulas of PL is the best symbolization...
+  Correct: D
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+Ollama loaded successfully.
+Error in run_pipeline: 'charmap' codec can't encode character '\u2283' in position 70: character maps to <undefined>
+  GraphRAG:  (Score: 0.0)
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+MMLU:   0%|          | 0/1 
+[00:00<?, ?it/s]Traceback 
+(most recent call last):
+  File "C:\Users\John Renie
+l\thesis\thesis\prolog_grap
+hrag_pipeline\graphrag\enco
+der.py", line 52, in 
+extract_query_and_context
+    print("Ollama 
+Response:", response) # 
+verbose
+    ^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
+  File "C:\Users\John Renie
+l\AppData\Local\Programs\Py
+thon\Python312\Lib\encoding
+s\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_e
+ncode(input,self.errors,enc
+oding_table)[0]
+           ^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
+UnicodeEncodeError: 
+'charmap' codec can't 
+encode character '\u2283' 
+in position 275: character 
+maps to <undefined>
+Traceback (most recent 
+call last):
+  File "C:\Users\John Renie
+l\thesis\thesis\prolog_grap
+hrag_pipeline\graphrag\enco
+der.py", line 52, in 
+extract_query_and_context
+    print("Ollama 
+Response:", response) # 
+verbose
+    ^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
+  File "C:\Users\John Renie
+l\AppData\Local\Programs\Py
+thon\Python312\Lib\encoding
+s\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_e
+ncode(input,self.errors,enc
+oding_table)[0]
+           ^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
+UnicodeEncodeError: 
+'charmap' codec can't 
+encode character '\u2283' 
+in position 275: character 
+maps to <undefined>
+Traceback (most recent 
+call last):
+  File "C:\Users\John Renie
+l\thesis\thesis\prolog_grap
+hrag_pipeline\graphrag\enco
+der.py", line 52, in 
+extract_query_and_context
+    print("Ollama 
+Response:", response) # 
+verbose
+    ^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
+  File "C:\Users\John Renie
+l\AppData\Local\Programs\Py
+thon\Python312\Lib\encoding
+s\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_e
+ncode(input,self.errors,enc
+oding_table)[0]
+           ^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
+UnicodeEncodeError: 
+'charmap' codec can't 
+encode character '\u2283' 
+in position 275: character 
+maps to <undefined>
+Traceback (most recent 
+call last):
+  File "C:\Users\John Renie
+l\thesis\thesis\prolog_grap
+hrag_pipeline\graphrag\enco
+der.py", line 52, in 
+extract_query_and_context
+    print("Ollama 
+Response:", response) # 
+verbose
+    ^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
+  File "C:\Users\John Renie
+l\AppData\Local\Programs\Py
+thon\Python312\Lib\encoding
+s\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_e
+ncode(input,self.errors,enc
+oding_table)[0]
+           ^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
+UnicodeEncodeError: 
+'charmap' codec can't 
+encode character '\u2283' 
+in position 275: character 
+maps to <undefined>
+Traceback (most recent 
+call last):
+  File "C:\Users\John Renie
+l\thesis\thesis\prolog_grap
+hrag_pipeline\graphrag\enco
+der.py", line 52, in 
+extract_query_and_context
+    print("Ollama 
+Response:", response) # 
+verbose
+    ^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
+  File "C:\Users\John Renie
+l\AppData\Local\Programs\Py
+thon\Python312\Lib\encoding
+s\cp1252.py", line 19, in 
+encode
+    return codecs.charmap_e
+ncode(input,self.errors,enc
+oding_table)[0]
+           ^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^
+UnicodeEncodeError: 
+'charmap' codec can't 
+encode character '\u2283' 
+in position 275: character 
+maps to <undefined>
+
+MMLU: 100%|##########| 1/1 
+[01:16<00:00, 76.78s/it]
+MMLU: 100%|##########| 1/1 
+[01:16<00:00, 76.79s/it]
+Ollama loaded successfully.
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+Ollama Response: DEBUG: Exception in loop: UnicodeEncodeError: 'charmap' codec can't encode character '\u2283' in position 275: character maps to <undefined>
+Ollama Response: DEBUG: Exception in loop: UnicodeEncodeError: 'charmap' codec can't encode character '\u2283' in position 275: character maps to <undefined>
+Ollama Response: DEBUG: Exception in loop: UnicodeEncodeError: 'charmap' codec can't encode character '\u2283' in position 275: character maps to <undefined>
+Ollama Response: DEBUG: Exception in loop: UnicodeEncodeError: 'charmap' codec can't encode character '\u2283' in position 275: character maps to <undefined>
+Ollama Response: DEBUG: Exception in loop: UnicodeEncodeError: 'charmap' codec can't encode character '\u2283' in position 275: character maps to <undefined>
+  Pipeline error: Failed to extract query and context after 5 retries. Last error: 'charmap' codec can't encode character '\u2283' in position 275: character maps to <undefined>
+  Prolog-GraphRAG:  (Score: 0.0)
+  Tuned Pipeline: D (Score: 1.0)
+MMLU evaluation complete. Results saved to C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_results/mmlu_scores.csv

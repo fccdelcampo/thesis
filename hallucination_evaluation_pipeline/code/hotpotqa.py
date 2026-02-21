@@ -157,6 +157,7 @@ def run_test_case(test_case: dict, test_case_id: int):
         test_case_id (int): The ID of the test case
     """
     question = test_case.get("question", "")
+    formatted_input = test_case.get("formatted_input", question) # Default to question if missing
     ground_truth = test_case.get("ground_truth", "")
     gt_context = test_case.get("ground_truth_context", "")
     q_type = test_case.get("type", "unknown")
@@ -168,19 +169,19 @@ def run_test_case(test_case: dict, test_case_id: int):
     print(f"\n[HotpotQA #{test_case_id}] ({q_type}/{q_level}) {question[:60]}...")
 
     # 1. GraphRAG Pipeline
-    gr_result = run_pipeline_safe(run_graphrag, question)
+    gr_result = run_pipeline_safe(run_graphrag, formatted_input)
     gr_answer = gr_result.get("answer", "")
     gr_score = judge_answer(question, ground_truth, gt_context, gr_answer)
     print(f"  GraphRAG Score: {gr_score:.2f}")
     
     # 2. Prolog GraphRAG Pipeline
-    pgr_result = run_pipeline_safe(run_prolog_graphrag, question, flag="prolog")
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, formatted_input, flag="prolog")
     pgr_answer = pgr_result.get("answer", "")
     pgr_score = judge_answer(question, ground_truth, gt_context, pgr_answer)
     print(f"  Prolog-GraphRAG Score: {pgr_score:.2f}")
     
     # 3. Tuned Pipeline
-    tuned_result = run_pipeline_safe(run_tuned_pipeline, question)
+    tuned_result = run_pipeline_safe(run_tuned_pipeline, formatted_input)
     tuned_answer = tuned_result.get("text_answer", "")
     tuned_score = judge_answer(question, ground_truth, gt_context, tuned_answer)
     print(f"  Tuned Pipeline Score: {tuned_score:.2f}")

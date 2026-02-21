@@ -262,7 +262,7 @@ if __name__ == "__main__":
 # def generate_context(query, retriever, llm) -> str:
 #     return generate(llm, retriever, query)
 
-from .retriever import get_retriever
+from .retriever import get_retriever, create_indexes, wait_for_indexes
 
 def run_pipeline(question: str) -> dict:
     """
@@ -276,10 +276,15 @@ def run_pipeline(question: str) -> dict:
         # Note: initialize_models prints "Ollama loaded successfully."
         encoder_llm, retriever_llm, embedder = initialize_models()
         
-        # 2. Get Retriever (without rebuilding indexes)
+        # 2. Ensure indexes exist (Self-healing for new instances)
+        print("DEBUG: Verifying Neo4j indexes...")
+        create_indexes(neo4j_driver)
+        wait_for_indexes(neo4j_driver, timeout=30)
+        
+        # 3. Get Retriever (without rebuilding indexes)
         retriever = get_retriever(neo4j_driver, embedder)
         
-        # 3. Generate Answer
+        # 4. Generate Answer
         # generate_answer calls llm.generate which returns {'answer': ..., 'context': ...}
         result = generate_answer(question, retriever, retriever_llm)
         
