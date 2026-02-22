@@ -134,7 +134,7 @@ def run_test_case(test_case: dict, test_case_id: int):
         test_case (dict): A test case's dict
         test_case_id (int): The ID of the test case
     """
-    formatted_question = format_mmlu_question(test_case)
+    formatted_input = format_mmlu_question(test_case)
     correct_answer = test_case.get("answer", "")
     raw_question = test_case.get("question", "")
     
@@ -142,20 +142,20 @@ def run_test_case(test_case: dict, test_case_id: int):
     print(f"  Correct: {correct_answer}")
 
     # 1. GraphRAG Pipeline
-    gr_result = run_pipeline_safe(run_graphrag, formatted_question)
+    gr_result = run_pipeline_safe(run_graphrag, formatted_input)
     gr_letter = extract_answer_letter(gr_result.get("answer", ""))
     gr_score = score_answer(gr_letter, correct_answer)
     print(f"  GraphRAG: {gr_letter} (Score: {gr_score})")
     
     # 2. Prolog GraphRAG Pipeline
     # FIX: Added flag="prolog"
-    pgr_result = run_pipeline_safe(run_prolog_graphrag, formatted_question, flag="prolog")
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, formatted_input, flag="prolog")
     pgr_letter = extract_answer_letter(pgr_result.get("answer", ""))
     pgr_score = score_answer(pgr_letter, correct_answer)
     print(f"  Prolog-GraphRAG: {pgr_letter} (Score: {pgr_score})")
     
     # 3. Tuned Pipeline 
-    tuned_result = run_pipeline_safe(run_tuned_pipeline, formatted_question)
+    tuned_result = run_pipeline_safe(run_tuned_pipeline, formatted_input)
     tuned_letter = extract_answer_letter(tuned_result.get("answer", ""))
     tuned_score = score_answer(tuned_letter, correct_answer)
     print(f"  Tuned Pipeline: {tuned_letter} (Score: {tuned_score})")

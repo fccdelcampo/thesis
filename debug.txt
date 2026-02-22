@@ -9824,3 +9824,81 @@
     ]
 }
 ===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text What could be used as an electrical conductor   FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text What could be used as an electrical conductor A. A penny B. Shoe laces C. Wood D. A button  FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "electrical_conductor",
+            "label": "Concept",
+            "properties": {"name": "Electrical Conductor"}
+        },
+        {
+            "id": "penny",
+            "label": "Example",
+            "properties": {"name": "Penny"}
+        },
+        {
+            "id": "shoe_laces",
+            "label": "Example",
+            "properties": {"name": "Shoe Laces"}
+        },
+        {
+            "id": "wood",
+            "label": "Concept",
+            "properties": {"name": "Wood"}
+        },
+        {
+            "id": "button",
+            "label": "Example",
+            "properties": {"name": "Button"}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "IS_A",
+            "start_node_id": "penny",
+            "end_node_id": "electrical_conductor",
+            "properties": {
+                "natural_statement": "A penny could be used as an electrical conductor.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "IS_A",
+            "start_node_id": "shoe_laces",
+            "end_node_id": "electrical_conductor",
+            "properties": {
+                "natural_statement": "Shoe laces could be used as an electrical conductor.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "IS_A",
+            "start_node_id": "wood",
+            "end_node_id": "electrical_conductor",
+            "properties": {
+                "natural_statement": "Wood cannot be used as an electrical conductor.",
+                "logic_intent": "EXCEPTION"
+            }
+        },
+        {
+            "type": "IS_A",
+            "start_node_id": "button",
+            "end_node_id": "electrical_conductor",
+            "properties": {
+                "natural_statement": "A button cannot be used as an electrical conductor.",
+                "logic_intent": "EXCEPTION"
+            }
+        }
+    ]
+}
+===================================
