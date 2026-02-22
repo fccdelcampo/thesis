@@ -40,7 +40,7 @@ def run_testset_generation(test_size: int = 100):
     print("=" * 60)
     print("STEP 0: Generating Synthetic Testset (RAGAS)")
     print("=" * 60)
-    import generate_testset
+    import test_cases.metrics_loaders.generate_testset as generate_testset
     generate_testset.generate_synthetic_testset(test_size=test_size)
 
 
