@@ -96,11 +96,7 @@ IDENTIFY THREE TYPES OF LOGIC:
 FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble.
 '''
 
-RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
-
-# Retrieval query for HybridCypherRetriever:
-# Takes the vector-matched local node and finds its local connections.
-
+RETRIEVER = RETRIEVER_OPTIONS.HybridRetriever
 
 RETRIEVAL_QUERY = '''
 // Part A: Local Document Retrieval (Vector/Keyword matches passed as `node`)
@@ -163,7 +159,6 @@ Extraction Constraints:
 - ONLY include information found in the Context.
 - Use precise language that can be mapped to Prolog atoms.
 </task>
-
 ### Question:
 {query_text}
 

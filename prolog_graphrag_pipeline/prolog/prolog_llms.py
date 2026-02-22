@@ -5,6 +5,7 @@ def generate(prompt: str, flag: str) -> dict:
         raise ValueError(f"Flag {flag} is invalid. Only 'prolog' and 'explanation' are accepted.")
     
     return generate_response(prompt=prompt, flag=flag)
+
     
 def generate_response(prompt: str, flag: str) -> dict:
     from .prolog_config import GENERATOR_LLM_MESSAGES, EXPLAINER_LLM_MESSAGES

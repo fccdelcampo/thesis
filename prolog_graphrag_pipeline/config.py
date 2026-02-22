@@ -26,6 +26,8 @@ You are an Expert Knowledge Synthesizer. Your mission is to provide clear, accur
     - **DO NOT** use code-like syntax such as parent(x,y) or not(affected(snake)).
 
 4. **Tone & Style:** Professional, helpful, and grounded. Use a "bottom-line up front" (BLUF) approach: answer the question immediately, then provide the supporting context.
+
+
 """
 
 LLM_FEW_SHOT_EXAMPLES = [

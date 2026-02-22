@@ -109,32 +109,26 @@ def run_test_case(test_case: dict, test_case_id: int):
     """
     Runs a test case by calling each pipeline's run_pipeline function. 
     """
-    raw_question = test_case.get("question", "")
-    options = test_case.get("options", [])
-    labels = test_case.get("labels", ["A", "B", "C", "D"])
+    question = test_case.get("formatted_input", "")
     correct_answer = test_case.get("answer", "")
     
-    # Format question with options (e.g., "A) hover a magnet over it\nB) take the rock home")
-    formatted_options = "\n".join([f"{labels[i]}) {opt}" for i, opt in enumerate(options)])
-    formatted_question = f"{raw_question}\n{formatted_options}"
-    
-    print(f"\n[OpenBookQA #{test_case_id}] {raw_question[:60]}...")
+    print(f"\n[OpenBookQA #{test_case_id}] {question[:60]}...")
     print(f"  Correct: {correct_answer}")
 
     # 1. GraphRAG Pipeline
-    gr_result = run_pipeline_safe(run_graphrag, formatted_question)
+    gr_result = run_pipeline_safe(run_graphrag, question)
     gr_letter = extract_answer_letter(gr_result.get("answer", ""))
     gr_score = score_answer(gr_letter, correct_answer)
     print(f"  GraphRAG: {gr_letter} (Score: {gr_score})")
     
     # 2. Prolog GraphRAG Pipeline
-    pgr_result = run_pipeline_safe(run_prolog_graphrag, formatted_question, flag="prolog")
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, question, flag="prolog")
     pgr_letter = extract_answer_letter(pgr_result.get("answer", ""))
     pgr_score = score_answer(pgr_letter, correct_answer)
     print(f"  Prolog-GraphRAG: {pgr_letter} (Score: {pgr_score})")
     
     # 3. Tuned Pipeline 
-    tuned_result = run_pipeline_safe(run_tuned_pipeline, formatted_question)
+    tuned_result = run_pipeline_safe(run_tuned_pipeline, question)
     tuned_letter = extract_answer_letter(tuned_result.get("answer", ""))
     tuned_score = score_answer(tuned_letter, correct_answer)
     print(f"  Tuned Pipeline: {tuned_letter} (Score: {tuned_score})")
@@ -147,9 +141,9 @@ def run_test_case(test_case: dict, test_case_id: int):
     pgr_label = "1" if pgr_score >= THRESHOLD else "0"
     tuned_label = "1" if tuned_score >= THRESHOLD else "0"
     
-    log_question_and_answer(test_case_id, "graphrag", raw_question, gr_result.get("answer", ""), gr_score, gr_label)
-    log_question_and_answer(test_case_id, "prolog_graphrag", raw_question, pgr_result.get("answer", ""), pgr_score, pgr_label)
-    log_question_and_answer(test_case_id, "tuned_pipeline", raw_question, tuned_result.get("answer", ""), tuned_score, tuned_label)
+    log_question_and_answer(test_case_id, "graphrag", question, gr_result.get("answer", ""), gr_score, gr_label)
+    log_question_and_answer(test_case_id, "prolog_graphrag", question, pgr_result.get("answer", ""), pgr_score, pgr_label)
+    log_question_and_answer(test_case_id, "tuned_pipeline", question, tuned_result.get("answer", ""), tuned_score, tuned_label)
 
 
 def log_results(test_case_id: int, tuned_score: Union[float, int], 

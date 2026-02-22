@@ -31,7 +31,7 @@ from answer_relevancy_loader import AnswerRelevancyLoader
 
 def load_documents():
     """Load all PDFs from the unprocessed_documents directory."""
-    docs_dir = os.path.join(project_root, "unprocessed_documents")
+    docs_dir = os.path.join(project_root, "documents")
     all_docs = []
     
     if not os.path.exists(docs_dir):
