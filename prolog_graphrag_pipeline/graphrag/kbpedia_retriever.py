@@ -5,6 +5,7 @@ and uses an LLM to filter only query-relevant facts for the Prolog pipeline.
 """
 
 import json
+import re
 from typing import List, Dict, Any, Optional
 
 
@@ -17,7 +18,7 @@ class KBPediaRetriever:
 
     _index_verified = False
 
-    def __init__(self, driver, llm=None, top_k: int = 3):
+    def __init__(self, driver, llm=None, top_k: int = 8):
         self.driver = driver
         self.llm = llm
         self.top_k = top_k
@@ -43,14 +44,25 @@ class KBPediaRetriever:
             return False
 
     def extract_entities_from_query(self, query: str) -> List[str]:
-        """Use LLM to extract key entities from the user query."""
+        """
+        Use LLM to extract entities from the user query.
+        Extracts explicit entities, functional/conceptual terms, AND MCQ choices.
+        """
         if not self.llm:
-            return [w for w in query.replace('?', '').split() if len(w) > 4][:3]
+            return [w for w in query.replace('?', '').split() if len(w) > 4][:5]
 
-        prompt = f"""Extract the core, specific entities from this query for a knowledge base lookup.
+        prompt = f"""You are extracting search terms for a knowledge base lookup.
+
+Given this query, extract ALL of the following:
+1. **Explicit entities** mentioned (e.g., "plant cell", "animal skeleton")
+2. **Implied functional concepts** that the question is really asking about (e.g., if the question compares functions, extract the function like "structural support", "protection")
+3. **All MCQ answer choices** if they exist (e.g., "cell membrane", "cell wall", "chloroplast", "nucleus")
+4. **Related scientific terms** that would help answer (e.g., "rigidity", "endoskeleton")
+
 Query: "{query}"
-Output a plain JSON list of strings representing the entities. Do not include anything else.
-Example: ["cell wall", "animal skeleton"]"""
+
+Output a plain JSON list of strings. Include 5-8 terms maximum. Do not include anything else.
+Example: ["plant cell", "animal skeleton", "structural support", "cell wall", "cell membrane", "chloroplast", "nucleus"]"""
         try:
             response = self.llm.invoke(prompt).content.strip()
             if "```json" in response:
@@ -58,19 +70,58 @@ Example: ["cell wall", "animal skeleton"]"""
             elif "```" in response:
                 response = response.split("```")[1].split("```")[0].strip()
 
+            # Guard against empty LLM responses
+            if not response:
+                print(f"DEBUG: Entity extraction returned empty response, falling back to original query terms.")
+                return [w for w in query.replace('?', '').split() if len(w) > 4][:5]
+
+            # Try to extract a JSON array even from messy responses
+            bracket_start = response.find('[')
+            bracket_end = response.rfind(']')
+            if bracket_start != -1 and bracket_end != -1:
+                response = response[bracket_start:bracket_end + 1]
+
             entities = json.loads(response)
             if isinstance(entities, list):
-                return entities
+                return entities[:8]
         except Exception as e:
-            print(f"DEBUG: KBPedia entity extraction failed: {e}")
+            print(f"DEBUG: KBPedia entity extraction failed: {e}. Falling back to original query terms.")
 
         return [query]
 
     def find_concepts(self, search_term: str, limit: int = 3) -> List[Dict[str, Any]]:
-        """Fulltext search on KBPediaConcept nodes."""
-        # Sanitize search term for Lucene
-        safe_term = search_term.replace('"', '').replace('\\', '').replace('~', '').replace('*', '')
-        if not safe_term.strip():
+        """
+        Fulltext search on KBPediaConcept nodes with fuzzy fallback.
+        If exact search returns nothing, tries individual words.
+        """
+        results = self._fulltext_search(search_term, limit)
+
+        # Fuzzy fallback: if no results, try individual words
+        if not results and ' ' in search_term:
+            words = [w for w in search_term.split() if len(w) > 3]
+            for word in words:
+                word_results = self._fulltext_search(word, limit=2)
+                if word_results:
+                    results.extend(word_results)
+                    if len(results) >= limit:
+                        break
+            # Deduplicate by URI
+            seen = set()
+            deduped = []
+            for r in results:
+                if r["uri"] not in seen:
+                    seen.add(r["uri"])
+                    deduped.append(r)
+            results = deduped[:limit]
+
+        return results
+
+    def _fulltext_search(self, term: str, limit: int = 3) -> List[Dict[str, Any]]:
+        """Raw fulltext search against the index."""
+        # Sanitize for Lucene
+        safe_term = term.replace('"', '').replace('\\', '').replace('~', '').replace('*', '')
+        safe_term = re.sub(r'[+\-!(){}[\]^"~*?:\\/]', ' ', safe_term).strip()
+        if not safe_term:
             return []
 
         try:
@@ -98,24 +149,24 @@ Example: ["cell wall", "animal skeleton"]"""
                 })
             return results
         except Exception as e:
-            print(f"DEBUG: KBPedia concept search error: {e}")
+            print(f"DEBUG: KBPedia concept search error for '{safe_term}': {e}")
             return []
 
     def get_neighborhood(self, uri: str) -> List[str]:
-        """Get the ontology neighborhood of a concept: parents, siblings, children."""
+        """Get the ontology neighborhood of a concept: parents, siblings, children (up to 3 hops)."""
         try:
             records, _, _ = self.driver.execute_query(
                 """
                 MATCH (n:KBPediaConcept {uri: $uri})
-                OPTIONAL MATCH (n)-[:SUBCLASS_OF]->(parent:KBPediaConcept)
+                OPTIONAL MATCH (n)-[:SUBCLASS_OF*1..2]->(ancestor:KBPediaConcept)
                 OPTIONAL MATCH (child:KBPediaConcept)-[:SUBCLASS_OF]->(n)
-                OPTIONAL MATCH (sibling:KBPediaConcept)-[:SUBCLASS_OF]->(parent)
+                OPTIONAL MATCH (n)-[:SUBCLASS_OF]->(parent:KBPediaConcept)<-[:SUBCLASS_OF]-(sibling:KBPediaConcept)
                 WHERE sibling.uri <> n.uri
                 WITH n,
-                     collect(DISTINCT {role: 'parent', name: parent.name, def: parent.definition}) AS parents,
+                     collect(DISTINCT {role: 'ancestor', name: ancestor.name, def: ancestor.definition}) AS ancestors,
                      collect(DISTINCT {role: 'child', name: child.name, def: child.definition}) AS children,
                      collect(DISTINCT {role: 'sibling', name: sibling.name, def: sibling.definition}) AS siblings
-                RETURN parents, children, siblings[0..5] AS siblings
+                RETURN ancestors[0..5] AS ancestors, children[0..8] AS children, siblings[0..5] AS siblings
                 """,
                 uri=uri,
                 database_="neo4j",
@@ -124,11 +175,11 @@ Example: ["cell wall", "animal skeleton"]"""
             triples = []
             if records:
                 row = records[0]
-                for p in row["parents"]:
-                    if p["name"]:
-                        triples.append(f"subclass of: {p['name']}")
-                        if p["def"]:
-                            triples.append(f"parent definition: {p['def'][:150]}")
+                for a in row["ancestors"]:
+                    if a["name"]:
+                        triples.append(f"subclass of: {a['name']}")
+                        if a["def"]:
+                            triples.append(f"ancestor definition: {a['def'][:150]}")
                 for c in row["children"]:
                     if c["name"]:
                         triples.append(f"has subclass: {c['name']}")
@@ -157,7 +208,7 @@ Facts about {entity_label}:
 {triples_text}
 
 Output format: A JSON list of strings containing exactly the original facts you deemed relevant.
-Example: ["subclass of: Structural Component", "parent definition: provides support"]
+Example: ["subclass of: Structural Component", "ancestor definition: provides support"]
 If none are relevant, output an empty list [].
 """
         try:
@@ -167,11 +218,22 @@ If none are relevant, output an empty list [].
             elif "```" in res:
                 res = res.split("```")[1].split("```")[0].strip()
 
+            # Guard against empty LLM responses
+            if not res:
+                print(f"DEBUG: Triple filtering returned empty response, using raw triples.")
+                return triples[:5]
+
+            # Try to extract a JSON array even from messy responses
+            bracket_start = res.find('[')
+            bracket_end = res.rfind(']')
+            if bracket_start != -1 and bracket_end != -1:
+                res = res[bracket_start:bracket_end + 1]
+
             filtered = json.loads(res)
             if isinstance(filtered, list):
                 return filtered
         except Exception as e:
-            print(f"DEBUG: Triple filtering failed: {e}")
+            print(f"DEBUG: Triple filtering failed: {e}. Using raw triples.")
 
         return triples[:5]
 
@@ -194,6 +256,10 @@ If none are relevant, output an empty list [].
                 break
 
             matches = self.find_concepts(concept_name, limit=2)
+
+            if not matches:
+                print(f"DEBUG: KBPedia has no match for '{concept_name}', skipping.")
+                continue
 
             for match in matches:
                 if len(items) >= top_k:

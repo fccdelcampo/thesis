@@ -17,7 +17,7 @@ def log_retrieved_context(test_case: dict, retrieved_context: dict, debug_id: in
     formatted_input = test_case["formatted_input"]
     correct_answer = test_case["correct_answer"]
     benchmark_name = test_case["dataset"]
-    with open("graphrag_retrieval.log", "a", encoding="utf-8") as log_file:
+    with open("kbpedia_graphrag_retrieval.log", "a", encoding="utf-8") as log_file:
         log_file.write(f"   [+] Debug ID #{debug_id} | Benchmark: {benchmark_name}\n      Formatted Input: {formatted_input}\n        Context: {retrieved_context}\n        Correct Answer: {correct_answer}\n")
         log_file.flush()
     print(f"   [+] Debug ID #{debug_id} | Benchmark: {benchmark_name}\n      Formatted Input: {formatted_input}\n        Context: {retrieved_context}\n        Correct Answer: {correct_answer}\n")
@@ -43,9 +43,9 @@ def run_tests(start_from_id=1):
             retrieve_context(test_case, debug_id=debug_id)
         except Exception as e:
             print(f"[ERROR] Debug ID #{debug_id} failed: {e}")
-            with open("graphrag_retrieval.log", "a", encoding="utf-8") as log_file:
+            with open("kbpedia_graphrag_retrieval.log", "a", encoding="utf-8") as log_file:
                 log_file.write(f"   [ERROR] Debug ID #{debug_id} | SKIPPED due to: {e}\n")
             continue
 
 
-run_tests(start_from_id=21)
+run_tests(start_from_id=1)

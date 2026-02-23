@@ -65,7 +65,7 @@ def run_graphrag_pipeline(user_prompt: str, flag: str = "", sample_mode: bool = 
     return run_pipeline(user_prompt, flag, sample_mode, include_conclusion)
 
 if __name__ == "__main__":
-    prompt = "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"
+    prompt = "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?"
     print(f"--- Running Pipeline with prompt: '{prompt}' ---")
     # flag default to empty string to run everything
     output = run_pipeline(prompt, flag="", include_conclusion=True)
