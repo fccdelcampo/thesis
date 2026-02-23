@@ -146,6 +146,16 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
             "Move the rule bodies to <database> and call the predicate head in <query>."
         )
 
+    # CLEANUP: Strip inline comments (% ...) from the query
+    query = re.sub(r"%.*$", "", query, flags=re.MULTILINE).strip()
+
+    # CLEANUP: Keep only the FIRST complete Prolog statement.
+    # The LLM sometimes adds multiple goals or comments after the first one.
+    # A valid query is exactly one goal ending with '.'.
+    first_dot = query.find('.')
+    if first_dot != -1:
+        query = query[:first_dot + 1].strip()
+
     # VALIDATION: Ensure Query ends with a period
     if not query.endswith('.'):
         query += "."
