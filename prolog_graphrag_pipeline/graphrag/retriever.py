@@ -141,48 +141,17 @@ def expand_query(self, query):
         print(f"DEBUG: Query expansion failed: {e}")
         return query
 
-def generate_wikidata_queries(self, query: str) -> List[str]:
-    if not hasattr(self, 'llm') or not self.llm:
-        return []
-        
-    prompt = f"""
-    ### Task
-    Extract the **Main Entities** from the user's query for a Wikidata search.
-    
-    ### User Query
-    "{query}"
-    
-    ### Output Format (JSON)
-    {{ "queries": ["ENTITY_1", "ENTITY_2"] }}
-    """
-    try:
-        response_text = self.llm.invoke(prompt).content.strip()
-        if "```json" in response_text:
-            response_text = response_text.split("```json")[1].split("```")[0].strip()
-        elif "```" in response_text:
-            response_text = response_text.split("```")[1].split("```")[0].strip()
-            
-        data = json.loads(response_text)
-        return data.get("queries", [])
-    except Exception as e:
-        print(f"DEBUG: Smart selection failed: {e}")
-        return []
-
 def patched_vector_cypher_search(self, query_text, top_k=5, **kwargs):
-    # 1. Wikidata Search
-    wikidata_items = []
+    # 1. KBPedia Search (via Neo4j)
+    kb_items = []
     if hasattr(self, 'llm') and self.llm:
-        smart_terms = generate_wikidata_queries(self, query_text)
-        if smart_terms:
-            print(f"DEBUG: Triggering Wikidata Search for: {smart_terms}")
-            if not hasattr(self, 'wikidata_retriever'):
-                 from .wikidata_retriever import WikidataRetriever
-                 self.wikidata_retriever = WikidataRetriever()
-            
-            wd_search_query = " OR ".join([f'"{t}"' for t in smart_terms])
-            wd_result = self.wikidata_retriever.search(wd_search_query)
-            if wd_result and wd_result.items:
-                wikidata_items = wd_result.items
+        if not hasattr(self, 'kbpedia_retriever'):
+             from .kbpedia_retriever import KBPediaRetriever
+             self.kbpedia_retriever = KBPediaRetriever(driver=self._driver, llm=self.llm, top_k=top_k)
+        
+        kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k)
+        if kb_result and kb_result.items:
+            kb_items = kb_result.items
 
     # 2. Local Vector Search
     local_items = []
@@ -213,7 +182,7 @@ def patched_vector_cypher_search(self, query_text, top_k=5, **kwargs):
     except Exception as e:
         print(f"DEBUG: Main retriever failed: {e}")
         
-    all_items = wikidata_items + local_items
+    all_items = kb_items + local_items
     for item in all_items:
         if 'score' not in item.metadata:
             item.metadata['score'] = 0.0
@@ -228,7 +197,7 @@ def patched_vector_cypher_search(self, query_text, top_k=5, **kwargs):
             seen_content.add(sig)
             unique_items.append(item)
     
-    final_top_k = top_k * 2 if (wikidata_items and local_items) else top_k
+    final_top_k = top_k * 2 if (kb_items and local_items) else top_k
     return RetrieverResult(items=unique_items[:final_top_k], metadata={})
 
 
@@ -283,6 +252,7 @@ def create_retriever(driver, embedder):
             retrieval_query=RETRIEVAL_QUERY,
             embedder=embedder
         )
+        r._driver = driver  # Store driver ref for KBPedia Neo4j queries
         r.llm = None # Initialize llm attribute for patching
         # Monkey-patch
         r._original_search = r.search
@@ -360,7 +330,7 @@ def generate(llm, retriever, query) -> dict:
                 for lc in local_ctx:
                     enriched_content += f"   - {lc.get('entity')} {lc.get('relationship')} {lc.get('target')}\n"
             
-            # Check for knowledge graph triples (from Wikidata/VectorCypherRetriever)
+            # Check for knowledge graph triples (from KBPedia/VectorCypherRetriever)
             kg_triples = metadata.get('triples', [])
             if kg_triples:
                  enriched_content += "  [Knowledge Graph Triples]:\n"

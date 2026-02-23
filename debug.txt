@@ -22122,3 +22122,411 @@
     ]
 }
 ===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus  FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {
+      "id": "cell_membrane",
+      "label": "Cell membrane",
+      "properties": {"name": "cell membrane"}
+    },
+    {
+      "id": "cell_wall",
+      "label": "Cell wall",
+      "properties": {"name": "cell wall"}
+    },
+    {
+      "id": "chloroplast",
+      "label": "Chloroplast",
+      "properties": {"name": "chloroplast"}
+    },
+    {
+      "id": "nucleus",
+      "label": "Nucleus",
+      "properties": {"name": "nucleus"}
+    },
+    {
+      "id": "skeleton",
+      "label": "Skeleton",
+      "properties": {"name": "skeleton"}
+    }
+  ],
+  "relationships": [
+    {
+      "type": "IS_A",
+      "start_node_id": "cell_wall",
+      "end_node_id": "nucleus",
+      "properties": {
+        "natural_statement": "The cell wall has a function that is similar to the function of an animal skeleton.",
+        "logic_intent": "FACT"
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "chloroplast",
+      "end_node_id": "nucleus",
+      "properties": {
+        "natural_statement": "The chloroplast has a function that is similar to the function of an animal skeleton.",
+        "logic_intent": "FACT"
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "cell_membrane",
+      "end_node_id": "nucleus",
+      "properties": {
+        "natural_statement": "The cell membrane has a function that is similar to the function of an animal skeleton.",
+        "logic_intent": "FACT"
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "skeleton",
+      "end_node_id": "nucleus",
+      "properties": {
+        "natural_statement": "The function of an animal skeleton is similar to the function of a cell wall.",
+        "logic_intent": "FACT"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus  FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {
+      "id": "plant_cell_part",
+      "label": "concept",
+      "properties": {"name": "Plant cell part"}
+    },
+    {
+      "id": "animal_skeleton_function",
+      "label": "definition",
+      "properties": {"name": "Animal skeleton function"}
+    }
+  ],
+  "relationships": [
+    {
+      "type": "IS_A",
+      "start_node_id": "plant_cell_part",
+      "end_node_id": "animal_skeleton_function",
+      "properties": {
+        "natural_statement": "The cell wall of a plant cell has a function that is most similar to the function of an animal skeleton.",
+        "logic_intent": "FACT"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus  FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "plant_cell_part",
+            "label": "PlantCellPart",
+            "properties": {"name": "cell membrane"}
+        },
+        {
+            "id": "animal_skeleton_function",
+            "label": "AnimalSkeletonFunction",
+            "properties": {"name": "supporting structure"}
+        },
+        {
+            "id": "plant_cell_part_function",
+            "label": "PlantCellPartFunction",
+            "properties": {"name": "cell wall function"}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "SIMILAR_FUNCTION",
+            "start_node_id": "plant_cell_part",
+            "end_node_id": "animal_skeleton_function",
+            "properties": {
+                "natural_statement": "The cell membrane has a function that is most similar to the function of an animal skeleton.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "SIMILAR_FUNCTION",
+            "start_node_id": "plant_cell_part_function",
+            "end_node_id": "animal_skeleton_function",
+            "properties": {
+                "natural_statement": "The cell wall function is similar to the function of an animal skeleton.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "SIMILAR_FUNCTION",
+            "start_node_id": "plant_cell_part",
+            "end_node_id": "animal_skeleton_function",
+            "properties": {
+                "natural_statement": "The nucleus has a function that is not similar to the function of an animal skeleton.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "SIMILAR_FUNCTION",
+            "start_node_id": "plant_cell_part_function",
+            "end_node_id": "animal_skeleton_function",
+            "properties": {
+                "natural_statement": "The chloroplast has a function that is not similar to the function of an animal skeleton.",
+                "logic_intent": "FACT"
+            }
+        }
+    ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus  FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "plant_cell_part",
+            "label": "concept",
+            "properties": {
+                "name": "cell membrane"
+            }
+        },
+        {
+            "id": "animal_skeleton_function",
+            "label": "definition",
+            "properties": {
+                "name": "support and protection of the body"
+            }
+        },
+        {
+            "id": "cell_wall",
+            "label": "concept",
+            "properties": {
+                "name": "cell wall"
+            }
+        },
+        {
+            "id": "chloroplast",
+            "label": "concept",
+            "properties": {
+                "name": "chloroplast"
+            }
+        },
+        {
+            "id": "nucleus",
+            "label": "concept",
+            "properties": {
+                "name": "nucleus"
+            }
+        }
+    ],
+    "relationships": [
+        {
+            "type": "IS_A",
+            "start_node_id": "cell_wall",
+            "end_node_id": "plant_cell_part",
+            "properties": {
+                "natural_statement": "A cell wall is a part of a plant cell.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "SIMILAR_FUNCTION",
+            "start_node_id": "cell_wall",
+            "end_node_id": "animal_skeleton_function",
+            "properties": {
+                "natural_statement": "The function of a cell wall is most similar to the function of an animal skeleton.",
+                "logic_intent": "RULE"
+            }
+        },
+        {
+            "type": "PART_OF",
+            "start_node_id": "plant_cell_part",
+            "end_node_id": "cell_wall",
+            "properties": {
+                "natural_statement": "A cell wall is part of a plant cell.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "CONTAINS",
+            "start_node_id": "chloroplast",
+            "end_node_id": "plant_cell_part",
+            "properties": {
+                "natural_statement": "A chloroplast contains various parts of a plant cell.",
+                "logic_intent": "RULE"
+            }
+        },
+        {
+            "type": "CONTAINS",
+            "start_node_id": "nucleus",
+            "end_node_id": "plant_cell_part",
+            "properties": {
+                "natural_statement": "A nucleus contains various parts of a plant cell.",
+                "logic_intent": "RULE"
+            }
+        },
+        {
+            "type": "IS_A",
+            "start_node_id": "animal_skeleton_function",
+            "end_node_id": "definition",
+            "properties": {
+                "natural_statement": "An animal skeleton function is a definition of an animal part.",
+                "logic_intent": "FACT"
+            }
+        }
+    ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus  FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "plant_cell_part",
+            "label": "concept",
+            "properties": {"name": "Plant Cell Part"}
+        },
+        {
+            "id": "animal_skeleton",
+            "label": "concept",
+            "properties": {"name": "Animal Skeleton"}
+        },
+        {
+            "id": "function_similarity",
+            "label": "relationship_type",
+            "properties": {"name": "Function Similarity"}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "FUNCTION_SIMILARITY",
+            "start_node_id": "plant_cell_part",
+            "end_node_id": "animal_skeleton",
+            "properties": {
+                "natural_statement": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?",
+                "logic_intent": "RULE"
+            }
+        },
+        {
+            "type": "FUNCTION_SIMILARITY",
+            "start_node_id": "cell_wall",
+            "end_node_id": "animal_skeleton",
+            "properties": {
+                "natural_statement": "The cell wall has a function that is similar to the function of an animal skeleton.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "FUNCTION_SIMILARITY",
+            "start_node_id": "cell_membrane",
+            "end_node_id": "animal_skeleton",
+            "properties": {
+                "natural_statement": "The cell membrane has a function that is similar to the function of an animal skeleton.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "FUNCTION_SIMILARITY",
+            "start_node_id": "chloroplast",
+            "end_node_id": "animal_skeleton",
+            "properties": {
+                "natural_statement": "The chloroplast has a function that is similar to the function of an animal skeleton.",
+                "logic_intent": "FACT"
+            }
+        },
+        {
+            "type": "FUNCTION_SIMILARITY",
+            "start_node_id": "nucleus",
+            "end_node_id": "animal_skeleton",
+            "properties": {
+                "natural_statement": "The nucleus has a function that is similar to the function of an animal skeleton.",
+                "logic_intent": "FACT"
+            }
+        }
+    ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ ### Role You are a Knowledge Engineer specialized in Symbolic Logic.  Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph. </system>  ### Task Decompose the input text into entities and relationships.  For every relationship, you must provide a 'natural_statement' that preserves the full  nuance of the source text (modality, quantifiers, conditions).  ### Execution Flow IDENTIFY THREE TYPES OF LOGIC: 1. FACT: A simple assertion (e.g., "X is a Y"). 2. RULE: A conditional implication (e.g., "If P then Q"). 3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").  ### STRICT JSON FORMAT: {   "nodes": [     {       "id": "unique_atom_id",        "label": "PrologSafeLabel",        "properties": {"name": "Actual Name"}      }   ],   "relationships": [     {       "type": "PREDICATE_TYPE",       "start_node_id": "id1",       "end_node_id": "id2",       "properties": {         "natural_statement": "The full natural language fact or rule extracted from text",         "logic_intent": "FACT | RULE | EXCEPTION",         "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"       }     }   ] } </task>  ### Constraints - Use lowercase_with_underscores for IDs and Types (Prolog atom style). - Do not hallucinate. If no clear logic exists, return empty arrays. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True} </constraints>  ### Examples   ### Input Text Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus  FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {
+      "id": "plant_cell_part",
+      "label": "Concept",
+      "properties": {"name": "cell wall"}
+    },
+    {
+      "id": "animal_skeleton",
+      "label": "Concept",
+      "properties": {"name": "skeleton"}
+    }
+  ],
+  "relationships": [
+    {
+      "type": "DEFINES",
+      "start_node_id": "plant_cell_part",
+      "end_node_id": "animal_skeleton",
+      "properties": {
+        "natural_statement": "The cell wall has a function most similar to the function of an animal skeleton.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "similar_function(X, Y)"
+      }
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "plant_cell_part",
+      "end_node_id": "cell membrane",
+      "properties": {
+        "natural_statement": "The cell wall has a function most similar to the function of an animal skeleton.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "similar_function(X, Y)"
+      }
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "plant_cell_part",
+      "end_node_id": "chloroplast",
+      "properties": {
+        "natural_statement": "The cell wall has a function most similar to the function of an animal skeleton.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "similar_function(X, Y)"
+      }
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "plant_cell_part",
+      "end_node_id": "nucleus",
+      "properties": {
+        "natural_statement": "The cell wall has a function most similar to the function of an animal skeleton.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "similar_function(X, Y)"
+      }
+    }
+  ]
+}
+===================================

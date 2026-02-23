@@ -3189,3 +3189,326 @@ None
 #### Rules (Horn Clauses / Implications)
 None
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 1.0
+}
+[Item 1]
+[Chunk Score: 1.0000] {'text': 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus', 'id': None}
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates
+* `has_function`
+* `similar_to`
+
+#### Facts (Ground Truths)
+* `animal_skeleton_supports_body_structure` 
+* `plant_cell_wall_provides_structural_support` 
+
+#### Rules (Horn Clauses / Implications)
+* `X has function similar to animal skeleton if X provides structural support.`
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.9993629455566406,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.9994] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates
+* `has_function(X, Y)`: X has function Y.
+* `similar_to(Z, W)` : Z and W have functions that are similar.
+
+### Facts (Ground Truths)
+* `cell_membrane_has_structure_support`
+* `animal_skeleton_provides_structural_support`
+
+### Rules (Horn Clauses / Implications)
+* `has_function(cell_wall, structural_support) :- has_function(X, Y), similar_to(Y, animal_skeleton_provides_structural_support)`
+ 
+Note: The rules are based on the assumption that there is a similarity between plant cell wall and animal skeleton functions. This rule can be further refined or modified if more information becomes available.
+
+### Constants vs Variables
+* `cell membrane` (constant)
+* `animal skeleton` (constant)
+* `X`, `Y`, `Z`, `W` are variables
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.9993629455566406,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.9994] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates
+* `has_function(X, Y)`: X has function Y.
+* `similar_to(Z, W)` : Z and W have functions that are similar.
+
+### Facts (Ground Truths)
+* `cell_membrane_has_structure_support`
+* `animal_skeleton_provides_structural_support`
+
+### Rules (Horn Clauses / Implications)
+* `has_function(cell_wall, structural_support) :- has_function(X, Y), similar_to(Y, animal_skeleton_provides_structural_support)`
+ 
+Note: The rules are based on the assumption that there is a similarity between plant cell wall and animal skeleton functions. This rule can be further refined or modified if more information becomes available.
+
+### Constants vs Variables
+* `cell membrane` (constant)
+* `animal skeleton` (constant)
+* `X`, `Y`, `Z`, `W` are variables
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.9993629455566406,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.9994] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates
+* `has_function(X, Y)`: X has function Y.
+* `similar_to(Z, W)` : Z and W have functions that are similar.
+
+### Facts (Ground Truths)
+* `cell_membrane_has_structure_support`
+* `animal_skeleton_provides_structural_support`
+
+### Rules (Horn Clauses / Implications)
+* `has_function(cell_wall, structural_support) :- has_function(X, Y), similar_to(Y, animal_skeleton_provides_structural_support)`
+ 
+Note: The rules are based on the assumption that there is a similarity between plant cell wall and animal skeleton functions. This rule can be further refined or modified if more information becomes available.
+
+### Constants vs Variables
+* `cell membrane` (constant)
+* `animal skeleton` (constant)
+* `X`, `Y`, `Z`, `W` are variables
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant epidermis",
+  "uri": "http://kbpedia.org/kko/rc/PlantEpidermis",
+  "score": 1.0,
+  "triples": [
+    "subclass of: external anatomical part",
+    "parent definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: plant epidermis. Relevant Logical Facts:  - subclass of: external anatomical part  - parent definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism.
+  [Knowledge Graph Triples]:
+   - subclass of: external anatomical part
+   - parent definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "parent definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - parent definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o
+  [Knowledge Graph Triples]:
+   - parent definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "skeleton tarantula",
+  "uri": "http://kbpedia.org/kko/rc/EphebopusMurinus",
+  "score": 1.0,
+  "triples": [
+    "subclass of: tarantula"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: skeleton tarantula. Relevant Logical Facts:  - subclass of: tarantula
+  [Knowledge Graph Triples]:
+   - subclass of: tarantula
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell wall",
+  "uri": "http://kbpedia.org/kko/rc/CellWall",
+  "score": 1.0,
+  "triples": [
+    "subclass of: structural cell part",
+    "parent definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: cell wall. Relevant Logical Facts:  - subclass of: structural cell part  - parent definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct
+  [Knowledge Graph Triples]:
+   - subclass of: structural cell part
+   - parent definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "bacterial cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BacterialCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.",
+    "subclass of: cell wall",
+    "parent definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to ",
+    "subclass of: prokaryotic cell wall",
+    "parent definition: The collection of instances of CellWall that are anatomicalParts of some instance of ProkaryoticCell."
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: bacterial cell wall. Relevant Logical Facts:  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.  - subclass of: cell wall  - parent definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to  - subclass of: prokaryotic cell wall  - parent definition: The collection of instances of CellWall that are anatomicalParts of some instance of ProkaryoticCell.
+  [Knowledge Graph Triples]:
+   - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+   - subclass of: cell wall
+   - parent definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to 
+   - subclass of: prokaryotic cell wall
+   - parent definition: The collection of instances of CellWall that are anatomicalParts of some instance of ProkaryoticCell.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.9993629455566406,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.9994] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `is_subclass_of(plant_epidermis, external_anatomical_part)`
+2. `parent_definition(external_anatomical_part, organism_part)`
+3. `instance_of_external_anatomy(part, organism)`
+4. `specialization(skeletal_system, animal_body_part)`
+5. `function(animal_skeleton, support_separate_protect)`
+6. `is_subclass_of(cell_wall, structural_cell_part)`
+7. `parent_definition(structural_cell_part, cell_maintain_physical_integrity)`
+8. `definition(bacterial_cell_wall, protect_permeability_barrier)`
+
+#### Facts (Ground Truths):
+1. `plant_epidermis`
+2. `human_skeleton`
+3. `tarantula_skeleton`
+4. `cell_wall`
+5. `bacterial_cell_wall`
+
+#### Rules (Horn Clauses / Implications):
+None extracted due to lack of conditional statements in the provided context.
+
+### Note:
+The question is not answered, but rather the evidence from the given text has been meticulously extracted and categorized according to the specified methodology.
+==================================================

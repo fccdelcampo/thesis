@@ -93,7 +93,7 @@ class SimpleResult:
 class EnhancedRetriever(VectorCypherRetriever):
     """
     Extended retriever that merges local Neo4j vector search results
-    with Wikidata global knowledge for richer context.
+    with KBPedia global knowledge for richer context.
     Also filters out low-quality/noise chunks.
     """
     def __init__(self, driver, index_name, retrieval_query, embedder, llm=None):
@@ -101,70 +101,23 @@ class EnhancedRetriever(VectorCypherRetriever):
         self.driver = driver
         self.llm = llm
 
-    def generate_wikidata_queries(self, query: str) -> dict:
-        """
-        Uses LLM to extract specific entities/concepts for Wikidata search.
-        Returns: {"queries": [...]}
-        """
-        if not self.llm:
-            return {"queries": []}
-            
-        prompt = f"""
-        ### Task
-        Extract the **Main Entities and Concepts** from the user's educational query for a Wikidata search.
-        
-        ### Rules
-        1. **Specific Entities**: Extract names of people, places, theories, formulas, or specific concepts.
-        2. **Disambiguate**: If an entity is ambiguous (e.g., "Apple"), include context (e.g., "Apple company" or "Apple fruit").
-        3. **Concepts**: Include scientific terms, mathematical concepts, or literary works if they are the focus.
-        4. **No Synonyms**: Use the exact words from the query where possible.
-        
-        ### User Query
-        "{query}"
-        
-        ### Output Format (JSON)
-        {{
-            "queries": ["ENTITY_1", "ENTITY_2 (CONTEXT)"]
-        }}
-        """
-        try:
-            response_text = self.llm.invoke(prompt).content.strip()
-            # Clean possible markdown
-            if "```json" in response_text:
-                response_text = response_text.split("```json")[1].split("```")[0].strip()
-            elif "```" in response_text:
-                response_text = response_text.split("```")[1].split("```")[0].strip()
-                
-            import json
-            data = json.loads(response_text)
-            return {
-                "queries": data.get("queries", [])
-            }
-        except Exception as e:
-            print(f"DEBUG: Smart selection failed: {e}")
-            return {"queries": []}
-
     def search(self, query_text, top_k=5, **kwargs):
-        # 1. Smart Entity Extraction & Wikidata Search (Global Knowledge)
-        wikidata_items = []
+        # 1. KBPedia Search (Global Knowledge via Neo4j)
+        kb_items = []
         if self.llm:
-            extraction_result = self.generate_wikidata_queries(query_text)
-            smart_terms = extraction_result.get("queries", [])
-            
-            if smart_terms:
-                print(f"DEBUG: Triggering Wikidata Search for: {smart_terms}")
-                if not hasattr(self, 'wikidata_retriever'):
-                    # Import from the prolog pipeline which has the shared wikidata_retriever
-                    from prolog_graphrag_pipeline.graphrag.wikidata_retriever import WikidataRetriever
-                    self.wikidata_retriever = WikidataRetriever()
-                
-                # Use " OR " to search for any of the terms
-                wd_search_query = " OR ".join([f'"{t}"' for t in smart_terms])
-                # Search using Unified Educational Property Set (no category needed)
-                wd_result = self.wikidata_retriever.search(wd_search_query)
-                if wd_result and wd_result.items:
-                    wikidata_items = wd_result.items
-                    print(f"DEBUG: Wikidata returned {len(wikidata_items)} items.")
+            if not hasattr(self, 'kbpedia_retriever'):
+                from prolog_graphrag_pipeline.graphrag.kbpedia_retriever import KBPediaRetriever
+                self.kbpedia_retriever = KBPediaRetriever(driver=self.driver, llm=self.llm, top_k=top_k)
+
+            kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k)
+            if kb_result and kb_result.items:
+                # Convert to RetrieverResultItem format
+                for item in kb_result.items:
+                    kb_items.append(RetrieverResultItem(
+                        content=item.content,
+                        metadata=item.metadata
+                    ))
+                print(f"DEBUG: KBPedia returned {len(kb_items)} items.")
 
         # 2. Local Vector Search (Local Documents)
         local_items = []
@@ -215,7 +168,7 @@ class EnhancedRetriever(VectorCypherRetriever):
             print(f"DEBUG: Main retriever failed: {e}")
             
         # 3. Merge and Rerank
-        all_items = wikidata_items + local_items
+        all_items = kb_items + local_items
         
         for item in all_items:
             if 'score' not in item.metadata:
@@ -234,7 +187,7 @@ class EnhancedRetriever(VectorCypherRetriever):
         
         print(f"DEBUG: Merged Result Count: {len(unique_items)}")
         
-        final_top_k = top_k * 2 if (wikidata_items and local_items) else top_k
+        final_top_k = top_k * 2 if (kb_items and local_items) else top_k
         
         return RetrieverResult(items=unique_items[:final_top_k], metadata={})
 

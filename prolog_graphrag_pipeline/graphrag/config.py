@@ -6,7 +6,7 @@ NEO4J_USERNAME = "neo4j"
 NEO4J_PASSWORD = "graphrag"
 
 # Global Knowledge Source Configuration
-GLOBAL_KB = "WIKIDATA"
+GLOBAL_KB = "KBPEDIA"
 
 
 class RETRIEVER_OPTIONS(Enum):
@@ -96,7 +96,7 @@ IDENTIFY THREE TYPES OF LOGIC:
 FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble.
 '''
 
-RETRIEVER = RETRIEVER_OPTIONS.HybridRetriever
+RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
 
 RETRIEVAL_QUERY = '''
 // Part A: Local Document Retrieval (Vector/Keyword matches passed as `node`)
