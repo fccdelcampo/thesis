@@ -160,7 +160,9 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
     print(f"Iteration {i} | Extracted Query:\n{query}\n")
     janus.query_once("unload_file(user)")
     janus.consult("user", database)
-    janus.query_once(query)
+    # Run query with a 10-second hard timeout to catch infinite recursive loops
+    safe_query = f"call_with_time_limit(20, ({query[:-1]}))"
+    janus.query_once(safe_query)
 
     print(f"Iteration {i} | Prolog code generation success")
     return database, query
@@ -211,6 +213,11 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                 hint = "Fix the singleton variables by ensuring each variable appears at least twice in a rule (e.g., replace an unused variable with an underscore '_', or reuse it in the body)."
             elif "Syntax error: Operator expected" in error_str:
                 hint = "Wrap any mathematical/logical symbols (=>, ⊃, ∨, ∧, ~, +, -, (, )) entirely in single quotes (like `'(G ∨ H) ⊃ ~I'`) to make them valid Prolog atoms. Do not leave them unquoted."
+            elif "time_limit_exceeded" in error_str or "Time limit" in error_str:
+                hint = ("The query timed out — your rules form an INFINITE LOOP with no ground base case. "
+                        "Check for circular rule chains (e.g., A :- B. and B :- A.) with nothing to terminate them. "
+                        "Every recursive rule MUST bottom out at a plain ground fact (e.g., `animal(cat).` not `animal(Animal).`). "
+                        "Also: bare facts like `claw.` do NOT give any predicate a value — use `is_option(claw).` instead.")
             elif "not sufficiently instantiated" in error_str:
                 hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `option(A, cell_wall).` where A is unbound). "
                         "Use LOWERCASE atoms for constants in facts (e.g., `option(a, cell_wall).`). "
@@ -247,6 +254,9 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                     hint = "Fix the singleton variables by ensuring each variable appears at least twice in a rule."
                 elif "Syntax error: Operator expected" in error_str:
                     hint = "Wrap mathematical/logical symbols in single quotes."
+                elif "time_limit_exceeded" in error_str or "Time" in error_str:
+                    hint = ("The query timed out — your rules form an infinite loop with no ground base case. "
+                            "Break the cycle: ensure every recursive rule bottoms out at a grounded fact.")
                 elif "not sufficiently instantiated" in error_str:
                     hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `option(A, cell_wall).`). "
                             "Use LOWERCASE atoms instead (e.g., `option(a, cell_wall).`).")
