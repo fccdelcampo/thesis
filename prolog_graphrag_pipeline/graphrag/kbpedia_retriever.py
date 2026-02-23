@@ -83,9 +83,11 @@ class KBPediaRetriever:
                 unique.append(w)
         return unique[:8]
 
+    def extract_entities_from_query(self, query: str) -> List[str]:
         """
-        Use LLM to extract entities from the user query.
+        LLM-assisted entity extraction (used only when use_llm=True).
         Extracts explicit entities, functional/conceptual terms, AND MCQ choices.
+        Falls back to simple word-splitting if the LLM is unavailable.
         """
         if not self.llm:
             return [w for w in query.replace('?', '').split() if len(w) > 4][:5]
@@ -289,10 +291,14 @@ If none are relevant, output an empty list [].
         if not self._verify_index():
             return RetrieverResult(items=[], metadata={})
 
-        print(f"DEBUG: Querying KBPedia (Neo4j) for: '{query_text}'")
-
-        entities = self.extract_entities_from_query(query_text)
-        print(f"DEBUG: Extracted entities for KBPedia: {entities}")
+        # ── Entity extraction ─────────────────────────────────────────────────
+        if self.use_llm:
+            print(f"DEBUG: [KBPedia SLOW mode] Querying for: '{query_text}'", flush=True)
+            entities = self.extract_entities_from_query(query_text)
+        else:
+            print(f"DEBUG: [KBPedia FAST mode] Querying for: '{query_text}'", flush=True)
+            entities = self._extract_entities_fast(query_text)
+        print(f"DEBUG: Extracted entities for KBPedia: {entities}", flush=True)
 
         items = []
         seen_uris = set()
@@ -325,22 +331,28 @@ If none are relevant, output an empty list [].
                 raw_triples.extend(self.get_neighborhood(uri))
 
                 # Defensive filter: remove any triple that looks like an MCQ option
-                # (e.g. "B. cell wall" — graph contamination from a prior ingestion run).
-                mcq_pattern = re.compile(r'^[A-D][.):]\s', re.IGNORECASE)
+                mcq_pattern = re.compile(r'^[A-D][.):] ', re.IGNORECASE)
                 raw_triples = [t for t in raw_triples if not mcq_pattern.match(t)]
 
                 if not raw_triples:
                     print(f"DEBUG: No raw triples for '{match['name']}' ({uri}), skipping.", flush=True)
                     continue
 
-                print(f"DEBUG: Built {len(raw_triples)} raw triple(s) for '{match['name']}'. Sending to LLM filter...", flush=True)
-                filtered_triples = self.filter_triples_for_query(query_text, match["name"], raw_triples)
-                print(f"DEBUG: LLM filter kept {len(filtered_triples)}/{len(raw_triples)} triple(s) for '{match['name']}': {filtered_triples}", flush=True)
+                # ── Triple selection ──────────────────────────────────────────
+                if self.use_llm:
+                    # SLOW: LLM decides which triples are relevant
+                    print(f"DEBUG: Built {len(raw_triples)} raw triple(s) for '{match['name']}'. Sending to LLM filter...", flush=True)
+                    selected_triples = self.filter_triples_for_query(query_text, match["name"], raw_triples)
+                    print(f"DEBUG: LLM filter kept {len(selected_triples)}/{len(raw_triples)} triple(s) for '{match['name']}': {selected_triples}", flush=True)
+                else:
+                    # FAST: return all raw triples (no LLM call)
+                    selected_triples = raw_triples
+                    print(f"DEBUG: Fast mode — using all {len(selected_triples)} raw triple(s) for '{match['name']}'", flush=True)
 
-                if not filtered_triples:
+                if not selected_triples:
                     continue
 
-                triples_text = "\n".join([f"  - {t}" for t in filtered_triples])
+                triples_text = "\n".join([f"  - {t}" for t in selected_triples])
                 content = f"KBPedia Concept: {match['name']}.\nRelevant Logical Facts:\n{triples_text}"
 
                 metadata = {
@@ -348,10 +360,10 @@ If none are relevant, output an empty list [].
                     "entity": match["name"],
                     "uri": uri,
                     "score": 1.0,
-                    "triples": filtered_triples,
+                    "triples": selected_triples,
                 }
 
                 items.append(RetrieverResultItem(content=content, metadata=metadata))
 
-        print(f"DEBUG: KBPedia found {len(items)} grounded concept contexts.")
+        print(f"DEBUG: KBPedia found {len(items)} grounded concept contexts.", flush=True)
         return RetrieverResult(items=items, metadata={})

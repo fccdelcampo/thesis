@@ -45,27 +45,21 @@ class DebugOllamaLLM(OllamaLLM):
             print(f"[DebugOllamaLLM Error] Could not write to debug.txt: {e}")
 
     def _clean_response_text(self, text: str) -> str:
-        """Helper: Extracts JSON from the response string (object OR array)."""
+        """Helper: Extracts JSON object from the response string.
+
+        Always prefers {…} objects because SimpleKGPipeline strictly requires
+        {"nodes": […], "relationships": […]}. The triple filter (filter_triples_for_query)
+        does its own independent [bracket] extraction and does NOT rely on this method
+        to return arrays, so reverting to object-only is safe for both callers.
+        """
         if not text:
             return ""
         obj_start = text.find('{')
         obj_end   = text.rfind('}')
-        arr_start = text.find('[')
-        arr_end   = text.rfind(']')
-
-        has_obj = obj_start != -1 and obj_end != -1 and obj_start < obj_end
-        has_arr = arr_start != -1 and arr_end != -1 and arr_start < arr_end
-
-        if has_obj and has_arr:
-            # Return whichever JSON structure starts first in the response
-            if arr_start < obj_start:
-                return text[arr_start : arr_end + 1]
+        if obj_start != -1 and obj_end != -1 and obj_start < obj_end:
             return text[obj_start : obj_end + 1]
-        if has_arr:
-            return text[arr_start : arr_end + 1]
-        if has_obj:
-            return text[obj_start : obj_end + 1]
-        return text
+        return text   # nothing to strip — return as-is
+
 
     def _clean_prompt(self, text: str) -> str:
         """Removes all newlines from the input prompt to fix PDF formatting."""
