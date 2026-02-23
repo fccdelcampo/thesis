@@ -45,13 +45,26 @@ class DebugOllamaLLM(OllamaLLM):
             print(f"[DebugOllamaLLM Error] Could not write to debug.txt: {e}")
 
     def _clean_response_text(self, text: str) -> str:
-        """Helper: Extracts JSON from the response string."""
+        """Helper: Extracts JSON from the response string (object OR array)."""
         if not text:
             return ""
-        start_index = text.find('{')
-        end_index = text.rfind('}')
-        if start_index != -1 and end_index != -1 and start_index < end_index:
-            return text[start_index : end_index + 1]
+        obj_start = text.find('{')
+        obj_end   = text.rfind('}')
+        arr_start = text.find('[')
+        arr_end   = text.rfind(']')
+
+        has_obj = obj_start != -1 and obj_end != -1 and obj_start < obj_end
+        has_arr = arr_start != -1 and arr_end != -1 and arr_start < arr_end
+
+        if has_obj and has_arr:
+            # Return whichever JSON structure starts first in the response
+            if arr_start < obj_start:
+                return text[arr_start : arr_end + 1]
+            return text[obj_start : obj_end + 1]
+        if has_arr:
+            return text[arr_start : arr_end + 1]
+        if has_obj:
+            return text[obj_start : obj_end + 1]
         return text
 
     def _clean_prompt(self, text: str) -> str:
@@ -173,7 +186,7 @@ def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
             "ILLUSTRATES"   # Example -> Concept ("Pingu ILLUSTRATES Non-flying bird")
         ]
     }
-    chunk_splitter = FixedSizeSplitter(chunk_size=1200, chunk_overlap=150) # changed from 2000 and 200 to smaller sizes for better context handling
+    chunk_splitter = FixedSizeSplitter(chunk_size=800, chunk_overlap=100) # OPT2: reduced from 1200/150 → fewer tokens per extraction call
     
     schema = STATIC_SCHEMA if SCHEMA_CONFIG.name == "STATIC" else "EXTRACTED"
 
@@ -230,20 +243,33 @@ def run_pipeline(user_question) -> dict:
     init_globals()
     
     # 1. Clear stale Neo4j data from previous questions to prevent irrelevant retrieval
+    print("DEBUG [run_pipeline]: Clearing local data...", flush=True)
     clear_local_data()
+    print("DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...", flush=True)
     
     # 2. Extract query and context from user input
     query, text_context = extract_query_and_context(user_question)
+    print(f"DEBUG [run_pipeline]: extract_query_and_context done. query={repr(query[:80])} | context items={len(text_context) if isinstance(text_context, list) else 'str'}", flush=True)
     
-    # 3. If context is empty (common for self-contained MCQ benchmarks),
-    #    inject the question text itself as context so the retriever has material to work with
-    if not text_context:
-        print("DEBUG: Encoder returned empty context. Injecting question text as fallback context.")
-        text_context = [user_question]
+    # 3. OPT3: Only ingest into the KG if the encoder actually found real context
+    #    (e.g. a passage-based question). For self-contained MCQs, context is empty —
+    #    ingesting the question itself produces barely-useful local chunks (~0.7 score)
+    #    while adding a full LLM call + 2s sleep per question. Skip it.
+    context_was_extracted = bool(text_context)  # True only if encoder found real facts/passages
     
-    _run_async(process_context(kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
-    time.sleep(2) # Allow vector index to update
+    if not context_was_extracted:
+        print("DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.", flush=True)
+        text_context = [user_question]  # keep for logging/reference, but don't ingest
+    else:
+        print(f"DEBUG [run_pipeline]: Starting process_context (KG ingestion) with {len(text_context)} text chunk(s)...", flush=True)
+        _run_async(process_context(kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
+        print("DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...", flush=True)
+        time.sleep(2) # Allow vector index to update
+        print("DEBUG [run_pipeline]: Sleep done.", flush=True)
+
+    print("DEBUG [run_pipeline]: Starting generate (retriever + LLM)...", flush=True)
     generation_result = generate(llm=retriever_llm, retriever=retriever, query=query)
+    print("DEBUG [run_pipeline]: generate done. Returning result.", flush=True)
     # generation_result is now a dict: {'answer': str, 'contexts': list}
     
     return {

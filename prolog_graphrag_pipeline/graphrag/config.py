@@ -41,51 +41,29 @@ STATIC_SCHEMA = { # NOTE: Due to how 'EXTRACTED' works, the prompt used by Simpl
     }
 
 PROMPT_TEMPLATE = '''
-### Role
-You are a Knowledge Engineer specialized in Symbolic Logic. 
-Your goal is to extract evidence from text to build a Prolog-compatible Knowledge Graph.
-</system>
+You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.
 
-### Task
-Decompose the input text into entities and relationships. 
-For every relationship, you must provide a 'natural_statement' that preserves the full 
-nuance of the source text (modality, quantifiers, conditions).
+For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.
 
-### Execution Flow
-IDENTIFY THREE TYPES OF LOGIC:
-1. FACT: A simple assertion (e.g., "X is a Y").
-2. RULE: A conditional implication (e.g., "If P then Q").
-3. EXCEPTION: A negation or constraint (e.g., "Unless Z, then P").
-
-### STRICT JSON FORMAT:
+### JSON FORMAT:
 {{
-  "nodes": [
-    {{
-      "id": "unique_atom_id", 
-      "label": "PrologSafeLabel", 
-      "properties": {{"name": "Actual Name"}} 
+  "nodes": [{{"id": "atom_id", "label": "PrologLabel", "properties": {{"name": "Name"}}}}],
+  "relationships": [{{
+    "type": "PREDICATE_TYPE",
+    "start_node_id": "id1",
+    "end_node_id": "id2",
+    "properties": {{
+      "natural_statement": "full extracted fact or rule",
+      "logic_intent": "FACT | RULE | EXCEPTION",
+      "logical_form_hint": "e.g., mortal(X) :- man(X)"
     }}
-  ],
-  "relationships": [
-    {{
-      "type": "PREDICATE_TYPE",
-      "start_node_id": "id1",
-      "end_node_id": "id2",
-      "properties": {{
-        "natural_statement": "The full natural language fact or rule extracted from text",
-        "logic_intent": "FACT | RULE | EXCEPTION",
-        "logical_form_hint": "e.g., parent(X, Y) or mortal(X) :- man(X)"
-      }}
-    }}
-  ]
+  }}]
 }}
-</task>
 
 ### Constraints
-- Use lowercase_with_underscores for IDs and Types (Prolog atom style).
-- Do not hallucinate. If no clear logic exists, return empty arrays.
+- IDs and types: lowercase_with_underscores (Prolog atom style).
+- Do not hallucinate. Return empty arrays if no clear logic exists.
 - {schema}
-</constraints>
 
 ### Examples
 {examples}
@@ -93,7 +71,7 @@ IDENTIFY THREE TYPES OF LOGIC:
 ### Input Text
 {text}
 
-FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown, no code blocks, no preamble.
+Output JSON ONLY. No markdown, no preamble.
 '''
 
 RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever

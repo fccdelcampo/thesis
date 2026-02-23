@@ -18,24 +18,40 @@ class SCHEMA_TYPE(Enum):
   
 SCHEMA_CONFIG = SCHEMA_TYPE.STATIC
 
-STATIC_SCHEMA = { # NOTE: Due to how 'EXTRACTED' works, the prompt used by SimpleKGPipeline is bad and does not constrain the output to only JSON format. We can create a custom KG Pipeline but for now we use this to skip it entirely.
-        "node_types": [
-            "Concept",      # The heavy lifter: covers Theorems, Ideas, Theories, Terms
-            "Person",       # Key figures: Socrates, Einstein, Historical Leaders
-            "Event",        # Occurrences: Wars, Experiments, Historical Periods
-            "Definition",   # Crucial for education: Explicit statements of meaning
-            "Example",      # Grounding: Specific instances (e.g., "Pingu" or "3")
-            "Topic"         # The Field: "Mathematics", "Philosophy", "Biology"
-        ],
-        "relationship_types": [
-            "RELATED_TO",   # Generic connection
-            "IS_A",         # Hierarchy: "Calculus IS_A Topic", "Penguin IS_A Bird"
-            "PART_OF",      # Composition: "Cell PART_OF Tissue"
-            "CAUSES",       # Logic/History: "War CAUSES Famine", "Premise CAUSES Conclusion"
-            "DEFINES",      # Concept -> Definition
-            "ILLUSTRATES"   # Example -> Concept ("Pingu ILLUSTRATES Non-flying bird")
-        ]
-    }
+STATIC_SCHEMA = {
+    "node_types": [
+        "ReferenceConcept",  
+        "Person",            
+        "Event",             
+        "Denotative",        
+        "Associative",       
+        "ConceptualSystem"   
+    ],
+    "relationship_types": [
+        "IS_CLOSELY_RELATED", # KKO equivalent for 'RELATED_TO'
+        "SUBCLASS_OF",        # KKO strict Type-to-Type hierarchy
+        "INSTANCE_OF",        # KKO strict Entity-to-Type instantiation
+        "PART_OF",            # KKO mereological parthood
+        "CAUSES",             
+        "HAS_DEFINITION",     # KKO bridge to Denotatives
+        "HAS_EXAMPLE"         # KKO bridge to Associatives
+    ],
+    "patterns": [
+        # Defining these valid routing paths is critical so the extracted 
+        # graph translates cleanly into deterministic logical facts.
+        ("ReferenceConcept", "SUBCLASS_OF", "ConceptualSystem"),
+        ("ConceptualSystem", "SUBCLASS_OF", "ConceptualSystem"),
+        ("Person", "INSTANCE_OF", "ReferenceConcept"),
+        ("Event", "INSTANCE_OF", "ReferenceConcept"),
+        ("Event", "CAUSES", "Event"),
+        ("ReferenceConcept", "PART_OF", "ReferenceConcept"),
+        ("ReferenceConcept", "IS_CLOSELY_RELATED", "ReferenceConcept"),
+        ("ReferenceConcept", "HAS_DEFINITION", "Denotative"),
+        ("ReferenceConcept", "HAS_EXAMPLE", "Associative")
+    ],
+    "additional_node_types": False,
+    "additional_relationship_types": False
+}
 
 PROMPT_TEMPLATE = '''
 You are an educational question answering model tasked with extracting information from papers

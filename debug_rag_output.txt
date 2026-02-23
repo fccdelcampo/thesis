@@ -4106,3 +4106,2796 @@ None extracted due to the absence of conditional statements in the provided cont
 ### Note:
 The task requires extracting evidence from the given natural language context, which does not directly address the question about plant cell parts and their similarity to animal skeletons. The relevant information is limited to definitions and subclass relationships between concepts like `plant_cell_wall`, `animal_skeleton`, and `rigidness`.
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "subclass of: eukaryotic cell",
+    "ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.",
+    "subclass of: plant or part of a plant",
+    "ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts:  - subclass of: eukaryotic cell  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.  - subclass of: plant or part of a plant  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants.
+  [Knowledge Graph Triples]:
+   - subclass of: eukaryotic cell
+   - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.
+   - subclass of: plant or part of a plant
+   - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant epidermis",
+  "uri": "http://kbpedia.org/kko/rc/PlantEpidermis",
+  "score": 1.0,
+  "triples": [
+    "definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.",
+    "subclass of: external anatomical part",
+    "ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. ",
+    "subclass of: plant part",
+    "ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this "
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: plant epidermis. Relevant Logical Facts:  - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.  - subclass of: external anatomical part  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism.  - subclass of: plant part  - ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this 
+  [Knowledge Graph Triples]:
+   - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+   - subclass of: external anatomical part
+   - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. 
+   - subclass of: plant part
+   - ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this 
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyPart.",
+    "ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyPart.  - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+  [Knowledge Graph Triples]:
+   - subclass of: body part
+   - ancestor definition: A specialization of AnimalBodyPart.
+   - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "skeleton tarantula",
+  "uri": "http://kbpedia.org/kko/rc/EphebopusMurinus",
+  "score": 1.0,
+  "triples": [
+    "subclass of: spider",
+    "ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.",
+    "B. cell wall"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: skeleton tarantula. Relevant Logical Facts:  - subclass of: spider  - ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.  - B. cell wall
+  [Knowledge Graph Triples]:
+   - subclass of: spider
+   - ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.
+   - B. cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "structural system",
+  "uri": "http://kbpedia.org/kko/rc/StructuralSystem",
+  "score": 1.0,
+  "triples": [
+    "subclass of: man-made structure",
+    "ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection ",
+    "subclass of: fixed freestanding structure"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: structural system. Relevant Logical Facts:  - subclass of: man-made structure  - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection  - subclass of: fixed freestanding structure
+  [Knowledge Graph Triples]:
+   - subclass of: man-made structure
+   - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection 
+   - subclass of: fixed freestanding structure
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.9042143821716309,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?\nA. cell membrane\nB. cell wall\nC. chloroplast\nD. nucleus"
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.9042] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `plant_cell_wall(subclass_of, eukaryotic_cell)`
+2. `eukaryotic_cell(ancestor_definition, Cell)`
+3. `cell_wall(subclass_of, plant_or_part_of_plant)`
+4. `external_anatomical_part(subclass_of, organism_part)`
+5. `skeletal_system(subclass_of, body_part)`
+6. `body_part(ancestor_definition, AnimalBodyPart)`
+
+#### Facts (Ground Truths):
+1. `cell_wall`
+2. `eukaryotic_cell`
+3. `plant_or_part_of_plant`
+4. `external_anatomical_part`
+5. `organism_part`
+6. `animal_body_part`
+7. `body_part`
+8. `construction_artifact`
+
+#### Rules (Horn Clauses / Implications):
+1. `ancestor_definition(cell, eukaryotic_cell) :- subclass_of(eukaryotic_cell, cell)`
+2. `plant_epidermis(subclass_of, external_anatomical_part) :- ancestor_definition(external_anatomical_part, organism_part)`
+3. `skeletal_system(subclass_of, body_part) :- ancestor_definition(body_part, animal_body_part)`
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fatigue",
+  "uri": "http://kbpedia.org/kko/rc/FatigueCondition",
+  "score": 1.0,
+  "triples": [
+    "subclass of: illness",
+    "has subclass: exhausting",
+    "sibling concept: sleep deprivation"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: fatigue. Relevant Logical Facts:  - subclass of: illness  - has subclass: exhausting  - sibling concept: sleep deprivation
+  [Knowledge Graph Triples]:
+   - subclass of: illness
+   - has subclass: exhausting
+   - sibling concept: sleep deprivation
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chronic fatigue syndrome",
+  "uri": "http://kbpedia.org/kko/rc/ChronicFatigueSyndrome",
+  "score": 1.0,
+  "triples": [
+    "definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: chronic fatigue syndrome. Relevant Logical Facts:  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.
+  [Knowledge Graph Triples]:
+   - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature",
+  "uri": "http://kbpedia.org/kko/rc/Temperature",
+  "score": 1.0,
+  "triples": [
+    "subclass of: tangible physical quantity"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: temperature. Relevant Logical Facts:  - subclass of: tangible physical quantity
+  [Knowledge Graph Triples]:
+   - subclass of: tangible physical quantity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature control",
+  "uri": "http://kbpedia.org/kko/rc/TemperatureControl",
+  "score": 1.0,
+  "triples": [
+    "subclass of: scalar or vector interval"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: temperature control. Relevant Logical Facts:  - subclass of: scalar or vector interval
+  [Knowledge Graph Triples]:
+   - subclass of: scalar or vector interval
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6897716522216797,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.6898] Janette conducts an investigation to see which foods make her feel more fatigued.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6843624114990234,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.6844] She eats one of four different foods each day at the same time for four days and then records how she feels.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6737632751464844,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+[Item 7]
+[Chunk Score: 0.6738] She asks her friend Carmen to do the same investigation to see if she gets similar results.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. fatigue is an illness
+2. exhausting is a subclass of fatigue
+3. sleep deprivation is a sibling concept of fatigue
+4. ChronicFatigueSyndrome is characterized by fatigue, general pain, mental fogginess, and gastro-intestinal problems
+5. temperature is a tangible physical quantity
+
+#### Facts (Ground Truths):
+1. Janette conducts an investigation to see which foods make her feel more fatigued.
+2. She eats one of four different foods each day at the same time for four days.
+3. Carmen replicates Janette's experiment.
+
+#### Rules (Horn Clauses / Implications):
+None extracted from provided context
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "subclass of: eukaryotic cell",
+    "ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.",
+    "subclass of: plant or part of a plant",
+    "ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts:  - subclass of: eukaryotic cell  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.  - subclass of: plant or part of a plant  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants.
+  [Knowledge Graph Triples]:
+   - subclass of: eukaryotic cell
+   - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.
+   - subclass of: plant or part of a plant
+   - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant epidermis",
+  "uri": "http://kbpedia.org/kko/rc/PlantEpidermis",
+  "score": 1.0,
+  "triples": [
+    "definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.",
+    "subclass of: external anatomical part",
+    "ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. ",
+    "subclass of: plant part",
+    "ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this "
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: plant epidermis. Relevant Logical Facts:  - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.  - subclass of: external anatomical part  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism.  - subclass of: plant part  - ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this 
+  [Knowledge Graph Triples]:
+   - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+   - subclass of: external anatomical part
+   - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. 
+   - subclass of: plant part
+   - ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this 
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyPart.",
+    "ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyPart.  - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+  [Knowledge Graph Triples]:
+   - subclass of: body part
+   - ancestor definition: A specialization of AnimalBodyPart.
+   - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "skeleton tarantula",
+  "uri": "http://kbpedia.org/kko/rc/EphebopusMurinus",
+  "score": 1.0,
+  "triples": [
+    "subclass of: spider",
+    "ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.",
+    "B. cell wall"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: skeleton tarantula. Relevant Logical Facts:  - subclass of: spider  - ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.  - B. cell wall
+  [Knowledge Graph Triples]:
+   - subclass of: spider
+   - ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.
+   - B. cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "structural system",
+  "uri": "http://kbpedia.org/kko/rc/StructuralSystem",
+  "score": 1.0,
+  "triples": [
+    "subclass of: man-made structure",
+    "ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection ",
+    "subclass of: fixed freestanding structure"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: structural system. Relevant Logical Facts:  - subclass of: man-made structure  - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection  - subclass of: fixed freestanding structure
+  [Knowledge Graph Triples]:
+   - subclass of: man-made structure
+   - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection 
+   - subclass of: fixed freestanding structure
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.9042143821716309,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?\nA. cell membrane\nB. cell wall\nC. chloroplast\nD. nucleus"
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.9042] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `plant_cell_wall(subclass_of, eukaryotic_cell)`
+2. `eukaryotic_cell(ancestor_definition, Cell)`
+3. `cell_wall(subclass_of, plant_or_part_of_plant)`
+4. `external_anatomical_part(subclass_of, organism_part)`
+5. `skeletal_system(subclass_of, body_part)`
+6. `body_part(ancestor_definition, AnimalBodyPart)`
+
+#### Facts (Ground Truths):
+1. `cell_wall`
+2. `eukaryotic_cell`
+3. `plant_or_part_of_plant`
+4. `external_anatomical_part`
+5. `organism_part`
+6. `animal_body_part`
+7. `body_part`
+8. `construction_artifact`
+
+#### Rules (Horn Clauses / Implications):
+1. `ancestor_definition(cell, eukaryotic_cell) :- subclass_of(eukaryotic_cell, cell)`
+2. `plant_epidermis(subclass_of, external_anatomical_part) :- ancestor_definition(external_anatomical_part, organism_part)`
+3. `skeletal_system(subclass_of, body_part) :- ancestor_definition(body_part, animal_body_part)`
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fatigue",
+  "uri": "http://kbpedia.org/kko/rc/FatigueCondition",
+  "score": 1.0,
+  "triples": [
+    "subclass of: illness",
+    "has subclass: exhausting",
+    "sibling concept: sleep deprivation"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: fatigue. Relevant Logical Facts:  - subclass of: illness  - has subclass: exhausting  - sibling concept: sleep deprivation
+  [Knowledge Graph Triples]:
+   - subclass of: illness
+   - has subclass: exhausting
+   - sibling concept: sleep deprivation
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chronic fatigue syndrome",
+  "uri": "http://kbpedia.org/kko/rc/ChronicFatigueSyndrome",
+  "score": 1.0,
+  "triples": [
+    "definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: chronic fatigue syndrome. Relevant Logical Facts:  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.
+  [Knowledge Graph Triples]:
+   - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature",
+  "uri": "http://kbpedia.org/kko/rc/Temperature",
+  "score": 1.0,
+  "triples": [
+    "subclass of: tangible physical quantity"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: temperature. Relevant Logical Facts:  - subclass of: tangible physical quantity
+  [Knowledge Graph Triples]:
+   - subclass of: tangible physical quantity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature control",
+  "uri": "http://kbpedia.org/kko/rc/TemperatureControl",
+  "score": 1.0,
+  "triples": [
+    "subclass of: scalar or vector interval"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: temperature control. Relevant Logical Facts:  - subclass of: scalar or vector interval
+  [Knowledge Graph Triples]:
+   - subclass of: scalar or vector interval
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6897716522216797,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.6898] Janette conducts an investigation to see which foods make her feel more fatigued.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6843624114990234,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.6844] She eats one of four different foods each day at the same time for four days and then records how she feels.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6737632751464844,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+[Item 7]
+[Chunk Score: 0.6738] She asks her friend Carmen to do the same investigation to see if she gets similar results.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. fatigue is an illness
+2. exhausting is a subclass of fatigue
+3. sleep deprivation is a sibling concept of fatigue
+4. ChronicFatigueSyndrome is characterized by fatigue, general pain, mental fogginess, and gastro-intestinal problems
+5. temperature is a tangible physical quantity
+
+#### Facts (Ground Truths):
+1. Janette conducts an investigation to see which foods make her feel more fatigued.
+2. She eats one of four different foods each day at the same time for four days.
+3. Carmen replicates Janette's experiment.
+
+#### Rules (Horn Clauses / Implications):
+None extracted from provided context
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging? A) trench B) rift valley C) ocean basin D) mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "tectonic plate",
+  "uri": "http://kbpedia.org/kko/rc/TectonicPlate",
+  "score": 1.0,
+  "triples": [
+    "definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: \u03c4\u03b5\u03ba\u03c4\u03bf\u03bd\u03b9\u03ba\u03cc\u03c2 \"pertaining to building\") is a scientific theory describing the large-scale motion of 7 large plates and the movements of a ",
+    "subclass of: plate tectonics",
+    "ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: \u03c4\u03b5\u03ba\u03c4\u03bf\u03bd\u03b9\u03ba\u03cc\u03c2 pertaining to building) is a scientific theory describing the large-scale ",
+    "subclass of: natural stone",
+    "ancestor definition: Instances are individual rocks, pebbles, boulders etc.."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: tectonic plate. Relevant Logical Facts:  - definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός "pertaining to building") is a scientific theory describing the large-scale motion of 7 large plates and the movements of a  - subclass of: plate tectonics  - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale  - subclass of: natural stone  - ancestor definition: Instances are individual rocks, pebbles, boulders etc..
+  [Knowledge Graph Triples]:
+   - definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός "pertaining to building") is a scientific theory describing the large-scale motion of 7 large plates and the movements of a 
+   - subclass of: plate tectonics
+   - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale 
+   - subclass of: natural stone
+   - ancestor definition: Instances are individual rocks, pebbles, boulders etc..
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "interplate earthquake",
+  "uri": "http://kbpedia.org/kko/rc/InterplateEarthquake",
+  "score": 1.0,
+  "triples": [
+    "sibling concept: intraplate earthquake"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: interplate earthquake. Relevant Logical Facts:  - sibling concept: intraplate earthquake
+  [Knowledge Graph Triples]:
+   - sibling concept: intraplate earthquake
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "anabranch",
+  "uri": "http://kbpedia.org/kko/rc/Anabranch",
+  "score": 1.0,
+  "triples": [
+    "subclass of: flowing body of water",
+    "ancestor definition: A specialization of BodyOfWater... that flows when it is not frozen."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: anabranch. Relevant Logical Facts:  - subclass of: flowing body of water  - ancestor definition: A specialization of BodyOfWater... that flows when it is not frozen.
+  [Knowledge Graph Triples]:
+   - subclass of: flowing body of water
+   - ancestor definition: A specialization of BodyOfWater... that flows when it is not frozen.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Brachyelytrum",
+  "uri": "http://kbpedia.org/kko/rc/Brachyelytrum",
+  "score": 1.0,
+  "triples": [
+    "ancestor definition: All individual plants from the order of Grasses, which includes cereal grains, bamboo, turf grass, etc."
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: Brachyelytrum. Relevant Logical Facts:  - ancestor definition: All individual plants from the order of Grasses, which includes cereal grains, bamboo, turf grass, etc.
+  [Knowledge Graph Triples]:
+   - ancestor definition: All individual plants from the order of Grasses, which includes cereal grains, bamboo, turf grass, etc.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rift valley",
+  "uri": "http://kbpedia.org/kko/rc/RiftValley",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.",
+    "subclass of: land topographical feature",
+    "ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl",
+    "subclass of: valley"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: rift valley. Relevant Logical Facts:  - definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.  - subclass of: land topographical feature  - ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl  - subclass of: valley
+  [Knowledge Graph Triples]:
+   - definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.
+   - subclass of: land topographical feature
+   - ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl
+   - subclass of: valley
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8476333618164062,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Which feature does not form as a result of tectonic plates diverging?\nA. trench\nB. rift valley\nC. ocean basin\nD. mid-ocean ridge"
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.8476] Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+1. `diverging(TectonicPlates)`: Tectonic plates are moving apart.
+2. `forms(RiftValley, DivergingTectonicPlates)`: A Rift Valley forms as a result of diverging tectonic plates.
+3. `forms(MidOceanRidge, DivergingTectonicPlates)`: A Mid Ocean Ridge forms as a result of diverging tectonic plates.
+
+### Facts (Ground Truths):
+1. `trench(Trench)` 
+2. `rift_valley(RiftValley)`
+3. `ocean_basin(OceanBasin)`
+4. `mid_ocean_ridge(MidOceanRidge)`
+
+### Rules (Horn Clauses / Implications):
+None
+==================================================
+==================================================
+ QUERY: Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed
+==================================================
+
+--- RETRIEVED CONTEXT (Top 3 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.7196063995361328,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "A student planted two bean seeds in two identical pots containing the same type of soil."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.7196] A student planted two bean seeds in two identical pots containing the same type of soil.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6698989868164062,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Each day, he poured 15 milliliters of water into each pot."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.6699] Each day, he poured 15 milliliters of water into each pot.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6315078735351562,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "He placed one pot in a closet and the other near a sunny window."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.6315] He placed one pot in a closet and the other near a sunny window.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates
+* `pot/1`: A container for planting seeds (e.g., pot(X)).
+* `soil_type/2`: The type of soil used in pots (e.g., soil_type(type_a, X)).
+* `water_amount/3`: The amount of water poured into a pot each day (e.g., water_amount(15, milliliters, Y)).
+* `light_source/1`: A location with or without light for the plant (e.g., light_source(sunny_window)).
+
+#### Facts
+* `pot(pot_1)`.
+* `pot(pot_2)`.
+* `soil_type(type_a, pot_1)`.
+* `soil_type(type_a, pot_2)`.
+* `water_amount(15, milliliters, day_1, pot_1)`.
+* `water_amount(15, milliliters, day_1, pot_2)`.
+* `light_source(closet, pot_1)`.
+* `light_source(sunny_window, pot_2)`.
+
+#### Rules
+None. The context does not provide any conditional statements or implications that can be used for inference.
+==================================================
+==================================================
+ QUERY: Which is the most likely reason to tag an animal? A. to monitor their eating habits B. to monitor their roaming habits C. to monitor their sleeping habits D. to monitor their reproductive habits
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reproductive endocrinologist",
+  "uri": "http://kbpedia.org/kko/rc/ReproductiveEndocrinologist",
+  "score": 1.0,
+  "triples": [
+    "definition: A reproductive endocrinologist is a doctor who specializes in diagnosing and treating disorders of the endoctrine system which interfere with reproductive capabilities.",
+    "subclass of: endocrinologist",
+    "ancestor definition: Endocrinologists are doctors who specialize in treatment of disorders of the endocrine system.",
+    "subclass of: doctor",
+    "ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation. Each instance of Doctor_Medical is a person with a certain type o"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: reproductive endocrinologist. Relevant Logical Facts:  - definition: A reproductive endocrinologist is a doctor who specializes in diagnosing and treating disorders of the endoctrine system which interfere with reproductive capabilities.  - subclass of: endocrinologist  - ancestor definition: Endocrinologists are doctors who specialize in treatment of disorders of the endocrine system.  - subclass of: doctor  - ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation. Each instance of Doctor_Medical is a person with a certain type o
+  [Knowledge Graph Triples]:
+   - definition: A reproductive endocrinologist is a doctor who specializes in diagnosing and treating disorders of the endoctrine system which interfere with reproductive capabilities.
+   - subclass of: endocrinologist
+   - ancestor definition: Endocrinologists are doctors who specialize in treatment of disorders of the endocrine system.
+   - subclass of: doctor
+   - ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation. Each instance of Doctor_Medical is a person with a certain type o
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reproductive ecology",
+  "uri": "http://kbpedia.org/kko/rc/ReproductiveEcology",
+  "score": 1.0,
+  "triples": [
+    "definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism\u2019s reproductive system to ecological variables.",
+    "subclass of: subfield of ecology",
+    "ancestor definition: The study of the interrelationships between organisms and their physical environment."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: reproductive ecology. Relevant Logical Facts:  - definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism’s reproductive system to ecological variables.  - subclass of: subfield of ecology  - ancestor definition: The study of the interrelationships between organisms and their physical environment.
+  [Knowledge Graph Triples]:
+   - definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism’s reproductive system to ecological variables.
+   - subclass of: subfield of ecology
+   - ancestor definition: The study of the interrelationships between organisms and their physical environment.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Eating behavior",
+  "uri": "http://kbpedia.org/kko/rc/EatingBehavior",
+  "score": 1.0,
+  "triples": [
+    "definition: Any eating behavior.",
+    "subclass of: ethology",
+    "ancestor definition: Ethology is the scientific and objective study of animal behaviour...",
+    "has subclass: vegetarianism"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: Eating behavior. Relevant Logical Facts:  - definition: Any eating behavior.  - subclass of: ethology  - ancestor definition: Ethology is the scientific and objective study of animal behaviour...  - has subclass: vegetarianism
+  [Knowledge Graph Triples]:
+   - definition: Any eating behavior.
+   - subclass of: ethology
+   - ancestor definition: Ethology is the scientific and objective study of animal behaviour...
+   - has subclass: vegetarianism
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Brumby",
+  "uri": "http://kbpedia.org/kko/rc/Brumby",
+  "score": 1.0,
+  "triples": [
+    "ancestor definition: A feral horse is a free-roaming horse of domesticated ancestry."
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: Brumby. Relevant Logical Facts:  - ancestor definition: A feral horse is a free-roaming horse of domesticated ancestry.
+  [Knowledge Graph Triples]:
+   - ancestor definition: A feral horse is a free-roaming horse of domesticated ancestry.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Macedonian",
+  "uri": "http://kbpedia.org/kko/rc/EthnicGroupOfMacedonians",
+  "score": 1.0,
+  "triples": [
+    "definition: The people who follow the cultural habits of Macedonians.",
+    "subclass of: Slav",
+    "ancestor definition: The collection of persons who claim or identify with a Slavish heritage.",
+    "subclass of: Europeans",
+    "ancestor definition: The ethnic groups that originated on the ContinentOfEurope."
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: Macedonian. Relevant Logical Facts:  - definition: The people who follow the cultural habits of Macedonians.  - subclass of: Slav  - ancestor definition: The collection of persons who claim or identify with a Slavish heritage.  - subclass of: Europeans  - ancestor definition: The ethnic groups that originated on the ContinentOfEurope.
+  [Knowledge Graph Triples]:
+   - definition: The people who follow the cultural habits of Macedonians.
+   - subclass of: Slav
+   - ancestor definition: The collection of persons who claim or identify with a Slavish heritage.
+   - subclass of: Europeans
+   - ancestor definition: The ethnic groups that originated on the ContinentOfEurope.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7022266387939453,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Many endangered animals are captured, tagged, and then released back into their environment."
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.7022] Many endangered animals are captured, tagged, and then released back into their environment.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6782035827636719,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body."
+    }
+  ]
+}
+[Item 7]
+[Chunk Score: 0.6782] The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `tagged(X)`: X has been tagged
+2. `released_back_into_environment(Y)` : Y was released back into its environment after being captured and tagged.
+3. `coded_plastic_or_metal(Z)` : Z is a piece of coded plastic or metal.
+
+#### Facts (Ground Truths):
+1. `Many_endangered_animals_are_captured_and_tagged`: Many endangered animals are captured, tagged, and then released back into their environment.
+2. `The_tag_may_be_a_piece_of_coded_plastic_or_metal`: The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.
+
+#### Rules (Horn Clauses / Implications):
+1. `tagged(X) :- captured_and_released_back_into_environment(Y)` : If Y was released back into its environment after being captured and tagged, then X has been tagged.
+2. `released_back_into_environment(Y) :- Many_endangered_animals_are_captured_and_tagged` : If many endangered animals are captured, tagged, and then released back into their environment, then Y was released back into its environment.
+
+Note: The extracted evidence is based on the provided context only and does not include any information from the question.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "subclass of: eukaryotic cell",
+    "ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.",
+    "subclass of: plant or part of a plant",
+    "ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts:  - subclass of: eukaryotic cell  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.  - subclass of: plant or part of a plant  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants.
+  [Knowledge Graph Triples]:
+   - subclass of: eukaryotic cell
+   - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.
+   - subclass of: plant or part of a plant
+   - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant epidermis",
+  "uri": "http://kbpedia.org/kko/rc/PlantEpidermis",
+  "score": 1.0,
+  "triples": [
+    "definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.",
+    "subclass of: external anatomical part",
+    "ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. ",
+    "subclass of: plant part",
+    "ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this "
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: plant epidermis. Relevant Logical Facts:  - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.  - subclass of: external anatomical part  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism.  - subclass of: plant part  - ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this 
+  [Knowledge Graph Triples]:
+   - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+   - subclass of: external anatomical part
+   - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. 
+   - subclass of: plant part
+   - ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this 
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyPart.",
+    "ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyPart.  - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+  [Knowledge Graph Triples]:
+   - subclass of: body part
+   - ancestor definition: A specialization of AnimalBodyPart.
+   - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "skeleton tarantula",
+  "uri": "http://kbpedia.org/kko/rc/EphebopusMurinus",
+  "score": 1.0,
+  "triples": [
+    "subclass of: spider",
+    "ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.",
+    "B. cell wall"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: skeleton tarantula. Relevant Logical Facts:  - subclass of: spider  - ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.  - B. cell wall
+  [Knowledge Graph Triples]:
+   - subclass of: spider
+   - ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.
+   - B. cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "structural system",
+  "uri": "http://kbpedia.org/kko/rc/StructuralSystem",
+  "score": 1.0,
+  "triples": [
+    "subclass of: man-made structure",
+    "ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection ",
+    "subclass of: fixed freestanding structure"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: structural system. Relevant Logical Facts:  - subclass of: man-made structure  - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection  - subclass of: fixed freestanding structure
+  [Knowledge Graph Triples]:
+   - subclass of: man-made structure
+   - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection 
+   - subclass of: fixed freestanding structure
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.9042143821716309,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?\nA. cell membrane\nB. cell wall\nC. chloroplast\nD. nucleus"
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.9042] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `plant_cell_wall(subclass_of, eukaryotic_cell)`
+2. `eukaryotic_cell(ancestor_definition, Cell)`
+3. `cell_wall(subclass_of, plant_or_part_of_plant)`
+4. `external_anatomical_part(subclass_of, organism_part)`
+5. `skeletal_system(subclass_of, body_part)`
+6. `body_part(ancestor_definition, AnimalBodyPart)`
+
+#### Facts (Ground Truths):
+1. `cell_wall`
+2. `eukaryotic_cell`
+3. `plant_or_part_of_plant`
+4. `external_anatomical_part`
+5. `organism_part`
+6. `animal_body_part`
+7. `body_part`
+8. `construction_artifact`
+
+#### Rules (Horn Clauses / Implications):
+1. `ancestor_definition(cell, eukaryotic_cell) :- subclass_of(eukaryotic_cell, cell)`
+2. `plant_epidermis(subclass_of, external_anatomical_part) :- ancestor_definition(external_anatomical_part, organism_part)`
+3. `skeletal_system(subclass_of, body_part) :- ancestor_definition(body_part, animal_body_part)`
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fatigue",
+  "uri": "http://kbpedia.org/kko/rc/FatigueCondition",
+  "score": 1.0,
+  "triples": [
+    "subclass of: illness",
+    "has subclass: exhausting",
+    "sibling concept: sleep deprivation"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: fatigue. Relevant Logical Facts:  - subclass of: illness  - has subclass: exhausting  - sibling concept: sleep deprivation
+  [Knowledge Graph Triples]:
+   - subclass of: illness
+   - has subclass: exhausting
+   - sibling concept: sleep deprivation
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chronic fatigue syndrome",
+  "uri": "http://kbpedia.org/kko/rc/ChronicFatigueSyndrome",
+  "score": 1.0,
+  "triples": [
+    "definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: chronic fatigue syndrome. Relevant Logical Facts:  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.
+  [Knowledge Graph Triples]:
+   - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature",
+  "uri": "http://kbpedia.org/kko/rc/Temperature",
+  "score": 1.0,
+  "triples": [
+    "subclass of: tangible physical quantity"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: temperature. Relevant Logical Facts:  - subclass of: tangible physical quantity
+  [Knowledge Graph Triples]:
+   - subclass of: tangible physical quantity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature control",
+  "uri": "http://kbpedia.org/kko/rc/TemperatureControl",
+  "score": 1.0,
+  "triples": [
+    "subclass of: scalar or vector interval"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: temperature control. Relevant Logical Facts:  - subclass of: scalar or vector interval
+  [Knowledge Graph Triples]:
+   - subclass of: scalar or vector interval
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6897716522216797,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.6898] Janette conducts an investigation to see which foods make her feel more fatigued.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6843624114990234,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.6844] She eats one of four different foods each day at the same time for four days and then records how she feels.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6737632751464844,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+[Item 7]
+[Chunk Score: 0.6738] She asks her friend Carmen to do the same investigation to see if she gets similar results.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. fatigue is an illness
+2. exhausting is a subclass of fatigue
+3. sleep deprivation is a sibling concept of fatigue
+4. ChronicFatigueSyndrome is characterized by fatigue, general pain, mental fogginess, and gastro-intestinal problems
+5. temperature is a tangible physical quantity
+
+#### Facts (Ground Truths):
+1. Janette conducts an investigation to see which foods make her feel more fatigued.
+2. She eats one of four different foods each day at the same time for four days.
+3. Carmen replicates Janette's experiment.
+
+#### Rules (Horn Clauses / Implications):
+None extracted from provided context
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging? A) trench B) rift valley C) ocean basin D) mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "tectonic plate",
+  "uri": "http://kbpedia.org/kko/rc/TectonicPlate",
+  "score": 1.0,
+  "triples": [
+    "definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: \u03c4\u03b5\u03ba\u03c4\u03bf\u03bd\u03b9\u03ba\u03cc\u03c2 \"pertaining to building\") is a scientific theory describing the large-scale motion of 7 large plates and the movements of a ",
+    "subclass of: plate tectonics",
+    "ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: \u03c4\u03b5\u03ba\u03c4\u03bf\u03bd\u03b9\u03ba\u03cc\u03c2 pertaining to building) is a scientific theory describing the large-scale ",
+    "subclass of: natural stone",
+    "ancestor definition: Instances are individual rocks, pebbles, boulders etc.."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: tectonic plate. Relevant Logical Facts:  - definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός "pertaining to building") is a scientific theory describing the large-scale motion of 7 large plates and the movements of a  - subclass of: plate tectonics  - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale  - subclass of: natural stone  - ancestor definition: Instances are individual rocks, pebbles, boulders etc..
+  [Knowledge Graph Triples]:
+   - definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός "pertaining to building") is a scientific theory describing the large-scale motion of 7 large plates and the movements of a 
+   - subclass of: plate tectonics
+   - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale 
+   - subclass of: natural stone
+   - ancestor definition: Instances are individual rocks, pebbles, boulders etc..
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "interplate earthquake",
+  "uri": "http://kbpedia.org/kko/rc/InterplateEarthquake",
+  "score": 1.0,
+  "triples": [
+    "sibling concept: intraplate earthquake"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: interplate earthquake. Relevant Logical Facts:  - sibling concept: intraplate earthquake
+  [Knowledge Graph Triples]:
+   - sibling concept: intraplate earthquake
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "anabranch",
+  "uri": "http://kbpedia.org/kko/rc/Anabranch",
+  "score": 1.0,
+  "triples": [
+    "subclass of: flowing body of water",
+    "ancestor definition: A specialization of BodyOfWater... that flows when it is not frozen."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: anabranch. Relevant Logical Facts:  - subclass of: flowing body of water  - ancestor definition: A specialization of BodyOfWater... that flows when it is not frozen.
+  [Knowledge Graph Triples]:
+   - subclass of: flowing body of water
+   - ancestor definition: A specialization of BodyOfWater... that flows when it is not frozen.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Brachyelytrum",
+  "uri": "http://kbpedia.org/kko/rc/Brachyelytrum",
+  "score": 1.0,
+  "triples": [
+    "ancestor definition: All individual plants from the order of Grasses, which includes cereal grains, bamboo, turf grass, etc."
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: Brachyelytrum. Relevant Logical Facts:  - ancestor definition: All individual plants from the order of Grasses, which includes cereal grains, bamboo, turf grass, etc.
+  [Knowledge Graph Triples]:
+   - ancestor definition: All individual plants from the order of Grasses, which includes cereal grains, bamboo, turf grass, etc.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rift valley",
+  "uri": "http://kbpedia.org/kko/rc/RiftValley",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.",
+    "subclass of: land topographical feature",
+    "ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl",
+    "subclass of: valley"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: rift valley. Relevant Logical Facts:  - definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.  - subclass of: land topographical feature  - ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl  - subclass of: valley
+  [Knowledge Graph Triples]:
+   - definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.
+   - subclass of: land topographical feature
+   - ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl
+   - subclass of: valley
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8476333618164062,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Which feature does not form as a result of tectonic plates diverging?\nA. trench\nB. rift valley\nC. ocean basin\nD. mid-ocean ridge"
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.8476] Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+1. `diverging(TectonicPlates)`: Tectonic plates are moving apart.
+2. `forms(RiftValley, DivergingTectonicPlates)`: A Rift Valley forms as a result of diverging tectonic plates.
+3. `forms(MidOceanRidge, DivergingTectonicPlates)`: A Mid Ocean Ridge forms as a result of diverging tectonic plates.
+
+### Facts (Ground Truths):
+1. `trench(Trench)` 
+2. `rift_valley(RiftValley)`
+3. `ocean_basin(OceanBasin)`
+4. `mid_ocean_ridge(MidOceanRidge)`
+
+### Rules (Horn Clauses / Implications):
+None
+==================================================
+==================================================
+ QUERY: Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed
+==================================================
+
+--- RETRIEVED CONTEXT (Top 3 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.7196063995361328,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "A student planted two bean seeds in two identical pots containing the same type of soil."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.7196] A student planted two bean seeds in two identical pots containing the same type of soil.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6698989868164062,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Each day, he poured 15 milliliters of water into each pot."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.6699] Each day, he poured 15 milliliters of water into each pot.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6315078735351562,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "He placed one pot in a closet and the other near a sunny window."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.6315] He placed one pot in a closet and the other near a sunny window.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates
+* `pot/1`: A container for planting seeds (e.g., pot(X)).
+* `soil_type/2`: The type of soil used in pots (e.g., soil_type(type_a, X)).
+* `water_amount/3`: The amount of water poured into a pot each day (e.g., water_amount(15, milliliters, Y)).
+* `light_source/1`: A location with or without light for the plant (e.g., light_source(sunny_window)).
+
+#### Facts
+* `pot(pot_1)`.
+* `pot(pot_2)`.
+* `soil_type(type_a, pot_1)`.
+* `soil_type(type_a, pot_2)`.
+* `water_amount(15, milliliters, day_1, pot_1)`.
+* `water_amount(15, milliliters, day_1, pot_2)`.
+* `light_source(closet, pot_1)`.
+* `light_source(sunny_window, pot_2)`.
+
+#### Rules
+None. The context does not provide any conditional statements or implications that can be used for inference.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "subclass of: eukaryotic cell",
+    "ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.",
+    "subclass of: plant or part of a plant",
+    "ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts:  - subclass of: eukaryotic cell  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.  - subclass of: plant or part of a plant  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants.
+  [Knowledge Graph Triples]:
+   - subclass of: eukaryotic cell
+   - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.
+   - subclass of: plant or part of a plant
+   - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant epidermis",
+  "uri": "http://kbpedia.org/kko/rc/PlantEpidermis",
+  "score": 1.0,
+  "triples": [
+    "definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.",
+    "subclass of: external anatomical part",
+    "ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. ",
+    "subclass of: plant part",
+    "ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this "
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: plant epidermis. Relevant Logical Facts:  - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.  - subclass of: external anatomical part  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism.  - subclass of: plant part  - ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this 
+  [Knowledge Graph Triples]:
+   - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+   - subclass of: external anatomical part
+   - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. 
+   - subclass of: plant part
+   - ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this 
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyPart.",
+    "ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyPart.  - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+  [Knowledge Graph Triples]:
+   - subclass of: body part
+   - ancestor definition: A specialization of AnimalBodyPart.
+   - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "structural system",
+  "uri": "http://kbpedia.org/kko/rc/StructuralSystem",
+  "score": 1.0,
+  "triples": [
+    "subclass of: man-made structure",
+    "ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection ",
+    "subclass of: fixed freestanding structure"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: structural system. Relevant Logical Facts:  - subclass of: man-made structure  - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection  - subclass of: fixed freestanding structure
+  [Knowledge Graph Triples]:
+   - subclass of: man-made structure
+   - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection 
+   - subclass of: fixed freestanding structure
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "structural connector",
+  "uri": "http://kbpedia.org/kko/rc/StructuralConnector",
+  "score": 1.0,
+  "triples": [
+    "definition: This category is for components that connect structural systems or structural elements together in reference to buildings and structures.",
+    "subclass of: civil engineering",
+    "ancestor definition: Civil engineering: a <a href=\"http://sw.opencyc.org/concept/Mx4rvVi3_JwpEbGdrcN5Y29ycA\">ScientificFieldOfStudy</a>."
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: structural connector. Relevant Logical Facts:  - definition: This category is for components that connect structural systems or structural elements together in reference to buildings and structures.  - subclass of: civil engineering  - ancestor definition: Civil engineering: a <a href="http://sw.opencyc.org/concept/Mx4rvVi3_JwpEbGdrcN5Y29ycA">ScientificFieldOfStudy</a>.
+  [Knowledge Graph Triples]:
+   - definition: This category is for components that connect structural systems or structural elements together in reference to buildings and structures.
+   - subclass of: civil engineering
+   - ancestor definition: Civil engineering: a <a href="http://sw.opencyc.org/concept/Mx4rvVi3_JwpEbGdrcN5Y29ycA">ScientificFieldOfStudy</a>.
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+1. plant_cell_wall(subclass_of, eukaryotic_cell)
+2. ancestor_definition(eukaryotic_cell, Cell)
+3. subclass_of(plant_or_part_of_plant, biological_living_object)
+4. ancestor_definition(biological_living_object, PlantBLO and OrganismPart)
+5. definition(external_anatomical_part, part of the external anatomy of an organism)
+6. subclass_of(plant_epidermis, plant_part)
+7. human_skeleton(subclass_of, body_part)
+8. ancestor_definition(body_part, AnimalBodyPart)
+9. structural_system(subclass_of, man-made_structure)
+10. definition(structural_connector, components that connect structural systems or elements together)
+
+### Facts (Ground Truths):
+1. eukaryotic_cell
+2. plant_or_part_of_plant
+3. biological_living_object
+4. Cell
+5. PlantBLO and OrganismPart
+6. external_anatomical_part
+7. body_part
+8. AnimalBodyPart
+
+### Rules (Horn Clauses / Implications):
+1. If eukaryotic_cell, then subclass_of(plant_or_part_of_plant, biological_living_object)
+2. If plant_epidermis, then subclass_of(external_anatomical_part, organism_part)
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "subclass of: structural cell part",
+    "ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts:  - subclass of: structural cell part  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct
+  [Knowledge Graph Triples]:
+   - subclass of: structural cell part
+   - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant epidermis",
+  "uri": "http://kbpedia.org/kko/rc/PlantEpidermis",
+  "score": 1.0,
+  "triples": [
+    "subclass of: organism part"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: plant epidermis. Relevant Logical Facts:  - subclass of: organism part
+  [Knowledge Graph Triples]:
+   - subclass of: organism part
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyPart.",
+    "ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyPart.  - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+  [Knowledge Graph Triples]:
+   - subclass of: body part
+   - ancestor definition: A specialization of AnimalBodyPart.
+   - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "skeleton tarantula",
+  "uri": "http://kbpedia.org/kko/rc/EphebopusMurinus",
+  "score": 1.0,
+  "triples": [
+    "subclass of: spider",
+    "ancestor definition: A collection of all spiders..."
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: skeleton tarantula. Relevant Logical Facts:  - subclass of: spider  - ancestor definition: A collection of all spiders...
+  [Knowledge Graph Triples]:
+   - subclass of: spider
+   - ancestor definition: A collection of all spiders...
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rigidness",
+  "uri": "http://kbpedia.org/kko/rc/Rigidity",
+  "score": 1.0,
+  "triples": [
+    "subclass of: tangible physical quantity",
+    "ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have.",
+    "subclass of: scalar quantity"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: rigidness. Relevant Logical Facts:  - subclass of: tangible physical quantity  - ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have.  - subclass of: scalar quantity
+  [Knowledge Graph Triples]:
+   - subclass of: tangible physical quantity
+   - ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have.
+   - subclass of: scalar quantity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.9042143821716309,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?\nA. cell membrane\nB. cell wall\nC. chloroplast\nD. nucleus"
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.9042] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `structural_cell_part/1` - A predicate representing structural parts in cells.
+2. `cell_maintain_physical_integrity/1` - A predicate describing the function of maintaining physical integrity for a cell.
+
+#### Facts (Ground Truths):
+1. `plant_cell_wall(subclass_of, structural_cell_part)` 
+   - The plant cell wall is a subclass of structural cell parts.
+2. `ancestor_definition(plant_cell_wall, cell_maintain_physical_integrity)`
+   - An ancestor definition describing the function of maintaining physical integrity for cells.
+
+#### Rules (Horn Clauses / Implications):
+1. `skeleton(subclass_of, body_part)` 
+   - A skeleton is a subclass of body parts.
+2. `ancestor_definition(skeletal_system, support_separate_protect)`
+   - An ancestor definition describing the function of supporting, separating, and protecting other animal body parts.
+
+#### Extracted Question:
+`Which_of_the_following_parts_of_a_plant_cell(has_function_most_similar_to_animal_skeleton)` 
+
+### Structured Logic:
+
+```prolog
+?- Which_of_the_following_parts_of_a_plant_cell(
+    has_function_most_similar_to_animal_skeleton,
+    [plant_cell_wall, cell_membrane, chloroplast, nucleus]).
+
+Which_of_the_following_parts_of_a_plant_cell(has_function_most_similar_to_animal_skeleton, plant_cell_wall).
+```
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fatigue",
+  "uri": "http://kbpedia.org/kko/rc/FatigueCondition",
+  "score": 1.0,
+  "triples": [
+    "subclass of: illness",
+    "has subclass: exhausting",
+    "sibling concept: sleep deprivation"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: fatigue. Relevant Logical Facts:  - subclass of: illness  - has subclass: exhausting  - sibling concept: sleep deprivation
+  [Knowledge Graph Triples]:
+   - subclass of: illness
+   - has subclass: exhausting
+   - sibling concept: sleep deprivation
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chronic fatigue syndrome",
+  "uri": "http://kbpedia.org/kko/rc/ChronicFatigueSyndrome",
+  "score": 1.0,
+  "triples": [
+    "definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: chronic fatigue syndrome. Relevant Logical Facts:  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.
+  [Knowledge Graph Triples]:
+   - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature",
+  "uri": "http://kbpedia.org/kko/rc/Temperature",
+  "score": 1.0,
+  "triples": [
+    "subclass of: tangible physical quantity"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: temperature. Relevant Logical Facts:  - subclass of: tangible physical quantity
+  [Knowledge Graph Triples]:
+   - subclass of: tangible physical quantity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature control",
+  "uri": "http://kbpedia.org/kko/rc/TemperatureControl",
+  "score": 1.0,
+  "triples": [
+    "subclass of: scalar or vector interval"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: temperature control. Relevant Logical Facts:  - subclass of: scalar or vector interval
+  [Knowledge Graph Triples]:
+   - subclass of: scalar or vector interval
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6897716522216797,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.6898] Janette conducts an investigation to see which foods make her feel more fatigued.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6843624114990234,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.6844] She eats one of four different foods each day at the same time for four days and then records how she feels.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6737632751464844,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+[Item 7]
+[Chunk Score: 0.6738] She asks her friend Carmen to do the same investigation to see if she gets similar results.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. fatigue is an illness
+2. exhausting is a subclass of fatigue
+3. sleep deprivation is a sibling concept of fatigue
+4. ChronicFatigueSyndrome is characterized by fatigue, general pain, mental fogginess, and gastro-intestinal problems
+5. temperature is a tangible physical quantity
+
+#### Facts (Ground Truths):
+1. Janette conducts an investigation to see which foods make her feel more fatigued.
+2. She eats one of four different foods each day at the same time for four days.
+3. Carmen replicates Janette's experiment.
+
+#### Rules (Horn Clauses / Implications):
+None extracted from provided context
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging? A) trench B) rift valley C) ocean basin D) mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "tectonic plate",
+  "uri": "http://kbpedia.org/kko/rc/TectonicPlate",
+  "score": 1.0,
+  "triples": [
+    "definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: \u03c4\u03b5\u03ba\u03c4\u03bf\u03bd\u03b9\u03ba\u03cc\u03c2 \"pertaining to building\") is a scientific theory describing the large-scale motion of 7 large plates and the movements of a ",
+    "subclass of: plate tectonics",
+    "ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: \u03c4\u03b5\u03ba\u03c4\u03bf\u03bd\u03b9\u03ba\u03cc\u03c2 pertaining to building) is a scientific theory describing the large-scale ",
+    "subclass of: natural stone",
+    "ancestor definition: Instances are individual rocks, pebbles, boulders etc.."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: tectonic plate. Relevant Logical Facts:  - definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός "pertaining to building") is a scientific theory describing the large-scale motion of 7 large plates and the movements of a  - subclass of: plate tectonics  - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale  - subclass of: natural stone  - ancestor definition: Instances are individual rocks, pebbles, boulders etc..
+  [Knowledge Graph Triples]:
+   - definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός "pertaining to building") is a scientific theory describing the large-scale motion of 7 large plates and the movements of a 
+   - subclass of: plate tectonics
+   - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale 
+   - subclass of: natural stone
+   - ancestor definition: Instances are individual rocks, pebbles, boulders etc..
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "interplate earthquake",
+  "uri": "http://kbpedia.org/kko/rc/InterplateEarthquake",
+  "score": 1.0,
+  "triples": [
+    "sibling concept: intraplate earthquake"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: interplate earthquake. Relevant Logical Facts:  - sibling concept: intraplate earthquake
+  [Knowledge Graph Triples]:
+   - sibling concept: intraplate earthquake
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "anabranch",
+  "uri": "http://kbpedia.org/kko/rc/Anabranch",
+  "score": 1.0,
+  "triples": [
+    "subclass of: flowing body of water",
+    "ancestor definition: A specialization of BodyOfWater... that flows when it is not frozen."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: anabranch. Relevant Logical Facts:  - subclass of: flowing body of water  - ancestor definition: A specialization of BodyOfWater... that flows when it is not frozen.
+  [Knowledge Graph Triples]:
+   - subclass of: flowing body of water
+   - ancestor definition: A specialization of BodyOfWater... that flows when it is not frozen.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Brachyelytrum",
+  "uri": "http://kbpedia.org/kko/rc/Brachyelytrum",
+  "score": 1.0,
+  "triples": [
+    "ancestor definition: All individual plants from the order of Grasses, which includes cereal grains, bamboo, turf grass, etc."
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: Brachyelytrum. Relevant Logical Facts:  - ancestor definition: All individual plants from the order of Grasses, which includes cereal grains, bamboo, turf grass, etc.
+  [Knowledge Graph Triples]:
+   - ancestor definition: All individual plants from the order of Grasses, which includes cereal grains, bamboo, turf grass, etc.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rift valley",
+  "uri": "http://kbpedia.org/kko/rc/RiftValley",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.",
+    "subclass of: land topographical feature",
+    "ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl",
+    "subclass of: valley"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: rift valley. Relevant Logical Facts:  - definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.  - subclass of: land topographical feature  - ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl  - subclass of: valley
+  [Knowledge Graph Triples]:
+   - definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.
+   - subclass of: land topographical feature
+   - ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl
+   - subclass of: valley
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8476333618164062,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Which feature does not form as a result of tectonic plates diverging?\nA. trench\nB. rift valley\nC. ocean basin\nD. mid-ocean ridge"
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.8476] Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+1. `diverging(TectonicPlates)`: Tectonic plates are moving apart.
+2. `forms(RiftValley, DivergingTectonicPlates)`: A Rift Valley forms as a result of diverging tectonic plates.
+3. `forms(MidOceanRidge, DivergingTectonicPlates)`: A Mid Ocean Ridge forms as a result of diverging tectonic plates.
+
+### Facts (Ground Truths):
+1. `trench(Trench)` 
+2. `rift_valley(RiftValley)`
+3. `ocean_basin(OceanBasin)`
+4. `mid_ocean_ridge(MidOceanRidge)`
+
+### Rules (Horn Clauses / Implications):
+None
+==================================================
+==================================================
+ QUERY: Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed
+==================================================
+
+--- RETRIEVED CONTEXT (Top 3 Items) ---
+
+[Metadata Dump]
+{
+  "score": 0.7196063995361328,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "A student planted two bean seeds in two identical pots containing the same type of soil."
+    }
+  ]
+}
+[Item 1]
+[Chunk Score: 0.7196] A student planted two bean seeds in two identical pots containing the same type of soil.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6698989868164062,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Each day, he poured 15 milliliters of water into each pot."
+    }
+  ]
+}
+[Item 2]
+[Chunk Score: 0.6699] Each day, he poured 15 milliliters of water into each pot.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6315078735351562,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "He placed one pot in a closet and the other near a sunny window."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.6315] He placed one pot in a closet and the other near a sunny window.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates
+* `pot/1`: A container for planting seeds (e.g., pot(X)).
+* `soil_type/2`: The type of soil used in pots (e.g., soil_type(type_a, X)).
+* `water_amount/3`: The amount of water poured into a pot each day (e.g., water_amount(15, milliliters, Y)).
+* `light_source/1`: A location with or without light for the plant (e.g., light_source(sunny_window)).
+
+#### Facts
+* `pot(pot_1)`.
+* `pot(pot_2)`.
+* `soil_type(type_a, pot_1)`.
+* `soil_type(type_a, pot_2)`.
+* `water_amount(15, milliliters, day_1, pot_1)`.
+* `water_amount(15, milliliters, day_1, pot_2)`.
+* `light_source(closet, pot_1)`.
+* `light_source(sunny_window, pot_2)`.
+
+#### Rules
+None. The context does not provide any conditional statements or implications that can be used for inference.
+==================================================
+==================================================
+ QUERY: Which is the most likely reason to tag an animal? A. to monitor their eating habits B. to monitor their roaming habits C. to monitor their sleeping habits D. to monitor their reproductive habits
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reproductive endocrinologist",
+  "uri": "http://kbpedia.org/kko/rc/ReproductiveEndocrinologist",
+  "score": 1.0,
+  "triples": [
+    "definition: A reproductive endocrinologist is a doctor who specializes in diagnosing and treating disorders of the endoctrine system which interfere with reproductive capabilities.",
+    "subclass of: endocrinologist",
+    "ancestor definition: Endocrinologists are doctors who specialize in treatment of disorders of the endocrine system.",
+    "subclass of: doctor",
+    "ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation. Each instance of Doctor_Medical is a person with a certain type o"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: reproductive endocrinologist. Relevant Logical Facts:  - definition: A reproductive endocrinologist is a doctor who specializes in diagnosing and treating disorders of the endoctrine system which interfere with reproductive capabilities.  - subclass of: endocrinologist  - ancestor definition: Endocrinologists are doctors who specialize in treatment of disorders of the endocrine system.  - subclass of: doctor  - ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation. Each instance of Doctor_Medical is a person with a certain type o
+  [Knowledge Graph Triples]:
+   - definition: A reproductive endocrinologist is a doctor who specializes in diagnosing and treating disorders of the endoctrine system which interfere with reproductive capabilities.
+   - subclass of: endocrinologist
+   - ancestor definition: Endocrinologists are doctors who specialize in treatment of disorders of the endocrine system.
+   - subclass of: doctor
+   - ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation. Each instance of Doctor_Medical is a person with a certain type o
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reproductive ecology",
+  "uri": "http://kbpedia.org/kko/rc/ReproductiveEcology",
+  "score": 1.0,
+  "triples": [
+    "definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism\u2019s reproductive system to ecological variables.",
+    "subclass of: subfield of ecology",
+    "ancestor definition: The study of the interrelationships between organisms and their physical environment."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: reproductive ecology. Relevant Logical Facts:  - definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism’s reproductive system to ecological variables.  - subclass of: subfield of ecology  - ancestor definition: The study of the interrelationships between organisms and their physical environment.
+  [Knowledge Graph Triples]:
+   - definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism’s reproductive system to ecological variables.
+   - subclass of: subfield of ecology
+   - ancestor definition: The study of the interrelationships between organisms and their physical environment.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Eating behavior",
+  "uri": "http://kbpedia.org/kko/rc/EatingBehavior",
+  "score": 1.0,
+  "triples": [
+    "definition: Any eating behavior.",
+    "subclass of: ethology",
+    "ancestor definition: Ethology is the scientific and objective study of animal behaviour...",
+    "has subclass: vegetarianism"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: Eating behavior. Relevant Logical Facts:  - definition: Any eating behavior.  - subclass of: ethology  - ancestor definition: Ethology is the scientific and objective study of animal behaviour...  - has subclass: vegetarianism
+  [Knowledge Graph Triples]:
+   - definition: Any eating behavior.
+   - subclass of: ethology
+   - ancestor definition: Ethology is the scientific and objective study of animal behaviour...
+   - has subclass: vegetarianism
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Brumby",
+  "uri": "http://kbpedia.org/kko/rc/Brumby",
+  "score": 1.0,
+  "triples": [
+    "ancestor definition: A feral horse is a free-roaming horse of domesticated ancestry."
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: Brumby. Relevant Logical Facts:  - ancestor definition: A feral horse is a free-roaming horse of domesticated ancestry.
+  [Knowledge Graph Triples]:
+   - ancestor definition: A feral horse is a free-roaming horse of domesticated ancestry.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Macedonian",
+  "uri": "http://kbpedia.org/kko/rc/EthnicGroupOfMacedonians",
+  "score": 1.0,
+  "triples": [
+    "definition: The people who follow the cultural habits of Macedonians.",
+    "subclass of: Slav",
+    "ancestor definition: The collection of persons who claim or identify with a Slavish heritage.",
+    "subclass of: Europeans",
+    "ancestor definition: The ethnic groups that originated on the ContinentOfEurope."
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: Macedonian. Relevant Logical Facts:  - definition: The people who follow the cultural habits of Macedonians.  - subclass of: Slav  - ancestor definition: The collection of persons who claim or identify with a Slavish heritage.  - subclass of: Europeans  - ancestor definition: The ethnic groups that originated on the ContinentOfEurope.
+  [Knowledge Graph Triples]:
+   - definition: The people who follow the cultural habits of Macedonians.
+   - subclass of: Slav
+   - ancestor definition: The collection of persons who claim or identify with a Slavish heritage.
+   - subclass of: Europeans
+   - ancestor definition: The ethnic groups that originated on the ContinentOfEurope.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7022266387939453,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Many endangered animals are captured, tagged, and then released back into their environment."
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.7022] Many endangered animals are captured, tagged, and then released back into their environment.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6782035827636719,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body."
+    }
+  ]
+}
+[Item 7]
+[Chunk Score: 0.6782] The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `tagged(X)`: X has been tagged
+2. `released_back_into_environment(Y)` : Y was released back into its environment after being captured and tagged.
+3. `coded_plastic_or_metal(Z)` : Z is a piece of coded plastic or metal.
+
+#### Facts (Ground Truths):
+1. `Many_endangered_animals_are_captured_and_tagged`: Many endangered animals are captured, tagged, and then released back into their environment.
+2. `The_tag_may_be_a_piece_of_coded_plastic_or_metal`: The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.
+
+#### Rules (Horn Clauses / Implications):
+1. `tagged(X) :- captured_and_released_back_into_environment(Y)` : If Y was released back into its environment after being captured and tagged, then X has been tagged.
+2. `released_back_into_environment(Y) :- Many_endangered_animals_are_captured_and_tagged` : If many endangered animals are captured, tagged, and then released back into their environment, then Y was released back into its environment.
+
+Note: The extracted evidence is based on the provided context only and does not include any information from the question.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "subclass of: eukaryotic cell",
+    "ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.",
+    "subclass of: plant or part of a plant",
+    "ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts:  - subclass of: eukaryotic cell  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.  - subclass of: plant or part of a plant  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants.
+  [Knowledge Graph Triples]:
+   - subclass of: eukaryotic cell
+   - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.
+   - subclass of: plant or part of a plant
+   - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant epidermis",
+  "uri": "http://kbpedia.org/kko/rc/PlantEpidermis",
+  "score": 1.0,
+  "triples": [
+    "definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.",
+    "subclass of: external anatomical part",
+    "ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. ",
+    "subclass of: plant part",
+    "ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this "
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: plant epidermis. Relevant Logical Facts:  - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.  - subclass of: external anatomical part  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism.  - subclass of: plant part  - ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this 
+  [Knowledge Graph Triples]:
+   - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+   - subclass of: external anatomical part
+   - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. 
+   - subclass of: plant part
+   - ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this 
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyPart.",
+    "ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyPart.  - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+  [Knowledge Graph Triples]:
+   - subclass of: body part
+   - ancestor definition: A specialization of AnimalBodyPart.
+   - ancestor definition: Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of an animal's body.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "skeleton tarantula",
+  "uri": "http://kbpedia.org/kko/rc/EphebopusMurinus",
+  "score": 1.0,
+  "triples": [
+    "subclass of: spider",
+    "ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.",
+    "B. cell wall"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: skeleton tarantula. Relevant Logical Facts:  - subclass of: spider  - ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.  - B. cell wall
+  [Knowledge Graph Triples]:
+   - subclass of: spider
+   - ancestor definition: The collection of all spiders, which are arachnids with eight legs and which typically can spin silk from organs toward the back of their bodies.
+   - B. cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "structural system",
+  "uri": "http://kbpedia.org/kko/rc/StructuralSystem",
+  "score": 1.0,
+  "triples": [
+    "subclass of: man-made structure",
+    "ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection ",
+    "subclass of: fixed freestanding structure"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: structural system. Relevant Logical Facts:  - subclass of: man-made structure  - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection  - subclass of: fixed freestanding structure
+  [Knowledge Graph Triples]:
+   - subclass of: man-made structure
+   - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection 
+   - subclass of: fixed freestanding structure
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+
+1. `plant_cell_wall(subclass_of, eukaryotic_cell)`
+2. `eukaryotic_cell(ancestor_definition, Cell)`
+3. `cell_wall(subclass_of, plant_or_part_of_plant)`
+4. `plant_or_part_of_plant(ancestor_definition, BiologicalLivingObject)`
+5. `external_anatomical_part(subclass_of, organism_part)`
+6. `organism_part(ancestor_definition, ExternalAnatomicalPart)`
+7. `skeletal_system(subclass_of, body_part)`
+8. `body_part(ancestor_definition, AnimalBodyPart)`
+9. `animal_body_part(ancestor_definition, SkeletalSystem)`
+
+### Facts (Ground Truths):
+
+1. `cell_wall`
+2. `plant_cell_wall`
+3. `eukaryotic_cell`
+4. `BiologicalLivingObject`
+5. `ExternalAnatomicalPart`
+6. `organism_part`
+7. `body_part`
+8. `AnimalBodyPart`
+
+### Rules (Horn Clauses / Implications):
+
+1. `skeletal_system(X) :- body_part(X), AnimalBodyPart(Y)` 
+2. `cell_wall(subclass_of, plant_or_part_of_plant) :- eukaryotic_cell(ancestor_definition, Cell)`
+3. `plant_epidermis(X) :- Plant(Z), ExternalAnatomicalPart(W)`
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fatigue",
+  "uri": "http://kbpedia.org/kko/rc/FatigueCondition",
+  "score": 1.0,
+  "triples": [
+    "subclass of: illness",
+    "has subclass: exhausting",
+    "sibling concept: sleep deprivation"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: fatigue. Relevant Logical Facts:  - subclass of: illness  - has subclass: exhausting  - sibling concept: sleep deprivation
+  [Knowledge Graph Triples]:
+   - subclass of: illness
+   - has subclass: exhausting
+   - sibling concept: sleep deprivation
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chronic fatigue syndrome",
+  "uri": "http://kbpedia.org/kko/rc/ChronicFatigueSyndrome",
+  "score": 1.0,
+  "triples": [
+    "definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: chronic fatigue syndrome. Relevant Logical Facts:  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.
+  [Knowledge Graph Triples]:
+   - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature",
+  "uri": "http://kbpedia.org/kko/rc/Temperature",
+  "score": 1.0,
+  "triples": [
+    "subclass of: tangible physical quantity"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: temperature. Relevant Logical Facts:  - subclass of: tangible physical quantity
+  [Knowledge Graph Triples]:
+   - subclass of: tangible physical quantity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature control",
+  "uri": "http://kbpedia.org/kko/rc/TemperatureControl",
+  "score": 1.0,
+  "triples": [
+    "subclass of: scalar or vector interval"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: temperature control. Relevant Logical Facts:  - subclass of: scalar or vector interval
+  [Knowledge Graph Triples]:
+   - subclass of: scalar or vector interval
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6897716522216797,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.6898] Janette conducts an investigation to see which foods make her feel more fatigued.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6843624114990234,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.6844] She eats one of four different foods each day at the same time for four days and then records how she feels.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6737632751464844,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+[Item 7]
+[Chunk Score: 0.6738] She asks her friend Carmen to do the same investigation to see if she gets similar results.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. fatigue is an illness
+2. exhausting is a subclass of fatigue
+3. sleep deprivation is a sibling concept of fatigue
+4. ChronicFatigueSyndrome is characterized by fatigue, general pain, mental fogginess, and gastro-intestinal problems
+5. temperature is a tangible physical quantity
+
+#### Facts (Ground Truths):
+1. Janette conducts an investigation to see which foods make her feel more fatigued.
+2. She eats one of four different foods each day at the same time for four days.
+3. Carmen replicates Janette's experiment.
+
+#### Rules (Horn Clauses / Implications):
+None extracted from provided context
+==================================================

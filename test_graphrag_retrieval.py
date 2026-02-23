@@ -17,11 +17,36 @@ def log_retrieved_context(test_case: dict, retrieved_context: dict, debug_id: in
     formatted_input = test_case["formatted_input"]
     correct_answer = test_case["correct_answer"]
     benchmark_name = test_case["dataset"]
+    
+    if isinstance(retrieved_context, dict):
+        llm_answer        = retrieved_context.get("answer", "N/A")
+        context_strings   = retrieved_context.get("contexts", [])
+        context_from_prompt = retrieved_context.get("context_from_prompt", [])
+    else:
+        llm_answer        = "N/A"
+        context_strings   = retrieved_context
+        context_from_prompt = []
+
     with open("kbpedia_graphrag_retrieval.log", "a", encoding="utf-8") as log_file:
-        log_file.write(f"   [+] Debug ID #{debug_id} | Benchmark: {benchmark_name}\n      Formatted Input: {formatted_input}\n        Context: {retrieved_context}\n        Correct Answer: {correct_answer}\n")
+        log_file.write(
+            f"   [+] Debug ID #{debug_id} | Benchmark: {benchmark_name}\n"
+            f"      Formatted Input: {formatted_input}\n"
+            f"        Answer:            {llm_answer}\n"
+            f"        Context (retrieved): {context_strings}\n"
+            f"        Context (ingested):  {context_from_prompt}\n"
+            f"        Correct Answer: {correct_answer}\n"
+        )
         log_file.flush()
-    print(f"   [+] Debug ID #{debug_id} | Benchmark: {benchmark_name}\n      Formatted Input: {formatted_input}\n        Context: {retrieved_context}\n        Correct Answer: {correct_answer}\n")
+    print(
+        f"   [+] Debug ID #{debug_id} | Benchmark: {benchmark_name}\n"
+        f"      Formatted Input: {formatted_input}\n"
+        f"        Answer:            {llm_answer}\n"
+        f"        Context (retrieved): {context_strings}\n"
+        f"        Context (ingested):  {context_from_prompt}\n"
+        f"        Correct Answer: {correct_answer}\n"
+    )
     print(f"Retrieved context logged for debug ID {debug_id}.")
+
     
 def run_tests(start_from_id=1):
     test_cases_ai2_arc, test_cases_openbookqa = [], []

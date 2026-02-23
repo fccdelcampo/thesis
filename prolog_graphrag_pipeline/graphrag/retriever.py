@@ -330,9 +330,12 @@ def generate(llm, retriever, query) -> dict:
                 for lc in local_ctx:
                     enriched_content += f"   - {lc.get('entity')} {lc.get('relationship')} {lc.get('target')}\n"
             
-            # Check for knowledge graph triples (from KBPedia/VectorCypherRetriever)
+            # Check for knowledge graph triples (from VectorCypherRetriever local chunks only).
+            # KBPedia items already embed triples inside clean_content ("Relevant Logical Facts"),
+            # so skip to avoid duplicating them.
             kg_triples = metadata.get('triples', [])
-            if kg_triples:
+            is_kbpedia = metadata.get('source') == 'KBPedia'
+            if kg_triples and not is_kbpedia:
                  enriched_content += "  [Knowledge Graph Triples]:\n"
                  for t in kg_triples:
                      enriched_content += f"   - {t}\n"
