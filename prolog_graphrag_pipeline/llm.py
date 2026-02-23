@@ -25,7 +25,7 @@ def generate(user_question: str, retrieved_context: Optional[str], explainer_out
                         model='llama3.1:8b-instruct-q4_K_M',
                         messages=LLM_MESSAGES + [{"role": "user", "content": final_prompt}],
                         options={
-                            'temperature': 0.4,
+                            'temperature': 0.2,
                             'keep_alive': 0,
                             'top_k': 50,
                             'top_p': 0.9
@@ -46,7 +46,7 @@ def generate(user_question: str, retrieved_context: Optional[str], explainer_out
                     model='llama3.1:8b-instruct-q4_K_M',
                     messages=LLM_MESSAGES + [{"role": "user", "content": final_prompt}],
                     options={
-                        'temperature': 0.4,
+                        'temperature': 0.2,
                         'keep_alive': 0,
                         'top_k': 50,
                         'top_p': 0.9

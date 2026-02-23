@@ -134,6 +134,18 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
     if re.match(r"^\d+\.?$", query):
         raise ValueError(f"Invalid Prolog Query: '{query}'. The query must be a Prolog predicate (e.g., 'successor(1, X).'), not a number.")
 
+    # VALIDATION: Query must NOT contain rule definitions (:-) — those belong in <database>
+    # Strip comments and quoted strings before checking, to avoid false positives
+    query_stripped = re.sub(r"'[^']*'", "''", query)
+    query_stripped = re.sub(r"%.*$", "", query_stripped, flags=re.MULTILINE)
+    if ":-" in query_stripped:
+        raise ValueError(
+            "The <query> tag contains a rule definition (with ':-'), but queries must be plain goals. "
+            "Rule definitions (Head :- Body.) belong inside <database> tags. "
+            "The <query> tag must contain ONLY a single callable goal, e.g.: `answer(X).` or `my_predicate(foo).` "
+            "Move the rule bodies to <database> and call the predicate head in <query>."
+        )
+
     # VALIDATION: Ensure Query ends with a period
     if not query.endswith('.'):
         query += "."
@@ -222,6 +234,11 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                 hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `option(A, cell_wall).` where A is unbound). "
                         "Use LOWERCASE atoms for constants in facts (e.g., `option(a, cell_wall).`). "
                         "Variables (uppercase) should only appear in rule heads/bodies where they are instantiated by matching facts.")
+            elif "(:-)/2" in error_str or "Rules must be loaded from a file" in error_str:
+                hint = ("You put a rule definition (Head :- Body.) inside the <query> tag. "
+                        "The <query> tag must contain ONLY a plain callable goal, e.g.: `answer(X).` "
+                        "Rule definitions with ':-' belong inside <database> tags. "
+                        "Move the rule body to <database> and call the rule's head predicate in <query>.")
             elif "Unknown procedure" in error_str:
                 hint = ("Arity mismatch: the predicate called in the query has a different number of arguments than what is defined in the database. "
                         "Check that every predicate call in the query uses the exact same number of arguments as its definition (e.g., if DB has "

@@ -63,51 +63,74 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
     print(f"**Retrieved Context:**\n{retrieved_context}")
     print(f"**Context from Prompt:**\n{context_from_prompt}")
     print("Generating Prolog...")
-    final_context = retrieved_context+ "\n" +context_from_prompt
-    database, query = generate_prolog_code(user_question=user_question, retrieved_context=final_context, most_recent_error=None)
-    print(f"**Extracted database:**\n{database}")
-    print(f"**Extracted query:**\n{query}")
+    final_context = retrieved_context + "\n" + context_from_prompt
 
-    if not SCASP_AVAILABLE:
-        raise RuntimeError("s(CASP) library is specifically required for this pipeline. Execution aborted.")
+    prolog_error: str | None = None  # None = success; str = error message on failure
 
-    wrapper = ""
-    human_readable_explanation = ""
-    retrieved_values = ""
-
-    print("Generating s(CASP) wrapper...")
-    wrapper = generate_safe_scasp_wrapper(query)
-    print(f"**Wrapper:** \n{wrapper}")
-    final_query = f"explain(Explanation)."
-    
-    print("Consulting database...", flush=True)
-    janus.consult("user", database + "\n" + wrapper)
+    # ── Attempt Prolog-verified path ───────────────────────────────────
     try:
-        print("Querying database...", flush=True)
-        result = janus.query_once(final_query)
-        print(f"**Query Results:** \n{result}", flush=True)
-        
-        if result:
-            for arg in result.keys():  
-                if arg not in ["Explanation", "Tree", "Model"] and (arg.isupper() or arg == "truth"):  
-                    print(f"{arg} Found: {result[arg]}")    
-                    retrieved_values += f"{arg}: {result[arg]} "
-            
-            if SCASP_AVAILABLE and 'Explanation' in result:
-                print("**Human-Readable Explanation**")
-                human_readable_explanation = result['Explanation']
-                print(human_readable_explanation)
-        else:
-            print("No solution found.")
-    except Exception as e:
-        print(f"Error: {e}")
-        
-    explainer_output = generate_explanation(user_question=user_question, retrieved_context=retrieved_context, database=database, query=query, retrieved_values=retrieved_values, human_readable_explanation=human_readable_explanation)
-    if explainer_output:
-        print(f"**Explainer Output:** \n{explainer_output}")
-    else:
-        print("ERROR: Explainer failed to generate output.")
+        database, query = generate_prolog_code(
+            user_question=user_question,
+            retrieved_context=final_context,
+            most_recent_error=None,
+        )
+        print(f"**Extracted database:**\n{database}")
+        print(f"**Extracted query:**\n{query}")
 
+        if not SCASP_AVAILABLE:
+            raise RuntimeError("s(CASP) library is specifically required for this pipeline. Execution aborted.")
+
+        wrapper = ""
+        human_readable_explanation = ""
+        retrieved_values = ""
+
+        print("Generating s(CASP) wrapper...")
+        wrapper = generate_safe_scasp_wrapper(query)
+        print(f"**Wrapper:** \n{wrapper}")
+        final_query = f"explain(Explanation)."
+        
+        print("Consulting database...", flush=True)
+        janus.consult("user", database + "\n" + wrapper)
+        try:
+            print("Querying database...", flush=True)
+            result = janus.query_once(final_query)
+            print(f"**Query Results:** \n{result}", flush=True)
+            
+            if result:
+                for arg in result.keys():  
+                    if arg not in ["Explanation", "Tree", "Model"] and (arg.isupper() or arg == "truth"):  
+                        print(f"{arg} Found: {result[arg]}")    
+                        retrieved_values += f"{arg}: {result[arg]} "
+                
+                if SCASP_AVAILABLE and 'Explanation' in result:
+                    print("**Human-Readable Explanation**")
+                    human_readable_explanation = result['Explanation']
+                    print(human_readable_explanation)
+            else:
+                print("No solution found.")
+        except Exception as e:
+            print(f"Error: {e}")
+            
+        explainer_output = generate_explanation(
+            user_question=user_question,
+            retrieved_context=retrieved_context,
+            database=database,
+            query=query,
+            retrieved_values=retrieved_values,
+            human_readable_explanation=human_readable_explanation,
+        )
+        if explainer_output:
+            print(f"**Explainer Output:** \n{explainer_output}")
+        else:
+            print("ERROR: Explainer failed to generate output.")
+
+    except Exception as gen_err:
+        # ── Graceful fallback: Prolog generation failed ──────────────────────
+        prolog_error = str(gen_err)
+        print(f"[Prolog FAILED] {prolog_error} — falling back to unverified GraphRAG answer.")
+        explainer_output = None  # No Prolog proof; LLM will answer from context alone
+
+    # ── Final synthesis (always runs) ─────────────────────────────────
     print("\n**FINAL LLM OUTPUT:")
     final_answer = llm.generate(user_question, retrieved_context, explainer_output, flag="synthesis")
     
@@ -117,8 +140,12 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
         print("ERROR: Final LLM failed to generate answer.")
     end_time = time.perf_counter()
     duration = end_time - start_time
-    print(f"====The Prolog pipeline executed in {duration:.4f} seconds.===")
-    return final_answer if final_answer else {"text_answer": "Error: Final LLM failed to generate answer."}
+    print(f"====The pipeline executed in {duration:.4f} seconds. Prolog verified: {prolog_error is None}===")
+
+    result_dict = final_answer if final_answer else {"text_answer": "Error: Final LLM failed to generate answer."}
+    if isinstance(result_dict, dict):
+        result_dict["prolog_error"] = prolog_error  # None = verified; str = fallback reason
+    return result_dict
 
 
 if __name__ == "__main__":

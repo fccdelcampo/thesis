@@ -26391,3 +26391,69 @@
   }
 ]
 ===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text A man wants to use a material in a project that will be nonrenewable.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+    {
+        "id": "project_atom",
+        "label": "Project",
+        "properties": {"name": "project"}
+    },
+    {
+        "id": "man_atom",
+        "label": "Person",
+        "properties": {"name": "man"}
+    },
+    {
+        "id": "material_atom",
+        "label": "Concept",
+        "properties": {"name": "material"}
+    }
+] 
+[
+    {
+        "type": "DEFINES",
+        "start_node_id": "project_atom",
+        "end_node_id": "nonrenewable_atom",
+        "properties": {
+            "natural_statement": "A project will be nonrenewable.",
+            "logic_intent": "FACT",
+            "logical_form_hint": "renewable_project(X) :- renewable_resource(X)"
+        }
+    },
+    {
+        "type": "CAUSES",
+        "start_node_id": "man_atom",
+        "end_node_id": "project_atom",
+        "properties": {
+            "natural_statement": "A man wants to use a material in a project that will be nonrenewable.",
+            "logic_intent": "FACT",
+            "logical_form_hint": "man_wants_to_use_material(M, P) :- man(M), wants_to_use_material(M, P)"
+        }
+    },
+    {
+        "type": "DEFINES",
+        "start_node_id": "material_atom",
+        "end_node_id": "project_atom",
+        "properties": {
+            "natural_statement": "A material will be used in a project.",
+            "logic_intent": "FACT",
+            "logical_form_hint": "material_used_in_project(M, P) :- material(M), used_in_project(M, P)"
+        }
+    },
+    {
+        "type": "RELATED_TO",
+        "start_node_id": "man_atom",
+        "end_node_id": "material_atom",
+        "properties": {
+            "natural_statement": "A man wants to use a material in a project that will be nonrenewable.",
+            "logic_intent": "RULE",
+            "logical_form_hint": "man_wants_to_use_material(M, P) :- related_to_man(M), related_to_material(M)"
+        }
+    }
+]
+===================================

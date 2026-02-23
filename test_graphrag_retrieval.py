@@ -19,19 +19,26 @@ def log_retrieved_context(test_case: dict, retrieved_context: dict, debug_id: in
     benchmark_name = test_case["dataset"]
     
     if isinstance(retrieved_context, dict):
-        llm_answer        = retrieved_context.get("answer", "N/A")
-        context_strings   = retrieved_context.get("contexts", [])
+        llm_answer          = retrieved_context.get("answer", "N/A")
+        context_strings     = retrieved_context.get("contexts", [])
         context_from_prompt = retrieved_context.get("context_from_prompt", [])
+        prolog_error        = retrieved_context.get("prolog_error", None)  # None = verified
     else:
-        llm_answer        = "N/A"
-        context_strings   = retrieved_context
+        llm_answer          = "N/A"
+        context_strings     = retrieved_context
         context_from_prompt = []
+        prolog_error        = None
+
+    # Append a non-disruptive verification note when Prolog failed
+    verification_note = ""
+    if prolog_error is not None:
+        verification_note = f"\n        [⚠ Prolog verification FAILED — unverified answer. Reason: {prolog_error}]"
 
     with open("kbpedia_graphrag_retrieval.log", "a", encoding="utf-8") as log_file:
         log_file.write(
             f"   [+] Debug ID #{debug_id} | Benchmark: {benchmark_name}\n"
             f"      Formatted Input: {formatted_input}\n"
-            f"        Answer:            {llm_answer}\n"
+            f"        Answer:            {llm_answer}{verification_note}\n"
             f"        Context (retrieved): {context_strings}\n"
             f"        Context (ingested):  {context_from_prompt}\n"
             f"        Correct Answer: {correct_answer}\n"
@@ -40,7 +47,7 @@ def log_retrieved_context(test_case: dict, retrieved_context: dict, debug_id: in
     print(
         f"   [+] Debug ID #{debug_id} | Benchmark: {benchmark_name}\n"
         f"      Formatted Input: {formatted_input}\n"
-        f"        Answer:            {llm_answer}\n"
+        f"        Answer:            {llm_answer}{verification_note}\n"
         f"        Context (retrieved): {context_strings}\n"
         f"        Context (ingested):  {context_from_prompt}\n"
         f"        Correct Answer: {correct_answer}\n"
@@ -73,4 +80,4 @@ def run_tests(start_from_id=1):
             continue
 
 
-run_tests(start_from_id=1)
+run_tests(start_from_id=21)

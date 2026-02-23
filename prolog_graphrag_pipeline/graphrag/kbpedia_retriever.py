@@ -2,13 +2,13 @@
 Grounded KBPedia Retriever — Neo4j Edition
 Queries KBPedia concepts stored in Neo4j (:KBPediaConcept nodes).
 
-Two modes (controlled by `use_llm` at construction time):
-  use_llm=False (default, FAST):
+Two modes (controlled by `triple_filter` at construction time):
+  triple_filter=False (default, FAST):
     - Entity extraction: keyword-based, zero LLM calls
-    - Triple selection:  all raw triples returned (no filtering)
-  use_llm=True (SLOW, higher quality):
+    - Concept selection:  ONE LLM call at the end to filter all candidates at once
+  triple_filter=True (RIGOROUS, highest quality):
     - Entity extraction: LLM extracts entities + MCQ choices
-    - Triple selection:  LLM keeps only query-relevant triples
+    - Triple selection:  LLM keeps only query-relevant triples per concept (N calls)
 """
 
 import json
@@ -19,17 +19,17 @@ from typing import List, Dict, Any, Optional
 class KBPediaRetriever:
     """
     Retrieves grounded knowledge from KBPedia concepts stored in Neo4j.
-    Fast mode (use_llm=False, default): keyword entity extraction + raw triples.
-    Slow mode (use_llm=True): LLM entity extraction + LLM triple filtering.
+    Fast mode (triple_filter=False, default): keyword entity extraction + single end-of-search LLM filter.
+    Rigorous mode (triple_filter=True): LLM entity extraction + per-concept LLM triple filtering.
     """
 
     _index_verified = False
 
-    def __init__(self, driver, llm=None, top_k: int = 4, use_llm: bool = False):
+    def __init__(self, driver, llm=None, top_k: int = 4, triple_filter: bool = False):
         self.driver  = driver
         self.llm     = llm
         self.top_k   = top_k
-        self.use_llm = use_llm  # False = fast keyword mode; True = LLM-assisted mode
+        self.triple_filter = triple_filter  # False = fast (1 LLM call at end); True = rigorous per-concept LLM filter
 
     def _verify_index(self):
         """Check once whether the KBPedia fulltext index exists."""
@@ -285,6 +285,49 @@ If none are relevant, output an empty list [].
 
         return triples
 
+    def _filter_concepts_once(self, query_text: str, candidates: list) -> list:
+        """
+        Single LLM call to filter all candidates at once.
+        `candidates` is a list of dicts: {name, uri, definition, triples}.
+        Returns a filtered list of dicts containing only relevant candidates.
+        """
+        if not self.llm or not candidates:
+            return candidates
+
+        summary_lines = []
+        for idx, c in enumerate(candidates):
+            defn = (c.get("definition") or "")[:150]
+            summary_lines.append(f"[{idx}] {c['name']}: {defn}")
+        summary_text = "\n".join(summary_lines)
+
+        prompt = f"""You are filtering KBPedia knowledge graph concepts for relevance.
+
+User query: "{query_text}"
+
+Candidates (index: concept name: short definition):
+{summary_text}
+
+Return a JSON list of the indices (integers) of concepts that are relevant to the query.
+A concept is relevant if its definition or name overlaps with the topic of the query.
+If none are relevant, return [].
+Output ONLY the JSON list, nothing else. Example: [0, 2, 4]
+"""
+        try:
+            raw = self.llm.invoke(prompt)
+            res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
+            if "```" in res:
+                res = res.split("```")[1].split("```")[0].strip()
+            bracket_start = res.find('[')
+            bracket_end = res.rfind(']')
+            if bracket_start != -1 and bracket_end != -1:
+                res = res[bracket_start:bracket_end + 1]
+            indices = json.loads(res)
+            print(f"DEBUG: End-filter LLM kept indices: {indices} from {len(candidates)} candidates.", flush=True)
+            return [candidates[i] for i in indices if isinstance(i, int) and 0 <= i < len(candidates)]
+        except Exception as e:
+            print(f"DEBUG: End-filter LLM call failed: {e}. Returning all candidates.", flush=True)
+            return candidates
+
     def search(self, query_text: str, top_k: int = 5) -> Any:
         from .retriever import RetrieverResult, RetrieverResultItem
 
@@ -292,19 +335,22 @@ If none are relevant, output an empty list [].
             return RetrieverResult(items=[], metadata={})
 
         # ── Entity extraction ─────────────────────────────────────────────────
-        if self.use_llm:
-            print(f"DEBUG: [KBPedia SLOW mode] Querying for: '{query_text}'", flush=True)
+        if self.triple_filter:
+            print(f"DEBUG: [KBPedia RIGOROUS mode] Querying for: '{query_text}'", flush=True)
             entities = self.extract_entities_from_query(query_text)
         else:
             print(f"DEBUG: [KBPedia FAST mode] Querying for: '{query_text}'", flush=True)
             entities = self._extract_entities_fast(query_text)
         print(f"DEBUG: Extracted entities for KBPedia: {entities}", flush=True)
 
-        items = []
         seen_uris = set()
+        # In fast mode we buffer all candidates first, then do one LLM pass at the end.
+        # In rigorous mode we filter per concept and build items directly.
+        candidates = []  # for fast mode buffering: list of {name, uri, definition, triples}
+        items = []       # final result items
 
         for concept_name in entities:
-            if len(items) >= top_k:
+            if len(items) >= top_k and self.triple_filter:
                 break
 
             matches = self.find_concepts(concept_name, limit=2)
@@ -316,7 +362,7 @@ If none are relevant, output an empty list [].
             print(f"DEBUG: KBPedia matched {len(matches)} concept(s) for '{concept_name}': {[m['name'] for m in matches]}", flush=True)
 
             for match in matches:
-                if len(items) >= top_k:
+                if len(items) >= top_k and self.triple_filter:
                     break
 
                 uri = match["uri"]
@@ -324,7 +370,7 @@ If none are relevant, output an empty list [].
                     continue
                 seen_uris.add(uri)
 
-                # Build fact list from definition + neighborhood
+                # Build raw triples
                 raw_triples = []
                 if match["definition"]:
                     raw_triples.append(f"definition: {match['definition'][:200]}")
@@ -338,32 +384,45 @@ If none are relevant, output an empty list [].
                     print(f"DEBUG: No raw triples for '{match['name']}' ({uri}), skipping.", flush=True)
                     continue
 
-                # ── Triple selection ──────────────────────────────────────────
-                if self.use_llm:
-                    # SLOW: LLM decides which triples are relevant
+                if self.triple_filter:
+                    # RIGOROUS: LLM filters triples per concept
                     print(f"DEBUG: Built {len(raw_triples)} raw triple(s) for '{match['name']}'. Sending to LLM filter...", flush=True)
                     selected_triples = self.filter_triples_for_query(query_text, match["name"], raw_triples)
-                    print(f"DEBUG: LLM filter kept {len(selected_triples)}/{len(raw_triples)} triple(s) for '{match['name']}': {selected_triples}", flush=True)
+                    print(f"DEBUG: LLM filter kept {len(selected_triples)}/{len(raw_triples)} triple(s) for '{match['name']}'", flush=True)
+
+                    if not selected_triples:
+                        continue
+
+                    triples_text = "\n".join([f"  - {t}" for t in selected_triples])
+                    content = f"KBPedia Concept: {match['name']}.\nRelevant Logical Facts:\n{triples_text}"
+                    items.append(RetrieverResultItem(
+                        content=content,
+                        metadata={"source": "KBPedia", "entity": match["name"],
+                                  "uri": uri, "score": 1.0, "triples": selected_triples},
+                    ))
                 else:
-                    # FAST: return all raw triples (no LLM call)
-                    selected_triples = raw_triples
-                    print(f"DEBUG: Fast mode — using all {len(selected_triples)} raw triple(s) for '{match['name']}'", flush=True)
+                    # FAST: buffer raw candidates for a single end-of-loop LLM pass
+                    print(f"DEBUG: Buffered {len(raw_triples)} raw triple(s) for '{match['name']}'", flush=True)
+                    candidates.append({
+                        "name": match["name"],
+                        "uri": uri,
+                        "definition": match.get("definition", ""),
+                        "triples": raw_triples,
+                    })
 
-                if not selected_triples:
-                    continue
-
-                triples_text = "\n".join([f"  - {t}" for t in selected_triples])
-                content = f"KBPedia Concept: {match['name']}.\nRelevant Logical Facts:\n{triples_text}"
-
-                metadata = {
-                    "source": "KBPedia",
-                    "entity": match["name"],
-                    "uri": uri,
-                    "score": 1.0,
-                    "triples": selected_triples,
-                }
-
-                items.append(RetrieverResultItem(content=content, metadata=metadata))
+        # ── Fast-mode: single LLM relevance filter over all candidates ─────────────
+        if not self.triple_filter and candidates:
+            filtered_candidates = self._filter_concepts_once(query_text, candidates)
+            print(f"DEBUG: End-filter kept {len(filtered_candidates)}/{len(candidates)} concepts.", flush=True)
+            for c in filtered_candidates[:top_k]:
+                triples_text = "\n".join([f"  - {t}" for t in c["triples"]])
+                content = f"KBPedia Concept: {c['name']}.\nRelevant Logical Facts:\n{triples_text}"
+                items.append(RetrieverResultItem(
+                    content=content,
+                    metadata={"source": "KBPedia", "entity": c["name"],
+                              "uri": c["uri"], "score": 1.0, "triples": c["triples"]},
+                ))
 
         print(f"DEBUG: KBPedia found {len(items)} grounded concept contexts.", flush=True)
         return RetrieverResult(items=items, metadata={})
+
