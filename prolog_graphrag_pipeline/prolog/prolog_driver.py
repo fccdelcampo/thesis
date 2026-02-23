@@ -20,19 +20,34 @@ SCASP_AVAILABLE = False
 
 def use_scasp():
     global SCASP_AVAILABLE
-    if not SCASP_AVAILABLE:
-        janus.query("pack_install(scasp, [interactive(false)]).")
+    if SCASP_AVAILABLE:
+        return
+        
+    print("Attempting to load s(CASP)...")
     try:
+        # Try to load first
         list(janus.query("use_module(library(scasp))."))
         janus.query_once("use_module(library(scasp/human)).")
         print("s(CASP) loaded successfully.")
         SCASP_AVAILABLE = True
-    except Exception as e:
-        print(f"CRITICAL ERROR: s(CASP) library not found: {e}")
-        SCASP_AVAILABLE = False
+    except Exception:
+        print("s(CASP) not found locally. Attempting installation...")
+        try:
+            janus.query_once("pack_install(scasp, [interactive(false)]).")
+            list(janus.query("use_module(library(scasp))."))
+            janus.query_once("use_module(library(scasp/human)).")
+            print("s(CASP) installed and loaded successfully.")
+            SCASP_AVAILABLE = True
+        except Exception as e:
+            print(f"CRITICAL ERROR: Failed to install or load s(CASP): {e}")
+            SCASP_AVAILABLE = False
 
 def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt: str) -> str:
     start_time = time.perf_counter()
+    
+    # Ensure s(CASP) is loaded
+    if not SCASP_AVAILABLE:
+        use_scasp()
     # Ensure inputs are strings
     if isinstance(retrieved_context, list):
         retrieved_context = "\n".join(retrieved_context)

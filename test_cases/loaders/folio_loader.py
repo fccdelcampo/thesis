@@ -81,7 +81,7 @@ class FolioLoader:
                 
                 entry = {
                     "question": question_text,
-                    "answer": conclusion,
+                    "correct_answer": conclusion,
                     "label": label,
                     "premises": premises
                 }

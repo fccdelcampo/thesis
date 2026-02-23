@@ -92,7 +92,7 @@ class MMLULoader:
                         entry = {
                             "question": item['question'],
                             "options": item['choices'],
-                            "answer": correct_char,
+                            "correct_answer": correct_char,
                             "subject": subject
                         }
                         # Start logging to file

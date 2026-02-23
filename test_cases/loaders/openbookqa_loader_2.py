@@ -90,7 +90,7 @@ class OpenBookQALoader:
                         "dataset": "openbookqa",
                         "test_case_id": np.random.randint(1, 1000),
                         "question": formatted_input, #                        "question": question,
-                        "answer": answer_key,
+                        "correct_answer": answer_key,
                         "choices": choices
                     }
                     

@@ -135,6 +135,10 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             database = db_query["database"]
             query = db_query["query"].strip()
             
+            # VALIDATION: Provide fallback for ?- hallucination
+            if query.startswith("?-"):
+                query = query[2:].strip()
+
             # VALIDATION: Ensure Query is not just a number
             if re.match(r"^\d+\.?$", query):
                  raise ValueError(f"Invalid Prolog Query: '{query}'. The query must be a Prolog predicate (e.g., 'successor(1, X).'), not a number.")
@@ -147,14 +151,25 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             combined_code = database + "\n" + query
             # Remove anything inside single quotes to avoid false positives
             unquoted_code = re.sub(r"'[^']*'", "''", combined_code)
-            # Find disallowed symbols outside quotes
-            match = re.search(r"([~⊃∨∧]|\s\+\s|\\\+)", unquoted_code)
-            if match:
-                invalid_symbol = match.group(1).strip()
-                hint_msg = f"Invalid symbol '{invalid_symbol}' found unquoted.\n"
-                hint_msg += "If this is a NEGATION operator, you MUST use 'not' for negation by failure, or '-' for classical negation. NEVER use '~' as an operator.\n"
-                hint_msg += "If this is part of a logical formula string (like '(G ∨ H) ⊃ ~I'), you MUST wrap the ENTIRE formula in single quotes to make it a valid Prolog atom (e.g., `formula('(G ∨ H) ⊃ ~I').`)."
-                raise ValueError(hint_msg)
+            # Remove Prolog comments (% to end of line) to avoid false positives
+            unquoted_code = re.sub(r"%.*$", "", unquoted_code, flags=re.MULTILINE)
+            
+            # Check for s(CASP) forbidden operators: ;  =:=  =\=  ->  \+  ~  ⊃  ∨  ∧
+            # Also check for 'is' used as arithmetic evaluation (word boundary match)
+            forbidden_patterns = [
+                (r';', "Disjunction ';' is forbidden in s(CASP). Use multiple separate rules with the same head instead of ';'."),
+                (r'=:=', "Arithmetic equality '=:=' is forbidden in s(CASP). Use '#=' for constraint arithmetic or '=' for unification."),
+                (r'=\\=', "Arithmetic inequality '=\\=' is forbidden in s(CASP). Use '#=\\=' for constraint arithmetic."),
+                (r'->', "If-then '->' is forbidden in s(CASP). Use separate rules instead."),
+                (r'[~⊃∨∧]', "Unquoted logic symbol found. Wrap logical formulas in single quotes or use 'not'/'-' for negation."),
+                (r'\\\+', "Negation '\\+' is forbidden in s(CASP). Use 'not' for negation as failure."),
+            ]
+            
+            validation_failed = False
+            for pattern, hint in forbidden_patterns:
+                if re.search(pattern, unquoted_code):
+                    raise ValueError(f"{hint}")
+
 
             print(f"Iteration {i} | Extracted Database:\n{database}\n")
             print(f"Iteration {i} | Extracted Query:\n{query}\n")

@@ -60,11 +60,9 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
         "prolog_explanation": explainer_output.get("text_answer", "") if explainer_output else ""
     }
     
-def run_graphrag_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include_conclusion: bool = True) -> dict:
+def run_graphrag_pipeline(user_prompt: str, flag: str = "", sample_mode: bool = False, include_conclusion: bool = True) -> dict:
     """Wrapper function to run the entire pipeline with a given prompt and flag."""
-    retrieved_context = graphrag_driver.run_pipeline(user_prompt)
-    return 
-    
+    return run_pipeline(user_prompt, flag, sample_mode, include_conclusion)
 
 if __name__ == "__main__":
     prompt = "Which major international airport in south-east England ranks as the 8th busiest airport in Europe and replaced Croydon Airport?"

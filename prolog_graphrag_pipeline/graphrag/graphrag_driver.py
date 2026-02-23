@@ -11,8 +11,22 @@ from .config import PROMPT_TEMPLATE, NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD, 
 # However, this will fail when you run this file directly. For debugging purposes, you can run 'python -m graphrag-pipeline.graphrag.graphrag_driver' in the terminal.
 import asyncio
 import time
-
 import sys
+
+# Persistent event loop to avoid "RuntimeError: Event loop is closed" on Windows.
+# asyncio.run() creates and destroys a new loop each call, but httpx/httpcore
+# transport cleanup callbacks fire AFTER the loop is closed, causing a crash.
+# By reusing a single loop, we keep it alive for the entire process lifetime.
+_persistent_loop = None
+
+def _run_async(coro):
+    """Run an async coroutine using a persistent event loop (avoids httpx cleanup crash)."""
+    global _persistent_loop
+    if _persistent_loop is None or _persistent_loop.is_closed():
+        _persistent_loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(_persistent_loop)
+    return _persistent_loop.run_until_complete(coro)
+
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
@@ -73,8 +87,12 @@ class DebugOllamaLLM(OllamaLLM):
         # 2. LOG to file
         self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{clean_input}\n----------------------------------")
         
+        print(f"  > [Async] Sending chunk to LLM ({len(input)} chars) and waiting for extraction...", end="", flush=True)
+        
         # 3. Send to LLM
         response = await super().ainvoke(clean_input, **kwargs)
+        
+        print(" Done!")
         
         # 4. Extract content
         raw_content = response.content if hasattr(response, 'content') else str(response)
@@ -223,7 +241,7 @@ def run_pipeline(user_question) -> dict:
         print("DEBUG: Encoder returned empty context. Injecting question text as fallback context.")
         text_context = [user_question]
     
-    asyncio.run(process_context(kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
+    _run_async(process_context(kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
     time.sleep(2) # Allow vector index to update
     generation_result = generate(llm=retriever_llm, retriever=retriever, query=query)
     # generation_result is now a dict: {'answer': str, 'contexts': list}
@@ -338,7 +356,7 @@ def clear_local_data():
 def main():
     # Uncomment to clear data before running tests
     # clear_local_data() 
-    asyncio.run(perform_tests())
+    _run_async(perform_tests())
 
 
 if __name__ == "__main__":

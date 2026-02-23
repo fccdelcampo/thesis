@@ -77,7 +77,7 @@ class OpenBookQALoader:
                             "question": question_stem,
                             "options": choices_text,
                             "labels": choices_label,
-                            "answer": answer_key
+                            "correct_answer": answer_key
                         }
                         
                         all_selected_data.append(entry)
@@ -128,7 +128,7 @@ class OpenBookQALoader:
                             "dataset": "openbookqa",
                             "question": item['question'],
                             "formatted_input": formatted_input,
-                            "ground_truth": item['answer'], 
+                            "ground_truth": item['correct_answer'], 
                             "ground_truth_context": None
                         })
                     except json.JSONDecodeError:

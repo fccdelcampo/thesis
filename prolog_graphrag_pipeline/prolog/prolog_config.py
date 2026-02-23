@@ -60,6 +60,8 @@ Translate the provided Context into a formal Prolog database to answer the User 
 6. Finally, provide the <query>.
 
 ### Syntactic Requirements (s(CASP) Specific)
+- Disjunction / Logical OR: NEVER use the semicolon `;` for Logical OR. s(CASP) will crash with a permission error. If you need an OR condition, you MUST write multiple separate rules with the same head.
+- Arithmetic & Equality: NEVER use the native evaluation operators like `=:=`, `=\=`, `is`, `>`, `<`. s(CASP) strictly prohibits them. For numerical constraints or arithmetic equality, you MUST use constraint logic programming syntax like `#=`, `#<`, `#>`, `#=\=`. If just unifying two terms, use standard `=`.
 - Negation: You MUST use the keyword not for Negation as Failure. NEVER use \+.
 - Classical Negation: Use the - prefix (e.g., -mortal(X).) for explicit falsehood.
 - Atoms & Predicates: All Prolog atoms and predicates must be entirely lowercase. If you must refer to a mathematical formula, logical symbol, or option choice with special characters (like ⊃, ∨, ∧, ~, +, -, (, )), you MUST completely enclose it in single quotes to make it a valid Prolog atom (e.g., `'(G ∨ H) ⊃ ~I'`). NEVER use them unquoted.
