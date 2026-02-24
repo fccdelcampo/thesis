@@ -250,10 +250,12 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                         "Rule definitions with ':-' belong inside <database> tags. "
                         "Move the rule body to <database> and call the rule's head predicate in <query>.")
             elif "Unknown procedure" in error_str:
-                hint = ("Arity mismatch: the predicate called in the query has a different number of arguments than what is defined in the database. "
-                        "Check that every predicate call in the query uses the exact same number of arguments as its definition (e.g., if DB has "
-                        "`effect(cause, result)` then the query must use `effect(Cause, Result)`, NOT `effect(Cause)`). "
-                        "Also ensure every predicate used in the query is actually defined in the database.")
+                hint = ("You called a predicate in a rule body that is NOT defined anywhere in the database (closed-world violation). "
+                        "Every predicate that appears in a rule body MUST exist as a fact or the head of a rule in your database. "
+                        "NEVER invent predicate names that have no corresponding definition. "
+                        "For MCQ 'which factor is DIFFERENT?' questions, use simple ground facts instead of undefined chains: "
+                        "`different(factor_name).` and `same(factor_name).` — then `answer(X) :- option(X, Factor), different(Factor).` "
+                        "Also check for arity mismatches: if `option/2` is defined, the query must use `option(Option, Value)`, NOT `option(Option)`.")
             else:
                 hint = "Ensure strict Prolog syntax. No bullets/hyphens. Predicates must be lowercase."
             _record_error(f"Prolog Error: {e}\nHint: {hint}")
@@ -272,8 +274,16 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             try:
                 return _run_prolog_attempt(generate_fn, i, user_question, retrieved_context, error_history)
             except ValueError as e:
-                print(f"Extension {i} | Validation Error: {e}")
-                _record_error(f"{e} Ensure the query is a valid Prolog predicate.")
+                err_str = str(e)
+                print(f"Extension {i} | Validation Error: {err_str}")
+                if "Disjunction" in err_str or "';'" in err_str:
+                    hint = ("Forbidden: ';' (disjunction) is not allowed in s(CASP). "
+                            "Replace it with multiple rules that share the same head. "
+                            "Example — WRONG: `answer(X) :- option_a(X) ; option_b(X).` "
+                            "RIGHT: `answer(X) :- option_a(X).` and `answer(X) :- option_b(X).`")
+                    _record_error(f"{err_str} {hint}")
+                else:
+                    _record_error(f"{err_str} Ensure the query is a valid Prolog predicate.")
             except janus.PrologError as e:
                 print(f"Extension {i} | Prolog Error: {e}")
                 error_str = str(e)

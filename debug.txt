@@ -27610,3 +27610,523 @@
   ]
 }
 ===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Janette conducts an investigation to see which foods make her feel more fatigued.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+    {
+        "nodes": [
+            {"id": "janette_id", "label": "Person", "properties": {"name": "Janette"}},
+            {"id": "investigation_id", "label": "Event", "properties": {"name": "Investigation"}},
+            {"id": "foods_id", "label": "Concept", "properties": {"name": "Foods"}}
+        ],
+        "relationships": [
+            {
+                "type": "ILLUSTRATES",
+                "start_node_id": "janette_id",
+                "end_node_id": "investigation_id",
+                "properties": {
+                    "natural_statement": "Janette conducts an investigation to see which foods make her feel more fatigued.",
+                    "logic_intent": "FACT",
+                    "logical_form_hint": "mortal(janette) :- conduct_investigation(janette, investigation)."
+                }
+            },
+            {
+                "type": "DEFINES",
+                "start_node_id": "investigation_id",
+                "end_node_id": "foods_id",
+                "properties": {
+                    "natural_statement": "The purpose of the investigation is to determine which foods cause fatigue.",
+                    "logic_intent": "RULE",
+                    "logical_form_hint": "conduct_investigation(janette, investigation) :- causes_fatigue(foods)."
+                }
+            },
+            {
+                "type": "PART_OF",
+                "start_node_id": "foods_id",
+                "end_node_id": "janette_id",
+                "properties": {
+                    "natural_statement": "The foods being investigated are related to Janette's fatigue.",
+                    "logic_intent": "FACT",
+                    "logical_form_hint": "causes_fatigue(foods) :- part_of(janette, foods)."
+                }
+            }
+        ]
+    }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text She eats one of four different foods each day at the same time for four days and then records how she feels.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {
+            "id": "eating_habit",
+            "label": "Topic",
+            "properties": {"name": "Eating Habit"}
+        },
+        {
+            "id": "food",
+            "label": "Concept",
+            "properties": {"name": "Food"}
+        },
+        {
+            "id": "day",
+            "label": "Event",
+            "properties": {"name": "Day"}
+        },
+        {
+            "id": "feeling",
+            "label": "Concept",
+            "properties": {"name": "Feeling"}
+        }
+    ],
+    "relationships": [
+        {
+            "type": "DEFINES",
+            "start_node_id": "eating_habit",
+            "end_node_id": "food",
+            "properties": {
+                "natural_statement": "She eats one of four different foods each day.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "eats(Food) :- Food = one_of_four_different_foods"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "eating_habit",
+            "end_node_id": "day",
+            "properties": {
+                "natural_statement": "She eats one of four different foods each day.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "day(D) :- eats_one_of_four_different_foods"
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "eating_habit",
+            "end_node_id": "feeling",
+            "properties": {
+                "natural_statement": "and then records how she feels.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "records_feeling(F) :- feeling(F)"
+            }
+        },
+        {
+            "type": "CAUSES",
+            "start_node_id": "eating_habit",
+            "end_node_id": "feeling",
+            "properties": {
+                "natural_statement": "and then records how she feels.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "causes(C) :- eats(E), feeling(F)"
+            }
+        },
+        {
+            "type": "PART_OF",
+            "start_node_id": "eating_habit",
+            "end_node_id": "day",
+            "properties": {
+                "natural_statement": "for four days.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "part_of(P) :- eats(F), day(D)"
+            }
+        },
+        {
+            "type": "IS_A",
+            "start_node_id": "food",
+            "end_node_id": "concept",
+            "properties": {
+                "natural_statement": "one of four different foods.",
+                "logic_intent": "FACT",
+                "logical_form_hint": "is_a(F) :- concept(C)"
+            }
+        }
+    ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text She asks her friend Carmen to do the same investigation to see if she gets similar results.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {"id": "carmen", "label": "Person", "properties": {"name": "Carmen"}},
+    {"id": "she", "label": "Person", "properties": {"name": "She"}}
+  ],
+  "relationships": [
+    {
+      "type": "RELATED_TO",
+      "start_node_id": "she",
+      "end_node_id": "carmen",
+      "properties": {
+        "natural_statement": "She asks her friend Carmen to do the same investigation.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "friend(C, C1) :- X does investigation(X)"
+      }
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "carmen",
+      "end_node_id": "carmen_investigation",
+      "properties": {
+        "natural_statement": "to see if she gets similar results.",
+        "logic_intent": "RULE",
+        "logical_form_hint": "investigation(X) :- X finds similar results"
+      }
+    },
+    {
+      "type": "ILLUSTRATES",
+      "start_node_id": "she_investigation",
+      "end_node_id": "carmen_investigation",
+      "properties": {
+        "natural_statement": "to see if she gets similar results.",
+        "logic_intent": "EXCEPTION",
+        "logical_form_hint": "investigation(X) :- X does not find similar results"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text A student planted two bean seeds in two identical pots containing the same type of soil.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+  {
+    "nodes": [
+      {"id": "student_id", "label": "concept", "properties": {"name": "Student"}},
+      {"id": "bean_seeds_id", "label": "concept", "properties": {"name": "Bean Seeds"}},
+      {"id": "pots_id", "label": "concept", "properties": {"name": "Pots"}},
+      {"id": "soil_id", "label": "concept", "properties": {"name": "Soil"}}
+    ],
+    "relationships": [
+      {
+        "type": "causes",
+        "start_node_id": "student_id",
+        "end_node_id": "bean_seeds_id",
+        "properties": {
+          "natural_statement": "A student planted two bean seeds.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "planted(Student, Bean_Seeds)"
+        }
+      },
+      {
+        "type": "part_of",
+        "start_node_id": "bean_seeds_id",
+        "end_node_id": "pots_id",
+        "properties": {
+          "natural_statement": "two bean seeds were planted in identical pots.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "part_of(Bean_Seeds, Pots)"
+        }
+      },
+      {
+        "type": "has_same_property",
+        "start_node_id": "pots_id",
+        "end_node_id": "soil_id",
+        "properties": {
+          "natural_statement": "the pots contained the same type of soil.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "has_same_property(Pots, Soil)"
+        }
+      },
+      {
+        "type": "has_two_objects",
+        "start_node_id": "bean_seeds_id",
+        "end_node_id": "pots_id",
+        "properties": {
+          "natural_statement": "two bean seeds were planted in two identical pots.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "has_two_objects(Bean_Seeds, Pots)"
+        }
+      }
+    ]
+  }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text He placed one pot in a closet and the other near a sunny window.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {"id": "closet", "label": "Location", "properties": {"name": "Closet"}},
+    {"id": "sunny_window", "label": "Location", "properties": {"name": "Sunny Window"}},
+    {"id": "pot1", "label": "Object", "properties": {"name": "Pot 1"}},
+    {"id": "pot2", "label": "Object", "properties": {"name": "Pot 2"}}
+  ],
+  "relationships": [
+    {
+      "type": "RELATED_TO",
+      "start_node_id": "pot1",
+      "end_node_id": "closet",
+      "properties": {
+        "natural_statement": "He placed one pot in a closet.",
+        "logic_intent": "FACT"
+      }
+    },
+    {
+      "type": "RELATED_TO",
+      "start_node_id": "pot2",
+      "end_node_id": "sunny_window",
+      "properties": {
+        "natural_statement": "the other near a sunny window.",
+        "logic_intent": "FACT"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Each day, he poured 15 milliliters of water into each pot.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {"id": "he", "label": "Person", "properties": {"name": "He"}},
+    {"id": "water", "label": "Concept", "properties": {"name": "Water"}},
+    {"id": "pot", "label": "Concept", "properties": {"name": "Pot"}}
+  ],
+  "relationships": [
+    {
+      "type": "DEFINES",
+      "start_node_id": "he",
+      "end_node_id": "water_poured",
+      "properties": {
+        "natural_statement": "Each day, he poured 15 milliliters of water into each pot.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "poured(He, Water, Pot)"
+      }
+    },
+    {
+      "type": "PART_OF",
+      "start_node_id": "water_poured",
+      "end_node_id": "pot",
+      "properties": {
+        "natural_statement": "Each day, he poured 15 milliliters of water into each pot.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "part_of(WaterPoured, Pot)"
+      }
+    },
+    {
+      "type": "RELATED_TO",
+      "start_node_id": "water_poured",
+      "end_node_id": "he",
+      "properties": {
+        "natural_statement": "Each day, he poured 15 milliliters of water into each pot.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "related_to(WaterPoured, He)"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Many endangered animals are captured, tagged, and then released back into their environment.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+  {
+    "nodes": [
+      {"id": "endangered_animals", "label": "Concept", "properties": {"name": "Endangered Animals"}},
+      {"id": "captured_tagged_released", "label": "Event", "properties": {"name": "Captured, Tagged, and Released"}}
+    ],
+    "relationships": [
+      {
+        "type": "DEFINES",
+        "start_node_id": "endangered_animals",
+        "end_node_id": "captured_tagged_released",
+        "properties": {
+          "natural_statement": "Many endangered animals are captured, tagged, and then released back into their environment.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., captured(X) :- endangered_animal(X), tagged(X), released(X)"
+        }
+      }
+    ]
+  },
+  {
+    "nodes": [
+      {"id": "captured", "label": "Event", "properties": {"name": "Captured"}},
+      {"id": "tagged", "label": "Event", "properties": {"name": "Tagged"}},
+      {"id": "released", "label": "Event", "properties": {"name": "Released"}}
+    ],
+    "relationships": [
+      {
+        "type": "PART_OF",
+        "start_node_id": "captured_tagged_released",
+        "end_node_id": "captured",
+        "properties": {
+          "natural_statement": "Captured, tagged, and then released.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., part_of(captured_tagged_released, captured)"
+        }
+      },
+      {
+        "type": "PART_OF",
+        "start_node_id": "captured_tagged_released",
+        "end_node_id": "tagged",
+        "properties": {
+          "natural_statement": "Captured, tagged, and then released.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., part_of(captured_tagged_released, tagged)"
+        }
+      },
+      {
+        "type": "PART_OF",
+        "start_node_id": "captured_tagged_released",
+        "end_node_id": "released",
+        "properties": {
+          "natural_statement": "Captured, tagged, and then released.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., part_of(captured_tagged_released, released)"
+        }
+      }
+    ]
+  }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {"id": "tag", "label": "Concept", "properties": {"name": "Tag"}},
+    {"id": "plastic", "label": "Concept", "properties": {"name": "Plastic"}},
+    {"id": "metal", "label": "Concept", "properties": {"name": "Metal"}},
+    {"id": "body", "label": "Concept", "properties": {"name": "Body"}}
+  ],
+  "relationships": [
+    {
+      "type": "DEFINES",
+      "start_node_id": "tag",
+      "end_node_id": "plastic",
+      "properties": {
+        "natural_statement": "The tag may be a piece of coded plastic.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "tag(P) :- plastic(P)"
+      }
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "tag",
+      "end_node_id": "metal",
+      "properties": {
+        "natural_statement": "The tag may be a piece of coded metal.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "tag(M) :- metal(M)"
+      }
+    },
+    {
+      "type": "PART_OF",
+      "start_node_id": "plastic",
+      "end_node_id": "body",
+      "properties": {
+        "natural_statement": "Plastic is a part of the body.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "part_of(P, B) :- plastic(P), body(B)"
+      }
+    },
+    {
+      "type": "PART_OF",
+      "start_node_id": "metal",
+      "end_node_id": "body",
+      "properties": {
+        "natural_statement": "Metal is a part of the body.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "part_of(M, B) :- metal(M), body(B)"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {
+      "id": "protein",
+      "label": "Concept",
+      "properties": {
+        "name": "Proteins"
+      }
+    },
+    {
+      "id": "ribosomal_subunit",
+      "label": "Concept",
+      "properties": {
+        "name": "Ribosomal subunits"
+      }
+    },
+    {
+      "id": "post_translational_modification",
+      "label": "Event",
+      "properties": {
+        "name": "Post-translational modification"
+      }
+    },
+    {
+      "id": "destination",
+      "label": "Concept",
+      "properties": {
+        "name": "Destination"
+      }
+    }
+  ],
+  "relationships": [
+    {
+      "type": "IS_A",
+      "start_node_id": "protein",
+      "end_node_id": "ribosomal_subunit",
+      "properties": {
+        "natural_statement": "Proteins are synthesized in ribosomal subunits.",
+        "logic_intent": "FACT",
+        "logical_form_hint": ""
+      }
+    },
+    {
+      "type": "UNDERGOES",
+      "start_node_id": "protein",
+      "end_node_id": "post_translational_modification",
+      "properties": {
+        "natural_statement": "Proteins undergo post-translational modification.",
+        "logic_intent": "FACT",
+        "logical_form_hint": ""
+      }
+    },
+    {
+      "type": "ARE_PACKAGED_AND_DIRECTED_TO",
+      "start_node_id": "protein",
+      "end_node_id": "destination",
+      "properties": {
+        "natural_statement": "Proteins are packaged and directed to the appropriate destination.",
+        "logic_intent": "FACT",
+        "logical_form_hint": ""
+      }
+    }
+  ]
+}
+===================================

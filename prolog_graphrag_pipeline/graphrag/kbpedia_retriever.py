@@ -307,16 +307,20 @@ If none are relevant, output an empty list [].
             summary_lines.append(f"[{idx}] {c['name']}: {defn}")
         summary_text = "\n".join(summary_lines)
 
-        prompt = f"""You are filtering KBPedia knowledge graph concepts for relevance.
+        prompt = f"""You are filtering knowledge graph concepts for a Prolog-based question-answering system.
 
-User query: "{filter_query}"
+User question: "{filter_query}"
 
 Candidates (index: concept name: short definition):
 {summary_text}
 
-Return a JSON list of the indices (integers) of concepts that are relevant to the query.
-A concept is relevant if its definition or name is related to the topic of the query, or if it can be used to support or answer the query.
-If none are relevant, return [].
+### Decision Criteria
+A concept is RELEVANT if its definition or properties could provide a fact, rule, or piece of evidence that helps answer the question above.
+A concept is IRRELEVANT if it was matched by coincidence (e.g., the word "factor" matching "Rh factor" or "transcription factor" when the question is about experimental variables).
+
+When in doubt, KEEP the concept — the downstream Prolog engine can handle extra facts, but missing a relevant concept is harder to recover from.
+
+Return a JSON list of the RELEVANT indices (integers). If none are relevant, return [].
 Output ONLY the JSON list, nothing else. Example: [0, 2, 4]
 """
         try:
