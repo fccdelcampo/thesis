@@ -80,4 +80,4 @@ def run_tests(start_from_id=1):
             continue
 
 
-run_tests(start_from_id=21)
+run_tests(start_from_id=1)
