@@ -27,7 +27,7 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
         # 'query' is not returned by graphrag_driver, so we use the user_prompt
         query = graphrag_output.get("query", user_prompt) 
         context_from_prompt = graphrag_output.get("text_context", "") 
-        retrieved_context = graphrag_output.get("contexts", [])
+        retrieved_context = graphrag_output.get("answer", [])
     else:
         query = user_prompt # Fallback to user_prompt if we skip graphrag or it fails? 
         # Actually if flag != "q" but graphrag_output is None, it failed. 
@@ -60,9 +60,10 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
         "prolog_explanation": explainer_output.get("text_answer", "") if explainer_output else ""
     }
     
-def run_graphrag_pipeline(user_prompt: str, flag: str = "", sample_mode: bool = False, include_conclusion: bool = True) -> dict:
+def run_graphrag_pipeline(user_prompt: str) -> dict:
     """Wrapper function to run the entire pipeline with a given prompt and flag."""
-    return run_pipeline(user_prompt, flag, sample_mode, include_conclusion)
+    retrieved_context = graphrag_driver.run_pipeline(user_prompt).get("answer", [])
+    return retrieved_context
 
 if __name__ == "__main__":
     prompt = "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?"

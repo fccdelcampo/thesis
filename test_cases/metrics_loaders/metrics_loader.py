@@ -35,7 +35,7 @@ class MetricsLoader:
                 continue
 
             try:
-                with open("test_cases/logs/Metrics_approval.log", "a", encoding="utf-8") as log_file:
+                with open("test_cases/logs/metrics_approval.log", "a", encoding="utf-8") as log_file:
                     log_file.write(f"Question: {question}\n")
                     log_file.flush()
 
@@ -62,7 +62,7 @@ class MetricsLoader:
              print(f"\n[WARNING] MetricsLoader only approved {approved_count}/{self.SAMPLE_SIZE} items. Not enough synthetic questions generated.")
 
         # Save to JSONL
-        output_file = "test_cases/Metrics.jsonl"
+        output_file = "test_cases/metrics.jsonl"
         with open(output_file, "w", encoding="utf-8") as f:
             for item in all_selected_data:
                 f.write(json.dumps(item) + "\n")

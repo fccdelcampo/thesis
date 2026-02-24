@@ -18,8 +18,7 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from langchain_community.document_loaders import PyPDFLoader
-from langchain_ollama import ChatOllama, OllamaEmbeddings, ChatOpenAI
-from langchain_openai import OpenAIEmbeddings
+from langchain_openai import OpenAIEmbeddings, ChatOpenAI
 
 # Import our new interactive loaders
 metrics_loaders_dir = os.path.join(project_root, "test_cases", "metrics_loaders")
