@@ -11,9 +11,7 @@ except ImportError:
     from prompt_reconstructor import reconstruct_prompt
 
 def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include_conclusion: bool = True) -> dict:
-    # Auto-clear stale data as per user request
     if flag != "q":
-
         pass
         # try:
             # print("Auto-clearing stale data...")
@@ -29,10 +27,7 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
         context_from_prompt = graphrag_output.get("text_context", "") 
         retrieved_context = graphrag_output.get("answer", [])
     else:
-        query = user_prompt # Fallback to user_prompt if we skip graphrag or it fails? 
-        # Actually if flag != "q" but graphrag_output is None, it failed. 
-        # But if flag == "q", we skip everything.
-        # Logic matches previous structure but clearer.
+        query = user_prompt 
         context_from_prompt = ""
         retrieved_context = []
         
@@ -62,8 +57,7 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
     
 def run_graphrag_pipeline(user_prompt: str) -> dict:
     """Wrapper function to run the entire pipeline with a given prompt and flag."""
-    retrieved_context = graphrag_driver.run_pipeline(user_prompt).get("answer", [])
-    return retrieved_context
+    return run_pipeline(user_prompt, flag="")
 
 if __name__ == "__main__":
     prompt = "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?"

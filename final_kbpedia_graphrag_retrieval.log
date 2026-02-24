@@ -1,0 +1,50 @@
+   [+] Debug ID #1 | Benchmark: ai2_arc
+      Formatted Input: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+        Answer:            **B. cell wall**
+
+The cell wall of a plant cell provides structural support, which is similar to the function of an animal skeleton. This similarity lies in their ability to offer physical support and maintain the shape of the organism. The cell wall acts as a framework for the plant cell, providing rigidity and protection from external pressures, much like how an animal's skeleton supports its body structure.
+        Context (retrieved): ['### Predicates:\n1. nucleus(plural) is a membrane-enclosed organelle.\n2. eukaryotic cells have one or more nuclei.\n3. cell wall provides structural support to plant cells.\n\n### Facts (Ground Truths):\n1. The human skeleton has around 206 bones by adulthood.\n2. Human skeletons are composed of bone material.\n3. Plant cells contain a nucleus, chloroplast, and other organelles.\n\n### Rules (Horn Clauses / Implications):\n1. If an entity is eukaryotic, then it contains one or more nuclei.\n2. If an organism has a skeleton, then its body parts are supported by the skeletal system.\n3. Plant cells have cell walls that provide structural support similar to animal skeletons.\n\nNote: The above extraction adheres strictly to the provided context and methodology without inferring any additional information.']
+        Context (ingested):  ['Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?\nA. cell membrane\nB. cell wall\nC. chloroplast\nD. nucleus']
+        Correct Answer: B
+   [+] Debug ID #2 | Benchmark: ai2_arc
+      Formatted Input: Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+        Answer:            **C**
+
+Recording observations in the same chart is what makes the investigation most difficult to replicate because it introduces variability that could significantly impact the accuracy and reliability of the results if not controlled for. This aspect of the study, while crucial for understanding fatigue levels, poses a challenge when attempting to duplicate the findings due to potential differences in observation methods or recording techniques.
+
+This methodological choice can lead to inconsistencies in data collection and analysis, making it harder for others to replicate the investigation with identical outcomes.
+        Context (retrieved): ["### Extracted Evidence:\n\n#### Predicates:\n1. `investigation`: A collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing.\n2. `gathering information`: A subclass of Investigation, involving the acquisition of knowledge or data.\n3. `purposeful mental activity`: An ancestor definition that includes both StrictlyMentalEvent and PurposefulAction.\n4. `work`: Activities requiring physical or mental exertion for non-recreational purposes.\n\n#### Facts (Ground Truths):\n1. Janette conducts an investigation to see which foods make her feel more fatigued.\n2. She eats one of four different foods each day at the same time for four days and then records how she feels.\n3. Carmen is asked by Janette to conduct a similar investigation.\n\n#### Rules (Horn Clauses / Implications):\n1. `investigation(X) :- gathering_information(X).` // An Investigation can be any instance of Gathering Information\n2. `gathering_information(X) :- purposeful_mental_activity(X), work(X).` // Gathering information is an activity that requires mental effort and contributes to one's occupation.\n3. `Janette_conducts_investigation :- investigation(Janette, fatigue_foods).`\n4. `Carmen_participates_in_investigation :- Carmen_asks_to_replicate_Janettes_study.`"]
+        Context (ingested):  ['Janette conducts an investigation to see which foods make her feel more fatigued.', 'She eats one of four different foods each day at the same time for four days and then records how she feels.', 'She asks her friend Carmen to do the same investigation to see if she gets similar results.']
+        Correct Answer: A
+   [+] Debug ID #3 | Benchmark: ai2_arc
+      Formatted Input: Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+        Answer:            **B. trench**
+
+Trenches do not form due to tectonic plates diverging. Instead, they are associated with convergent processes where one plate is forced beneath another. This process of subduction can lead to the formation of deep trenches as seen along certain coastlines and oceanic ridges. In contrast, ocean basins, rift valleys, and mid-ocean ridges all form due to the movement apart of tectonic plates.
+        Context (retrieved): ['### Predicates:\n1. **tectonic_plate_diverging**: A predicate indicating the process of tectonic plates moving apart.\n2. **ocean_basin_forming**: A predicate describing the formation of an ocean basin as a result of plate movement.\n3. **rift_valley_forming**: A predicate representing the creation of a rift valley due to diverging tectonic plates.\n4. **trench_forming**: A predicate indicating that trenches form through specific geological processes, not directly related to divergence.\n\n### Facts (Ground Truths):\n1. **ocean_basin** is formed as a result of tectonic plate divergence.\n2. **rift_valley** forms due to the movement apart of tectonic plates.\n3. **mid-ocean_ridge** does form through diverging tectonic plates.\n\n### Rules (Horn Clauses / Implications):\n1. If tectonic_plate_diverging, then ocean_basin_forming.\n2. If tectonic_plate_diverging, then rift_valley_forming.\n3. Not(trench_forming) -> tectonic_plate_converging (Implication: Trenches do not form as a result of divergent plates; they are associated with convergent processes.)\n\n### Note:\n- The question asks for the feature that does NOT form due to plate divergence, which is answered by implication 3.\n- Constants vs. Variables constraint applied throughout extraction and categorization.']
+        Context (ingested):  ['Which feature does not form as a result of tectonic plates diverging?\nA. trench\nB. rift valley\nC. ocean basin\nD. mid-ocean ridge']
+        Correct Answer: A
+   [+] Debug ID #4 | Benchmark: ai2_arc
+      Formatted Input: A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed
+        Answer:            **B) amount of light**
+
+The key difference between the two pots was the amount of light they received, with one being placed near a sunny window and the other in a closet. This variation in lighting conditions is what distinguished them from each other.
+        Context (retrieved): ['### Extracted Evidence:\n\n#### Predicates:\n1. `pot/2`: A predicate indicating two identical pots (constants: `pots_1`, `pots_2`).\n   - `pot(pots_1, same_type_of_soil).`\n   - `pot(pots_2, same_type_of_soil).`\n\n2. `water_amount/3`: A predicate representing the amount of water poured into each pot (constants: `15_milliliters`, `pots_1`, `pots_2`).\n   - `water_amount(15_milliliters, pots_1, same_day).`\n   - `water_amount(15_milliliters, pots_2, same_day).`\n\n3. `light_location/4`: A predicate indicating the location of each pot (constants: `closet`, `sunny_window`, `pots_1`, `pots_2`).\n   - `light_location(closet, sunny_window, pots_1, near_something).`\n   - `light_location(sunny_window, closet, pots_2, near_something).`\n\n4. `seed_type/3`: A predicate representing the type of seed planted (constants: `bean_seeds`, `pots_1`, `pots_2`).\n   - `seed_type(bean_seeds, pots_1, same_day).`\n   - `seed_type(bean_seeds, pots_2, same_day).`\n\n5. `soil_type/3`: A predicate indicating the type of soil in each pot (constants: `same_type_of_soil`, `pots_1`, `pots_2`).\n   - `soil_type(same_type_of_soil, pots_1, same_day).`\n   - `soil_type(same_type_of_soil, pots_2, same_day).`\n\n#### Facts (Ground Truths):\n- The two bean seeds were planted in identical pots containing the same type of soil.\n  - `bean_seeds(pots_1)`.\n  - `bean_seeds(pots_2)`.\n\n- Each day, he poured 15 milliliters of water into each pot on the same day.\n  - `same_day(same_day).`\n\n#### Rules (Horn Clauses / Implications):\nNone extracted from the provided context.']
+        Context (ingested):  ['A student planted two bean seeds in two identical pots containing the same type of soil.', 'He placed one pot in a closet and the other near a sunny window.', 'Each day, he poured 15 milliliters of water into each pot.']
+        Correct Answer: B

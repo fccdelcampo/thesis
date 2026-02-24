@@ -13262,3 +13262,1908 @@ Note: The extracted evidence only includes information found within the provided
 1. island(X) :- topographical_feature(X), outflow_of_lava(X).
 2. is_island(Robert Island).
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nucleus",
+  "uri": "http://kbpedia.org/kko/rc/Nucleus",
+  "score": 1.0,
+  "triples": [
+    "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, ",
+    "subclass of: organelle",
+    "ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which ",
+    "subclass of: cell part",
+    "ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel",
+    "subclass of: internal body part",
+    "ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. ",
+    "has subclass: nuclear substructure",
+    "has subclass: nucleolus",
+    "sibling concept: centrosome",
+    "sibling concept: chloroplast",
+    "sibling concept: endoplasmic reticulum",
+    "sibling concept: Golgi apparatus",
+    "sibling concept: golgi cisterna"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: nucleus. Relevant Logical Facts:  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus,  - subclass of: organelle  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which  - subclass of: cell part  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel  - subclass of: internal body part  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism.  - has subclass: nuclear substructure  - has subclass: nucleolus  - sibling concept: centrosome  - sibling concept: chloroplast  - sibling concept: endoplasmic reticulum  - sibling concept: Golgi apparatus  - sibling concept: golgi cisterna
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth \u2013 this total decreases to 206 bones by adulthood after some bones have fused together. The bone ma",
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of B",
+    "subclass of: skeleton",
+    "ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o",
+    "subclass of: region on an animal's body",
+    "ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivisio",
+    "subclass of: organ system",
+    "ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological sy",
+    "sibling concept: abdomen",
+    "sibling concept: abdominal cavity",
+    "sibling concept: adrenal cortex",
+    "sibling concept: adrenal medulla",
+    "sibling concept: alimentary canal"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone ma  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of B  - subclass of: skeleton  - ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o  - subclass of: region on an animal's body  - ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivisio  - subclass of: organ system  - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological sy  - sibling concept: abdomen  - sibling concept: abdominal cavity  - sibling concept: adrenal cortex  - sibling concept: adrenal medulla  - sibling concept: alimentary canal
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+1. nucleus(plural) is a membrane-enclosed organelle.
+2. eukaryotic cells have one or more nuclei.
+3. cell wall provides structural support to plant cells.
+
+### Facts (Ground Truths):
+1. The human skeleton has around 206 bones by adulthood.
+2. Human skeletons are composed of bone material.
+3. Plant cells contain a nucleus, chloroplast, and other organelles.
+
+### Rules (Horn Clauses / Implications):
+1. If an entity is eukaryotic, then it contains one or more nuclei.
+2. If an organism has a skeleton, then its body parts are supported by the skeletal system.
+3. Plant cells have cell walls that provide structural support similar to animal skeletons.
+
+Note: The above extraction adheres strictly to the provided context and methodology without inferring any additional information.
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "investigation",
+  "uri": "http://kbpedia.org/kko/rc/Investigation",
+  "score": 1.0,
+  "triples": [
+    "definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide vari",
+    "subclass of: gathering information",
+    "ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info",
+    "subclass of: purposeful mental activity",
+    "ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is",
+    "subclass of: work",
+    "ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occup",
+    "subclass of: information transfer",
+    "ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (info",
+    "subclass of: action (purposeful)",
+    "ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose",
+    "has subclass: criminal investigation",
+    "has subclass: examination investigation",
+    "has subclass: investigating",
+    "has subclass: scrutiny",
+    "has subclass: witch hunt",
+    "sibling concept: analysing",
+    "sibling concept: business intelligence",
+    "sibling concept: counter-intelligence",
+    "sibling concept: lookup",
+    "sibling concept: exploring"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: investigation. Relevant Logical Facts:  - definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide vari  - subclass of: gathering information  - ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info  - subclass of: purposeful mental activity  - ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is  - subclass of: work  - ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occup  - subclass of: information transfer  - ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (info  - subclass of: action (purposeful)  - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose  - has subclass: criminal investigation  - has subclass: examination investigation  - has subclass: investigating  - has subclass: scrutiny  - has subclass: witch hunt  - sibling concept: analysing  - sibling concept: business intelligence  - sibling concept: counter-intelligence  - sibling concept: lookup  - sibling concept: exploring
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature measuring device",
+  "uri": "http://kbpedia.org/kko/rc/TemperatureMeasuringDevice",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all temperature measuring devices. A type of MeasuringDevice. TemperatureMeasuringDevice is a SpatiallyDisjointObjectType.",
+    "subclass of: measuring device",
+    "ancestor definition: MeasuringDevice is a specialization of PhysicalDevice. Each instance of MeasuringDevice is a device used for measuring some quantity such as Distance,",
+    "subclass of: device type by function",
+    "ancestor definition: A collection of collections; a subcollection of ArtifactTypeByFunction. Instances of DeviceTypeByFunction are mutually unique with respect to the full",
+    "subclass of: measuring or testing instrument",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of measur",
+    "subclass of: unit of measure concept",
+    "ancestor definition: A ConceptTypeByDomain (q.v.). Instances of UnitOfMeasureConcept are collections and relations having to do with unit of measurement functions and the ",
+    "has subclass: temperature gauge",
+    "has subclass: thermometer",
+    "sibling concept: acoustic measurement",
+    "sibling concept: astrometry",
+    "sibling concept: clock",
+    "sibling concept: compass",
+    "sibling concept: distance measuring device"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: temperature measuring device. Relevant Logical Facts:  - definition: The collection of all temperature measuring devices. A type of MeasuringDevice. TemperatureMeasuringDevice is a SpatiallyDisjointObjectType.  - subclass of: measuring device  - ancestor definition: MeasuringDevice is a specialization of PhysicalDevice. Each instance of MeasuringDevice is a device used for measuring some quantity such as Distance,  - subclass of: device type by function  - ancestor definition: A collection of collections; a subcollection of ArtifactTypeByFunction. Instances of DeviceTypeByFunction are mutually unique with respect to the full  - subclass of: measuring or testing instrument  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of measur  - subclass of: unit of measure concept  - ancestor definition: A ConceptTypeByDomain (q.v.). Instances of UnitOfMeasureConcept are collections and relations having to do with unit of measurement functions and the  - has subclass: temperature gauge  - has subclass: thermometer  - sibling concept: acoustic measurement  - sibling concept: astrometry  - sibling concept: clock  - sibling concept: compass  - sibling concept: distance measuring device
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6899070739746094,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.6899] Janette conducts an investigation to see which foods make her feel more fatigued.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6852493286132812,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+[Item 4]
+[Chunk Score: 0.6852] She eats one of four different foods each day at the same time for four days and then records how she feels.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6725425720214844,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.6725] She asks her friend Carmen to do the same investigation to see if she gets similar results.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `investigation`: A collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing.
+2. `gathering information`: A subclass of Investigation, involving the acquisition of knowledge or data.
+3. `purposeful mental activity`: An ancestor definition that includes both StrictlyMentalEvent and PurposefulAction.
+4. `work`: Activities requiring physical or mental exertion for non-recreational purposes.
+
+#### Facts (Ground Truths):
+1. Janette conducts an investigation to see which foods make her feel more fatigued.
+2. She eats one of four different foods each day at the same time for four days and then records how she feels.
+3. Carmen is asked by Janette to conduct a similar investigation.
+
+#### Rules (Horn Clauses / Implications):
+1. `investigation(X) :- gathering_information(X).` // An Investigation can be any instance of Gathering Information
+2. `gathering_information(X) :- purposeful_mental_activity(X), work(X).` // Gathering information is an activity that requires mental effort and contributes to one's occupation.
+3. `Janette_conducts_investigation :- investigation(Janette, fatigue_foods).`
+4. `Carmen_participates_in_investigation :- Carmen_asks_to_replicate_Janettes_study.`
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "ocean pollution",
+  "uri": "http://kbpedia.org/kko/rc/OceanPollution",
+  "score": 1.0,
+  "triples": [
+    "definition: Marine pollution occurs when harmful, or potentially harmful, effects result from the entry into the ocean of chemicals, particles, industrial, agricultural and residential waste, noise, or the spread",
+    "subclass of: pollutant",
+    "ancestor definition: A pollutant is a substance or energy introduced into the environment that has undesired effects, or adversely affects the usefulness of a resource. A ",
+    "subclass of: polluting",
+    "ancestor definition: The process by which something is polluted-- made impure or contaminated. This includes air pollution, water pollution, noise pollution, etc.",
+    "subclass of: waste product",
+    "ancestor definition: Waste or by-products that may be useful resources in their own right.",
+    "subclass of: contaminating",
+    "ancestor definition: A specialization of IntrinsicStateChangeEvent. In each instance of ContaminationEvent, some instance of PartiallyTangible comes to contain a contamina",
+    "subclass of: environmental process",
+    "ancestor definition: Environmental processes are systems and processes of the natural environment, including atmospheric, geological, climatic, and water systems, often im",
+    "has subclass: oil spill",
+    "sibling concept: agrochemicals",
+    "sibling concept: air pollutant",
+    "sibling concept: biological contamination",
+    "sibling concept: Persistent Organic Pollutant under the Convention on Long-Range Transboundary Air Pollution",
+    "sibling concept: automobile exhaust"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: ocean pollution. Relevant Logical Facts:  - definition: Marine pollution occurs when harmful, or potentially harmful, effects result from the entry into the ocean of chemicals, particles, industrial, agricultural and residential waste, noise, or the spread  - subclass of: pollutant  - ancestor definition: A pollutant is a substance or energy introduced into the environment that has undesired effects, or adversely affects the usefulness of a resource. A  - subclass of: polluting  - ancestor definition: The process by which something is polluted-- made impure or contaminated. This includes air pollution, water pollution, noise pollution, etc.  - subclass of: waste product  - ancestor definition: Waste or by-products that may be useful resources in their own right.  - subclass of: contaminating  - ancestor definition: A specialization of IntrinsicStateChangeEvent. In each instance of ContaminationEvent, some instance of PartiallyTangible comes to contain a contamina  - subclass of: environmental process  - ancestor definition: Environmental processes are systems and processes of the natural environment, including atmospheric, geological, climatic, and water systems, often im  - has subclass: oil spill  - sibling concept: agrochemicals  - sibling concept: air pollutant  - sibling concept: biological contamination  - sibling concept: Persistent Organic Pollutant under the Convention on Long-Range Transboundary Air Pollution  - sibling concept: automobile exhaust
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "trench",
+  "uri": "http://kbpedia.org/kko/rc/Trench",
+  "score": 1.0,
+  "triples": [
+    "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple",
+    "subclass of: topographical feature",
+    "ancestor definition: A specialization of GeographicalRegion. Each instance of TopographicalFeature is a three-dimensional feature of a planet's surface, typically with bou",
+    "subclass of: cartographic feature type",
+    "ancestor definition: A SecondOrderCollection. Each instance of CartographicFeatureType is a specialization of Place whose instances are often displayed on maps or conceptu",
+    "subclass of: configuration",
+    "ancestor definition: Forms or arrangements that are of the nature or perceivable of the subject (A).",
+    "subclass of: non-agent-like place",
+    "ancestor definition: A collection of places which are not agent-like. Some things can be both places and exhibit agency; e.g., the CityOfMiamiFL is a region in Florida_Sta",
+    "sibling concept: albedo feature",
+    "sibling concept: archipelago",
+    "sibling concept: asphalt lake",
+    "sibling concept: bend",
+    "sibling concept: body of water"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: trench. Relevant Logical Facts:  - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple  - subclass of: topographical feature  - ancestor definition: A specialization of GeographicalRegion. Each instance of TopographicalFeature is a three-dimensional feature of a planet's surface, typically with bou  - subclass of: cartographic feature type  - ancestor definition: A SecondOrderCollection. Each instance of CartographicFeatureType is a specialization of Place whose instances are often displayed on maps or conceptu  - subclass of: configuration  - ancestor definition: Forms or arrangements that are of the nature or perceivable of the subject (A).  - subclass of: non-agent-like place  - ancestor definition: A collection of places which are not agent-like. Some things can be both places and exhibit agency; e.g., the CityOfMiamiFL is a region in Florida_Sta  - sibling concept: albedo feature  - sibling concept: archipelago  - sibling concept: asphalt lake  - sibling concept: bend  - sibling concept: body of water
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+1. **tectonic_plate_diverging**: A predicate indicating the process of tectonic plates moving apart.
+2. **ocean_basin_forming**: A predicate describing the formation of an ocean basin as a result of plate movement.
+3. **rift_valley_forming**: A predicate representing the creation of a rift valley due to diverging tectonic plates.
+4. **trench_forming**: A predicate indicating that trenches form through specific geological processes, not directly related to divergence.
+
+### Facts (Ground Truths):
+1. **ocean_basin** is formed as a result of tectonic plate divergence.
+2. **rift_valley** forms due to the movement apart of tectonic plates.
+3. **mid-ocean_ridge** does form through diverging tectonic plates.
+
+### Rules (Horn Clauses / Implications):
+1. If tectonic_plate_diverging, then ocean_basin_forming.
+2. If tectonic_plate_diverging, then rift_valley_forming.
+3. Not(trench_forming) -> tectonic_plate_converging (Implication: Trenches do not form as a result of divergent plates; they are associated with convergent processes.)
+
+### Note:
+- The question asks for the feature that does NOT form due to plate divergence, which is answered by implication 3.
+- Constants vs. Variables constraint applied throughout extraction and categorization.
+==================================================
+==================================================
+ QUERY: Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "slave trade",
+  "uri": "http://kbpedia.org/kko/rc/SlaveTrade",
+  "score": 1.0,
+  "triples": [
+    "definition: The history of slavery spans nearly every culture, nationality, and religion and from ancient times to the present day. However the social, economic, and legal position of slaves was vastly different ",
+    "subclass of: slavery",
+    "ancestor definition: Slavery is a legal or economic system under which people are treated as property. While laws and systems vary, as property, slaves may be bought and s",
+    "subclass of: slave trafficking",
+    "ancestor definition: A specialization of CommercialActivity. Instances are actions undertaken as part of an illicit business seeking to profit from the buying, selling, tr",
+    "sibling concept: slave rebellion",
+    "sibling concept: slavery by type",
+    "sibling concept: slavery in ancient Greece"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: slave trade. Relevant Logical Facts:  - definition: The history of slavery spans nearly every culture, nationality, and religion and from ancient times to the present day. However the social, economic, and legal position of slaves was vastly different  - subclass of: slavery  - ancestor definition: Slavery is a legal or economic system under which people are treated as property. While laws and systems vary, as property, slaves may be bought and s  - subclass of: slave trafficking  - ancestor definition: A specialization of CommercialActivity. Instances are actions undertaken as part of an illicit business seeking to profit from the buying, selling, tr  - sibling concept: slave rebellion  - sibling concept: slavery by type  - sibling concept: slavery in ancient Greece
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Tap water",
+  "uri": "http://kbpedia.org/kko/rc/TapWater",
+  "score": 1.0,
+  "triples": [
+    "definition: Tap water (running water, city water, town water, municipal water, etc.) is water supplied to a tap (valve). Its uses include drinking, washing, cooking, and the flushing of toilets.",
+    "subclass of: fresh water",
+    "ancestor definition: Fresh water is naturally occurring  water on the Earth's surface in ice sheets, ice caps, glaciers, icebergs, bogs, ponds, lakes, rivers and streams, ",
+    "subclass of: water",
+    "ancestor definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or imp",
+    "subclass of: Water resource",
+    "ancestor definition: Water resources are sources of water that are potentially useful. The majority of human uses require fresh water.",
+    "sibling concept: cold spring",
+    "sibling concept: drinking water",
+    "sibling concept: fresh-water lake",
+    "sibling concept: frost",
+    "sibling concept: fresh liquid water"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: Tap water. Relevant Logical Facts:  - definition: Tap water (running water, city water, town water, municipal water, etc.) is water supplied to a tap (valve). Its uses include drinking, washing, cooking, and the flushing of toilets.  - subclass of: fresh water  - ancestor definition: Fresh water is naturally occurring water on the Earth's surface in ice sheets, ice caps, glaciers, icebergs, bogs, ponds, lakes, rivers and streams,  - subclass of: water  - ancestor definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or imp  - subclass of: Water resource  - ancestor definition: Water resources are sources of water that are potentially useful. The majority of human uses require fresh water.  - sibling concept: cold spring  - sibling concept: drinking water  - sibling concept: fresh-water lake  - sibling concept: frost  - sibling concept: fresh liquid water
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7226371765136719,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "A student planted two bean seeds in two identical pots containing the same type of soil."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.7226] A student planted two bean seeds in two identical pots containing the same type of soil.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6692886352539062,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Each day, he poured 15 milliliters of water into each pot."
+    }
+  ]
+}
+[Item 4]
+[Chunk Score: 0.6693] Each day, he poured 15 milliliters of water into each pot.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.636688232421875,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "He placed one pot in a closet and the other near a sunny window."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.6367] He placed one pot in a closet and the other near a sunny window.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `pot/2`: A predicate indicating two identical pots (constants: `pots_1`, `pots_2`).
+   - `pot(pots_1, same_type_of_soil).`
+   - `pot(pots_2, same_type_of_soil).`
+
+2. `water_amount/3`: A predicate representing the amount of water poured into each pot (constants: `15_milliliters`, `pots_1`, `pots_2`).
+   - `water_amount(15_milliliters, pots_1, same_day).`
+   - `water_amount(15_milliliters, pots_2, same_day).`
+
+3. `light_location/4`: A predicate indicating the location of each pot (constants: `closet`, `sunny_window`, `pots_1`, `pots_2`).
+   - `light_location(closet, sunny_window, pots_1, near_something).`
+   - `light_location(sunny_window, closet, pots_2, near_something).`
+
+4. `seed_type/3`: A predicate representing the type of seed planted (constants: `bean_seeds`, `pots_1`, `pots_2`).
+   - `seed_type(bean_seeds, pots_1, same_day).`
+   - `seed_type(bean_seeds, pots_2, same_day).`
+
+5. `soil_type/3`: A predicate indicating the type of soil in each pot (constants: `same_type_of_soil`, `pots_1`, `pots_2`).
+   - `soil_type(same_type_of_soil, pots_1, same_day).`
+   - `soil_type(same_type_of_soil, pots_2, same_day).`
+
+#### Facts (Ground Truths):
+- The two bean seeds were planted in identical pots containing the same type of soil.
+  - `bean_seeds(pots_1)`.
+  - `bean_seeds(pots_2)`.
+
+- Each day, he poured 15 milliliters of water into each pot on the same day.
+  - `same_day(same_day).`
+
+#### Rules (Horn Clauses / Implications):
+None extracted from the provided context.
+==================================================
+==================================================
+ QUERY: Which is the most likely reason to tag an animal? A. to monitor their eating habits B. to monitor their roaming habits C. to monitor their sleeping habits D. to monitor their reproductive habits
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reproductive ecology",
+  "uri": "http://kbpedia.org/kko/rc/ReproductiveEcology",
+  "score": 1.0,
+  "triples": [
+    "definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism\u2019s reproductive system to ecological variables.",
+    "subclass of: subfield of ecology",
+    "ancestor definition: A subfield of ecology.",
+    "subclass of: ecology",
+    "ancestor definition: The study of the interrelationships between organisms and their physical environment.",
+    "subclass of: subfield",
+    "ancestor definition: A subfield is an area of research and study within a field of study or academic discipline.",
+    "sibling concept: chemical ecology",
+    "sibling concept: forest ecology",
+    "sibling concept: freshwater ecology",
+    "sibling concept: industrial ecology",
+    "sibling concept: insect ecology"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: reproductive ecology. Relevant Logical Facts:  - definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism’s reproductive system to ecological variables.  - subclass of: subfield of ecology  - ancestor definition: A subfield of ecology.  - subclass of: ecology  - ancestor definition: The study of the interrelationships between organisms and their physical environment.  - subclass of: subfield  - ancestor definition: A subfield is an area of research and study within a field of study or academic discipline.  - sibling concept: chemical ecology  - sibling concept: forest ecology  - sibling concept: freshwater ecology  - sibling concept: industrial ecology  - sibling concept: insect ecology
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nomad",
+  "uri": "http://kbpedia.org/kko/rc/Nomad",
+  "score": 1.0,
+  "triples": [
+    "definition: A nomad (Greek: \u03bd\u03bf\u03bc\u03ac\u03c2, nomas, plural \u03bd\u03bf\u03bc\u03ac\u03b4\u03b5\u03c2, nomades; meaning one roaming about for pasture, pastoral tribe) is a member of a community of people who live in different locations, moving from one plac",
+    "subclass of: person type by residence",
+    "ancestor definition: A category for ways to describe people by virtue of where they reside or not.",
+    "subclass of: person types",
+    "ancestor definition: Persons that may be grouped by a variety of types.",
+    "sibling concept: colonist",
+    "sibling concept: expatriate",
+    "sibling concept: home owner",
+    "sibling concept: homeless person",
+    "sibling concept: islander"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: nomad. Relevant Logical Facts:  - definition: A nomad (Greek: νομάς, nomas, plural νομάδες, nomades; meaning one roaming about for pasture, pastoral tribe) is a member of a community of people who live in different locations, moving from one plac  - subclass of: person type by residence  - ancestor definition: A category for ways to describe people by virtue of where they reside or not.  - subclass of: person types  - ancestor definition: Persons that may be grouped by a variety of types.  - sibling concept: colonist  - sibling concept: expatriate  - sibling concept: home owner  - sibling concept: homeless person  - sibling concept: islander
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7045421600341797,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Many endangered animals are captured, tagged, and then released back into their environment."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.7045] Many endangered animals are captured, tagged, and then released back into their environment.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6787300109863281,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body."
+    }
+  ]
+}
+[Item 4]
+[Chunk Score: 0.6787] The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `tagged(X)`: X has been tagged with an identification device.
+2. `released_back_into_environment(Y, Z)`: Y was released back into its environment after being captured and tagged as Z.
+3. `coded_plastic_or_metal_tag(A)` : A is a coded plastic or metal tag used for identification.
+
+#### Facts (Ground Truths):
+1. `many_endangered_animals_captured_and_released_back_into_their_environment`: Many endangered animals are captured, tagged, and then released back into their environment.
+2. `tag(X) implies identified(Y)` : If X is tagged with an identification device, it can be identified as Y.
+
+#### Rules (Horn Clauses / Implications):
+1. `released_back_into_environment(Z, animal) implies not_harmed_by_tagging`: If Z was released back into its environment after being captured and tagged, then the tagging process did not harm the animal.
+2. `tagged(X)` : X has been identified with a coded plastic or metal tag.
+
+Note: The extracted evidence is based solely on the provided context and does not include any information from the question itself.
+==================================================
+==================================================
+ QUERY: Which structural component of a cell is involved in such modification? A. endoplasmic reticulum B. lysosomes C. mitochondria D. Golgi apparatus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 3 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "post-translational modification",
+  "uri": "http://kbpedia.org/kko/rc/PosttranslationalModification",
+  "score": 1.0,
+  "triples": [
+    "definition: Post-translational modification (PTM) refers to the covalent and generally enzymatic modification of proteins during or after protein biosynthesis. Proteins are synthesized by ribosomes translating mR",
+    "subclass of: cellular protein synthesis",
+    "ancestor definition: Protein biosynthesis is the process whereby biological cells generate new proteins; it is balanced by the loss of cellular proteins via degradation or",
+    "subclass of: gene expression",
+    "ancestor definition: The collection of events in which some quantity, more than a single molecule, of protein is synthesized \"under the guidance\" of a particular gene, i.e",
+    "subclass of: biochemical synthesis",
+    "ancestor definition: A collection of events. During instances of BiochemicalSynthesis, some chemical object is produced by synthesis (usually from more elementary objects)",
+    "subclass of: chemical synthesis",
+    "ancestor definition: The collection of processes by which chemical compounds are created (usually out of simpler chemical compounds).",
+    "subclass of: cellular level biological process",
+    "ancestor definition: The collection of instances of BiologicalProcess that occur at the cellular level (i.e., an instance of Cell plays the locusOfCellularProcess_Cell rol",
+    "sibling concept: eukaryotic protein synthesis",
+    "sibling concept: LRP8",
+    "sibling concept: prokaryotic protein synthesis",
+    "sibling concept: cellular protein synthesis",
+    "sibling concept: eukaryotic gene expression"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: post-translational modification. Relevant Logical Facts:  - definition: Post-translational modification (PTM) refers to the covalent and generally enzymatic modification of proteins during or after protein biosynthesis. Proteins are synthesized by ribosomes translating mR  - subclass of: cellular protein synthesis  - ancestor definition: Protein biosynthesis is the process whereby biological cells generate new proteins; it is balanced by the loss of cellular proteins via degradation or  - subclass of: gene expression  - ancestor definition: The collection of events in which some quantity, more than a single molecule, of protein is synthesized "under the guidance" of a particular gene, i.e  - subclass of: biochemical synthesis  - ancestor definition: A collection of events. During instances of BiochemicalSynthesis, some chemical object is produced by synthesis (usually from more elementary objects)  - subclass of: chemical synthesis  - ancestor definition: The collection of processes by which chemical compounds are created (usually out of simpler chemical compounds).  - subclass of: cellular level biological process  - ancestor definition: The collection of instances of BiologicalProcess that occur at the cellular level (i.e., an instance of Cell plays the locusOfCellularProcess_Cell rol  - sibling concept: eukaryotic protein synthesis  - sibling concept: LRP8  - sibling concept: prokaryotic protein synthesis  - sibling concept: cellular protein synthesis  - sibling concept: eukaryotic gene expression
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "endoplasmic reticulum",
+  "uri": "http://kbpedia.org/kko/rc/EndoplasmicReticulum",
+  "score": 1.0,
+  "triples": [
+    "definition: A collection. Instances are systems of membranes that assist in the transport of materials within a cell.",
+    "subclass of: aura: membrane bounded organelle",
+    "ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane. Includes the nucleus, mitochondria, ",
+    "subclass of: organelle",
+    "ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which ",
+    "subclass of: cell part",
+    "ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel",
+    "subclass of: internal body part",
+    "ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. ",
+    "sibling concept: Golgi apparatus",
+    "sibling concept: mitochondrion",
+    "sibling concept: plastid",
+    "sibling concept: centrosome",
+    "sibling concept: chloroplast"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: endoplasmic reticulum. Relevant Logical Facts:  - definition: A collection. Instances are systems of membranes that assist in the transport of materials within a cell.  - subclass of: aura: membrane bounded organelle  - ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane. Includes the nucleus, mitochondria,  - subclass of: organelle  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which  - subclass of: cell part  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel  - subclass of: internal body part  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism.  - sibling concept: Golgi apparatus  - sibling concept: mitochondrion  - sibling concept: plastid  - sibling concept: centrosome  - sibling concept: chloroplast
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7252960205078125,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.7253] Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `post_translational_modification/1`: Post-translational modification refers to covalent and generally enzymatic modification of proteins.
+2. `protein_synthesis/1`: Proteins are synthesized by ribosomes translating mRNA.
+3. `cellular_protein_synthesis/1`: Protein synthesis is a subclass of cellular protein synthesis.
+
+#### Facts (Ground Truths):
+1. `PTM` = post_translational_modification
+2. `mRNA` = message_RNA
+
+#### Rules (Horn Clauses / Implications):
+1. `protein_synthesized_by_ribosomes :- PTM, mRNA`
+   - Proteins are synthesized by ribosomes translating mRNA if they undergo post-translational modification.
+2. `cellular_protein_synthesis_subclass_of_cellular_level_biological_process :- cellular_protein_synthesis`
+
+Note: The extracted evidence is based on the provided context and follows the specified methodology for categorizing predicates, facts, and rules.
+
+### Relevant Logical Facts:
+1. Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification.
+2. These proteins are packaged and directed to their appropriate destination.
+
+These logical facts can be represented as:
+
+#### Predicates:
+1. `protein_synthesized_in_ribosomal_subunit/1`: Proteins are synthesized in ribosomal subunits.
+2. `undergo_extensive_post_translational_modification/1`: Proteins undergo extensive post-translational modification.
+3. `packaged_and_directed_to_destination/1`: Packaged and directed to the appropriate destination.
+
+#### Facts (Ground Truths):
+1. `protein_synthesized_in_ribosomal_subunit`
+2. `undergo_extensive_post_translational_modification`
+
+#### Rules (Horn Clauses / Implications):
+1. `packaged_and_directed_to_destination :- protein_synthesized_in_ribosomal_subunit, undergo_extensive_post_translational_modification`
+   - Proteins are packaged and directed to their destination if they are synthesized in ribosomal subunits and undergo extensive post-translational modification.
+
+### Relevant KBpedia Concepts:
+1. `endoplasmic_reticulum/1`: A collection of systems of membranes that assist in the transport of materials within a cell.
+2. `lysosomes/1`: Not explicitly mentioned, but can be inferred as part of cellular protein synthesis and post-translational modification.
+
+### Relevant KBpedia Concepts (continued):
+3. `mitochondria/1`: An organized structure or compartment bounded by a single or double lipid bilayer membrane.
+4. `Golgi_apparatus/1`: A collection of systems that assist in the transport of materials within a cell, similar to endoplasmic reticulum.
+
+### Relevant KBpedia Concepts (continued):
+5. `cellular_protein_synthesis/1`: The process by which proteins are synthesized and modified at the cellular level.
+6. `post_translational_modification/1`: A subclass of biochemical synthesis that refers to covalent modification of proteins during or after protein biosynthesis.
+
+### Relevant KBpedia Concepts (continued):
+7. `protein_biosynthesis/1`: The process by which biological cells generate new proteins, balanced by the loss of cellular proteins via degradation.
+8. `gene_expression/1`: A subclass of biochemical synthesis that refers to the collection of events in which some quantity of protein is synthesized under the guidance of a particular gene.
+
+### Relevant KBpedia Concepts (continued):
+9. `biochemical_synthesis/1`: The process by which chemical compounds are created, usually from more elementary objects.
+10. `cellular_level_biological_process/1`: A subclass of biological processes that occur at the cellular level.
+
+Note: These extracted evidence and relevant logical facts follow the specified methodology for categorizing predicates, facts, and rules based on the provided context.
+==================================================
+==================================================
+ QUERY: The modern theory of the atom is best described as the result of which of these activities? A. the experiments of John Dalton in the early 1800s B. the discussions between two important scientists C. the research of many scientists over many years D. the ideas of atoms by Democritus over 2000 years ago
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "thought experiments in quantum mechanics",
+  "uri": "http://kbpedia.org/kko/rc/ThoughtExperimentsInQuantumMechanics",
+  "score": 1.0,
+  "triples": [
+    "definition: Thought experiments in quantum mechanics.",
+    "subclass of: quantum physics",
+    "ancestor definition: An instance of <a href=\"http://sw.opencyc.org/concept/Mx4rvVi3N5wpEbGdrcN5Y29ycA\">FieldOfStudy</a>. It is the branch of physics based on quantum theor",
+    "subclass of: quantum field theory",
+    "ancestor definition: An instance of <a href=\"http://sw.opencyc.org/concept/Mx4rvVi3N5wpEbGdrcN5Y29ycA\">FieldOfStudy</a>. It is the branch of quantum physics that is concer",
+    "sibling concept: atomic physics",
+    "sibling concept: density functional theory",
+    "sibling concept: electronic structure method",
+    "sibling concept: foundational quantum physics",
+    "sibling concept: hidden variable theory"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: thought experiments in quantum mechanics. Relevant Logical Facts:  - definition: Thought experiments in quantum mechanics.  - subclass of: quantum physics  - ancestor definition: An instance of <a href="http://sw.opencyc.org/concept/Mx4rvVi3N5wpEbGdrcN5Y29ycA">FieldOfStudy</a>. It is the branch of physics based on quantum theor  - subclass of: quantum field theory  - ancestor definition: An instance of <a href="http://sw.opencyc.org/concept/Mx4rvVi3N5wpEbGdrcN5Y29ycA">FieldOfStudy</a>. It is the branch of quantum physics that is concer  - sibling concept: atomic physics  - sibling concept: density functional theory  - sibling concept: electronic structure method  - sibling concept: foundational quantum physics  - sibling concept: hidden variable theory
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "experimental particle physics",
+  "uri": "http://kbpedia.org/kko/rc/ExperimentalParticlePhysics",
+  "score": 1.0,
+  "triples": [
+    "definition: Experimental particle physics concepts are the ideas and techniques important to doing experiments in particle physics.",
+    "subclass of: trial thing",
+    "ancestor definition: An attribute that describes things, methods, actions which are not yet established as standard, which are still being evaluated.",
+    "subclass of: experimental physics",
+    "ancestor definition: Experimental physics is the category of disciplines and sub-disciplines in the field of physics that are concerned with the observation of physical ph",
+    "subclass of: particle physics",
+    "ancestor definition: Particle physics (also high energy physics) is the branch of physics that studies the nature of the particles that constitute matter (particles with m",
+    "subclass of: atypical thing",
+    "ancestor definition: A normality attribute. Used to describe things which are uncommon, unusual, abnormal, etc. This attribute has no relation whatsoever to Cyc's default ",
+    "subclass of: physics",
+    "ancestor definition: Physics: a <a href=\"http://sw.opencyc.org/concept/Mx4rvVi3_JwpEbGdrcN5Y29ycA\">ScientificFieldOfStudy</a>.",
+    "sibling concept: experimental medical procedure",
+    "sibling concept: experimental movie",
+    "sibling concept: experimental physics",
+    "sibling concept: antimatter",
+    "sibling concept: astroparticle physics"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: experimental particle physics. Relevant Logical Facts:  - definition: Experimental particle physics concepts are the ideas and techniques important to doing experiments in particle physics.  - subclass of: trial thing  - ancestor definition: An attribute that describes things, methods, actions which are not yet established as standard, which are still being evaluated.  - subclass of: experimental physics  - ancestor definition: Experimental physics is the category of disciplines and sub-disciplines in the field of physics that are concerned with the observation of physical ph  - subclass of: particle physics  - ancestor definition: Particle physics (also high energy physics) is the branch of physics that studies the nature of the particles that constitute matter (particles with m  - subclass of: atypical thing  - ancestor definition: A normality attribute. Used to describe things which are uncommon, unusual, abnormal, etc. This attribute has no relation whatsoever to Cyc's default  - subclass of: physics  - ancestor definition: Physics: a <a href="http://sw.opencyc.org/concept/Mx4rvVi3_JwpEbGdrcN5Y29ycA">ScientificFieldOfStudy</a>.  - sibling concept: experimental medical procedure  - sibling concept: experimental movie  - sibling concept: experimental physics  - sibling concept: antimatter  - sibling concept: astroparticle physics
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "conference proceedings series",
+  "uri": "http://kbpedia.org/kko/rc/ConferenceProceedingsSeries",
+  "score": 1.0,
+  "triples": [
+    "definition: A periodical dealing with the discussions at a conference or series of conferences.",
+    "subclass of: journal",
+    "ancestor definition: A periodical dealing especially with areas of current interest.",
+    "subclass of: reference work",
+    "ancestor definition: A reference work is a book or periodical (or its electronic equivalent) to which one can refer for confirmed facts. The information is intended to be ",
+    "subclass of: written reference work",
+    "ancestor definition: Reference works that are largely written in nature.",
+    "subclass of: nonfictional PCW",
+    "ancestor definition: The collection of all PropositionalConceptualWorks that are nonfictional.",
+    "subclass of: publication",
+    "ancestor definition: To publish is to make content available to the general public. While specific use of the term may vary among countries, it is usually applied to text,",
+    "sibling concept: almanac",
+    "sibling concept: atlas",
+    "sibling concept: bibliography",
+    "sibling concept: blue book",
+    "sibling concept: blue book social register"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: conference proceedings series. Relevant Logical Facts:  - definition: A periodical dealing with the discussions at a conference or series of conferences.  - subclass of: journal  - ancestor definition: A periodical dealing especially with areas of current interest.  - subclass of: reference work  - ancestor definition: A reference work is a book or periodical (or its electronic equivalent) to which one can refer for confirmed facts. The information is intended to be  - subclass of: written reference work  - ancestor definition: Reference works that are largely written in nature.  - subclass of: nonfictional PCW  - ancestor definition: The collection of all PropositionalConceptualWorks that are nonfictional.  - subclass of: publication  - ancestor definition: To publish is to make content available to the general public. While specific use of the term may vary among countries, it is usually applied to text,  - sibling concept: almanac  - sibling concept: atlas  - sibling concept: bibliography  - sibling concept: blue book  - sibling concept: blue book social register
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "negotiator",
+  "uri": "http://kbpedia.org/kko/rc/Negotiator",
+  "score": 1.0,
+  "triples": [
+    "definition: One who engages in discussions, working toward agreements between the organization they represent and some other organization or individual.",
+    "subclass of: professional",
+    "ancestor definition: The collection of all people who work at a job for which a skill that most adults do not have. This skill is normally achieved through training, howev",
+    "subclass of: skilled worker",
+    "ancestor definition: A sub-collection of PersonWithOccupation. Each instance is a worker who has acquired special skills.",
+    "sibling concept: accountant",
+    "sibling concept: actuary",
+    "sibling concept: aircraft crew member",
+    "sibling concept: archaeologist",
+    "sibling concept: bailiff"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: negotiator. Relevant Logical Facts:  - definition: One who engages in discussions, working toward agreements between the organization they represent and some other organization or individual.  - subclass of: professional  - ancestor definition: The collection of all people who work at a job for which a skill that most adults do not have. This skill is normally achieved through training, howev  - subclass of: skilled worker  - ancestor definition: A sub-collection of PersonWithOccupation. Each instance is a worker who has acquired special skills.  - sibling concept: accountant  - sibling concept: actuary  - sibling concept: aircraft crew member  - sibling concept: archaeologist  - sibling concept: bailiff
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "CIA activities in the Americas",
+  "uri": "http://kbpedia.org/kko/rc/CIAActivitiesInTheAmericas",
+  "score": 1.0,
+  "triples": [
+    "definition: CIA activities in the Americas.",
+    "subclass of: intelligence collection",
+    "ancestor definition: A collection of InformationGathering events, in which the gathering is done in secret. Most commonly known as 'spying', though the intelligence gather",
+    "subclass of: gathering information",
+    "ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info",
+    "subclass of: physical information transfer",
+    "ancestor definition: A specialization of InformationTransferEvent (q.v.) and PhysicalEvent each instance of which involves at least one PartiallyTangible, either as its so",
+    "subclass of: intelligence activity",
+    "ancestor definition: Action related to the gathering or analysis of intelligence information.",
+    "subclass of: military event",
+    "ancestor definition: The collection of all military events, including War, Battles, Explosions, and military Training. Note that these events need not be organized or plan",
+    "sibling concept: counterintelligence",
+    "sibling concept: social engineering",
+    "sibling concept: undercover operation",
+    "sibling concept: wiretap"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: CIA activities in the Americas. Relevant Logical Facts:  - definition: CIA activities in the Americas.  - subclass of: intelligence collection  - ancestor definition: A collection of InformationGathering events, in which the gathering is done in secret. Most commonly known as 'spying', though the intelligence gather  - subclass of: gathering information  - ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info  - subclass of: physical information transfer  - ancestor definition: A specialization of InformationTransferEvent (q.v.) and PhysicalEvent each instance of which involves at least one PartiallyTangible, either as its so  - subclass of: intelligence activity  - ancestor definition: Action related to the gathering or analysis of intelligence information.  - subclass of: military event  - ancestor definition: The collection of all military events, including War, Battles, Explosions, and military Training. Note that these events need not be organized or plan  - sibling concept: counterintelligence  - sibling concept: social engineering  - sibling concept: undercover operation  - sibling concept: wiretap
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+- **definition**: A property of KBPedia Concepts.
+- **subclass_of**: A relationship between concepts, indicating a hierarchical structure (e.g., "A is subclass of B").
+- **ancestor_definition**: An attribute describing the origin or nature of a concept.
+
+### Facts (Ground Truths):
+- The modern theory of the atom is best described as the result of which activity?
+  - definition: Thought experiments in quantum mechanics.
+  - subclass_of: Quantum physics
+  - ancestor_definition: FieldOfStudy
+
+### Rules (Horn Clauses / Implications):
+
+1. **If** a concept has an "ancestor_definition" attribute, then it is related to its parent through the "subclass_of" relationship.
+
+2. **If** two concepts are siblings in KBPedia Concepts, they share common attributes or characteristics but differ in their specific definitions.
+
+3. **If** a concept belongs to the subclass of quantum physics and has an ancestor definition as FieldOfStudy, then it is related to thought experiments in quantum mechanics through its parent's relationship with "FieldOfStudy".
+
+4. **If** a concept is classified under intelligence collection or gathering information, then it falls under physical information transfer.
+
+5. **If** a concept belongs to the subclass of military events and has an ancestor definition as War, Battles, Explosions, or military Training, then it can be related to counterintelligence through its parent's relationship with these attributes.
+
+6. **If** two concepts are siblings in KBPedia Concepts (e.g., experimental particle physics and conference proceedings series), they share common characteristics but differ in their specific definitions.
+
+7. **If** a concept has an ancestor definition as FieldOfStudy, then it is related to its parent through the "subclass_of" relationship.
+
+8. **If** a concept belongs to the subclass of intelligence activity or military event, then it can be classified under gathering information or physical information transfer respectively.
+
+9. **If** two concepts are siblings in KBPedia Concepts (e.g., negotiator and CIA activities in the Americas), they share common attributes but differ in their specific definitions.
+
+10. **If** a concept has an ancestor definition as ScientificFieldOfStudy, then it is related to its parent through the "subclass_of" relationship.
+==================================================
+==================================================
+ QUERY: The most likely reason sound travels faster in saltwater than in freshwater is that saltwater A) is more elastic. B) absorbs heat faster. C) has a higher density. D) reflects sound better.
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "freshwater ecology",
+  "uri": "http://kbpedia.org/kko/rc/FreshwaterEcology",
+  "score": 1.0,
+  "triples": [
+    "definition: Freshwater ecology is about freshwater ecosystems and elements in aquatic ecology and limnology.",
+    "subclass of: subfield of ecology",
+    "ancestor definition: A subfield of ecology.",
+    "subclass of: ecology",
+    "ancestor definition: The study of the interrelationships between organisms and their physical environment.",
+    "subclass of: subfield",
+    "ancestor definition: A subfield is an area of research and study within a field of study or academic discipline.",
+    "sibling concept: chemical ecology",
+    "sibling concept: forest ecology",
+    "sibling concept: industrial ecology",
+    "sibling concept: insect ecology",
+    "sibling concept: insular ecology"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: freshwater ecology. Relevant Logical Facts:  - definition: Freshwater ecology is about freshwater ecosystems and elements in aquatic ecology and limnology.  - subclass of: subfield of ecology  - ancestor definition: A subfield of ecology.  - subclass of: ecology  - ancestor definition: The study of the interrelationships between organisms and their physical environment.  - subclass of: subfield  - ancestor definition: A subfield is an area of research and study within a field of study or academic discipline.  - sibling concept: chemical ecology  - sibling concept: forest ecology  - sibling concept: industrial ecology  - sibling concept: insect ecology  - sibling concept: insular ecology
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "freshwater algae",
+  "uri": "http://kbpedia.org/kko/rc/FreshwaterAlgae",
+  "score": 1.0,
+  "triples": [
+    "definition: The relative minority of algae found in freshwater.",
+    "subclass of: algae",
+    "ancestor definition: One of many different aquatic photosynthetic organisms, often one-celled but sometimes filamentous or parenchymatous, both prokaryotic and eukaryotic.",
+    "subclass of: aquatic organism",
+    "ancestor definition: A specialization of Organism_Whole. Each specialization of AquaticOrganism is a type of organism adapted to life underwater, whose instances spend all",
+    "subclass of: photolithoautotroph",
+    "ancestor definition: The collection of organisms which use energy from Sunlight to manufacture organic nutrients from inorganic raw materials, using CarbonDioxide from the",
+    "subclass of: the plant kingdom",
+    "ancestor definition: The collection of all individual plants, an instance of OrganismClassificationType and a specialization of EukaryoticOrganism. Plant is a member of th",
+    "sibling concept: algae",
+    "sibling concept: algae of Australia",
+    "sibling concept: Archaeplastida",
+    "sibling concept: Axodine",
+    "sibling concept: brown algae"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: freshwater algae. Relevant Logical Facts:  - definition: The relative minority of algae found in freshwater.  - subclass of: algae  - ancestor definition: One of many different aquatic photosynthetic organisms, often one-celled but sometimes filamentous or parenchymatous, both prokaryotic and eukaryotic.  - subclass of: aquatic organism  - ancestor definition: A specialization of Organism_Whole. Each specialization of AquaticOrganism is a type of organism adapted to life underwater, whose instances spend all  - subclass of: photolithoautotroph  - ancestor definition: The collection of organisms which use energy from Sunlight to manufacture organic nutrients from inorganic raw materials, using CarbonDioxide from the  - subclass of: the plant kingdom  - ancestor definition: The collection of all individual plants, an instance of OrganismClassificationType and a specialization of EukaryoticOrganism. Plant is a member of th  - sibling concept: algae  - sibling concept: algae of Australia  - sibling concept: Archaeplastida  - sibling concept: Axodine  - sibling concept: brown algae
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Saltwater Crocodile",
+  "uri": "http://kbpedia.org/kko/rc/SaltwaterCrocodile",
+  "score": 1.0,
+  "triples": [
+    "definition: A species of crocodile. The saltwater crocodiles are the largest living reptiles.",
+    "subclass of: Crocodylus",
+    "ancestor definition: Crocodylus is one of three genera from the subfamily Crocodylinae of the family Crocodylidae. The 13 living species are: \\n*  American crocodile, Croc",
+    "subclass of: crocodile",
+    "ancestor definition: The collection of all crocodiles. These so-called True Crocodiles are distinct from alligators. The collection Crocodile constitutes a biological subo",
+    "sibling concept: American Crocodile",
+    "sibling concept: Cuban Crocodile",
+    "sibling concept: Freshwater Crocodile",
+    "sibling concept: Morelet's Crocodile",
+    "sibling concept: Mugger Crocodile"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: Saltwater Crocodile. Relevant Logical Facts:  - definition: A species of crocodile. The saltwater crocodiles are the largest living reptiles.  - subclass of: Crocodylus  - ancestor definition: Crocodylus is one of three genera from the subfamily Crocodylinae of the family Crocodylidae. The 13 living species are: \n* American crocodile, Croc  - subclass of: crocodile  - ancestor definition: The collection of all crocodiles. These so-called True Crocodiles are distinct from alligators. The collection Crocodile constitutes a biological subo  - sibling concept: American Crocodile  - sibling concept: Cuban Crocodile  - sibling concept: Freshwater Crocodile  - sibling concept: Morelet's Crocodile  - sibling concept: Mugger Crocodile
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Marine Otter",
+  "uri": "http://kbpedia.org/kko/rc/MarineOtter",
+  "score": 1.0,
+  "triples": [
+    "definition: The marine otter (Lontra felina) is a rare and poorly known South American mammal of the weasel family (Mustelidae). The scientific name means \\\"otter cat\\\", and in Spanish, the marine otter is also o",
+    "subclass of: sea mammal",
+    "ancestor definition: Marine mammals are aquatic mammals that rely on the ocean and other marine ecosystems for their existence. They include animals such as seals, whales,",
+    "subclass of: placental mammal",
+    "ancestor definition: Eutheria is a specialization of Mammal. Each instance of Eutheria is a placental mammal; most mammals are members of this collection. Eutheria are bor",
+    "subclass of: marine organism",
+    "ancestor definition: Marine life refers to the plants, animals and other organisms that live in the ocean. At a fundamental level, marine life helps determine the very nat",
+    "sibling concept: cetacean",
+    "sibling concept: Desmostylia",
+    "sibling concept: Kolponomos",
+    "sibling concept: manatee",
+    "sibling concept: Oceanic dolphin"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: Marine Otter. Relevant Logical Facts:  - definition: The marine otter (Lontra felina) is a rare and poorly known South American mammal of the weasel family (Mustelidae). The scientific name means \"otter cat\", and in Spanish, the marine otter is also o  - subclass of: sea mammal  - ancestor definition: Marine mammals are aquatic mammals that rely on the ocean and other marine ecosystems for their existence. They include animals such as seals, whales,  - subclass of: placental mammal  - ancestor definition: Eutheria is a specialization of Mammal. Each instance of Eutheria is a placental mammal; most mammals are members of this collection. Eutheria are bor  - subclass of: marine organism  - ancestor definition: Marine life refers to the plants, animals and other organisms that live in the ocean. At a fundamental level, marine life helps determine the very nat  - sibling concept: cetacean  - sibling concept: Desmostylia  - sibling concept: Kolponomos  - sibling concept: manatee  - sibling concept: Oceanic dolphin
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reflector",
+  "uri": "http://kbpedia.org/kko/rc/Reflector",
+  "score": 1.0,
+  "triples": [
+    "definition: A sub-collection of PhysicalDevice. Each instance is a device that reflects radiation.",
+    "subclass of: industrial supply",
+    "ancestor definition: Inputs and supplies to industrial equipment, facilities and machinery.",
+    "subclass of: non-powered device",
+    "ancestor definition: A specialization of PhysicalDevice. Each instance of NonPoweredDevice is a device which does not need to have any kind of energy supplied to it in ord",
+    "subclass of: manufacturing supply product",
+    "ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers manufacturing componen",
+    "subclass of: supply",
+    "ancestor definition: The collection of food, clothes, and other materials that are stored for later use.",
+    "subclass of: device",
+    "ancestor definition: A specialization of SolidTangibleArtifact and ObjectWithUse. Each instance of PhysicalDevice is an artifact with a relatively rigid, set shape, design",
+    "has subclass: mirror",
+    "has subclass: radar reflector",
+    "has subclass: solar reflector",
+    "sibling concept: cord",
+    "sibling concept: hose",
+    "sibling concept: hose clamp",
+    "sibling concept: industrial goods",
+    "sibling concept: plexiglas"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: reflector. Relevant Logical Facts:  - definition: A sub-collection of PhysicalDevice. Each instance is a device that reflects radiation.  - subclass of: industrial supply  - ancestor definition: Inputs and supplies to industrial equipment, facilities and machinery.  - subclass of: non-powered device  - ancestor definition: A specialization of PhysicalDevice. Each instance of NonPoweredDevice is a device which does not need to have any kind of energy supplied to it in ord  - subclass of: manufacturing supply product  - ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers manufacturing componen  - subclass of: supply  - ancestor definition: The collection of food, clothes, and other materials that are stored for later use.  - subclass of: device  - ancestor definition: A specialization of SolidTangibleArtifact and ObjectWithUse. Each instance of PhysicalDevice is an artifact with a relatively rigid, set shape, design  - has subclass: mirror  - has subclass: radar reflector  - has subclass: solar reflector  - sibling concept: cord  - sibling concept: hose  - sibling concept: hose clamp  - sibling concept: industrial goods  - sibling concept: plexiglas
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+1. sound travels faster in saltwater than in freshwater.
+2. saltwater is more elastic.
+3. saltwater absorbs heat faster.
+4. saltwater has a higher density.
+
+### Facts (Ground Truths):
+None extracted from the provided context as it does not contain unconditional assertions about specific entities or constants related to the question's topic.
+
+### Rules (Horn Clauses / Implications):
+1. sound travels faster in saltwater than in freshwater → saltwater is more elastic.
+2. sound travels faster in saltwater than in freshwater → saltwater absorbs heat faster.
+3. sound travels faster in saltwater than in freshwater → saltwater has a higher density.
+
+Note: The rules are conditional statements that allow for inference based on the given information, but there's no explicit statement about why sound travels faster in saltwater than in freshwater within the provided context.
+==================================================
+==================================================
+ QUERY: Which factor most likely increased, causing more competition for resources among the rodents? A. the fertility of the soil B. the population of producers in the area C. the amount of food scraps left by predators D. the rate at which primary consumers moved into the area
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "bodybuilding competition",
+  "uri": "http://kbpedia.org/kko/rc/BodybuildingCompetition",
+  "score": 1.0,
+  "triples": [
+    "definition: Competition in bodybuilding.",
+    "subclass of: bodybuilding",
+    "ancestor definition: Bodybuilding is the use of progressive resistance exercise to control and develop one's musculature. An individual who engages in this activity is ref",
+    "subclass of: individual sports competition",
+    "ancestor definition: Sports competitions where the competitors are individual agents, not teams",
+    "subclass of: strength conditioning",
+    "ancestor definition: The collection of all Exercising events designed to increase the strength of particular muscle groups.",
+    "subclass of: sports competition",
+    "ancestor definition: The collection of Competitions consisting primarily of one or more SportsEvents. See its specializations SportsFormalCompetition and SportsEvent also.",
+    "sibling concept: bodybuilding supplement",
+    "sibling concept: female bodybuilding",
+    "sibling concept: professional bodybuilding",
+    "sibling concept: air pistol shooting sports event",
+    "sibling concept: air rifle shooting sports event"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: bodybuilding competition. Relevant Logical Facts:  - definition: Competition in bodybuilding.  - subclass of: bodybuilding  - ancestor definition: Bodybuilding is the use of progressive resistance exercise to control and develop one's musculature. An individual who engages in this activity is ref  - subclass of: individual sports competition  - ancestor definition: Sports competitions where the competitors are individual agents, not teams  - subclass of: strength conditioning  - ancestor definition: The collection of all Exercising events designed to increase the strength of particular muscle groups.  - subclass of: sports competition  - ancestor definition: The collection of Competitions consisting primarily of one or more SportsEvents. See its specializations SportsFormalCompetition and SportsEvent also.  - sibling concept: bodybuilding supplement  - sibling concept: female bodybuilding  - sibling concept: professional bodybuilding  - sibling concept: air pistol shooting sports event  - sibling concept: air rifle shooting sports event
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "population density",
+  "uri": "http://kbpedia.org/kko/rc/PopulationDensity",
+  "score": 1.0,
+  "triples": [
+    "definition: Population density (in agriculture : standing stock and standing crop) is a measurement of population per unit area or unit volume; it is a quantity of type number density. It is frequently applied to",
+    "subclass of: geographical quantity",
+    "ancestor definition: A specialization of TangiblePhysicalQuantity. Each instance of GeographicalQuantity is a PhysicalQuantity that can only characterize a GeographicalReg",
+    "subclass of: non aspectual quantity",
+    "ancestor definition: A specialization of ScalarQuantity (q.v.). This is the collection of all \"non-aspectual\" quantities: those that can always be attributed to an object ",
+    "subclass of: ecological population",
+    "ancestor definition: The collection of naturally-occurring groups of organisms, such that each group consists of members of a single species, and all group members live mo",
+    "subclass of: population",
+    "ancestor definition: A population is a summation of all the organisms of the same group or species, which live in a particular geographical area, and have the capability o",
+    "subclass of: ratio quantity",
+    "ancestor definition: A specialization of MultiDimensionalQuantity (q.v.). Each instance of RatioQuantity is a quantity that is derivable (via QuotientFn) as a ratio of oth",
+    "sibling concept: biodiversity",
+    "sibling concept: geographic data",
+    "sibling concept: per capita frequency",
+    "sibling concept: population of BLOs",
+    "sibling concept: weather quantity"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: population density. Relevant Logical Facts:  - definition: Population density (in agriculture : standing stock and standing crop) is a measurement of population per unit area or unit volume; it is a quantity of type number density. It is frequently applied to  - subclass of: geographical quantity  - ancestor definition: A specialization of TangiblePhysicalQuantity. Each instance of GeographicalQuantity is a PhysicalQuantity that can only characterize a GeographicalReg  - subclass of: non aspectual quantity  - ancestor definition: A specialization of ScalarQuantity (q.v.). This is the collection of all "non-aspectual" quantities: those that can always be attributed to an object  - subclass of: ecological population  - ancestor definition: The collection of naturally-occurring groups of organisms, such that each group consists of members of a single species, and all group members live mo  - subclass of: population  - ancestor definition: A population is a summation of all the organisms of the same group or species, which live in a particular geographical area, and have the capability o  - subclass of: ratio quantity  - ancestor definition: A specialization of MultiDimensionalQuantity (q.v.). Each instance of RatioQuantity is a quantity that is derivable (via QuotientFn) as a ratio of oth  - sibling concept: biodiversity  - sibling concept: geographic data  - sibling concept: per capita frequency  - sibling concept: population of BLOs  - sibling concept: weather quantity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "resources",
+  "uri": "http://kbpedia.org/kko/rc/Resources",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all Resources consists in things needed for carrying a task or running a system. Resources include financial resources, energy resources, raw materials, information, infra-structure ",
+    "subclass of: thing that exists in time",
+    "ancestor definition: A specialization of Individual. This is the collection of all things that have temporal extent or location -- things about which one might sensibly as",
+    "has subclass: asbestos",
+    "has subclass: natural resource",
+    "has subclass: raw materials",
+    "sibling concept: ancient thing",
+    "sibling concept: belief system",
+    "sibling concept: business-related documents or agreements",
+    "sibling concept: business related thing",
+    "sibling concept: capability"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: resources. Relevant Logical Facts:  - definition: The collection of all Resources consists in things needed for carrying a task or running a system. Resources include financial resources, energy resources, raw materials, information, infra-structure  - subclass of: thing that exists in time  - ancestor definition: A specialization of Individual. This is the collection of all things that have temporal extent or location -- things about which one might sensibly as  - has subclass: asbestos  - has subclass: natural resource  - has subclass: raw materials  - sibling concept: ancient thing  - sibling concept: belief system  - sibling concept: business-related documents or agreements  - sibling concept: business related thing  - sibling concept: capability
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7116508483886719,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Different species of herbivorous rodents lived in the same ecosystem."
+    }
+  ]
+}
+[Item 4]
+[Chunk Score: 0.7117] Different species of herbivorous rodents lived in the same ecosystem.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+1. `rodent` (a type of animal)
+2. `herbivore` (an eating habit)
+3. `ecosystem` (a community of living and non-living things)
+
+### Facts (Ground Truths):
+1. Different species of herbivorous rodents lived in the same ecosystem.
+   - Constants: `rodents`, `species`
+   - Variables: `herbivore`
+
+2. The collection of all Resources consists in things needed for carrying a task or running a system.
+   - Constants: `Resources`
+   - Variable: `thing`
+
+### Rules (Horn Clauses / Implications):
+1. If an animal is herbivorous, then it eats plants.
+   - Variables: `animal`, `herbivore`, `plants`
+==================================================
+==================================================
+ QUERY: Which of these objects will most likely float in water? A) glass marble B) steel ball C) hard rubber ball D) table tennis ball
+==================================================
+
+--- RETRIEVED CONTEXT (Top 3 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "float glass",
+  "uri": "http://kbpedia.org/kko/rc/FloatGlass",
+  "score": 1.0,
+  "triples": [
+    "definition: This \u2018commodity\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This commodity category is for float glass. This product category corresponds to the UNSPSC co",
+    "subclass of: glass product",
+    "ancestor definition: This \u2018class\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product \u2018class\u2019 is an aggregate of glass pr",
+    "subclass of: door or window or glass",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of door o"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: float glass. Relevant Logical Facts:  - definition: This ‘commodity’ product category is drawn from UNSPSC, readily converted into other widely used systems. This commodity category is for float glass. This product category corresponds to the UNSPSC co  - subclass of: glass product  - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of glass pr  - subclass of: door or window or glass  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of door o
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "water",
+  "uri": "http://kbpedia.org/kko/rc/Water",
+  "score": 1.0,
+  "triples": [
+    "definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or impure) portion of the chemical compound H2O. Instanc",
+    "subclass of: raw materials",
+    "ancestor definition: The collection of all instances of PartiallyTangible that are used as raw materials for the purpose of manufacturing.",
+    "subclass of: achromatism",
+    "ancestor definition: Transparent is the collection of transparent objects. Transparent objects transmit enough light to see clear images through them. See also transparenc",
+    "subclass of: commodity",
+    "ancestor definition: Commodities are those products for which the only relevant data are the quantity and the price (and possibly the location). That is, their quality is ",
+    "subclass of: natural material",
+    "ancestor definition: A natural material is any product or physical matter that comes from plants, animals, or the ground. Minerals and the metals that can be extracted fro",
+    "subclass of: type of product",
+    "ancestor definition: A collection of collections. Each instance of ProductType is a collection of Products (q.v.) -- i.e. a kind of substances, objects, or actions -- that",
+    "has subclass: American Water Landmark",
+    "has subclass: anoxic water",
+    "has subclass: Aquatic ecosystem",
+    "has subclass: body of water",
+    "has subclass: intermittent body of water",
+    "has subclass: body water",
+    "has subclass: extraterrestrial water",
+    "has subclass: form of water",
+    "sibling concept: agricultural commodity",
+    "sibling concept: animal human food source",
+    "sibling concept: crop plant",
+    "sibling concept: earthen substance",
+    "sibling concept: fossil fuel"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: water. Relevant Logical Facts:  - definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or impure) portion of the chemical compound H2O. Instanc  - subclass of: raw materials  - ancestor definition: The collection of all instances of PartiallyTangible that are used as raw materials for the purpose of manufacturing.  - subclass of: achromatism  - ancestor definition: Transparent is the collection of transparent objects. Transparent objects transmit enough light to see clear images through them. See also transparenc  - subclass of: commodity  - ancestor definition: Commodities are those products for which the only relevant data are the quantity and the price (and possibly the location). That is, their quality is  - subclass of: natural material  - ancestor definition: A natural material is any product or physical matter that comes from plants, animals, or the ground. Minerals and the metals that can be extracted fro  - subclass of: type of product  - ancestor definition: A collection of collections. Each instance of ProductType is a collection of Products (q.v.) -- i.e. a kind of substances, objects, or actions -- that  - has subclass: American Water Landmark  - has subclass: anoxic water  - has subclass: Aquatic ecosystem  - has subclass: body of water  - has subclass: intermittent body of water  - has subclass: body water  - has subclass: extraterrestrial water  - has subclass: form of water  - sibling concept: agricultural commodity  - sibling concept: animal human food source  - sibling concept: crop plant  - sibling concept: earthen substance  - sibling concept: fossil fuel
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Tap water",
+  "uri": "http://kbpedia.org/kko/rc/TapWater",
+  "score": 1.0,
+  "triples": [
+    "definition: Tap water (running water, city water, town water, municipal water, etc.) is water supplied to a tap (valve). Its uses include drinking, washing, cooking, and the flushing of toilets.",
+    "subclass of: fresh water",
+    "ancestor definition: Fresh water is naturally occurring  water on the Earth's surface in ice sheets, ice caps, glaciers, icebergs, bogs, ponds, lakes, rivers and streams, ",
+    "subclass of: water",
+    "ancestor definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or imp",
+    "subclass of: Water resource",
+    "ancestor definition: Water resources are sources of water that are potentially useful. The majority of human uses require fresh water.",
+    "sibling concept: cold spring",
+    "sibling concept: drinking water",
+    "sibling concept: fresh-water lake",
+    "sibling concept: frost",
+    "sibling concept: fresh liquid water"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: Tap water. Relevant Logical Facts:  - definition: Tap water (running water, city water, town water, municipal water, etc.) is water supplied to a tap (valve). Its uses include drinking, washing, cooking, and the flushing of toilets.  - subclass of: fresh water  - ancestor definition: Fresh water is naturally occurring water on the Earth's surface in ice sheets, ice caps, glaciers, icebergs, bogs, ponds, lakes, rivers and streams,  - subclass of: water  - ancestor definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or imp  - subclass of: Water resource  - ancestor definition: Water resources are sources of water that are potentially useful. The majority of human uses require fresh water.  - sibling concept: cold spring  - sibling concept: drinking water  - sibling concept: fresh-water lake  - sibling concept: frost  - sibling concept: fresh liquid water
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+1. float(X) :- X is glass marble, Y is steel ball.
+2. float(X) :- X is hard rubber ball, Y is table tennis ball.
+
+### Facts (Ground Truths):
+1. glass_marble is a type of object that can float in water.
+2. steel_ball is not typically associated with floating in water.
+3. hard_rubber_ball is capable of floating on the surface of water.
+4. table_tennis_ball has properties similar to those allowing it to potentially float.
+
+### Rules (Horn Clauses / Implications):
+1. float(X) :- X is glass_marble, Y is steel ball.
+2. float(X) :- X is hard_rubber_ball, Y is table_tennis_ball.
+
+Note: The rules provided are based on the assumption that if an object has properties similar to those of a known floating object (e.g., being made of rubber), it may also be able to float in water. However, this inference requires further testing and validation for accuracy.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nucleus",
+  "uri": "http://kbpedia.org/kko/rc/Nucleus",
+  "score": 1.0,
+  "triples": [
+    "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, ",
+    "subclass of: organelle",
+    "ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which ",
+    "subclass of: cell part",
+    "ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel",
+    "subclass of: internal body part",
+    "ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. ",
+    "has subclass: nuclear substructure",
+    "has subclass: nucleolus",
+    "sibling concept: centrosome",
+    "sibling concept: chloroplast",
+    "sibling concept: endoplasmic reticulum",
+    "sibling concept: Golgi apparatus",
+    "sibling concept: golgi cisterna"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: nucleus. Relevant Logical Facts:  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus,  - subclass of: organelle  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which  - subclass of: cell part  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel  - subclass of: internal body part  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism.  - has subclass: nuclear substructure  - has subclass: nucleolus  - sibling concept: centrosome  - sibling concept: chloroplast  - sibling concept: endoplasmic reticulum  - sibling concept: Golgi apparatus  - sibling concept: golgi cisterna
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth \u2013 this total decreases to 206 bones by adulthood after some bones have fused together. The bone ma",
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of B",
+    "subclass of: skeleton",
+    "ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o",
+    "subclass of: region on an animal's body",
+    "ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivisio",
+    "subclass of: organ system",
+    "ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological sy",
+    "sibling concept: abdomen",
+    "sibling concept: abdominal cavity",
+    "sibling concept: adrenal cortex",
+    "sibling concept: adrenal medulla",
+    "sibling concept: alimentary canal"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone ma  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of B  - subclass of: skeleton  - ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o  - subclass of: region on an animal's body  - ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivisio  - subclass of: organ system  - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological sy  - sibling concept: abdomen  - sibling concept: abdominal cavity  - sibling concept: adrenal cortex  - sibling concept: adrenal medulla  - sibling concept: alimentary canal
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+1. nucleus(plural) is a membrane-enclosed organelle.
+2. eukaryotic cells have one or more nuclei.
+3. cell wall provides structural support to plant cells.
+
+### Facts (Ground Truths):
+1. The human skeleton has around 206 bones by adulthood.
+2. Human skeletons are composed of bone material.
+3. Plant cells contain a nucleus, chloroplast, and other organelles.
+
+### Rules (Horn Clauses / Implications):
+1. If an entity is eukaryotic, then it contains one or more nuclei.
+2. If an organism has a skeleton, then its body parts are supported by the skeletal system.
+3. Plant cells have cell walls that provide structural support similar to animal skeletons.
+
+Note: The above extraction adheres strictly to the provided context and methodology without inferring any additional information.
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "investigation",
+  "uri": "http://kbpedia.org/kko/rc/Investigation",
+  "score": 1.0,
+  "triples": [
+    "definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide vari",
+    "subclass of: gathering information",
+    "ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info",
+    "subclass of: purposeful mental activity",
+    "ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is",
+    "subclass of: work",
+    "ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occup",
+    "subclass of: information transfer",
+    "ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (info",
+    "subclass of: action (purposeful)",
+    "ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose",
+    "has subclass: criminal investigation",
+    "has subclass: examination investigation",
+    "has subclass: investigating",
+    "has subclass: scrutiny",
+    "has subclass: witch hunt",
+    "sibling concept: analysing",
+    "sibling concept: business intelligence",
+    "sibling concept: counter-intelligence",
+    "sibling concept: lookup",
+    "sibling concept: exploring"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: investigation. Relevant Logical Facts:  - definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide vari  - subclass of: gathering information  - ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info  - subclass of: purposeful mental activity  - ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is  - subclass of: work  - ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occup  - subclass of: information transfer  - ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (info  - subclass of: action (purposeful)  - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose  - has subclass: criminal investigation  - has subclass: examination investigation  - has subclass: investigating  - has subclass: scrutiny  - has subclass: witch hunt  - sibling concept: analysing  - sibling concept: business intelligence  - sibling concept: counter-intelligence  - sibling concept: lookup  - sibling concept: exploring
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature measuring device",
+  "uri": "http://kbpedia.org/kko/rc/TemperatureMeasuringDevice",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all temperature measuring devices. A type of MeasuringDevice. TemperatureMeasuringDevice is a SpatiallyDisjointObjectType.",
+    "subclass of: measuring device",
+    "ancestor definition: MeasuringDevice is a specialization of PhysicalDevice. Each instance of MeasuringDevice is a device used for measuring some quantity such as Distance,",
+    "subclass of: device type by function",
+    "ancestor definition: A collection of collections; a subcollection of ArtifactTypeByFunction. Instances of DeviceTypeByFunction are mutually unique with respect to the full",
+    "subclass of: measuring or testing instrument",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of measur",
+    "subclass of: unit of measure concept",
+    "ancestor definition: A ConceptTypeByDomain (q.v.). Instances of UnitOfMeasureConcept are collections and relations having to do with unit of measurement functions and the ",
+    "has subclass: temperature gauge",
+    "has subclass: thermometer",
+    "sibling concept: acoustic measurement",
+    "sibling concept: astrometry",
+    "sibling concept: clock",
+    "sibling concept: compass",
+    "sibling concept: distance measuring device"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: temperature measuring device. Relevant Logical Facts:  - definition: The collection of all temperature measuring devices. A type of MeasuringDevice. TemperatureMeasuringDevice is a SpatiallyDisjointObjectType.  - subclass of: measuring device  - ancestor definition: MeasuringDevice is a specialization of PhysicalDevice. Each instance of MeasuringDevice is a device used for measuring some quantity such as Distance,  - subclass of: device type by function  - ancestor definition: A collection of collections; a subcollection of ArtifactTypeByFunction. Instances of DeviceTypeByFunction are mutually unique with respect to the full  - subclass of: measuring or testing instrument  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of measur  - subclass of: unit of measure concept  - ancestor definition: A ConceptTypeByDomain (q.v.). Instances of UnitOfMeasureConcept are collections and relations having to do with unit of measurement functions and the  - has subclass: temperature gauge  - has subclass: thermometer  - sibling concept: acoustic measurement  - sibling concept: astrometry  - sibling concept: clock  - sibling concept: compass  - sibling concept: distance measuring device
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6899070739746094,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.6899] Janette conducts an investigation to see which foods make her feel more fatigued.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6852493286132812,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+[Item 4]
+[Chunk Score: 0.6852] She eats one of four different foods each day at the same time for four days and then records how she feels.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6725425720214844,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.6725] She asks her friend Carmen to do the same investigation to see if she gets similar results.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `investigation`: A collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing.
+2. `gathering information`: A subclass of Investigation, involving the acquisition of knowledge or data.
+3. `purposeful mental activity`: An ancestor definition that includes both StrictlyMentalEvent and PurposefulAction.
+4. `work`: Activities requiring physical or mental exertion for non-recreational purposes.
+
+#### Facts (Ground Truths):
+1. Janette conducts an investigation to see which foods make her feel more fatigued.
+2. She eats one of four different foods each day at the same time for four days and then records how she feels.
+3. Carmen is asked by Janette to conduct a similar investigation.
+
+#### Rules (Horn Clauses / Implications):
+1. `investigation(X) :- gathering_information(X).` // An Investigation can be any instance of Gathering Information
+2. `gathering_information(X) :- purposeful_mental_activity(X), work(X).` // Gathering information is an activity that requires mental effort and contributes to one's occupation.
+3. `Janette_conducts_investigation :- investigation(Janette, fatigue_foods).`
+4. `Carmen_participates_in_investigation :- Carmen_asks_to_replicate_Janettes_study.`
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "ocean pollution",
+  "uri": "http://kbpedia.org/kko/rc/OceanPollution",
+  "score": 1.0,
+  "triples": [
+    "definition: Marine pollution occurs when harmful, or potentially harmful, effects result from the entry into the ocean of chemicals, particles, industrial, agricultural and residential waste, noise, or the spread",
+    "subclass of: pollutant",
+    "ancestor definition: A pollutant is a substance or energy introduced into the environment that has undesired effects, or adversely affects the usefulness of a resource. A ",
+    "subclass of: polluting",
+    "ancestor definition: The process by which something is polluted-- made impure or contaminated. This includes air pollution, water pollution, noise pollution, etc.",
+    "subclass of: waste product",
+    "ancestor definition: Waste or by-products that may be useful resources in their own right.",
+    "subclass of: contaminating",
+    "ancestor definition: A specialization of IntrinsicStateChangeEvent. In each instance of ContaminationEvent, some instance of PartiallyTangible comes to contain a contamina",
+    "subclass of: environmental process",
+    "ancestor definition: Environmental processes are systems and processes of the natural environment, including atmospheric, geological, climatic, and water systems, often im",
+    "has subclass: oil spill",
+    "sibling concept: agrochemicals",
+    "sibling concept: air pollutant",
+    "sibling concept: biological contamination",
+    "sibling concept: Persistent Organic Pollutant under the Convention on Long-Range Transboundary Air Pollution",
+    "sibling concept: automobile exhaust"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: ocean pollution. Relevant Logical Facts:  - definition: Marine pollution occurs when harmful, or potentially harmful, effects result from the entry into the ocean of chemicals, particles, industrial, agricultural and residential waste, noise, or the spread  - subclass of: pollutant  - ancestor definition: A pollutant is a substance or energy introduced into the environment that has undesired effects, or adversely affects the usefulness of a resource. A  - subclass of: polluting  - ancestor definition: The process by which something is polluted-- made impure or contaminated. This includes air pollution, water pollution, noise pollution, etc.  - subclass of: waste product  - ancestor definition: Waste or by-products that may be useful resources in their own right.  - subclass of: contaminating  - ancestor definition: A specialization of IntrinsicStateChangeEvent. In each instance of ContaminationEvent, some instance of PartiallyTangible comes to contain a contamina  - subclass of: environmental process  - ancestor definition: Environmental processes are systems and processes of the natural environment, including atmospheric, geological, climatic, and water systems, often im  - has subclass: oil spill  - sibling concept: agrochemicals  - sibling concept: air pollutant  - sibling concept: biological contamination  - sibling concept: Persistent Organic Pollutant under the Convention on Long-Range Transboundary Air Pollution  - sibling concept: automobile exhaust
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "trench",
+  "uri": "http://kbpedia.org/kko/rc/Trench",
+  "score": 1.0,
+  "triples": [
+    "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple",
+    "subclass of: topographical feature",
+    "ancestor definition: A specialization of GeographicalRegion. Each instance of TopographicalFeature is a three-dimensional feature of a planet's surface, typically with bou",
+    "subclass of: cartographic feature type",
+    "ancestor definition: A SecondOrderCollection. Each instance of CartographicFeatureType is a specialization of Place whose instances are often displayed on maps or conceptu",
+    "subclass of: configuration",
+    "ancestor definition: Forms or arrangements that are of the nature or perceivable of the subject (A).",
+    "subclass of: non-agent-like place",
+    "ancestor definition: A collection of places which are not agent-like. Some things can be both places and exhibit agency; e.g., the CityOfMiamiFL is a region in Florida_Sta",
+    "sibling concept: albedo feature",
+    "sibling concept: archipelago",
+    "sibling concept: asphalt lake",
+    "sibling concept: bend",
+    "sibling concept: body of water"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: trench. Relevant Logical Facts:  - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple  - subclass of: topographical feature  - ancestor definition: A specialization of GeographicalRegion. Each instance of TopographicalFeature is a three-dimensional feature of a planet's surface, typically with bou  - subclass of: cartographic feature type  - ancestor definition: A SecondOrderCollection. Each instance of CartographicFeatureType is a specialization of Place whose instances are often displayed on maps or conceptu  - subclass of: configuration  - ancestor definition: Forms or arrangements that are of the nature or perceivable of the subject (A).  - subclass of: non-agent-like place  - ancestor definition: A collection of places which are not agent-like. Some things can be both places and exhibit agency; e.g., the CityOfMiamiFL is a region in Florida_Sta  - sibling concept: albedo feature  - sibling concept: archipelago  - sibling concept: asphalt lake  - sibling concept: bend  - sibling concept: body of water
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Predicates:
+1. **tectonic_plate_diverging**: A predicate indicating the process of tectonic plates moving apart.
+2. **ocean_basin_forming**: A predicate describing the formation of an ocean basin as a result of plate movement.
+3. **rift_valley_forming**: A predicate representing the creation of a rift valley due to diverging tectonic plates.
+4. **trench_forming**: A predicate indicating that trenches form through specific geological processes, not directly related to divergence.
+
+### Facts (Ground Truths):
+1. **ocean_basin** is formed as a result of tectonic plate divergence.
+2. **rift_valley** forms due to the movement apart of tectonic plates.
+3. **mid-ocean_ridge** does form through diverging tectonic plates.
+
+### Rules (Horn Clauses / Implications):
+1. If tectonic_plate_diverging, then ocean_basin_forming.
+2. If tectonic_plate_diverging, then rift_valley_forming.
+3. Not(trench_forming) -> tectonic_plate_converging (Implication: Trenches do not form as a result of divergent plates; they are associated with convergent processes.)
+
+### Note:
+- The question asks for the feature that does NOT form due to plate divergence, which is answered by implication 3.
+- Constants vs. Variables constraint applied throughout extraction and categorization.
+==================================================
+==================================================
+ QUERY: Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "slave trade",
+  "uri": "http://kbpedia.org/kko/rc/SlaveTrade",
+  "score": 1.0,
+  "triples": [
+    "definition: The history of slavery spans nearly every culture, nationality, and religion and from ancient times to the present day. However the social, economic, and legal position of slaves was vastly different ",
+    "subclass of: slavery",
+    "ancestor definition: Slavery is a legal or economic system under which people are treated as property. While laws and systems vary, as property, slaves may be bought and s",
+    "subclass of: slave trafficking",
+    "ancestor definition: A specialization of CommercialActivity. Instances are actions undertaken as part of an illicit business seeking to profit from the buying, selling, tr",
+    "sibling concept: slave rebellion",
+    "sibling concept: slavery by type",
+    "sibling concept: slavery in ancient Greece"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: slave trade. Relevant Logical Facts:  - definition: The history of slavery spans nearly every culture, nationality, and religion and from ancient times to the present day. However the social, economic, and legal position of slaves was vastly different  - subclass of: slavery  - ancestor definition: Slavery is a legal or economic system under which people are treated as property. While laws and systems vary, as property, slaves may be bought and s  - subclass of: slave trafficking  - ancestor definition: A specialization of CommercialActivity. Instances are actions undertaken as part of an illicit business seeking to profit from the buying, selling, tr  - sibling concept: slave rebellion  - sibling concept: slavery by type  - sibling concept: slavery in ancient Greece
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Tap water",
+  "uri": "http://kbpedia.org/kko/rc/TapWater",
+  "score": 1.0,
+  "triples": [
+    "definition: Tap water (running water, city water, town water, municipal water, etc.) is water supplied to a tap (valve). Its uses include drinking, washing, cooking, and the flushing of toilets.",
+    "subclass of: fresh water",
+    "ancestor definition: Fresh water is naturally occurring  water on the Earth's surface in ice sheets, ice caps, glaciers, icebergs, bogs, ponds, lakes, rivers and streams, ",
+    "subclass of: water",
+    "ancestor definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or imp",
+    "subclass of: Water resource",
+    "ancestor definition: Water resources are sources of water that are potentially useful. The majority of human uses require fresh water.",
+    "sibling concept: cold spring",
+    "sibling concept: drinking water",
+    "sibling concept: fresh-water lake",
+    "sibling concept: frost",
+    "sibling concept: fresh liquid water"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: Tap water. Relevant Logical Facts:  - definition: Tap water (running water, city water, town water, municipal water, etc.) is water supplied to a tap (valve). Its uses include drinking, washing, cooking, and the flushing of toilets.  - subclass of: fresh water  - ancestor definition: Fresh water is naturally occurring water on the Earth's surface in ice sheets, ice caps, glaciers, icebergs, bogs, ponds, lakes, rivers and streams,  - subclass of: water  - ancestor definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or imp  - subclass of: Water resource  - ancestor definition: Water resources are sources of water that are potentially useful. The majority of human uses require fresh water.  - sibling concept: cold spring  - sibling concept: drinking water  - sibling concept: fresh-water lake  - sibling concept: frost  - sibling concept: fresh liquid water
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7226371765136719,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "A student planted two bean seeds in two identical pots containing the same type of soil."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.7226] A student planted two bean seeds in two identical pots containing the same type of soil.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6692886352539062,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Each day, he poured 15 milliliters of water into each pot."
+    }
+  ]
+}
+[Item 4]
+[Chunk Score: 0.6693] Each day, he poured 15 milliliters of water into each pot.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.636688232421875,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "He placed one pot in a closet and the other near a sunny window."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.6367] He placed one pot in a closet and the other near a sunny window.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `pot/2`: A predicate indicating two identical pots (constants: `pots_1`, `pots_2`).
+   - `pot(pots_1, same_type_of_soil).`
+   - `pot(pots_2, same_type_of_soil).`
+
+2. `water_amount/3`: A predicate representing the amount of water poured into each pot (constants: `15_milliliters`, `pots_1`, `pots_2`).
+   - `water_amount(15_milliliters, pots_1, same_day).`
+   - `water_amount(15_milliliters, pots_2, same_day).`
+
+3. `light_location/4`: A predicate indicating the location of each pot (constants: `closet`, `sunny_window`, `pots_1`, `pots_2`).
+   - `light_location(closet, sunny_window, pots_1, near_something).`
+   - `light_location(sunny_window, closet, pots_2, near_something).`
+
+4. `seed_type/3`: A predicate representing the type of seed planted (constants: `bean_seeds`, `pots_1`, `pots_2`).
+   - `seed_type(bean_seeds, pots_1, same_day).`
+   - `seed_type(bean_seeds, pots_2, same_day).`
+
+5. `soil_type/3`: A predicate indicating the type of soil in each pot (constants: `same_type_of_soil`, `pots_1`, `pots_2`).
+   - `soil_type(same_type_of_soil, pots_1, same_day).`
+   - `soil_type(same_type_of_soil, pots_2, same_day).`
+
+#### Facts (Ground Truths):
+- The two bean seeds were planted in identical pots containing the same type of soil.
+  - `bean_seeds(pots_1)`.
+  - `bean_seeds(pots_2)`.
+
+- Each day, he poured 15 milliliters of water into each pot on the same day.
+  - `same_day(same_day).`
+
+#### Rules (Horn Clauses / Implications):
+None extracted from the provided context.
+==================================================
+==================================================
+ QUERY: Which is the most likely reason to tag an animal? A. to monitor their eating habits B. to monitor their roaming habits C. to monitor their sleeping habits D. to monitor their reproductive habits
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reproductive ecology",
+  "uri": "http://kbpedia.org/kko/rc/ReproductiveEcology",
+  "score": 1.0,
+  "triples": [
+    "definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism\u2019s reproductive system to ecological variables.",
+    "subclass of: subfield of ecology",
+    "ancestor definition: A subfield of ecology.",
+    "subclass of: ecology",
+    "ancestor definition: The study of the interrelationships between organisms and their physical environment.",
+    "subclass of: subfield",
+    "ancestor definition: A subfield is an area of research and study within a field of study or academic discipline.",
+    "sibling concept: chemical ecology",
+    "sibling concept: forest ecology",
+    "sibling concept: freshwater ecology",
+    "sibling concept: industrial ecology",
+    "sibling concept: insect ecology"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: reproductive ecology. Relevant Logical Facts:  - definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism’s reproductive system to ecological variables.  - subclass of: subfield of ecology  - ancestor definition: A subfield of ecology.  - subclass of: ecology  - ancestor definition: The study of the interrelationships between organisms and their physical environment.  - subclass of: subfield  - ancestor definition: A subfield is an area of research and study within a field of study or academic discipline.  - sibling concept: chemical ecology  - sibling concept: forest ecology  - sibling concept: freshwater ecology  - sibling concept: industrial ecology  - sibling concept: insect ecology
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nomad",
+  "uri": "http://kbpedia.org/kko/rc/Nomad",
+  "score": 1.0,
+  "triples": [
+    "definition: A nomad (Greek: \u03bd\u03bf\u03bc\u03ac\u03c2, nomas, plural \u03bd\u03bf\u03bc\u03ac\u03b4\u03b5\u03c2, nomades; meaning one roaming about for pasture, pastoral tribe) is a member of a community of people who live in different locations, moving from one plac",
+    "subclass of: person type by residence",
+    "ancestor definition: A category for ways to describe people by virtue of where they reside or not.",
+    "subclass of: person types",
+    "ancestor definition: Persons that may be grouped by a variety of types.",
+    "sibling concept: colonist",
+    "sibling concept: expatriate",
+    "sibling concept: home owner",
+    "sibling concept: homeless person",
+    "sibling concept: islander"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: nomad. Relevant Logical Facts:  - definition: A nomad (Greek: νομάς, nomas, plural νομάδες, nomades; meaning one roaming about for pasture, pastoral tribe) is a member of a community of people who live in different locations, moving from one plac  - subclass of: person type by residence  - ancestor definition: A category for ways to describe people by virtue of where they reside or not.  - subclass of: person types  - ancestor definition: Persons that may be grouped by a variety of types.  - sibling concept: colonist  - sibling concept: expatriate  - sibling concept: home owner  - sibling concept: homeless person  - sibling concept: islander
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7045421600341797,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Many endangered animals are captured, tagged, and then released back into their environment."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.7045] Many endangered animals are captured, tagged, and then released back into their environment.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6787300109863281,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body."
+    }
+  ]
+}
+[Item 4]
+[Chunk Score: 0.6787] The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### Extracted Evidence:
+
+#### Predicates:
+1. `tagged(X)`: X has been tagged with an identification device.
+2. `released_back_into_environment(Y, Z)`: Y was released back into its environment after being captured and tagged as Z.
+3. `coded_plastic_or_metal_tag(A)` : A is a coded plastic or metal tag used for identification.
+
+#### Facts (Ground Truths):
+1. `many_endangered_animals_captured_and_released_back_into_their_environment`: Many endangered animals are captured, tagged, and then released back into their environment.
+2. `tag(X) implies identified(Y)` : If X is tagged with an identification device, it can be identified as Y.
+
+#### Rules (Horn Clauses / Implications):
+1. `released_back_into_environment(Z, animal) implies not_harmed_by_tagging`: If Z was released back into its environment after being captured and tagged, then the tagging process did not harm the animal.
+2. `tagged(X)` : X has been identified with a coded plastic or metal tag.
+
+Note: The extracted evidence is based solely on the provided context and does not include any information from the question itself.
+==================================================

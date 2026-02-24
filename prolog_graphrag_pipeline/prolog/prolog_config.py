@@ -69,6 +69,22 @@ Translate the provided Context into a formal Prolog database to answer the User 
 - Singleton Variables: Every named variable in a rule must appear at least twice. If a variable is only used once, use the anonymous variable `_` instead.
 - Punctuation: Every Prolog line must end with a period (.). No standalone bullets or hyphens at the start of a line.
 
+### Multiple-Choice Questions (MCQ) — Critical
+When the user question presents options (A/B/C/D), you MUST follow this pattern:
+1. Encode EACH option as a separate fact: `option(a, 'description').` / `option(b, 'description').` etc.
+2. Encode the domain knowledge from the context as rules that DERIVE properties relevant to the question. Do NOT hardcode which option is correct.
+3. Write an `answer/1` rule that unifies with the correct option ONLY through logical derivation from those domain rules and facts.
+4. The <query> should be `answer(Option).` with a variable — NEVER `answer(b).` with a constant.
+
+WRONG (hardcoded answer — defeats the purpose of Prolog reasoning):
+  `answer(b) :- true.`
+  `best_option(X) :- X = option_b.`
+
+RIGHT (derived through logical rules):
+  `option(a, cell_membrane). option(b, cell_wall). ...`
+  `provides_structural_support(cell_wall).`
+  `answer(Option) :- option(Option, Part), provides_structural_support(Part).`
+
 ### Structural Output Format (Strict)
 
 Your output must strictly follow this visual template:
@@ -78,7 +94,7 @@ Your output must strictly follow this visual template:
 [Prolog code]
 </reasoning_step>
 
-reasoning_step>
+<reasoning_step>
 [Reasoning for facts/rules]
 [Prolog code]
 </reasoning_step>
@@ -293,6 +309,75 @@ affected(Predator) :- eats(Predator, Prey), affected(Prey).
 
 <query> 
 affected(snake). 
+</query>
+
+---
+"""},
+
+    # Example 6: Multiple-Choice Question (MCQ)
+    {"role": "user", "content": """
+Now, process the following:
+Context:
+### Predicates:
+1. sound_travel(medium, speed) - describes how fast sound travels through a medium.
+2. medium_state(medium, state) - the physical state of a medium (solid, liquid, gas).
+
+### Facts (Ground Truths):
+1. Sound travels fastest through solids, then liquids, then gases.
+2. Steel is a solid. Water is a liquid. Air is a gas. A vacuum has no medium.
+
+### Rules (Horn Clauses / Implications):
+1. If a medium is solid, sound travels fastest through it.
+2. Sound cannot travel through a vacuum because there are no particles.
+
+User Question: Through which medium does sound travel the fastest?
+A. vacuum
+B. water
+C. steel
+D. air
+"""},
+    {"role": "assistant", "content": r"""
+<reasoning_step>
+I must encode each option as a fact so that Prolog can select the correct one through logical derivation, rather than me choosing it directly.
+option(a, vacuum).
+option(b, water).
+option(c, steel).
+option(d, air).
+</reasoning_step>
+
+<reasoning_step>
+The context tells us the physical state of each medium and how sound speed relates to state.
+medium_state(steel, solid).
+medium_state(water, liquid).
+medium_state(air, gas).
+no_medium(vacuum).
+</reasoning_step>
+
+<reasoning_step>
+Sound travels fastest through solids. A medium allows fastest travel if it is solid. Sound cannot travel through a vacuum at all.
+sound_fastest(Medium) :- medium_state(Medium, solid).
+</reasoning_step>
+
+<reasoning_step>
+The answer is the option whose medium allows the fastest sound travel.
+answer(Option) :- option(Option, Medium), sound_fastest(Medium).
+</reasoning_step>
+
+<database>
+option(a, vacuum).
+option(b, water).
+option(c, steel).
+option(d, air).
+medium_state(steel, solid).
+medium_state(water, liquid).
+medium_state(air, gas).
+no_medium(vacuum).
+sound_fastest(Medium) :- medium_state(Medium, solid).
+answer(Option) :- option(Option, Medium), sound_fastest(Medium).
+</database>
+
+<query>
+answer(Option).
 </query>
 
 ---
