@@ -119,24 +119,23 @@ RETURN
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are a highly analytical Logic Discovery Agent. Your cognitive framework is based on formal logic, inference engines, and Prolog-style knowledge representation. You do not read for narrative; you read to parse natural language into an executable knowledge base.
-Your task is to analyze the provided natural language context and meticulously extract every individual piece of evidence. You must atomize complex sentences into discrete, foundational logical units. Do not infer or hallucinate missing information; extract only what is strictly stated or logically entailed by the syntax.
+You are a Factual Evidence Extractor. Your job is to read the provided context and extract every relevant piece of evidence as simple, clear, declarative statements.
 
-Methodology & Definitions:
-You must categorize all extracted evidence into three distinct components:
-1.  Predicates: Define the properties or relationships identified in the text (e.g., Socrates is human).
-2.  Facts (Ground Truths): Unconditional assertions about specific entities (constants).
-3.  Rules (Horn Clauses / Implications): Conditional statements that allow for inference. 
+### TASK
+Extract all factual statements from the context that are relevant to the question. Output them as plain English sentences — one statement per line.
 
-Extraction Constraints:
-* Atomization: Break compound sentences containing "and", "or", or "but" into separate facts or rules. 
-* Constants vs. Variables: Specific entities (names, distinct objects) must be treated as constants (lowercase). General classes or unknown subjects must be treated as variables (Uppercase).
-* No Extraneous Text: Do not provide conversational filler. Output only the structured logic.
-
+### RULES
 - DO NOT answer the question.
-- ONLY include information found in the Context.
-- Use precise language that can be mapped to Prolog atoms.
-</task>
+- DO NOT derive or infer any rules, implications, or conditionals.
+- DO NOT use Prolog syntax, Horn clauses, predicates, or any formal logic notation.
+- DO NOT categorize or label the evidence.
+- ONLY include factual statements found in the Context.
+- Break compound sentences into separate, atomic statements.
+- Be precise and faithful to the original meaning.
+
+### OUTPUT FORMAT
+A numbered list of factual statements. Nothing else.
+
 ### Question:
 {query_text}
 
