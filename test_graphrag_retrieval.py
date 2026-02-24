@@ -34,7 +34,7 @@ def log_retrieved_context(test_case: dict, retrieved_context: dict, debug_id: in
     if prolog_error is not None:
         verification_note = f"\n        [⚠ Prolog verification FAILED — unverified answer. Reason: {prolog_error}]"
 
-    with open("kbpedia_graphrag_retrieval.log", "a", encoding="utf-8") as log_file:
+    with open("final_kbpedia_graphrag_retrieval.log", "a", encoding="utf-8") as log_file:
         log_file.write(
             f"   [+] Debug ID #{debug_id} | Benchmark: {benchmark_name}\n"
             f"      Formatted Input: {formatted_input}\n"
@@ -75,7 +75,7 @@ def run_tests(start_from_id=1):
             retrieve_context(test_case, debug_id=debug_id)
         except Exception as e:
             print(f"[ERROR] Debug ID #{debug_id} failed: {e}")
-            with open("kbpedia_graphrag_retrieval.log", "a", encoding="utf-8") as log_file:
+            with open("final_kbpedia_graphrag_retrieval.log", "a", encoding="utf-8") as log_file:
                 log_file.write(f"   [ERROR] Debug ID #{debug_id} | SKIPPED due to: {e}\n")
             continue
 
