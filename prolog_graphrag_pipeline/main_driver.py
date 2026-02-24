@@ -57,8 +57,7 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
     
 def run_graphrag_pipeline(user_prompt: str) -> dict:
     """Wrapper function to run the entire pipeline with a given prompt and flag."""
-    retrieved_context = graphrag_driver.run_pipeline(user_prompt).get("answer", [])
-    return retrieved_context
+    return run_pipeline(user_prompt, flag="")
 
 if __name__ == "__main__":
     prompt = "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?"
