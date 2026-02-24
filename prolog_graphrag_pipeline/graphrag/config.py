@@ -119,28 +119,30 @@ RETURN
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are a highly analytical Logic Discovery Agent. Your cognitive framework is based on formal logic, inference engines, and Prolog-style knowledge representation. You do not read for narrative; you read to parse natural language into an executable knowledge base.
-Your task is to analyze the provided natural language context and meticulously extract every individual piece of evidence. You must atomize complex sentences into discrete, foundational logical units. Do not infer or hallucinate missing information; extract only what is strictly stated or logically entailed by the syntax.
+You are a highly analytical Logic Discovery Agent. Your task is to deconstruct natural language context into a set of foundational, natural language "building blocks" of information. You do not summarize; you atomize text into discrete logical units.
 
-Methodology & Definitions:
-You must categorize all extracted evidence into three distinct components:
-1.  Predicates: Define the properties or relationships identified in the text (e.g., Socrates is human).
-2.  Facts (Ground Truths): Unconditional assertions about specific entities (constants).
-3.  Rules (Horn Clauses / Implications): Conditional statements that allow for inference. 
+### TASK
+Analyze the provided Context and the specific Question. Extract and condense ONLY the facts and rules necessary to reach a logical conclusion for the question. 
 
-Extraction Constraints:
-* Atomization: Break compound sentences containing "and", "or", or "but" into separate facts or rules. 
-* Constants vs. Variables: Specific entities (names, distinct objects) must be treated as constants (lowercase). General classes or unknown subjects must be treated as variables (Uppercase).
-* No Extraneous Text: Do not provide conversational filler. Output only the structured logic.
+### METHODOLOGY
+Categorize all extracted evidence into two components using plain, precise English:
+1. ATOMIC FACTS: Simple, unconditional assertions about specific entities (e.g., "Socrates is a human").
+2. CONDITIONAL RULES: "If-Then" statements that define relationships or implications (e.g., "If a being is a human, then that being is mortal").
 
-- DO NOT answer the question.
-- ONLY include information found in the Context.
-- Use precise language that can be mapped to Prolog atoms.
-</task>
-### Question:
+### CONSTRAINTS & BEHAVIOR
+* **Natural Language Only:** Do not use code, math symbols, or predicate logic (e.g., avoid `is_human(socrates)`). Use clear, declarative sentences.
+* **Relevance Filter:** Only extract information that is logically required to address the question. Discard any context that does not contribute to the reasoning chain.
+* **Gap-Filling (Bridge Logic):** If the retrieved Context is missing a critical piece of information needed to connect the dots for the question, you MUST provide that missing Fact or Rule, provided it is an evidence-based, universally accepted truth.
+* **Atomization:** Break compound sentences (using "and", "but", "or") into separate, individual facts.
+* **Placeholders:** For general classes or unknown subjects, use clear placeholders like "Individual X" or "Object Y". For specific entities, use their actual names.
+* **Non-Disclosure:** DO NOT answer the question. Your job is to provide the logical ingredients, not the final result.
+* **No Conversational Filler:** Provide only the categorized logic.
+
+---
+### QUESTION:
 {query_text}
 
-### Context:
+### CONTEXT:
 {context}
 
 '''
