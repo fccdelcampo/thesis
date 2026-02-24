@@ -263,7 +263,10 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             print(f"Iteration {i} | General Error: {e}")
             if "missing 3 required positional arguments" in str(e):
                 raise e  # Fatal — stop immediately
-            _record_error(f"Error: {e}. Please ensure valid Prolog syntax.")
+            if isinstance(e, TimeoutError):
+                _record_error(f"LLM call timed out ({e}). The model may have hung. It has been reset — retry.")
+            else:
+                _record_error(f"Error: {e}. Please ensure valid Prolog syntax.")
 
     # ── Phase 2: Close-check — should we try 5 more times? ───────────────────
     most_recent_error = error_history[-1] if error_history else None
@@ -307,7 +310,10 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                 print(f"Extension {i} | General Error: {e}")
                 if "missing 3 required positional arguments" in str(e):
                     raise e
-                _record_error(f"Error: {e}. Please ensure valid Prolog syntax.")
+                if isinstance(e, TimeoutError):
+                    _record_error(f"LLM call timed out ({e}). The model may have hung. It has been reset — retry.")
+                else:
+                    _record_error(f"Error: {e}. Please ensure valid Prolog syntax.")
         print(f"[Prolog retry] Extension attempts also exhausted.")
     else:
         print(f"[Prolog retry] LLM says NO (or check failed) — skipping extension.")
