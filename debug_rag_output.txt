@@ -15167,3 +15167,431 @@ None extracted from the provided context.
 
 Note: The extracted evidence is based solely on the provided context and does not include any information from the question itself.
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nucleus",
+  "uri": "http://kbpedia.org/kko/rc/Nucleus",
+  "score": 1.0,
+  "triples": [
+    "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, ",
+    "subclass of: organelle",
+    "ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which ",
+    "subclass of: cell part",
+    "ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel",
+    "subclass of: internal body part",
+    "ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. ",
+    "has subclass: nuclear substructure",
+    "has subclass: nucleolus",
+    "sibling concept: centrosome",
+    "sibling concept: chloroplast",
+    "sibling concept: endoplasmic reticulum",
+    "sibling concept: Golgi apparatus",
+    "sibling concept: golgi cisterna"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: nucleus. Relevant Logical Facts:  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus,  - subclass of: organelle  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which  - subclass of: cell part  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel  - subclass of: internal body part  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism.  - has subclass: nuclear substructure  - has subclass: nucleolus  - sibling concept: centrosome  - sibling concept: chloroplast  - sibling concept: endoplasmic reticulum  - sibling concept: Golgi apparatus  - sibling concept: golgi cisterna
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth \u2013 this total decreases to 206 bones by adulthood after some bones have fused together. The bone ma",
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of B",
+    "subclass of: skeleton",
+    "ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o",
+    "subclass of: region on an animal's body",
+    "ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivisio",
+    "subclass of: organ system",
+    "ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological sy",
+    "sibling concept: abdomen",
+    "sibling concept: abdominal cavity",
+    "sibling concept: adrenal cortex",
+    "sibling concept: adrenal medulla",
+    "sibling concept: alimentary canal"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone ma  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of B  - subclass of: skeleton  - ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o  - subclass of: region on an animal's body  - ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivisio  - subclass of: organ system  - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological sy  - sibling concept: abdomen  - sibling concept: abdominal cavity  - sibling concept: adrenal cortex  - sibling concept: adrenal medulla  - sibling concept: alimentary canal
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### ATOMIC FACTS:
+
+1. The nucleus is a membrane-enclosed organelle found in eukaryotic cells.
+2. Eukaryotes usually have a single nucleus.
+3. A cell wall provides structural support and protection to the plant cell.
+4. Chloroplasts are responsible for photosynthesis in plants.
+5. Animal skeletons provide structural support, separate organs, and protect internal body parts.
+
+### CONDITIONAL RULES:
+
+1. If an organelle is found within a eukaryotic cell, then it has a membrane-enclosed structure (Nucleus).
+2. If a plant cell contains chloroplasts, then the function of those chloroplasts involves photosynthesis.
+3. If an animal's body part serves to support and protect internal organs, then that body part is considered part of its skeletal system.
+
+### GAPS:
+
+1. The definition for "cell wall" in plants does not explicitly state a structural similarity with animal skeletons; however, it can be inferred as providing similar functions (support and protection).
+2. There are no direct comparisons between the nucleus's function and that of an animal skeleton within the provided context.
+3. A bridge rule is needed to connect plant cell organelles' functions with those of animal body parts: "If a structure provides structural support in one organism, then it may serve similar purposes in another."
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "investigation",
+  "uri": "http://kbpedia.org/kko/rc/Investigation",
+  "score": 1.0,
+  "triples": [
+    "definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide vari",
+    "subclass of: gathering information",
+    "ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info",
+    "subclass of: purposeful mental activity",
+    "ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is",
+    "subclass of: work",
+    "ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occup",
+    "subclass of: information transfer",
+    "ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (info",
+    "subclass of: action (purposeful)",
+    "ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose",
+    "has subclass: criminal investigation",
+    "has subclass: examination investigation",
+    "has subclass: investigating",
+    "has subclass: scrutiny",
+    "has subclass: witch hunt",
+    "sibling concept: analysing",
+    "sibling concept: business intelligence",
+    "sibling concept: counter-intelligence",
+    "sibling concept: lookup",
+    "sibling concept: exploring"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: investigation. Relevant Logical Facts:  - definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide vari  - subclass of: gathering information  - ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info  - subclass of: purposeful mental activity  - ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is  - subclass of: work  - ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occup  - subclass of: information transfer  - ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (info  - subclass of: action (purposeful)  - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose  - has subclass: criminal investigation  - has subclass: examination investigation  - has subclass: investigating  - has subclass: scrutiny  - has subclass: witch hunt  - sibling concept: analysing  - sibling concept: business intelligence  - sibling concept: counter-intelligence  - sibling concept: lookup  - sibling concept: exploring
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature measuring device",
+  "uri": "http://kbpedia.org/kko/rc/TemperatureMeasuringDevice",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all temperature measuring devices. A type of MeasuringDevice. TemperatureMeasuringDevice is a SpatiallyDisjointObjectType.",
+    "subclass of: measuring device",
+    "ancestor definition: MeasuringDevice is a specialization of PhysicalDevice. Each instance of MeasuringDevice is a device used for measuring some quantity such as Distance,",
+    "subclass of: device type by function",
+    "ancestor definition: A collection of collections; a subcollection of ArtifactTypeByFunction. Instances of DeviceTypeByFunction are mutually unique with respect to the full",
+    "subclass of: measuring or testing instrument",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of measur",
+    "subclass of: unit of measure concept",
+    "ancestor definition: A ConceptTypeByDomain (q.v.). Instances of UnitOfMeasureConcept are collections and relations having to do with unit of measurement functions and the ",
+    "has subclass: temperature gauge",
+    "has subclass: thermometer",
+    "sibling concept: acoustic measurement",
+    "sibling concept: astrometry",
+    "sibling concept: clock",
+    "sibling concept: compass",
+    "sibling concept: distance measuring device"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: temperature measuring device. Relevant Logical Facts:  - definition: The collection of all temperature measuring devices. A type of MeasuringDevice. TemperatureMeasuringDevice is a SpatiallyDisjointObjectType.  - subclass of: measuring device  - ancestor definition: MeasuringDevice is a specialization of PhysicalDevice. Each instance of MeasuringDevice is a device used for measuring some quantity such as Distance,  - subclass of: device type by function  - ancestor definition: A collection of collections; a subcollection of ArtifactTypeByFunction. Instances of DeviceTypeByFunction are mutually unique with respect to the full  - subclass of: measuring or testing instrument  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of measur  - subclass of: unit of measure concept  - ancestor definition: A ConceptTypeByDomain (q.v.). Instances of UnitOfMeasureConcept are collections and relations having to do with unit of measurement functions and the  - has subclass: temperature gauge  - has subclass: thermometer  - sibling concept: acoustic measurement  - sibling concept: astrometry  - sibling concept: clock  - sibling concept: compass  - sibling concept: distance measuring device
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6899070739746094,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+[Item 3]
+[Chunk Score: 0.6899] Janette conducts an investigation to see which foods make her feel more fatigued.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6852493286132812,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+[Item 4]
+[Chunk Score: 0.6852] She eats one of four different foods each day at the same time for four days and then records how she feels.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6725425720214844,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.6725] She asks her friend Carmen to do the same investigation to see if she gets similar results.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### ATOMIC FACTS:
+
+1. Janette conducts an investigation about which foods make her feel more fatigued.
+2. The investigation involves eating one of four different foods each day at the same time for four days.
+3. Janette records how she feels after consuming each food.
+4. Carmen is asked to replicate Janette's investigation.
+
+### CONDITIONAL RULES:
+
+1. If an individual conducts a thorough and controlled experiment, then they can accurately determine cause-and-effect relationships between variables (e.g., foods consumed vs. fatigue levels).
+2. If two or more individuals conduct the same investigation under identical conditions, their results should be similar.
+3. If there are variations in measurement procedures, such as recording observations on different charts, it may affect the accuracy and replicability of the findings.
+
+### GAPS:
+
+1. The context does not specify whether Janette's friend Carmen is conducting an exact replica of her investigation or if she has made any changes to the procedure.
+2. There is no information about how Janette records her observations (e.g., on a specific chart, using a particular method).
+
+These gaps are critical in determining which aspect would make the investigation most difficult to replicate.
+
+### ATOMIC FACTS WITH GAPS FILLED:
+
+1. Carmen conducts an identical replication of Janette's investigation.
+2. Both individuals record their observations on the same type of chart (e.g., digital, paper-based).
+3. The experiment is conducted under controlled conditions with minimal variations in measurement procedures.
+
+These filled gaps provide a clearer understanding of the scenario and can be used to address the question about which aspect would make the investigation most difficult to replicate.
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "ocean pollution",
+  "uri": "http://kbpedia.org/kko/rc/OceanPollution",
+  "score": 1.0,
+  "triples": [
+    "definition: Marine pollution occurs when harmful, or potentially harmful, effects result from the entry into the ocean of chemicals, particles, industrial, agricultural and residential waste, noise, or the spread",
+    "subclass of: pollutant",
+    "ancestor definition: A pollutant is a substance or energy introduced into the environment that has undesired effects, or adversely affects the usefulness of a resource. A ",
+    "subclass of: polluting",
+    "ancestor definition: The process by which something is polluted-- made impure or contaminated. This includes air pollution, water pollution, noise pollution, etc.",
+    "subclass of: waste product",
+    "ancestor definition: Waste or by-products that may be useful resources in their own right.",
+    "subclass of: contaminating",
+    "ancestor definition: A specialization of IntrinsicStateChangeEvent. In each instance of ContaminationEvent, some instance of PartiallyTangible comes to contain a contamina",
+    "subclass of: environmental process",
+    "ancestor definition: Environmental processes are systems and processes of the natural environment, including atmospheric, geological, climatic, and water systems, often im",
+    "has subclass: oil spill",
+    "sibling concept: agrochemicals",
+    "sibling concept: air pollutant",
+    "sibling concept: biological contamination",
+    "sibling concept: Persistent Organic Pollutant under the Convention on Long-Range Transboundary Air Pollution",
+    "sibling concept: automobile exhaust"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: ocean pollution. Relevant Logical Facts:  - definition: Marine pollution occurs when harmful, or potentially harmful, effects result from the entry into the ocean of chemicals, particles, industrial, agricultural and residential waste, noise, or the spread  - subclass of: pollutant  - ancestor definition: A pollutant is a substance or energy introduced into the environment that has undesired effects, or adversely affects the usefulness of a resource. A  - subclass of: polluting  - ancestor definition: The process by which something is polluted-- made impure or contaminated. This includes air pollution, water pollution, noise pollution, etc.  - subclass of: waste product  - ancestor definition: Waste or by-products that may be useful resources in their own right.  - subclass of: contaminating  - ancestor definition: A specialization of IntrinsicStateChangeEvent. In each instance of ContaminationEvent, some instance of PartiallyTangible comes to contain a contamina  - subclass of: environmental process  - ancestor definition: Environmental processes are systems and processes of the natural environment, including atmospheric, geological, climatic, and water systems, often im  - has subclass: oil spill  - sibling concept: agrochemicals  - sibling concept: air pollutant  - sibling concept: biological contamination  - sibling concept: Persistent Organic Pollutant under the Convention on Long-Range Transboundary Air Pollution  - sibling concept: automobile exhaust
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "trench",
+  "uri": "http://kbpedia.org/kko/rc/Trench",
+  "score": 1.0,
+  "triples": [
+    "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple",
+    "subclass of: topographical feature",
+    "ancestor definition: A specialization of GeographicalRegion. Each instance of TopographicalFeature is a three-dimensional feature of a planet's surface, typically with bou",
+    "subclass of: cartographic feature type",
+    "ancestor definition: A SecondOrderCollection. Each instance of CartographicFeatureType is a specialization of Place whose instances are often displayed on maps or conceptu",
+    "subclass of: configuration",
+    "ancestor definition: Forms or arrangements that are of the nature or perceivable of the subject (A).",
+    "subclass of: non-agent-like place",
+    "ancestor definition: A collection of places which are not agent-like. Some things can be both places and exhibit agency; e.g., the CityOfMiamiFL is a region in Florida_Sta",
+    "sibling concept: albedo feature",
+    "sibling concept: archipelago",
+    "sibling concept: asphalt lake",
+    "sibling concept: bend",
+    "sibling concept: body of water"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: trench. Relevant Logical Facts:  - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple  - subclass of: topographical feature  - ancestor definition: A specialization of GeographicalRegion. Each instance of TopographicalFeature is a three-dimensional feature of a planet's surface, typically with bou  - subclass of: cartographic feature type  - ancestor definition: A SecondOrderCollection. Each instance of CartographicFeatureType is a specialization of Place whose instances are often displayed on maps or conceptu  - subclass of: configuration  - ancestor definition: Forms or arrangements that are of the nature or perceivable of the subject (A).  - subclass of: non-agent-like place  - ancestor definition: A collection of places which are not agent-like. Some things can be both places and exhibit agency; e.g., the CityOfMiamiFL is a region in Florida_Sta  - sibling concept: albedo feature  - sibling concept: archipelago  - sibling concept: asphalt lake  - sibling concept: bend  - sibling concept: body of water
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### ATOMIC FACTS:
+
+1. Tectonic plates diverging results in the formation of a mid-ocean ridge.
+2. A trench is formed as a result of tectonic plate convergence, not divergence.
+3. A rift valley can form due to tectonic plate movement and extensional forces.
+4. An ocean basin forms through various geological processes including rifting and seafloor spreading.
+
+### CONDITIONAL RULES:
+
+1. If two or more tectonic plates diverge, then a mid-ocean ridge will likely form as a result of the process known as seafloor spreading.
+2. If tectonic plate convergence occurs, then a trench is formed due to subduction and collision processes.
+3. If there are extensional forces acting on tectonic plates, then a rift valley may develop.
+
+### GAPS FILLED:
+
+1. The formation of ocean basins can be attributed to various geological processes including rifting (the process by which the Earth's crust is pulled apart) and seafloor spreading.
+2. Trenches are typically formed through plate convergence where one tectonic plate sinks beneath another, often resulting in subduction.
+
+### ATOMIZATION:
+
+1. The context mentions "ocean pollution" but does not directly relate to the question about geological features forming due to tectonic plates diverging or converging.
+2. Relevant facts from both KBPedia Concepts (trench and ocean basin) have been extracted, focusing on their definitions and relationships with other concepts.
+
+### PLACEHOLDERS:
+
+1. "Individual X" could represent a specific type of plate boundary where divergence occurs.
+2. The term "Object Y" is not applicable in this context as it pertains to geological features rather than objects.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nucleus",
+  "uri": "http://kbpedia.org/kko/rc/Nucleus",
+  "score": 1.0,
+  "triples": [
+    "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, ",
+    "subclass of: organelle",
+    "ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which ",
+    "subclass of: cell part",
+    "ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel",
+    "subclass of: internal body part",
+    "ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. ",
+    "has subclass: nuclear substructure",
+    "has subclass: nucleolus",
+    "sibling concept: centrosome",
+    "sibling concept: chloroplast",
+    "sibling concept: endoplasmic reticulum",
+    "sibling concept: Golgi apparatus",
+    "sibling concept: golgi cisterna"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: nucleus. Relevant Logical Facts:  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus,  - subclass of: organelle  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which  - subclass of: cell part  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel  - subclass of: internal body part  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism.  - has subclass: nuclear substructure  - has subclass: nucleolus  - sibling concept: centrosome  - sibling concept: chloroplast  - sibling concept: endoplasmic reticulum  - sibling concept: Golgi apparatus  - sibling concept: golgi cisterna
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth \u2013 this total decreases to 206 bones by adulthood after some bones have fused together. The bone ma",
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of B",
+    "subclass of: skeleton",
+    "ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o",
+    "subclass of: region on an animal's body",
+    "ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivisio",
+    "subclass of: organ system",
+    "ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological sy",
+    "sibling concept: abdomen",
+    "sibling concept: abdominal cavity",
+    "sibling concept: adrenal cortex",
+    "sibling concept: adrenal medulla",
+    "sibling concept: alimentary canal"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone ma  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of B  - subclass of: skeleton  - ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o  - subclass of: region on an animal's body  - ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivisio  - subclass of: organ system  - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological sy  - sibling concept: abdomen  - sibling concept: abdominal cavity  - sibling concept: adrenal cortex  - sibling concept: adrenal medulla  - sibling concept: alimentary canal
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### ATOMIC FACTS:
+
+1. The nucleus is a membrane-enclosed organelle found in eukaryotic cells.
+2. Eukaryotes usually have a single nucleus.
+3. A cell wall provides structural support and protection to the plant cell.
+4. Chloroplasts are responsible for photosynthesis in plants.
+5. Animal skeletons provide structural support, separate organs, and protect internal body parts.
+
+### CONDITIONAL RULES:
+
+1. If an organelle is found within a eukaryotic cell, then it has a membrane-enclosed structure (Nucleus).
+2. If a plant cell contains chloroplasts, then the function of those chloroplasts involves photosynthesis.
+3. If an animal's body part serves to support and protect internal organs, then that body part is considered part of its skeletal system.
+
+### GAPS:
+
+1. The definition for "cell wall" in plants does not explicitly state a structural similarity with animal skeletons; however, it can be inferred as providing similar functions (support and protection).
+2. There are no direct comparisons between the nucleus's function and that of an animal skeleton within the provided context.
+3. A bridge rule is needed to connect plant cell organelles' functions with those of animal body parts: "If a structure provides structural support in one organism, then it may serve similar purposes in another."
+==================================================

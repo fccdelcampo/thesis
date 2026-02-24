@@ -235,10 +235,13 @@ Example: ["plant cell", "animal skeleton", "structural support", "cell wall", "c
             print(f"DEBUG: KBPedia neighborhood error: {e}")
             return []
 
-    def filter_triples_for_query(self, query: str, entity_label: str, triples: List[str]) -> List[str]:
+    def filter_triples_for_query(self, query: str, entity_label: str, triples: List[str], original_query: str = "") -> List[str]:
         """Use LLM to keep only logically relevant triples."""
         if not self.llm or not triples:
             return triples[:10]
+
+        # Use the full original prompt (with MCQ choices) when available for better filtering
+        filter_query = original_query if original_query else query
 
         triples_text = "\n".join([f"- {t}" for t in triples])
         prompt = f"""Task: You are deeply integrated into a Prolog GraphRAG pipeline.
@@ -246,7 +249,7 @@ Below is a list of known facts (triples) about the entity '{entity_label}'.
 Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
 Irrelevant facts will poison the logic engine, so drop anything that doesn't help.
 
-User Query: "{query}"
+User Query: "{filter_query}"
 
 Facts about {entity_label}:
 {triples_text}
@@ -285,14 +288,18 @@ If none are relevant, output an empty list [].
 
         return triples
 
-    def _filter_concepts_once(self, query_text: str, candidates: list) -> list:
+    def _filter_concepts_once(self, query_text: str, candidates: list, original_query: str = "") -> list:
         """
         Single LLM call to filter all candidates at once.
         `candidates` is a list of dicts: {name, uri, definition, triples}.
+        `original_query` is the full user prompt including MCQ choices (when available).
         Returns a filtered list of dicts containing only relevant candidates.
         """
         if not self.llm or not candidates:
             return candidates
+
+        # Use the full original prompt (with MCQ choices) when available for better filtering
+        filter_query = original_query if original_query else query_text
 
         summary_lines = []
         for idx, c in enumerate(candidates):
@@ -302,13 +309,13 @@ If none are relevant, output an empty list [].
 
         prompt = f"""You are filtering KBPedia knowledge graph concepts for relevance.
 
-User query: "{query_text}"
+User query: "{filter_query}"
 
 Candidates (index: concept name: short definition):
 {summary_text}
 
 Return a JSON list of the indices (integers) of concepts that are relevant to the query.
-A concept is relevant if its definition or name overlaps with the topic of the query.
+A concept is relevant if its definition or name is related to the topic of the query, or if it can be used to support or answer the query.
 If none are relevant, return [].
 Output ONLY the JSON list, nothing else. Example: [0, 2, 4]
 """
@@ -328,11 +335,16 @@ Output ONLY the JSON list, nothing else. Example: [0, 2, 4]
             print(f"DEBUG: End-filter LLM call failed: {e}. Returning all candidates.", flush=True)
             return candidates
 
-    def search(self, query_text: str, top_k: int = 5) -> Any:
+    def search(self, query_text: str, top_k: int = 5, original_query: str = "") -> Any:
         from .retriever import RetrieverResult, RetrieverResultItem
 
         if not self._verify_index():
             return RetrieverResult(items=[], metadata={})
+
+        # `original_query` = full user prompt (with MCQ choices) for LLM filtering.
+        # `query_text`     = extracted question stem, used for entity extraction.
+        # Fall back to query_text if original_query was not provided.
+        filter_query = original_query if original_query else query_text
 
         # ── Entity extraction ─────────────────────────────────────────────────
         if self.triple_filter:
@@ -387,7 +399,7 @@ Output ONLY the JSON list, nothing else. Example: [0, 2, 4]
                 if self.triple_filter:
                     # RIGOROUS: LLM filters triples per concept
                     print(f"DEBUG: Built {len(raw_triples)} raw triple(s) for '{match['name']}'. Sending to LLM filter...", flush=True)
-                    selected_triples = self.filter_triples_for_query(query_text, match["name"], raw_triples)
+                    selected_triples = self.filter_triples_for_query(query_text, match["name"], raw_triples, original_query=filter_query)
                     print(f"DEBUG: LLM filter kept {len(selected_triples)}/{len(raw_triples)} triple(s) for '{match['name']}'", flush=True)
 
                     if not selected_triples:
@@ -412,7 +424,7 @@ Output ONLY the JSON list, nothing else. Example: [0, 2, 4]
 
         # ── Fast-mode: single LLM relevance filter over all candidates ─────────────
         if not self.triple_filter and candidates:
-            filtered_candidates = self._filter_concepts_once(query_text, candidates)
+            filtered_candidates = self._filter_concepts_once(query_text, candidates, original_query=filter_query)
             print(f"DEBUG: End-filter kept {len(filtered_candidates)}/{len(candidates)} concepts.", flush=True)
             for c in filtered_candidates[:top_k]:
                 triples_text = "\n".join([f"  - {t}" for t in c["triples"]])

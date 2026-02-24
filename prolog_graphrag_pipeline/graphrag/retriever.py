@@ -142,6 +142,10 @@ def expand_query(self, query):
         return query
 
 def patched_vector_cypher_search(self, query_text, top_k=5, **kwargs):
+    # `original_query` carries the full user prompt (with MCQ choices) for LLM filtering.
+    # `query_text` is the extracted question stem (used for embedding/entity extraction).
+    original_query = kwargs.pop("original_query", query_text)
+
     # 1. KBPedia Search (via Neo4j)
     kb_items = []
     if hasattr(self, 'llm') and self.llm:
@@ -149,7 +153,7 @@ def patched_vector_cypher_search(self, query_text, top_k=5, **kwargs):
              from .kbpedia_retriever import KBPediaRetriever
              self.kbpedia_retriever = KBPediaRetriever(driver=self._driver, llm=self.llm, top_k=top_k)
         
-        kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k)
+        kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query)
         if kb_result and kb_result.items:
             kb_items = kb_result.items
 
@@ -265,7 +269,7 @@ def create_retriever(driver, embedder):
     # This section is removed as it's no longer needed with the new patching approach.
 
 
-def generate(llm, retriever, query) -> dict:
+def generate(llm, retriever, query, original_query: str = "") -> dict:
     # If the retriever is our EnhancedRetriever, inject the LLM
     if hasattr(retriever, 'llm'):
         retriever.llm = llm
@@ -274,9 +278,15 @@ def generate(llm, retriever, query) -> dict:
     
     graph_rag = GraphRAG(llm=llm, retriever=retriever, prompt_template=rag_template)
 
+    # Pass original_query (full MCQ prompt) through retriever_config so patched_vector_cypher_search
+    # can forward it to the KBPedia LLM filter. Falls back to query if not provided.
+    retriever_config = {'top_k': 5}
+    if original_query:
+        retriever_config['original_query'] = original_query
+
     graph_rag_results = graph_rag.search(
         query, 
-        retriever_config={'top_k': 5}, 
+        retriever_config=retriever_config, 
         return_context=True
     )
     

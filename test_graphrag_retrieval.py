@@ -19,12 +19,12 @@ def log_retrieved_context(test_case: dict, retrieved_context: dict, debug_id: in
     benchmark_name = test_case["dataset"]
     
     if isinstance(retrieved_context, dict):
-        # llm_answer          = retrieved_context.get("answer", "N/A")
+        llm_answer          = retrieved_context.get("answer", "N/A")
         context_strings     = retrieved_context.get("contexts", [])
         # context_from_prompt = retrieved_context.get("context_from_prompt", [])
         prolog_error        = retrieved_context.get("prolog_error", None)  # None = verified
     else:
-        # llm_answer          = "N/A"
+        llm_answer          = "N/A"
         context_strings     = retrieved_context
         # context_from_prompt = []
         prolog_error        = None
@@ -38,7 +38,7 @@ def log_retrieved_context(test_case: dict, retrieved_context: dict, debug_id: in
         log_file.write(
             f"   [+] Debug ID #{debug_id} | Benchmark: {benchmark_name}\n"
             f"      Formatted Input: {formatted_input}\n"
-            # f"        Answer:            {llm_answer}{verification_note}\n"
+            f"        answer: {llm_answer}{verification_note}\n"
             f"        Context (retrieved): {context_strings}\n"
             # f"        Context (ingested):  {context_from_prompt}\n"
             f"        Correct Answer: {correct_answer}\n"
@@ -47,7 +47,7 @@ def log_retrieved_context(test_case: dict, retrieved_context: dict, debug_id: in
     print(
         f"   [+] Debug ID #{debug_id} | Benchmark: {benchmark_name}\n"
         f"      Formatted Input: {formatted_input}\n"
-        # f"        Answer:            {llm_answer}{verification_note}\n"
+        f"        answer: {llm_answer}{verification_note}\n"
         f"        Context (retrieved): {context_strings}\n"
         # f"        Context (ingested):  {context_from_prompt}\n"
         f"        Correct Answer: {correct_answer}\n"
