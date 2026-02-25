@@ -9,8 +9,8 @@ from ragas.llms import LangchainLLMWrapper
 from ragas.embeddings import LangchainEmbeddingsWrapper
 
 # Define the model to use for both generation (evaluation) and embeddings
-# Using the one verified to be available: llama3.1:8b-instruct-q4_K_M
-MODEL_NAME = "llama3.1:8b-instruct-q4_K_M"
+# Using the one verified to be available: llama3.2:3b-instruct-q8_0
+MODEL_NAME = "llama3.2:3b-instruct-q8_0"
 EMBED_MODEL_NAME = "nomic-embed-text"
 
 # Add aliases for RAGAS

@@ -22,7 +22,7 @@ except ImportError:
     except ImportError as e:
         print(f"Warning: ragas not installed or import failed: {e}. Evaluation logic will simulate calls or fail.")
 
-MODEL_NAME = "llama3.1:8b-instruct-q4_K_M"
+MODEL_NAME = "llama3.2:3b-instruct-q8_0"
 
 def unload_ollama_model():
     """Force-unload the model from VRAM so RAGAS can use it without OOM."""

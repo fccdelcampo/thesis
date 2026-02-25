@@ -137,7 +137,7 @@ def approve(question: str) -> bool:
     for attempt in range(max_retries):
         try:
             response = ollama.chat(
-                model='llama3.1:8b-instruct-q4_K_M',
+                model='llama3.2:3b-instruct-q8_0',
                 messages=LLM_MESSAGES + [{"role": "user", "content": question}],
                 options={
                     'temperature': 0.7,

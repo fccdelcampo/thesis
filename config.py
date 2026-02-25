@@ -3,7 +3,7 @@ from enum import Enum
 class Pipeline(Enum):
     PROLOG_GRAPHRAG = ("Prolog-GraphRAG Pipeline", "prolog_graphrag")
     GRAPHRAG = ("GraphRAG Pipeline", "graphrag")
-    TUNED = ("llama3.1:instruct", "tuned")
+    TUNED = ("llama3.2:3b-instruct-q8_0", "tuned")
     
 class Metric(Enum):
     FAITHFULNESS = ("Faithfulness", "faithfulness")

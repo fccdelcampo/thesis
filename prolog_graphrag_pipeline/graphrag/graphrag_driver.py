@@ -30,8 +30,10 @@ def _run_async(coro):
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
-# llama3.1:8b-instruct uses 8GB VRAM, while q4_K_M quantized version uses around 4GB-5GB VRAM so it's the only one I can run locally
-MODEL = "llama3.1:8b-instruct-q4_K_M"
+# Structured JSON extraction (KG builder) benefits from a code-tuned model
+ENCODER_MODEL = "qwen2.5-coder:3b-instruct-q8_0"
+# Natural language synthesis (retriever) + embeddings stay on llama3.2
+RETRIEVER_MODEL = "llama3.2:3b-instruct-q8_0"
 
 class DebugOllamaLLM(OllamaLLM):
     """Wrapper to clean input prompts and log raw LLM responses to debug.txt."""
@@ -123,7 +125,7 @@ neo4j_driver = None
 def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     # keep_alive=0 unloads VRAM after each document processing
     encoder_llm = DebugOllamaLLM(
-        model_name=MODEL,
+        model_name=ENCODER_MODEL,
         model_params={
             "keep_alive": "20m",
             "options": { # in case parameters need to be nested
@@ -136,9 +138,8 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
         }
     )
 
-    # 2. The Retriever: Logical synthesis for Prolog
     retriever_llm = OllamaLLM(
-        model_name=MODEL,
+        model_name=RETRIEVER_MODEL,
         model_params={
             "keep_alive": "20m", # Keep it loaded during an active chat session
             "options": {
@@ -154,7 +155,7 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
 
     # 2. Initialize Embedder
     embedder = OllamaEmbeddings(
-        model=MODEL
+        model=RETRIEVER_MODEL
     )
 
     print("Ollama loaded successfully.")
@@ -313,13 +314,13 @@ async def perform_tests():
 
 def ensure_driver_connected():
     global neo4j_driver
-    while True:
-        # print("DEBUG: Checking Neo4j driver...", flush=True)
+    MAX_RETRIES = 10
+    RETRY_DELAY = 30  # seconds between retries
+    
+    for attempt in range(MAX_RETRIES):
         try:
             if neo4j_driver is not None:
-                # print("DEBUG: Verifying existing Neo4j connectivity...", flush=True)
                 neo4j_driver.verify_connectivity()
-                # print("DEBUG: Neo4j connectivity verified.", flush=True)
                 return False
 
             print("DEBUG: Initializing new Neo4j driver...", flush=True)
@@ -334,20 +335,20 @@ def ensure_driver_connected():
             print("DEBUG: Neo4j driver initialized and connected.", flush=True)
             return True
         except Exception as e:
-            print(f"CRITICAL ERROR: Could not connect to Neo4j: {e}", flush=True)
+            print(f"CRITICAL ERROR: Could not connect to Neo4j (attempt {attempt+1}/{MAX_RETRIES}): {e}", flush=True)
             if neo4j_driver:
                 try:
                     neo4j_driver.close()
                 except:
                     pass
-            neo4j_driver = None 
+            neo4j_driver = None
             
-            print(f"Error: {e}")
-            print("The process is paused. Please ensure Neo4j is running.")
-            user_response = input("Press Enter to retry connecting... (or type 'q' to raise error): ")
-            if user_response.lower().strip() == 'q':
-                raise e
-            print("Retrying connection...", flush=True)
+            if attempt < MAX_RETRIES - 1:
+                print(f"Retrying in {RETRY_DELAY}s...", flush=True)
+                import time
+                time.sleep(RETRY_DELAY)
+            else:
+                raise ConnectionError(f"Failed to connect to Neo4j after {MAX_RETRIES} attempts: {e}") from e
 
 
 def clear_local_data():

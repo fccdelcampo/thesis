@@ -168,7 +168,13 @@ affected(snake).
     {"role": "user", "content": """
 Now, process the following:
 Context:
-### ATOMIC FACTS:\n\n1. The cell wall is a component found in plant cells.\n2. A skeleton provides structural support and protection for an animal's body.\n\n### CONDITIONAL RULES:\n\n1. If a structure has the function of providing structural support, then it serves as a substitute or equivalent to an animal skeleton (by analogy).\n2. Plant structures that provide mechanical strength are analogous to skeletal systems in animals.\n3. The cell wall is responsible for maintaining plant cell shape and supporting its internal components.\n\n### GAPS IN THE CONTEXT:\n\n1. There is no direct information about the function of specific parts within a plant cell, such as chloroplasts or nuclei.\n2. No explicit comparison between animal skeletons and any part of a plant cell has been made in the provided context.\n\n### ATOMIC FACTS (CONTINUED):\n\n3. Chloroplasts are organelles found in plant cells responsible for photosynthesis.\n4. The nucleus is an essential component within eukaryotic cells, including those of plants, containing genetic material.\n\n### CONDITIONAL RULES (CONTINUED):\n\n5. If a structure has the primary function related to energy production or storage, then it would be less likely to serve as a direct equivalent for skeletal functions.\n6. The nucleus and chloroplasts are essential components within plant cells but do not directly provide structural support like an animal skeleton.\n\n### ATOMIC FACTS (FINAL):\n\n7. Photosynthetic pigments play a crucial role in the process of photosynthesis, which occurs primarily in chloroplasts.\n8. Organelles such as mitochondria and ribosomes also have critical functions within plant cells but are not directly analogous to skeletal structures.
+LOGICAL EVIDENCE:
+1. The cell wall is a component found in plant cells.
+2. A skeleton provides structural support and protection for an animal's body.
+3. If a structure provides structural support, it is functionally analogous to an animal skeleton.
+4. The cell wall is responsible for maintaining plant cell shape and supporting its internal components.
+5. Chloroplasts are responsible for photosynthesis, not structural support.
+6. The nucleus contains genetic material, not structural support.
 
 User Question: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
 A. cell membrane
@@ -253,7 +259,13 @@ choice(OptionLetter, PlantPart), equivalent_to_skeleton(PlantPart).
     {
         "role": "user", 
         "content": """
-Context: **ATOMIC FACTS**\n\n1. Tectonic plates are large, rigid slabs of the Earth's lithosphere.\n2. The movement of tectonic plates is responsible for shaping the Earth's surface through processes such as faulting and volcanic activity.\n\n**CONDITIONAL RULES**\n\n1. If two or more tectonic plates converge (move towards each other), then a mountain range will form due to the collision between them.\n2. If two or more tectonic plates diverge (move apart from each other), then new crust is created as magma rises up and solidifies, forming oceanic basins.\n\n**ATOMIC FACTS**\n\n1. A trench forms when one plate moves under another at a subduction zone.\n2. A rift valley forms when two or more tectonic plates diverge (move apart from each other).\n3. An ocean basin is formed by the creation of new crust as magma rises up and solidifies, resulting in the separation between two or more tectonic plates.\n\n**CONDITIONAL RULES**\n\n1. If a trench forms due to plate convergence, then it will be characterized by deep water and high pressure.\n2. If a rift valley forms due to plate divergence, then it will be characterized by shallow water and low pressure.\n3. An ocean basin is formed when two or more tectonic plates diverge (move apart from each other), resulting in the creation of new crust.\n\n**ATOMIC FACTS**\n\n1. The Pacific Ocean has a large number of trenches due to subduction zones where one plate moves under another.\n2. The Atlantic Ocean has several mid-ocean ridges, which are areas where two or more tectonic plates diverge (move apart from each other).\n3. The Indian Ocean is characterized by the presence of oceanic basins formed as a result of plate divergence.\n\n**CONDITIONAL RULES**\n\n1. If an oil spill occurs in an ocean basin, then it will spread rapidly due to currents and winds.\n2. If pollution enters an ocean through human activities such as industrial waste or agricultural runoff, then it can have devastating effects on marine life and ecosystems.\n\nNote: The above facts are based on the provided text and may not be a comprehensive list of all relevant information related to tectonic plates and their interactions with oceans.
+Context:
+LOGICAL EVIDENCE:
+1. A trench forms when one plate moves under another at a subduction zone (plate convergence).
+2. A rift valley forms when tectonic plates diverge.
+3. An ocean basin forms when tectonic plates diverge, creating new crust.
+4. Mid-ocean ridges are areas where tectonic plates diverge.
+5. If two plates converge, features like trenches form; if they diverge, features like rift valleys and ocean basins form.
 
 Question: Which feature does not form as a result of tectonic plates diverging?
 A. trench
@@ -328,7 +340,11 @@ choice(OptionLetter, GeologicFeature), not(forms_from(GeologicFeature, plate_div
 Question: If two rocks are lacking magnetic properties and far apart, can a magnetic effect pull them together? 
 
 Retrieved Context: 
-### ATOMIC FACTS:\n\n1. A magnetic effect can pull two objects together.\n2. Magnetic properties are necessary for a force to act between two rocks.\n3. Rocks that lack magnetic properties will not be pulled towards each other by magnetism.\n\n### CONDITIONAL RULES:\n\n1. If an object has magnetic properties, then it may exert a magnetic force on another object with similar properties (at any distance).\n2. If two objects are touching and both have or lack magnetic properties, the presence of touch does not affect their ability to be pulled together by magnetism.\n\n### GAPS FILLED:\n\n1. The definition of "magnetic ordering" is irrelevant to understanding how rocks interact through magnetism.\n2. Bryophytes (plants lacking vascular tissue) are unrelated to this context and can be disregarded for the purpose of answering the question about magnetic effects on rocks.\n\nNote: These extracted facts and rules provide a foundation for reasoning about the conditions under which two rocks may be pulled together by a magnetic effect, but they do not directly answer the original question.
+LOGICAL EVIDENCE:
+1. A magnetic effect can pull two objects together.
+2. Magnetic properties are necessary for a magnetic force to act between two rocks.
+3. Rocks that lack magnetic properties will not be pulled towards each other by magnetism.
+4. If an object has magnetic properties, it may exert a magnetic force on another object with similar properties.
         """
         },
     

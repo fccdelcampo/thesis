@@ -2,7 +2,10 @@ from copy import deepcopy
 import signal
 import threading
 
-MODEL_NAME = 'llama3.1:8b-instruct-q4_K_M'
+# Prolog code generation benefits from a code-tuned model
+PROLOG_MODEL = 'qwen2.5-coder:3b-instruct-q8_0'
+# Natural language tasks (explanation, close-check, final synthesis) stay on llama3.2
+NL_MODEL = 'llama3.2:3b-instruct-q8_0'
 OLLAMA_TIMEOUT = 600  # seconds per LLM call (10 minutes)
 
 # ── KV-cache warmup ────────────────────────────────────────────────────────
@@ -26,7 +29,7 @@ def warmup_prolog_model():
     try:
         print("[Prolog Warmup] Priming KV cache with few-shot prefix...", flush=True)
         ollama.chat(
-            model=MODEL_NAME,
+            model=PROLOG_MODEL,
             messages=GENERATOR_LLM_MESSAGES + [
                 {'role': 'user', 'content': 'Now, process the following:\nContext: A is true.\nUser Question: Is A true?\n'}
             ],
@@ -46,9 +49,9 @@ def reset_ollama_model():
     """Force-unload the model from Ollama, then verify it reloads successfully."""
     import ollama
     try:
-        print("[Ollama Reset] Unloading model to recover from hang...", flush=True)
+        print("[Ollama Reset] Unloading prolog model to recover from hang...", flush=True)
         # Setting keep_alive to 0 with a dummy generate forces immediate unload
-        ollama.generate(model=MODEL_NAME, prompt="", keep_alive=0)
+        ollama.generate(model=PROLOG_MODEL, prompt="", keep_alive=0)
         print("[Ollama Reset] Model unloaded.", flush=True)
     except Exception as e:
         print(f"[Ollama Reset] Warning during unload: {e}", flush=True)
@@ -57,7 +60,7 @@ def reset_ollama_model():
     try:
         print("[Ollama Reset] Verifying model reloads...", flush=True)
         test_response = ollama.chat(
-            model=MODEL_NAME,
+            model=PROLOG_MODEL,
             messages=[{'role': 'user', 'content': 'Say OK'}],
             options={'temperature': 0, 'keep_alive': '20m'},
         )
@@ -79,13 +82,17 @@ def generate_response(prompt: str, flag: str) -> dict:
     
     answer = dict()
     
+    # Select model based on flag: code-tuned for Prolog, NL model for everything else
     if flag == "prolog":
+        model = PROLOG_MODEL
         llm_messages = GENERATOR_LLM_MESSAGES + [{'role': 'user', 'content': prompt}]
         temperature = 0
     elif flag == "explanation":
+        model = NL_MODEL
         llm_messages = EXPLAINER_LLM_MESSAGES + [{'role': 'user', 'content': prompt}]
         temperature = 0.2
     elif flag == "q":
+        model = NL_MODEL
         llm_messages = [{'role': 'user', 'content': prompt}]
         temperature = 0
     else:
@@ -98,7 +105,7 @@ def generate_response(prompt: str, flag: str) -> dict:
     def _call_ollama():
         try:
             response = ollama.chat(
-                model=MODEL_NAME,
+                model=model,
                 messages=llm_messages,
                 options={
                     'temperature': temperature,
@@ -138,7 +145,7 @@ def generate_response(prompt: str, flag: str) -> dict:
     
 # import ollama
 # response = ollama.chat(
-#             model='llama3.1:8b-instruct-q4_K_M',
+#             model='llama3.2:3b-instruct-q8_0',
 #             messages=[{'role': 'user', 'content': "What is the Riemann sum definition of the definite integral?"}],
 #             options={
 #                 'temperature': 0  
