@@ -1,49 +1,3 @@
-VAR = """
-### Role
-You are an expert Prolog programmer specializing in Knowledge Representation and Reasoning for GraphRAG systems.
-
-### Task
-Translate the provided Context into a formal Prolog database to answer the User Question. You must not conclude anything for yourself; only generate the Prolog code that could be used to answer the question. Focus more on generating rules rather than only facts, especially for context that give implications (if-then or when-then statements).
-
-### Execution Flow (Mandatory)
-You must follow this exact sequence for every response:
-1. For every logical leap, use a SEPARATE <reasoning_step> tag.
-2. Inside <reasoning_step>, explain the logic in English, then provide the Prolog code snippet.
-3. You MUST close every </reasoning_step> before starting the next one.
-4. After all reasoning is complete, provide the full <database>. The database must be enclosed within <database> and </database> tags.
-5. Finally, provide the <query>. The query must be enclosed within <query> and </query> tags.
-6. You MUST close the </database> and </query> tags.
-
-### Syntactic Requirements
-- All Prolog atoms (facts/predicates) must be lowercase.
-- Use CamelCase for Variables (e.g., PersonName, UncleObject).
-- Every Prolog line must end with a period (.).
-- No single-letter variables (Use 'Parent' instead of 'P').
-
-### Structural Output Format (Strict)
-Your output must strictly follow this visual template:
-
-<reasoning_step>
-[Reasoning for facts or rules or queries]
-[Prolog facts or rules or queries]
-</reasoning_step>
-
-<reasoning_step>
-[Reasoning for facts or rules or queries]
-[Prolog facts or rules or queries]
-</reasoning_step>
-
-<database>
-[All facts and rules combined here. NO natural language inside these tags.]
-</database>
-
-<query>
-[The specific query only. NO natural language inside these tags.]
-</query>
-
----
-"""
-
 GENERATOR_SYSTEM_PROMPT = r"""
 ### Role
 You are an expert Prolog programmer specializing in Knowledge Representation and Reasoning for GraphRAG systems, specifically optimized for the s(CASP) (Stable Constraint Answer Set Programming) solver.
@@ -111,131 +65,11 @@ Your output must strictly follow this visual template:
 """
 
 GENERATOR_FEW_SHOT_EXAMPLES = [
-    # Example 1: Brother of Amanda.
-    {"role": "user", "content": """
-Now, process the following:
-Context: Bob is Alice's brother. Amanda is Alice's sister.
-Query: Who is Alice's brother?
-"""},
-    {"role": "assistant", "content": r"""
-<reasoning_step>
-The context identifies Bob as a male, Alice as a female, and Amanda as a female. They share a sibling relationship via a common parent (p1).
-male(bob).
-female(alice).
-female(amanda).
-parent(p1, bob).
-parent(p1, alice).
-parent(p1, amanda).
-</reasoning_step>
-
-<reasoning_step>
-To answer "who is a brother of Amanda," I need a rule defining a brother as a male sibling.
-sibling(Sibling1, Sibling2) :- parent(Parent, Sibling1), parent(Parent, Sibling2), Sibling1 \= Sibling2.
-brother(Brother, Sibling) :- male(Brother), sibling(Brother, Sibling).
-</reasoning_step>
-
-
-<reasoning_step>
-The question "who is a brother of Amanda," requires a variable as it implies a query to find all Brothers such that Brother is a brother of Amanda. 
-brother(Brother, amanda).
-</reasoning_step>
-
-<database>
-male(bob).
-female(alice).
-female(amanda).
-parent(p1, bob).
-parent(p1, alice).
-parent(p1, amanda).
-sibling(Sibling1, Sibling2) :- parent(Parent, Sibling1), parent(Parent, Sibling2), Sibling1 \= Sibling2.
-brother(Brother, Sibling) :- male(Brother), sibling(Brother, Sibling).
-</database>
-
-<query>
-brother(Brother, amanda).
-</query>
-
----
-"""},
-    
-    # Example 2: One-hop reasoning
-    {"role": "user", "content": """
-Now, process the following:
-Context: Maria is the mother of Chloe. Chloe is the mother of Dan. 
-Query: Is Maria the grandmother of Dan?
-"""},
-    {"role": "assistant", "content": r"""
-<reasoning_step> 
-The context identifies Maria as Chloe's mother and Chloe as Dan's mother. I will use lowercase atoms for names. 
-parent(maria, chloe). 
-parent(chloe, dan). 
-</reasoning_step>
-
-<reasoning_step> 
-To answer the grandmother query, I need a rule defining a grandmother as a parent of a parent. 
-grandmother(Grandmother, Grandchild) :- parent(Grandmother, IntermediateParent), parent(IntermediateParent, Grandchild). 
-</reasoning_step>
-
-<reasoning_step> 
-The question does not require a variable; it is a yes/no question about whether Maria is the grandmother of Dan. 
-grandmother(maria, dan). 
-</reasoning_step>
-
-<database> 
-parent(maria, chloe). 
-parent(chloe, dan). 
-grandmother(Grandmother, Grandchild) :- parent(Grandmother, IntermediateParent), parent(IntermediateParent, Grandchild). 
-</database>
-
-<query> 
-grandmother(maria, dan). 
-</query>
-
----
-"""},
-    
-    # Example 3: One-hop reasoning
-    {"role": "user", "content": """
-Now, process the following:
-Context: Tomasinno is the friend of Vito. Solozzo is the enemy of Vito. Vito believes that he should keep his enemies closer than his friends. 
-Query: Who does Vito believe he should keep closer?
-"""},
-    {"role": "assistant", "content": r"""
-<reasoning_step>
-The context identifies two specific relationships involving Vito: Tomasinno is a friend, and Solozzo is an enemy. These are represented as facts. 
-friend(tomasinno, vito). 
-enemy(solozzo, vito). 
-</reasoning_step>
-
-<reasoning_step>
-The context states a belief/rule: "Vito believes that he should keep his enemies closer than his friends." This implies a relative closeness where an enemy is closer than a friend. We can define a rule closer_than(PersonA, PersonB) based on their relationship status to Vito. 
-closer_than(Enemy, Friend) :- enemy(Enemy, vito), friend(Friend, vito). 
-</reasoning_step>
-
-<reasoning_step>
-The user question asks "Who does Vito believe he should keep closer?" In the context of the rule established, this targets the person who occupies the "closer" position in the comparison (the enemy). We define a predicate vito_keeps_closer(Person) to identify this individual. 
-vito_keeps_closer(Person) :- closer_than(Person, _). 
-</reasoning_step>
-
-<database>
-friend(tomasinno, vito).
-enemy(solozzo, vito).
-closer_than(Enemy, Friend) :- enemy(Enemy, vito), friend(Friend, vito).
-vito_keeps_closer(Person) :- closer_than(Person, _). 
-</database>
-
-<query>
-vito_keeps_closer(Who).
-</query>
-
----
-"""},
-    
-    # Example 4: Simple Educational QA
+    # Example 1: Simple Educational QA
     {"role": "user", "content": """
 Now, process the following:
 Context: A square is a polygon with four equal sides and four right angles. A rectangle has four right angles. 
-Query: Is every square a rectangle?
+Question: Is every square a rectangle?
 """},
     {"role": "assistant", "content": r"""
 <reasoning_step> 
@@ -269,11 +103,11 @@ is_a(square, rectangle).
 ---
 """},
     
-    # Example 5: Recursive Logic
+    # Example 2: Recursive Logic
     {"role": "user", "content": """
 Now, process the following:
 Context: In a food web, grass is a producer. Grasshoppers eat grass. Frogs eat grasshoppers. Snakes eat frogs. 
-Query: If the grass is contaminated, are the snakes affected?
+Question: If the grass is contaminated, are the snakes affected?
 """},
     {"role": "assistant", "content": r"""
 <reasoning_step> 
@@ -314,74 +148,221 @@ affected(snake).
 ---
 """},
 
-    # Example 6: Multiple-Choice Question (MCQ)
+    # Example 3: Multiple-Choice Question (MCQ)
     {"role": "user", "content": """
 Now, process the following:
 Context:
-### Predicates:
-1. sound_travel(medium, speed) - describes how fast sound travels through a medium.
-2. medium_state(medium, state) - the physical state of a medium (solid, liquid, gas).
+### ATOMIC FACTS:\n\n1. The cell wall is a component found in plant cells.\n2. A skeleton provides structural support and protection for an animal's body.\n\n### CONDITIONAL RULES:\n\n1. If a structure has the function of providing structural support, then it serves as a substitute or equivalent to an animal skeleton (by analogy).\n2. Plant structures that provide mechanical strength are analogous to skeletal systems in animals.\n3. The cell wall is responsible for maintaining plant cell shape and supporting its internal components.\n\n### GAPS IN THE CONTEXT:\n\n1. There is no direct information about the function of specific parts within a plant cell, such as chloroplasts or nuclei.\n2. No explicit comparison between animal skeletons and any part of a plant cell has been made in the provided context.\n\n### ATOMIC FACTS (CONTINUED):\n\n3. Chloroplasts are organelles found in plant cells responsible for photosynthesis.\n4. The nucleus is an essential component within eukaryotic cells, including those of plants, containing genetic material.\n\n### CONDITIONAL RULES (CONTINUED):\n\n5. If a structure has the primary function related to energy production or storage, then it would be less likely to serve as a direct equivalent for skeletal functions.\n6. The nucleus and chloroplasts are essential components within plant cells but do not directly provide structural support like an animal skeleton.\n\n### ATOMIC FACTS (FINAL):\n\n7. Photosynthetic pigments play a crucial role in the process of photosynthesis, which occurs primarily in chloroplasts.\n8. Organelles such as mitochondria and ribosomes also have critical functions within plant cells but are not directly analogous to skeletal structures.
 
-### Facts (Ground Truths):
-1. Sound travels fastest through solids, then liquids, then gases.
-2. Steel is a solid. Water is a liquid. Air is a gas. A vacuum has no medium.
-
-### Rules (Horn Clauses / Implications):
-1. If a medium is solid, sound travels fastest through it.
-2. Sound cannot travel through a vacuum because there are no particles.
-
-User Question: Through which medium does sound travel the fastest?
-A. vacuum
-B. water
-C. steel
-D. air
+User Question: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
 """},
     {"role": "assistant", "content": r"""
 <reasoning_step>
-I must encode each option as a fact so that Prolog can select the correct one through logical derivation, rather than me choosing it directly.
-option(a, vacuum).
-option(b, water).
-option(c, steel).
-option(d, air).
+First, we need to represent the multiple-choice options provided in the user's question as Prolog facts. This allows the inference engine to bind the variables to the specific test case options.
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
 </reasoning_step>
 
 <reasoning_step>
-The context tells us the physical state of each medium and how sound speed relates to state.
-medium_state(steel, solid).
-medium_state(water, liquid).
-medium_state(air, gas).
-no_medium(vacuum).
+Next, we translate the explicitly stated atomic facts regarding the components of a plant cell and their respective functions, including the animal skeleton for our baseline analogy.
+component_of(cell_wall, plant_cell).
+function_of(skeleton, structural_support).
+function_of(skeleton, protection).
+function_of(chloroplast, photosynthesis).
+function_of(nucleus, contains_genetic_material).
 </reasoning_step>
 
 <reasoning_step>
-Sound travels fastest through solids. A medium allows fastest travel if it is solid. Sound cannot travel through a vacuum at all.
-sound_fastest(Medium) :- medium_state(Medium, solid).
+The context lists a conditional rule stating that the cell wall is responsible for maintaining shape and supporting internal components. We translate this specific function into a factual predicate.
+function_of(cell_wall, supports_internal_components).
 </reasoning_step>
 
 <reasoning_step>
-The answer is the option whose medium allows the fastest sound travel.
-answer(Option) :- option(Option, Medium), sound_fastest(Medium).
+We now translate the conditional rules that define what makes a structure equivalent to an animal skeleton. The context states that structures providing structural support or mechanical strength are analogous to an animal skeleton.
+provides_structural_support(PlantStructure) :- function_of(PlantStructure, structural_support).
+provides_structural_support(PlantStructure) :- function_of(PlantStructure, mechanical_strength).
+provides_structural_support(PlantStructure) :- function_of(PlantStructure, supports_internal_components).
+equivalent_to_skeleton(PlantStructure) :- provides_structural_support(PlantStructure).
+</reasoning_step>
+
+<reasoning_step>
+To ensure logical completeness based on the provided context, we also encode the negative rules (Gaps and final conditional rules) stating that chloroplasts and nuclei do not serve this structural function.
+lacks_structural_support(chloroplast).
+lacks_structural_support(nucleus).
+not_equivalent_to_skeleton(PlantStructure) :- lacks_structural_support(PlantStructure).
+</reasoning_step>
+
+<reasoning_step>
+Finally, we formulate the query. The goal is to find which of the multiple-choice options binds to a plant part that satisfies the conditions for being equivalent to a skeleton.
+choice(OptionLetter, PlantPart), equivalent_to_skeleton(PlantPart).
 </reasoning_step>
 
 <database>
-option(a, vacuum).
-option(b, water).
-option(c, steel).
-option(d, air).
-medium_state(steel, solid).
-medium_state(water, liquid).
-medium_state(air, gas).
-no_medium(vacuum).
-sound_fastest(Medium) :- medium_state(Medium, solid).
-answer(Option) :- option(Option, Medium), sound_fastest(Medium).
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+component_of(cell_wall, plant_cell).
+
+function_of(skeleton, structural_support).
+function_of(skeleton, protection).
+function_of(chloroplast, photosynthesis).
+function_of(nucleus, contains_genetic_material).
+function_of(cell_wall, supports_internal_components).
+
+provides_structural_support(PlantStructure) :- function_of(PlantStructure, structural_support).
+provides_structural_support(PlantStructure) :- function_of(PlantStructure, mechanical_strength).
+provides_structural_support(PlantStructure) :- function_of(PlantStructure, supports_internal_components).
+
+equivalent_to_skeleton(PlantStructure) :- provides_structural_support(PlantStructure).
+
+lacks_structural_support(chloroplast).
+lacks_structural_support(nucleus).
+
+not_equivalent_to_skeleton(PlantStructure) :- lacks_structural_support(PlantStructure).
 </database>
 
 <query>
-answer(Option).
+choice(OptionLetter, PlantPart), equivalent_to_skeleton(PlantPart).
 </query>
+"""},
+    
+    {
+        "role": "user", 
+        "content": """
+Context: **ATOMIC FACTS**\n\n1. Tectonic plates are large, rigid slabs of the Earth's lithosphere.\n2. The movement of tectonic plates is responsible for shaping the Earth's surface through processes such as faulting and volcanic activity.\n\n**CONDITIONAL RULES**\n\n1. If two or more tectonic plates converge (move towards each other), then a mountain range will form due to the collision between them.\n2. If two or more tectonic plates diverge (move apart from each other), then new crust is created as magma rises up and solidifies, forming oceanic basins.\n\n**ATOMIC FACTS**\n\n1. A trench forms when one plate moves under another at a subduction zone.\n2. A rift valley forms when two or more tectonic plates diverge (move apart from each other).\n3. An ocean basin is formed by the creation of new crust as magma rises up and solidifies, resulting in the separation between two or more tectonic plates.\n\n**CONDITIONAL RULES**\n\n1. If a trench forms due to plate convergence, then it will be characterized by deep water and high pressure.\n2. If a rift valley forms due to plate divergence, then it will be characterized by shallow water and low pressure.\n3. An ocean basin is formed when two or more tectonic plates diverge (move apart from each other), resulting in the creation of new crust.\n\n**ATOMIC FACTS**\n\n1. The Pacific Ocean has a large number of trenches due to subduction zones where one plate moves under another.\n2. The Atlantic Ocean has several mid-ocean ridges, which are areas where two or more tectonic plates diverge (move apart from each other).\n3. The Indian Ocean is characterized by the presence of oceanic basins formed as a result of plate divergence.\n\n**CONDITIONAL RULES**\n\n1. If an oil spill occurs in an ocean basin, then it will spread rapidly due to currents and winds.\n2. If pollution enters an ocean through human activities such as industrial waste or agricultural runoff, then it can have devastating effects on marine life and ecosystems.\n\nNote: The above facts are based on the provided text and may not be a comprehensive list of all relevant information related to tectonic plates and their interactions with oceans.
 
----
-"""}
+Question: Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+        """
+        },
+    
+    {
+        "role": "assistant", 
+        "content": r"""
+reasoning_step>
+First, we must map the multiple-choice options provided in the question into our Prolog database. This allows the query to bind the variable to the specific options being tested.
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+</reasoning_step>
+
+<reasoning_step>
+Next, we translate the first set of conditional rules regarding the general movements of tectonic plates. The context states that plate convergence forms mountain ranges, and plate divergence creates new crust and oceanic basins.
+forms_from(mountain_range, plate_convergence).
+forms_from(oceanic_basin, plate_divergence).
+</reasoning_step>
+
+<reasoning_step>
+We then encode the specific formation facts from the second set of atomic facts and conditional rules. The context explicitly links trenches to subduction zones and convergence, while rift valleys and ocean basins are linked to divergence.
+
+forms_from(trench, subduction_zone).
+forms_from(trench, plate_convergence).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+</reasoning_step>
+
+<reasoning_step>
+The final set of atomic facts details specific geographical locations. Importantly, it establishes the definition of mid-ocean ridges as areas where tectonic plates diverge. We encode this as a formation rule to evaluate option D.
+forms_from(mid_ocean_ridge, plate_divergence).
+</reasoning_step>
+
+<reasoning_step>
+Finally, we formulate the query. The user asks which feature does not form as a result of tectonic plates diverging. We use the Prolog negation operator (\+) to find the choice that is not associated with plate_divergence in our database.
+choice(OptionLetter, GeologicFeature), + forms_from(GeologicFeature, plate_divergence).
+</reasoning_step>
+
+<database>
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(mountain_range, plate_convergence).
+forms_from(oceanic_basin, plate_divergence).
+
+forms_from(trench, subduction_zone).
+forms_from(trench, plate_convergence).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+
+forms_from(mid_ocean_ridge, plate_divergence).
+</database>
+
+<query>
+choice(OptionLetter, GeologicFeature), not(forms_from(GeologicFeature, plate_divergence)).
+</query>
+        """
+        },
+    
+    {
+        "role": "user", 
+        "content": """
+Question: If two rocks are lacking magnetic properties and far apart, can a magnetic effect pull them together? 
+
+Retrieved Context: 
+### ATOMIC FACTS:\n\n1. A magnetic effect can pull two objects together.\n2. Magnetic properties are necessary for a force to act between two rocks.\n3. Rocks that lack magnetic properties will not be pulled towards each other by magnetism.\n\n### CONDITIONAL RULES:\n\n1. If an object has magnetic properties, then it may exert a magnetic force on another object with similar properties (at any distance).\n2. If two objects are touching and both have or lack magnetic properties, the presence of touch does not affect their ability to be pulled together by magnetism.\n\n### GAPS FILLED:\n\n1. The definition of "magnetic ordering" is irrelevant to understanding how rocks interact through magnetism.\n2. Bryophytes (plants lacking vascular tissue) are unrelated to this context and can be disregarded for the purpose of answering the question about magnetic effects on rocks.\n\nNote: These extracted facts and rules provide a foundation for reasoning about the conditions under which two rocks may be pulled together by a magnetic effect, but they do not directly answer the original question.
+        """
+        },
+    
+    {
+        "role": "assistant", 
+        "content": r"""
+<reasoning_step>
+First, we need to encode the specific hypothetical scenario presented in this binary (Yes/No) question. The question posits two rocks that lack magnetic properties and are far apart. We define these as specific instances in our knowledge base.
+lacks_magnetic_properties(rock_one).
+lacks_magnetic_properties(rock_two).
+far_apart(rock_one, rock_two).
+</reasoning_step>
+
+<reasoning_step>
+Next, we translate Atomic Fact 3 from the context, which explicitly states that rocks lacking magnetic properties will not be pulled towards each other. Because s(CASP) supports classical negation for explicit falsehoods, we use the `-` prefix. To satisfy the constraint against singleton variables, we use the anonymous variable `_` for the other rock in the relationship.
+-pulled_by_magnetism(RockA, *) :- lacks_magnetic_properties(RockA).
+-pulled_by_magnetism(*, RockB) :- lacks_magnetic_properties(RockB).
+</reasoning_step>
+
+<reasoning_step>
+We then translate Conditional Rule 1, which establishes the positive condition for a magnetic pull. If objects have magnetic properties, they exert a force on each other. We use this to define when a pull is successfully derived.
+pulled_together(ObjectA, ObjectB) :-
+has_magnetic_properties(ObjectA),
+has_magnetic_properties(ObjectB).
+</reasoning_step>
+
+<reasoning_step>
+Finally, we formulate the query for this binary question. As per the new formatting rules for True/False questions, we directly test the claim presented in the question without variables. The query checks if `rock_one` and `rock_two` can be pulled together by magnetism. The s(CASP) solver will attempt to prove this and return failure (false), which accurately answers the question.
+pulled_by_magnetism(rock_one, rock_two).
+</reasoning_step>
+
+<database>
+lacks_magnetic_properties(rock_one).
+lacks_magnetic_properties(rock_two).
+far_apart(rock_one, rock_two).
+
+-pulled_by_magnetism(RockA, *) :- lacks_magnetic_properties(RockA).
+-pulled_by_magnetism(*, RockB) :- lacks_magnetic_properties(RockB).
+
+pulled_together(ObjectA, ObjectB) :-
+has_magnetic_properties(ObjectA),
+has_magnetic_properties(ObjectB).
+</database>
+
+<query>
+pulled_together(rock_one, rock_two).
+</query>
+        """
+    }
+    
 ]
 
 EXPLAINER_SYSTEM_PROMPT = rf"""

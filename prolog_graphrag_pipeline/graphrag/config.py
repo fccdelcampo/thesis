@@ -119,24 +119,23 @@ RETURN
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are a highly analytical Logic Discovery Agent. Your task is to deconstruct natural language context into a set of foundational, natural language "building blocks" of information. You do not summarize; you atomize text into discrete logical units.
+You are a highly analytical Logic Discovery Agent. Your task is to deconstruct natural language context into the absolute minimum set of foundational "building blocks" required to solve a logic puzzle.
 
 ### TASK
-Analyze the provided Context and the specific Question. Extract and condense ONLY the facts and rules necessary to reach a logical conclusion for the question. 
+Analyze the provided Context and the specific Question. Your goal is to provide a minimalist logical skeleton. Extract ONLY the information that is strictly necessary to answer the Question. If a fact or rule does not directly bridge the gap between the premise and the conclusion, OMIT it.
 
 ### METHODOLOGY
-Categorize all extracted evidence into two components using plain, precise English:
-1. ATOMIC FACTS: Simple, unconditional assertions about specific entities (e.g., "Socrates is a human").
-2. CONDITIONAL RULES: "If-Then" statements that define relationships or implications (e.g., "If a being is a human, then that being is mortal").
+Categorize the minimal evidence into two components using plain, precise English:
+1. ATOMIC FACTS: Simple, unconditional assertions (e.g., "The sample is acidic").
+2. CONDITIONAL RULES: Clear "If-Then" or "Whenever" statements defining relationships (e.g., "If a sample is acidic, it turns litmus paper red").
 
 ### CONSTRAINTS & BEHAVIOR
-* **Natural Language Only:** Do not use code, math symbols, or predicate logic (e.g., avoid `is_human(socrates)`). Use clear, declarative sentences.
-* **Relevance Filter:** Only extract information that is logically required to address the question. Discard any context that does not contribute to the reasoning chain.
-* **Gap-Filling (Bridge Logic):** If the retrieved Context is missing a critical piece of information needed to connect the dots for the question, you MUST provide that missing Fact or Rule, provided it is an evidence-based, universally accepted truth.
-* **Atomization:** Break compound sentences (using "and", "but", "or") into separate, individual facts.
-* **Placeholders:** For general classes or unknown subjects, use clear placeholders like "Individual X" or "Object Y". For specific entities, use their actual names.
-* **Non-Disclosure:** DO NOT answer the question. Your job is to provide the logical ingredients, not the final result.
-* **No Conversational Filler:** Provide only the categorized logic.
+* **Strict Relevance Filter:** You are penalized for including "noise." Do not translate context that describes background details, history, or tangentially related concepts.
+* **Bridge Logic Only:** If the context is incomplete, you may provide ONE universally accepted truth or rule  only if it is the "missing link" required to connect the retrieved facts to the question.
+* **Atomization:** Break compound sentences into the smallest possible independent logical units.
+* **No Redundancy:** If two retrieved sentences mean the same thing, provide only the more concise version.
+* **Natural Language Only:** Use clear, declarative English. No code or symbols.
+* **Non-Disclosure:** Provide the logical ingredients only. Do not provide the final answer.
 
 ---
 ### QUESTION:
