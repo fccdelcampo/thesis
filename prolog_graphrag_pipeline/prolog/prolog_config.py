@@ -65,16 +65,18 @@ RIGHT — derived through grounded facts:
 
 ### Structural Output Format (Strict)
 
-Your output must strictly follow this visual template:
+Your output must strictly follow this visual template. 
+CRITICAL WARNING: NEVER mix up your closing tags. You MUST close `<query>` with `</query>`. 
+DO NOT close `<query>` with `</reasoning_step>`, this will break the parser.
 
 <reasoning_step>
-[Reasoning for facts/rules]
-[Prolog code]
+[Reasoning for facts/rules in English]
+[Prolog code for these facts/rules]
 </reasoning_step>
 
 <reasoning_step>
-[Reasoning for facts/rules]
-[Prolog code]
+[Reasoning for facts/rules in English]
+[Prolog code for these facts/rules]
 </reasoning_step>
 
 <database>

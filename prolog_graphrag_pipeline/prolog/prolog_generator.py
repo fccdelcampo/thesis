@@ -4,21 +4,21 @@ import re
 def capture_db_and_query(answer_text: str) -> tuple[str, str]:
     import re
 
-    db_match = re.search(r"<database>(.*?)</database>", answer_text, re.DOTALL)
-    # if "</query>" not in answer_text:
-    #     answer_text += "</query>"
-    query_match = re.search(r"<query>(.*?)</query>", answer_text, re.DOTALL)
+    # Match everything after <database> until either </database>, <query>, or the end of the string
+    db_match = re.search(r"<database>(.*?)(?:</database>|<query>|\Z)", answer_text, re.DOTALL)
+    
+    # Match everything after <query> until </query>, </reasoning_step> (common hallucination), or the end of the string
+    query_match = re.search(r"<query>(.*?)(?:</query>|</reasoning_step>|\Z)", answer_text, re.DOTALL)
 
-    try:
-        db = db_match.group(1)
-    except:
+    if not db_match:
         raise ValueError(f"Database not found in LLM's response \n{answer_text}")
-    try:
-        query = query_match.group(1)
-    except:
-        raise ValueError(f"Query not found in LLM's response: \n{answer_text}")
+    db = db_match.group(1).strip()
 
-    return {"database":db, "query":query}
+    if not query_match:
+        raise ValueError(f"Query not found in LLM's response: \n{answer_text}")
+    query = query_match.group(1).strip()
+
+    return {"database": db, "query": query}
 
 
 def capture_predicate_and_arguments(query: str) -> dict:
