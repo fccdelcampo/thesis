@@ -230,8 +230,8 @@ def init_globals():
         kg_builder_pdf, kg_builder_text = setup_kg_pipeline(encoder_llm, embedder)
         retriever = create_retriever(neo4j_driver, embedder)
 
-def generate_answer(query, retriever, llm) -> dict:
-    return generate(llm, retriever, query)
+def generate_answer(query, retriever, llm, original_query: str = "") -> dict:
+    return generate(llm, retriever, query, original_query=original_query)
 
 def run_pipeline(user_question) -> dict:
     init_globals()
@@ -262,7 +262,7 @@ def run_pipeline(user_question) -> dict:
         print("DEBUG [run_pipeline]: Sleep done.", flush=True)
 
     print("DEBUG [run_pipeline]: Starting generate (retriever + LLM)...", flush=True)
-    generation_result = generate(llm=retriever_llm, retriever=retriever, query=query)
+    generation_result = generate(llm=retriever_llm, retriever=retriever, query=query, original_query=user_question)
     print("DEBUG [run_pipeline]: generate done. Returning result.", flush=True)
     # generation_result is now a dict: {'answer': str, 'contexts': list}
     

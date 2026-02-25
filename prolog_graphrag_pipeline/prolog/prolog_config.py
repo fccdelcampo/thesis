@@ -14,7 +14,9 @@ Translate the provided Context into a formal Prolog database to answer the User 
 6. Finally, provide the <query>.
 
 ### Syntactic Requirements (s(CASP) Specific)
-- Disjunction / Logical OR: NEVER use the semicolon `;` for Logical OR. s(CASP) will crash with a permission error. If you need an OR condition, you MUST write multiple separate rules with the same head.
+- Disjunction / Logical OR: NEVER use the semicolon `;` anywhere — not inside rule bodies, not inside queries. s(CASP) will immediately crash with a permission error. This is the single most common mistake — AVOID IT ENTIRELY.
+  ❌ WRONG: `answer(X) :- option_a(X) ; option_b(X).`
+  ✅ RIGHT:  `answer(X) :- option_a(X).`  AND as a SEPARATE RULE:  `answer(X) :- option_b(X).`
 - Arithmetic & Equality: NEVER use the native evaluation operators like `=:=`, `=\=`, `is`, `>`, `<`. s(CASP) strictly prohibits them. For numerical constraints or arithmetic equality, you MUST use constraint logic programming syntax like `#=`, `#<`, `#>`, `#=\=`. If just unifying two terms, use standard `=`.
 - Negation: You MUST use the keyword not for Negation as Failure. NEVER use \+.
 - Classical Negation: Use the - prefix (e.g., -mortal(X).) for explicit falsehood.
@@ -22,22 +24,44 @@ Translate the provided Context into a formal Prolog database to answer the User 
 - Variables: Use CamelCase for Variables (e.g., PersonName). No single-letter variables.
 - Singleton Variables: Every named variable in a rule must appear at least twice. If a variable is only used once, use the anonymous variable `_` instead.
 - Punctuation: Every Prolog line must end with a period (.). No standalone bullets or hyphens at the start of a line.
+- Closed-World / No Undefined Predicates (CRITICAL): Every predicate name that appears in a rule body MUST be defined somewhere in the same database — either as a ground fact or as the head of another rule. NEVER call a predicate that you did not define. If you find yourself writing `receives_more_light(X)` in a body, you MUST also have `receives_more_light(pot1).` (or equivalent) as a fact. Calling an undefined predicate will always cause an 'Unknown procedure' error.
+  ❌ WRONG: `answer(X) :- option(X, Factor), causes_difference(Factor).`  ← if `causes_difference/1` is never defined as a fact
+  ✅ RIGHT:  `causes_difference(amount_of_light).`  (ground fact)  THEN  `answer(X) :- option(X, Factor), causes_difference(Factor).`
+- Discontiguous Clauses: Group ALL clauses for the same predicate together. Never interleave clauses for different predicates. If `answer/1` has two clauses, write them one after the other, not separated by other predicate definitions.
 
 ### Multiple-Choice Questions (MCQ) — Critical
 When the user question presents options (A/B/C/D), you MUST follow this pattern:
-1. Encode EACH option as a separate fact: `option(a, 'description').` / `option(b, 'description').` etc.
-2. Encode the domain knowledge from the context as rules that DERIVE properties relevant to the question. Do NOT hardcode which option is correct.
-3. Write an `answer/1` rule that unifies with the correct option ONLY through logical derivation from those domain rules and facts.
+1. Encode EACH option as a separate fact: `option(a, description).` / `option(b, description).` etc.
+2. Encode the domain knowledge from the context as GROUND FACTS for properties that are directly stated. Do NOT hardcode which option is correct.
+3. Write an `answer/1` rule that unifies with the correct option ONLY through logical derivation from those domain facts.
 4. The <query> should be `answer(Option).` with a variable — NEVER `answer(b).` with a constant.
 
-WRONG (hardcoded answer — defeats the purpose of Prolog reasoning):
+WRONG — hardcoded answer:
   `answer(b) :- true.`
-  `best_option(X) :- X = option_b.`
 
-RIGHT (derived through logical rules):
-  `option(a, cell_membrane). option(b, cell_wall). ...`
-  `provides_structural_support(cell_wall).`
+WRONG — undefined predicate in body (causes 'Unknown procedure' error):
+  `answer(X) :- option(X, Factor), causes_difference(Factor).`  ← CRASH if `causes_difference/1` has no facts
+  `answer(X) :- option_a(X).`  ← CRASH because `option_a/1` is never defined
+
+RIGHT — derived through grounded facts:
+  `option(a, cell_membrane). option(b, cell_wall).`
+  `provides_structural_support(cell_wall).`   ← ground fact from context
   `answer(Option) :- option(Option, Part), provides_structural_support(Part).`
+
+### MCQ Strategy Selector — Pick the pattern that matches the question type:
+
+| Question Type | Example phrasing | Strategy |
+|---|---|---|
+| **Property match** | "Which has property P?" / "Which is most similar to X?" | `has_property(X, p). answer(O) :- option(O, X), has_property(X, p).` |
+| **Difference** | "Which factor was DIFFERENT?" / "Which was NOT the same?" | `different(factor). same(other). answer(O) :- option(O, F), different(F).` |
+| **Negation** | "Which is NOT true?" / "Which does NOT apply?" | `true_of(b). true_of(c). true_of(d). answer(O) :- option(O, X), not true_of(X).` |
+| **Causal / reason** | "Most likely reason for X?" / "What caused X?" | `causes(x, effect). answer(O) :- option(O, X), causes(X, effect).` |
+| **Consequence** | "What would happen if X?" / "What results from X?" | `leads_to(cause, result). answer(O) :- option(O, R), leads_to(cause, R).` |
+| **Classification** | "Which is an example of X?" / "Which belongs to category Y?" | `is_a(x, category). answer(O) :- option(O, X), is_a(X, category).` |
+| **Purpose / function** | "What is the PURPOSE of X?" / "Why is X used?" | `purpose_of(x, goal). answer(O) :- option(O, G), purpose_of(x, G).` |
+| **Degree / most** | "Which would MOST likely / BEST explain?" | `best_fits(x, criterion). answer(O) :- option(O, X), best_fits(X, criterion).` |
+
+**Universal rule:** Every property predicate (`has_property`, `different`, `causes`, `is_a`, etc.) used in a rule body MUST be grounded by a fact in the same database. Read the context, extract what is explicitly stated, and encode it as ground facts FIRST — then write the `answer` rule to derive from those facts.
 
 ### Structural Output Format (Strict)
 
@@ -110,39 +134,31 @@ Context: In a food web, grass is a producer. Grasshoppers eat grass. Frogs eat g
 Question: If the grass is contaminated, are the snakes affected?
 """},
     {"role": "assistant", "content": r"""
-<reasoning_step> 
-First, I will define the direct consumption relationships (the edges in the graph). 
-eats(grasshopper, grass). 
-eats(frog, grasshopper). 
-eats(snake, frog). 
-is_producer(grass). 
+<reasoning_step>
+Encode direct eating relationships and the contamination premise.
+eats(grasshopper, grass).
+eats(frog, grasshopper).
+eats(snake, frog).
+is_contaminated(grass).
 </reasoning_step>
 
-<reasoning_step> 
-The contamination affects a species if it eats something contaminated. This is a recursive relationship (bioaccumulation). 
-is_contaminated(grass). 
-% Fact from query premise 
-affected(Species) :- is_contaminated(Species). 
-affected(Predator) :- eats(Predator, Prey), affected(Prey). 
+<reasoning_step>
+Contamination propagates recursively up the food chain.
+affected(Species) :- is_contaminated(Species).
+affected(Predator) :- eats(Predator, Prey), affected(Prey).
 </reasoning_step>
 
-<reasoning_step> 
-Now that the properties and definitions about the animals, the food web, and the contamination are established, I can query whether snakes are affected.
-affected(snake). 
-</reasoning_step>
-
-<database> 
-eats(grasshopper, grass). 
-eats(frog, grasshopper). 
-eats(snake, frog). 
-is_producer(grass). 
-is_contaminated(grass). 
-affected(Species) :- is_contaminated(Species). 
-affected(Predator) :- eats(Predator, Prey), affected(Prey). 
+<database>
+eats(grasshopper, grass).
+eats(frog, grasshopper).
+eats(snake, frog).
+is_contaminated(grass).
+affected(Species) :- is_contaminated(Species).
+affected(Predator) :- eats(Predator, Prey), affected(Prey).
 </database>
 
-<query> 
-affected(snake). 
+<query>
+affected(snake).
 </query>
 
 ---
@@ -365,6 +381,97 @@ pulled_together(rock_one, rock_two).
     
 ]
 
+    # Example 4: MCQ — "Which factor is DIFFERENT?" (grounded same/different facts)
+    {"role": "user", "content": """
+Now, process the following:
+Context:
+### Facts:
+1. Two identical pots with the same soil and seed type.
+2. Each pot receives 15 ml of water daily.
+3. Pot A is in a dark closet; Pot B is near a sunny window.
+
+User Question: Which factor was DIFFERENT for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed
+"""},
+    {"role": "assistant", "content": r"""
+<reasoning_step>
+Encode MCQ options and assert which factors are same vs. different as ground facts. The answer derives from different/1.
+option(a, amount_of_water).
+option(b, amount_of_light).
+option(c, type_of_soil).
+option(d, type_of_seed).
+same(amount_of_water).
+same(type_of_soil).
+same(type_of_seed).
+different(amount_of_light).
+answer(Option) :- option(Option, Factor), different(Factor).
+</reasoning_step>
+
+<database>
+option(a, amount_of_water).
+option(b, amount_of_light).
+option(c, type_of_soil).
+option(d, type_of_seed).
+same(amount_of_water).
+same(type_of_soil).
+same(type_of_seed).
+different(amount_of_light).
+answer(Option) :- option(Option, Factor), different(Factor).
+</database>
+
+<query>
+answer(Option).
+</query>
+
+---
+"""},
+
+    # Example 5: MCQ — "Which does NOT …?" (negation as failure)
+    {"role": "user", "content": """
+Now, process the following:
+Context:
+### Facts:
+1. Photosynthesis uses sunlight to produce food.
+2. Cellular respiration breaks down glucose — no sunlight needed.
+3. Decomposition is carried out by fungi/bacteria — no sunlight needed.
+4. Fermentation produces energy without oxygen and without sunlight.
+
+User Question: Which process does NOT directly use sunlight as an energy source?
+A. photosynthesis
+B. cellular respiration
+C. decomposition
+D. fermentation
+"""},
+    {"role": "assistant", "content": r"""
+<reasoning_step>
+Encode options and assert which process uses sunlight (only photosynthesis). Use 'not' (never \+) for negation as failure.
+option(a, photosynthesis).
+option(b, cellular_respiration).
+option(c, decomposition).
+option(d, fermentation).
+uses_sunlight(photosynthesis).
+answer(Option) :- option(Option, Process), not uses_sunlight(Process).
+</reasoning_step>
+
+<database>
+option(a, photosynthesis).
+option(b, cellular_respiration).
+option(c, decomposition).
+option(d, fermentation).
+uses_sunlight(photosynthesis).
+answer(Option) :- option(Option, Process), not uses_sunlight(Process).
+</database>
+
+<query>
+answer(Option).
+</query>
+
+---
+"""},
+]
 EXPLAINER_SYSTEM_PROMPT = rf"""
 ### Role
 You are a Logical Elucidator and Technical Translator. Your job is to take the formal output of a Prolog s(CASP) solver and transform it into a clear, step-by-step natural language explanation. This explanation will be used to reconstruct a final answer for a user.
