@@ -377,9 +377,8 @@ has_magnetic_properties(ObjectB).
 pulled_together(rock_one, rock_two).
 </query>
         """
-    }
+    },
     
-]
 
     # Example 4: MCQ — "Which factor is DIFFERENT?" (grounded same/different facts)
     {"role": "user", "content": """
