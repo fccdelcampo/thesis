@@ -16672,3 +16672,343 @@ To connect the dots between PTM and its structural components, we need to fill a
 
 This rule can be inferred from Atomic Fact 2 ("Proteins synthesized by ribosomes undergo extensive post-translational modification") and the roles of endoplasmic reticulum (Atomic Fact 3) and Golgi apparatus (Atomic Fact 4).
 ==================================================
+==================================================
+ QUERY: Which structural component of a cell is involved in such modification? A. endoplasmic reticulum B. lysosomes C. mitochondria D. Golgi apparatus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "post-translational modification",
+  "uri": "http://kbpedia.org/kko/rc/PosttranslationalModification",
+  "score": 1.0,
+  "triples": [
+    "definition: Post-translational modification (PTM) refers to the covalent and generally enzymatic modification of proteins during or after protein biosynthesis. Proteins are synthesized by ribosomes translating mR",
+    "subclass of: cellular protein synthesis",
+    "ancestor definition: Protein biosynthesis is the process whereby biological cells generate new proteins; it is balanced by the loss of cellular proteins via degradation or",
+    "subclass of: gene expression",
+    "ancestor definition: The collection of events in which some quantity, more than a single molecule, of protein is synthesized \"under the guidance\" of a particular gene, i.e",
+    "subclass of: biochemical synthesis",
+    "ancestor definition: A collection of events. During instances of BiochemicalSynthesis, some chemical object is produced by synthesis (usually from more elementary objects)",
+    "subclass of: chemical synthesis",
+    "ancestor definition: The collection of processes by which chemical compounds are created (usually out of simpler chemical compounds).",
+    "subclass of: cellular level biological process",
+    "ancestor definition: The collection of instances of BiologicalProcess that occur at the cellular level (i.e., an instance of Cell plays the locusOfCellularProcess_Cell rol",
+    "sibling concept: eukaryotic protein synthesis",
+    "sibling concept: LRP8",
+    "sibling concept: prokaryotic protein synthesis",
+    "sibling concept: cellular protein synthesis",
+    "sibling concept: eukaryotic gene expression"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: post-translational modification. Relevant Logical Facts:  - definition: Post-translational modification (PTM) refers to the covalent and generally enzymatic modification of proteins during or after protein biosynthesis. Proteins are synthesized by ribosomes translating mR  - subclass of: cellular protein synthesis  - ancestor definition: Protein biosynthesis is the process whereby biological cells generate new proteins; it is balanced by the loss of cellular proteins via degradation or  - subclass of: gene expression  - ancestor definition: The collection of events in which some quantity, more than a single molecule, of protein is synthesized "under the guidance" of a particular gene, i.e  - subclass of: biochemical synthesis  - ancestor definition: A collection of events. During instances of BiochemicalSynthesis, some chemical object is produced by synthesis (usually from more elementary objects)  - subclass of: chemical synthesis  - ancestor definition: The collection of processes by which chemical compounds are created (usually out of simpler chemical compounds).  - subclass of: cellular level biological process  - ancestor definition: The collection of instances of BiologicalProcess that occur at the cellular level (i.e., an instance of Cell plays the locusOfCellularProcess_Cell rol  - sibling concept: eukaryotic protein synthesis  - sibling concept: LRP8  - sibling concept: prokaryotic protein synthesis  - sibling concept: cellular protein synthesis  - sibling concept: eukaryotic gene expression
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "organelle",
+  "uri": "http://kbpedia.org/kko/rc/Organelle",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated f",
+    "subclass of: cell part",
+    "ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel",
+    "subclass of: internal body part",
+    "ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. ",
+    "subclass of: microscopic object",
+    "ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cann",
+    "subclass of: organic matter",
+    "ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of ",
+    "subclass of: parts",
+    "ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of \u2018whole\u2019.",
+    "has subclass: centrosome",
+    "has subclass: chloroplast",
+    "has subclass: endoplasmic reticulum",
+    "has subclass: Golgi apparatus",
+    "has subclass: golgi cisterna",
+    "has subclass: aura: membrane bounded organelle",
+    "has subclass: mitochondrion",
+    "has subclass: nucleus",
+    "sibling concept: aster (cell part)",
+    "sibling concept: axon",
+    "sibling concept: biological membrane stuff",
+    "sibling concept: bacterial capsule",
+    "sibling concept: structural cell part"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: organelle. Relevant Logical Facts:  - definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated f  - subclass of: cell part  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel  - subclass of: internal body part  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism.  - subclass of: microscopic object  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cann  - subclass of: organic matter  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of  - subclass of: parts  - ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of ‘whole’.  - has subclass: centrosome  - has subclass: chloroplast  - has subclass: endoplasmic reticulum  - has subclass: Golgi apparatus  - has subclass: golgi cisterna  - has subclass: aura: membrane bounded organelle  - has subclass: mitochondrion  - has subclass: nucleus  - sibling concept: aster (cell part)  - sibling concept: axon  - sibling concept: biological membrane stuff  - sibling concept: bacterial capsule  - sibling concept: structural cell part
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "endomembrane system",
+  "uri": "http://kbpedia.org/kko/rc/EndomembraneSystem",
+  "score": 1.0,
+  "triples": [
+    "definition: A collection of membranous structures involved in transport within the cell. The main components of the endomembrane system are endoplasmic reticulum, Golgi bodies, vesicles, cell membrane and nuclear",
+    "subclass of: cell membrane",
+    "ancestor definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells.",
+    "subclass of: membrane (biological)",
+    "ancestor definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope",
+    "subclass of: structural cell part",
+    "ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct",
+    "subclass of: lipid bilayer",
+    "ancestor definition: The collection of all membranes consisting of a double layer of amphipathic lipid molecules in aqueous solution, oriented so that their hydrophobic en",
+    "subclass of: sheet of some substance",
+    "ancestor definition: A specialization of PartiallyTangible. Each instance of SheetOfSomeStuff is a partially tangible thing which (in its \"intrinsic\" shape -- see #$Curren",
+    "sibling concept: T-tubule"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: endomembrane system. Relevant Logical Facts:  - definition: A collection of membranous structures involved in transport within the cell. The main components of the endomembrane system are endoplasmic reticulum, Golgi bodies, vesicles, cell membrane and nuclear  - subclass of: cell membrane  - ancestor definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells.  - subclass of: membrane (biological)  - ancestor definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope  - subclass of: structural cell part  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct  - subclass of: lipid bilayer  - ancestor definition: The collection of all membranes consisting of a double layer of amphipathic lipid molecules in aqueous solution, oriented so that their hydrophobic en  - subclass of: sheet of some substance  - ancestor definition: A specialization of PartiallyTangible. Each instance of SheetOfSomeStuff is a partially tangible thing which (in its "intrinsic" shape -- see #$Curren  - sibling concept: T-tubule
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rhythmic gymnastics apparatus",
+  "uri": "http://kbpedia.org/kko/rc/RhythmicGymnasticsApparatus",
+  "score": 1.0,
+  "triples": [
+    "definition: Topics about the apparatus used in Rhythmic Gymnastics.",
+    "subclass of: gymnastics apparatus",
+    "ancestor definition: A piece of gymnastic equipment used during a routine, where the gymnast's weight is supported by the device, for however short a time. Does not includ",
+    "subclass of: single-user device",
+    "ancestor definition: Device_SingleUser is a specialization of PhysicalDevice. Each instance of Device_SingleUser is a device that typically has exactly one (i.e., one and ",
+    "subclass of: non-powered device",
+    "ancestor definition: A specialization of PhysicalDevice. Each instance of NonPoweredDevice is a device which does not need to have any kind of energy supplied to it in ord",
+    "subclass of: sports equipment",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of sports",
+    "sibling concept: artistic gymnastics apparatus",
+    "sibling concept: boxing equipment",
+    "sibling concept: balance beam",
+    "sibling concept: horizontal bar",
+    "sibling concept: vaulting horse"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: rhythmic gymnastics apparatus. Relevant Logical Facts:  - definition: Topics about the apparatus used in Rhythmic Gymnastics.  - subclass of: gymnastics apparatus  - ancestor definition: A piece of gymnastic equipment used during a routine, where the gymnast's weight is supported by the device, for however short a time. Does not includ  - subclass of: single-user device  - ancestor definition: Device_SingleUser is a specialization of PhysicalDevice. Each instance of Device_SingleUser is a device that typically has exactly one (i.e., one and  - subclass of: non-powered device  - ancestor definition: A specialization of PhysicalDevice. Each instance of NonPoweredDevice is a device which does not need to have any kind of energy supplied to it in ord  - subclass of: sports equipment  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of sports  - sibling concept: artistic gymnastics apparatus  - sibling concept: boxing equipment  - sibling concept: balance beam  - sibling concept: horizontal bar  - sibling concept: vaulting horse
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7273597717285156,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.7274] Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### ATOMIC FACTS:
+
+1. Post-translational modifications (PTMs) refer to covalent, generally enzymatic changes of proteins during or after protein biosynthesis.
+2. Proteins synthesized by ribosomes undergo PTM.
+3. The endoplasmic reticulum is a component of the endomembrane system involved in transport within cells.
+4. The Golgi apparatus is also part of the endomembrane system and plays a role in packaging proteins for secretion or modification.
+
+### CONDITIONAL RULES:
+
+1. If a protein undergoes PTM, then it will be modified after synthesis (Atomic Fact 1).
+2. If a protein is synthesized by ribosomes, then it may undergo extensive post-translational modifications (Atomic Fact 2 and Rule 1).
+3. The endomembrane system includes the endoplasmic reticulum and Golgi apparatus, which are involved in transport within cells (Atomic Facts 3-4).
+
+### MISSING LOGIC:
+
+To connect the dots between PTM and its structural components, we need to fill a gap: "If proteins undergo post-translational modification, then they require specific organelles for packaging or secretion."
+
+This rule can be inferred from Atomic Fact 2 ("Proteins synthesized by ribosomes undergo extensive post-translational modification") and the roles of endoplasmic reticulum (Atomic Fact 3) and Golgi apparatus (Atomic Fact 4).
+==================================================
+==================================================
+ QUERY: Which structural component of a cell is involved in such modification? A. endoplasmic reticulum B. lysosomes C. mitochondria D. Golgi apparatus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "post-translational modification",
+  "uri": "http://kbpedia.org/kko/rc/PosttranslationalModification",
+  "score": 1.0,
+  "triples": [
+    "definition: Post-translational modification (PTM) refers to the covalent and generally enzymatic modification of proteins during or after protein biosynthesis. Proteins are synthesized by ribosomes translating mR",
+    "subclass of: cellular protein synthesis",
+    "ancestor definition: Protein biosynthesis is the process whereby biological cells generate new proteins; it is balanced by the loss of cellular proteins via degradation or",
+    "subclass of: gene expression",
+    "ancestor definition: The collection of events in which some quantity, more than a single molecule, of protein is synthesized \"under the guidance\" of a particular gene, i.e",
+    "subclass of: biochemical synthesis",
+    "ancestor definition: A collection of events. During instances of BiochemicalSynthesis, some chemical object is produced by synthesis (usually from more elementary objects)",
+    "subclass of: chemical synthesis",
+    "ancestor definition: The collection of processes by which chemical compounds are created (usually out of simpler chemical compounds).",
+    "subclass of: cellular level biological process",
+    "ancestor definition: The collection of instances of BiologicalProcess that occur at the cellular level (i.e., an instance of Cell plays the locusOfCellularProcess_Cell rol",
+    "sibling concept: eukaryotic protein synthesis",
+    "sibling concept: LRP8",
+    "sibling concept: prokaryotic protein synthesis",
+    "sibling concept: cellular protein synthesis",
+    "sibling concept: eukaryotic gene expression"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: post-translational modification. Relevant Logical Facts:  - definition: Post-translational modification (PTM) refers to the covalent and generally enzymatic modification of proteins during or after protein biosynthesis. Proteins are synthesized by ribosomes translating mR  - subclass of: cellular protein synthesis  - ancestor definition: Protein biosynthesis is the process whereby biological cells generate new proteins; it is balanced by the loss of cellular proteins via degradation or  - subclass of: gene expression  - ancestor definition: The collection of events in which some quantity, more than a single molecule, of protein is synthesized "under the guidance" of a particular gene, i.e  - subclass of: biochemical synthesis  - ancestor definition: A collection of events. During instances of BiochemicalSynthesis, some chemical object is produced by synthesis (usually from more elementary objects)  - subclass of: chemical synthesis  - ancestor definition: The collection of processes by which chemical compounds are created (usually out of simpler chemical compounds).  - subclass of: cellular level biological process  - ancestor definition: The collection of instances of BiologicalProcess that occur at the cellular level (i.e., an instance of Cell plays the locusOfCellularProcess_Cell rol  - sibling concept: eukaryotic protein synthesis  - sibling concept: LRP8  - sibling concept: prokaryotic protein synthesis  - sibling concept: cellular protein synthesis  - sibling concept: eukaryotic gene expression
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "organelle",
+  "uri": "http://kbpedia.org/kko/rc/Organelle",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated f",
+    "subclass of: cell part",
+    "ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel",
+    "subclass of: internal body part",
+    "ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. ",
+    "subclass of: microscopic object",
+    "ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cann",
+    "subclass of: organic matter",
+    "ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of ",
+    "subclass of: parts",
+    "ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of \u2018whole\u2019.",
+    "has subclass: centrosome",
+    "has subclass: chloroplast",
+    "has subclass: endoplasmic reticulum",
+    "has subclass: Golgi apparatus",
+    "has subclass: golgi cisterna",
+    "has subclass: aura: membrane bounded organelle",
+    "has subclass: mitochondrion",
+    "has subclass: nucleus",
+    "sibling concept: aster (cell part)",
+    "sibling concept: axon",
+    "sibling concept: biological membrane stuff",
+    "sibling concept: bacterial capsule",
+    "sibling concept: structural cell part"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: organelle. Relevant Logical Facts:  - definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated f  - subclass of: cell part  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel  - subclass of: internal body part  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism.  - subclass of: microscopic object  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cann  - subclass of: organic matter  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of  - subclass of: parts  - ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of ‘whole’.  - has subclass: centrosome  - has subclass: chloroplast  - has subclass: endoplasmic reticulum  - has subclass: Golgi apparatus  - has subclass: golgi cisterna  - has subclass: aura: membrane bounded organelle  - has subclass: mitochondrion  - has subclass: nucleus  - sibling concept: aster (cell part)  - sibling concept: axon  - sibling concept: biological membrane stuff  - sibling concept: bacterial capsule  - sibling concept: structural cell part
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "endomembrane system",
+  "uri": "http://kbpedia.org/kko/rc/EndomembraneSystem",
+  "score": 1.0,
+  "triples": [
+    "definition: A collection of membranous structures involved in transport within the cell. The main components of the endomembrane system are endoplasmic reticulum, Golgi bodies, vesicles, cell membrane and nuclear",
+    "subclass of: cell membrane",
+    "ancestor definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells.",
+    "subclass of: membrane (biological)",
+    "ancestor definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope",
+    "subclass of: structural cell part",
+    "ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct",
+    "subclass of: lipid bilayer",
+    "ancestor definition: The collection of all membranes consisting of a double layer of amphipathic lipid molecules in aqueous solution, oriented so that their hydrophobic en",
+    "subclass of: sheet of some substance",
+    "ancestor definition: A specialization of PartiallyTangible. Each instance of SheetOfSomeStuff is a partially tangible thing which (in its \"intrinsic\" shape -- see #$Curren",
+    "sibling concept: T-tubule"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: endomembrane system. Relevant Logical Facts:  - definition: A collection of membranous structures involved in transport within the cell. The main components of the endomembrane system are endoplasmic reticulum, Golgi bodies, vesicles, cell membrane and nuclear  - subclass of: cell membrane  - ancestor definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells.  - subclass of: membrane (biological)  - ancestor definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope  - subclass of: structural cell part  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct  - subclass of: lipid bilayer  - ancestor definition: The collection of all membranes consisting of a double layer of amphipathic lipid molecules in aqueous solution, oriented so that their hydrophobic en  - subclass of: sheet of some substance  - ancestor definition: A specialization of PartiallyTangible. Each instance of SheetOfSomeStuff is a partially tangible thing which (in its "intrinsic" shape -- see #$Curren  - sibling concept: T-tubule
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rhythmic gymnastics apparatus",
+  "uri": "http://kbpedia.org/kko/rc/RhythmicGymnasticsApparatus",
+  "score": 1.0,
+  "triples": [
+    "definition: Topics about the apparatus used in Rhythmic Gymnastics.",
+    "subclass of: gymnastics apparatus",
+    "ancestor definition: A piece of gymnastic equipment used during a routine, where the gymnast's weight is supported by the device, for however short a time. Does not includ",
+    "subclass of: single-user device",
+    "ancestor definition: Device_SingleUser is a specialization of PhysicalDevice. Each instance of Device_SingleUser is a device that typically has exactly one (i.e., one and ",
+    "subclass of: non-powered device",
+    "ancestor definition: A specialization of PhysicalDevice. Each instance of NonPoweredDevice is a device which does not need to have any kind of energy supplied to it in ord",
+    "subclass of: sports equipment",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of sports",
+    "sibling concept: artistic gymnastics apparatus",
+    "sibling concept: boxing equipment",
+    "sibling concept: balance beam",
+    "sibling concept: horizontal bar",
+    "sibling concept: vaulting horse"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: rhythmic gymnastics apparatus. Relevant Logical Facts:  - definition: Topics about the apparatus used in Rhythmic Gymnastics.  - subclass of: gymnastics apparatus  - ancestor definition: A piece of gymnastic equipment used during a routine, where the gymnast's weight is supported by the device, for however short a time. Does not includ  - subclass of: single-user device  - ancestor definition: Device_SingleUser is a specialization of PhysicalDevice. Each instance of Device_SingleUser is a device that typically has exactly one (i.e., one and  - subclass of: non-powered device  - ancestor definition: A specialization of PhysicalDevice. Each instance of NonPoweredDevice is a device which does not need to have any kind of energy supplied to it in ord  - subclass of: sports equipment  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of sports  - sibling concept: artistic gymnastics apparatus  - sibling concept: boxing equipment  - sibling concept: balance beam  - sibling concept: horizontal bar  - sibling concept: vaulting horse
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7273597717285156,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.7274] Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+### ATOMIC FACTS:
+
+1. Post-translational modifications (PTMs) refer to covalent, generally enzymatic changes of proteins during or after protein biosynthesis.
+2. Proteins synthesized by ribosomes undergo PTM.
+3. The endoplasmic reticulum is a component of the endomembrane system involved in transport within cells.
+4. The Golgi apparatus is also part of the endomembrane system and plays a role in packaging proteins for secretion or modification.
+
+### CONDITIONAL RULES:
+
+1. If a protein undergoes PTM, then it will be modified after synthesis (Atomic Fact 1).
+2. If a protein is synthesized by ribosomes, then it may undergo extensive post-translational modifications (Atomic Fact 2 and Rule 1).
+3. The endomembrane system includes the endoplasmic reticulum and Golgi apparatus, which are involved in transport within cells (Atomic Facts 3-4).
+
+### MISSING LOGIC:
+
+To connect the dots between PTM and its structural components, we need to fill a gap: "If proteins undergo post-translational modification, then they require specific organelles for packaging or secretion."
+
+This rule can be inferred from Atomic Fact 2 ("Proteins synthesized by ribosomes undergo extensive post-translational modification") and the roles of endoplasmic reticulum (Atomic Fact 3) and Golgi apparatus (Atomic Fact 4).
+==================================================
