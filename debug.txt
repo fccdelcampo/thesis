@@ -28264,3 +28264,101 @@
     ]
 }
 ===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+  {
+    "nodes": [
+      {"id": "protein_id", "label": "Protein", "properties": {"name": "Proteins"}},
+      {"id": "ribosomal_subunit_id", "label": "Ribosomal Subunit", "properties": {"name": "Ribosomal subunits"}}
+    ],
+    "relationships": [
+      {
+        "type": "DEFINES",
+        "start_node_id": "protein_id",
+        "end_node_id": "ribosomal_subunit_id",
+        "properties": {
+          "natural_statement": "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.",
+          "logic_intent": "FACT"
+        }
+      }
+    ]
+  },
+  {
+    "nodes": [
+      {"id": "post_translational_modification_id", "label": "Post-Translational Modification", "properties": {"name": "Post-translational modification"}},
+      {"id": "packaging_destination_id", "label": "Packaging Destination", "properties": {"name": "Appropriate destination"}}
+    ],
+    "relationships": [
+      {
+        "type": "DEFINES",
+        "start_node_id": "post_translational_modification_id",
+        "end_node_id": "ribosomal_subunit_id",
+        "properties": {
+          "natural_statement": "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification.",
+          "logic_intent": "FACT"
+        }
+      },
+      {
+        "type": "DEFINES",
+        "start_node_id": "packaging_destination_id",
+        "end_node_id": "ribosomal_subunit_id",
+        "properties": {
+          "natural_statement": "and are packaged and directed to the appropriate destination.",
+          "logic_intent": "FACT"
+        }
+      }
+    ]
+  }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {"id": "protein_id", "label": "Protein", "properties": {"name": "Proteins"}},
+    {"id": "ribosomal_subunit_id", "label": "Ribosomal Subunit", "properties": {"name": "ribosomal subunits"}},
+    {"id": "destination_id", "label": "Destination", "properties": {"name": "appropriate destination"}}
+  ],
+  "relationships": [
+    {
+      "type": "PART_OF",
+      "start_node_id": "protein_id",
+      "end_node_id": "ribosomal_subunit_id",
+      "properties": {
+        "natural_statement": "Proteins that are synthesized in ribosomal subunits",
+        "logic_intent": "FACT",
+        "logical_form_hint": "synthesized_in(Ribosomal_Subunit, Protein)"
+      }
+    },
+    {
+      "type": "CAUSES",
+      "start_node_id": "ribosomal_subunit_id",
+      "end_node_id": "protein_id",
+      "properties": {
+        "natural_statement": "undergo extensive post-translational modification and are packaged and directed to the appropriate destination",
+        "logic_intent": "RULE",
+        "logical_form_hint": "modify_and_package(Ribosomal_Subunit, Protein)"
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "destination_id",
+      "end_node_id": "protein_id",
+      "properties": {
+        "natural_statement": "packaged and directed to the appropriate destination",
+        "logic_intent": "EXCEPTION",
+        "logical_form_hint": "directed_to(Destination, Protein)"
+      }
+    }
+  ]
+}
+===================================

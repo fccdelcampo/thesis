@@ -4,6 +4,7 @@ import time
 try:
     from .prolog_generator import generate_prolog_code, capture_db_and_query, capture_predicate_and_arguments
     from .explainer import generate_safe_scasp_wrapper, generate_explanation
+    from .prolog_llms import warmup_prolog_model, reset_kv_cache_flag
     from .. import llm
 except ImportError:
     import sys
@@ -14,6 +15,7 @@ except ImportError:
         
     from prolog_graphrag_pipeline.prolog.prolog_generator import generate_prolog_code, capture_db_and_query, capture_predicate_and_arguments
     from prolog_graphrag_pipeline.prolog.explainer import generate_safe_scasp_wrapper, generate_explanation
+    from prolog_graphrag_pipeline.prolog.prolog_llms import warmup_prolog_model, reset_kv_cache_flag
     import prolog_graphrag_pipeline.llm as llm
 
 SCASP_AVAILABLE = False
@@ -62,6 +64,14 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
     print(f"**User Question:**\n{user_question}")
     print(f"**Retrieved Context:**\n{retrieved_context}")
     print(f"**Context from Prompt:**\n{context_from_prompt}")
+
+    # Re-prime Ollama's KV cache with the static few-shot prefix.
+    # GraphRAG (same model) runs just before us and evicts the cache.
+    # Resetting the flag then calling warmup ensures all retry attempts
+    # within this question benefit from the cached prefix.
+    reset_kv_cache_flag()
+    warmup_prolog_model()
+
     print("Generating Prolog...")
     final_context = retrieved_context + "\n" + context_from_prompt
 

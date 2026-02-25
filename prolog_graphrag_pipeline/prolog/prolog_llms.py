@@ -5,6 +5,43 @@ import threading
 MODEL_NAME = 'llama3.1:8b-instruct-q4_K_M'
 OLLAMA_TIMEOUT = 600  # seconds per LLM call (10 minutes)
 
+# ── KV-cache warmup ────────────────────────────────────────────────────────
+# Ollama reuses its KV cache when the prefix of a chat request matches a
+# previously seen prefix.  Because the GraphRAG step runs the same model just
+# before Prolog generation, it evicts the Prolog prefix from the cache.
+# warmup_prolog_model() re-primes the cache (system prompt + few-shots) once
+# per question so that all retry attempts within that question are fast.
+_kv_cache_warmed = False
+
+def warmup_prolog_model():
+    """Prime Ollama's KV cache with the static few-shot prefix (once per question)."""
+    global _kv_cache_warmed
+    if _kv_cache_warmed:
+        return
+    import ollama
+    try:
+        from .prolog_config import GENERATOR_LLM_MESSAGES
+    except ImportError:
+        from prolog_graphrag_pipeline.prolog.prolog_config import GENERATOR_LLM_MESSAGES
+    try:
+        print("[Prolog Warmup] Priming KV cache with few-shot prefix...", flush=True)
+        ollama.chat(
+            model=MODEL_NAME,
+            messages=GENERATOR_LLM_MESSAGES + [
+                {'role': 'user', 'content': 'Now, process the following:\nContext: A is true.\nUser Question: Is A true?\n'}
+            ],
+            options={'temperature': 0, 'keep_alive': '20m', 'num_ctx': 4096},
+        )
+        _kv_cache_warmed = True
+        print("[Prolog Warmup] KV cache primed.", flush=True)
+    except Exception as e:
+        print(f"[Prolog Warmup] Non-fatal warmup failure: {e}", flush=True)
+
+def reset_kv_cache_flag():
+    """Call this before each new question so warmup re-runs after GraphRAG evicts the cache."""
+    global _kv_cache_warmed
+    _kv_cache_warmed = False
+
 def reset_ollama_model():
     """Force-unload the model from Ollama, then verify it reloads successfully."""
     import ollama
@@ -65,7 +102,8 @@ def generate_response(prompt: str, flag: str) -> dict:
                 messages=llm_messages,
                 options={
                     'temperature': temperature,
-                    'keep_alive': '20m'
+                    'keep_alive': '20m',
+                    'num_ctx': 4096,
                 },
             )
             result_holder[0] = response

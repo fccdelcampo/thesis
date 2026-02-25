@@ -135,7 +135,7 @@ Your output must strictly follow this visual template:
 """
 
 GENERATOR_FEW_SHOT_EXAMPLES = [
-    # Example 1: Brother of Amanda.
+    # Example 1: Relational / rule-chaining logic
     {"role": "user", "content": """
 Now, process the following:
 Context: Bob is Alice's brother. Amanda is Alice's sister.
@@ -143,7 +143,7 @@ Query: Who is Alice's brother?
 """},
     {"role": "assistant", "content": r"""
 <reasoning_step>
-The context identifies Bob as a male, Alice as a female, and Amanda as a female. They share a sibling relationship via a common parent (p1).
+Encode gender facts and shared parentage.
 male(bob).
 female(alice).
 female(amanda).
@@ -153,15 +153,9 @@ parent(p1, amanda).
 </reasoning_step>
 
 <reasoning_step>
-To answer "who is a brother of Amanda," I need a rule defining a brother as a male sibling.
+Define sibling and brother rules.
 sibling(Sibling1, Sibling2) :- parent(Parent, Sibling1), parent(Parent, Sibling2), Sibling1 \= Sibling2.
 brother(Brother, Sibling) :- male(Brother), sibling(Brother, Sibling).
-</reasoning_step>
-
-
-<reasoning_step>
-The question "who is a brother of Amanda," requires a variable as it implies a query to find all Brothers such that Brother is a brother of Amanda. 
-brother(Brother, amanda).
 </reasoning_step>
 
 <database>
@@ -181,178 +175,51 @@ brother(Brother, amanda).
 
 ---
 """},
-    
-    # Example 2: One-hop reasoning
+
+    # Example 2: Recursive / transitive logic (food chain)
     {"role": "user", "content": """
 Now, process the following:
-Context: Maria is the mother of Chloe. Chloe is the mother of Dan. 
-Query: Is Maria the grandmother of Dan?
-"""},
-    {"role": "assistant", "content": r"""
-<reasoning_step> 
-The context identifies Maria as Chloe's mother and Chloe as Dan's mother. I will use lowercase atoms for names. 
-parent(maria, chloe). 
-parent(chloe, dan). 
-</reasoning_step>
-
-<reasoning_step> 
-To answer the grandmother query, I need a rule defining a grandmother as a parent of a parent. 
-grandmother(Grandmother, Grandchild) :- parent(Grandmother, IntermediateParent), parent(IntermediateParent, Grandchild). 
-</reasoning_step>
-
-<reasoning_step> 
-The question does not require a variable; it is a yes/no question about whether Maria is the grandmother of Dan. 
-grandmother(maria, dan). 
-</reasoning_step>
-
-<database> 
-parent(maria, chloe). 
-parent(chloe, dan). 
-grandmother(Grandmother, Grandchild) :- parent(Grandmother, IntermediateParent), parent(IntermediateParent, Grandchild). 
-</database>
-
-<query> 
-grandmother(maria, dan). 
-</query>
-
----
-"""},
-    
-    # Example 3: One-hop reasoning
-    {"role": "user", "content": """
-Now, process the following:
-Context: Tomasinno is the friend of Vito. Solozzo is the enemy of Vito. Vito believes that he should keep his enemies closer than his friends. 
-Query: Who does Vito believe he should keep closer?
-"""},
-    {"role": "assistant", "content": r"""
-<reasoning_step>
-The context identifies two specific relationships involving Vito: Tomasinno is a friend, and Solozzo is an enemy. These are represented as facts. 
-friend(tomasinno, vito). 
-enemy(solozzo, vito). 
-</reasoning_step>
-
-<reasoning_step>
-The context states a belief/rule: "Vito believes that he should keep his enemies closer than his friends." This implies a relative closeness where an enemy is closer than a friend. We can define a rule closer_than(PersonA, PersonB) based on their relationship status to Vito. 
-closer_than(Enemy, Friend) :- enemy(Enemy, vito), friend(Friend, vito). 
-</reasoning_step>
-
-<reasoning_step>
-The user question asks "Who does Vito believe he should keep closer?" In the context of the rule established, this targets the person who occupies the "closer" position in the comparison (the enemy). We define a predicate vito_keeps_closer(Person) to identify this individual. 
-vito_keeps_closer(Person) :- closer_than(Person, _). 
-</reasoning_step>
-
-<database>
-friend(tomasinno, vito).
-enemy(solozzo, vito).
-closer_than(Enemy, Friend) :- enemy(Enemy, vito), friend(Friend, vito).
-vito_keeps_closer(Person) :- closer_than(Person, _). 
-</database>
-
-<query>
-vito_keeps_closer(Who).
-</query>
-
----
-"""},
-    
-    # Example 4: Simple Educational QA
-    {"role": "user", "content": """
-Now, process the following:
-Context: A square is a polygon with four equal sides and four right angles. A rectangle has four right angles. 
-Query: Is every square a rectangle?
-"""},
-    {"role": "assistant", "content": r"""
-<reasoning_step> 
-I will define the properties of a square based on the context. 
-has_property(square, four_equal_sides). 
-has_property(square, four_right_angles). 
-is_a(square, polygon). 
-</reasoning_step>
-
-<reasoning_step> 
-A rectangle is defined by having four right angles. 
-is_a(Shape, rectangle) :- has_property(Shape, four_right_angles). 
-</reasoning_step>
-
-<reasoning_step> 
-Now that the properties and definitions about squares, rectangles, as well as their angles and sides are established, I can query whether every square is a rectangle.
-is_a(square, rectangle). 
-</reasoning_step>
-
-<database> 
-has_property(square, four_equal_sides). 
-has_property(square, four_right_angles). 
-is_a(square, polygon). 
-is_a(Shape, rectangle) :- has_property(Shape, four_right_angles). 
-</database>
-
-<query> 
-is_a(square, rectangle). 
-</query>
-
----
-"""},
-    
-    # Example 5: Recursive Logic
-    {"role": "user", "content": """
-Now, process the following:
-Context: In a food web, grass is a producer. Grasshoppers eat grass. Frogs eat grasshoppers. Snakes eat frogs. 
+Context: In a food web, grass is a producer. Grasshoppers eat grass. Frogs eat grasshoppers. Snakes eat frogs.
 Query: If the grass is contaminated, are the snakes affected?
 """},
     {"role": "assistant", "content": r"""
-<reasoning_step> 
-First, I will define the direct consumption relationships (the edges in the graph). 
-eats(grasshopper, grass). 
-eats(frog, grasshopper). 
-eats(snake, frog). 
-is_producer(grass). 
+<reasoning_step>
+Encode direct eating relationships and the contamination premise.
+eats(grasshopper, grass).
+eats(frog, grasshopper).
+eats(snake, frog).
+is_contaminated(grass).
 </reasoning_step>
 
-<reasoning_step> 
-The contamination affects a species if it eats something contaminated. This is a recursive relationship (bioaccumulation). 
-is_contaminated(grass). 
-% Fact from query premise 
-affected(Species) :- is_contaminated(Species). 
-affected(Predator) :- eats(Predator, Prey), affected(Prey). 
+<reasoning_step>
+Contamination propagates recursively up the food chain.
+affected(Species) :- is_contaminated(Species).
+affected(Predator) :- eats(Predator, Prey), affected(Prey).
 </reasoning_step>
 
-<reasoning_step> 
-Now that the properties and definitions about the animals, the food web, and the contamination are established, I can query whether snakes are affected.
-affected(snake). 
-</reasoning_step>
-
-<database> 
-eats(grasshopper, grass). 
-eats(frog, grasshopper). 
-eats(snake, frog). 
-is_producer(grass). 
-is_contaminated(grass). 
-affected(Species) :- is_contaminated(Species). 
-affected(Predator) :- eats(Predator, Prey), affected(Prey). 
+<database>
+eats(grasshopper, grass).
+eats(frog, grasshopper).
+eats(snake, frog).
+is_contaminated(grass).
+affected(Species) :- is_contaminated(Species).
+affected(Predator) :- eats(Predator, Prey), affected(Prey).
 </database>
 
-<query> 
-affected(snake). 
+<query>
+affected(snake).
 </query>
 
 ---
 """},
 
-    # Example 6: Multiple-Choice Question (MCQ)
+    # Example 3: Standard MCQ — property match
     {"role": "user", "content": """
 Now, process the following:
 Context:
-### Predicates:
-1. sound_travel(medium, speed) - describes how fast sound travels through a medium.
-2. medium_state(medium, state) - the physical state of a medium (solid, liquid, gas).
-
-### Facts (Ground Truths):
+### Facts:
 1. Sound travels fastest through solids, then liquids, then gases.
 2. Steel is a solid. Water is a liquid. Air is a gas. A vacuum has no medium.
-
-### Rules (Horn Clauses / Implications):
-1. If a medium is solid, sound travels fastest through it.
-2. Sound cannot travel through a vacuum because there are no particles.
 
 User Question: Through which medium does sound travel the fastest?
 A. vacuum
@@ -362,28 +229,16 @@ D. air
 """},
     {"role": "assistant", "content": r"""
 <reasoning_step>
-I must encode each option as a fact so that Prolog can select the correct one through logical derivation, rather than me choosing it directly.
+Encode each MCQ option as an option/2 fact, then encode medium states and derive which allows fastest sound travel.
 option(a, vacuum).
 option(b, water).
 option(c, steel).
 option(d, air).
-</reasoning_step>
-
-<reasoning_step>
-The context tells us the physical state of each medium and how sound speed relates to state.
 medium_state(steel, solid).
 medium_state(water, liquid).
 medium_state(air, gas).
 no_medium(vacuum).
-</reasoning_step>
-
-<reasoning_step>
-Sound travels fastest through solids. A medium allows fastest travel if it is solid. Sound cannot travel through a vacuum at all.
 sound_fastest(Medium) :- medium_state(Medium, solid).
-</reasoning_step>
-
-<reasoning_step>
-The answer is the option whose medium allows the fastest sound travel.
 answer(Option) :- option(Option, Medium), sound_fastest(Medium).
 </reasoning_step>
 
@@ -407,17 +262,14 @@ answer(Option).
 ---
 """},
 
-    # Example 7: 'Which factor is DIFFERENT?' MCQ — demonstrates grounded same/different facts
+    # Example 4: MCQ — "Which factor is DIFFERENT?" (grounded same/different facts)
     {"role": "user", "content": """
 Now, process the following:
 Context:
-### ATOMIC FACTS:
-1. Two identical pots are used.
-2. Both pots contain the same type of soil.
-3. Both pots use the same type of seed.
-4. Each pot receives 15 ml of water daily.
-5. Pot A is placed in a closet (no light).
-6. Pot B is placed near a sunny window (bright light).
+### Facts:
+1. Two identical pots with the same soil and seed type.
+2. Each pot receives 15 ml of water daily.
+3. Pot A is in a dark closet; Pot B is near a sunny window.
 
 User Question: Which factor was DIFFERENT for the two pots?
 A. amount of water
@@ -427,25 +279,15 @@ D. type of seed
 """},
     {"role": "assistant", "content": r"""
 <reasoning_step>
-I encode each MCQ option as an option/2 fact.
+Encode MCQ options and assert which factors are same vs. different as ground facts. The answer derives from different/1.
 option(a, amount_of_water).
 option(b, amount_of_light).
 option(c, type_of_soil).
 option(d, type_of_seed).
-</reasoning_step>
-
-<reasoning_step>
-From the context I directly assert which factors are the same and which are different.
-The context explicitly states: same soil, same seed, same 15ml water, but different locations (one dark, one sunny).
-I must use ground facts — I must NOT call predicates I have not defined.
 same(amount_of_water).
 same(type_of_soil).
 same(type_of_seed).
 different(amount_of_light).
-</reasoning_step>
-
-<reasoning_step>
-The answer is the option whose factor is different.
 answer(Option) :- option(Option, Factor), different(Factor).
 </reasoning_step>
 
@@ -468,14 +310,14 @@ answer(Option).
 ---
 """},
 
-    # Example 8: Negation — 'Which is NOT true / does NOT apply?' MCQ
+    # Example 5: MCQ — "Which does NOT …?" (negation as failure)
     {"role": "user", "content": """
 Now, process the following:
 Context:
-### ATOMIC FACTS:
-1. Photosynthesis is the process by which plants use sunlight to produce food.
-2. Cellular respiration breaks down glucose to release energy — no sunlight required.
-3. Decomposition is carried out by fungi/bacteria breaking down dead matter — no sunlight required.
+### Facts:
+1. Photosynthesis uses sunlight to produce food.
+2. Cellular respiration breaks down glucose — no sunlight needed.
+3. Decomposition is carried out by fungi/bacteria — no sunlight needed.
 4. Fermentation produces energy without oxygen and without sunlight.
 
 User Question: Which process does NOT directly use sunlight as an energy source?
@@ -486,21 +328,12 @@ D. fermentation
 """},
     {"role": "assistant", "content": r"""
 <reasoning_step>
-Encode all four options as option/2 facts.
+Encode options and assert which process uses sunlight (only photosynthesis). Use 'not' (never \+) for negation as failure.
 option(a, photosynthesis).
 option(b, cellular_respiration).
 option(c, decomposition).
 option(d, fermentation).
-</reasoning_step>
-
-<reasoning_step>
-From context, only photosynthesis directly uses sunlight. Assert that as a ground fact.
 uses_sunlight(photosynthesis).
-</reasoning_step>
-
-<reasoning_step>
-The question asks which does NOT use sunlight. Use 'not' for negation as failure.
-Every other predicate is already defined, so 'not uses_sunlight(X)' is safe to call.
 answer(Option) :- option(Option, Process), not uses_sunlight(Process).
 </reasoning_step>
 
@@ -519,59 +352,7 @@ answer(Option).
 
 ---
 """},
-
-    # Example 9: Causal / Reason — 'Most likely reason for X?' MCQ
-    {"role": "user", "content": """
-Now, process the following:
-Context:
-### ATOMIC FACTS:
-1. Many endangered animals are captured, tagged, and released back into their environment.
-2. A tag is a coded piece of plastic or metal placed on the body.
-3. The primary purpose of animal tagging is to monitor and track movement patterns in the wild.
-4. Tags allow researchers to understand habitat use, migration routes, and population distribution.
-
-User Question: Which is the most likely reason to tag an animal?
-A. to monitor their eating habits
-B. to monitor their roaming habits
-C. to monitor their sleeping habits
-D. to monitor their reproductive habits
-"""},
-    {"role": "assistant", "content": r"""
-<reasoning_step>
-Encode each MCQ option as an option/2 fact.
-option(a, monitor_eating).
-option(b, monitor_roaming).
-option(c, monitor_sleeping).
-option(d, monitor_reproduction).
-</reasoning_step>
-
-<reasoning_step>
-The context explicitly states tracking movement/roaming is the primary purpose. Assert as a ground fact.
-primary_purpose(monitor_roaming).
-</reasoning_step>
-
-<reasoning_step>
-The answer is the option whose stated purpose matches the primary purpose ground fact.
-answer(Option) :- option(Option, Purpose), primary_purpose(Purpose).
-</reasoning_step>
-
-<database>
-option(a, monitor_eating).
-option(b, monitor_roaming).
-option(c, monitor_sleeping).
-option(d, monitor_reproduction).
-primary_purpose(monitor_roaming).
-answer(Option) :- option(Option, Purpose), primary_purpose(Purpose).
-</database>
-
-<query>
-answer(Option).
-</query>
-
----
-"""}
 ]
-
 EXPLAINER_SYSTEM_PROMPT = rf"""
 ### Role
 You are a Logical Elucidator and Technical Translator. Your job is to take the formal output of a Prolog s(CASP) solver and transform it into a clear, step-by-step natural language explanation. This explanation will be used to reconstruct a final answer for a user.
