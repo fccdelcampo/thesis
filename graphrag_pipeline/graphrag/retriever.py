@@ -102,6 +102,9 @@ class EnhancedRetriever(VectorCypherRetriever):
         self.llm = llm
 
     def search(self, query_text, top_k=5, **kwargs):
+        # `original_query` carries the full MCQ prompt (with answer options) for LLM filtering.
+        original_query = kwargs.pop("original_query", query_text)
+
         # 1. KBPedia Search (Global Knowledge via Neo4j)
         kb_items = []
         if self.llm:
@@ -109,9 +112,8 @@ class EnhancedRetriever(VectorCypherRetriever):
                 from prolog_graphrag_pipeline.graphrag.kbpedia_retriever import KBPediaRetriever
                 self.kbpedia_retriever = KBPediaRetriever(driver=self.driver, llm=self.llm, top_k=top_k)
 
-            kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k)
+            kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query)
             if kb_result and kb_result.items:
-                # Convert to RetrieverResultItem format
                 for item in kb_result.items:
                     kb_items.append(RetrieverResultItem(
                         content=item.content,

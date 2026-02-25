@@ -215,12 +215,12 @@ def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
     
     return kg_builder_pdf, kg_builder_text
 
-def generate_answer(query, retriever, llm) -> dict:
-    # Inject LLM into EnhancedRetriever for KBPedia entity extraction
+def generate_answer(query, retriever, llm, original_query: str = "") -> dict:
+    # Inject LLM into EnhancedRetriever so KBPedia search is active
     from .retriever import EnhancedRetriever
     if isinstance(retriever, EnhancedRetriever):
         retriever.llm = llm
-    return generate(llm, retriever, query)
+    return generate(llm, retriever, query, original_query=original_query)
 
 from .encoder import process_pdf_documents, process_text_context, extract_query_and_context
 
@@ -267,28 +267,29 @@ from .retriever import get_retriever, create_indexes, wait_for_indexes
 def run_pipeline(question: str) -> dict:
     """
     Runs the GraphRAG pipeline for a given question.
-    Returns a dictionary with 'answer' and 'context'.
+    Returns a dictionary with 'answer' and 'contexts'.
+    Retriever uses KBPedia (global ontology) + local vector search.
     """
     try:
-        ensure_driver_connected() # Ensure safe
-        
+        ensure_driver_connected()
+
         # 1. Initialize models
-        # Note: initialize_models prints "Ollama loaded successfully."
         encoder_llm, retriever_llm, embedder = initialize_models()
-        
-        # 2. Ensure indexes exist (Self-healing for new instances)
-        print("DEBUG: Verifying Neo4j indexes...")
+
+        # 2. Ensure indexes exist (self-healing for new Neo4j instances)
+        print("DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...", flush=True)
         create_indexes(neo4j_driver)
         wait_for_indexes(neo4j_driver, timeout=30)
-        
-        # 3. Get Retriever (without rebuilding indexes)
+
+        # 3. Get retriever and inject LLM so KBPedia search is active
         retriever = get_retriever(neo4j_driver, embedder)
-        
-        # 4. Generate Answer
-        # generate_answer calls llm.generate which returns {'answer': ..., 'context': ...}
-        result = generate_answer(question, retriever, retriever_llm)
-        
+        if hasattr(retriever, 'llm'):
+            retriever.llm = retriever_llm
+
+        # 4. Generate answer — pass full question as original_query for MCQ-aware KBPedia filter
+        result = generate_answer(question, retriever, retriever_llm, original_query=question)
+
         return result
     except Exception as e:
         print(f"Error in run_pipeline: {e}")
-        return {"answer": "Error", "context": ""}
+        return {"answer": "Error", "contexts": []}

@@ -5,14 +5,20 @@ except ModuleNotFoundError:
     from graphrag.config import GRAPHRAG_TEMPLATE
 from neo4j_graphrag.generation import GraphRAG
 
-def generate(llm, retriever, query) -> dict:
+def generate(llm, retriever, query, original_query: str = "") -> dict:
     rag_template = RagTemplate(template=GRAPHRAG_TEMPLATE, expected_inputs=['query_text', 'context'])
 
     graph_rag = GraphRAG(llm=llm, retriever=retriever, prompt_template=rag_template)
 
+    # Forward original_query (full MCQ prompt) so EnhancedRetriever's KBPedia filter
+    # gets the complete question including answer options — same pattern as prolog_graphrag_pipeline.
+    retriever_config = {'top_k': 5}
+    if original_query:
+        retriever_config['original_query'] = original_query
+
     graph_rag_results = graph_rag.search(
         query, 
-        retriever_config={'top_k': 5}, 
+        retriever_config=retriever_config, 
         return_context=True
     )
     
