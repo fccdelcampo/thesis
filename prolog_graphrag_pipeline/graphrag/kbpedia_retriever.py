@@ -195,13 +195,13 @@ Example: ["plant cell", "animal skeleton", "structural support", "cell wall", "c
                 MATCH (n:KBPediaConcept {uri: $uri})
                 
                 CALL (n) {
-                    OPTIONAL MATCH (n)-[:SUBCLASS_OF*1..2]->(ancestor:KBPediaConcept)
-                    RETURN collect(DISTINCT {name: ancestor.name, def: ancestor.definition})[0..5] AS ancestors
+                    OPTIONAL MATCH (n)-[:SUBCLASS_OF*1..3]->(ancestor:KBPediaConcept)
+                    RETURN collect(DISTINCT {name: ancestor.name, def: ancestor.definition})[0..8] AS ancestors
                 }
                 
                 CALL (n) {
                     OPTIONAL MATCH (child:KBPediaConcept)-[:SUBCLASS_OF]->(n)
-                    RETURN collect(DISTINCT {name: child.name, def: child.definition})[0..8] AS children
+                    RETURN collect(DISTINCT {name: child.name, def: child.definition})[0..12] AS children
                 }
                 
                 CALL (n) {
