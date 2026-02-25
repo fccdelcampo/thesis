@@ -33,7 +33,7 @@ def check_db_health(driver):
         return False
 
 def create_indexes(driver):
-    embedding_dimension = 4096 
+    embedding_dimension = 3072  # llama3.2:3b produces 3072-dim embeddings (was 4096 for llama3.1:8b)
 
     print(f"Creating indexes with dimension: {embedding_dimension}...")
 

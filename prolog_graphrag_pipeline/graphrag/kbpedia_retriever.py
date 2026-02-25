@@ -301,6 +301,17 @@ If none are relevant, output an empty list [].
         # Use the full original prompt (with MCQ choices) when available for better filtering
         filter_query = original_query if original_query else query_text
 
+        # Extract MCQ choices from the question so the LLM knows to keep them
+        mcq_choices = re.findall(r'\b[A-D][.)]\s*(.+)', filter_query)
+        mcq_hint = ""
+        if mcq_choices:
+            mcq_hint = (
+                f"\n\n### MCQ Answer Choices Detected\n"
+                f"The question has these answer options: {mcq_choices}\n"
+                f"You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. "
+                f"These are exactly the concepts the Prolog engine needs to reason about.\n"
+            )
+
         summary_lines = []
         for idx, c in enumerate(candidates):
             defn = (c.get("definition") or "")[:150]
@@ -309,19 +320,22 @@ If none are relevant, output an empty list [].
 
         prompt = f"""You are filtering knowledge graph concepts for a Prolog-based question-answering system.
 
-User question: "{filter_query}"
+User question: "{filter_query}"{mcq_hint}
 
 Candidates (index: concept name: short definition):
 {summary_text}
 
 ### Decision Criteria
-A concept is RELEVANT if its definition or properties could provide a fact, rule, or piece of evidence that helps answer the question above.
-A concept is IRRELEVANT if it was matched by coincidence (e.g., the word "factor" matching "Rh factor" or "transcription factor" when the question is about experimental variables).
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
 
-When in doubt, KEEP the concept — the downstream Prolog engine can handle extra facts, but missing a relevant concept is harder to recover from.
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
 
-Return a JSON list of the RELEVANT indices (integers). If none are relevant, return [].
-Output ONLY the JSON list, nothing else. Example: [0, 2, 4]
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
 """
         try:
             raw = self.llm.invoke(prompt)
