@@ -138,27 +138,36 @@ def run_test_case(test_case: dict, test_case_id: int):
     correct_answer = test_case.get("answer", "")
     raw_question = test_case.get("question", "")
     
-    print(f"\n[MMLU #{test_case_id}] {raw_question[:60]}...")
-    print(f"  Correct: {correct_answer}")
+    print(f"\n" + "="*80)
+    print(f"[MMLU #{test_case_id}] {raw_question[:120]}...")
+    print(f"Correct Answer: [{correct_answer}]")
+    print("-" * 80)
 
     # 1. GraphRAG Pipeline
     gr_result = run_pipeline_safe(run_graphrag, formatted_input)
     gr_letter = extract_answer_letter(gr_result.get("answer", ""))
     gr_score = score_answer(gr_letter, correct_answer)
-    print(f"  GraphRAG: {gr_letter} (Score: {gr_score})")
     
     # 2. Prolog GraphRAG Pipeline
-    # FIX: Added flag="prolog"
     pgr_result = run_pipeline_safe(run_prolog_graphrag, formatted_input, flag="prolog")
     pgr_letter = extract_answer_letter(pgr_result.get("answer", ""))
     pgr_score = score_answer(pgr_letter, correct_answer)
-    print(f"  Prolog-GraphRAG: {pgr_letter} (Score: {pgr_score})")
     
     # 3. Tuned Pipeline 
     tuned_result = run_pipeline_safe(run_tuned_pipeline, formatted_input)
     tuned_letter = extract_answer_letter(tuned_result.get("answer", ""))
     tuned_score = score_answer(tuned_letter, correct_answer)
-    print(f"  Tuned Pipeline: {tuned_letter} (Score: {tuned_score})")
+    
+    print(f"\n--- PIPELINE COMPARISON ---")
+    def format_res(name, letter, score):
+        status = "✅ RIGHT" if score >= 1.0 else "❌ WRONG"
+        let_str = f"[{letter}]" if letter else "[?]"
+        return f"{name:<15} | Predicted: {let_str:<5} | {status}"
+        
+    print(format_res("GraphRAG", gr_letter, gr_score))
+    print(format_res("Prolog", pgr_letter, pgr_score))
+    print(format_res("Tuned LLM", tuned_letter, tuned_score))
+    print("=" * 80 + "\n")
     
     # Log scores
     log_results(test_case_id, tuned_score, gr_score, pgr_score)

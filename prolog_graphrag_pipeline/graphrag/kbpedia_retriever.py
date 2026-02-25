@@ -54,34 +54,50 @@ class KBPediaRetriever:
     def _extract_entities_fast(self, query: str) -> List[str]:
         """
         Fast keyword-based entity extraction — no LLM calls.
-        Strips MCQ option markers (A. B. C. D.), removes stop words,
-        and returns the top N content words sorted by length (most specific first).
+        Extracts MCQ choices as full phrases, removes stop words,
+        and returns the top N content words/phrases sorted by length (most specific first).
         """
+        # 1. Extract MCQ choices explicitly
+        mcq_choices = [c.strip() for c in re.findall(r'\b[A-D][.)]\s*(.+?)(?=\s+\b[A-D][.)]|$)', query)]
+        # Clean up any trailing punctuation from choices
+        mcq_choices = [re.sub(r'[?!.]+$', '', c).strip().lower() for c in mcq_choices if c.strip()]
+
         stop_words = {
             'what', 'which', 'where', 'when', 'who', 'how', 'the', 'that',
             'this', 'with', 'from', 'into', 'have', 'most', 'some', 'such',
             'does', 'will', 'each', 'they', 'their', 'would', 'could', 'more',
             'than', 'also', 'like', 'make', 'used', 'being', 'been', 'were',
-            'about', 'other', 'only', 'over', 'both', 'very', 'after',
+            'about', 'other', 'only', 'over', 'both', 'very', 'after', 
+            'following', 'these', 'those'
         }
-        # Remove MCQ option labels and punctuation
+        
+        # 2. Remove MCQ option labels and punctuation for word extraction
         cleaned = re.sub(r'\b[A-D][.)]\s?', ' ', query)
         cleaned = re.sub(r'[?!,;:()\[\]]', ' ', cleaned).replace('\n', ' ')
         words = cleaned.split()
-        # Keep words > 4 chars not in stop list
-        content = [
-            w.strip('.') for w in words
-            if len(w) > 4 and w.lower().strip('.') not in stop_words
+        
+        # 3. Keep words >= 4 chars not in stop list (fixes bug where 4-letter words like "cell" were dropped)
+        content_words = [
+            w.strip('.').lower() for w in words
+            if len(w) >= 4 and w.lower().strip('.') not in stop_words
         ]
-        # Deduplicate (case-insensitive), longest first
-        seen: set = set()
-        unique = []
-        for w in sorted(content, key=len, reverse=True):
-            key = w.lower()
-            if key not in seen:
-                seen.add(key)
-                unique.append(w)
-        return unique[:8]
+        
+        # 4. Combine MCQ choices and content words, deduplicate
+        unique_entities = []
+        seen = set()
+        
+        # Prioritize MCQ choices first
+        for phrase in mcq_choices + content_words:
+            if phrase and phrase not in seen:
+                seen.add(phrase)
+                unique_entities.append(phrase)
+                
+        # Sort by length descending, but keep MCQ choices at the top
+        mcq_set = set(mcq_choices)
+        sorted_entities = sorted(unique_entities, key=lambda x: (x not in mcq_set, -len(x)))
+        
+        print(f"DEBUG: Fast extracted entities: {sorted_entities[:10]}", flush=True)
+        return sorted_entities[:10]
 
     def extract_entities_from_query(self, query: str) -> List[str]:
         """
