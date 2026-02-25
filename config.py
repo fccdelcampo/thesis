@@ -12,8 +12,6 @@ class Metric(Enum):
     
 class Benchmark(Enum):
     MMLU = ("MMLU", "mmlu")
-    HOTPOTQA = ("HotpotQA", "hotpotqa")
-    TRUTHFULQA = ("TruthfulQA", "truthfulqa")
     AI2_ARC = ("AI2 ARC", "ai2_arc")
     OPENBOOKQA = ("OpenBookQA", "openbookqa")
     
@@ -22,8 +20,8 @@ class SampleSequencesFlags(Enum):
     Q = ("q", "q")
     X_C = ("x\\c", "x_c")
     
-DISCRETE_EVALS = [Benchmark.MMLU, Benchmark.HOTPOTQA]
-CONTINUOUS_EVALS = [Metric.FAITHFULNESS, Metric.ANSWER_RELEVANCY, Metric.CONTEXT_RECALL, Benchmark.TRUTHFULQA]
+DISCRETE_EVALS = [Benchmark.MMLU, Benchmark.AI2_ARC, Benchmark.OPENBOOKQA]
+CONTINUOUS_EVALS = [Metric.FAITHFULNESS, Metric.ANSWER_RELEVANCY, Metric.CONTEXT_RECALL]
     
 ALPHA = 0.05
 NUM_TEST_CASES = 100

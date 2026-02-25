@@ -65,7 +65,6 @@ def perform_continuous_hypothesis_tests():
         Metric.FAITHFULNESS: pd.read_csv(DATA_DIR / "faithfulness_scores.csv"),
         Metric.ANSWER_RELEVANCY: pd.read_csv(DATA_DIR / "answer_relevancy_scores.csv"),
         Metric.CONTEXT_RECALL: pd.read_csv(DATA_DIR / "context_recall_scores.csv"),
-        Benchmark.TRUTHFULQA: pd.read_csv(DATA_DIR / "truthfulqa_scores.csv")
     }
 
     for eval in CONTINUOUS_EVALS:
@@ -118,7 +117,8 @@ def compute_hypothesis_test_for_discrete_eval(tuned_data: np.ndarray, graphrag_d
 def perform_discrete_hypothesis_tests():
     df_map = {
         Benchmark.MMLU: pd.read_csv(DATA_DIR / "mmlu_scores.csv"),
-        Benchmark.HOTPOTQA: pd.read_csv(DATA_DIR / "hotpotqa_scores.csv")
+        Benchmark.AI2_ARC: pd.read_csv(DATA_DIR / "ai2_arc_scores.csv"),
+        Benchmark.OPENBOOKQA: pd.read_csv(DATA_DIR / "openbookqa_scores.csv"),
     }
 
     for eval in DISCRETE_EVALS:

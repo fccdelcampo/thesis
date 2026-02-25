@@ -45,18 +45,7 @@ def load_test_cases(limit: int = 10) -> list[dict]:
                     break
                 if line.strip():
                     test_cases.append(json.loads(line))
-    
-    # Fallback to truthfulqa if empty (since it has ground_truth)
-    if not test_cases:
-        tqa_path = os.path.join(TEST_CASES_DIR, "truthfulqa.jsonl")
-        if os.path.exists(tqa_path):
-            with open(tqa_path, 'r', encoding='utf-8') as f:
-                for i, line in enumerate(f):
-                    if i >= limit:
-                        break
-                    if line.strip():
-                        test_cases.append(json.loads(line))
-                        
+                         
     return test_cases
 
 def evaluate_with_ragas(question: str, ground_truth: str, contexts: list[str]) -> float:
@@ -66,7 +55,7 @@ def evaluate_with_ragas(question: str, ground_truth: str, contexts: list[str]) -
     if not ground_truth or not contexts:
         return 0.0
         
-    # Handle list of ground truths (TruthfulQA style might have list)
+    # Handle list of ground truths
     if isinstance(ground_truth, list):
         ground_truth = "; ".join(ground_truth)
 

@@ -15,17 +15,17 @@ class Metric(Enum):
     
 class Benchmark(Enum):
     MMLU = ("MMLU", "mmlu")
-    HOTPOTQA = ("HotpotQA", "hotpotqa")
-    TRUTHFULQA = ("TruthfulQA", "truthfulqa")
+    AI2_ARC = ("AI2 ARC", "ai2_arc")
+    OPENBOOKQA = ("OpenBookQA", "openbookqa")
 
 CONTINUOUS_EVALS = [
     Metric.FAITHFULNESS,
     Metric.ANSWER_RELEVANCY,
     Metric.CONTEXT_RECALL,
-    Benchmark.TRUTHFULQA
 ]
 
 DISCRETE_EVALS = [
     Benchmark.MMLU,
-    Benchmark.HOTPOTQA
+    Benchmark.AI2_ARC,
+    Benchmark.OPENBOOKQA,
 ]
