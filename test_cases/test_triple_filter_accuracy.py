@@ -65,7 +65,7 @@ def test_filter_accuracy():
     
     # 1. Setup Retrievers
     print("\nInitializing Sequential Retriever...")
-    retriever_seq = KBPediaRetriever(driver=gd.neo4j_driver, llm=retriever_llm, top_k=5, triple_filter=False, hybrid_triple_filter=True)
+    retriever_seq = KBPediaRetriever(driver=gd.neo4j_driver, llm=retriever_llm, top_k=5)
     # Patch the retriever to use sequential filtering instead of batch
     original_batch = retriever_seq.filter_triples_batch
     def force_sequential(query, batch_data, original_query):
@@ -76,7 +76,7 @@ def test_filter_accuracy():
     retriever_seq.filter_triples_batch = force_sequential
 
     print("Initializing Batch Retriever...")
-    retriever_batch = KBPediaRetriever(driver=gd.neo4j_driver, llm=retriever_llm, top_k=5, triple_filter=False, hybrid_triple_filter=True)
+    retriever_batch = KBPediaRetriever(driver=gd.neo4j_driver, llm=retriever_llm, top_k=5)
 
     # 2. Define Test Cases (ranging from simple to complex with multiple concepts/triples)
     queries = [

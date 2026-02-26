@@ -25,12 +25,10 @@ class KBPediaRetriever:
 
     _index_verified = False
 
-    def __init__(self, driver, llm=None, top_k: int = 4, triple_filter: bool = False, hybrid_triple_filter: bool = True):
+    def __init__(self, driver, llm=None, top_k: int = 4):
         self.driver  = driver
         self.llm     = llm
         self.top_k   = top_k
-        self.triple_filter = triple_filter  # False = fast (1 LLM call at end); True = rigorous per-concept LLM filter
-        self.hybrid_triple_filter = hybrid_triple_filter # Only active if triple_filter=False. Determines if the validated concepts undergo rigorous triple filtering.
 
     def _verify_index(self):
         """Check once whether the KBPedia fulltext index exists."""
@@ -363,7 +361,9 @@ Example:
                 for c in concepts_data:
                     name = c["name"]
                     if name in filtered and isinstance(filtered[name], list):
-                        result_map[name] = filtered[name]
+                        # Clean up formatting artifacts (like "- subclass of:" -> "subclass of:")
+                        cleaned_triples = [t[2:].strip() if t.startswith("- ") else t.strip() for t in filtered[name]]
+                        result_map[name] = cleaned_triples
         except Exception as e:
             print(f"DEBUG: Batch triple filtering failed: {e}. Using all raw triples.", flush=True)
 
@@ -446,24 +446,15 @@ Output ONLY the JSON list, nothing else.
         filter_query = original_query if original_query else query_text
 
         # ── Entity extraction ─────────────────────────────────────────────────
-        if self.triple_filter:
-            print(f"DEBUG: [KBPedia RIGOROUS mode] Querying for: '{query_text}'", flush=True)
-            entities = self._extract_entities_fast(query_text)
-        else:
-            print(f"DEBUG: [KBPedia FAST mode] Querying for: '{query_text}'", flush=True)
-            entities = self._extract_entities_fast(query_text)
+        print(f"DEBUG: [KBPedia] Querying for: '{query_text}'", flush=True)
+        entities = self._extract_entities_fast(query_text)
         print(f"DEBUG: Extracted entities for KBPedia: {entities}", flush=True)
 
         seen_uris = set()
-        # In fast mode we buffer all candidates first, then do one LLM pass at the end.
-        # In rigorous mode we filter per concept and build items directly.
-        candidates = []  # for fast mode buffering: list of {name, uri, definition, triples}
+        candidates = []  # list of {name, uri, definition, triples}
         items = []       # final result items
 
         for concept_name in entities:
-            if len(items) >= top_k and self.triple_filter:
-                break
-
             matches = self.find_concepts(concept_name, limit=2)
 
             if not matches:
@@ -473,9 +464,6 @@ Output ONLY the JSON list, nothing else.
             print(f"DEBUG: KBPedia matched {len(matches)} concept(s) for '{concept_name}': {[m['name'] for m in matches]}", flush=True)
 
             for match in matches:
-                if len(items) >= top_k and self.triple_filter:
-                    break
-
                 uri = match["uri"]
                 if uri in seen_uris:
                     continue
@@ -495,41 +483,24 @@ Output ONLY the JSON list, nothing else.
                     print(f"DEBUG: No raw triples for '{match['name']}' ({uri}), skipping.", flush=True)
                     continue
 
-                if self.triple_filter:
-                    # RIGOROUS: LLM filters triples per concept
-                    print(f"DEBUG: Built {len(raw_triples)} raw triple(s) for '{match['name']}'. Sending to LLM filter...", flush=True)
-                    selected_triples = self.filter_triples_for_query(query_text, match["name"], raw_triples, original_query=filter_query)
-                    print(f"DEBUG: LLM filter kept {len(selected_triples)}/{len(raw_triples)} triple(s) for '{match['name']}'", flush=True)
+                # Buffer raw candidates for a single end-of-loop LLM pass
+                print(f"DEBUG: Buffered {len(raw_triples)} raw triple(s) for '{match['name']}'", flush=True)
+                candidates.append({
+                    "name": match["name"],
+                    "uri": uri,
+                    "definition": match.get("definition", ""),
+                    "triples": raw_triples,
+                })
 
-                    if not selected_triples:
-                        continue
-
-                    triples_text = "\n".join([f"  - {t}" for t in selected_triples])
-                    content = f"KBPedia Concept: {match['name']}.\nRelevant Logical Facts:\n{triples_text}"
-                    items.append(RetrieverResultItem(
-                        content=content,
-                        metadata={"source": "KBPedia", "entity": match["name"],
-                                  "uri": uri, "score": 1.0, "triples": selected_triples},
-                    ))
-                else:
-                    # FAST: buffer raw candidates for a single end-of-loop LLM pass
-                    print(f"DEBUG: Buffered {len(raw_triples)} raw triple(s) for '{match['name']}'", flush=True)
-                    candidates.append({
-                        "name": match["name"],
-                        "uri": uri,
-                        "definition": match.get("definition", ""),
-                        "triples": raw_triples,
-                    })
-
-        # ── Fast-mode: single LLM relevance filter over all candidates ─────────────
-        if not self.triple_filter and candidates:
+        # ── Single LLM relevance filter over all candidates ─────────────
+        if candidates:
             filtered_candidates = self._filter_concepts_once(query_text, candidates, original_query=filter_query)
             print(f"DEBUG: End-filter kept {len(filtered_candidates)}/{len(candidates)} concepts.", flush=True)
             
-            # Hybrid Mode: Batch Triple filtering on the validated concepts
+            # Batch Triple filtering on the validated concepts
             filtered_concepts_to_use = filtered_candidates[:top_k]
             
-            if self.hybrid_triple_filter and filtered_concepts_to_use:
+            if filtered_concepts_to_use:
                 # Prepare batch payload
                 batch_data = [{"name": c["name"], "triples": c["triples"]} for c in filtered_concepts_to_use]
                 print(f"DEBUG: Batch sending {len(batch_data)} concepts to LLM triple filter...", flush=True)
