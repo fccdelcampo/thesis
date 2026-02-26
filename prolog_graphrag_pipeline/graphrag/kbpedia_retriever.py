@@ -298,16 +298,21 @@ If none are relevant, output an empty list [].
         prompt = f"""Task: You are deeply integrated into a Prolog GraphRAG pipeline.
 Below are lists of known facts (triples) for MULTIPLE entities.
 Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
-Irrelevant facts will poison the logic engine, so drop anything that doesn't help.
 
 User Query: "{filter_query}"
 
 {concepts_text}
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
 Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
 Example:
 {{
-  "Concept A": ["subclass of: Structural Component", "ancestor definition: provides support"],
-  "Concept B": []
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
 }}
 """
         # Default fallback
