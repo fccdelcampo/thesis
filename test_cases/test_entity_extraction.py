@@ -42,36 +42,18 @@ def test_extraction_methods():
         print(f"QUERY: {tc['query']}")
         print("="*80)
 
-        # --- Fast Extraction ---
-        print("\n>>> Running FAST Extraction (Keyword-based)")
+        # --- Hybrid Extraction ---
+        print("\n>>> Running HYBRID Extraction (Regex + LLM)")
         t0 = time.time()
-        fast_entities = retriever._extract_entities_fast(tc['query'])
-        t_fast = time.time() - t0
-        print(f"Time: {t_fast:.2f}s")
-        print(f"Entities: {fast_entities}")
-
-        # --- LLM Extraction ---
-        print("\n>>> Running LLM Extraction (extract_entities_from_query)")
-        t0 = time.time()
-        llm_entities = retriever.extract_entities_from_query(tc['query'])
-        t_llm = time.time() - t0
-        print(f"Time: {t_llm:.2f}s")
-        print(f"Entities: {llm_entities}")
-
-        print("\n" + "-"*40)
-        print(f"Speed comparison: Fast is {t_llm - t_fast:.2f}s faster than LLM.")
+        entities = retriever.extract_entities(tc['query'])
+        t_hybrid = time.time() - t0
+        print(f"Time: {t_hybrid:.2f}s")
+        print(f"Entities: {entities}")
 
         # Simulate how GraphRAG would handle these entities by finding concepts
         print("\n>>> Concept Matching Simulation (Top 2 matches per top 3 entities):")
         
-        print("Fast Concepts:")
-        for entity in fast_entities[:3]:
-            matches = retriever.find_concepts(entity, limit=2)
-            names = [m['name'] for m in matches]
-            print(f"  - '{entity}' -> {names}")
-            
-        print("\nLLM Concepts:")
-        for entity in llm_entities[:3]:
+        for entity in entities[:3]:
             matches = retriever.find_concepts(entity, limit=2)
             names = [m['name'] for m in matches]
             print(f"  - '{entity}' -> {names}")

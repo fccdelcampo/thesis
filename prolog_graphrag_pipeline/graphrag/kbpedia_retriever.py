@@ -50,100 +50,98 @@ class KBPediaRetriever:
             print(f"DEBUG: Error verifying KBPedia index: {e}")
             return False
 
-    def _extract_entities_fast(self, query: str) -> List[str]:
+    def extract_entities(self, query: str, include_keywords: bool = False) -> List[str]:
         """
-        Fast keyword-based entity extraction — no LLM calls.
-        Extracts MCQ choices as full phrases, removes stop words,
-        and returns the top N content words/phrases sorted by length (most specific first).
+        Hybrid entity extraction:
+        1. Uses Regex to accurately pull exact MCQ choices (fast and prevents LLM formatting crashes).
+        2. Uses LLM to extract explicit entities and implied conceptual terms from the question stem.
+        3. Combines and prioritizes the lists.
+        Optional `include_keywords=True`: Also extracts all non-stop-words to test if density improves recall.
         """
-        # 1. Extract MCQ choices explicitly
+        # --- 1. Regex MCQ Extraction ---
         mcq_choices = [c.strip() for c in re.findall(r'\b[A-D][.)]\s*(.+?)(?=\s+\b[A-D][.)]|$)', query)]
         # Clean up any trailing punctuation from choices
         mcq_choices = [re.sub(r'[?!.]+$', '', c).strip().lower() for c in mcq_choices if c.strip()]
+        
+        # --- 2. LLM Conceptual Extraction ---
+        llm_entities = []
+        if self.llm:
+            # Strip MCQ choices from the query sent to LLM so it focuses purely on the concepts
+            query_stem = re.sub(r'\b[A-D][.)]\s*(.+?)(?=\s+\b[A-D][.)]|$)', '', query).strip()
+            
+            prompt = f"""You are extracting search terms for a knowledge base lookup.
 
-        stop_words = {
-            'what', 'which', 'where', 'when', 'who', 'how', 'the', 'that',
-            'this', 'with', 'from', 'into', 'have', 'most', 'some', 'such',
-            'does', 'will', 'each', 'they', 'their', 'would', 'could', 'more',
-            'than', 'also', 'like', 'make', 'used', 'being', 'been', 'were',
-            'about', 'other', 'only', 'over', 'both', 'very', 'after', 
-            'following', 'these', 'those'
-        }
-        
-        # 2. Remove MCQ option labels and punctuation for word extraction
-        cleaned = re.sub(r'\b[A-D][.)]\s?', ' ', query)
-        cleaned = re.sub(r'[?!,;:()\[\]]', ' ', cleaned).replace('\n', ' ')
-        words = cleaned.split()
-        
-        # 3. Keep words >= 4 chars not in stop list (fixes bug where 4-letter words like "cell" were dropped)
-        content_words = [
-            w.strip('.').lower() for w in words
-            if len(w) >= 4 and w.lower().strip('.') not in stop_words
-        ]
-        
-        # 4. Combine MCQ choices and content words, deduplicate
+Given this query, extract ONLY the following:
+1. **Explicit entities** mentioned (e.g., "plant cell", "animal skeleton")
+2. **Implied functional concepts** that the question is really asking about (e.g., if the question is "what makes leaves green?", extract "chlorophyll", "photosynthesis")
+3. **Related scientific terms** that would help answer (e.g., "rigidity", "endoskeleton")
+
+Do NOT try to extract answer choices. Just the core scientific or conceptual topics.
+
+Query: "{query_stem}"
+
+Output a plain JSON list of strings. Include 3-6 terms maximum. Do not include anything else.
+Example: ["plant cell", "structural support", "cell wall"]"""
+            
+            try:
+                response = self.llm.invoke(prompt)
+                res_text = (response.content if hasattr(response, 'content') else str(response)).strip()
+                
+                # Robust JSON extraction: Find first '[' and last ']'
+                bracket_start = res_text.find('[')
+                bracket_end = res_text.rfind(']')
+                
+                if bracket_start != -1 and bracket_end != -1:
+                    json_str = res_text[bracket_start:bracket_end + 1]
+                    parsed = json.loads(json_str)
+                    if isinstance(parsed, list):
+                        llm_entities = [str(item).lower() for item in parsed]
+                else:
+                    print(f"DEBUG: Entity extraction LLM returned no JSON array. Raw: {repr(res_text[:100])}")
+            except Exception as e:
+                print(f"DEBUG: KBPedia entity extraction LLM failed: {e}")
+
+        # --- 3. Optional Keyword Extraction (Bloat Test) ---
+        keyword_entities = []
+        if include_keywords:
+            stop_words = {
+                'what', 'which', 'where', 'when', 'who', 'how', 'the', 'that',
+                'this', 'with', 'from', 'into', 'have', 'most', 'some', 'such',
+                'does', 'will', 'each', 'they', 'their', 'would', 'could', 'more',
+                'than', 'also', 'like', 'make', 'used', 'being', 'been', 'were',
+                'about', 'other', 'only', 'over', 'both', 'very', 'after', 
+                'following', 'these', 'those'
+            }
+            cleaned = re.sub(r'\b[A-D][.)]\s?', ' ', query)
+            cleaned = re.sub(r'[?!,;:()\[\]]', ' ', cleaned).replace('\n', ' ')
+            words = cleaned.split()
+            keyword_entities = [
+                w.strip('.').lower() for w in words
+                if len(w) >= 4 and w.lower().strip('.') not in stop_words
+            ]
+
+        # --- 4. Fallback ---
+        # If LLM fails or is missing, and we didn't include_keywords
+        if not llm_entities and not keyword_entities:
+            stem = re.sub(r'\b[A-D][.)]\s?', ' ', query)
+            stem = re.sub(r'[?!,;:()\[\]]', ' ', stem).replace('\n', ' ')
+            words = [w.strip('.').lower() for w in stem.split() if len(w) >= 5]
+            llm_entities = words[:5]
+
+        # --- 5. Combine and deduplicate ---
         unique_entities = []
         seen = set()
         
-        # Prioritize MCQ choices first
-        for phrase in mcq_choices + content_words:
+        # Prioritize MCQ choices first, then LLM concepts, then raw keywords
+        for phrase in mcq_choices + llm_entities + keyword_entities:
             if phrase and phrase not in seen:
                 seen.add(phrase)
                 unique_entities.append(phrase)
                 
-        # Sort by length descending, but keep MCQ choices at the top
-        mcq_set = set(mcq_choices)
-        sorted_entities = sorted(unique_entities, key=lambda x: (x not in mcq_set, -len(x)))
+        # We don't want to sort by length anymore because LLM gives high-quality short phrases too.
+        # MCQ choices naturally stay at the top.
         
-        print(f"DEBUG: Fast extracted entities: {sorted_entities[:10]}", flush=True)
-        return sorted_entities[:10]
-
-    def extract_entities_from_query(self, query: str) -> List[str]:
-        """
-        LLM-assisted entity extraction (used only when use_llm=True).
-        Extracts explicit entities, functional/conceptual terms, AND MCQ choices.
-        Falls back to simple word-splitting if the LLM is unavailable.
-        """
-        if not self.llm:
-            return [w for w in query.replace('?', '').split() if len(w) > 4][:5]
-
-        prompt = f"""You are extracting search terms for a knowledge base lookup.
-
-Given this query, extract ALL of the following:
-1. **Explicit entities** mentioned (e.g., "plant cell", "animal skeleton")
-2. **Implied functional concepts** that the question is really asking about (e.g., if the question compares functions, extract the function like "structural support", "protection")
-3. **All MCQ answer choices** if they exist (e.g., "cell membrane", "cell wall", "chloroplast", "nucleus")
-4. **Related scientific terms** that would help answer (e.g., "rigidity", "endoskeleton")
-
-Query: "{query}"
-
-Output a plain JSON list of strings. Include 5-8 terms maximum. Do not include anything else.
-Example: ["plant cell", "animal skeleton", "structural support", "cell wall", "cell membrane", "chloroplast", "nucleus"]"""
-        try:
-            response = self.llm.invoke(prompt).content.strip()
-            if "```json" in response:
-                response = response.split("```json")[1].split("```")[0].strip()
-            elif "```" in response:
-                response = response.split("```")[1].split("```")[0].strip()
-
-            # Guard against empty LLM responses
-            if not response:
-                print(f"DEBUG: Entity extraction returned empty response, falling back to original query terms.")
-                return [w for w in query.replace('?', '').split() if len(w) > 4][:5]
-
-            # Try to extract a JSON array even from messy responses
-            bracket_start = response.find('[')
-            bracket_end = response.rfind(']')
-            if bracket_start != -1 and bracket_end != -1:
-                response = response[bracket_start:bracket_end + 1]
-
-            entities = json.loads(response)
-            if isinstance(entities, list):
-                return entities[:5]
-        except Exception as e:
-            print(f"DEBUG: KBPedia entity extraction failed: {e}. Falling back to original query terms.")
-
-        return [query]
+        return unique_entities[:10]
 
     def find_concepts(self, search_term: str, limit: int = 3) -> List[Dict[str, Any]]:
         """
@@ -434,7 +432,7 @@ Output ONLY the JSON list, nothing else.
             print(f"DEBUG: End-filter LLM call failed: {e}. Returning all candidates.", flush=True)
             return candidates
 
-    def search(self, query_text: str, top_k: int = 5, original_query: str = "") -> Any:
+    def search(self, query_text: str, top_k: int = 5, original_query: str = "", include_keywords: bool = False) -> Any:
         from .retriever import RetrieverResult, RetrieverResultItem
 
         if not self._verify_index():
@@ -447,7 +445,7 @@ Output ONLY the JSON list, nothing else.
 
         # ── Entity extraction ─────────────────────────────────────────────────
         print(f"DEBUG: [KBPedia] Querying for: '{query_text}'", flush=True)
-        entities = self._extract_entities_fast(query_text)
+        entities = self.extract_entities(query_text, include_keywords=include_keywords)
         print(f"DEBUG: Extracted entities for KBPedia: {entities}", flush=True)
 
         seen_uris = set()
