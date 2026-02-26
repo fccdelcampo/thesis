@@ -147,9 +147,9 @@ def run_test_case(test_case: dict, test_case_id: int):
     log_results(test_case_id, tuned_score, gr_score, pgr_score)
     
     # Log Q&A details per pipeline
-    gr_label = "1" if gr_score >= THRESHOLD else "0"
-    pgr_label = "1" if pgr_score >= THRESHOLD else "0"
-    tuned_label = "1" if tuned_score >= THRESHOLD else "0"
+    gr_label = "0" if gr_score >= THRESHOLD else "1"
+    pgr_label = "0" if pgr_score >= THRESHOLD else "1"
+    tuned_label = "0" if tuned_score >= THRESHOLD else "1"
     
     log_question_and_answer(test_case_id, "graphrag", question, gr_result.get("answer", ""), gr_score, gr_label)
     log_question_and_answer(test_case_id, "prolog_graphrag", question, pgr_result.get("answer", ""), pgr_score, pgr_label)
@@ -167,11 +167,11 @@ def log_results(test_case_id: int, tuned_score: Union[float, int],
     new_row = pd.DataFrame({
         "test_case_id": [test_case_id],
         "tuned_score": [tuned_score],
-        "tuned_label": [1 if tuned_score >= THRESHOLD else 0],
+        "tuned_label": [0 if tuned_score >= THRESHOLD else 1],
         "graphrag_score": [graphrag_score],
-        "graphrag_label": [1 if graphrag_score >= THRESHOLD else 0],
+        "graphrag_label": [0 if graphrag_score >= THRESHOLD else 1],
         "prolog_graphrag_score": [prolog_graphrag_score],
-        "prolog_graphrag_label": [1 if prolog_graphrag_score >= THRESHOLD else 0]
+        "prolog_graphrag_label": [0 if prolog_graphrag_score >= THRESHOLD else 1]
     })
     
     header = not os.path.exists(file_path) or os.path.getsize(file_path) == 0

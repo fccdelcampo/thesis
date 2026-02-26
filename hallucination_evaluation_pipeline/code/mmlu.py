@@ -173,9 +173,9 @@ def run_test_case(test_case: dict, test_case_id: int):
     log_results(test_case_id, tuned_score, gr_score, pgr_score)
     
     # Log Q&A details per pipeline
-    gr_label = "1" if gr_score >= THRESHOLD else "0"
-    pgr_label = "1" if pgr_score >= THRESHOLD else "0"
-    tuned_label = "1" if tuned_score >= THRESHOLD else "0"
+    gr_label = "0" if gr_score >= THRESHOLD else "1"
+    pgr_label = "0" if pgr_score >= THRESHOLD else "1"
+    tuned_label = "0" if tuned_score >= THRESHOLD else "1"
     
     log_question_and_answer(test_case_id, "graphrag", raw_question, gr_result.get("answer", ""), gr_score, gr_label)
     log_question_and_answer(test_case_id, "prolog_graphrag", raw_question, pgr_result.get("answer", ""), pgr_score, pgr_label)
