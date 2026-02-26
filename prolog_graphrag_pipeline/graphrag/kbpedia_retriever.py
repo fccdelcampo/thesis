@@ -305,6 +305,70 @@ If none are relevant, output an empty list [].
 
         return triples
 
+    def filter_triples_batch(self, query: str, concepts_data: List[Dict[str, Any]], original_query: str = "") -> Dict[str, List[str]]:
+        """
+        Use LLM to keep only logically relevant triples for MULTIPLE concepts at once.
+        concepts_data is a list of dicts: {"name": str, "triples": List[str]}
+        Returns a dictionary mapping concept_name to a list of filtered triples.
+        """
+        if not self.llm or not concepts_data:
+            return {c["name"]: c["triples"][:10] for c in concepts_data}
+
+        filter_query = original_query if original_query else query
+
+        # Build the payload for the prompt
+        concepts_text = ""
+        for c in concepts_data:
+            triples_text = "\n".join([f"  - {t}" for t in c["triples"]])
+            concepts_text += f"Concept: '{c['name']}'\nFacts:\n{triples_text}\n\n"
+
+        prompt = f"""Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+Irrelevant facts will poison the logic engine, so drop anything that doesn't help.
+
+User Query: "{filter_query}"
+
+{concepts_text}
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{{
+  "Concept A": ["subclass of: Structural Component", "ancestor definition: provides support"],
+  "Concept B": []
+}}
+"""
+        # Default fallback
+        result_map = {c["name"]: c["triples"] for c in concepts_data}
+
+        try:
+            raw = self.llm.invoke(prompt)
+            res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
+            print(f"DEBUG: Batch triple filter raw response: {repr(res[:200])}...", flush=True)
+
+            if "```json" in res:
+                res = res.split("```json")[1].split("```")[0].strip()
+            elif "```" in res:
+                res = res.split("```")[1].split("```")[0].strip()
+
+            bracket_start = res.find('{')
+            bracket_end = res.rfind('}')
+            if bracket_start != -1 and bracket_end != -1:
+                res = res[bracket_start:bracket_end + 1]
+            elif not res:
+                print(f"DEBUG: Batch triple filter got empty response. Using all raw triples.", flush=True)
+                return result_map
+
+            filtered = json.loads(res)
+            if isinstance(filtered, dict):
+                for c in concepts_data:
+                    name = c["name"]
+                    if name in filtered and isinstance(filtered[name], list):
+                        result_map[name] = filtered[name]
+        except Exception as e:
+            print(f"DEBUG: Batch triple filtering failed: {e}. Using all raw triples.", flush=True)
+
+        return result_map
+
     def _filter_concepts_once(self, query_text: str, candidates: list, original_query: str = "") -> list:
         """
         Single LLM call to filter all candidates at once.
@@ -461,17 +525,28 @@ Output ONLY the JSON list, nothing else.
         if not self.triple_filter and candidates:
             filtered_candidates = self._filter_concepts_once(query_text, candidates, original_query=filter_query)
             print(f"DEBUG: End-filter kept {len(filtered_candidates)}/{len(candidates)} concepts.", flush=True)
-            for c in filtered_candidates[:top_k]:
+            
+            # Hybrid Mode: Batch Triple filtering on the validated concepts
+            filtered_concepts_to_use = filtered_candidates[:top_k]
+            
+            if self.hybrid_triple_filter and filtered_concepts_to_use:
+                # Prepare batch payload
+                batch_data = [{"name": c["name"], "triples": c["triples"]} for c in filtered_concepts_to_use]
+                print(f"DEBUG: Batch sending {len(batch_data)} concepts to LLM triple filter...", flush=True)
+                
+                # We can process all top_k (usually <= 5) in one LLM call
+                batch_results = self.filter_triples_batch(query_text, batch_data, original_query=filter_query)
+                
+                # Reassign filtered triples back to the candidates
+                for c in filtered_concepts_to_use:
+                    selected = batch_results.get(c["name"], c["triples"])
+                    print(f"DEBUG: Batch LLM filter kept {len(selected)}/{len(c['triples'])} triple(s) for '{c['name']}'", flush=True)
+                    c["triples"] = selected
+
+            for c in filtered_concepts_to_use:
                 selected_triples = c["triples"]
-
-                if self.hybrid_triple_filter:
-                    # Hybrid Mode: Triple filter ONLY on the validated concepts
-                    print(f"DEBUG: Built {len(c['triples'])} raw triple(s) for validated concept '{c['name']}'. Sending to LLM filter...", flush=True)
-                    selected_triples = self.filter_triples_for_query(query_text, c["name"], c["triples"], original_query=filter_query)
-                    print(f"DEBUG: LLM filter kept {len(selected_triples)}/{len(c['triples'])} triple(s) for '{c['name']}'", flush=True)
-
-                    if not selected_triples:
-                        continue
+                if not selected_triples:
+                    continue
 
                 triples_text = "\n".join([f"  - {t}" for t in selected_triples])
                 content = f"KBPedia Concept: {c['name']}.\nRelevant Logical Facts:\n{triples_text}"
