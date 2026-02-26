@@ -23,9 +23,13 @@ def warmup_prolog_model():
         return
     import ollama
     try:
-        from .prolog_config import GENERATOR_LLM_MESSAGES
+        from .prolog_config import GENERATOR_LLM_MESSAGES, USE_KV_CACHE
     except ImportError:
-        from prolog_graphrag_pipeline.prolog.prolog_config import GENERATOR_LLM_MESSAGES
+        from prolog_graphrag_pipeline.prolog.prolog_config import GENERATOR_LLM_MESSAGES, USE_KV_CACHE
+        
+    if not USE_KV_CACHE:
+        return
+        
     try:
         print("[Prolog Warmup] Priming KV cache with few-shot prefix...", flush=True)
         ollama.chat(
@@ -69,15 +73,15 @@ def reset_ollama_model():
     except Exception as e:
         print(f"[Ollama Reset] WARNING: Model failed to reload: {e}", flush=True)
 
-def generate(prompt: str, flag: str, use_kv_cache: bool = False) -> dict:
+def generate(prompt: str, flag: str) -> dict:
     if flag not in ["prolog", "explanation", "q"]:
         raise ValueError(f"Flag {flag} is invalid. Only 'prolog', 'explanation', and 'q' are accepted.")
     
-    return generate_response(prompt=prompt, flag=flag, use_kv_cache=use_kv_cache)
+    return generate_response(prompt=prompt, flag=flag)
 
     
-def generate_response(prompt: str, flag: str, use_kv_cache: bool = False) -> dict:
-    from .prolog_config import GENERATOR_LLM_MESSAGES, EXPLAINER_LLM_MESSAGES
+def generate_response(prompt: str, flag: str) -> dict:
+    from .prolog_config import GENERATOR_LLM_MESSAGES, EXPLAINER_LLM_MESSAGES, USE_KV_CACHE
     import ollama
     
     answer = dict()
@@ -98,7 +102,7 @@ def generate_response(prompt: str, flag: str, use_kv_cache: bool = False) -> dic
     else:
         raise ValueError(f"Flag {flag} is invalid. Only 'prolog', 'explanation', and 'q' are accepted.")
 
-    if use_kv_cache:
+    if USE_KV_CACHE:
         # Proper KV Caching: Send system instructions/few-shots as distinct message objects.
         # This builds a stable prefix that Ollama caches in memory, but has a large initial overhead.
         llm_messages = base_messages + [{'role': 'user', 'content': prompt}]

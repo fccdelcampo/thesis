@@ -63,8 +63,13 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
         context_from_prompt = "NONE"
 
     print(f"**User Question:**\n{user_question}")
-    print(f"**Retrieved Context:**\n{retrieved_context}")
-    print(f"**Context from Prompt:**\n{context_from_prompt}")
+    
+    # Safely print retrieved context to avoid Windows charmap encoding errors with chars like \u2192 (→)
+    safe_context = retrieved_context.encode('utf-8', errors='replace').decode('utf-8')
+    print(f"**Retrieved Context:**\n{safe_context}")
+    
+    safe_prompt_context = context_from_prompt.encode('utf-8', errors='replace').decode('utf-8')
+    print(f"**Context from Prompt:**\n{safe_prompt_context}")
 
     # Re-prime Ollama's KV cache with the static few-shot prefix.
     # GraphRAG (same model) runs just before us and evicts the cache.

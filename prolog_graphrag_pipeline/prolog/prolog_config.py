@@ -1,3 +1,7 @@
+# Global configuration toggle for LLM KV Cache prefix priming. 
+# False = Fast linear flattening for benchmarks. True = Stable prefix caching for Chat UIs.
+USE_KV_CACHE = False
+
 GENERATOR_SYSTEM_PROMPT = r"""
 ### Role
 You are an expert Prolog programmer specializing in Knowledge Representation and Reasoning for GraphRAG systems, specifically optimized for the s(CASP) (Stable Constraint Answer Set Programming) solver.
