@@ -2,7 +2,7 @@
 
 # print("Asking Ollama (with confidence scores)...")
 # response = ollama.chat(
-#     model='llama3.2:3b-instruct-q8_0',
+#     model='llama3.1:8b-instruct-q4_K_M',
 #     messages=[
 #         {'role': 'user', 'content': 'Who are you?'}
 #     ],

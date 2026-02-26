@@ -13,7 +13,7 @@ import sys
 from pathlib import Path
 
 # sys.path.append(str(Path(__file__).resolve().parents[1]))
-MODEL = "llama3.2:3b-instruct-q8_0"
+MODEL = "llama3.1:8b-instruct-q4_K_M"
 
 try:
     from graphrag_pipeline.llm import generate

@@ -6,7 +6,7 @@ NUM_TEST_CASES = 100
 class Pipeline(Enum):
     PROLOG_GRAPHRAG = ("Prolog-GraphRAG Pipeline", "prolog_graphrag")
     GRAPHRAG = ("GraphRAG Pipeline", "graphrag")
-    TUNED = ("llama3.2:3b-instruct-q8_0", "tuned")
+    TUNED = ("llama3.1:8b-instruct-q4_K_M", "tuned")
 
 class Metric(Enum):
     FAITHFULNESS = ("Faithfulness", "faithfulness")

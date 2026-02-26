@@ -31,9 +31,9 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 # Structured JSON extraction (KG builder) benefits from a code-tuned model
-ENCODER_MODEL = "llama3.2:3b-instruct-q8_0"
+ENCODER_MODEL = "llama3.1:8b-instruct-q4_K_M"
 # Natural language synthesis (retriever) + embeddings stay on llama3.2
-RETRIEVER_MODEL = "llama3.2:3b-instruct-q8_0"
+RETRIEVER_MODEL = "llama3.1:8b-instruct-q4_K_M"
 
 class DebugOllamaLLM(OllamaLLM):
     """Wrapper to clean input prompts and log raw LLM responses to debug.txt."""

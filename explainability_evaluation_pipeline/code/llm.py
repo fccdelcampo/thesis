@@ -34,7 +34,7 @@ You should reject equivalence (verdict: "no") if ANY of the following apply:
 def generate(prompt: str):
     try:
         response = ollama.chat(
-                model='llama3.2:3b-instruct-q8_0',
+                model='llama3.1:8b-instruct-q4_K_M',
                 messages=LLM_MESSAGES + [{"role": "user", "content": prompt}],
                 options={
                     'temperature': 0.3,
