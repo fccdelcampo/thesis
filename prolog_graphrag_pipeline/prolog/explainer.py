@@ -17,14 +17,12 @@ The values retrieved from the query are:
 
 def generate_safe_scasp_wrapper(query):
     query = query.replace(".", "").replace("\n", "")
-# explain({args_str}, Explanation) :-
     return rf"""
 explain(Explanation) :-
-    % 1. Run the solver
-    scasp({query}, [tree(Tree)]),
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp(({query}), [tree(Tree)]),
     
     % 2. Capture the human-readable output into a string
-    % We call human_justification_tree INSIDE with_output_to
     with_output_to(string(Explanation), 
         human_justification_tree(Tree, [tree_style(human)])
     ).
