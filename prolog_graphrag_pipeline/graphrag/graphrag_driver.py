@@ -31,7 +31,7 @@ from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
 # Structured JSON extraction (KG builder) benefits from a code-tuned model
-ENCODER_MODEL = "qwen2.5-coder:3b-instruct-q8_0"
+ENCODER_MODEL = "llama3.2:3b-instruct-q8_0"
 # Natural language synthesis (retriever) + embeddings stay on llama3.2
 RETRIEVER_MODEL = "llama3.2:3b-instruct-q8_0"
 

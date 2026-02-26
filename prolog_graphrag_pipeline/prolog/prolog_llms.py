@@ -3,7 +3,7 @@ import signal
 import threading
 
 # Prolog code generation benefits from a code-tuned model
-PROLOG_MODEL = 'qwen2.5-coder:3b-instruct-q8_0'
+PROLOG_MODEL = 'llama3.2:3b-instruct-q8_0'
 # Natural language tasks (explanation, close-check, final synthesis) stay on llama3.2
 NL_MODEL = 'llama3.2:3b-instruct-q8_0'
 OLLAMA_TIMEOUT = 600  # seconds per LLM call (10 minutes)
