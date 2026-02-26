@@ -151,7 +151,7 @@ def patched_vector_cypher_search(self, query_text, top_k=5, **kwargs):
     if hasattr(self, 'llm') and self.llm:
         if not hasattr(self, 'kbpedia_retriever'):
              from .kbpedia_retriever import KBPediaRetriever
-             self.kbpedia_retriever = KBPediaRetriever(driver=self._driver, llm=self.llm, top_k=top_k, triple_filter=True)
+             self.kbpedia_retriever = KBPediaRetriever(driver=self._driver, llm=self.llm, top_k=top_k, triple_filter=False)
         
         kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query)
         if kb_result and kb_result.items:
