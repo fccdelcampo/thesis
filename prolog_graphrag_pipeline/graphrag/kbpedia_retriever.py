@@ -25,11 +25,12 @@ class KBPediaRetriever:
 
     _index_verified = False
 
-    def __init__(self, driver, llm=None, top_k: int = 4, triple_filter: bool = False):
+    def __init__(self, driver, llm=None, top_k: int = 4, triple_filter: bool = False, hybrid_triple_filter: bool = True):
         self.driver  = driver
         self.llm     = llm
         self.top_k   = top_k
         self.triple_filter = triple_filter  # False = fast (1 LLM call at end); True = rigorous per-concept LLM filter
+        self.hybrid_triple_filter = hybrid_triple_filter # Only active if triple_filter=False. Determines if the validated concepts undergo rigorous triple filtering.
 
     def _verify_index(self):
         """Check once whether the KBPedia fulltext index exists."""
@@ -461,13 +462,16 @@ Output ONLY the JSON list, nothing else.
             filtered_candidates = self._filter_concepts_once(query_text, candidates, original_query=filter_query)
             print(f"DEBUG: End-filter kept {len(filtered_candidates)}/{len(candidates)} concepts.", flush=True)
             for c in filtered_candidates[:top_k]:
-                # Hybrid Mode: Triple filter ONLY on the validated concepts
-                print(f"DEBUG: Built {len(c['triples'])} raw triple(s) for validated concept '{c['name']}'. Sending to LLM filter...", flush=True)
-                selected_triples = self.filter_triples_for_query(query_text, c["name"], c["triples"], original_query=filter_query)
-                print(f"DEBUG: LLM filter kept {len(selected_triples)}/{len(c['triples'])} triple(s) for '{c['name']}'", flush=True)
+                selected_triples = c["triples"]
 
-                if not selected_triples:
-                    continue
+                if self.hybrid_triple_filter:
+                    # Hybrid Mode: Triple filter ONLY on the validated concepts
+                    print(f"DEBUG: Built {len(c['triples'])} raw triple(s) for validated concept '{c['name']}'. Sending to LLM filter...", flush=True)
+                    selected_triples = self.filter_triples_for_query(query_text, c["name"], c["triples"], original_query=filter_query)
+                    print(f"DEBUG: LLM filter kept {len(selected_triples)}/{len(c['triples'])} triple(s) for '{c['name']}'", flush=True)
+
+                    if not selected_triples:
+                        continue
 
                 triples_text = "\n".join([f"  - {t}" for t in selected_triples])
                 content = f"KBPedia Concept: {c['name']}.\nRelevant Logical Facts:\n{triples_text}"

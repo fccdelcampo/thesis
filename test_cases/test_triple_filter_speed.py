@@ -18,9 +18,9 @@ def test_triple_filter_speed():
     encoder_llm, retriever_llm, embedder = gd.initialize_models()
     
     print("\n" + "="*50)
-    print("TEST 1: FAST MODE (triple_filter=False)")
+    print("TEST 1: ORIGINAL FAST MODE (hybrid_triple_filter=False)")
     print("="*50)
-    retriever_fast = KBPediaRetriever(driver=gd.neo4j_driver, llm=retriever_llm, top_k=5, triple_filter=False)
+    retriever_fast = KBPediaRetriever(driver=gd.neo4j_driver, llm=retriever_llm, top_k=5, triple_filter=False, hybrid_triple_filter=False)
     
     start_time = time.time()
     result_fast = retriever_fast.search(query_text=extracted_query, top_k=5, original_query=question)
@@ -31,9 +31,9 @@ def test_triple_filter_speed():
     print(f"[FAST MODE] Items retrieved: {len(result_fast.items)}")
     
     print("\n" + "="*50)
-    print("TEST 2: RIGOROUS MODE (triple_filter=True)")
+    print("TEST 2: HYBRID MODE (hybrid_triple_filter=True)")
     print("="*50)
-    retriever_rigorous = KBPediaRetriever(driver=gd.neo4j_driver, llm=retriever_llm, top_k=5, triple_filter=True)
+    retriever_rigorous = KBPediaRetriever(driver=gd.neo4j_driver, llm=retriever_llm, top_k=5, triple_filter=False, hybrid_triple_filter=True)
     
     start_time = time.time()
     result_rigorous = retriever_rigorous.search(query_text=extracted_query, top_k=5, original_query=question)
@@ -44,7 +44,7 @@ def test_triple_filter_speed():
     print(f"[RIGOROUS MODE] Items retrieved: {len(result_rigorous.items)}")
     
     print("\n" + "="*50)
-    print(f"CONCLUSION: Rigorous Mode was {rigorous_duration - fast_duration:.2f} seconds slower.")
+    print(f"CONCLUSION: Hybrid Mode was {rigorous_duration - fast_duration:.2f} seconds slower.")
     print("="*50)
 
 if __name__ == "__main__":
