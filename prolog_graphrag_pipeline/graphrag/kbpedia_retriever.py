@@ -50,13 +50,12 @@ class KBPediaRetriever:
             print(f"DEBUG: Error verifying KBPedia index: {e}")
             return False
 
-    def extract_entities(self, query: str, include_keywords: bool = False) -> List[str]:
+    def extract_entities(self, query: str) -> List[str]:
         """
         Hybrid entity extraction:
         1. Uses Regex to accurately pull exact MCQ choices (fast and prevents LLM formatting crashes).
         2. Uses LLM to extract explicit entities and implied conceptual terms from the question stem.
         3. Combines and prioritizes the lists.
-        Optional `include_keywords=True`: Also extracts all non-stop-words to test if density improves recall.
         """
         # --- 1. Regex MCQ Extraction ---
         mcq_choices = [c.strip() for c in re.findall(r'\b[A-D][.)]\s*(.+?)(?=\s+\b[A-D][.)]|$)', query)]
@@ -66,22 +65,19 @@ class KBPediaRetriever:
         # --- 2. LLM Conceptual Extraction ---
         llm_entities = []
         if self.llm:
-            # Strip MCQ choices from the query sent to LLM so it focuses purely on the concepts
-            query_stem = re.sub(r'\b[A-D][.)]\s*(.+?)(?=\s+\b[A-D][.)]|$)', '', query).strip()
-            
+            # We provide the FULL query (stem + options) to the LLM so it can deduce context
+            # and extract underlying concepts from the answer choices as well.
             prompt = f"""You are extracting search terms for a knowledge base lookup.
 
-Given this query, extract ONLY the following:
-1. **Explicit entities** mentioned (e.g., "plant cell", "animal skeleton")
-2. **Implied functional concepts** that the question is really asking about (e.g., if the question is "what makes leaves green?", extract "chlorophyll", "photosynthesis")
-3. **Related scientific terms** that would help answer (e.g., "rigidity", "endoskeleton")
+Given this query (which may include multiple-choice options), extract the following:
+1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton")
+2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis")
+3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").
 
-Do NOT try to extract answer choices. Just the core scientific or conceptual topics.
+Query: "{query}"
 
-Query: "{query_stem}"
-
-Output a plain JSON list of strings. Include 3-6 terms maximum. Do not include anything else.
-Example: ["plant cell", "structural support", "cell wall"]"""
+Output a plain JSON list of strings. Include 4-8 terms maximum.
+Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
             
             try:
                 response = self.llm.invoke(prompt)
@@ -101,39 +97,20 @@ Example: ["plant cell", "structural support", "cell wall"]"""
             except Exception as e:
                 print(f"DEBUG: KBPedia entity extraction LLM failed: {e}")
 
-        # --- 3. Optional Keyword Extraction (Bloat Test) ---
-        keyword_entities = []
-        if include_keywords:
-            stop_words = {
-                'what', 'which', 'where', 'when', 'who', 'how', 'the', 'that',
-                'this', 'with', 'from', 'into', 'have', 'most', 'some', 'such',
-                'does', 'will', 'each', 'they', 'their', 'would', 'could', 'more',
-                'than', 'also', 'like', 'make', 'used', 'being', 'been', 'were',
-                'about', 'other', 'only', 'over', 'both', 'very', 'after', 
-                'following', 'these', 'those'
-            }
-            cleaned = re.sub(r'\b[A-D][.)]\s?', ' ', query)
-            cleaned = re.sub(r'[?!,;:()\[\]]', ' ', cleaned).replace('\n', ' ')
-            words = cleaned.split()
-            keyword_entities = [
-                w.strip('.').lower() for w in words
-                if len(w) >= 4 and w.lower().strip('.') not in stop_words
-            ]
-
-        # --- 4. Fallback ---
-        # If LLM fails or is missing, and we didn't include_keywords
-        if not llm_entities and not keyword_entities:
+        # --- 3. Fallback ---
+        # If LLM fails or is missing, use basic word splitting for the stem
+        if not llm_entities:
             stem = re.sub(r'\b[A-D][.)]\s?', ' ', query)
             stem = re.sub(r'[?!,;:()\[\]]', ' ', stem).replace('\n', ' ')
             words = [w.strip('.').lower() for w in stem.split() if len(w) >= 5]
             llm_entities = words[:5]
 
-        # --- 5. Combine and deduplicate ---
+        # --- 4. Combine and deduplicate ---
         unique_entities = []
         seen = set()
         
-        # Prioritize MCQ choices first, then LLM concepts, then raw keywords
-        for phrase in mcq_choices + llm_entities + keyword_entities:
+        # Prioritize MCQ choices first, then LLM concepts
+        for phrase in mcq_choices + llm_entities:
             if phrase and phrase not in seen:
                 seen.add(phrase)
                 unique_entities.append(phrase)
@@ -432,7 +409,7 @@ Output ONLY the JSON list, nothing else.
             print(f"DEBUG: End-filter LLM call failed: {e}. Returning all candidates.", flush=True)
             return candidates
 
-    def search(self, query_text: str, top_k: int = 5, original_query: str = "", include_keywords: bool = False) -> Any:
+    def search(self, query_text: str, top_k: int = 5, original_query: str = "") -> Any:
         from .retriever import RetrieverResult, RetrieverResultItem
 
         if not self._verify_index():
@@ -445,7 +422,7 @@ Output ONLY the JSON list, nothing else.
 
         # ── Entity extraction ─────────────────────────────────────────────────
         print(f"DEBUG: [KBPedia] Querying for: '{query_text}'", flush=True)
-        entities = self.extract_entities(query_text, include_keywords=include_keywords)
+        entities = self.extract_entities(query_text)
         print(f"DEBUG: Extracted entities for KBPedia: {entities}", flush=True)
 
         seen_uris = set()
