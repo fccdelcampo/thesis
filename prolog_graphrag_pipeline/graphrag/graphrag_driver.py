@@ -154,6 +154,7 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     )
 
     # 2. Initialize Embedder
+    # Set the model explicitly so Neo4j uses the correct dimensionality (3072 for llama3.2:3b, 4096 for llama3.1:8b).
     embedder = OllamaEmbeddings(
         model=RETRIEVER_MODEL
     )
@@ -265,14 +266,14 @@ def run_pipeline(user_question) -> dict:
     print("DEBUG [run_pipeline]: Starting generate (retriever + LLM)...", flush=True)
     generation_result = generate(llm=retriever_llm, retriever=retriever, query=query, original_query=user_question)
     print("DEBUG [run_pipeline]: generate done. Returning result.", flush=True)
-    # generation_result is now a dict: {'answer': str, 'contexts': list}
     
+    # generation_result is a dict: {'answer': str, 'contexts': list}
     return {
         "query": query,
         "text_context": text_context,
-        "answer": generation_result["answer"],
-        "contexts": generation_result["contexts"]
-            }
+        "answer": generation_result.get("answer", "No answer generated."),
+        "contexts": generation_result.get("contexts", [])
+    }
 
 async def test_process_pdf_context(kg_builder_pdf: SimpleKGPipeline):
     await process_pdf_documents(kg_builder_pdf)

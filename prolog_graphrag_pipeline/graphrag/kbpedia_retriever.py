@@ -383,7 +383,7 @@ Output ONLY the JSON list, nothing else.
         # ── Entity extraction ─────────────────────────────────────────────────
         if self.triple_filter:
             print(f"DEBUG: [KBPedia RIGOROUS mode] Querying for: '{query_text}'", flush=True)
-            entities = self.extract_entities_from_query(query_text)
+            entities = self._extract_entities_fast(query_text)
         else:
             print(f"DEBUG: [KBPedia FAST mode] Querying for: '{query_text}'", flush=True)
             entities = self._extract_entities_fast(query_text)
@@ -461,12 +461,20 @@ Output ONLY the JSON list, nothing else.
             filtered_candidates = self._filter_concepts_once(query_text, candidates, original_query=filter_query)
             print(f"DEBUG: End-filter kept {len(filtered_candidates)}/{len(candidates)} concepts.", flush=True)
             for c in filtered_candidates[:top_k]:
-                triples_text = "\n".join([f"  - {t}" for t in c["triples"]])
+                # Hybrid Mode: Triple filter ONLY on the validated concepts
+                print(f"DEBUG: Built {len(c['triples'])} raw triple(s) for validated concept '{c['name']}'. Sending to LLM filter...", flush=True)
+                selected_triples = self.filter_triples_for_query(query_text, c["name"], c["triples"], original_query=filter_query)
+                print(f"DEBUG: LLM filter kept {len(selected_triples)}/{len(c['triples'])} triple(s) for '{c['name']}'", flush=True)
+
+                if not selected_triples:
+                    continue
+
+                triples_text = "\n".join([f"  - {t}" for t in selected_triples])
                 content = f"KBPedia Concept: {c['name']}.\nRelevant Logical Facts:\n{triples_text}"
                 items.append(RetrieverResultItem(
                     content=content,
                     metadata={"source": "KBPedia", "entity": c["name"],
-                              "uri": c["uri"], "score": 1.0, "triples": c["triples"]},
+                              "uri": c["uri"], "score": 1.0, "triples": selected_triples},
                 ))
 
         print(f"DEBUG: KBPedia found {len(items)} grounded concept contexts.", flush=True)

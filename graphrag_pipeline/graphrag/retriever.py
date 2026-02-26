@@ -110,7 +110,7 @@ class EnhancedRetriever(VectorCypherRetriever):
         if self.llm:
             if not hasattr(self, 'kbpedia_retriever'):
                 from prolog_graphrag_pipeline.graphrag.kbpedia_retriever import KBPediaRetriever
-                self.kbpedia_retriever = KBPediaRetriever(driver=self.driver, llm=self.llm, top_k=top_k)
+                self.kbpedia_retriever = KBPediaRetriever(driver=self.driver, llm=self.llm, top_k=top_k, triple_filter=True)
 
             kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query)
             if kb_result and kb_result.items:

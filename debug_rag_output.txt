@@ -1,9 +1,9 @@
 ==================================================
- QUERY: Which feature does not form as a result of tectonic plates diverging?
-A. trench
-B. rift valley
-C. ocean basin
-D. mid-ocean ridge
+ QUERY: What could be used as an electrical conductor
+A. A penny
+B. Shoe laces
+C. Wood
+D. A button
 ==================================================
 
 --- RETRIEVED CONTEXT (Top 5 Chunks) ---
@@ -11,163 +11,193 @@ D. mid-ocean ridge
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "oceanic ridge",
-  "uri": "http://kbpedia.org/kko/rc/OceanicRidge",
+  "entity": "men's shoe",
+  "uri": "http://kbpedia.org/kko/rc/MensShoe",
   "score": 1.0,
   "triples": [
-    "definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This",
-    "subclass of: plate tectonics",
-    "ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: \u03c4\u03b5\u03ba\u03c4\u03bf\u03bd\u03b9\u03ba\u03cc\u03c2 pertaining to building) is a scientific theory describing the large-scale ",
-    "subclass of: scientific discipline",
-    "ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and pr",
-    "subclass of: field of study",
-    "ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h",
-    "sibling concept: Aulacogen",
-    "sibling concept: continental fragment",
-    "sibling concept: craton",
-    "sibling concept: fracture zone",
-    "sibling concept: geodynamics"
+    "definition: The collection of all men's shoes. A type of MensClothing and Shoe.",
+    "subclass of: men's clothing",
+    "ancestor definition: A specialization of Clothing_Generic. Each specialization of MensClothing is a type of clothing item worn usually by men. Specializations of MensCloth",
+    "subclass of: shoe",
+    "ancestor definition: A shoe is an item of footwear intended to protect and comfort the human foot while doing various activities. Shoes are also used as an item of decorat",
+    "subclass of: clothing",
+    "ancestor definition: This is the broadest category for all clothing items. This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used sy",
+    "subclass of: clothing item",
+    "ancestor definition: A specialization of Clothing_Generic. Each instance of ClothingItem is something that a person wears as a protective and/or decorative covering or orn",
+    "subclass of: footwear",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of footwe",
+    "subclass of: covering",
+    "ancestor definition: The collection of all objects designed or evolved to be used as coverings for other objects. The intended purpose could be to shelter or protect the c",
+    "subclass of: non-powered device",
+    "ancestor definition: A specialization of PhysicalDevice. Each instance of NonPoweredDevice is a device which does not need to have any kind of energy supplied to it in ord",
+    "subclass of: personal care and luggage and apparel product",
+    "ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers apparel and luggage an",
+    "has subclass: men's casual shoe",
+    "has subclass: men's dress shoe",
+    "sibling concept: black tie",
+    "sibling concept: boxer shorts",
+    "sibling concept: cap-toe shoe",
+    "sibling concept: coat or jacket",
+    "sibling concept: dinner jacket"
   ]
 }
 
 [Chunk 1 | Score: 1.0000]
-KBPedia Concept: oceanic ridge. Relevant Logical Facts:   - definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This   - subclass of: plate tectonics   - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale    - subclass of: scientific discipline   - ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and pr   - subclass of: field of study   - ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h   - sibling concept: Aulacogen   - sibling concept: continental fragment   - sibling concept: craton   - sibling concept: fracture zone   - sibling concept: geodynamics
+KBPedia Concept: men's shoe. Relevant Logical Facts:   - definition: The collection of all men's shoes. A type of MensClothing and Shoe.   - subclass of: men's clothing   - ancestor definition: A specialization of Clothing_Generic. Each specialization of MensClothing is a type of clothing item worn usually by men. Specializations of MensCloth   - subclass of: shoe   - ancestor definition: A shoe is an item of footwear intended to protect and comfort the human foot while doing various activities. Shoes are also used as an item of decorat   - subclass of: clothing   - ancestor definition: This is the broadest category for all clothing items. This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used sy   - subclass of: clothing item   - ancestor definition: A specialization of Clothing_Generic. Each instance of ClothingItem is something that a person wears as a protective and/or decorative covering or orn   - subclass of: footwear   - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of footwe   - subclass of: covering   - ancestor definition: The collection of all objects designed or evolved to be used as coverings for other objects. The intended purpose could be to shelter or protect the c   - subclass of: non-powered device   - ancestor definition: A specialization of PhysicalDevice. Each instance of NonPoweredDevice is a device which does not need to have any kind of energy supplied to it in ord   - subclass of: personal care and luggage and apparel product   - ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers apparel and luggage an   - has subclass: men's casual shoe   - has subclass: men's dress shoe   - sibling concept: black tie   - sibling concept: boxer shorts   - sibling concept: cap-toe shoe   - sibling concept: coat or jacket   - sibling concept: dinner jacket
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "beach ridge",
-  "uri": "http://kbpedia.org/kko/rc/BeachRidge",
+  "entity": "mouse button",
+  "uri": "http://kbpedia.org/kko/rc/MouseButton",
   "score": 1.0,
   "triples": [
-    "definition: A specialization of Ridge-Hill. Each BeachRidge is found on a SandyBeach.",
-    "subclass of: ridge-hill",
-    "ancestor definition: A specialization of both Ridge and Hill. Each instance of Ridge_Hill is a hill with a linearly extended crest and two slopes to either side. The top o",
-    "subclass of: site that is also a geographical thing",
-    "ancestor definition: The collectionIntersection of GeographicalThing and Place (q.v.).",
-    "subclass of: hill",
-    "ancestor definition: A specialization of VerticalProtrusion_Topographical. Each instance of Hill is a convex protrusion from the surface of a planet that is smaller than a",
-    "subclass of: ridge",
-    "ancestor definition: This is the collection of all ridges that stick out from other objects. More precisely, each instance of Ridge is a long and thin, bilaterally symmetr",
-    "subclass of: high ground",
-    "ancestor definition: A military term and an instance of TerrainTypeBySurfaceLevel. The central feature point of high ground terrain (e.g. the hilltop of a hill) is typical",
-    "subclass of: geographical thing",
-    "ancestor definition: A specialization of EnduringThing_Localized. This collection may be thought of as consisting of all the entities which are localizable within the cont",
-    "subclass of: spatial thing",
-    "ancestor definition: A specialization of Individual. The collection of all things that have a spatial extent or location relative to some other SpatialThing or in some emb",
-    "subclass of: defensively advantageous terrain",
-    "ancestor definition: The collection of geographical regions that are useful for defensive actions. Note that it is possible for a geographical region to be both offensive ",
-    "sibling concept: cuesta",
-    "sibling concept: dorsum",
-    "sibling concept: flexus"
+    "definition: The prototype mouse button.",
+    "subclass of: computer input device",
+    "ancestor definition: A specialization of ComputerInterfaceDevice. Each instance of this collection is an ElectronicDevice which delivers information from a user to a compu",
+    "subclass of: electrical button",
+    "ancestor definition: The collection of all electrical buttons. A type of ElectricalSwitch and Button_ControlDevice. The collection ElectricalButton is a #$ManufacturedGood",
+    "subclass of: computer interface device",
+    "ancestor definition: A specialization of ElectronicDevice. Each instance of this collection is a device that allows a user to communicate with a Computer. One sigificant s",
+    "subclass of: computer peripheral",
+    "ancestor definition: A specialization of ComputerHardwareItem. Each instance of this collection is an electronic device intended to be used with (but not in) some computer",
+    "subclass of: control button",
+    "ancestor definition: Telephone buttons, keyboard keys, doorbell buttons -- not buttons for clothes, but buttons that are depressed with the finger.",
+    "subclass of: switch",
+    "ancestor definition: A device that is placed in the path of electrical current (on a wire) to control its passage. In one position, the switch allows current to pass, and ",
+    "subclass of: computer component",
+    "ancestor definition: The collection of all computer components. A type of ComputerHardwareItem. The collection ComputerHardwareComponent is a ComputerHardwareDeviceType an",
+    "subclass of: control device",
+    "ancestor definition: ControlDevice is a specialization of ControlStructure_Physical and PhysicalDevice. Each instance of ControlDevice is a device whose primaryFunction is",
+    "sibling concept: computer keyboard",
+    "sibling concept: computer terminal",
+    "sibling concept: game controller",
+    "sibling concept: image input device",
+    "sibling concept: numeric keypad"
   ]
 }
 
 [Chunk 2 | Score: 1.0000]
-KBPedia Concept: beach ridge. Relevant Logical Facts:   - definition: A specialization of Ridge-Hill. Each BeachRidge is found on a SandyBeach.   - subclass of: ridge-hill   - ancestor definition: A specialization of both Ridge and Hill. Each instance of Ridge_Hill is a hill with a linearly extended crest and two slopes to either side. The top o   - subclass of: site that is also a geographical thing   - ancestor definition: The collectionIntersection of GeographicalThing and Place (q.v.).   - subclass of: hill   - ancestor definition: A specialization of VerticalProtrusion_Topographical. Each instance of Hill is a convex protrusion from the surface of a planet that is smaller than a   - subclass of: ridge   - ancestor definition: This is the collection of all ridges that stick out from other objects. More precisely, each instance of Ridge is a long and thin, bilaterally symmetr   - subclass of: high ground   - ancestor definition: A military term and an instance of TerrainTypeBySurfaceLevel. The central feature point of high ground terrain (e.g. the hilltop of a hill) is typical   - subclass of: geographical thing   - ancestor definition: A specialization of EnduringThing_Localized. This collection may be thought of as consisting of all the entities which are localizable within the cont   - subclass of: spatial thing   - ancestor definition: A specialization of Individual. The collection of all things that have a spatial extent or location relative to some other SpatialThing or in some emb   - subclass of: defensively advantageous terrain   - ancestor definition: The collection of geographical regions that are useful for defensive actions. Note that it is possible for a geographical region to be both offensive    - sibling concept: cuesta   - sibling concept: dorsum   - sibling concept: flexus
+KBPedia Concept: mouse button. Relevant Logical Facts:   - definition: The prototype mouse button.   - subclass of: computer input device   - ancestor definition: A specialization of ComputerInterfaceDevice. Each instance of this collection is an ElectronicDevice which delivers information from a user to a compu   - subclass of: electrical button   - ancestor definition: The collection of all electrical buttons. A type of ElectricalSwitch and Button_ControlDevice. The collection ElectricalButton is a #$ManufacturedGood   - subclass of: computer interface device   - ancestor definition: A specialization of ElectronicDevice. Each instance of this collection is a device that allows a user to communicate with a Computer. One sigificant s   - subclass of: computer peripheral   - ancestor definition: A specialization of ComputerHardwareItem. Each instance of this collection is an electronic device intended to be used with (but not in) some computer   - subclass of: control button   - ancestor definition: Telephone buttons, keyboard keys, doorbell buttons -- not buttons for clothes, but buttons that are depressed with the finger.   - subclass of: switch   - ancestor definition: A device that is placed in the path of electrical current (on a wire) to control its passage. In one position, the switch allows current to pass, and    - subclass of: computer component   - ancestor definition: The collection of all computer components. A type of ComputerHardwareItem. The collection ComputerHardwareComponent is a ComputerHardwareDeviceType an   - subclass of: control device   - ancestor definition: ControlDevice is a specialization of ControlStructure_Physical and PhysicalDevice. Each instance of ControlDevice is a device whose primaryFunction is   - sibling concept: computer keyboard   - sibling concept: computer terminal   - sibling concept: game controller   - sibling concept: image input device   - sibling concept: numeric keypad
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "Lake Nyasa",
-  "uri": "http://kbpedia.org/kko/rc/LakeNyasa",
+  "entity": "penny stock",
+  "uri": "http://kbpedia.org/kko/rc/PennyStock",
   "score": 1.0,
   "triples": [
-    "definition: Lake in the Great Rift Valley.",
-    "subclass of: fresh-water lake",
-    "ancestor definition: A specialization of Lake. Each instance of FreshWaterLake is a freshwater land-locked body of water. Examples include LakeMaracaibo, LakeWinnipeg, Lak",
-    "subclass of: lake",
-    "ancestor definition: A specialization of BodyOfWater. Each instance of Lake is a land-locked body of water, typically but not necessarily of fresh water. Two important spe",
-    "subclass of: fresh water",
-    "ancestor definition: Fresh water is naturally occurring  water on the Earth's surface in ice sheets, ice caps, glaciers, icebergs, bogs, ponds, lakes, rivers and streams, ",
-    "subclass of: body of water",
-    "ancestor definition: A specialization of TopographicalFeature. Each instance of BodyOfWater is a natural or artificial topographical feature consisting of a relatively lar",
-    "subclass of: water",
-    "ancestor definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or imp",
-    "subclass of: Water resource",
-    "ancestor definition: Water resources are sources of water that are potentially useful. The majority of human uses require fresh water.",
-    "sibling concept: Canadice Lake",
-    "sibling concept: Canandaigua Lake",
-    "sibling concept: Cayuga Lake",
-    "sibling concept: China Lake",
-    "sibling concept: Crater Lake"
+    "definition: The collection of all penny stocks. A type of Stock.",
+    "subclass of: stock",
+    "ancestor definition: A specialization of AuthorizedAgreement and TradeableSecurity. Each instance of this collection is a share of ownership in some instance of LegalCorpo",
+    "subclass of: equity",
+    "ancestor definition: The collection of instances of TradeableSecurity, ownership of which confers ownership in some company.",
+    "subclass of: tradeable security",
+    "ancestor definition: The collection of Agreements (some of which are technically LoanAgreements) issued by Organizations (typical examples include LegalCorporations and Lo",
+    "sibling concept: blue chip stock",
+    "sibling concept: common stock",
+    "sibling concept: Growth stock",
+    "sibling concept: IPO stock",
+    "sibling concept: large cap stock"
   ]
 }
 
 [Chunk 3 | Score: 1.0000]
-KBPedia Concept: Lake Nyasa. Relevant Logical Facts:   - definition: Lake in the Great Rift Valley.   - subclass of: fresh-water lake   - ancestor definition: A specialization of Lake. Each instance of FreshWaterLake is a freshwater land-locked body of water. Examples include LakeMaracaibo, LakeWinnipeg, Lak   - subclass of: lake   - ancestor definition: A specialization of BodyOfWater. Each instance of Lake is a land-locked body of water, typically but not necessarily of fresh water. Two important spe   - subclass of: fresh water   - ancestor definition: Fresh water is naturally occurring  water on the Earth's surface in ice sheets, ice caps, glaciers, icebergs, bogs, ponds, lakes, rivers and streams,    - subclass of: body of water   - ancestor definition: A specialization of TopographicalFeature. Each instance of BodyOfWater is a natural or artificial topographical feature consisting of a relatively lar   - subclass of: water   - ancestor definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or imp   - subclass of: Water resource   - ancestor definition: Water resources are sources of water that are potentially useful. The majority of human uses require fresh water.   - sibling concept: Canadice Lake   - sibling concept: Canandaigua Lake   - sibling concept: Cayuga Lake   - sibling concept: China Lake   - sibling concept: Crater Lake
+KBPedia Concept: penny stock. Relevant Logical Facts:   - definition: The collection of all penny stocks. A type of Stock.   - subclass of: stock   - ancestor definition: A specialization of AuthorizedAgreement and TradeableSecurity. Each instance of this collection is a share of ownership in some instance of LegalCorpo   - subclass of: equity   - ancestor definition: The collection of instances of TradeableSecurity, ownership of which confers ownership in some company.   - subclass of: tradeable security   - ancestor definition: The collection of Agreements (some of which are technically LoanAgreements) issued by Organizations (typical examples include LegalCorporations and Lo   - sibling concept: blue chip stock   - sibling concept: common stock   - sibling concept: Growth stock   - sibling concept: IPO stock   - sibling concept: large cap stock
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "basin",
-  "uri": "http://kbpedia.org/kko/rc/Basin",
+  "entity": "apple tree wood",
+  "uri": "http://kbpedia.org/kko/rc/AppleTreeWood",
   "score": 1.0,
   "triples": [
-    "definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.",
-    "subclass of: walled cavity",
-    "ancestor definition: A specialization of PartiallyTangible and Cavity. Each instance of CavityWithWalls is an individual that spatially subsumes both the intangible space ",
-    "subclass of: site that is also a geographical thing",
-    "ancestor definition: The collectionIntersection of GeographicalThing and Place (q.v.).",
-    "subclass of: cavity",
-    "ancestor definition: The collection of all cavities, including instances of Crevice, deep concavities or holes, and cavities of containers (for example, the interior of a ",
-    "subclass of: geographical thing",
-    "ancestor definition: A specialization of EnduringThing_Localized. This collection may be thought of as consisting of all the entities which are localizable within the cont",
-    "subclass of: spatial thing",
-    "ancestor definition: A specialization of Individual. The collection of all things that have a spatial extent or location relative to some other SpatialThing or in some emb",
-    "subclass of: cavity or container",
-    "ancestor definition: The collection of all cavities, containers, and hollow objects. An instance of CavityOrContainer spatially subsumes a hollow space region, and might i",
-    "has subclass: geological basin",
-    "has subclass: bathtub",
-    "has subclass: bowl",
-    "has subclass: washbasin",
-    "sibling concept: abdominal cavity",
-    "sibling concept: acetabulum",
-    "sibling concept: alveolus",
-    "sibling concept: bodily orifice",
-    "sibling concept: cave"
+    "definition: The collection of all apple tree wood. A type of Wood.",
+    "subclass of: hardwood",
+    "ancestor definition: includes wood from many deciduous broadleaved temperate trees, including oak, ash, maple, etc. These trees have wood that is much harder that that of ",
+    "subclass of: wood",
+    "ancestor definition: This \u2018class\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product \u2018class\u2019 is an aggregate of wood. Th",
+    "subclass of: combustible material",
+    "ancestor definition: The Collection CombustibleMaterial that groups together instances of ExistingStuffType which are capable of playing the role stuffUsed in instances of",
+    "subclass of: fibrous thing",
+    "ancestor definition: The collection of instances of PartiallyTangible composed mainly of Fibers.",
+    "subclass of: non edible plant or forestry product",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of non ed",
+    "subclass of: raw materials",
+    "ancestor definition: The collection of all instances of PartiallyTangible that are used as raw materials for the purpose of manufacturing.",
+    "subclass of: plant material",
+    "ancestor definition: A specialization of both NaturalTangibleStuff and #$OrganicStuff. Each instance of VegetableMatter is a piece of stuff (solid, liquid, or, improbably ",
+    "sibling concept: alder tree wood",
+    "sibling concept: basswood",
+    "sibling concept: birch tree wood",
+    "sibling concept: cherry tree wood",
+    "sibling concept: cherry wood"
   ]
 }
 
 [Chunk 4 | Score: 1.0000]
-KBPedia Concept: basin. Relevant Logical Facts:   - definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.   - subclass of: walled cavity   - ancestor definition: A specialization of PartiallyTangible and Cavity. Each instance of CavityWithWalls is an individual that spatially subsumes both the intangible space    - subclass of: site that is also a geographical thing   - ancestor definition: The collectionIntersection of GeographicalThing and Place (q.v.).   - subclass of: cavity   - ancestor definition: The collection of all cavities, including instances of Crevice, deep concavities or holes, and cavities of containers (for example, the interior of a    - subclass of: geographical thing   - ancestor definition: A specialization of EnduringThing_Localized. This collection may be thought of as consisting of all the entities which are localizable within the cont   - subclass of: spatial thing   - ancestor definition: A specialization of Individual. The collection of all things that have a spatial extent or location relative to some other SpatialThing or in some emb   - subclass of: cavity or container   - ancestor definition: The collection of all cavities, containers, and hollow objects. An instance of CavityOrContainer spatially subsumes a hollow space region, and might i   - has subclass: geological basin   - has subclass: bathtub   - has subclass: bowl   - has subclass: washbasin   - sibling concept: abdominal cavity   - sibling concept: acetabulum   - sibling concept: alveolus   - sibling concept: bodily orifice   - sibling concept: cave
+KBPedia Concept: apple tree wood. Relevant Logical Facts:   - definition: The collection of all apple tree wood. A type of Wood.   - subclass of: hardwood   - ancestor definition: includes wood from many deciduous broadleaved temperate trees, including oak, ash, maple, etc. These trees have wood that is much harder that that of    - subclass of: wood   - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of wood. Th   - subclass of: combustible material   - ancestor definition: The Collection CombustibleMaterial that groups together instances of ExistingStuffType which are capable of playing the role stuffUsed in instances of   - subclass of: fibrous thing   - ancestor definition: The collection of instances of PartiallyTangible composed mainly of Fibers.   - subclass of: non edible plant or forestry product   - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of non ed   - subclass of: raw materials   - ancestor definition: The collection of all instances of PartiallyTangible that are used as raw materials for the purpose of manufacturing.   - subclass of: plant material   - ancestor definition: A specialization of both NaturalTangibleStuff and #$OrganicStuff. Each instance of VegetableMatter is a piece of stuff (solid, liquid, or, improbably    - sibling concept: alder tree wood   - sibling concept: basswood   - sibling concept: birch tree wood   - sibling concept: cherry tree wood   - sibling concept: cherry wood
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "trench coat",
-  "uri": "http://kbpedia.org/kko/rc/TrenchCoat",
+  "entity": "fuse (electrical)",
+  "uri": "http://kbpedia.org/kko/rc/Fuse-ElectricalComponent",
   "score": 1.0,
   "triples": [
-    "definition: The collection of all trench coats. A type of RainCoat. The collection TrenchCoat is a SomethingToWearTypeByGenericCategory and a SpatiallyDisjointObjectType.",
-    "subclass of: raincoat",
-    "ancestor definition: The collection of all rain coats",
-    "subclass of: coat",
-    "ancestor definition: The set of all coats.",
-    "subclass of: rain gear",
-    "ancestor definition: The collection of clothes which are worn for protection from the elements.",
-    "subclass of: overgarment",
-    "ancestor definition: A specialization of OuterGarment. Each instance of OverGarment is a piece of clothing designed to be worn outside of other garments, usually other Out",
-    "subclass of: protective garment",
-    "ancestor definition: ProtectiveAttire is a specialization of SomethingToWear. Each instance of ProtectiveAttire is something to wear that is designed to protect its wearer"
+    "definition: Device that prevents another electrical device from drawing too much electrical current.",
+    "subclass of: circuit protection device",
+    "ancestor definition: This \u2018class\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product \u2018class\u2019 is an aggregate of circuit ",
+    "subclass of: electrical component",
+    "ancestor definition: An electronic component is any basic discrete device or physical entity in an electronic system used to affect electrons or their associated fields. E",
+    "subclass of: electrical equipment or component",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of electr",
+    "subclass of: electrical device",
+    "ancestor definition: A specialization of PoweredDevice. Each instance of ElectricalDevice is a device that requires an input of electrical current (as its energySourceForE",
+    "subclass of: electrical engineering",
+    "ancestor definition: Electrical engineering is a field of engineering that generally deals with the study and application of electricity, electronics, and electromagnetism",
+    "subclass of: part",
+    "ancestor definition: The collection of things that are best thought of as parts of other things, and about which we might have something useful to say. Think of table legs",
+    "subclass of: transportation component or system",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of transp",
+    "subclass of: electrical lighting device",
+    "ancestor definition: Devices that provide light by transforming electrical current into light energy. This main product category is drawn from UNSPSC, readily converted in",
+    "has subclass: car fuse",
+    "has subclass: house fuse",
+    "has subclass: surge protector",
+    "sibling concept: circuit breaker",
+    "sibling concept: audio tape deck mechanism",
+    "sibling concept: power sun roof",
+    "sibling concept: automatic window",
+    "sibling concept: automotive electronics"
   ]
 }
 
 [Chunk 5 | Score: 1.0000]
-KBPedia Concept: trench coat. Relevant Logical Facts:   - definition: The collection of all trench coats. A type of RainCoat. The collection TrenchCoat is a SomethingToWearTypeByGenericCategory and a SpatiallyDisjointObjectType.   - subclass of: raincoat   - ancestor definition: The collection of all rain coats   - subclass of: coat   - ancestor definition: The set of all coats.   - subclass of: rain gear   - ancestor definition: The collection of clothes which are worn for protection from the elements.   - subclass of: overgarment   - ancestor definition: A specialization of OuterGarment. Each instance of OverGarment is a piece of clothing designed to be worn outside of other garments, usually other Out   - subclass of: protective garment   - ancestor definition: ProtectiveAttire is a specialization of SomethingToWear. Each instance of ProtectiveAttire is something to wear that is designed to protect its wearer
+KBPedia Concept: fuse (electrical). Relevant Logical Facts:   - definition: Device that prevents another electrical device from drawing too much electrical current.   - subclass of: circuit protection device   - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of circuit    - subclass of: electrical component   - ancestor definition: An electronic component is any basic discrete device or physical entity in an electronic system used to affect electrons or their associated fields. E   - subclass of: electrical equipment or component   - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of electr   - subclass of: electrical device   - ancestor definition: A specialization of PoweredDevice. Each instance of ElectricalDevice is a device that requires an input of electrical current (as its energySourceForE   - subclass of: electrical engineering   - ancestor definition: Electrical engineering is a field of engineering that generally deals with the study and application of electricity, electronics, and electromagnetism   - subclass of: part   - ancestor definition: The collection of things that are best thought of as parts of other things, and about which we might have something useful to say. Think of table legs   - subclass of: transportation component or system   - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of transp   - subclass of: electrical lighting device   - ancestor definition: Devices that provide light by transforming electrical current into light energy. This main product category is drawn from UNSPSC, readily converted in   - has subclass: car fuse   - has subclass: house fuse   - has subclass: surge protector   - sibling concept: circuit breaker   - sibling concept: audio tape deck mechanism   - sibling concept: power sun roof   - sibling concept: automatic window   - sibling concept: automotive electronics
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-A trench does not form as a result of tectonic plates diverging; it forms when two continental plates collide and push up the Earth's crust, creating mountains or volcanoes on either side. The correct answer related to plate divergence would be B (rift valley), C (ocean basin), or D (mid-ocean ridge).
+Based on the provided information, I will choose an answer that is most relevant to the question.
+
+The correct answer would be related to electrical devices or components. However, since there are multiple options and no specific context for comparison, it's challenging to pinpoint a single best choice without more details about what you're looking for (e.g., something used in electronics, safety features of fuses).
+
+Given this ambiguity:
+
+- **Fuse** is directly mentioned as an electrical device that prevents another electrical device from drawing too much current. It fits the description well but might not be the only relevant option.
+  
+Considering general relevance and specificity to "electrical" or related concepts without further context for comparison, I would suggest selecting a fuse (electrical) due to its direct association with preventing overcurrent in circuits.
+
+However, if you're looking for something more specific like safety devices used in electronics, then the answer might lean towards **Fuse**.
 ==================================================
 ==================================================
- QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+ QUERY: What could be used as an electrical conductor? A) A penny B) Shoe laces C) Wood D) A button
 ==================================================
 
 --- RETRIEVED CONTEXT (Top 5 Items) ---
@@ -175,171 +205,186 @@ A trench does not form as a result of tectonic plates diverging; it forms when t
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "oceanic ridge",
-  "uri": "http://kbpedia.org/kko/rc/OceanicRidge",
+  "entity": "men's shoe",
+  "uri": "http://kbpedia.org/kko/rc/MensShoe",
   "score": 1.0,
   "triples": [
-    "definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This",
-    "subclass of: plate tectonics",
-    "ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: \u03c4\u03b5\u03ba\u03c4\u03bf\u03bd\u03b9\u03ba\u03cc\u03c2 pertaining to building) is a scientific theory describing the large-scale ",
-    "subclass of: scientific discipline",
-    "ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and pr",
-    "subclass of: field of study",
-    "ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h",
-    "sibling concept: Aulacogen",
-    "sibling concept: continental fragment",
-    "sibling concept: craton",
-    "sibling concept: fracture zone",
-    "sibling concept: geodynamics"
+    "definition: The collection of all men's shoes. A type of MensClothing and Shoe.",
+    "subclass of: men's clothing",
+    "ancestor definition: A specialization of Clothing_Generic. Each specialization of MensClothing is a type of clothing item worn usually by men. Specializations of MensCloth",
+    "subclass of: shoe",
+    "ancestor definition: A shoe is an item of footwear intended to protect and comfort the human foot while doing various activities. Shoes are also used as an item of decorat",
+    "subclass of: clothing",
+    "ancestor definition: This is the broadest category for all clothing items. This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used sy",
+    "subclass of: clothing item",
+    "ancestor definition: A specialization of Clothing_Generic. Each instance of ClothingItem is something that a person wears as a protective and/or decorative covering or orn",
+    "subclass of: footwear",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of footwe",
+    "subclass of: covering",
+    "ancestor definition: The collection of all objects designed or evolved to be used as coverings for other objects. The intended purpose could be to shelter or protect the c",
+    "subclass of: non-powered device",
+    "ancestor definition: A specialization of PhysicalDevice. Each instance of NonPoweredDevice is a device which does not need to have any kind of energy supplied to it in ord",
+    "subclass of: personal care and luggage and apparel product",
+    "ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers apparel and luggage an",
+    "has subclass: men's casual shoe",
+    "has subclass: men's dress shoe",
+    "sibling concept: black tie",
+    "sibling concept: boxer shorts",
+    "sibling concept: cap-toe shoe",
+    "sibling concept: coat or jacket",
+    "sibling concept: dinner jacket"
   ]
 }
 [Item 1]
-[Chunk Score: 1.0000] KBPedia Concept: oceanic ridge. Relevant Logical Facts:  - definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This  - subclass of: plate tectonics  - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale  - subclass of: scientific discipline  - ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and pr  - subclass of: field of study  - ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h  - sibling concept: Aulacogen  - sibling concept: continental fragment  - sibling concept: craton  - sibling concept: fracture zone  - sibling concept: geodynamics
+[Chunk Score: 1.0000] KBPedia Concept: men's shoe. Relevant Logical Facts:  - definition: The collection of all men's shoes. A type of MensClothing and Shoe.  - subclass of: men's clothing  - ancestor definition: A specialization of Clothing_Generic. Each specialization of MensClothing is a type of clothing item worn usually by men. Specializations of MensCloth  - subclass of: shoe  - ancestor definition: A shoe is an item of footwear intended to protect and comfort the human foot while doing various activities. Shoes are also used as an item of decorat  - subclass of: clothing  - ancestor definition: This is the broadest category for all clothing items. This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used sy  - subclass of: clothing item  - ancestor definition: A specialization of Clothing_Generic. Each instance of ClothingItem is something that a person wears as a protective and/or decorative covering or orn  - subclass of: footwear  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of footwe  - subclass of: covering  - ancestor definition: The collection of all objects designed or evolved to be used as coverings for other objects. The intended purpose could be to shelter or protect the c  - subclass of: non-powered device  - ancestor definition: A specialization of PhysicalDevice. Each instance of NonPoweredDevice is a device which does not need to have any kind of energy supplied to it in ord  - subclass of: personal care and luggage and apparel product  - ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers apparel and luggage an  - has subclass: men's casual shoe  - has subclass: men's dress shoe  - sibling concept: black tie  - sibling concept: boxer shorts  - sibling concept: cap-toe shoe  - sibling concept: coat or jacket  - sibling concept: dinner jacket
 
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "beach ridge",
-  "uri": "http://kbpedia.org/kko/rc/BeachRidge",
+  "entity": "mouse button",
+  "uri": "http://kbpedia.org/kko/rc/MouseButton",
   "score": 1.0,
   "triples": [
-    "definition: A specialization of Ridge-Hill. Each BeachRidge is found on a SandyBeach.",
-    "subclass of: ridge-hill",
-    "ancestor definition: A specialization of both Ridge and Hill. Each instance of Ridge_Hill is a hill with a linearly extended crest and two slopes to either side. The top o",
-    "subclass of: site that is also a geographical thing",
-    "ancestor definition: The collectionIntersection of GeographicalThing and Place (q.v.).",
-    "subclass of: hill",
-    "ancestor definition: A specialization of VerticalProtrusion_Topographical. Each instance of Hill is a convex protrusion from the surface of a planet that is smaller than a",
-    "subclass of: ridge",
-    "ancestor definition: This is the collection of all ridges that stick out from other objects. More precisely, each instance of Ridge is a long and thin, bilaterally symmetr",
-    "subclass of: high ground",
-    "ancestor definition: A military term and an instance of TerrainTypeBySurfaceLevel. The central feature point of high ground terrain (e.g. the hilltop of a hill) is typical",
-    "subclass of: geographical thing",
-    "ancestor definition: A specialization of EnduringThing_Localized. This collection may be thought of as consisting of all the entities which are localizable within the cont",
-    "subclass of: spatial thing",
-    "ancestor definition: A specialization of Individual. The collection of all things that have a spatial extent or location relative to some other SpatialThing or in some emb",
-    "subclass of: defensively advantageous terrain",
-    "ancestor definition: The collection of geographical regions that are useful for defensive actions. Note that it is possible for a geographical region to be both offensive ",
-    "sibling concept: cuesta",
-    "sibling concept: dorsum",
-    "sibling concept: flexus"
+    "definition: The prototype mouse button.",
+    "subclass of: computer input device",
+    "ancestor definition: A specialization of ComputerInterfaceDevice. Each instance of this collection is an ElectronicDevice which delivers information from a user to a compu",
+    "subclass of: electrical button",
+    "ancestor definition: The collection of all electrical buttons. A type of ElectricalSwitch and Button_ControlDevice. The collection ElectricalButton is a #$ManufacturedGood",
+    "subclass of: computer interface device",
+    "ancestor definition: A specialization of ElectronicDevice. Each instance of this collection is a device that allows a user to communicate with a Computer. One sigificant s",
+    "subclass of: computer peripheral",
+    "ancestor definition: A specialization of ComputerHardwareItem. Each instance of this collection is an electronic device intended to be used with (but not in) some computer",
+    "subclass of: control button",
+    "ancestor definition: Telephone buttons, keyboard keys, doorbell buttons -- not buttons for clothes, but buttons that are depressed with the finger.",
+    "subclass of: switch",
+    "ancestor definition: A device that is placed in the path of electrical current (on a wire) to control its passage. In one position, the switch allows current to pass, and ",
+    "subclass of: computer component",
+    "ancestor definition: The collection of all computer components. A type of ComputerHardwareItem. The collection ComputerHardwareComponent is a ComputerHardwareDeviceType an",
+    "subclass of: control device",
+    "ancestor definition: ControlDevice is a specialization of ControlStructure_Physical and PhysicalDevice. Each instance of ControlDevice is a device whose primaryFunction is",
+    "sibling concept: computer keyboard",
+    "sibling concept: computer terminal",
+    "sibling concept: game controller",
+    "sibling concept: image input device",
+    "sibling concept: numeric keypad"
   ]
 }
 [Item 2]
-[Chunk Score: 1.0000] KBPedia Concept: beach ridge. Relevant Logical Facts:  - definition: A specialization of Ridge-Hill. Each BeachRidge is found on a SandyBeach.  - subclass of: ridge-hill  - ancestor definition: A specialization of both Ridge and Hill. Each instance of Ridge_Hill is a hill with a linearly extended crest and two slopes to either side. The top o  - subclass of: site that is also a geographical thing  - ancestor definition: The collectionIntersection of GeographicalThing and Place (q.v.).  - subclass of: hill  - ancestor definition: A specialization of VerticalProtrusion_Topographical. Each instance of Hill is a convex protrusion from the surface of a planet that is smaller than a  - subclass of: ridge  - ancestor definition: This is the collection of all ridges that stick out from other objects. More precisely, each instance of Ridge is a long and thin, bilaterally symmetr  - subclass of: high ground  - ancestor definition: A military term and an instance of TerrainTypeBySurfaceLevel. The central feature point of high ground terrain (e.g. the hilltop of a hill) is typical  - subclass of: geographical thing  - ancestor definition: A specialization of EnduringThing_Localized. This collection may be thought of as consisting of all the entities which are localizable within the cont  - subclass of: spatial thing  - ancestor definition: A specialization of Individual. The collection of all things that have a spatial extent or location relative to some other SpatialThing or in some emb  - subclass of: defensively advantageous terrain  - ancestor definition: The collection of geographical regions that are useful for defensive actions. Note that it is possible for a geographical region to be both offensive  - sibling concept: cuesta  - sibling concept: dorsum  - sibling concept: flexus
+[Chunk Score: 1.0000] KBPedia Concept: mouse button. Relevant Logical Facts:  - definition: The prototype mouse button.  - subclass of: computer input device  - ancestor definition: A specialization of ComputerInterfaceDevice. Each instance of this collection is an ElectronicDevice which delivers information from a user to a compu  - subclass of: electrical button  - ancestor definition: The collection of all electrical buttons. A type of ElectricalSwitch and Button_ControlDevice. The collection ElectricalButton is a #$ManufacturedGood  - subclass of: computer interface device  - ancestor definition: A specialization of ElectronicDevice. Each instance of this collection is a device that allows a user to communicate with a Computer. One sigificant s  - subclass of: computer peripheral  - ancestor definition: A specialization of ComputerHardwareItem. Each instance of this collection is an electronic device intended to be used with (but not in) some computer  - subclass of: control button  - ancestor definition: Telephone buttons, keyboard keys, doorbell buttons -- not buttons for clothes, but buttons that are depressed with the finger.  - subclass of: switch  - ancestor definition: A device that is placed in the path of electrical current (on a wire) to control its passage. In one position, the switch allows current to pass, and  - subclass of: computer component  - ancestor definition: The collection of all computer components. A type of ComputerHardwareItem. The collection ComputerHardwareComponent is a ComputerHardwareDeviceType an  - subclass of: control device  - ancestor definition: ControlDevice is a specialization of ControlStructure_Physical and PhysicalDevice. Each instance of ControlDevice is a device whose primaryFunction is  - sibling concept: computer keyboard  - sibling concept: computer terminal  - sibling concept: game controller  - sibling concept: image input device  - sibling concept: numeric keypad
 
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "Lake Nyasa",
-  "uri": "http://kbpedia.org/kko/rc/LakeNyasa",
+  "entity": "penny stock",
+  "uri": "http://kbpedia.org/kko/rc/PennyStock",
   "score": 1.0,
   "triples": [
-    "definition: Lake in the Great Rift Valley.",
-    "subclass of: fresh-water lake",
-    "ancestor definition: A specialization of Lake. Each instance of FreshWaterLake is a freshwater land-locked body of water. Examples include LakeMaracaibo, LakeWinnipeg, Lak",
-    "subclass of: lake",
-    "ancestor definition: A specialization of BodyOfWater. Each instance of Lake is a land-locked body of water, typically but not necessarily of fresh water. Two important spe",
-    "subclass of: fresh water",
-    "ancestor definition: Fresh water is naturally occurring  water on the Earth's surface in ice sheets, ice caps, glaciers, icebergs, bogs, ponds, lakes, rivers and streams, ",
-    "subclass of: body of water",
-    "ancestor definition: A specialization of TopographicalFeature. Each instance of BodyOfWater is a natural or artificial topographical feature consisting of a relatively lar",
-    "subclass of: water",
-    "ancestor definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or imp",
-    "subclass of: Water resource",
-    "ancestor definition: Water resources are sources of water that are potentially useful. The majority of human uses require fresh water.",
-    "sibling concept: Canadice Lake",
-    "sibling concept: Canandaigua Lake",
-    "sibling concept: Cayuga Lake",
-    "sibling concept: China Lake",
-    "sibling concept: Crater Lake"
+    "definition: The collection of all penny stocks. A type of Stock.",
+    "subclass of: stock",
+    "ancestor definition: A specialization of AuthorizedAgreement and TradeableSecurity. Each instance of this collection is a share of ownership in some instance of LegalCorpo",
+    "subclass of: equity",
+    "ancestor definition: The collection of instances of TradeableSecurity, ownership of which confers ownership in some company.",
+    "subclass of: tradeable security",
+    "ancestor definition: The collection of Agreements (some of which are technically LoanAgreements) issued by Organizations (typical examples include LegalCorporations and Lo",
+    "sibling concept: blue chip stock",
+    "sibling concept: common stock",
+    "sibling concept: Growth stock",
+    "sibling concept: IPO stock",
+    "sibling concept: large cap stock"
   ]
 }
 [Item 3]
-[Chunk Score: 1.0000] KBPedia Concept: Lake Nyasa. Relevant Logical Facts:  - definition: Lake in the Great Rift Valley.  - subclass of: fresh-water lake  - ancestor definition: A specialization of Lake. Each instance of FreshWaterLake is a freshwater land-locked body of water. Examples include LakeMaracaibo, LakeWinnipeg, Lak  - subclass of: lake  - ancestor definition: A specialization of BodyOfWater. Each instance of Lake is a land-locked body of water, typically but not necessarily of fresh water. Two important spe  - subclass of: fresh water  - ancestor definition: Fresh water is naturally occurring water on the Earth's surface in ice sheets, ice caps, glaciers, icebergs, bogs, ponds, lakes, rivers and streams,  - subclass of: body of water  - ancestor definition: A specialization of TopographicalFeature. Each instance of BodyOfWater is a natural or artificial topographical feature consisting of a relatively lar  - subclass of: water  - ancestor definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or imp  - subclass of: Water resource  - ancestor definition: Water resources are sources of water that are potentially useful. The majority of human uses require fresh water.  - sibling concept: Canadice Lake  - sibling concept: Canandaigua Lake  - sibling concept: Cayuga Lake  - sibling concept: China Lake  - sibling concept: Crater Lake
+[Chunk Score: 1.0000] KBPedia Concept: penny stock. Relevant Logical Facts:  - definition: The collection of all penny stocks. A type of Stock.  - subclass of: stock  - ancestor definition: A specialization of AuthorizedAgreement and TradeableSecurity. Each instance of this collection is a share of ownership in some instance of LegalCorpo  - subclass of: equity  - ancestor definition: The collection of instances of TradeableSecurity, ownership of which confers ownership in some company.  - subclass of: tradeable security  - ancestor definition: The collection of Agreements (some of which are technically LoanAgreements) issued by Organizations (typical examples include LegalCorporations and Lo  - sibling concept: blue chip stock  - sibling concept: common stock  - sibling concept: Growth stock  - sibling concept: IPO stock  - sibling concept: large cap stock
 
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "basin",
-  "uri": "http://kbpedia.org/kko/rc/Basin",
+  "entity": "apple tree wood",
+  "uri": "http://kbpedia.org/kko/rc/AppleTreeWood",
   "score": 1.0,
   "triples": [
-    "definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.",
-    "subclass of: walled cavity",
-    "ancestor definition: A specialization of PartiallyTangible and Cavity. Each instance of CavityWithWalls is an individual that spatially subsumes both the intangible space ",
-    "subclass of: site that is also a geographical thing",
-    "ancestor definition: The collectionIntersection of GeographicalThing and Place (q.v.).",
-    "subclass of: cavity",
-    "ancestor definition: The collection of all cavities, including instances of Crevice, deep concavities or holes, and cavities of containers (for example, the interior of a ",
-    "subclass of: geographical thing",
-    "ancestor definition: A specialization of EnduringThing_Localized. This collection may be thought of as consisting of all the entities which are localizable within the cont",
-    "subclass of: spatial thing",
-    "ancestor definition: A specialization of Individual. The collection of all things that have a spatial extent or location relative to some other SpatialThing or in some emb",
-    "subclass of: cavity or container",
-    "ancestor definition: The collection of all cavities, containers, and hollow objects. An instance of CavityOrContainer spatially subsumes a hollow space region, and might i",
-    "has subclass: geological basin",
-    "has subclass: bathtub",
-    "has subclass: bowl",
-    "has subclass: washbasin",
-    "sibling concept: abdominal cavity",
-    "sibling concept: acetabulum",
-    "sibling concept: alveolus",
-    "sibling concept: bodily orifice",
-    "sibling concept: cave"
+    "definition: The collection of all apple tree wood. A type of Wood.",
+    "subclass of: hardwood",
+    "ancestor definition: includes wood from many deciduous broadleaved temperate trees, including oak, ash, maple, etc. These trees have wood that is much harder that that of ",
+    "subclass of: wood",
+    "ancestor definition: This \u2018class\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product \u2018class\u2019 is an aggregate of wood. Th",
+    "subclass of: combustible material",
+    "ancestor definition: The Collection CombustibleMaterial that groups together instances of ExistingStuffType which are capable of playing the role stuffUsed in instances of",
+    "subclass of: fibrous thing",
+    "ancestor definition: The collection of instances of PartiallyTangible composed mainly of Fibers.",
+    "subclass of: non edible plant or forestry product",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of non ed",
+    "subclass of: raw materials",
+    "ancestor definition: The collection of all instances of PartiallyTangible that are used as raw materials for the purpose of manufacturing.",
+    "subclass of: plant material",
+    "ancestor definition: A specialization of both NaturalTangibleStuff and #$OrganicStuff. Each instance of VegetableMatter is a piece of stuff (solid, liquid, or, improbably ",
+    "sibling concept: alder tree wood",
+    "sibling concept: basswood",
+    "sibling concept: birch tree wood",
+    "sibling concept: cherry tree wood",
+    "sibling concept: cherry wood"
   ]
 }
 [Item 4]
-[Chunk Score: 1.0000] KBPedia Concept: basin. Relevant Logical Facts:  - definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.  - subclass of: walled cavity  - ancestor definition: A specialization of PartiallyTangible and Cavity. Each instance of CavityWithWalls is an individual that spatially subsumes both the intangible space  - subclass of: site that is also a geographical thing  - ancestor definition: The collectionIntersection of GeographicalThing and Place (q.v.).  - subclass of: cavity  - ancestor definition: The collection of all cavities, including instances of Crevice, deep concavities or holes, and cavities of containers (for example, the interior of a  - subclass of: geographical thing  - ancestor definition: A specialization of EnduringThing_Localized. This collection may be thought of as consisting of all the entities which are localizable within the cont  - subclass of: spatial thing  - ancestor definition: A specialization of Individual. The collection of all things that have a spatial extent or location relative to some other SpatialThing or in some emb  - subclass of: cavity or container  - ancestor definition: The collection of all cavities, containers, and hollow objects. An instance of CavityOrContainer spatially subsumes a hollow space region, and might i  - has subclass: geological basin  - has subclass: bathtub  - has subclass: bowl  - has subclass: washbasin  - sibling concept: abdominal cavity  - sibling concept: acetabulum  - sibling concept: alveolus  - sibling concept: bodily orifice  - sibling concept: cave
+[Chunk Score: 1.0000] KBPedia Concept: apple tree wood. Relevant Logical Facts:  - definition: The collection of all apple tree wood. A type of Wood.  - subclass of: hardwood  - ancestor definition: includes wood from many deciduous broadleaved temperate trees, including oak, ash, maple, etc. These trees have wood that is much harder that that of  - subclass of: wood  - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of wood. Th  - subclass of: combustible material  - ancestor definition: The Collection CombustibleMaterial that groups together instances of ExistingStuffType which are capable of playing the role stuffUsed in instances of  - subclass of: fibrous thing  - ancestor definition: The collection of instances of PartiallyTangible composed mainly of Fibers.  - subclass of: non edible plant or forestry product  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of non ed  - subclass of: raw materials  - ancestor definition: The collection of all instances of PartiallyTangible that are used as raw materials for the purpose of manufacturing.  - subclass of: plant material  - ancestor definition: A specialization of both NaturalTangibleStuff and #$OrganicStuff. Each instance of VegetableMatter is a piece of stuff (solid, liquid, or, improbably  - sibling concept: alder tree wood  - sibling concept: basswood  - sibling concept: birch tree wood  - sibling concept: cherry tree wood  - sibling concept: cherry wood
 
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "trench coat",
-  "uri": "http://kbpedia.org/kko/rc/TrenchCoat",
+  "entity": "fuse (electrical)",
+  "uri": "http://kbpedia.org/kko/rc/Fuse-ElectricalComponent",
   "score": 1.0,
   "triples": [
-    "definition: The collection of all trench coats. A type of RainCoat. The collection TrenchCoat is a SomethingToWearTypeByGenericCategory and a SpatiallyDisjointObjectType.",
-    "subclass of: raincoat",
-    "ancestor definition: The collection of all rain coats",
-    "subclass of: coat",
-    "ancestor definition: The set of all coats.",
-    "subclass of: rain gear",
-    "ancestor definition: The collection of clothes which are worn for protection from the elements.",
-    "subclass of: overgarment",
-    "ancestor definition: A specialization of OuterGarment. Each instance of OverGarment is a piece of clothing designed to be worn outside of other garments, usually other Out",
-    "subclass of: protective garment",
-    "ancestor definition: ProtectiveAttire is a specialization of SomethingToWear. Each instance of ProtectiveAttire is something to wear that is designed to protect its wearer"
+    "definition: Device that prevents another electrical device from drawing too much electrical current.",
+    "subclass of: circuit protection device",
+    "ancestor definition: This \u2018class\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product \u2018class\u2019 is an aggregate of circuit ",
+    "subclass of: electrical component",
+    "ancestor definition: An electronic component is any basic discrete device or physical entity in an electronic system used to affect electrons or their associated fields. E",
+    "subclass of: electrical equipment or component",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of electr",
+    "subclass of: electrical device",
+    "ancestor definition: A specialization of PoweredDevice. Each instance of ElectricalDevice is a device that requires an input of electrical current (as its energySourceForE",
+    "subclass of: electrical engineering",
+    "ancestor definition: Electrical engineering is a field of engineering that generally deals with the study and application of electricity, electronics, and electromagnetism",
+    "subclass of: part",
+    "ancestor definition: The collection of things that are best thought of as parts of other things, and about which we might have something useful to say. Think of table legs",
+    "subclass of: transportation component or system",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of transp",
+    "subclass of: electrical lighting device",
+    "ancestor definition: Devices that provide light by transforming electrical current into light energy. This main product category is drawn from UNSPSC, readily converted in",
+    "has subclass: car fuse",
+    "has subclass: house fuse",
+    "has subclass: surge protector",
+    "sibling concept: circuit breaker",
+    "sibling concept: audio tape deck mechanism",
+    "sibling concept: power sun roof",
+    "sibling concept: automatic window",
+    "sibling concept: automotive electronics"
   ]
 }
 [Item 5]
-[Chunk Score: 1.0000] KBPedia Concept: trench coat. Relevant Logical Facts:  - definition: The collection of all trench coats. A type of RainCoat. The collection TrenchCoat is a SomethingToWearTypeByGenericCategory and a SpatiallyDisjointObjectType.  - subclass of: raincoat  - ancestor definition: The collection of all rain coats  - subclass of: coat  - ancestor definition: The set of all coats.  - subclass of: rain gear  - ancestor definition: The collection of clothes which are worn for protection from the elements.  - subclass of: overgarment  - ancestor definition: A specialization of OuterGarment. Each instance of OverGarment is a piece of clothing designed to be worn outside of other garments, usually other Out  - subclass of: protective garment  - ancestor definition: ProtectiveAttire is a specialization of SomethingToWear. Each instance of ProtectiveAttire is something to wear that is designed to protect its wearer
+[Chunk Score: 1.0000] KBPedia Concept: fuse (electrical). Relevant Logical Facts:  - definition: Device that prevents another electrical device from drawing too much electrical current.  - subclass of: circuit protection device  - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of circuit  - subclass of: electrical component  - ancestor definition: An electronic component is any basic discrete device or physical entity in an electronic system used to affect electrons or their associated fields. E  - subclass of: electrical equipment or component  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of electr  - subclass of: electrical device  - ancestor definition: A specialization of PoweredDevice. Each instance of ElectricalDevice is a device that requires an input of electrical current (as its energySourceForE  - subclass of: electrical engineering  - ancestor definition: Electrical engineering is a field of engineering that generally deals with the study and application of electricity, electronics, and electromagnetism  - subclass of: part  - ancestor definition: The collection of things that are best thought of as parts of other things, and about which we might have something useful to say. Think of table legs  - subclass of: transportation component or system  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of transp  - subclass of: electrical lighting device  - ancestor definition: Devices that provide light by transforming electrical current into light energy. This main product category is drawn from UNSPSC, readily converted in  - has subclass: car fuse  - has subclass: house fuse  - has subclass: surge protector  - sibling concept: circuit breaker  - sibling concept: audio tape deck mechanism  - sibling concept: power sun roof  - sibling concept: automatic window  - sibling concept: automotive electronics
 
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-**LOGICAL EVIDENCE**
+**Answer:** To determine which of the given concepts is an electrical component, we need to analyze each option.
 
-1. Tectonic plates diverging can form mid-ocean ridges.
-2. A mid-ocean ridge consists of various mountains linked in chains, typically having a valley known as a rift running along its spine.
-3. The formation of a trench is not directly related to the divergence of tectonic plates.
-4. Rift valleys are formed when two tectonic plates move apart and new crust is created between them.
-5. Ocean basins can form through various geological processes, including plate movement.
-6. Trenches typically occur at subduction zones where one plate is being pushed beneath another.
-7. The formation of a mid-ocean ridge involves the creation of new oceanic crust as magma rises to fill the gap between diverging plates.
-8. Rift valleys are characterized by normal faults and can be found in areas where tectonic plates are moving apart.
-9. Ocean basins can also form through the process of seafloor spreading, which occurs at mid-ocean ridges.
-10. The formation of a trench is primarily related to subduction processes rather than plate divergence.
+1. **Penny Stock**: A penny stock is a type of low-priced stock that trades at less than $5 per share. It has no relation to electricity.
+2. **Apple Tree Wood**: Apple tree wood refers to the material obtained from apple trees and does not relate directly to electrical components or devices.
+3. **Fuse (Electrical)**: A fuse, by definition, is a device used in electrical circuits for overcurrent protection. This concept clearly relates to electricity.
 
-Note: These logical evidence items aim to provide a clear understanding of how tectonic plates interact and influence geological features such as mid-ocean ridges, rift valleys, ocean basins, and trenches.
+Therefore, based on this analysis:
+
+The final answer is $\boxed{fuse}$
 ==================================================
