@@ -92,7 +92,14 @@ class DebugOllamaLLM(OllamaLLM):
         
         raw_content = response.content if hasattr(response, 'content') else str(response)
         self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Sync) ===\n{raw_content}\n===================================")
-        return self._clean_response_text(raw_content)
+        
+        clean_content = self._clean_response_text(raw_content)
+        if hasattr(response, 'content'):
+            response.content = clean_content
+            return response
+        else:
+            from neo4j_graphrag.llm.types import LLMResponse
+            return LLMResponse(content=clean_content)
 
     async def ainvoke(self, input, **kwargs):
         clean_input = self._clean_input_data(input)
@@ -100,9 +107,31 @@ class DebugOllamaLLM(OllamaLLM):
         log_input = clean_input if isinstance(clean_input, str) else str(clean_input)
         self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{log_input}\n----------------------------------")
         
-        response = await super().ainvoke(clean_input, **kwargs)
+        input_len = len(input) if isinstance(input, str) else len(str(input))
+        print(f"  > [Async] Sending chunk to LLM ({input_len} chars) and waiting for extraction...", end="", flush=True)
         
-        raw_content = response.content if hasattr(response, 'content') else str(response)
+        # Bypass neo4j-graphrag's ainvoke and its broken rate limit decorator
+        # Call the native async_client from ollama directly
+        from neo4j_graphrag.llm.types import LLMResponse
+        try:
+            if isinstance(clean_input, str):
+                messages = self.get_messages(clean_input, message_history=None, system_instruction=None)
+            else:
+                messages = self.get_messages_v2(clean_input)
+                
+            response_obj = await self.async_client.chat(
+                model=self.model_name,
+                messages=messages,
+                options={**self.model_params, **kwargs},
+            )
+            raw_content = response_obj.message.content or ""
+            response = LLMResponse(content=raw_content)
+        except Exception as e:
+            print(f"\n[DebugOllamaLLM Error] Async call failed: {e}")
+            raise
+        
+        print(" Done!")
+        
         self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Async) ===\n{raw_content}\n===================================")
         
         clean_content = self._clean_response_text(raw_content)

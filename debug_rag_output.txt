@@ -1,135 +1,154 @@
 ==================================================
- QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
-A. cell membrane
-B. cell wall
-C. chloroplast
-D. nucleus
+ QUERY: Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
 ==================================================
 
---- RETRIEVED CONTEXT (Top 5 Chunks) ---
+--- RETRIEVED CONTEXT (Top 8 Chunks) ---
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "membrane protein",
-  "uri": "http://kbpedia.org/kko/rc/MembraneProtein",
+  "entity": "trench",
+  "uri": "http://kbpedia.org/kko/rc/Trench",
   "score": 1.0,
   "triples": [
-    "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembra",
-    "subclass of: protein molecule",
-    "ancestor definition: The collection of molecules of proteins. Instances are defined chemically as polymers made up of amino acids. Compare with ProteinStuff.",
-    "subclass of: biopolymer",
-    "ancestor definition: The collection of macromolecules which are produced by and can be found within living things, such as proteins (essentially polymers of amino acids), ",
-    "subclass of: heteropolymer",
-    "ancestor definition: The collection of all PolymerMolecules whose instances are characterized by having more than one type of Monomer as polymericSubComponents. More speci",
-    "subclass of: organic molecule",
-    "ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas",
-    "subclass of: polymer molecule",
-    "ancestor definition: A polymer (/\u02c8p\u0252l\u1d7bm\u0259r/; Greek poly-, \"many\" + -mer, \"parts\") is a large molecule, or macromolecule, composed of many repeated subunits. Because of thei",
-    "subclass of: polypeptide",
-    "ancestor definition: The collection of all PeptideMolecules comprised of between 10 and 100 AminoAcids.",
-    "subclass of: protein molecule or protein complex",
-    "ancestor definition: A specialization of ChemicalObject. Each instance of ProteinMoleculeOrProteinComplex is either a single ProteinMolecule or is a group of ProteinMolecu",
-    "subclass of: organic chemical object",
-    "ancestor definition: The collection of molecules or other ChemicalObjects which are produced by and can be found within living things, such as #$Biopolymers or AminoAcids.",
-    "has subclass: peripheral protein",
-    "sibling concept: aquaporin",
-    "sibling concept: plasma protein molecule",
-    "sibling concept: enzyme",
-    "sibling concept: hemoprotein molecule",
-    "sibling concept: kinetochore"
+    "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple",
+    "subclass of: topographical feature"
   ]
 }
 
 [Chunk 1 | Score: 1.0000]
-KBPedia Concept: membrane protein. Relevant Logical Facts:   - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembra   - subclass of: protein molecule   - ancestor definition: The collection of molecules of proteins. Instances are defined chemically as polymers made up of amino acids. Compare with ProteinStuff.   - subclass of: biopolymer   - ancestor definition: The collection of macromolecules which are produced by and can be found within living things, such as proteins (essentially polymers of amino acids),    - subclass of: heteropolymer   - ancestor definition: The collection of all PolymerMolecules whose instances are characterized by having more than one type of Monomer as polymericSubComponents. More speci   - subclass of: organic molecule   - ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas   - subclass of: polymer molecule   - ancestor definition: A polymer (/ˈpɒlᵻmər/; Greek poly-, "many" + -mer, "parts") is a large molecule, or macromolecule, composed of many repeated subunits. Because of thei   - subclass of: polypeptide   - ancestor definition: The collection of all PeptideMolecules comprised of between 10 and 100 AminoAcids.   - subclass of: protein molecule or protein complex   - ancestor definition: A specialization of ChemicalObject. Each instance of ProteinMoleculeOrProteinComplex is either a single ProteinMolecule or is a group of ProteinMolecu   - subclass of: organic chemical object   - ancestor definition: The collection of molecules or other ChemicalObjects which are produced by and can be found within living things, such as #$Biopolymers or AminoAcids.   - has subclass: peripheral protein   - sibling concept: aquaporin   - sibling concept: plasma protein molecule   - sibling concept: enzyme   - sibling concept: hemoprotein molecule   - sibling concept: kinetochore
+KBPedia Concept: trench. Relevant Logical Facts:   - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple   - subclass of: topographical feature
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "bacterial cell wall",
-  "uri": "http://kbpedia.org/kko/rc/BacterialCellWall",
+  "entity": "rift valley",
+  "uri": "http://kbpedia.org/kko/rc/RiftValley",
   "score": 1.0,
   "triples": [
-    "definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.",
-    "subclass of: cell wall",
-    "ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to ",
-    "subclass of: prokaryotic cell wall",
-    "ancestor definition: The collection of instances of CellWall that are anatomicalParts of some instance of ProkaryoticCell.",
-    "subclass of: structural cell part",
-    "ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct",
-    "subclass of: external anatomical part",
-    "ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. ",
-    "subclass of: cell part",
-    "ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel",
-    "subclass of: organism part",
-    "ancestor definition: A specialization of both PhysicalPartOfObject and BiologicalLivingObject. Each instance of OrganismPart is a part of an organism. It may be an anatomi",
-    "sibling concept: plant cell wall",
-    "sibling concept: prokaryotic cell wall"
+    "definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.",
+    "subclass of: land topographical feature",
+    "ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl"
   ]
 }
 
 [Chunk 2 | Score: 1.0000]
-KBPedia Concept: bacterial cell wall. Relevant Logical Facts:   - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.   - subclass of: cell wall   - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to    - subclass of: prokaryotic cell wall   - ancestor definition: The collection of instances of CellWall that are anatomicalParts of some instance of ProkaryoticCell.   - subclass of: structural cell part   - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct   - subclass of: external anatomical part   - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism.    - subclass of: cell part   - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel   - subclass of: organism part   - ancestor definition: A specialization of both PhysicalPartOfObject and BiologicalLivingObject. Each instance of OrganismPart is a part of an organism. It may be an anatomi   - sibling concept: plant cell wall   - sibling concept: prokaryotic cell wall
+KBPedia Concept: rift valley. Relevant Logical Facts:   - definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.   - subclass of: land topographical feature   - ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "nucleus",
-  "uri": "http://kbpedia.org/kko/rc/Nucleus",
+  "entity": "Lake Nyasa",
+  "uri": "http://kbpedia.org/kko/rc/LakeNyasa",
   "score": 1.0,
   "triples": [
-    "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.",
-    "subclass of: internal body part",
-    "ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart."
+    "definition: Lake in the Great Rift Valley.",
+    "subclass of: fresh-water lake",
+    "ancestor definition: A specialization of BodyOfWater. Each instance of FreshWaterLake is a freshwater land-locked body of water."
   ]
 }
 
 [Chunk 3 | Score: 1.0000]
-KBPedia Concept: nucleus. Relevant Logical Facts:   - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.   - subclass of: internal body part   - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart.
+KBPedia Concept: Lake Nyasa. Relevant Logical Facts:   - definition: Lake in the Great Rift Valley.   - subclass of: fresh-water lake   - ancestor definition: A specialization of BodyOfWater. Each instance of FreshWaterLake is a freshwater land-locked body of water.
 --------------------------------------------------
 
 [Metadata Dump]
 {
   "source": "KBPedia",
-  "entity": "human skeleton",
-  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "entity": "basin",
+  "uri": "http://kbpedia.org/kko/rc/Basin",
   "score": 1.0,
   "triples": [
-    "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth \u2013 this total decreases to 206 bones by adulthood after some bones have fused together.",
-    "subclass of: region on an animal's body",
-    "ancestor definition: A specialization of AnimalBodyRegion."
+    "definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids.",
+    "subclass of: walled cavity",
+    "ancestor definition: An instance of CollectionType, and a specialization of FixedOrderCollection."
   ]
 }
 
 [Chunk 4 | Score: 1.0000]
-KBPedia Concept: human skeleton. Relevant Logical Facts:   - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together.   - subclass of: region on an animal's body   - ancestor definition: A specialization of AnimalBodyRegion.
+KBPedia Concept: basin. Relevant Logical Facts:   - definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids.   - subclass of: walled cavity   - ancestor definition: An instance of CollectionType, and a specialization of FixedOrderCollection.
 --------------------------------------------------
 
 [Metadata Dump]
 {
-  "score": 0.6944618225097656,
+  "source": "KBPedia",
+  "entity": "oceanic ridge",
+  "uri": "http://kbpedia.org/kko/rc/OceanicRidge",
+  "score": 1.0,
+  "triples": [
+    "definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine.",
+    "subclass of: plate tectonics"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: oceanic ridge. Relevant Logical Facts:   - definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine.   - subclass of: plate tectonics
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.60479736328125,
   "local_context": [
     {
       "entity": null,
       "relationship": null,
       "source": "Local Document",
       "target": null,
-      "text": "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination."
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
     }
   ]
 }
 
-[Chunk 5 | Score: 0.6945]
-Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.
+[Chunk 6 | Score: 0.6048]
+She asks her friend Carmen to do the same investigation to see if she gets similar results.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.5930976867675781,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+
+[Chunk 7 | Score: 0.5931]
+She eats one of four different foods each day at the same time for four days and then records how she feels.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.5887050628662109,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+
+[Chunk 8 | Score: 0.5887]
+Janette conducts an investigation to see which foods make her feel more fatigued.
 --------------------------------------------------
 
 ==================================================
  LLM ANSWER:
 ==================================================
-B. cell wall 
+D. mid-ocean ridge 
 
-The function of a plant cell wall is similar to an animal skeleton as both provide structural support, protection, and maintain physical integrity for their respective cells or organisms.
+This is because a mid-ocean ridge forms as a result of tectonic plates diverging, creating new oceanic crust by volcanic activity and the upwelling of mantle material. This process occurs at the boundary between two moving tectonic plates that are pulling apart from each other.
 ==================================================
