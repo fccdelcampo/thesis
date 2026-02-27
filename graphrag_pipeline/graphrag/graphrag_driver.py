@@ -28,68 +28,85 @@ class DebugOllamaLLM(OllamaLLM):
     def _log_to_file(self, message: str):
         """Appends a message to debug.txt with UTF-8 encoding."""
         try:
-            # "a" mode appends to the file. Change to "w" if you want to overwrite every time.
             with open("debug.txt", "a", encoding="utf-8") as f:
                 f.write(message + "\n")
         except Exception as e:
-            # Fallback to console if file writing fails
             print(f"[DebugOllamaLLM Error] Could not write to debug.txt: {e}")
 
     def _clean_response_text(self, text: str) -> str:
-        """Helper: Extracts JSON from the response string."""
+        """Helper: Extracts JSON object from the response string.
+
+        Always prefers {…} objects because SimpleKGPipeline strictly requires
+        {"nodes": […], "relationships": […]}. The triple filter (filter_triples_for_query)
+        does its own independent [bracket] extraction and does NOT rely on this method
+        to return arrays, so reverting to object-only is safe for both callers.
+        """
         if not text:
             return ""
-        start_index = text.find('{')
-        end_index = text.rfind('}')
-        if start_index != -1 and end_index != -1 and start_index < end_index:
-            return text[start_index : end_index + 1]
-        return text
+        obj_start = text.find('{')
+        obj_end   = text.rfind('}')
+        if obj_start != -1 and obj_end != -1 and obj_start < obj_end:
+            return text[obj_start : obj_end + 1]
+        return text   # nothing to strip — return as-is
 
     def _clean_prompt(self, text: str) -> str:
-        """Removes all newlines from the input prompt to fix PDF formatting."""
+        """Removes newlines only from PDF-extracted prose.
+
+        Structured filter prompts (KBPedia batch filter, concept filter) use
+        intentional newlines to separate concept blocks. Stripping them collapses
+        all structure into one line, which confuses the model and causes hangs.
+        We detect structured prompts by the presence of known marker strings.
+        """
+        STRUCTURED_MARKERS = ("Concept: '", "  - ", "Facts:\n", "Candidates (")
+        if any(m in text for m in STRUCTURED_MARKERS):
+            return text   # preserve structured prompt formatting
         return text.replace('\n', ' ')
 
+    def _clean_input_data(self, input_data):
+        """Applies _clean_prompt either to a string or to the 'content' of a list of message dicts."""
+        if isinstance(input_data, str):
+            return self._clean_prompt(input_data)
+        elif isinstance(input_data, list):
+            # Neo4j GraphRAG passes List[LLMMessage] which are dicts with 'role' and 'content'
+            cleaned_list = []
+            for msg in input_data:
+                cleaned_msg = msg.copy() if isinstance(msg, dict) else msg
+                if isinstance(cleaned_msg, dict) and 'content' in cleaned_msg:
+                    cleaned_msg['content'] = self._clean_prompt(str(cleaned_msg['content']))
+                cleaned_list.append(cleaned_msg)
+            return cleaned_list
+        return input_data
+
     def invoke(self, input, **kwargs):
-        # 1. Clean the input
         clean_input = self._clean_input_data(input)
         
-        # 2. LOG to file instead of print
-        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{clean_input}\n----------------------------------")
-
-        print(f"  > Sending chunk to LLM ({len(input)} chars)...", end="", flush=True)
+        # Format for logging
+        log_input = clean_input if isinstance(clean_input, str) else str(clean_input)
+        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{log_input}\n----------------------------------")
         
-        # 3. Send to LLM
+        input_len = len(input) if isinstance(input, str) else len(str(input))
+        print(f"  > Sending chunk to LLM ({input_len} chars)...", end="", flush=True)
+        
         response = super().invoke(clean_input, **kwargs)
-
         print(" Done!")
         
-        # 4. Handle response
         raw_content = response.content if hasattr(response, 'content') else str(response)
-        
-        # 5. LOG to file
         self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Sync) ===\n{raw_content}\n===================================")
-        
         return self._clean_response_text(raw_content)
 
     async def ainvoke(self, input, **kwargs):
-        # 1. Clean the input
         clean_input = self._clean_input_data(input)
         
-        # 2. LOG to file
-        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{clean_input}\n----------------------------------")
+        log_input = clean_input if isinstance(clean_input, str) else str(clean_input)
+        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{log_input}\n----------------------------------")
         
-        # 3. Send to LLM
         response = await super().ainvoke(clean_input, **kwargs)
         
-        # 4. Extract content
         raw_content = response.content if hasattr(response, 'content') else str(response)
-        
-        # 5. LOG to file
         self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Async) ===\n{raw_content}\n===================================")
         
         clean_content = self._clean_response_text(raw_content)
         
-        # 6. Return Object or String
         if hasattr(response, 'content'):
             response.content = clean_content
             return response
