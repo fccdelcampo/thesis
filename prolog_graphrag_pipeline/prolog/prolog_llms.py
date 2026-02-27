@@ -50,12 +50,33 @@ def reset_kv_cache_flag():
     _kv_cache_warmed = False
 
 def reset_ollama_model():
-    """Force-unload the model from Ollama, then verify it reloads successfully."""
+    """Force-unload the model from Ollama, then verify it reloads successfully with strict timeouts."""
     import ollama
+    
+    def run_with_timeout(target_func, timeout=30):
+        error_holder = [None]
+        result_holder = [None]
+        
+        def wrapper():
+            try:
+                result_holder[0] = target_func()
+            except Exception as e:
+                error_holder[0] = e
+                
+        thread = threading.Thread(target=wrapper, daemon=True)
+        thread.start()
+        thread.join(timeout=timeout)
+        
+        if thread.is_alive():
+            raise TimeoutError(f"Operation timed out after {timeout} seconds")
+        if error_holder[0]:
+            raise error_holder[0]
+        return result_holder[0]
+
     try:
         print("[Ollama Reset] Unloading prolog model to recover from hang...", flush=True)
         # Setting keep_alive to 0 with a dummy generate forces immediate unload
-        ollama.generate(model=PROLOG_MODEL, prompt="", keep_alive=0)
+        run_with_timeout(lambda: ollama.generate(model=PROLOG_MODEL, prompt="", keep_alive=0))
         print("[Ollama Reset] Model unloaded.", flush=True)
     except Exception as e:
         print(f"[Ollama Reset] Warning during unload: {e}", flush=True)
@@ -63,10 +84,12 @@ def reset_ollama_model():
     # Verify the model reloads successfully with a simple ping
     try:
         print("[Ollama Reset] Verifying model reloads...", flush=True)
-        test_response = ollama.chat(
-            model=PROLOG_MODEL,
-            messages=[{'role': 'user', 'content': 'Say OK'}],
-            options={'temperature': 0, 'keep_alive': '20m'},
+        test_response = run_with_timeout(
+            lambda: ollama.chat(
+                model=PROLOG_MODEL,
+                messages=[{'role': 'user', 'content': 'Say OK'}],
+                options={'temperature': 0, 'keep_alive': '20m'},
+            )
         )
         reply = test_response.get('message', {}).get('content', '').strip()
         print(f"[Ollama Reset] Model reloaded successfully. Ping reply: {reply[:50]}", flush=True)

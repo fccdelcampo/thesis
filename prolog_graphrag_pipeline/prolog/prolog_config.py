@@ -20,6 +20,7 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 - Arithmetic: Use CLP operators `#=`, `#<`. NEVER use `=`, `is`, `>`.
 - Negation: Use `not`. NEVER use `\+`.
 - Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
+- Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
 - Atoms: Must be lowercase. Quote special characters (e.g., `'(A ∨ B)'`).
 - Variables: CamelCase. Use `_` for singletons.
 - Closed-World: EVERY predicate in a body MUST be defined as a fact or rule head somewhere in the database.
@@ -27,10 +28,10 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 
 ### Query Formatting by Question Type
 1. **Multiple-Choice Questions (MCQ):**
-   - Encode EACH option: `option(a, description).`
+   - Encode EACH option description: `choice(a, description).`
    - Encode domain knowledge as GROUND FACTS.
    - Write an `answer/1` rule unifying with the correct option based on facts.
-   - The <query> MUST be `answer(Option).`
+   - The <query> MUST be `answer(OptionLetter).`
 2. **Binary (True/False) Questions:**
    - Define specific instances from the question (e.g., `rock_one`, `rock_two`).
    - Write rules defining the condition context (e.g., `pulled_together(A, B) :- ...`).

@@ -41,12 +41,13 @@ LOGS_DIR = os.path.join(project_root, "logs")
 THRESHOLD = 0.7
 
 
-def load_test_cases(limit: int = 1000) -> list[dict]:
+def load_test_cases(limit: int = 1000, start_idx: int = 0) -> list[dict]:
     """
     Reads .jsonl files in test_cases/ and turns each JSON line into a dict.
 
     Args:
         limit (int): Max number of test cases.
+        start_idx (int): Global offset to skip initial test cases.
 
     Returns:
         list[dict]: A list of dict objects where each dict is a test case.
@@ -56,7 +57,9 @@ def load_test_cases(limit: int = 1000) -> list[dict]:
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
             for i, line in enumerate(f):
-                if i >= limit:
+                if i < start_idx:
+                    continue
+                if i >= start_idx + limit:
                     break
                 if line.strip():
                     test_cases.append(json.loads(line))
@@ -244,24 +247,24 @@ def log_question_and_answer(test_case_id: int, pipeline: str, question: str,
         f.write(json.dumps(entry) + "\n")
 
 
-def run_test_cases(test_cases: list[dict]):
+def run_test_cases(test_cases: list[dict], start_idx: int = 0):
     """
     Runs test cases for the present metric / benchmark.
 
     Args:
         test_cases (list[dict]): The list of dicts returned by load_test_cases()
     """
-    for i, t in enumerate(tqdm(test_cases, desc="MMLU")):
+    for i, t in enumerate(tqdm(test_cases, desc="MMLU"), start=start_idx):
         run_test_case(t, i)
 
 
-def main(test_size: int = 1000):
-    test_cases = load_test_cases(limit=test_size)
-    print(f"Loaded {len(test_cases)} MMLU test cases.")
+def main(test_size: int = 1000, start_idx: int = 0):
+    test_cases = load_test_cases(limit=test_size, start_idx=start_idx)
+    print(f"Loaded {len(test_cases)} MMLU test cases (starting from index {start_idx}).")
     if not test_cases:
         print("No MMLU test cases found. Skipping.")
         return
-    run_test_cases(test_cases)
+    run_test_cases(test_cases, start_idx=start_idx)
     print(f"MMLU evaluation complete. Results saved to {RESULTS_DIR}/mmlu_scores.csv")
 
 
@@ -269,5 +272,6 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--test-size", type=int, default=1000, help="Number of test cases to run")
+    parser.add_argument("--start-idx", type=int, default=0, help="Starting index")
     args = parser.parse_args()
-    main(test_size=args.test_size)
+    main(test_size=args.test_size, start_idx=args.start_idx)

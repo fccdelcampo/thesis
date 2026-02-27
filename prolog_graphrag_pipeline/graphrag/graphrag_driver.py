@@ -90,7 +90,7 @@ class DebugOllamaLLM(OllamaLLM):
             return cleaned_list
         return input_data
 
-    def invoke(self, input, **kwargs):
+    def invoke(self, input, *args, **kwargs):
         clean_input = self._clean_input_data(input)
         
         # Format for logging
@@ -100,7 +100,7 @@ class DebugOllamaLLM(OllamaLLM):
         input_len = len(input) if isinstance(input, str) else len(str(input))
         print(f"  > Sending chunk to LLM ({input_len} chars)...", end="", flush=True)
         
-        response = super().invoke(clean_input, **kwargs)
+        response = super().invoke(clean_input, *args, **kwargs)
         print(" Done!")
         
         raw_content = response.content if hasattr(response, 'content') else str(response)
@@ -114,7 +114,7 @@ class DebugOllamaLLM(OllamaLLM):
             from neo4j_graphrag.llm.types import LLMResponse
             return LLMResponse(content=clean_content)
 
-    async def ainvoke(self, input, **kwargs):
+    async def ainvoke(self, input, *args, **kwargs):
         clean_input = self._clean_input_data(input)
         
         log_input = clean_input if isinstance(clean_input, str) else str(clean_input)
@@ -128,7 +128,7 @@ class DebugOllamaLLM(OllamaLLM):
         from neo4j_graphrag.llm.types import LLMResponse
         try:
             if isinstance(clean_input, str):
-                messages = self.get_messages(clean_input, message_history=None, system_instruction=None)
+                messages = self.get_messages(clean_input, *args, **kwargs)
             else:
                 messages = self.get_messages_v2(clean_input)
                 
