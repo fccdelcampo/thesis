@@ -181,8 +181,8 @@ forms_from(mid_ocean_ridge, plate_divergence).
 </reasoning_step>
 
 <reasoning_step>
-Query for the choice NOT associated with plate_divergence.
-choice(OptionLetter, GeologicFeature), not(forms_from(GeologicFeature, plate_divergence)).
+Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with plate_divergence.
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
 </reasoning_step>
 
 <database>
@@ -196,10 +196,12 @@ forms_from(trench, plate_convergence).
 forms_from(rift_valley, plate_divergence).
 forms_from(ocean_basin, plate_divergence).
 forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
 </database>
 
 <query>
-choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+answer(OptionLetter).
 </query>
 ---
 """},

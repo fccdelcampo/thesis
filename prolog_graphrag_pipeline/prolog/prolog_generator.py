@@ -60,8 +60,8 @@ The following errors occurred across prior attempts. Fix ALL of them before resp
 
 {numbered}
 
-Locate every offending line in your previous database/query and fix it.
-Rewrite ONLY what is broken. Output the corrected code in `<database>` / `<query>` tags.
+Analyze the errors carefully. Then, rewrite the ENTIRE `<database>` and `<query>` blocks incorporating your fixes. DO NOT output partial code.
+Ensure your `<database>` contains all facts and rules (using `:-`), and your `<query>` contains exactly one simple callable goal.
 """
 
     return prompt
@@ -254,8 +254,8 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                         "Every predicate that appears in a rule body MUST exist as a fact or the head of a rule in your database. "
                         "NEVER invent predicate names that have no corresponding definition. "
                         "For MCQ 'which factor is DIFFERENT?' questions, use simple ground facts instead of undefined chains: "
-                        "`different(factor_name).` and `same(factor_name).` — then `answer(X) :- choice_X, Factor), different(Factor).` "
-                        "Also check for arity mismatches: if `option/2` is defined, the query must use `choice_Option, Value)`, NOT `choice_Option)`.")
+                        "`different(factor_name).` and `same(factor_name).` — then `answer(X) :- choice(X, Factor), different(Factor).` "
+                        "Also check for arity mismatches: if `choice/2` is defined, the rule must use `choice(Option, Value)`, NOT `choice(Option)`.")
             else:
                 hint = "Ensure strict Prolog syntax. No bullets/hyphens. Predicates must be lowercase."
             _record_error(f"Prolog Error: {e}\nHint: {hint}")
