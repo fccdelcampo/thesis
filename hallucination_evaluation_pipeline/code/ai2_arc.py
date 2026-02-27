@@ -1,12 +1,12 @@
 """
-FOLIO Benchmark Evaluator
+AI2 ARC Benchmark Evaluator
 
-Evaluates the pipelines on FOLIO (First-Order Logic Inference Dataset).
-Each test case provides a series of premises and asks what can be concluded.
-The answer is categorical (e.g., "True", "False", "Unknown").
-We evaluate by checking if the pipeline's answer extracts the correct category.
+Evaluates the pipelines on AI2 ARC (AI2 Reasoning Challenge).
+AI2 ARC is a multiple-choice benchmark. Each test case has a question, 
+choices (typically A-D), and a correct answer letter. We evaluate by checking 
+if the pipeline's answer matches the correct letter.
 
-Scoring: 1.0 if correct label matches, 0.0 otherwise.
+Scoring: 1.0 if correct letter matches, 0.0 otherwise.
 Label: 1 if score >= 0.7 (i.e., correct), 0 otherwise (hallucination/incorrect).
 """
 import json
@@ -44,8 +44,14 @@ THRESHOLD = 0.7
 def load_test_cases(limit: int = 1000) -> list[dict]:
     """
     Reads .jsonl files in test_cases/ and turns each JSON line into a dict.
+
+    Args:
+        limit (int): Max number of test cases.
+
+    Returns:
+        list[dict]: A list of dict objects where each dict is a test case.
     """
-    file_path = os.path.join(TEST_CASES_DIR, "folio.jsonl")
+    file_path = os.path.join(TEST_CASES_DIR, "ai2_arc.jsonl")
     test_cases = []
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
@@ -57,28 +63,37 @@ def load_test_cases(limit: int = 1000) -> list[dict]:
     return test_cases
 
 
-def extract_answer(response: str) -> str:
+def extract_answer_letter(response: str) -> str:
     """
-    Extracts the FOLIO answer (True, False, or Unknown) from the pipeline's response.
+    Extracts the answer letter (A, B, C, or D) from the pipeline's response.
+    Tries multiple patterns: standalone letter, "Answer: X", "The answer is X", etc.
     """
     if not response:
         return ""
     
-    response = response.strip().lower()
+    response = response.strip()
     
-    if "true" in response:
-        return "True"
-    elif "false" in response:
-        return "False"
-    elif "unknown" in response:
-        return "Unknown"
+    # Pattern 1: Standalone letter at the start (ignoring markdown *, spaces, etc.)
+    match = re.match(r'^[\*\s]*([A-D])(?:[\.\)]|\b)', response, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
+    
+    # Pattern 2: "Answer: X" or "The answer is X"
+    match = re.search(r'(?:answer|choice)[^A-Za-z]*([A-D])\b', response, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
+    
+    # Pattern 3: Any standalone A-D bounded by markdown or punctuation
+    match = re.search(r'(?:\*\*|\*|\s|^)([A-D])(?:\*\*|\*|\s|\.|\)|$)', response, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
     
     return ""
 
 
 def score_answer(predicted: str, correct: str) -> float:
-    """Returns 1.0 if the predicted matches the correct label, else 0.0."""
-    return 1.0 if predicted.lower() == correct.lower() else 0.0
+    """Returns 1.0 if the predicted letter matches the correct letter, else 0.0."""
+    return 1.0 if predicted.upper() == correct.upper() else 0.0
 
 
 def run_pipeline_safe(pipeline_fn, question: str, **kwargs) -> dict:
@@ -94,40 +109,47 @@ def run_test_case(test_case: dict, test_case_id: int):
     """
     Runs a test case by calling each pipeline's run_pipeline function. 
     """
-    # Build formatted question incorporating the premises
-    question = test_case.get("question", "")
-    premises = test_case.get("premises", "")
+    question = test_case.get("formatted_input", "")
+    correct_answer = test_case.get("correct_answer", "")
     
-    correct_answer = test_case.get("answer", "")
-    
-    print(f"\n[FOLIO #{test_case_id}] {question[:60]}...")
-    print(f"  Correct: {correct_answer}")
+    print(f"\n" + "="*80)
+    print(f"[AI2 ARC #{test_case_id}] {question[:120]}...")
+    print(f"Correct Answer: [{correct_answer}]")
+    print("-" * 80)
 
     # 1. GraphRAG Pipeline
     gr_result = run_pipeline_safe(run_graphrag, question)
-    gr_ans = extract_answer(gr_result.get("answer", ""))
-    gr_score = score_answer(gr_ans, correct_answer)
-    print(f"  GraphRAG: {gr_ans} (Score: {gr_score})")
+    gr_letter = extract_answer_letter(gr_result.get("answer", ""))
+    gr_score = score_answer(gr_letter, correct_answer)
     
     # 2. Prolog GraphRAG Pipeline
     pgr_result = run_pipeline_safe(run_prolog_graphrag, question, flag="prolog")
-    pgr_ans = extract_answer(pgr_result.get("answer", ""))
-    pgr_score = score_answer(pgr_ans, correct_answer)
-    print(f"  Prolog-GraphRAG: {pgr_ans} (Score: {pgr_score})")
+    pgr_letter = extract_answer_letter(pgr_result.get("answer", ""))
+    pgr_score = score_answer(pgr_letter, correct_answer)
     
     # 3. Tuned Pipeline 
     tuned_result = run_pipeline_safe(run_tuned_pipeline, question)
-    tuned_ans = extract_answer(tuned_result.get("answer", ""))
-    tuned_score = score_answer(tuned_ans, correct_answer)
-    print(f"  Tuned Pipeline: {tuned_ans} (Score: {tuned_score})")
+    tuned_letter = extract_answer_letter(tuned_result.get("answer", ""))
+    tuned_score = score_answer(tuned_letter, correct_answer)
+    
+    print(f"\n--- PIPELINE COMPARISON ---")
+    def format_res(name, letter, score):
+        status = "✅ RIGHT" if score >= 1.0 else "❌ WRONG"
+        let_str = f"[{letter}]" if letter else "[?]"
+        return f"{name:<15} | Predicted: {let_str:<5} | {status}"
+        
+    print(format_res("GraphRAG", gr_letter, gr_score))
+    print(format_res("Prolog", pgr_letter, pgr_score))
+    print(format_res("Tuned LLM", tuned_letter, tuned_score))
+    print("=" * 80 + "\n")
     
     # Log scores
     log_results(test_case_id, tuned_score, gr_score, pgr_score)
     
     # Log Q&A details per pipeline
-    gr_label = "1" if gr_score >= THRESHOLD else "0"
-    pgr_label = "1" if pgr_score >= THRESHOLD else "0"
-    tuned_label = "1" if tuned_score >= THRESHOLD else "0"
+    gr_label = "0" if gr_score >= THRESHOLD else "1"
+    pgr_label = "0" if pgr_score >= THRESHOLD else "1"
+    tuned_label = "0" if tuned_score >= THRESHOLD else "1"
     
     log_question_and_answer(test_case_id, "graphrag", question, gr_result.get("answer", ""), gr_score, gr_label)
     log_question_and_answer(test_case_id, "prolog_graphrag", question, pgr_result.get("answer", ""), pgr_score, pgr_label)
@@ -140,16 +162,16 @@ def log_results(test_case_id: int, tuned_score: Union[float, int],
     Logs results of the evaluations in the appropriate CSV files in hallucination_evaluation_results/
     """
     os.makedirs(RESULTS_DIR, exist_ok=True)
-    file_path = os.path.join(RESULTS_DIR, "folio_scores.csv")
+    file_path = os.path.join(RESULTS_DIR, "ai2_arc_scores.csv")
     
     new_row = pd.DataFrame({
         "test_case_id": [test_case_id],
         "tuned_score": [tuned_score],
-        "tuned_label": [1 if tuned_score >= THRESHOLD else 0],
+        "tuned_label": [0 if tuned_score >= THRESHOLD else 1],
         "graphrag_score": [graphrag_score],
-        "graphrag_label": [1 if graphrag_score >= THRESHOLD else 0],
+        "graphrag_label": [0 if graphrag_score >= THRESHOLD else 1],
         "prolog_graphrag_score": [prolog_graphrag_score],
-        "prolog_graphrag_label": [1 if prolog_graphrag_score >= THRESHOLD else 0]
+        "prolog_graphrag_label": [0 if prolog_graphrag_score >= THRESHOLD else 1]
     })
     
     header = not os.path.exists(file_path) or os.path.getsize(file_path) == 0
@@ -163,11 +185,11 @@ def log_question_and_answer(test_case_id: int, pipeline: str, question: str,
     """
     log_dir = os.path.join(LOGS_DIR, f"{pipeline}_logs")
     os.makedirs(log_dir, exist_ok=True)
-    file_path = os.path.join(log_dir, "folio_qa.jsonl")
+    file_path = os.path.join(log_dir, "ai2_arc_qa.jsonl")
     
     entry = {
         "test_case_id": test_case_id,
-        "benchmark": "folio",
+        "benchmark": "ai2_arc",
         "question": question,
         "answer": answer,
         "score": score,
@@ -179,23 +201,23 @@ def log_question_and_answer(test_case_id: int, pipeline: str, question: str,
 
 
 def run_test_cases(test_cases: list[dict]):
-    for i, t in enumerate(tqdm(test_cases, desc="FOLIO")):
+    for i, t in enumerate(tqdm(test_cases, desc="AI2 ARC")):
         run_test_case(t, i)
 
 
 def main(test_size: int = 1000):
     test_cases = load_test_cases(limit=test_size)
-    print(f"Loaded {len(test_cases)} FOLIO test cases.")
+    print(f"Loaded {len(test_cases)} AI2 ARC test cases.")
     if not test_cases:
-        print("No FOLIO test cases found. Skipping.")
+        print("No AI2 ARC test cases found. Skipping.")
         return
     run_test_cases(test_cases)
-    print(f"FOLIO evaluation complete. Results saved to {RESULTS_DIR}/folio_scores.csv")
+    print(f"AI2 ARC evaluation complete. Results saved to {RESULTS_DIR}/ai2_arc_scores.csv")
 
 
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
-    parser.add_argument("--test-size", type=int, default=100, help="Number of test cases to run")
+    parser.add_argument("--test-size", type=int, default=1000, help="Number of test cases to run")
     args = parser.parse_args()
     main(test_size=args.test_size)

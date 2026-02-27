@@ -176,19 +176,19 @@ RETURN
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are an expert Educational AI Assistant. Answer the user's question accurately using ONLY the provided Context.
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
 
 ### STRICT INSTRUCTIONS
-1. **Answer Directly**: Start with the answer. Do NOT begin with definitions or explanations of how you found it.
-2. **Sound Natural**: Write as if you already know the answer. NEVER say "the context states", "according to the provided information", "based on the evidence", or similar phrases.
-3. **Use Context Silently**: The Context helps you be accurate, but the user should not know you relied on it. Integrate facts naturally.
-4. **REFUSE if unsupported**: If the Context does NOT contain enough information to answer the question, respond ONLY with: "I do not have enough information to answer this question." Do NOT guess, speculate, or use your own knowledge. Using information not present in the Context is considered hallucination.
-5. **MMLU/Multiple Choice**: If options are provided (A, B, C, D), select the single best one and explain why. If the Context does not help determine the answer, say you do not have enough information.
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
 
 ### Question:
 {query_text}
 
-### Context (for your reference only — do NOT mention it):
+### Context:
 {context}
 
 ### Answer:

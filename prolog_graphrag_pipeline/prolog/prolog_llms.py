@@ -2,7 +2,10 @@ from copy import deepcopy
 import signal
 import threading
 
-MODEL_NAME = 'llama3.1:8b-instruct-q4_K_M'
+# Prolog code generation benefits from a code-tuned model
+PROLOG_MODEL = 'llama3.1:8b-instruct-q4_K_M'
+# Natural language tasks (explanation, close-check, final synthesis) stay on llama3.2
+NL_MODEL = 'llama3.1:8b-instruct-q4_K_M'
 OLLAMA_TIMEOUT = 600  # seconds per LLM call (10 minutes)
 
 # ── KV-cache warmup ────────────────────────────────────────────────────────
@@ -20,13 +23,17 @@ def warmup_prolog_model():
         return
     import ollama
     try:
-        from .prolog_config import GENERATOR_LLM_MESSAGES
+        from .prolog_config import GENERATOR_LLM_MESSAGES, USE_KV_CACHE
     except ImportError:
-        from prolog_graphrag_pipeline.prolog.prolog_config import GENERATOR_LLM_MESSAGES
+        from prolog_graphrag_pipeline.prolog.prolog_config import GENERATOR_LLM_MESSAGES, USE_KV_CACHE
+        
+    if not USE_KV_CACHE:
+        return
+        
     try:
         print("[Prolog Warmup] Priming KV cache with few-shot prefix...", flush=True)
         ollama.chat(
-            model=MODEL_NAME,
+            model=PROLOG_MODEL,
             messages=GENERATOR_LLM_MESSAGES + [
                 {'role': 'user', 'content': 'Now, process the following:\nContext: A is true.\nUser Question: Is A true?\n'}
             ],
@@ -46,9 +53,9 @@ def reset_ollama_model():
     """Force-unload the model from Ollama, then verify it reloads successfully."""
     import ollama
     try:
-        print("[Ollama Reset] Unloading model to recover from hang...", flush=True)
+        print("[Ollama Reset] Unloading prolog model to recover from hang...", flush=True)
         # Setting keep_alive to 0 with a dummy generate forces immediate unload
-        ollama.generate(model=MODEL_NAME, prompt="", keep_alive=0)
+        ollama.generate(model=PROLOG_MODEL, prompt="", keep_alive=0)
         print("[Ollama Reset] Model unloaded.", flush=True)
     except Exception as e:
         print(f"[Ollama Reset] Warning during unload: {e}", flush=True)
@@ -57,7 +64,7 @@ def reset_ollama_model():
     try:
         print("[Ollama Reset] Verifying model reloads...", flush=True)
         test_response = ollama.chat(
-            model=MODEL_NAME,
+            model=PROLOG_MODEL,
             messages=[{'role': 'user', 'content': 'Say OK'}],
             options={'temperature': 0, 'keep_alive': '20m'},
         )
@@ -74,22 +81,43 @@ def generate(prompt: str, flag: str) -> dict:
 
     
 def generate_response(prompt: str, flag: str) -> dict:
-    from .prolog_config import GENERATOR_LLM_MESSAGES, EXPLAINER_LLM_MESSAGES
+    from .prolog_config import GENERATOR_LLM_MESSAGES, EXPLAINER_LLM_MESSAGES, USE_KV_CACHE
     import ollama
     
     answer = dict()
     
+    # Select model based on flag: code-tuned for Prolog, NL model for everything else
     if flag == "prolog":
-        llm_messages = GENERATOR_LLM_MESSAGES + [{'role': 'user', 'content': prompt}]
+        model = PROLOG_MODEL
+        base_messages = GENERATOR_LLM_MESSAGES
         temperature = 0
     elif flag == "explanation":
-        llm_messages = EXPLAINER_LLM_MESSAGES + [{'role': 'user', 'content': prompt}]
+        model = NL_MODEL
+        base_messages = EXPLAINER_LLM_MESSAGES
         temperature = 0.2
     elif flag == "q":
-        llm_messages = [{'role': 'user', 'content': prompt}]
+        model = NL_MODEL
+        base_messages = []
         temperature = 0
     else:
         raise ValueError(f"Flag {flag} is invalid. Only 'prolog', 'explanation', and 'q' are accepted.")
+
+    if USE_KV_CACHE:
+        # Proper KV Caching: Send system instructions/few-shots as distinct message objects.
+        # This builds a stable prefix that Ollama caches in memory, but has a large initial overhead.
+        llm_messages = base_messages + [{'role': 'user', 'content': prompt}]
+    else:
+        # Linear/No Cache (Default for fast Testing):
+        # Flatten all system instructions and few-shots into a single raw text block.
+        # This completely bypasses the KV Cache prefix evaluation penalty, making it significantly faster for single queries.
+        flattened_context = ""
+        for msg in base_messages:
+            role = msg.get('role', 'system').upper()
+            content = msg.get('content', '')
+            flattened_context += f"<{role}>\n{content}\n</{role}>\n\n"
+        
+        dynamic_prompt = f"{flattened_context}\nPlease answer the following query based on the above instructions and examples:\n{prompt}"
+        llm_messages = [{'role': 'user', 'content': dynamic_prompt}]
 
     # Use a thread to enforce a hard timeout on ollama.chat()
     result_holder = [None]
@@ -98,7 +126,7 @@ def generate_response(prompt: str, flag: str) -> dict:
     def _call_ollama():
         try:
             response = ollama.chat(
-                model=MODEL_NAME,
+                model=model,
                 messages=llm_messages,
                 options={
                     'temperature': temperature,

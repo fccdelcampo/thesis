@@ -19,6 +19,7 @@ except ImportError:
     import prolog_graphrag_pipeline.llm as llm
 
 SCASP_AVAILABLE = False
+ALLOW_LLM_FALLBACK = False
 
 def use_scasp():
     global SCASP_AVAILABLE
@@ -62,8 +63,13 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
         context_from_prompt = "NONE"
 
     print(f"**User Question:**\n{user_question}")
-    print(f"**Retrieved Context:**\n{retrieved_context}")
-    print(f"**Context from Prompt:**\n{context_from_prompt}")
+    
+    # Safely print retrieved context to avoid Windows charmap encoding errors with chars like \u2192 (→)
+    safe_context = retrieved_context.encode('utf-8', errors='replace').decode('utf-8')
+    print(f"**Retrieved Context:**\n{safe_context}")
+    
+    safe_prompt_context = context_from_prompt.encode('utf-8', errors='replace').decode('utf-8')
+    print(f"**Context from Prompt:**\n{safe_prompt_context}")
 
     # Re-prime Ollama's KV cache with the static few-shot prefix.
     # GraphRAG (same model) runs just before us and evicts the cache.
@@ -140,14 +146,18 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
         print(f"[Prolog FAILED] {prolog_error} — falling back to unverified GraphRAG answer.")
         explainer_output = None  # No Prolog proof; LLM will answer from context alone
 
-    # ── Final synthesis (always runs) ─────────────────────────────────
-    print("\n**FINAL LLM OUTPUT:")
-    final_answer = llm.generate(user_question, retrieved_context, explainer_output, flag="synthesis")
-    
-    if final_answer:
-        print(final_answer["text_answer"])
+    # ── Final synthesis (always runs unless fallback disabled) ───────────────
+    if prolog_error is not None and not ALLOW_LLM_FALLBACK:
+        print("\n**LLM FALLBACK DISABLED: Skipping final synthesis because Prolog failed.")
+        final_answer = {"text_answer": "Error: Prolog generation failed and LLM fallback is disabled."}
     else:
-        print("ERROR: Final LLM failed to generate answer.")
+        print("\n**FINAL LLM OUTPUT:")
+        final_answer = llm.generate(user_question, retrieved_context, explainer_output, flag="synthesis")
+        
+        if final_answer:
+            print(final_answer["text_answer"])
+        else:
+            print("ERROR: Final LLM failed to generate answer.")
     end_time = time.perf_counter()
     duration = end_time - start_time
     print(f"====The pipeline executed in {duration:.4f} seconds. Prolog verified: {prolog_error is None}===")

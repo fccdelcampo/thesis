@@ -6,7 +6,7 @@ Usage Examples:
    python loader_main_driver.py
 
 2. Run specific benchmarks only:
-   python loader_main_driver.py --benchmarks hotpotqa truthfulqa
+   python loader_main_driver.py --benchmarks ai2_arc openbookqa
 
 3. Run only one benchmark with a custom sample size:
    python loader_main_driver.py --benchmarks openbookqa --openbook-size 200
@@ -16,12 +16,10 @@ Usage Examples:
 
 Flags:
 ------
---benchmarks [list]       : List of benchmarks to run (e.g. hotpotqa truthfulqa mmlu folio openbookqa).
+--benchmarks [list]       : List of benchmarks to run (e.g. ai2_arc mmlu openbookqa).
                             Default is all available benchmarks.
 --all-size [int]          : Override ALL benchmark sizes to this value.
---hotpot-size [int]       : Target approved sample size for HotpotQA (default: 100).
---truthful-size [int]     : Target approved sample size for TruthfulQA (default: 100).
---folio-size [int]        : Target approved sample size for FOLIO (default: 100).
+--ai2arc-size [int]       : Target approved sample size for AI2 ARC (default: 100).
 --openbook-size [int]     : Target approved sample size for OpenBookQA (default: 100).
 --mmlu-size [int]         : Target approved sample size for MMLU (default: 100).
 """
@@ -34,22 +32,18 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 if current_dir not in sys.path:
     sys.path.append(current_dir)
 
-from hotpotqa_loader import HotpotQALoader
 from mmlu_loader import MMLULoader
-from truthfulqa_loader import TruthfulQALoader
-from folio_loader import FolioLoader
 from openbookqa_loader import OpenBookQALoader
+from ai2_arc_loader import AI2_ARC_Loader
 
 def main():
     parser = argparse.ArgumentParser(description="Generate approved datasets for GraphRAG pipelines.")
     
-    parser.add_argument("--hotpot-size", type=int, default=100, help="Target approved sample size for HotpotQA (default: 100)")
-    parser.add_argument("--truthful-size", type=int, default=100, help="Target approved sample size for TruthfulQA (default: 100)")
+    parser.add_argument("--ai2arc-size", type=int, default=100, help="Target approved sample size for AI2 ARC (default: 100)")
     parser.add_argument("--mmlu-size", type=int, default=100, help="Target approved sample size for MMLU (default: 100)")
-    parser.add_argument("--folio-size", type=int, default=100, help="Target approved sample size for FOLIO (default: 100)")
     parser.add_argument("--openbook-size", type=int, default=100, help="Target approved sample size for OpenBookQA (default: 100)")
     parser.add_argument("--all-size", type=int, help="Override all benchmark sizes with this value")
-    parser.add_argument("--benchmarks", nargs='+', default=["mmlu", "folio", "openbookqa"], help="List of benchmarks to run (e.g. hotpotqa truthfulqa mmlu folio openbookqa)")
+    parser.add_argument("--benchmarks", nargs='+', default=["ai2_arc", "mmlu", "openbookqa"], help="List of benchmarks to run (e.g. ai2_arc mmlu openbookqa)")
     
     args = parser.parse_args()
     
@@ -60,41 +54,28 @@ def main():
     # Handle --all-size override
     if args.all_size:
         print(f"[Driver] Overriding sizes for all benchmarks to {args.all_size}...")
-        args.hotpot_size = args.all_size
-        args.truthful_size = args.all_size
+        args.ai2arc_size = args.all_size
         args.mmlu_size = args.all_size
-        args.folio_size = args.all_size
         args.openbook_size = args.all_size
 
     print("="*60)
     print(f"Starting Dataset Generation Pipeline")
     print(f"Selected Benchmarks: {args.benchmarks}")
-    print(f"HotpotQA Target:    {args.hotpot_size}")
-    print(f"TruthfulQA Target:  {args.truthful_size}")
+    print(f"AI2 ARC Target:     {args.ai2arc_size}")
     print(f"MMLU Target:        {args.mmlu_size}")
-    print(f"FOLIO Target:       {args.folio_size}")
     print(f"OpenBookQA Target:  {args.openbook_size}")
     print("="*60)
 
-    # 1. HotpotQA
-    if "hotpotqa" in args.benchmarks:
-        print("\n>>> Running HotpotQA Loader...")
+    # 1. AI2 ARC
+    if "ai2_arc" in args.benchmarks:
+        print("\n>>> Running AI2 ARC Loader...")
         try:
-            hotpot_loader = HotpotQALoader(sample_size=args.hotpot_size)
-            hotpot_loader.generate_dataset()
+            ai2arc_loader = AI2_ARC_Loader(sample_size=args.ai2arc_size)
+            ai2arc_loader.generate_dataset()
         except Exception as e:
-            print(f"[ERROR] HotpotQA Loader failed: {e}")
+            print(f"[ERROR] AI2 ARC Loader failed: {e}")
 
-    # 2. TruthfulQA
-    if "truthfulqa" in args.benchmarks:
-        print("\n>>> Running TruthfulQA Loader...")
-        try:
-            truthful_loader = TruthfulQALoader(sample_size=args.truthful_size)
-            truthful_loader.generate_dataset()
-        except Exception as e:
-            print(f"[ERROR] TruthfulQA Loader failed: {e}")
-
-    # 3. MMLU
+    # 2. MMLU
     if "mmlu" in args.benchmarks:
         print("\n>>> Running MMLU Loader...")
         try:
@@ -103,16 +84,7 @@ def main():
         except Exception as e:
             print(f"[ERROR] MMLU Loader failed: {e}")
 
-    # 4. FOLIO
-    if "folio" in args.benchmarks:
-        print("\n>>> Running FOLIO Loader...")
-        try:
-            folio_loader = FolioLoader(sample_size=args.folio_size)
-            folio_loader.generate_dataset()
-        except Exception as e:
-            print(f"[ERROR] Folio Loader failed: {e}")
-
-    # 5. OpenBookQA
+    # 3. OpenBookQA
     if "openbookqa" in args.benchmarks:
         print("\n>>> Running OpenBookQA Loader...")
         try:

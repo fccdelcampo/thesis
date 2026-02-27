@@ -102,8 +102,7 @@ class CleanOutputChatOllama(ChatOllama):
 
 # Loaders
 from test_cases.loaders.mmlu_loader import MMLULoader
-from test_cases.loaders.truthfulqa_loader import TruthfulQALoader
-from test_cases.loaders.hotpotqa_loader import HotpotQALoader
+from test_cases.loaders.ai2_arc_loader import AI2_ARC_Loader
 
 import sys
 
@@ -145,9 +144,8 @@ def run_evaluation():
     # 1. Setup
     graph_rag = GraphRAGSystem()
     loaders = [
-        # MMLULoader(),
-        # TruthfulQALoader(),
-        HotpotQALoader()
+        MMLULoader(),
+        AI2_ARC_Loader(),
     ]
     
     results_dir = "test_cases/results"
@@ -237,7 +235,7 @@ def run_evaluation():
                     active_metrics.append(faithfulness)
                 
                 # Answer Relevancy: Only for specific datasets or if desired
-                if case['dataset'] in ['truthfulqa', 'hotpotqa']:
+                if case['dataset'] in ['ai2_arc', 'mmlu', 'openbookqa']:
                     active_metrics.append(answer_relevancy)
                 
                 # Context Recall: Needs Ground Truth
@@ -329,5 +327,4 @@ def run_evaluation():
     print(f"\nEvaluation complete. Results saved to {results_file}")
 
 if __name__ == "__main__":
-    # run_evaluation()
-    MMLULoader.load_cases()
+    run_evaluation()

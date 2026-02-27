@@ -33,7 +33,7 @@ def check_db_health(driver):
         return False
 
 def create_indexes(driver):
-    embedding_dimension = 4096 
+    embedding_dimension = 4096
 
     print(f"Creating indexes with dimension: {embedding_dimension}...")
 

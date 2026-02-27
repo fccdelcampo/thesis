@@ -6,7 +6,7 @@ NUM_TEST_CASES = 100
 class Pipeline(Enum):
     PROLOG_GRAPHRAG = ("Prolog-GraphRAG Pipeline", "prolog_graphrag")
     GRAPHRAG = ("GraphRAG Pipeline", "graphrag")
-    TUNED = ("llama3.1:instruct", "tuned")
+    TUNED = ("llama3.1:8b-instruct-q4_K_M", "tuned")
 
 class Metric(Enum):
     FAITHFULNESS = ("Faithfulness", "faithfulness")
@@ -15,17 +15,17 @@ class Metric(Enum):
     
 class Benchmark(Enum):
     MMLU = ("MMLU", "mmlu")
-    HOTPOTQA = ("HotpotQA", "hotpotqa")
-    TRUTHFULQA = ("TruthfulQA", "truthfulqa")
+    AI2_ARC = ("AI2 ARC", "ai2_arc")
+    OPENBOOKQA = ("OpenBookQA", "openbookqa")
 
 CONTINUOUS_EVALS = [
     Metric.FAITHFULNESS,
     Metric.ANSWER_RELEVANCY,
     Metric.CONTEXT_RECALL,
-    Benchmark.TRUTHFULQA
 ]
 
 DISCRETE_EVALS = [
     Benchmark.MMLU,
-    Benchmark.HOTPOTQA
+    Benchmark.AI2_ARC,
+    Benchmark.OPENBOOKQA,
 ]

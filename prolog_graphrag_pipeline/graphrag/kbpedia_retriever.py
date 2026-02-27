@@ -25,11 +25,10 @@ class KBPediaRetriever:
 
     _index_verified = False
 
-    def __init__(self, driver, llm=None, top_k: int = 4, triple_filter: bool = False):
+    def __init__(self, driver, llm=None, top_k: int = 4):
         self.driver  = driver
         self.llm     = llm
         self.top_k   = top_k
-        self.triple_filter = triple_filter  # False = fast (1 LLM call at end); True = rigorous per-concept LLM filter
 
     def _verify_index(self):
         """Check once whether the KBPedia fulltext index exists."""
@@ -51,84 +50,75 @@ class KBPediaRetriever:
             print(f"DEBUG: Error verifying KBPedia index: {e}")
             return False
 
-    def _extract_entities_fast(self, query: str) -> List[str]:
+    def extract_entities(self, query: str) -> List[str]:
         """
-        Fast keyword-based entity extraction — no LLM calls.
-        Strips MCQ option markers (A. B. C. D.), removes stop words,
-        and returns the top N content words sorted by length (most specific first).
+        Hybrid entity extraction:
+        1. Uses Regex to accurately pull exact MCQ choices (fast and prevents LLM formatting crashes).
+        2. Uses LLM to extract explicit entities and implied conceptual terms from the question stem.
+        3. Combines and prioritizes the lists.
         """
-        stop_words = {
-            'what', 'which', 'where', 'when', 'who', 'how', 'the', 'that',
-            'this', 'with', 'from', 'into', 'have', 'most', 'some', 'such',
-            'does', 'will', 'each', 'they', 'their', 'would', 'could', 'more',
-            'than', 'also', 'like', 'make', 'used', 'being', 'been', 'were',
-            'about', 'other', 'only', 'over', 'both', 'very', 'after',
-        }
-        # Remove MCQ option labels and punctuation
-        cleaned = re.sub(r'\b[A-D][.)]\s?', ' ', query)
-        cleaned = re.sub(r'[?!,;:()\[\]]', ' ', cleaned).replace('\n', ' ')
-        words = cleaned.split()
-        # Keep words > 4 chars not in stop list
-        content = [
-            w.strip('.') for w in words
-            if len(w) > 4 and w.lower().strip('.') not in stop_words
-        ]
-        # Deduplicate (case-insensitive), longest first
-        seen: set = set()
-        unique = []
-        for w in sorted(content, key=len, reverse=True):
-            key = w.lower()
-            if key not in seen:
-                seen.add(key)
-                unique.append(w)
-        return unique[:8]
+        # --- 1. Regex MCQ Extraction ---
+        mcq_choices = [c.strip() for c in re.findall(r'\b[A-D][.)]\s*(.+?)(?=\s+\b[A-D][.)]|$)', query)]
+        # Clean up any trailing punctuation from choices
+        mcq_choices = [re.sub(r'[?!.]+$', '', c).strip().lower() for c in mcq_choices if c.strip()]
+        
+        # --- 2. LLM Conceptual Extraction ---
+        llm_entities = []
+        if self.llm:
+            # We provide the FULL query (stem + options) to the LLM so it can deduce context
+            # and extract underlying concepts from the answer choices as well.
+            prompt = f"""You are extracting search terms for a knowledge base lookup.
 
-    def extract_entities_from_query(self, query: str) -> List[str]:
-        """
-        LLM-assisted entity extraction (used only when use_llm=True).
-        Extracts explicit entities, functional/conceptual terms, AND MCQ choices.
-        Falls back to simple word-splitting if the LLM is unavailable.
-        """
-        if not self.llm:
-            return [w for w in query.replace('?', '').split() if len(w) > 4][:5]
-
-        prompt = f"""You are extracting search terms for a knowledge base lookup.
-
-Given this query, extract ALL of the following:
-1. **Explicit entities** mentioned (e.g., "plant cell", "animal skeleton")
-2. **Implied functional concepts** that the question is really asking about (e.g., if the question compares functions, extract the function like "structural support", "protection")
-3. **All MCQ answer choices** if they exist (e.g., "cell membrane", "cell wall", "chloroplast", "nucleus")
-4. **Related scientific terms** that would help answer (e.g., "rigidity", "endoskeleton")
+Given this query (which may include multiple-choice options), extract the following:
+1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton")
+2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis")
+3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").
 
 Query: "{query}"
 
-Output a plain JSON list of strings. Include 5-8 terms maximum. Do not include anything else.
-Example: ["plant cell", "animal skeleton", "structural support", "cell wall", "cell membrane", "chloroplast", "nucleus"]"""
-        try:
-            response = self.llm.invoke(prompt).content.strip()
-            if "```json" in response:
-                response = response.split("```json")[1].split("```")[0].strip()
-            elif "```" in response:
-                response = response.split("```")[1].split("```")[0].strip()
+Output a plain JSON list of strings. Include 4-8 terms maximum.
+Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
+            
+            try:
+                response = self.llm.invoke(prompt)
+                res_text = (response.content if hasattr(response, 'content') else str(response)).strip()
+                
+                # Robust JSON extraction: Find first '[' and last ']'
+                bracket_start = res_text.find('[')
+                bracket_end = res_text.rfind(']')
+                
+                if bracket_start != -1 and bracket_end != -1:
+                    json_str = res_text[bracket_start:bracket_end + 1]
+                    parsed = json.loads(json_str)
+                    if isinstance(parsed, list):
+                        llm_entities = [str(item).lower() for item in parsed]
+                else:
+                    print(f"DEBUG: Entity extraction LLM returned no JSON array. Raw: {repr(res_text[:100])}")
+            except Exception as e:
+                print(f"DEBUG: KBPedia entity extraction LLM failed: {e}")
 
-            # Guard against empty LLM responses
-            if not response:
-                print(f"DEBUG: Entity extraction returned empty response, falling back to original query terms.")
-                return [w for w in query.replace('?', '').split() if len(w) > 4][:5]
+        # --- 3. Fallback ---
+        # If LLM fails or is missing, use basic word splitting for the stem
+        if not llm_entities:
+            stem = re.sub(r'\b[A-D][.)]\s?', ' ', query)
+            stem = re.sub(r'[?!,;:()\[\]]', ' ', stem).replace('\n', ' ')
+            words = [w.strip('.').lower() for w in stem.split() if len(w) >= 5]
+            llm_entities = words[:5]
 
-            # Try to extract a JSON array even from messy responses
-            bracket_start = response.find('[')
-            bracket_end = response.rfind(']')
-            if bracket_start != -1 and bracket_end != -1:
-                response = response[bracket_start:bracket_end + 1]
-
-            entities = json.loads(response)
-            if isinstance(entities, list):
-                return entities[:5]
-        except Exception as e:
-            print(f"DEBUG: KBPedia entity extraction failed: {e}. Falling back to original query terms.")
-
-        return [query]
+        # --- 4. Combine and deduplicate ---
+        unique_entities = []
+        seen = set()
+        
+        # Prioritize MCQ choices first, then LLM concepts
+        for phrase in mcq_choices + llm_entities:
+            if phrase and phrase not in seen:
+                seen.add(phrase)
+                unique_entities.append(phrase)
+                
+        # We don't want to sort by length anymore because LLM gives high-quality short phrases too.
+        # MCQ choices naturally stay at the top.
+        
+        return unique_entities[:10]
 
     def find_concepts(self, search_term: str, limit: int = 3) -> List[Dict[str, Any]]:
         """
@@ -288,6 +278,77 @@ If none are relevant, output an empty list [].
 
         return triples
 
+    def filter_triples_batch(self, query: str, concepts_data: List[Dict[str, Any]], original_query: str = "") -> Dict[str, List[str]]:
+        """
+        Use LLM to keep only logically relevant triples for MULTIPLE concepts at once.
+        concepts_data is a list of dicts: {"name": str, "triples": List[str]}
+        Returns a dictionary mapping concept_name to a list of filtered triples.
+        """
+        if not self.llm or not concepts_data:
+            return {c["name"]: c["triples"][:10] for c in concepts_data}
+
+        filter_query = original_query if original_query else query
+
+        # Build the payload for the prompt
+        concepts_text = ""
+        for c in concepts_data:
+            triples_text = "\n".join([f"  - {t}" for t in c["triples"]])
+            concepts_text += f"Concept: '{c['name']}'\nFacts:\n{triples_text}\n\n"
+
+        prompt = f"""Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "{filter_query}"
+
+{concepts_text}
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}}
+"""
+        # Default fallback
+        result_map = {c["name"]: c["triples"] for c in concepts_data}
+
+        try:
+            raw = self.llm.invoke(prompt)
+            res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
+            print(f"DEBUG: Batch triple filter raw response: {repr(res[:200])}...", flush=True)
+
+            if "```json" in res:
+                res = res.split("```json")[1].split("```")[0].strip()
+            elif "```" in res:
+                res = res.split("```")[1].split("```")[0].strip()
+
+            bracket_start = res.find('{')
+            bracket_end = res.rfind('}')
+            if bracket_start != -1 and bracket_end != -1:
+                res = res[bracket_start:bracket_end + 1]
+            elif not res:
+                print(f"DEBUG: Batch triple filter got empty response. Using all raw triples.", flush=True)
+                return result_map
+
+            filtered = json.loads(res)
+            if isinstance(filtered, dict):
+                for c in concepts_data:
+                    name = c["name"]
+                    if name in filtered and isinstance(filtered[name], list):
+                        # Clean up formatting artifacts (like "- subclass of:" -> "subclass of:")
+                        cleaned_triples = [t[2:].strip() if t.startswith("- ") else t.strip() for t in filtered[name]]
+                        result_map[name] = cleaned_triples
+        except Exception as e:
+            print(f"DEBUG: Batch triple filtering failed: {e}. Using all raw triples.", flush=True)
+
+        return result_map
+
     def _filter_concepts_once(self, query_text: str, candidates: list, original_query: str = "") -> list:
         """
         Single LLM call to filter all candidates at once.
@@ -301,6 +362,17 @@ If none are relevant, output an empty list [].
         # Use the full original prompt (with MCQ choices) when available for better filtering
         filter_query = original_query if original_query else query_text
 
+        # Extract MCQ choices from the question so the LLM knows to keep them
+        mcq_choices = re.findall(r'\b[A-D][.)]\s*(.+)', filter_query)
+        mcq_hint = ""
+        if mcq_choices:
+            mcq_hint = (
+                f"\n\n### MCQ Answer Choices Detected\n"
+                f"The question has these answer options: {mcq_choices}\n"
+                f"You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. "
+                f"These are exactly the concepts the Prolog engine needs to reason about.\n"
+            )
+
         summary_lines = []
         for idx, c in enumerate(candidates):
             defn = (c.get("definition") or "")[:150]
@@ -309,19 +381,22 @@ If none are relevant, output an empty list [].
 
         prompt = f"""You are filtering knowledge graph concepts for a Prolog-based question-answering system.
 
-User question: "{filter_query}"
+User question: "{filter_query}"{mcq_hint}
 
 Candidates (index: concept name: short definition):
 {summary_text}
 
 ### Decision Criteria
-A concept is RELEVANT if its definition or properties could provide a fact, rule, or piece of evidence that helps answer the question above.
-A concept is IRRELEVANT if it was matched by coincidence (e.g., the word "factor" matching "Rh factor" or "transcription factor" when the question is about experimental variables).
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
 
-When in doubt, KEEP the concept — the downstream Prolog engine can handle extra facts, but missing a relevant concept is harder to recover from.
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
 
-Return a JSON list of the RELEVANT indices (integers). If none are relevant, return [].
-Output ONLY the JSON list, nothing else. Example: [0, 2, 4]
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
 """
         try:
             raw = self.llm.invoke(prompt)
@@ -351,24 +426,15 @@ Output ONLY the JSON list, nothing else. Example: [0, 2, 4]
         filter_query = original_query if original_query else query_text
 
         # ── Entity extraction ─────────────────────────────────────────────────
-        if self.triple_filter:
-            print(f"DEBUG: [KBPedia RIGOROUS mode] Querying for: '{query_text}'", flush=True)
-            entities = self.extract_entities_from_query(query_text)
-        else:
-            print(f"DEBUG: [KBPedia FAST mode] Querying for: '{query_text}'", flush=True)
-            entities = self._extract_entities_fast(query_text)
+        print(f"DEBUG: [KBPedia] Querying for: '{query_text}'", flush=True)
+        entities = self.extract_entities(query_text)
         print(f"DEBUG: Extracted entities for KBPedia: {entities}", flush=True)
 
         seen_uris = set()
-        # In fast mode we buffer all candidates first, then do one LLM pass at the end.
-        # In rigorous mode we filter per concept and build items directly.
-        candidates = []  # for fast mode buffering: list of {name, uri, definition, triples}
+        candidates = []  # list of {name, uri, definition, triples}
         items = []       # final result items
 
         for concept_name in entities:
-            if len(items) >= top_k and self.triple_filter:
-                break
-
             matches = self.find_concepts(concept_name, limit=2)
 
             if not matches:
@@ -378,9 +444,6 @@ Output ONLY the JSON list, nothing else. Example: [0, 2, 4]
             print(f"DEBUG: KBPedia matched {len(matches)} concept(s) for '{concept_name}': {[m['name'] for m in matches]}", flush=True)
 
             for match in matches:
-                if len(items) >= top_k and self.triple_filter:
-                    break
-
                 uri = match["uri"]
                 if uri in seen_uris:
                     continue
@@ -400,43 +463,48 @@ Output ONLY the JSON list, nothing else. Example: [0, 2, 4]
                     print(f"DEBUG: No raw triples for '{match['name']}' ({uri}), skipping.", flush=True)
                     continue
 
-                if self.triple_filter:
-                    # RIGOROUS: LLM filters triples per concept
-                    print(f"DEBUG: Built {len(raw_triples)} raw triple(s) for '{match['name']}'. Sending to LLM filter...", flush=True)
-                    selected_triples = self.filter_triples_for_query(query_text, match["name"], raw_triples, original_query=filter_query)
-                    print(f"DEBUG: LLM filter kept {len(selected_triples)}/{len(raw_triples)} triple(s) for '{match['name']}'", flush=True)
+                # Buffer raw candidates for a single end-of-loop LLM pass
+                print(f"DEBUG: Buffered {len(raw_triples)} raw triple(s) for '{match['name']}'", flush=True)
+                candidates.append({
+                    "name": match["name"],
+                    "uri": uri,
+                    "definition": match.get("definition", ""),
+                    "triples": raw_triples,
+                })
 
-                    if not selected_triples:
-                        continue
-
-                    triples_text = "\n".join([f"  - {t}" for t in selected_triples])
-                    content = f"KBPedia Concept: {match['name']}.\nRelevant Logical Facts:\n{triples_text}"
-                    items.append(RetrieverResultItem(
-                        content=content,
-                        metadata={"source": "KBPedia", "entity": match["name"],
-                                  "uri": uri, "score": 1.0, "triples": selected_triples},
-                    ))
-                else:
-                    # FAST: buffer raw candidates for a single end-of-loop LLM pass
-                    print(f"DEBUG: Buffered {len(raw_triples)} raw triple(s) for '{match['name']}'", flush=True)
-                    candidates.append({
-                        "name": match["name"],
-                        "uri": uri,
-                        "definition": match.get("definition", ""),
-                        "triples": raw_triples,
-                    })
-
-        # ── Fast-mode: single LLM relevance filter over all candidates ─────────────
-        if not self.triple_filter and candidates:
+        # ── Single LLM relevance filter over all candidates ─────────────
+        if candidates:
             filtered_candidates = self._filter_concepts_once(query_text, candidates, original_query=filter_query)
             print(f"DEBUG: End-filter kept {len(filtered_candidates)}/{len(candidates)} concepts.", flush=True)
-            for c in filtered_candidates[:top_k]:
-                triples_text = "\n".join([f"  - {t}" for t in c["triples"]])
+            
+            # Batch Triple filtering on the validated concepts
+            filtered_concepts_to_use = filtered_candidates[:top_k]
+            
+            if filtered_concepts_to_use:
+                # Prepare batch payload
+                batch_data = [{"name": c["name"], "triples": c["triples"]} for c in filtered_concepts_to_use]
+                print(f"DEBUG: Batch sending {len(batch_data)} concepts to LLM triple filter...", flush=True)
+                
+                # We can process all top_k (usually <= 5) in one LLM call
+                batch_results = self.filter_triples_batch(query_text, batch_data, original_query=filter_query)
+                
+                # Reassign filtered triples back to the candidates
+                for c in filtered_concepts_to_use:
+                    selected = batch_results.get(c["name"], c["triples"])
+                    print(f"DEBUG: Batch LLM filter kept {len(selected)}/{len(c['triples'])} triple(s) for '{c['name']}'", flush=True)
+                    c["triples"] = selected
+
+            for c in filtered_concepts_to_use:
+                selected_triples = c["triples"]
+                if not selected_triples:
+                    continue
+
+                triples_text = "\n".join([f"  - {t}" for t in selected_triples])
                 content = f"KBPedia Concept: {c['name']}.\nRelevant Logical Facts:\n{triples_text}"
                 items.append(RetrieverResultItem(
                     content=content,
                     metadata={"source": "KBPedia", "entity": c["name"],
-                              "uri": c["uri"], "score": 1.0, "triples": c["triples"]},
+                              "uri": c["uri"], "score": 1.0, "triples": selected_triples},
                 ))
 
         print(f"DEBUG: KBPedia found {len(items)} grounded concept contexts.", flush=True)

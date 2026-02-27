@@ -4,7 +4,7 @@ Hallucination Evaluation Pipeline - Main Driver
 Orchestrates the full evaluation pipeline:
 1. (Optional) Generate synthetic testset from documents
 2. Run hallucination metrics (Faithfulness, Answer Relevancy, Context Recall)
-3. Run benchmark evaluators (HotpotQA, MMLU, TruthfulQA)
+3. Run benchmark evaluators (AI2 ARC, OpenBookQA, MMLU)
 4. Run statistical analysis
 
 Usage:
@@ -13,7 +13,7 @@ Usage:
     python hallucination_evaluation_pipeline\code\main_driver.py --metrics-only     # Run only hallucination metrics
     python hallucination_evaluation_pipeline\code\main_driver.py --benchmarks-only  # Run only benchmarks
     python hallucination_evaluation_pipeline\code\main_driver.py --test-size n      # Run with n test cases
-    python hallucination_evaluation_pipeline\code\main_driver.py --benchmarks mmlu folio openbookqa      # Run with n test cases
+    python hallucination_evaluation_pipeline\code\main_driver.py --benchmarks ai2_arc openbookqa mmlu      # Run specific benchmarks
 """
 import os
 import sys
@@ -58,7 +58,7 @@ def run_hallucination_metrics(test_size: int = 100):
     
     print("\n--- Answer Relevancy ---")
     try:
-        answer_relevance.main(test_size=test_size)
+        answer_relevancy.main(test_size=test_size)
     except Exception as e:
         print(f"Answer Relevancy failed: {e}")
     
@@ -71,19 +71,19 @@ def run_hallucination_metrics(test_size: int = 100):
 def run_benchmarks(test_size: int = 100, benchmarks: list[str] = None):
     """Run benchmark evaluators."""
     if benchmarks is None:
-        benchmarks = ["mmlu", "openbookqa", "folio"]
+        benchmarks = ["ai2_arc", "openbookqa", "mmlu"]
         
     print("\n" + "=" * 60)
     print(f"STEP 2: Running Benchmark Evaluators: {benchmarks}")
     print("=" * 60)
     
-    if "hotpotqa" in benchmarks:
+    if "ai2_arc" in benchmarks:
         try:
-            import hotpotqa
-            print("\n--- HotpotQA ---")
-            hotpotqa.main(test_size=test_size)
+            import ai2_arc
+            print("\n--- AI2 ARC ---")
+            ai2_arc.main(test_size=test_size)
         except Exception as e:
-            print(f"HotpotQA failed: {e}")
+            print(f"AI2 ARC failed: {e}")
     
     if "mmlu" in benchmarks:
         try:
@@ -92,14 +92,6 @@ def run_benchmarks(test_size: int = 100, benchmarks: list[str] = None):
             mmlu.main(test_size=test_size)
         except Exception as e:
             print(f"MMLU failed: {e}")
-            
-    if "truthfulqa" in benchmarks:
-        try:
-            import truthfulqa
-            print("\n--- TruthfulQA ---")
-            truthfulqa.main(test_size=test_size)
-        except Exception as e:
-            print(f"TruthfulQA failed: {e}")
 
     if "openbookqa" in benchmarks:
         try:
@@ -108,14 +100,6 @@ def run_benchmarks(test_size: int = 100, benchmarks: list[str] = None):
             openbookqa.main(test_size=test_size)
         except Exception as e:
             print(f"OpenBookQA failed: {e}")
-            
-    if "folio" in benchmarks:
-        try:
-            import folio
-            print("\n--- FOLIO ---")
-            folio.main(test_size=test_size)
-        except Exception as e:
-            print(f"FOLIO failed: {e}")
 
 def run_statistical_analysis():
     """Run statistical tests on collected results."""
@@ -168,12 +152,12 @@ if __name__ == "__main__":
                        help="Run only benchmarks (skip hallucination metrics)")
     parser.add_argument("--test-size", type=int, default=100,
                        help="Number of test cases to run/generate")
-    parser.add_argument("--benchmarks", nargs='+', default=["mmlu", "openbookqa", "folio"],
-                       help="List of benchmarks to run (e.g. mmlu openbookqa folio truthfulqa hotpotqa)")
+    parser.add_argument("--benchmarks", nargs='+', default=["ai2_arc", "openbookqa", "mmlu"],
+                       help="List of benchmarks to run (e.g. ai2_arc openbookqa mmlu)")
     args = parser.parse_args()
     
     # Normalize benchmarks to lowercase
-    benchmarks_lower = [b.lower() for b in args.benchmarks] if args.benchmarks else ["mmlu", "openbookqa", "folio"]
+    benchmarks_lower = [b.lower() for b in args.benchmarks] if args.benchmarks else ["ai2_arc", "openbookqa", "mmlu"]
     
     run_hallucination_evaluation_pipeline(
         generate_testset=args.generate_testset,
