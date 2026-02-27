@@ -27,7 +27,7 @@ def generate(llm, retriever, query, original_query: str = "") -> dict:
 
     output_file = "debug_rag_output.txt"
     
-    with open(output_file, "w", encoding="utf-8") as f:
+    with open(output_file, "a", encoding="utf-8") as f:
         f.write("="*50 + "\n")
         f.write(f" QUERY: {query}\n")
         f.write("="*50 + "\n\n")
