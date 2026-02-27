@@ -19,8 +19,8 @@ Translate the provided Context into a formal Prolog database to answer the User 
 
 ### Syntactic Requirements (s(CASP) Specific)
 - Disjunction / Logical OR: NEVER use the semicolon `;` anywhere — not inside rule bodies, not inside queries. s(CASP) will immediately crash with a permission error. This is the single most common mistake — AVOID IT ENTIRELY.
-  WRONG: `answer(X) :- option_a(X) ; option_b(X).`
-  RIGHT:  `answer(X) :- option_a(X).`  AND as a SEPARATE RULE:  `answer(X) :- option_b(X).`
+  WRONG: `answer(X) :- choice_a(X) ; choice_b(X).`
+  RIGHT:  `answer(X) :- choice_a(X).`  AND as a SEPARATE RULE:  `answer(X) :- choice_b(X).`
 - Arithmetic & Equality: NEVER use the native evaluation operators like `=:=`, `=\=`, `is`, `>`, `<`. s(CASP) strictly prohibits them. For numerical constraints or arithmetic equality, you MUST use constraint logic programming syntax like `#=`, `#<`, `#>`, `#=\=`. If just unifying two terms, use standard `=`.
 - Negation: You MUST use the keyword not for Negation as Failure. NEVER use \+.
 - Classical Negation: Use the - prefix (e.g., -mortal(X).) for explicit falsehood.
@@ -29,13 +29,13 @@ Translate the provided Context into a formal Prolog database to answer the User 
 - Singleton Variables: Every named variable in a rule must appear at least twice. If a variable is only used once, use the anonymous variable `_` instead.
 - Punctuation: Every Prolog line must end with a period (.). No standalone bullets or hyphens at the start of a line.
 - Closed-World / No Undefined Predicates (CRITICAL): Every predicate name that appears in a rule body MUST be defined somewhere in the same database — either as a ground fact or as the head of another rule. NEVER call a predicate that you did not define. If you find yourself writing `receives_more_light(X)` in a body, you MUST also have `receives_more_light(pot1).` (or equivalent) as a fact. Calling an undefined predicate will always cause an 'Unknown procedure' error.
-  WRONG: `answer(X) :- option(X, Factor), causes_difference(Factor).`  ← if `causes_difference/1` is never defined as a fact
-  RIGHT:  `causes_difference(amount_of_light).`  (ground fact)  THEN  `answer(X) :- option(X, Factor), causes_difference(Factor).`
+  WRONG: `answer(X) :- choice_X, Factor), causes_difference(Factor).`  ← if `causes_difference/1` is never defined as a fact
+  RIGHT:  `causes_difference(amount_of_light).`  (ground fact)  THEN  `answer(X) :- choice_X, Factor), causes_difference(Factor).`
 - Discontiguous Clauses: Group ALL clauses for the same predicate together. Never interleave clauses for different predicates. If `answer/1` has two clauses, write them one after the other, not separated by other predicate definitions.
 
 ### Multiple-Choice Questions (MCQ) — Critical
 When the user question presents options (A/B/C/D), you MUST follow this pattern:
-1. Encode EACH option as a separate fact: `option(a, description).` / `option(b, description).` etc.
+1. Encode EACH option as a separate fact: `choice_a, description).` / `choice_b, description).` etc.
 2. Encode the domain knowledge from the context as GROUND FACTS for properties that are directly stated. Do NOT hardcode which option is correct.
 3. Write an `answer/1` rule that unifies with the correct option ONLY through logical derivation from those domain facts.
 4. The <query> should be `answer(Option).` with a variable — NEVER `answer(b).` with a constant.
@@ -44,26 +44,26 @@ WRONG — hardcoded answer:
   `answer(b) :- true.`
 
 WRONG — undefined predicate in body (causes 'Unknown procedure' error):
-  `answer(X) :- option(X, Factor), causes_difference(Factor).`  ← CRASH if `causes_difference/1` has no facts
-  `answer(X) :- option_a(X).`  ← CRASH because `option_a/1` is never defined
+  `answer(X) :- choice_X, Factor), causes_difference(Factor).`  ← CRASH if `causes_difference/1` has no facts
+  `answer(X) :- choice_a(X).`  ← CRASH because `choice_a/1` is never defined
 
 RIGHT — derived through grounded facts:
-  `option(a, cell_membrane). option(b, cell_wall).`
+  `choice_a, cell_membrane). choice_b, cell_wall).`
   `provides_structural_support(cell_wall).`   ← ground fact from context
-  `answer(Option) :- option(Option, Part), provides_structural_support(Part).`
+  `answer(Option) :- choice_Option, Part), provides_structural_support(Part).`
 
 ### MCQ Strategy Selector — Pick the pattern that matches the question type:
 
 | Question Type | Example phrasing | Strategy |
 |---|---|---|
-| **Property match** | "Which has property P?" / "Which is most similar to X?" | `has_property(X, p). answer(O) :- option(O, X), has_property(X, p).` |
-| **Difference** | "Which factor was DIFFERENT?" / "Which was NOT the same?" | `different(factor). same(other). answer(O) :- option(O, F), different(F).` |
-| **Negation** | "Which is NOT true?" / "Which does NOT apply?" | `true_of(b). true_of(c). true_of(d). answer(O) :- option(O, X), not true_of(X).` |
-| **Causal / reason** | "Most likely reason for X?" / "What caused X?" | `causes(x, effect). answer(O) :- option(O, X), causes(X, effect).` |
-| **Consequence** | "What would happen if X?" / "What results from X?" | `leads_to(cause, result). answer(O) :- option(O, R), leads_to(cause, R).` |
-| **Classification** | "Which is an example of X?" / "Which belongs to category Y?" | `is_a(x, category). answer(O) :- option(O, X), is_a(X, category).` |
-| **Purpose / function** | "What is the PURPOSE of X?" / "Why is X used?" | `purpose_of(x, goal). answer(O) :- option(O, G), purpose_of(x, G).` |
-| **Degree / most** | "Which would MOST likely / BEST explain?" | `best_fits(x, criterion). answer(O) :- option(O, X), best_fits(X, criterion).` |
+| **Property match** | "Which has property P?" / "Which is most similar to X?" | `has_property(X, p). answer(O) :- choice_O, X), has_property(X, p).` |
+| **Difference** | "Which factor was DIFFERENT?" / "Which was NOT the same?" | `different(factor). same(other). answer(O) :- choice_O, F), different(F).` |
+| **Negation** | "Which is NOT true?" / "Which does NOT apply?" | `true_of(b). true_of(c). true_of(d). answer(O) :- choice_O, X), not true_of(X).` |
+| **Causal / reason** | "Most likely reason for X?" / "What caused X?" | `causes(x, effect). answer(O) :- choice_O, X), causes(X, effect).` |
+| **Consequence** | "What would happen if X?" / "What results from X?" | `leads_to(cause, result). answer(O) :- choice_O, R), leads_to(cause, R).` |
+| **Classification** | "Which is an example of X?" / "Which belongs to category Y?" | `is_a(x, category). answer(O) :- choice_O, X), is_a(X, category).` |
+| **Purpose / function** | "What is the PURPOSE of X?" / "Why is X used?" | `purpose_of(x, goal). answer(O) :- choice_O, G), purpose_of(x, G).` |
+| **Degree / most** | "Which would MOST likely / BEST explain?" | `best_fits(x, criterion). answer(O) :- choice_O, X), best_fits(X, criterion).` |
 
 **Universal rule:** Every property predicate (`has_property`, `different`, `causes`, `is_a`, etc.) used in a rule body MUST be grounded by a fact in the same database. Read the context, extract what is explicitly stated, and encode it as ground facts FIRST — then write the `answer` rule to derive from those facts.
 
@@ -420,27 +420,27 @@ D. type of seed
     {"role": "assistant", "content": r"""
 <reasoning_step>
 Encode MCQ options and assert which factors are same vs. different as ground facts. The answer derives from different/1.
-option(a, amount_of_water).
-option(b, amount_of_light).
-option(c, type_of_soil).
-option(d, type_of_seed).
+choice_a, amount_of_water).
+choice_b, amount_of_light).
+choice_c, type_of_soil).
+choice_d, type_of_seed).
 same(amount_of_water).
 same(type_of_soil).
 same(type_of_seed).
 different(amount_of_light).
-answer(Option) :- option(Option, Factor), different(Factor).
+answer(Option) :- choice_Option, Factor), different(Factor).
 </reasoning_step>
 
 <database>
-option(a, amount_of_water).
-option(b, amount_of_light).
-option(c, type_of_soil).
-option(d, type_of_seed).
+choice_a, amount_of_water).
+choice_b, amount_of_light).
+choice_c, type_of_soil).
+choice_d, type_of_seed).
 same(amount_of_water).
 same(type_of_soil).
 same(type_of_seed).
 different(amount_of_light).
-answer(Option) :- option(Option, Factor), different(Factor).
+answer(Option) :- choice_Option, Factor), different(Factor).
 </database>
 
 <query>
@@ -469,21 +469,21 @@ D. fermentation
     {"role": "assistant", "content": r"""
 <reasoning_step>
 Encode options and assert which process uses sunlight (only photosynthesis). Use 'not' (never \+) for negation as failure.
-option(a, photosynthesis).
-option(b, cellular_respiration).
-option(c, decomposition).
-option(d, fermentation).
+choice_a, photosynthesis).
+choice_b, cellular_respiration).
+choice_c, decomposition).
+choice_d, fermentation).
 uses_sunlight(photosynthesis).
-answer(Option) :- option(Option, Process), not uses_sunlight(Process).
+answer(Option) :- choice_Option, Process), not uses_sunlight(Process).
 </reasoning_step>
 
 <database>
-option(a, photosynthesis).
-option(b, cellular_respiration).
-option(c, decomposition).
-option(d, fermentation).
+choice_a, photosynthesis).
+choice_b, cellular_respiration).
+choice_c, decomposition).
+choice_d, fermentation).
 uses_sunlight(photosynthesis).
-answer(Option) :- option(Option, Process), not uses_sunlight(Process).
+answer(Option) :- choice_Option, Process), not uses_sunlight(Process).
 </database>
 
 <query>

@@ -8893,25 +8893,25 @@
             "type": "IS_A",
             "start_node_id": "growth_in_routine_practice",
             "end_node_id": "height_only",
-            "properties": {"natural_statement": "A. Height only", "logic_intent": "FACT", "logical_form_hint": "option(growth_in_routine_practice, height_only)"}
+            "properties": {"natural_statement": "A. Height only", "logic_intent": "FACT", "logical_form_hint": "choice_growth_in_routine_practice, height_only)"}
         },
         {
             "type": "IS_A",
             "start_node_id": "growth_in_routine_practice",
             "end_node_id": "weight_only",
-            "properties": {"natural_statement": "B. Weight only", "logic_intent": "FACT", "logical_form_hint": "option(growth_in_routine_practice, weight_only)"}
+            "properties": {"natural_statement": "B. Weight only", "logic_intent": "FACT", "logical_form_hint": "choice_growth_in_routine_practice, weight_only)"}
         },
         {
             "type": "IS_A",
             "start_node_id": "growth_in_routine_practice",
             "end_node_id": "weight_and_height",
-            "properties": {"natural_statement": "C. Weight and height", "logic_intent": "FACT", "logical_form_hint": "option(growth_in_routine_practice, weight_and_height)"}
+            "properties": {"natural_statement": "C. Weight and height", "logic_intent": "FACT", "logical_form_hint": "choice_growth_in_routine_practice, weight_and_height)"}
         },
         {
             "type": "IS_A",
             "start_node_id": "growth_in_routine_practice",
             "end_node_id": "head_circumference",
-            "properties": {"natural_statement": "D. Head circumference", "logic_intent": "FACT", "logical_form_hint": "option(growth_in_routine_practice, head_circumference)"}
+            "properties": {"natural_statement": "D. Head circumference", "logic_intent": "FACT", "logical_form_hint": "choice_growth_in_routine_practice, head_circumference)"}
         }
     ]
 }
@@ -50648,3 +50648,1364 @@ Explanation:
 
 Note: I've kept the original fact formatting to maintain consistency with your output format.
 ===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "In a forest, how do decomposers help other organisms survive? A. They release oxygen into the air that animals breathe. B. They put nutrients into the soil that plants use to grow. C. They provide shelter in forests where animals can hide. D. They use sunlight to make food for plants and animals."  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "decomposers",
+    "oxygen",
+    "animals",
+    "plants"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "In a forest, how do decomposers help other organisms survive?
+A. They release oxygen into the air that animals breathe.
+B. They put nutrients into the soil that plants use to grow.
+C. They provide shelter in forests where animals can hide.
+D. They use sunlight to make food for plants and animals."
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['They release oxygen into the air that animals breathe.', 'They put nutrients into the soil that plants use to grow.', 'They provide shelter in forests where animals can hide.', 'They use sunlight to make food for plants and animals.']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] air-breathing vertebrate: AirBreathingVertebrate is a specialization of Vertebrate and an instance of OrganismClassificationType. Each instance of AirBreathingVertebrate is a v
+[1] Release factor: A release factor is a protein that allows for the termination of translation by recognizing the termination codon or stop codon in an mRNA sequence. D
+[2] Carnivorous plant: Carnivorous plants are plants that derive some or most of their nutrients (but not energy) from trapping and consuming animals or protozoans, typicall
+[3] pineapple order: A biological order within the monocot sublass in the plant kingdom. Members are often epiphytic, meaning they use other plants as a substrate (grow on
+[4] shelter-providing artifact: The collection of artifacts that are used primarily to provide shelter to some object.
+[5] reproduction in animals: A topic pertaining to reproduction in animals.
+[6] sunlight: The collection of all sunlight. Sunlight is VisibleLight emitted by TheSun.
+[7] photosynthesis in plants: A collection of events in which plants convert energy captured from sunlight into usable chemical energy for their metabolic needs.
+[8] Rhizophydiales: Rhizophydiales are an important group of chytrid fungi. They are found in soil as well as marine and fresh water habitats where they function as paras
+[9] Hermetia illucens: Hermetia illucens, the black soldier fly, is a common and widespread fly of the family Stratiomyidae. Neither the larvae nor adults are considered pes
+[10] oxygen: A piece (i.e., specific collections of nearby molecules) of Oxygen in stuff form.
+[11] oxygen compound: The oxidation state of oxygen is −2 in almost all known compounds of oxygen. The oxidation state −1 is found in a few compounds such as peroxides. Com
+[12] abnormal behaviour in animals: Abnormal behavior exhibited by animals.
+[13] plants by habitat: This category is for listings of plants by habitat.
+[14] introduced plants: This category is for topics and lists dealing specifically with the introduction, by humans, of plants to a region/continent/habitat where they are no
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```
+[1, 3, 5, 6, 8, 10, 12, 13, 14]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "In a forest, how do decomposers help other organisms survive?
+A. They release oxygen into the air that animals breathe.
+B. They put nutrients into the soil that plants use to grow.
+C. They provide shelter in forests where animals can hide.
+D. They use sunlight to make food for plants and animals."
+
+Concept: 'Release factor'
+Facts:
+  - definition: A release factor is a protein that allows for the termination of translation by recognizing the termination codon or stop codon in an mRNA sequence. During translation of mRNA, most codons are recogni
+  - subclass of: protein
+  - ancestor definition: Proteins (/ˈproʊˌtiːnz/ or /ˈproʊti.ɨnz/) are large biomolecules, or macromolecules, consisting of one or more long chains of amino acid residues. Pro
+  - subclass of: peptide molecule
+  - ancestor definition: Peptides (from Greek language πεπτός, peptós "digested"; derived from πέσσειν, péssein "to digest") are short chains of amino acids linked by peptide 
+  - subclass of: molecular material
+  - ancestor definition: A collection of tangible stuff. Every instance of MolecularStuff is a portion of stuff composed of covalently-bonded molecules. Thus, Water and DNAStu
+  - subclass of: nutrient
+  - ancestor definition: Nutrients are components in foods that an organism uses to survive and grow. Macronutrients provide the bulk energy an organism's metabolic system nee
+  - subclass of: organic compound
+  - ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas
+  - subclass of: polymer molecule
+
+Concept: 'pineapple order'
+Facts:
+  - definition: A biological order within the monocot sublass in the plant kingdom. Members are often epiphytic, meaning they use other plants as a substrate (grow on them), but don't get any water or nutrients fromt
+  - subclass of: monocot
+  - ancestor definition: MonocotSubclass is a specialization of FloweringPlant and instance of BiologicalSubclass. It is an angiosperm subclass containing taxa whose members h
+  - subclass of: floral plant
+  - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of flowerin
+  - subclass of: floriculture or silviculture product
+  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of floric
+  - subclass of: the plant kingdom
+  - ancestor definition: The collection of all individual plants, an instance of OrganismClassificationType and a specialization of EukaryoticOrganism. Plant is a member of th
+  - subclass of: spermatophyte
+  - ancestor definition: The collection of land plants that produce seeds.
+  - has subclass: Bromeliaceae
+
+Concept: 'reproduction in animals'
+Facts:
+  - definition: A topic pertaining to reproduction in animals.
+  - subclass of: biological reproduction
+  - ancestor definition: A specialization of BiologicalProductionEvent. Each instance of BiologicalReproductionEvent is an event in which one or more instances of BiologicalLi
+  - subclass of: biological production
+  - ancestor definition: A specialization of both PhysicalCreationEvent and BiologicalEvent. In each instance of BiologicalProductionEvent, raw materials are combined to produ
+  - subclass of: organic event
+  - ancestor definition: A specialization of BiologicalProcess (q.v.) instances of which are non-deliberately "done by" biological organisms. Each instance of BiologicalEvent 
+  - subclass of: physical creation event
+  - ancestor definition: The collection of all CreationEvents in which something PartiallyTangible is created.
+  - subclass of: production
+  - ancestor definition: The collection of instances of CreationEvent, each of which is a production event, regardless of whether it is a commercial production, a biological p
+  - sibling concept: asexual reproduction event
+
+Concept: 'sunlight'
+Facts:
+  - definition: The collection of all sunlight. Sunlight is VisibleLight emitted by TheSun.
+  - subclass of: light
+  - ancestor definition: This is the collection of events consisting of the propogation of electromagnetic radiation and associated with photons, a particle which lacks rest m
+  - subclass of: solar radiation
+  - ancestor definition: Instances of SolarRadiation are wave propagation events and include any ElectromagneticRadiation emitted by TheSun, whether those events are the propa
+  - subclass of: solar thermal energy
+  - ancestor definition: Solar thermal energy (STE) is a form of energy and a technology for harnessing solar energy to generate thermal energy or electrical energy for use in
+  - subclass of: light wave
+  - ancestor definition: The visible spectrum is the portion of the electromagnetic spectrum that is visible to (can be detected by) the human eye. Electromagnetic radiation i
+  - subclass of: electromagnetic radiation
+  - ancestor definition: A specialization of WavePropagation (q.v.). Each instance of ElectromagneticRadiation is an event that arises from the interaction of an electrical fi
+  - subclass of: energy
+
+Concept: 'Rhizophydiales'
+Facts:
+  - definition: Rhizophydiales are an important group of chytrid fungi. They are found in soil as well as marine and fresh water habitats where they function as parasites and decomposers.
+  - subclass of: Chytridiomycota Division
+  - ancestor definition: These fungi are characterised by their asexual state, a zoospore (motile) with a single whiplash flagellum oriented and located posteriorly. The zoosp
+  - subclass of: fungus
+  - ancestor definition: A fungus is any member of the group of eukaryotic organisms that includes unicellular microorganisms such as yeasts and molds, as well as multicellula
+  - subclass of: fungus or part of a fungus
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all living fungi, parts of living fungi, and regions of living fungi.
+  - subclass of: heterotroph
+  - ancestor definition: A specialization of Organism_Whole. Each instance of Heterotroph is an organism incapable of manufacturing organic nutrients from inorganic raw materi
+  - subclass of: mycology
+  - ancestor definition: Mycology is the branch of biology concerned with the study of fungi, including their genetic and biochemical properties, their taxonomy and their use 
+  - sibling concept: Chytridiales
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+After carefully reviewing each concept and its associated facts, I have filtered out irrelevant information while retaining the essential structural facts for each concept. Here is the output in JSON format:
+
+```json
+{
+    "Decomposers": [
+        "definition: Rhizophydiales are an important group of chytrid fungi.",
+        "subclass of: Chytridiomycota Division",
+        "ancestor definition: These fungi are characterised by their asexual state, a zoospore (motile) with a single whiplash flagellum oriented and located posteriorly."
+    ],
+    "Release factor": [
+        "definition: A release factor is a protein that allows for the termination of translation by recognizing the termination codon or stop codon in an mRNA sequence.",
+        "subclass of: protein"
+    ],
+    "Pineapple order": [
+        "definition: A biological order within the monocot sublass in the plant kingdom. Members are often epiphytic, meaning they use other plants as a substrate (grow on them), but don't get any water or nutrients fromt",
+        "subclass of: monocot"
+    ],
+    "Reproduction in animals": [
+        "definition: A topic pertaining to reproduction in animals.",
+        "subclass of: biological production"
+    ],
+    "Sunlight": [
+        "definition: The collection of all sunlight. Sunlight is VisibleLight emitted by TheSun."
+    ]
+}
+```
+
+I have carefully followed the instructions:
+
+1. I dropped useless trivia, such as Wikipedia links and word lengths.
+2. For each concept that perfectly matches one of the multiple-choice options in the User Query (Decomposers), I kept its core definition, what it is a subclass of, and what it does to provide essential structural facts for evaluation by the logic engine.
+
+Note: Since Rhizophydiales are mentioned as decomposers, I have included them under that concept.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "In a forest, how do decomposers help other organisms survive? A) They release oxygen into the air that animals breathe. B) They put nutrients into the soil that plants use to grow. C) They provide shelter in forests where animals can hide. D) They use sunlight to make food for plants and animals."  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "decomposers",
+    "oxygen",
+    "animals",
+    "plants"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "In a forest, how do decomposers help other organisms survive?
+A. They release oxygen into the air that animals breathe.
+B. They put nutrients into the soil that plants use to grow.
+C. They provide shelter in forests where animals can hide.
+D. They use sunlight to make food for plants and animals."
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['They release oxygen into the air that animals breathe.', 'They put nutrients into the soil that plants use to grow.', 'They provide shelter in forests where animals can hide.', 'They use sunlight to make food for plants and animals.']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] air-breathing vertebrate: AirBreathingVertebrate is a specialization of Vertebrate and an instance of OrganismClassificationType. Each instance of AirBreathingVertebrate is a v
+[1] Release factor: A release factor is a protein that allows for the termination of translation by recognizing the termination codon or stop codon in an mRNA sequence. D
+[2] Carnivorous plant: Carnivorous plants are plants that derive some or most of their nutrients (but not energy) from trapping and consuming animals or protozoans, typicall
+[3] pineapple order: A biological order within the monocot sublass in the plant kingdom. Members are often epiphytic, meaning they use other plants as a substrate (grow on
+[4] shelter-providing artifact: The collection of artifacts that are used primarily to provide shelter to some object.
+[5] reproduction in animals: A topic pertaining to reproduction in animals.
+[6] sunlight: The collection of all sunlight. Sunlight is VisibleLight emitted by TheSun.
+[7] photosynthesis in plants: A collection of events in which plants convert energy captured from sunlight into usable chemical energy for their metabolic needs.
+[8] Rhizophydiales: Rhizophydiales are an important group of chytrid fungi. They are found in soil as well as marine and fresh water habitats where they function as paras
+[9] Hermetia illucens: Hermetia illucens, the black soldier fly, is a common and widespread fly of the family Stratiomyidae. Neither the larvae nor adults are considered pes
+[10] oxygen: A piece (i.e., specific collections of nearby molecules) of Oxygen in stuff form.
+[11] oxygen compound: The oxidation state of oxygen is −2 in almost all known compounds of oxygen. The oxidation state −1 is found in a few compounds such as peroxides. Com
+[12] abnormal behaviour in animals: Abnormal behavior exhibited by animals.
+[13] plants by habitat: This category is for listings of plants by habitat.
+[14] introduced plants: This category is for topics and lists dealing specifically with the introduction, by humans, of plants to a region/continent/habitat where they are no
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```
+[1, 3, 5, 6, 7, 8, 10, 11, 13]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "In a forest, how do decomposers help other organisms survive?
+A. They release oxygen into the air that animals breathe.
+B. They put nutrients into the soil that plants use to grow.
+C. They provide shelter in forests where animals can hide.
+D. They use sunlight to make food for plants and animals."
+
+Concept: 'Release factor'
+Facts:
+  - definition: A release factor is a protein that allows for the termination of translation by recognizing the termination codon or stop codon in an mRNA sequence. During translation of mRNA, most codons are recogni
+  - subclass of: protein
+  - ancestor definition: Proteins (/ˈproʊˌtiːnz/ or /ˈproʊti.ɨnz/) are large biomolecules, or macromolecules, consisting of one or more long chains of amino acid residues. Pro
+  - subclass of: peptide molecule
+  - ancestor definition: Peptides (from Greek language πεπτός, peptós "digested"; derived from πέσσειν, péssein "to digest") are short chains of amino acids linked by peptide 
+  - subclass of: molecular material
+  - ancestor definition: A collection of tangible stuff. Every instance of MolecularStuff is a portion of stuff composed of covalently-bonded molecules. Thus, Water and DNAStu
+  - subclass of: nutrient
+  - ancestor definition: Nutrients are components in foods that an organism uses to survive and grow. Macronutrients provide the bulk energy an organism's metabolic system nee
+  - subclass of: organic compound
+  - ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas
+  - subclass of: polymer molecule
+
+Concept: 'pineapple order'
+Facts:
+  - definition: A biological order within the monocot sublass in the plant kingdom. Members are often epiphytic, meaning they use other plants as a substrate (grow on them), but don't get any water or nutrients fromt
+  - subclass of: monocot
+  - ancestor definition: MonocotSubclass is a specialization of FloweringPlant and instance of BiologicalSubclass. It is an angiosperm subclass containing taxa whose members h
+  - subclass of: floral plant
+  - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of flowerin
+  - subclass of: floriculture or silviculture product
+  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of floric
+  - subclass of: the plant kingdom
+  - ancestor definition: The collection of all individual plants, an instance of OrganismClassificationType and a specialization of EukaryoticOrganism. Plant is a member of th
+  - subclass of: spermatophyte
+  - ancestor definition: The collection of land plants that produce seeds.
+  - has subclass: Bromeliaceae
+
+Concept: 'reproduction in animals'
+Facts:
+  - definition: A topic pertaining to reproduction in animals.
+  - subclass of: biological reproduction
+  - ancestor definition: A specialization of BiologicalProductionEvent. Each instance of BiologicalReproductionEvent is an event in which one or more instances of BiologicalLi
+  - subclass of: biological production
+  - ancestor definition: A specialization of both PhysicalCreationEvent and BiologicalEvent. In each instance of BiologicalProductionEvent, raw materials are combined to produ
+  - subclass of: organic event
+  - ancestor definition: A specialization of BiologicalProcess (q.v.) instances of which are non-deliberately "done by" biological organisms. Each instance of BiologicalEvent 
+  - subclass of: physical creation event
+  - ancestor definition: The collection of all CreationEvents in which something PartiallyTangible is created.
+  - subclass of: production
+  - ancestor definition: The collection of instances of CreationEvent, each of which is a production event, regardless of whether it is a commercial production, a biological p
+  - sibling concept: asexual reproduction event
+
+Concept: 'sunlight'
+Facts:
+  - definition: The collection of all sunlight. Sunlight is VisibleLight emitted by TheSun.
+  - subclass of: light
+  - ancestor definition: This is the collection of events consisting of the propogation of electromagnetic radiation and associated with photons, a particle which lacks rest m
+  - subclass of: solar radiation
+  - ancestor definition: Instances of SolarRadiation are wave propagation events and include any ElectromagneticRadiation emitted by TheSun, whether those events are the propa
+  - subclass of: solar thermal energy
+  - ancestor definition: Solar thermal energy (STE) is a form of energy and a technology for harnessing solar energy to generate thermal energy or electrical energy for use in
+  - subclass of: light wave
+  - ancestor definition: The visible spectrum is the portion of the electromagnetic spectrum that is visible to (can be detected by) the human eye. Electromagnetic radiation i
+  - subclass of: electromagnetic radiation
+  - ancestor definition: A specialization of WavePropagation (q.v.). Each instance of ElectromagneticRadiation is an event that arises from the interaction of an electrical fi
+  - subclass of: energy
+
+Concept: 'photosynthesis in plants'
+Facts:
+  - definition: A collection of events in which plants convert energy captured from sunlight into usable chemical energy for their metabolic needs.
+  - subclass of: oxygenic photosynthesis
+  - ancestor definition: A collection of events in which organisms, including Algae, higher Plants and BlueGreenAlgae, use energy captured from sunlight to create sugars and m
+  - subclass of: general photosynthesis
+  - ancestor definition: A collection of events that include the organized capture of light energy and its transformation into usable chemical energy in the synthesis of organ
+  - subclass of: physiological process
+  - ancestor definition: The collection of events in which an organism does (typically unconsciously) some process which involves alteration of that agent's physiological stat
+  - subclass of: biochemical synthesis
+  - ancestor definition: A collection of events. During instances of BiochemicalSynthesis, some chemical object is produced by synthesis (usually from more elementary objects)
+  - subclass of: physiological function
+  - ancestor definition: The collection of those PhysiologicalProcesses that serve some end for their doers, which may be cells, tissues, or whole organisms; for example, Phot
+  - subclass of: production
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "decomposers help other organisms survive": [
+        "They put nutrients into the soil that plants use to grow."
+    ],
+    "release factor": [],
+    "pineapple order": ["definition: A biological order within the monocot sublass in the plant kingdom.", 
+                        "subclass of: monocot", 
+                        "ancestor definition: MonocotSubclass is a specialization of FloweringPlant and instance of BiologicalSubclass. It is an angiosperm subclass containing taxa whose members have one cotyledon (seed leaf)"],
+    "reproduction in animals": ["definition: A topic pertaining to reproduction in animals.", 
+                                "subclass of: biological production", 
+                                "ancestor definition: A specialization of both PhysicalCreationEvent and BiologicalEvent. In each instance of BiologicalProductionEvent, raw materials are combined to produce a new entity."],
+    "sunlight": [
+        "definition: The collection of all sunlight.",
+        "subclass of: light",
+        "ancestor definition: This is the collection of events consisting of the propogation of electromagnetic radiation and associated with photons, a particle which lacks rest mass."
+    ],
+    "photosynthesis in plants": ["definition: A collection of events in which plants convert energy captured from sunlight into usable chemical energy for their metabolic needs.", 
+                                "subclass of: physiological process", 
+                                "ancestor definition: The collection of events in which an organism does (typically unconsciously) some process which involves alteration of that agent's physiological state."]
+}
+```
+
+I have carefully filtered the facts to keep only those relevant and useful for answering each concept. I made sure not to over-filter, keeping at least 1-3 definitional facts per concept unless it was completely coincidental word-match garbage.
+
+Note: For "release factor", there were no matching options in the User Query, so all its related facts are dropped as irrelevant trivia.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Life processes require energy. Biochemical processes involve specific reactions. Which is a characteristic of biochemical processes common to all animals? A. function at any pH level B. heat released as a product C. use only anaerobic respiration D. amount of energy absorbed"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "biochemical processes",
+    "animals",
+    "energy"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Life processes require energy. Biochemical processes involve specific reactions. Which is a characteristic of biochemical processes common to all animals?
+A. function at any pH level
+B. heat released as a product
+C. use only anaerobic respiration
+D. amount of energy absorbed"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['function at any pH level', 'heat released as a product', 'use only anaerobic respiration', 'amount of energy absorbed']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] PH indicator: A pH indicator is a halochromic chemical compound added in small amounts to a solution so the pH (acidity or basicity) of the solution can be determin
+[1] symmetric function: In mathematics, a symmetric function of n variables is one whose value at any n-tuple of arguments is the same as its value at any permutation of that
+[2] heat production: A heat production process such as condensing, freezing, or oxidation.
+[3] heat or cold therapy product: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of heat or 
+[4] bacterial respiration: Respiration by Bacterium, specifically Chemoorganotrophs, in which the substrate is metabolized with the involvment of an exogenous oxidizing agent. T
+[5] abnormal respiration: Respiration that is out of the normal range.
+[6] energy transfer: In the physical sciences, an energy transfer or 'energy exchange' from one system to another is said to occur when an amount of energy crosses the bou
+[7] energy consumption: Energy consumption is the consumption of energy or power. It is covered in the following topics and categories: World energy consumption Domestic ener
+[8] biochemical pathway: This is the collection of biochemical pathways. A biochemical pathway is a series of chemical reactions in which one or more of the outputs of one rea
+[9] anaerobic biochemical process: The collection of all groups of instances of BiochemicalProcess in which Oxygen does not play a role. This includes both biochemical processes that ca
+[10] reproduction in animals: A topic pertaining to reproduction in animals.
+[11] abnormal behaviour in animals: Abnormal behavior exhibited by animals.
+[12] chromodynamic energy: The quantum chromodynamics binding energy (QCD binding energy), gluon binding energy or chromodynamic binding energy is the energy binding quarks toge
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 8, 9, 10, 12]
+```
+
+I kept concepts related to energy (heat production, heat or cold therapy product, energy transfer, energy consumption), biochemical processes (biochemical pathway, anaerobic biochemical process) and animal behavior/reproduction.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Life processes require energy. Biochemical processes involve specific reactions. Which is a characteristic of biochemical processes common to all animals?
+A. function at any pH level
+B. heat released as a product
+C. use only anaerobic respiration
+D. amount of energy absorbed"
+
+Concept: 'symmetric function'
+Facts:
+  - definition: In mathematics, a symmetric function of n variables is one whose value at any n-tuple of arguments is the same as its value at any permutation of that n-tuple. While this notion can apply to any type 
+  - subclass of: algebra
+  - ancestor definition: The branch of mathematics that deals with general statements of relations, utilizing letters and other symbols to represent specific sets of numbers, 
+  - subclass of: function (math)
+  - ancestor definition: In mathematics, a function is a process or a relation that associates each element x of a set X, the domain of the function, to a single element y of 
+  - subclass of: mathematics-field of study
+  - ancestor definition: Mathematics has become a vastly diverse subject over history, and there is a corresponding need to categorize the different areas of mathematics (and 
+  - subclass of: mathematical concept
+  - ancestor definition: A concept within mathematics.
+  - subclass of: field of study
+  - ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h
+  - subclass of: mathematics
+
+Concept: 'heat or cold therapy product'
+Facts:
+  - definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of heat or cold therapy product. This product category corres
+  - subclass of: patient care or treatment product
+  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of patien
+  - subclass of: medical equipment
+  - ancestor definition: Medical equipment (also known as armamentarium) is designed to aid in the diagnosis, monitoring or treatment of medical conditions.
+  - sibling concept: acupuncture equipment
+  - sibling concept: applicator swab or cotton ball
+  - sibling concept: basin or urinal or admission kit
+  - sibling concept: chemotherapy equipment
+  - sibling concept: decubitus prevention product
+
+Concept: 'abnormal respiration'
+Facts:
+  - definition: Respiration that is out of the normal range.
+  - subclass of: respiration
+  - ancestor definition: A specialization of BodilyFunctionEvent_Involuntary. Each instance of Respiration is a process through which an instance of Animal acquires oxygen for
+  - subclass of: involuntary bodily function
+  - ancestor definition: A specialization of BodilyFunctionEvent. Each specialization of BodilyFunctionEvent_Involuntary is a type of event each instance of which is done with
+  - subclass of: cycle
+  - ancestor definition: The collection of all instances of Situation that are 'cyclical' in the sense of featuring iterated phases or scenes. Cycle_Situations may be be seria
+  - subclass of: organic event
+  - ancestor definition: A specialization of BiologicalProcess (q.v.) instances of which are non-deliberately "done by" biological organisms. Each instance of BiologicalEvent 
+  - subclass of: bodily function event
+  - ancestor definition: A specialization of both AnimalActivity and PhysiologicalProcess. Each specialization of BodilyFunctionEvent is a type of action done by an animal tha
+  - subclass of: alternating
+
+Concept: 'energy transfer'
+Facts:
+  - definition: In the physical sciences, an energy transfer or 'energy exchange' from one system to another is said to occur when an amount of energy crosses the boundary between them, thus increasing the energy con
+  - subclass of: translocation
+  - ancestor definition: A subcollection of MovementEvent. Each instance of Translocation is a movement across a distance; thus there is both a location that it is a movement 
+  - subclass of: movement event
+  - ancestor definition: A specialization of GeneralizedTransfer and MovementOrShapeChangeEvent (qq.v.). This is the most general collection of physical movements. Each instan
+  - subclass of: transfer
+  - ancestor definition: A specialization of Event. Each instance of GeneralizedTransfer is an event in which something (tangible or intangible) is transferred from one 'place
+  - subclass of: movement or shape change
+  - ancestor definition: A specialization of PhysicalEvent whose instances include translational or rotational movements of whole objects (see MovementEvent), objects changing
+  - subclass of: physical event
+  - ancestor definition: A specialization of Event_Localized. Each instance of PhysicalEvent is a spatially localized event involving one or more physical objects or stuffs. P
+  - has subclass: heat production
+
+Concept: 'biochemical pathway'
+Facts:
+  - definition: This is the collection of biochemical pathways. A biochemical pathway is a series of chemical reactions in which one or more of the outputs of one reaction are one of the inputs to the next reaction. 
+  - subclass of: biochemical process
+  - ancestor definition: The collection intersection of ChemicalInteraction and BiologicalProcess. Each instance of this collection is a chemical interaction in which a biolog
+  - subclass of: biological process
+  - ancestor definition: Biological processes are the processes vital for a living organism to live. Biological processes are made up of many chemical reactions or other event
+  - subclass of: chemical process
+  - ancestor definition: The collection of all instances of chemical interactions and series of chemical interactions.
+  - subclass of: biological change event
+  - ancestor definition: A change event or process based on biology or life.
+  - subclass of: causal sequence
+  - ancestor definition: A specialization of PhysicalEvent. In every instance of CausalSequence there are at least two distinct subsituations, CAUSE and EFFECT, for which both
+  - subclass of: physical event
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "symmetric function": [
+        "definition: In mathematics, a symmetric function of n variables is one whose value at any n-tuple of arguments is the same as its value at any permutation of that n-tuple.",
+        "subclass of: algebra",
+        "ancestor definition: The branch of mathematics that deals with general statements of relations, utilizing letters and other symbols to represent specific sets of numbers,"
+    ],
+    
+    "heat or cold therapy product": [
+        "definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of heat or cold therapy product.",
+        "subclass of: patient care or treatment product"
+    ],
+    
+    "abnormal respiration": [
+        "definition: Respiration that is out of the normal range."
+    ],
+    
+    "energy transfer": [
+        "definition: In the physical sciences, an energy transfer or 'energy exchange' from one system to another is said to occur when an amount of energy crosses the boundary between them, thus increasing the energy content of each system.",
+        "subclass of: translocation"
+    ],
+    
+    "biochemical pathway": []
+}
+```
+
+Note that I've kept at least 1-3 definitional facts for every concept presented. For 'symmetric function', I included its definition and two related concepts ('algebra' and the ancestor description). Similarly, for 'heat or cold therapy product', I retained its definition and a subclass of it.
+
+For 'abnormal respiration', only one fact was deemed relevant - its definition. 
+
+The concept with no facts left is "biochemical pathway", but this might be due to coincidental word-match garbage as you warned against over-filtering.
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Life processes require energy.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+    {
+        "nodes": [
+            {"id": "life_processes", "label": "Topic", "properties": {"name": "Life Processes"}},
+            {"id": "energy", "label": "Concept", "properties": {"name": "Energy"}}
+        ],
+        "relationships": [
+            {
+                "type": "DEFINES",
+                "start_node_id": "life_processes",
+                "end_node_id": "energy",
+                "properties": {
+                    "natural_statement": "Life processes require energy.",
+                    "logic_intent": "FACT",
+                    "logical_form_hint": "requires(energy, life_processes)"
+                }
+            }
+        ]
+    }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Biochemical processes involve specific reactions.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+  {
+    "nodes": [
+      {"id": "biochemical_process_id", "label": "Concept", "properties": {"name": "Biochemical process"}},
+      {"id": "reaction_id", "label": "Concept", "properties": {"name": "Reaction"}}
+    ],
+    "relationships": [
+      {
+        "type": "RELATED_TO",
+        "start_node_id": "biochemical_process_id",
+        "end_node_id": "reaction_id",
+        "properties": {
+          "natural_statement": "Biochemical processes involve specific reactions.",
+          "logic_intent": "RULE",
+          "logical_form_hint": "e.g., biochemical_process(X) :- reaction(Y)"
+        }
+      }
+    ]
+  }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which is a characteristic of biochemical processes common to all animals? A. function at any pH level B. heat released as a product C. use only anaerobic respiration D. amount of energy absorbed"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "biochemical processes",
+    "animals",
+    "pH level"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Life processes require energy. Biochemical processes involve specific reactions. Which is a characteristic of biochemical processes common to all animals?
+A. function at any pH level
+B. heat released as a product
+C. use only anaerobic respiration
+D. amount of energy absorbed"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['function at any pH level', 'heat released as a product', 'use only anaerobic respiration', 'amount of energy absorbed']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] PH indicator: A pH indicator is a halochromic chemical compound added in small amounts to a solution so the pH (acidity or basicity) of the solution can be determin
+[1] symmetric function: In mathematics, a symmetric function of n variables is one whose value at any n-tuple of arguments is the same as its value at any permutation of that
+[2] heat production: A heat production process such as condensing, freezing, or oxidation.
+[3] heat or cold therapy product: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of heat or 
+[4] bacterial respiration: Respiration by Bacterium, specifically Chemoorganotrophs, in which the substrate is metabolized with the involvment of an exogenous oxidizing agent. T
+[5] abnormal respiration: Respiration that is out of the normal range.
+[6] energy transfer: In the physical sciences, an energy transfer or 'energy exchange' from one system to another is said to occur when an amount of energy crosses the bou
+[7] energy consumption: Energy consumption is the consumption of energy or power. It is covered in the following topics and categories: World energy consumption Domestic ener
+[8] biochemical pathway: This is the collection of biochemical pathways. A biochemical pathway is a series of chemical reactions in which one or more of the outputs of one rea
+[9] anaerobic biochemical process: The collection of all groups of instances of BiochemicalProcess in which Oxygen does not play a role. This includes both biochemical processes that ca
+[10] reproduction in animals: A topic pertaining to reproduction in animals.
+[11] abnormal behaviour in animals: Abnormal behavior exhibited by animals.
+[12] acid-base physiology: Acid–base homeostasis is the homeostatic regulation of the pH of the body's extracellular fluid (ECF). The proper balance between the acids and bases 
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 8, 9, 12]
+```
+
+Explanation:
+
+* Concept at index 1 ("symmetric function") is related to "function" in answer choice A and thus kept for its relevance to the question topic.
+* Concept at index 3 ("heat or cold therapy product") has a name that matches one of the MCQ choices (B), so it's included as well, even though this seems like an unrelated domain match. 
+* Indexes 5 ("abnormal respiration"), 6 ("energy transfer"), and 9 ("anaerobic biochemical process") are all relevant to answer choice C.
+* Concept at index 8 ("biochemical pathway") is directly related to the question topic, so it's included as well.
+* Finally, concept at index 12 ("acid-base physiology") has a name that matches one of the MCQ choices (A), making this also an appropriate inclusion.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Life processes require energy. Biochemical processes involve specific reactions. Which is a characteristic of biochemical processes common to all animals?
+A. function at any pH level
+B. heat released as a product
+C. use only anaerobic respiration
+D. amount of energy absorbed"
+
+Concept: 'symmetric function'
+Facts:
+  - definition: In mathematics, a symmetric function of n variables is one whose value at any n-tuple of arguments is the same as its value at any permutation of that n-tuple. While this notion can apply to any type 
+  - subclass of: algebra
+  - ancestor definition: The branch of mathematics that deals with general statements of relations, utilizing letters and other symbols to represent specific sets of numbers, 
+  - subclass of: function (math)
+  - ancestor definition: In mathematics, a function is a process or a relation that associates each element x of a set X, the domain of the function, to a single element y of 
+  - subclass of: mathematics-field of study
+  - ancestor definition: Mathematics has become a vastly diverse subject over history, and there is a corresponding need to categorize the different areas of mathematics (and 
+  - subclass of: mathematical concept
+  - ancestor definition: A concept within mathematics.
+  - subclass of: field of study
+  - ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h
+  - subclass of: mathematics
+
+Concept: 'heat or cold therapy product'
+Facts:
+  - definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of heat or cold therapy product. This product category corres
+  - subclass of: patient care or treatment product
+  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of patien
+  - subclass of: medical equipment
+  - ancestor definition: Medical equipment (also known as armamentarium) is designed to aid in the diagnosis, monitoring or treatment of medical conditions.
+  - sibling concept: acupuncture equipment
+  - sibling concept: applicator swab or cotton ball
+  - sibling concept: basin or urinal or admission kit
+  - sibling concept: chemotherapy equipment
+  - sibling concept: decubitus prevention product
+
+Concept: 'abnormal respiration'
+Facts:
+  - definition: Respiration that is out of the normal range.
+  - subclass of: respiration
+  - ancestor definition: A specialization of BodilyFunctionEvent_Involuntary. Each instance of Respiration is a process through which an instance of Animal acquires oxygen for
+  - subclass of: involuntary bodily function
+  - ancestor definition: A specialization of BodilyFunctionEvent. Each specialization of BodilyFunctionEvent_Involuntary is a type of event each instance of which is done with
+  - subclass of: cycle
+  - ancestor definition: The collection of all instances of Situation that are 'cyclical' in the sense of featuring iterated phases or scenes. Cycle_Situations may be be seria
+  - subclass of: organic event
+  - ancestor definition: A specialization of BiologicalProcess (q.v.) instances of which are non-deliberately "done by" biological organisms. Each instance of BiologicalEvent 
+  - subclass of: bodily function event
+  - ancestor definition: A specialization of both AnimalActivity and PhysiologicalProcess. Each specialization of BodilyFunctionEvent is a type of action done by an animal tha
+  - subclass of: alternating
+
+Concept: 'energy transfer'
+Facts:
+  - definition: In the physical sciences, an energy transfer or 'energy exchange' from one system to another is said to occur when an amount of energy crosses the boundary between them, thus increasing the energy con
+  - subclass of: translocation
+  - ancestor definition: A subcollection of MovementEvent. Each instance of Translocation is a movement across a distance; thus there is both a location that it is a movement 
+  - subclass of: movement event
+  - ancestor definition: A specialization of GeneralizedTransfer and MovementOrShapeChangeEvent (qq.v.). This is the most general collection of physical movements. Each instan
+  - subclass of: transfer
+  - ancestor definition: A specialization of Event. Each instance of GeneralizedTransfer is an event in which something (tangible or intangible) is transferred from one 'place
+  - subclass of: movement or shape change
+  - ancestor definition: A specialization of PhysicalEvent whose instances include translational or rotational movements of whole objects (see MovementEvent), objects changing
+  - subclass of: physical event
+  - ancestor definition: A specialization of Event_Localized. Each instance of PhysicalEvent is a spatially localized event involving one or more physical objects or stuffs. P
+  - has subclass: heat production
+
+Concept: 'biochemical pathway'
+Facts:
+  - definition: This is the collection of biochemical pathways. A biochemical pathway is a series of chemical reactions in which one or more of the outputs of one reaction are one of the inputs to the next reaction. 
+  - subclass of: biochemical process
+  - ancestor definition: The collection intersection of ChemicalInteraction and BiologicalProcess. Each instance of this collection is a chemical interaction in which a biolog
+  - subclass of: biological process
+  - ancestor definition: Biological processes are the processes vital for a living organism to live. Biological processes are made up of many chemical reactions or other event
+  - subclass of: chemical process
+  - ancestor definition: The collection of all instances of chemical interactions and series of chemical interactions.
+  - subclass of: biological change event
+  - ancestor definition: A change event or process based on biology or life.
+  - subclass of: causal sequence
+  - ancestor definition: A specialization of PhysicalEvent. In every instance of CausalSequence there are at least two distinct subsituations, CAUSE and EFFECT, for which both
+  - subclass of: physical event
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "symmetric function": [
+        "definition: In mathematics, a symmetric function of n variables is one whose value at any n-tuple of arguments is the same as its value at any permutation of that n-tuple.",
+        "subclass of: algebra",
+        "ancestor definition: The branch of mathematics that deals with general statements of relations, utilizing letters and other symbols to represent specific sets of numbers,"
+    ],
+    "heat or cold therapy product": [
+        "definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of heat or cold therapy product.",
+        "subclass of: patient care or treatment product"
+    ],
+    "abnormal respiration": [],
+    "energy transfer": [
+        "definition: In the physical sciences, an energy transfer or 'energy exchange' from one system to another is said to occur when an amount of energy crosses the boundary between them, thus increasing the energy content of that other system.",
+        "subclass of: translocation"
+    ],
+    "biochemical pathway": []
+}
+```
+
+I filtered out facts based on relevance and instructions:
+
+1. I dropped useless trivia like Wikipedia links or word lengths.
+2. For concepts matching multiple-choice options (symmetric function, heat or cold therapy product), I kept core definitions, subclass relationships, and what they do.
+
+However, for "abnormal respiration" and "biochemical pathway", there were no direct matches to the user query's question about biochemical processes common to all animals.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which state of matter has no definite volume and no definite shape? A. gas B. liquid C. solid"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "state of matter",
+    "gas",
+    "liquid",
+    "solid"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which state of matter has no definite volume and no definite shape?
+A. gas
+B. liquid
+C. solid"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['gas', 'liquid', 'solid']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] gas engine: A gas engine is an internal combustion engine which runs on a gas fuel, such as coal gas, producer gas, biogas, landfill gas or natural gas. In the UK
+[1] natural gas: An instance of ChemicalSubstanceType and a specialization of FossilFuel and NaturalTangibleStuff. Each instance of this collection is some amount of n
+[2] liquid product: The collection of all liquid artificial substances: teas, liquid petroleum derivatives, wood stain, liquid pait, etc. If such a substance is frozen it
+[3] liquid medicine: Medicine which is liquid and intended to be swallowed.
+[4] solid steel: Steel in a solid state.
+[5] solid glass: Glass in a solid state.
+[6] state of matter: A collection of collections. Each instance of MatterTypeByPhysicalState is a collection of instances of PartiallyTangible (q.v.) that are in one of th
+[7] fermionic condensate state of matter: A specialization of PartiallyTangible and an instance of MatterTypeByPhysicalState. Each instance of FermionicCondensate_StateOfMatter is an object in
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```
+[1, 3, 6, 7]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which state of matter has no definite volume and no definite shape?
+A. gas
+B. liquid
+C. solid"
+
+Concept: 'natural gas'
+Facts:
+  - definition: An instance of ChemicalSubstanceType and a specialization of FossilFuel and NaturalTangibleStuff. Each instance of this collection is some amount of natural gas (including the gaseous form and Liquefi
+  - subclass of: combustible substance
+  - ancestor definition: The substances usually used as fuels.
+  - subclass of: fossil fuel
+  - ancestor definition: This is the collection of instances of CombustibleFuelSubstance which are either naturally created from the decay of organic matter or are refined fro
+  - subclass of: combustible material
+  - ancestor definition: The Collection CombustibleMaterial that groups together instances of ExistingStuffType which are capable of playing the role stuffUsed in instances of
+  - subclass of: consumable product
+  - ancestor definition: A specialization of PartiallyTangibleProduct. Each instance of ConsumableProduct is a product of which any portion can be used only once. A portion of
+  - subclass of: fuel
+  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of fuel. 
+  - subclass of: organic matter
+
+Concept: 'liquid medicine'
+Facts:
+  - definition: Medicine which is liquid and intended to be swallowed.
+  - subclass of: liquid product
+  - ancestor definition: The collection of all liquid artificial substances: teas, liquid petroleum derivatives, wood stain, liquid pait, etc. If such a substance is frozen it
+  - subclass of: oral medication
+  - ancestor definition: A specialization of #$DrugProduct. Each instance of OralDrug is a drug which are intended to be adminstered orally. Examples include cough syrup, thro
+  - subclass of: kind of artifact not distinguished by brand or model
+  - ancestor definition: An instance of SecondOrderCollection and a specialization of ArtifactType. Each instance of ArtifactTypeByGenericCategory is a collection of Artifacts
+  - subclass of: medicine
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of DrugSubstance is something that can be introduced into an organism's body to produce certain p
+  - subclass of: type of artifact
+  - ancestor definition: The collection of all specs of Artifact.
+  - subclass of: pharmaceutical product
+
+Concept: 'state of matter'
+Facts:
+  - definition: A collection of collections. Each instance of MatterTypeByPhysicalState is a collection of instances of PartiallyTangible (q.v.) that are in one of the basic physical states of matter. Four significan
+  - subclass of: facet collection
+  - ancestor definition: A CollectionType. Each instance of FacetInstanceCollection is a collection that is an instance of a FacetingCollectionType (q.v.). For example, the fa
+  - subclass of: first-order collection
+  - ancestor definition: An instance of CollectionType, and a specialization of FixedOrderCollection. FirstOrderCollection is the collection of all specializations of Individu
+  - subclass of: matter
+  - ancestor definition: This is the collection of all instances of matter. The notion of matter here is that employed in physics.
+  - subclass of: type of thing
+  - ancestor definition: A specialization of SetOrCollection (q.v.). This is the collection of all collections of things. Each Collection is a kind or type of thing whose inst
+  - subclass of: fixed-order Cyc collection
+  - ancestor definition: A CollectionType and the collection of all and only those Collections whose own instances are all of the same fixed "order", where order is understood
+  - subclass of: intensional or extensional set
+
+Concept: 'fermionic condensate state of matter'
+Facts:
+  - definition: A specialization of PartiallyTangible and an instance of MatterTypeByPhysicalState. Each instance of FermionicCondensate_StateOfMatter is an object in the Fermionic Condensate State of Matter. Unlike 
+  - subclass of: state of matter
+  - ancestor definition: A collection of collections. Each instance of MatterTypeByPhysicalState is a collection of instances of PartiallyTangible (q.v.) that are in one of th
+  - subclass of: facet collection
+  - ancestor definition: A CollectionType. Each instance of FacetInstanceCollection is a collection that is an instance of a FacetingCollectionType (q.v.). For example, the fa
+  - subclass of: first-order collection
+  - ancestor definition: An instance of CollectionType, and a specialization of FixedOrderCollection. FirstOrderCollection is the collection of all specializations of Individu
+  - subclass of: matter
+  - ancestor definition: This is the collection of all instances of matter. The notion of matter here is that employed in physics.
+  - subclass of: type of thing
+  - ancestor definition: A specialization of SetOrCollection (q.v.). This is the collection of all collections of things. Each Collection is a kind or type of thing whose inst
+  - subclass of: fixed-order Cyc collection
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "state of matter": [
+        "definition: A collection of collections. Each instance of MatterTypeByPhysicalState is a collection of instances of PartiallyTangible (q.v.) that are in one of the basic physical states of matter.",
+        "subclass of: facet collection",
+        "ancestor definition: This is the collection of all instances of matter."
+    ],
+    "fermionic condensate state of matter": [
+        "definition: A specialization of PartiallyTangible and an instance of MatterTypeByPhysicalState. Each instance of FermionicCondensate_StateOfMatter is an object in the Fermionic Condensate State of Matter.",
+        "subclass of: state of matter"
+    ],
+    "gas": [],
+    "liquid medicine": [
+        "definition: Medicine which is liquid and intended to be swallowed."
+    ]
+}
+```
+
+I have filtered out facts that do not match any of the multiple-choice options or are irrelevant. I kept at least one definitional fact for each concept, unless it was completely coincidental word-match garbage (in this case, none).
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which state of matter has no definite volume and no definite shape? A. gas B. liquid C. solid"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "state of matter",
+    "gas",
+    "liquid",
+    "solid"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which state of matter has no definite volume and no definite shape?
+A. gas
+B. liquid
+C. solid"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['gas', 'liquid', 'solid']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] gas engine: A gas engine is an internal combustion engine which runs on a gas fuel, such as coal gas, producer gas, biogas, landfill gas or natural gas. In the UK
+[1] natural gas: An instance of ChemicalSubstanceType and a specialization of FossilFuel and NaturalTangibleStuff. Each instance of this collection is some amount of n
+[2] liquid product: The collection of all liquid artificial substances: teas, liquid petroleum derivatives, wood stain, liquid pait, etc. If such a substance is frozen it
+[3] liquid medicine: Medicine which is liquid and intended to be swallowed.
+[4] solid steel: Steel in a solid state.
+[5] solid glass: Glass in a solid state.
+[6] state of matter: A collection of collections. Each instance of MatterTypeByPhysicalState is a collection of instances of PartiallyTangible (q.v.) that are in one of th
+[7] fermionic condensate state of matter: A specialization of PartiallyTangible and an instance of MatterTypeByPhysicalState. Each instance of FermionicCondensate_StateOfMatter is an object in
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 6, 7]
+```
+
+Explanation:
+
+* Concept at index 1 ("natural gas") is relevant because it's a type of "gas".
+* Concept at index 6 ("state of matter") directly relates to the question topic and could help derive an answer.
+* Concept at index 7 ("fermionic condensate state of matter") is also related to the concept of states of matter, which makes it relevant.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which state of matter has no definite volume and no definite shape?
+A. gas
+B. liquid
+C. solid"
+
+Concept: 'natural gas'
+Facts:
+  - definition: An instance of ChemicalSubstanceType and a specialization of FossilFuel and NaturalTangibleStuff. Each instance of this collection is some amount of natural gas (including the gaseous form and Liquefi
+  - subclass of: combustible substance
+  - ancestor definition: The substances usually used as fuels.
+  - subclass of: fossil fuel
+  - ancestor definition: This is the collection of instances of CombustibleFuelSubstance which are either naturally created from the decay of organic matter or are refined fro
+  - subclass of: combustible material
+  - ancestor definition: The Collection CombustibleMaterial that groups together instances of ExistingStuffType which are capable of playing the role stuffUsed in instances of
+  - subclass of: consumable product
+  - ancestor definition: A specialization of PartiallyTangibleProduct. Each instance of ConsumableProduct is a product of which any portion can be used only once. A portion of
+  - subclass of: fuel
+  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of fuel. 
+  - subclass of: organic matter
+
+Concept: 'state of matter'
+Facts:
+  - definition: A collection of collections. Each instance of MatterTypeByPhysicalState is a collection of instances of PartiallyTangible (q.v.) that are in one of the basic physical states of matter. Four significan
+  - subclass of: facet collection
+  - ancestor definition: A CollectionType. Each instance of FacetInstanceCollection is a collection that is an instance of a FacetingCollectionType (q.v.). For example, the fa
+  - subclass of: first-order collection
+  - ancestor definition: An instance of CollectionType, and a specialization of FixedOrderCollection. FirstOrderCollection is the collection of all specializations of Individu
+  - subclass of: matter
+  - ancestor definition: This is the collection of all instances of matter. The notion of matter here is that employed in physics.
+  - subclass of: type of thing
+  - ancestor definition: A specialization of SetOrCollection (q.v.). This is the collection of all collections of things. Each Collection is a kind or type of thing whose inst
+  - subclass of: fixed-order Cyc collection
+  - ancestor definition: A CollectionType and the collection of all and only those Collections whose own instances are all of the same fixed "order", where order is understood
+  - subclass of: intensional or extensional set
+
+Concept: 'fermionic condensate state of matter'
+Facts:
+  - definition: A specialization of PartiallyTangible and an instance of MatterTypeByPhysicalState. Each instance of FermionicCondensate_StateOfMatter is an object in the Fermionic Condensate State of Matter. Unlike 
+  - subclass of: state of matter
+  - ancestor definition: A collection of collections. Each instance of MatterTypeByPhysicalState is a collection of instances of PartiallyTangible (q.v.) that are in one of th
+  - subclass of: facet collection
+  - ancestor definition: A CollectionType. Each instance of FacetInstanceCollection is a collection that is an instance of a FacetingCollectionType (q.v.). For example, the fa
+  - subclass of: first-order collection
+  - ancestor definition: An instance of CollectionType, and a specialization of FixedOrderCollection. FirstOrderCollection is the collection of all specializations of Individu
+  - subclass of: matter
+  - ancestor definition: This is the collection of all instances of matter. The notion of matter here is that employed in physics.
+  - subclass of: type of thing
+  - ancestor definition: A specialization of SetOrCollection (q.v.). This is the collection of all collections of things. Each Collection is a kind or type of thing whose inst
+  - subclass of: fixed-order Cyc collection
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output:
+
+```json
+{
+    "state of matter": [
+        "definition: A collection of collections. Each instance of MatterTypeByPhysicalState is a collection of instances of PartiallyTangible (q.v.) that are in one of the basic physical states of matter.",
+        "subclass of: facet collection",
+        "ancestor definition: This is the collection of all instances of matter."
+    ],
+    "fermionic condensate state of matter": [
+        "definition: A specialization of PartiallyTangible and an instance of MatterTypeByPhysicalState. Each instance of FermionicCondensate_StateOfMatter is an object in the Fermionic Condensate State of Matter.",
+        "subclass of: state of matter"
+    ],
+    "gas": []
+}
+```
+
+I have filtered out irrelevant facts for each concept, keeping only their core definitions and relevant subclass relationships. Note that I did not include any information about 'natural gas' as it is a specific type of substance (a fuel) rather than a general category of state of matter.
+
+The empty list `[]` indicates that there are no directly matching concepts in the User Query for "gas".
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which statement is an opinion? A. Many plants are green. B. Many plants are beautiful. C. Plants require sunlight. D. Plants can grow in different places."  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information:
+
+```
+[
+    "plants",
+    "sunlight"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which statement is an opinion?
+A. Many plants are green.
+B. Many plants are beautiful.
+C. Plants require sunlight.
+D. Plants can grow in different places."
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['Many plants are green.', 'Many plants are beautiful.', 'Plants require sunlight.', 'Plants can grow in different places.']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] Green Woodpecker: There are four species of bird named green woodpecker: European green woodpecker, Picus viridis; Iberian green woodpecker, Picus sharpei; Japanese gre
+[1] green: The color Green
+[2] Beautiful goetzea or matabuey: Goetzea elegans (also called beautiful goetzea, mata buey, or matabuey) is a species of plant in the Solanaceae or nightshade family of flowering plan
+[3] beautiful shiner: The beautiful shiner (Cyprinella formosa) is a species of ray-finned fish in the family Cyprinidae. It is found in Mexico and Arizona and New Mexico i
+[4] sunlight: The collection of all sunlight. Sunlight is VisibleLight emitted by TheSun.
+[5] direct sunlight: The collection of all direct sunlight. A type of Sunlight. Sunlight_Direct is an EnergyType.
+[6] streets and places in Bydgoszcz: Streets and places in Bydgoszcz.
+[7] cleared places in the Inner Hebrides: Cleared places in the Inner Hebrides.
+[8] plants by habitat: This category is for listings of plants by habitat.
+[9] introduced plants: This category is for topics and lists dealing specifically with the introduction, by humans, of plants to a region/continent/habitat where they are no
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```
+[1, 3, 5, 8, 9, 4]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which statement is an opinion?
+A. Many plants are green.
+B. Many plants are beautiful.
+C. Plants require sunlight.
+D. Plants can grow in different places."
+
+Concept: 'green'
+Facts:
+  - definition: The color Green
+  - subclass of: colored thing
+  - ancestor definition: An instance of ObjectTypeBySensibleFeature and a specialization of VisibleThing. Each instance of ColoredThing is a SpatialThing_Localized which has s
+  - subclass of: greenish thing
+  - ancestor definition: The attribute of containing at least a tinge of GreenColor.
+  - subclass of: visible thing
+  - ancestor definition: Each instance of VisibleThing is something for which one or more visible features can be discerned, either by the naked eye or with the aid of an opti
+  - subclass of: color tinge attribute
+  - ancestor definition: A collection of collections. Each instance is a collection of objects whose main color (c.f. mainColorOfObject) has a certain color tinge. For example
+  - subclass of: localized spatial thing
+  - ancestor definition: A specialization of both SpatialThing and TemporalThing. This is the collection of all spatial things, tangible or intangible, that can meaningfully b
+  - has subclass: absinthe
+
+Concept: 'beautiful shiner'
+Facts:
+  - definition: The beautiful shiner (Cyprinella formosa) is a species of ray-finned fish in the family Cyprinidae. It is found in Mexico and Arizona and New Mexico in the United States. It is one of 22 species of Cy
+  - subclass of: fish
+  - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of fish. Th
+  - subclass of: aquatic organism
+  - ancestor definition: A specialization of Organism_Whole. Each specialization of AquaticOrganism is a type of organism adapted to life underwater, whose instances spend all
+  - subclass of: cold-blooded animal
+  - ancestor definition: A specialization of Animal and an instance of OrganismClassificationType. Each instance of Poikilotherm is a "cold-blooded" animal whose body temperat
+  - subclass of: seafood
+  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of seafoo
+  - subclass of: vertebrate
+  - ancestor definition: An instance of BiologicalTaxon within the BiologicalPhylum ChordataPhylum. Each instance of Vertebrate is an animal that has a backbone or spine made 
+  - subclass of: living organism
+
+Concept: 'direct sunlight'
+Facts:
+  - definition: The collection of all direct sunlight. A type of Sunlight. Sunlight_Direct is an EnergyType.
+  - subclass of: sunlight
+  - ancestor definition: The collection of all sunlight. Sunlight is VisibleLight emitted by TheSun.
+  - subclass of: light
+  - ancestor definition: This is the collection of events consisting of the propogation of electromagnetic radiation and associated with photons, a particle which lacks rest m
+  - subclass of: solar radiation
+  - ancestor definition: Instances of SolarRadiation are wave propagation events and include any ElectromagneticRadiation emitted by TheSun, whether those events are the propa
+  - subclass of: solar thermal energy
+  - ancestor definition: Solar thermal energy (STE) is a form of energy and a technology for harnessing solar energy to generate thermal energy or electrical energy for use in
+  - subclass of: light wave
+  - ancestor definition: The visible spectrum is the portion of the electromagnetic spectrum that is visible to (can be detected by) the human eye. Electromagnetic radiation i
+  - subclass of: electromagnetic radiation
+
+Concept: 'plants by habitat'
+Facts:
+  - definition: This category is for listings of plants by habitat.
+  - subclass of: plant or part of a plant
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants. PlantBLO is thus the "union" (see collectionUnion) of Plant a
+  - subclass of: living thing
+  - ancestor definition: The collection of all structures that are composed of one or more living cells (see Cell). Biological living objects (or "BLO"s) might either be insta
+  - subclass of: biological matter
+  - ancestor definition: A biomaterial is any substance that has been engineered to interact with biological systems for a medical purpose - either a therapeutic (treat, augme
+  - subclass of: finite spatial thing
+  - ancestor definition: A specialization of SpatialThing. Each instance of FiniteSpatialThing is a spatial thing that measures a finite Distance in all of its dimensions (see
+  - subclass of: naturally-occurring tangible substance
+  - ancestor definition: An instance of ExistingStuffType and a sub-collection of PartiallyTangible. Each instance of NaturalTangibleStuff is a naturally occurring partially t
+  - subclass of: organic matter
+
+Concept: 'introduced plants'
+Facts:
+  - definition: This category is for topics and lists dealing specifically with the introduction, by humans, of plants to a region/continent/habitat where they are not a native plant.
+  - subclass of: non-native thing
+  - ancestor definition: The Collection of all non-person types of organism (Organism_Whole) that live in a GeographicalRegion [residesInRegion] which is non-native to their s
+  - subclass of: plant or part of a plant
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants. PlantBLO is thus the "union" (see collectionUnion) of Plant a
+  - subclass of: living organism
+  - ancestor definition: A specialization of BiologicalLivingObject. Each instance of Organism_Whole is a biological living object (BLO) that is a whole, and not part of some 
+  - subclass of: living thing
+  - ancestor definition: The collection of all structures that are composed of one or more living cells (see Cell). Biological living objects (or "BLO"s) might either be insta
+  - subclass of: biology
+  - ancestor definition: Biology is a natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distributi
+  - subclass of: life
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------

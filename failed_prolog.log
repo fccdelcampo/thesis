@@ -56,20 +56,20 @@ Warning:    Singleton variables: [TypeOfSeed]
 Iteration 1 | Prolog Error: amount_of_water_same/0: Unknown procedure: amount_of_water/2
 Iteration 2 | Extracted Database:
 
-option(a, type_of_soil).
-option(b, amount_of_water).
-option(c, type_of_seed).
+choice_a, type_of_soil).
+choice_b, amount_of_water).
+choice_c, type_of_seed).
 medium_state(steel, solid).
 medium_state(water, liquid).
 medium_state(air, gas).
 no_medium(vacuum).
 sound_fastest(Medium) :- medium_state(Medium, solid).
-answer(Option) :- option(Option, Medium), sound_fastest(Medium).
+answer(Option) :- choice_Option, Medium), sound_fastest(Medium).
 amount_of_water(Medium, Amount) :- medium_state(Medium, solid), water_amount(Medium, Amount).
 
 
 Iteration 2 | Extracted Query:
-option(b).
+choice_b).
 
 Iteration 2 | Prolog Error: time:run_alarm_goal/2: Unknown procedure: option/1
   However, there are definitions for:
@@ -80,10 +80,10 @@ same_type_soil(Pots) :- identical_pots(Pots).
 same_amount_water(Pots) :- same_daily_water(Pots).
 different_location(Pots) :- closet(Pots), sunny_window(Pots).
 amount_of_water(Same, Pots) :- same_type_soil(Pots), same_amount_water(Pots).
-option(a, 'amount of water').
-option(b, 'amount of light').
-option(c, 'type of soil').
-option(d, 'type of seed').
+choice_a, 'amount of water').
+choice_b, 'amount of light').
+choice_c, 'type of soil').
+choice_d, 'type of seed').
 answer(X) :- option_a(X).
 answer(X) :- option_b(X).
 
@@ -96,10 +96,10 @@ Warning:    Singleton variables: [Same]
 Iteration 3 | Prolog Error: answer/1: Unknown procedure: option_a/1
 Iteration 4 | Extracted Database:
 
-option(a, amount_of_water).
-option(b, amount_of_light).
-option(c, type_of_soil).
-option(d, type_of_seed).
+choice_a, amount_of_water).
+choice_b, amount_of_light).
+choice_c, type_of_soil).
+choice_d, type_of_seed).
 
 same_type_of_soil(pot1, pot2) :- identical_conditions(pot1, pot2).
 different_amounts_of_nutrients(pot1, pot2) :- receives_more_light(pot1, pot2).
@@ -109,8 +109,8 @@ same_type_of_soil(pot1, pot2) :- identical_conditions(pot2, pot1). % Symmetry
 different_amounts_of_nutrients(pot2, pot1) :- receives_more_light(pot2, pot1).
 drought_stress(pot2, pot1) :- receives_less_water(pot2, pot1).
 
-answer(X) :- option(a, X), drought_stress(pot1, pot2).
-answer(X) :- option(b, X), different_amounts_of_nutrients(pot1, pot2).
+answer(X) :- choice_a, X), drought_stress(pot1, pot2).
+answer(X) :- choice_b, X), different_amounts_of_nutrients(pot1, pot2).
 
 
 Iteration 4 | Extracted Query:

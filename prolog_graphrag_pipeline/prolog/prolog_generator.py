@@ -223,8 +223,8 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             if "Disjunction" in err_str or "';'" in err_str:
                 hint = ("Forbidden: ';' (disjunction) is not allowed in s(CASP). "
                         "Replace it with multiple rules that share the same head. "
-                        "Example — WRONG: `answer(X) :- option_a(X) ; option_b(X).` "
-                        "RIGHT: `answer(X) :- option_a(X).` and `answer(X) :- option_b(X).`")
+                        "Example — WRONG: `answer(X) :- choice_a(X) ; choice_b(X).` "
+                        "RIGHT: `answer(X) :- choice_a(X).` and `answer(X) :- choice_b(X).`")
                 _record_error(f"{err_str} {hint}")
             else:
                 _record_error(f"{err_str} Ensure the query is a valid Prolog predicate.")
@@ -239,10 +239,10 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                 hint = ("The query timed out — your rules form an INFINITE LOOP with no ground base case. "
                         "Check for circular rule chains (e.g., A :- B. and B :- A.) with nothing to terminate them. "
                         "Every recursive rule MUST bottom out at a plain ground fact (e.g., `animal(cat).` not `animal(Animal).`). "
-                        "Also: bare facts like `claw.` do NOT give any predicate a value — use `is_option(claw).` instead.")
+                        "Also: bare facts like `claw.` do NOT give any predicate a value — use `is_choice_claw).` instead.")
             elif "not sufficiently instantiated" in error_str:
-                hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `option(A, cell_wall).` where A is unbound). "
-                        "Use LOWERCASE atoms for constants in facts (e.g., `option(a, cell_wall).`). "
+                hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `choice_A, cell_wall).` where A is unbound). "
+                        "Use LOWERCASE atoms for constants in facts (e.g., `choice_a, cell_wall).`). "
                         "Variables (uppercase) should only appear in rule heads/bodies where they are instantiated by matching facts.")
             elif "(:-)/2" in error_str or "Rules must be loaded from a file" in error_str:
                 hint = ("You put a rule definition (Head :- Body.) inside the <query> tag. "
@@ -254,8 +254,8 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                         "Every predicate that appears in a rule body MUST exist as a fact or the head of a rule in your database. "
                         "NEVER invent predicate names that have no corresponding definition. "
                         "For MCQ 'which factor is DIFFERENT?' questions, use simple ground facts instead of undefined chains: "
-                        "`different(factor_name).` and `same(factor_name).` — then `answer(X) :- option(X, Factor), different(Factor).` "
-                        "Also check for arity mismatches: if `option/2` is defined, the query must use `option(Option, Value)`, NOT `option(Option)`.")
+                        "`different(factor_name).` and `same(factor_name).` — then `answer(X) :- choice_X, Factor), different(Factor).` "
+                        "Also check for arity mismatches: if `option/2` is defined, the query must use `choice_Option, Value)`, NOT `choice_Option)`.")
             else:
                 hint = "Ensure strict Prolog syntax. No bullets/hyphens. Predicates must be lowercase."
             _record_error(f"Prolog Error: {e}\nHint: {hint}")
@@ -282,8 +282,8 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                 if "Disjunction" in err_str or "';'" in err_str:
                     hint = ("Forbidden: ';' (disjunction) is not allowed in s(CASP). "
                             "Replace it with multiple rules that share the same head. "
-                            "Example — WRONG: `answer(X) :- option_a(X) ; option_b(X).` "
-                            "RIGHT: `answer(X) :- option_a(X).` and `answer(X) :- option_b(X).`")
+                            "Example — WRONG: `answer(X) :- choice_a(X) ; choice_b(X).` "
+                            "RIGHT: `answer(X) :- choice_a(X).` and `answer(X) :- choice_b(X).`")
                     _record_error(f"{err_str} {hint}")
                 else:
                     _record_error(f"{err_str} Ensure the query is a valid Prolog predicate.")
@@ -298,8 +298,8 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                     hint = ("The query timed out — your rules form an infinite loop with no ground base case. "
                             "Break the cycle: ensure every recursive rule bottoms out at a grounded fact.")
                 elif "not sufficiently instantiated" in error_str:
-                    hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `option(A, cell_wall).`). "
-                            "Use LOWERCASE atoms instead (e.g., `option(a, cell_wall).`).")
+                    hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `choice_A, cell_wall).`). "
+                            "Use LOWERCASE atoms instead (e.g., `choice_a, cell_wall).`).")
                 elif "Unknown procedure" in error_str:
                     hint = ("Arity mismatch: ensure the predicate in the query uses the same number of arguments as its definition in the database. "
                             "Also ensure the predicate is actually defined.")
