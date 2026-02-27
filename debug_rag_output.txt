@@ -6,7 +6,7 @@ C. biotic factors interacting with each other
 D. energy transfer between producer and consumer
 ==================================================
 
---- RETRIEVED CONTEXT (Top 7 Chunks) ---
+--- RETRIEVED CONTEXT (Top 8 Chunks) ---
 
 [Metadata Dump]
 {
@@ -126,24 +126,25 @@ KBPedia Concept: Aedes. Relevant Logical Facts:   - definition: Aedes is a genus
 
 [Metadata Dump]
 {
+  "score": 0.6107845306396484,
   "local_context": [
     {
       "entity": null,
       "relationship": null,
       "source": "Local Document",
       "target": null,
-      "text": "Greywater refers to home wastewater from sinks and tubs. It does not contain human biological wastes, so it can be reused instead of being treated as sewage."
+      "text": "Greywater refers to home wastewater from sinks and tubs."
     }
-  ],
-  "score": 0.6346836090087891
+  ]
 }
 
-[Chunk 6 | Score: 0.6347]
-Greywater refers to home wastewater from sinks and tubs. It does not contain human biological wastes, so it can be reused instead of being treated as sewage.
+[Chunk 6 | Score: 0.6108]
+Greywater refers to home wastewater from sinks and tubs.
 --------------------------------------------------
 
 [Metadata Dump]
 {
+  "score": 0.6067619323730469,
   "local_context": [
     {
       "entity": null,
@@ -152,12 +153,29 @@ Greywater refers to home wastewater from sinks and tubs. It does not contain hum
       "target": null,
       "text": "Wastewater from homes is not all the same."
     }
-  ],
-  "score": 0.6067619323730469
+  ]
 }
 
 [Chunk 7 | Score: 0.6068]
 Wastewater from homes is not all the same.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6009941101074219,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "It does not contain human biological wastes, so it can be reused instead of being treated as sewage."
+    }
+  ]
+}
+
+[Chunk 8 | Score: 0.6010]
+It does not contain human biological wastes, so it can be reused instead of being treated as sewage.
 --------------------------------------------------
 
 ==================================================
@@ -165,7 +183,7 @@ Wastewater from homes is not all the same.
 ==================================================
 C. biotic factors interacting with each other 
 
-This option best describes the relationship between mosquitoes (biotic factor) and humans in terms of disease transmission. Mosquitoes are a vector for various diseases, such as malaria and dengue fever, which can be transmitted to humans through bites. This interaction is an example of how two biotic factors interact with each other within their environment.
+This relationship describes how mosquitoes (biotic factor) carry a parasite that causes an infectious disease among humans, illustrating interaction between living organisms in the environment.
 ==================================================
 ==================================================
  QUERY: What best describes this type of relationship between mosquitoes and humans? A. predator-prey B. competition for resources C. biotic factors interacting with each other D. energy transfer between producer and consumer
@@ -291,6 +309,7 @@ This option best describes the relationship between mosquitoes (biotic factor) a
 
 [Metadata Dump]
 {
+  "score": 0.679901123046875,
   "local_context": [
     {
       "entity": null,
@@ -299,8 +318,7 @@ This option best describes the relationship between mosquitoes (biotic factor) a
       "target": null,
       "text": "In many tropical areas, mosquitoes may carry a parasite that can cause an infectious disease among humans."
     }
-  ],
-  "score": 0.679901123046875
+  ]
 }
 [Item 6]
 [Chunk Score: 0.6799] In many tropical areas, mosquitoes may carry a parasite that can cause an infectious disease among humans.

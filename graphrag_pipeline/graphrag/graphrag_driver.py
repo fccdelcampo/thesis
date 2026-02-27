@@ -77,7 +77,8 @@ class DebugOllamaLLM(OllamaLLM):
             return cleaned_list
         return input_data
 
-    def invoke(self, input, message_history=None, system_instruction=None, response_format=None, **kwargs):
+    def invoke(self, input, message_history=None, system_instruction=None, **kwargs):
+        kwargs.pop('response_format', None) # neo4j_graphrag OllamaLLM hates response_format
         clean_input = self._clean_input_data(input)
         
         # Format for logging
@@ -90,9 +91,7 @@ class DebugOllamaLLM(OllamaLLM):
         response = super().invoke(
             input=clean_input,
             message_history=message_history,
-            system_instruction=system_instruction,
-            response_format=response_format,
-            **kwargs
+            system_instruction=system_instruction
         )
         print(" Done!")
         
@@ -107,7 +106,8 @@ class DebugOllamaLLM(OllamaLLM):
             from neo4j_graphrag.llm.types import LLMResponse
             return LLMResponse(content=clean_content)
 
-    async def ainvoke(self, input, message_history=None, system_instruction=None, response_format=None, **kwargs):
+    async def ainvoke(self, input, message_history=None, system_instruction=None, **kwargs):
+        kwargs.pop('response_format', None)
         clean_input = self._clean_input_data(input)
         
         log_input = clean_input if isinstance(clean_input, str) else str(clean_input)
