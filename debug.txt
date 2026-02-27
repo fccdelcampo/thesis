@@ -52009,3 +52009,34 @@ Example:
 }
 
 ----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "beautiful shiner": [
+        "definition: The beautiful shiner (Cyprinella formosa) is a species of ray-finned fish in the family Cyprinidae.",
+        "subclass of: fish",
+        "ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of fish."
+    ],
+    "direct sunlight": [
+        "definition: The collection of all direct sunlight. A type of Sunlight.",
+        "subclass of: sunlight",
+        "ancestor definition: The collection of all sunlight. Sunlight is VisibleLight emitted by TheSun."
+    ],
+    "plants by habitat": [
+        "definition: This category is for listings of plants by habitat.",
+        "subclass of: plant or part of a plant"
+    ]
+}
+```
+
+I have filtered out the irrelevant facts as per your instructions, keeping only the core definition and subclass relationships that are relevant to answering the user's query. I did not retain any fact from the concept 'introduced plants' because it does not match one of the multiple-choice options in the User Query.
+
+Note: The "beautiful shiner" has a few extra facts related to its classification as an aquatic organism, but these were deemed too specific and irrelevant for answering the query.
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Many plants are green.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
