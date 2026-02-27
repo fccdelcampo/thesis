@@ -19,7 +19,7 @@ except ImportError:
     import prolog_graphrag_pipeline.llm as llm
 
 SCASP_AVAILABLE = False
-ALLOW_LLM_FALLBACK = False
+ALLOW_LLM_FALLBACK = True
 
 def use_scasp():
     global SCASP_AVAILABLE
