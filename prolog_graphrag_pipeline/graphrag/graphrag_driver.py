@@ -62,62 +62,74 @@ class DebugOllamaLLM(OllamaLLM):
             return text[obj_start : obj_end + 1]
         return text   # nothing to strip — return as-is
 
-
     def _clean_prompt(self, text: str) -> str:
-        """Removes all newlines from the input prompt to fix PDF formatting."""
+        """Removes newlines only from PDF-extracted prose.
+
+        Structured filter prompts (KBPedia batch filter, concept filter) use
+        intentional newlines to separate concept blocks. Stripping them collapses
+        all structure into one line, which confuses the model and causes hangs.
+        We detect structured prompts by the presence of known marker strings.
+        """
+        STRUCTURED_MARKERS = ("Concept: '", "  - ", "Facts:\n", "Candidates (")
+        if any(m in text for m in STRUCTURED_MARKERS):
+            return text   # preserve structured prompt formatting
         return text.replace('\n', ' ')
 
-    def invoke(self, input: str, **kwargs) -> str:
-        # 1. Clean the input
-        clean_input = self._clean_prompt(input)
-        
-        # 2. LOG to file instead of print
-        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{clean_input}\n----------------------------------")
+    def _clean_input_data(self, input_data):
+        """Applies _clean_prompt either to a string or to the 'content' of a list of message dicts."""
+        if isinstance(input_data, str):
+            return self._clean_prompt(input_data)
+        elif isinstance(input_data, list):
+            # Neo4j GraphRAG passes List[LLMMessage] which are dicts with 'role' and 'content'
+            cleaned_list = []
+            for msg in input_data:
+                cleaned_msg = msg.copy() if isinstance(msg, dict) else msg
+                if isinstance(cleaned_msg, dict) and 'content' in cleaned_msg:
+                    cleaned_msg['content'] = self._clean_prompt(str(cleaned_msg['content']))
+                cleaned_list.append(cleaned_msg)
+            return cleaned_list
+        return input_data
 
-        print(f"  > Sending chunk to LLM ({len(input)} chars)...", end="", flush=True)
+    def invoke(self, input, **kwargs):
+        clean_input = self._clean_input_data(input)
         
-        # 3. Send to LLM
+        # Format for logging
+        log_input = clean_input if isinstance(clean_input, str) else str(clean_input)
+        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{log_input}\n----------------------------------")
+        
+        input_len = len(input) if isinstance(input, str) else len(str(input))
+        print(f"  > Sending chunk to LLM ({input_len} chars)...", end="", flush=True)
+        
         response = super().invoke(clean_input, **kwargs)
-
         print(" Done!")
         
-        # 4. Handle response
         raw_content = response.content if hasattr(response, 'content') else str(response)
-        
-        # 5. LOG to file
         self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Sync) ===\n{raw_content}\n===================================")
-        
         return self._clean_response_text(raw_content)
 
-    async def ainvoke(self, input: str, **kwargs):
-        # 1. Clean the input
-        clean_input = self._clean_prompt(input)
+    async def ainvoke(self, input, **kwargs):
+        clean_input = self._clean_input_data(input)
         
-        # 2. LOG to file
-        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{clean_input}\n----------------------------------")
+        log_input = clean_input if isinstance(clean_input, str) else str(clean_input)
+        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{log_input}\n----------------------------------")
         
-        print(f"  > [Async] Sending chunk to LLM ({len(input)} chars) and waiting for extraction...", end="", flush=True)
+        input_len = len(input) if isinstance(input, str) else len(str(input))
+        print(f"  > [Async] Sending chunk to LLM ({input_len} chars) and waiting for extraction...", end="", flush=True)
         
-        # 3. Send to LLM
         response = await super().ainvoke(clean_input, **kwargs)
-        
         print(" Done!")
         
-        # 4. Extract content
         raw_content = response.content if hasattr(response, 'content') else str(response)
-        
-        # 5. LOG to file
         self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Async) ===\n{raw_content}\n===================================")
         
         clean_content = self._clean_response_text(raw_content)
-        
-        # 6. Return Object or String
         if hasattr(response, 'content'):
             response.content = clean_content
             return response
         else:
             return clean_content
-        
+            return clean_content
+
 
 neo4j_driver = None
 
@@ -138,13 +150,13 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
         }
     )
 
-    retriever_llm = OllamaLLM(
+    retriever_llm = DebugOllamaLLM(
         model_name=RETRIEVER_MODEL,
         model_params={
             "keep_alive": "20m", # Keep it loaded during an active chat session
             "options": {
                 "temperature": 0.1,
-                "num_ctx": 2048,
+                "num_ctx": 4096,
                 "format": "json",
                 "repeat_penalty": 1.2,
                 "seed": 42 # for reproducibility

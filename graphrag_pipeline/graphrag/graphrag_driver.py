@@ -49,9 +49,9 @@ class DebugOllamaLLM(OllamaLLM):
         """Removes all newlines from the input prompt to fix PDF formatting."""
         return text.replace('\n', ' ')
 
-    def invoke(self, input: str, **kwargs) -> str:
+    def invoke(self, input, **kwargs):
         # 1. Clean the input
-        clean_input = self._clean_prompt(input)
+        clean_input = self._clean_input_data(input)
         
         # 2. LOG to file instead of print
         self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{clean_input}\n----------------------------------")
@@ -71,9 +71,9 @@ class DebugOllamaLLM(OllamaLLM):
         
         return self._clean_response_text(raw_content)
 
-    async def ainvoke(self, input: str, **kwargs):
+    async def ainvoke(self, input, **kwargs):
         # 1. Clean the input
-        clean_input = self._clean_prompt(input)
+        clean_input = self._clean_input_data(input)
         
         # 2. LOG to file
         self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{clean_input}\n----------------------------------")
@@ -155,13 +155,13 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     )
 
     # 2. The Retriever: Logical synthesis for Prolog
-    retriever_llm = OllamaLLM(
+    retriever_llm = DebugOllamaLLM(
         model_name=MODEL,
         model_params={
             "keep_alive": "5m", # Keep it loaded during an active chat session
             "options": {
                 "temperature": 0.1,
-                "num_ctx": 2048,
+                "num_ctx": 4096, # Increased to prevent context truncation
                 "format": "json",
                 "repeat_penalty": 1.2,
                 "seed": 42 # for reproducibility

@@ -30519,3 +30519,721 @@
   ]
 }
 ===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {"id": "protein", "label": "Concept", "properties": {"name": "Protein"}},
+    {"id": "ribosomal_subunits", "label": "Concept", "properties": {"name": "Ribosomal Subunits"}},
+    {"id": "post-translational_modification", "label": "Concept", "properties": {"name": "Post-Translational Modification"}},
+    {"id": "destination", "label": "Concept", "properties": {"name": "Destination"}}
+  ],
+  "relationships": [
+    {
+      "type": "DEFINES",
+      "start_node_id": "protein",
+      "end_node_id": "ribosomal_subunits",
+      "properties": {
+        "natural_statement": "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "e.g., protein(X) :- ribosomal_subunits(X)"
+      }
+    },
+    {
+      "type": "CAUSES",
+      "start_node_id": "ribosomal_subunits",
+      "end_node_id": "post-translational_modification",
+      "properties": {
+        "natural_statement": "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "e.g., post_translational_modification(X) :- ribosomal_subunits(X)"
+      }
+    },
+    {
+      "type": "PART_OF",
+      "start_node_id": "post-translational_modification",
+      "end_node_id": "protein",
+      "properties": {
+        "natural_statement": "Proteins undergo extensive post-translational modification.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "e.g., part_of(post_translational_modification, protein)"
+      }
+    },
+    {
+      "type": "ILLUSTRATES",
+      "start_node_id": "protein",
+      "end_node_id": "destination",
+      "properties": {
+        "natural_statement": "Proteins are packaged and directed to the appropriate destination.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "e.g., illustrates(destination, protein)"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which structural component of a cell is involved in such modification? A. endoplasmic reticulum B. lysosomes C. mitochondria D. Golgi apparatus"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "endoplasmic reticulum",
+    "lysosomes",
+    "mitochondria",
+    "Golgi apparatus"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination. Which structural component of a cell is involved in such modification?
+A. endoplasmic reticulum
+B. lysosomes
+C. mitochondria
+D. Golgi apparatus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['endoplasmic reticulum', 'lysosomes', 'mitochondria', 'Golgi apparatus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] Reticulum: The constellation Reticulum, the Reticle.
+[1] endoplasmic reticulum: A collection. Instances are systems of membranes that assist in the transport of materials within a cell.
+[2] organelle: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which 
+[3] gentian order: Those structures which are capable of biological reproduction. This includes self-reproducing organelles like mitochondria and chloroplasts.
+[4] mitochondrial genetics: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondria
+[5] Golgi apparatus: An organelle found in most eukaryotic cells that processes and packages macromolecules (e.g. proteins and lipids).
+[6] artistic gymnastics apparatus: Apparatus and equipment used by artistic gymnasts.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+[1, 5]
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination. Which structural component of a cell is involved in such modification?
+A. endoplasmic reticulum
+B. lysosomes
+C. mitochondria
+D. Golgi apparatus"
+
+Concept: 'endoplasmic reticulum'
+Facts:
+  - definition: A collection. Instances are systems of membranes that assist in the transport of materials within a cell.
+  - subclass of: aura: membrane bounded organelle
+  - ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane. Includes the nucleus, mitochondria, 
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which 
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. 
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cann
+  - subclass of: organic matter
+
+Concept: 'Golgi apparatus'
+Facts:
+  - definition: An organelle found in most eukaryotic cells that processes and packages macromolecules (e.g. proteins and lipids).
+  - subclass of: aura: membrane bounded organelle
+  - ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane. Includes the nucleus, mitochondria, 
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which 
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. 
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cann
+  - subclass of: organic matter
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "endoplasmic reticulum": [
+        "definition: A collection. Instances are systems of membranes that assist in the transport of materials within a cell.",
+        "subclass of: aura: membrane bounded organelle",
+        "ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane."
+    ],
+    "Golgi apparatus": [
+        "definition: An organelle found in most eukaryotic cells that processes and packages macromolecules (e.g. proteins and lipids).",
+        "subclass of: aura: membrane bounded organelle"
+    ]
+}
+```
+
+I have carefully filtered out the irrelevant facts while keeping at least 1-3 definitional facts for each concept, as instructed.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "The modern theory of the atom is best described as the result of which of these activities? A. the experiments of John Dalton in the early 1800s B. the discussions between two important scientists C. the research of many scientists over many years D. the ideas of atoms by Democritus over 2000 years ago"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "atom",
+    "John Dalton",
+    "Democritus"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "The modern theory of the atom is best described as the result of which of these activities?
+A. the experiments of John Dalton in the early 1800s
+B. the discussions between two important scientists
+C. the research of many scientists over many years
+D. the ideas of atoms by Democritus over 2000 years ago"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['the experiments of John Dalton in the early 1800s', 'the discussions between two important scientists', 'the research of many scientists over many years', 'the ideas of atoms by Democritus over 2000 years ago']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] thought experiments in quantum mechanics: Thought experiments in quantum mechanics.
+[1] John: The Gospel According to John (also called the Gospel of John, the Fourth Gospel, or simply John) is one of the four canonical gospels in the New Testa
+[2] the Federation of American Scientists: The Federation of American Scientists (FAS) is a 501(c)(3) organization with the stated intent of using science and scientific analysis to attempt to 
+[3] negotiator: One who engages in discussions, working toward agreements between the organization they represent and some other organization or individual.
+[4] social research: Social research is research conducted by social scientists following a systematic plan. Social research methods can be classified along a quantitative
+[5] research scientist: The collection of all research scientists. A type of Scientist. ResearchScientist is a PersonTypeByOccupation.
+[6] Democritus: A Greek phiosopher, born in Abdera, near Thrace. Democritus, along with Leucippus, was the first to develop an atomistic metaphysics: only atoms and e
+[7] Dassault Mirage 2000: The Dassault Mirage 2000 is a French multirole, single-engine fourth-generation jet fighter manufactured by Dassault Aviation. It was designed in the 
+[8] atom: A specialization of ChemicalObject. Each instance of Atom is a microscopic-scale object with exactly one atomic nucleus (see AtomicNucleus) and some n
+[9] exotic atom: An exotic atom is an otherwise normal atom in which one or more sub-atomic particles have been replaced by other particles of the same charge. For exa
+[10] II John: The Second Epistle of John, often referred to as Second John and often written 2 John, is a book of the New Testament attributed to John the Evangelis
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[3, 5, 6, 8, 9]
+```
+
+These concepts are relevant because they relate to discussions/negotiations (answer choice B), research/scientists (answer choices A and C), or atoms/atomic theory (answer choice D). The Prolog engine can use these facts/rules to reason about the question.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "The modern theory of the atom is best described as the result of which of these activities?
+A. the experiments of John Dalton in the early 1800s
+B. the discussions between two important scientists
+C. the research of many scientists over many years
+D. the ideas of atoms by Democritus over 2000 years ago"
+
+Concept: 'negotiator'
+Facts:
+  - definition: One who engages in discussions, working toward agreements between the organization they represent and some other organization or individual.
+  - subclass of: professional
+  - ancestor definition: The collection of all people who work at a job for which a skill that most adults do not have. This skill is normally achieved through training, howev
+  - subclass of: skilled worker
+  - ancestor definition: A sub-collection of PersonWithOccupation. Each instance is a worker who has acquired special skills.
+  - subclass of: worker
+  - ancestor definition: The collection of persons who have a (skilled or unskilled) occupation. Most (but not all) instances of PersonWithOccupation spend a significant part 
+  - subclass of: skilled person
+  - ancestor definition: The collection of instances of Person who exhibit or have acquired a high level of skill in an area, where having such skills is generally seen as val
+  - sibling concept: accountant
+  - sibling concept: actuary
+  - sibling concept: aircraft crew member
+
+Concept: 'research scientist'
+Facts:
+  - definition: The collection of all research scientists. A type of Scientist. ResearchScientist is a PersonTypeByOccupation.
+  - subclass of: scientist
+  - ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation. Each instance of Scientist is a person who is educated and employ
+  - subclass of: researcher
+  - ancestor definition: A subcollection of PersonWithOccupation each instance of which is a person who performs research as a significant part of his or her occupation. This 
+  - subclass of: university graduate
+  - ancestor definition: The collection of all university graduates. A type of degree granting institution graduate and LiterateAgent.
+  - subclass of: worker
+  - ancestor definition: The collection of persons who have a (skilled or unskilled) occupation. Most (but not all) instances of PersonWithOccupation spend a significant part 
+  - subclass of: professional
+  - ancestor definition: The collection of all people who work at a job for which a skill that most adults do not have. This skill is normally achieved through training, howev
+  - subclass of: degree granting institution graduate
+
+Concept: 'Democritus'
+Facts:
+  - definition: A Greek phiosopher, born in Abdera, near Thrace. Democritus, along with Leucippus, was the first to develop an atomistic metaphysics: only atoms and empty space exist.
+  - subclass of: philosopher
+  - ancestor definition: A philosopher, in a broad sense, is someone who studies philosophy. The word "philosopher" comes from the Ancient Greek φιλόσοφος (philosophos), which
+  - subclass of: professional
+  - ancestor definition: The collection of all people who work at a job for which a skill that most adults do not have. This skill is normally achieved through training, howev
+  - subclass of: scholarly person
+  - ancestor definition: A sub-collection of Teacher. Each instance is a learned person (especially in the humanities); someone who by long study has gained mastery in one or 
+  - subclass of: skilled worker
+  - ancestor definition: A sub-collection of PersonWithOccupation. Each instance is a worker who has acquired special skills.
+  - subclass of: intellect
+  - ancestor definition: A sub-collection of Person. Each instance is a person who uses the mind creatively.
+  - subclass of: student
+
+Concept: 'atom'
+Facts:
+  - definition: A specialization of ChemicalObject. Each instance of Atom is a microscopic-scale object with exactly one atomic nucleus (see AtomicNucleus) and some number of electrons (see Electron). A typical insta
+  - subclass of: chemical object
+  - ancestor definition: A specialization of MicroscopicScaleObject. Each instance of ChemicalObject is an object whose behavior is typically described in terms of its outer c
+  - subclass of: molecular component
+  - ancestor definition: The collection of all ChemicalObjects which, notwithstanding the fact that they are conventionally regarded as ChemicalObjects in their own right, may
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cann
+  - subclass of: object types
+  - ancestor definition: Objects (artifacts) that may be grouped by a variety of operational or attribute types.
+  - subclass of: shaped thing
+  - ancestor definition: An ObjectType and a specialization of PositiveDimensionalThing (q.v.). Each instance of ShapedObject is a spatial object that has some well-defined sh
+  - subclass of: three dimensional thing
+
+Concept: 'exotic atom'
+Facts:
+  - definition: An exotic atom is an otherwise normal atom in which one or more sub-atomic particles have been replaced by other particles of the same charge. For example, electrons may be replaced by other negativel
+  - subclass of: particle physics
+  - ancestor definition: Particle physics (also high energy physics) is the branch of physics that studies the nature of the particles that constitute matter (particles with m
+  - subclass of: physics
+  - ancestor definition: Physics: a <a href="http://sw.opencyc.org/concept/Mx4rvVi3_JwpEbGdrcN5Y29ycA">ScientificFieldOfStudy</a>.
+  - subclass of: scientific discipline
+  - ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and pr
+  - sibling concept: antimatter
+  - sibling concept: astroparticle physics
+  - sibling concept: dark matter
+  - sibling concept: electroweak theory
+  - sibling concept: experimental particle physics
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "negotiator": [
+        "definition: One who engages in discussions, working toward agreements between the organization they represent and some other organization or individual.",
+        "subclass of: professional",
+        "ancestor definition: The collection of all people who work at a job for which a skill that most adults do not have. This skill is normally achieved through training, however"
+    ],
+    "research scientist": [
+        "definition: The collection of all research scientists. A type of Scientist.",
+        "subclass of: researcher",
+        "ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation."
+    ],
+    "Democritus": [
+        "definition: A Greek phiosopher, born in Abdera, near Thrace. Democritus, along with Leucippus, was the first to develop an atomistic metaphysics: only atoms and empty space exist.",
+        "subclass of: philosopher",
+        "ancestor definition: A sub-collection of Teacher."
+    ],
+    "atom": [
+        "definition: A specialization of ChemicalObject. Each instance of Atom is a microscopic-scale object with exactly one atomic nucleus (see AtomicNucleus) and some number of electrons (see Electron)."
+    ]
+}
+```
+
+I have carefully filtered out the irrelevant facts, keeping only the core definitions, subclass relationships, and ancestor descriptions that are relevant to answering the user's query.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "The most likely reason sound travels faster in saltwater than in freshwater is that saltwater A) is more elastic. B) absorbs heat faster. C) has a higher density. D) reflects sound better."  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here are the extracted search terms:
+
+```
+[
+    "saltwater",
+    "freshwater",
+    "density"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "The most likely reason sound travels faster in saltwater than in freshwater is that saltwater
+A. is more elastic.
+B. absorbs heat faster.
+C. has a higher density.
+D. reflects sound better."
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['is more elastic.', 'absorbs heat faster.', 'has a higher density.', 'reflects sound better.']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] elastic modulus: A sub-collection of #$Modulus-Coefficient. Each instance is a ratio of the applied stress to the change in shape of an elastic body.
+[1] stocking cap: The collection of all stocking caps: warm, snug-fitting caps, usually made of wool and or a synthetic, with elastic to make them fit more tightly.
+[2] faster-than-light travel: Faster-than-light (also superluminal or FTL) communication and travel refer to the propagation of information or matter faster than the speed of light
+[3] heat production: A heat production process such as condensing, freezing, or oxidation.
+[4] density: A specialization of PhysicalQuantity. Each instance of Density is a measure of an aspect of a tangible object, namely, its mass per volume. Instances 
+[5] population density: Population density (in agriculture : standing stock and standing crop) is a measurement of population per unit area or unit volume; it is a quantity o
+[6] sound: A specialization of WavePropagation. Each instance of Sound is an instance of wave propagation in which longitudinal pressure waves travel through mat
+[7] sound card: Computer sound cards.
+[8] Saltwater Crocodile: A species of crocodile. The saltwater crocodiles are the largest living reptiles.
+[9] Marine Otter: The marine otter (Lontra felina) is a rare and poorly known South American mammal of the weasel family (Mustelidae). The scientific name means \"otter
+[10] freshwater ecology: Freshwater ecology is about freshwater ecosystems and elements in aquatic ecology and limnology.
+[11] freshwater algae: The relative minority of algae found in freshwater.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+  {
+    "nodes": [
+      {"id": "protein_id", "label": "Protein", "properties": {"name": "Proteins"}},
+      {"id": "ribosomal_subunit_id", "label": "Ribosomal Subunit", "properties": {"name": "Ribosomal subunits"}}
+    ],
+    "relationships": [
+      {
+        "type": "DEFINES",
+        "start_node_id": "protein_id",
+        "end_node_id": "ribosomal_subunit_id",
+        "properties": {
+          "natural_statement": "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., protein(Proteins) :- ribosomal_subunit(Ribosomal subunits)"
+        }
+      },
+      {
+        "type": "CAUSES",
+        "start_node_id": "ribosomal_subunit_id",
+        "end_node_id": "protein_id",
+        "properties": {
+          "natural_statement": "Synthesis in ribosomal subunits causes extensive post-translational modification and packaging.",
+          "logic_intent": "RULE",
+          "logical_form_hint": "e.g., causes(Ribosomal subunits, protein(Proteins))"
+        }
+      },
+      {
+        "type": "DEFINES",
+        "start_node_id": "post_translational_modification_id", 
+        "end_node_id": "protein_id",
+        "properties": {
+          "natural_statement": "Proteins undergo extensive post-translational modification.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., protein(Proteins) :- post_translational_modification(Post translational modification)"
+        }
+      },
+      {
+        "type": "CAUSES",
+        "start_node_id": "post_translational_modification_id", 
+        "end_node_id": "protein_id",
+        "properties": {
+          "natural_statement": "Post-translational modification causes packaging.",
+          "logic_intent": "RULE",
+          "logical_form_hint": "e.g., causes(Post translational modification, protein(Proteins))"
+        }
+      },
+      {
+        "type": "DEFINES",
+        "start_node_id": "packaging_id", 
+        "end_node_id": "protein_id",
+        "properties": {
+          "natural_statement": "Proteins are packaged.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., protein(Proteins) :- packaging(Packaging)"
+        }
+      },
+      {
+        "type": "CAUSES",
+        "start_node_id": "packaging_id", 
+        "end_node_id": "protein_id",
+        "properties": {
+          "natural_statement": "Packaging causes directed to the appropriate destination.",
+          "logic_intent": "RULE",
+          "logical_form_hint": "e.g., causes(Packaging, protein(Proteins))"
+        }
+      },
+      {
+        "type": "DEFINES",
+        "start_node_id": "destination_id", 
+        "end_node_id": "protein_id",
+        "properties": {
+          "natural_statement": "Proteins are directed to the appropriate destination.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., protein(Proteins) :- destination(Destination)"
+        }
+      }
+    ]
+  }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which structural component of a cell is involved in such modification? A. endoplasmic reticulum B. lysosomes C. mitochondria D. Golgi apparatus"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "animal skeleton",
+    "plant cell",
+    "cell membrane",
+    "cell wall"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all l
+[1] membrane protein: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached
+[2] cell wall: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to 
+[3] bacterial cell wall: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certai
+[4] photosynthetic pigment: A photosynthetic pigment (accessory pigment; chloroplast pigment).
+[5] chloroplast: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+[6] nucleus: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic
+[7] lentiform nucleus: The collection of all lentiform nuclei. An individual LentiformNucleus (or 'lenticular nucleus') is a BasalNucleus which is a unique part of a Cerebra
+[8] human skeleton: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood
+[9] skeleton tarantula: The skeleton tarantula, Ephebopus murinus, is a species of spider belonging to the family Theraphosidae (tarantulas), sub-family Aviculariinae. A New 
+[10] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat r
+[11] plant epidermis: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermo
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 8, 9, 10, 11]
+```
+
+These indices correspond to concepts that are relevant for answering the question. 
+
+- Index [1] is "membrane protein" because it relates to cell membranes (answer choice A).
+- Index [3] is "bacterial cell wall" and index [5] is "chloroplast", both of which relate directly to answer choices B and C.
+- Index [6] is "nucleus" as it matches with one of the question's options, D. 
+- Indices [8] and [9] are related to skeletons (answer choice D), so they're relevant for comparison purposes.
+- Finally, indices [10] and [11] relate directly to plant cell walls and epidermis respectively which is also a part of answer option B.
+
+These concepts will help the Prolog engine reason about the question.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'membrane protein'
+Facts:
+  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembra
+  - subclass of: protein molecule
+  - ancestor definition: The collection of molecules of proteins. Instances are defined chemically as polymers made up of amino acids. Compare with ProteinStuff.
+  - subclass of: biopolymer
+  - ancestor definition: The collection of macromolecules which are produced by and can be found within living things, such as proteins (essentially polymers of amino acids), 
+  - subclass of: heteropolymer
+  - ancestor definition: The collection of all PolymerMolecules whose instances are characterized by having more than one type of Monomer as polymericSubComponents. More speci
+  - subclass of: organic molecule
+  - ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas
+  - subclass of: polymer molecule
+  - ancestor definition: A polymer (/ˈpɒlᵻmər/; Greek poly-, "many" + -mer, "parts") is a large molecule, or macromolecule, composed of many repeated subunits. Because of thei
+  - subclass of: polypeptide
+
+Concept: 'bacterial cell wall'
+Facts:
+  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+  - subclass of: cell wall
+  - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to 
+  - subclass of: prokaryotic cell wall
+  - ancestor definition: The collection of instances of CellWall that are anatomicalParts of some instance of ProkaryoticCell.
+  - subclass of: structural cell part
+  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct
+  - subclass of: external anatomical part
+  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. 
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel
+  - subclass of: organism part
+
+Concept: 'chloroplast'
+Facts:
+  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which 
+  - subclass of: plastid
+  - ancestor definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chlor
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. 
+  - subclass of: aura: membrane bounded organelle
+  - ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane. Includes the nucleus, mitochondria, 
+  - subclass of: microscopic object
+
+Concept: 'nucleus'
+Facts:
+  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, 
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which 
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. 
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cann
+  - subclass of: organic matter
+  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of 
+  - subclass of: parts
+
+Concept: 'human skeleton'
+Facts:
+  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone ma
+  - subclass of: body part
+  - ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of B
+  - subclass of: skeleton
+  - ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts o
+  - subclass of: region on an animal's body
+  - ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivisio
+  - subclass of: organ system
+  - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological sy
+  - subclass of: animal or body part
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all living animals, body parts of living animals, and body regions of living animals. AnimalB
+  - subclass of: organism part
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------

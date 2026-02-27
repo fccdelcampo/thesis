@@ -290,9 +290,14 @@ If none are relevant, output an empty list [].
         filter_query = original_query if original_query else query
 
         # Build the payload for the prompt
+        # Cap triples per concept to 12 to prevent the prompt from exceeding num_ctx.
+        # With 5 concepts * ~25 triples, the prompt alone can blow past 2048 tokens
+        # causing Ollama to truncate context and hang indefinitely on malformed JSON.
+        MAX_TRIPLES_PER_CONCEPT = 12
         concepts_text = ""
         for c in concepts_data:
-            triples_text = "\n".join([f"  - {t}" for t in c["triples"]])
+            capped_triples = c["triples"][:MAX_TRIPLES_PER_CONCEPT]
+            triples_text = "\n".join([f"  - {t}" for t in capped_triples])
             concepts_text += f"Concept: '{c['name']}'\nFacts:\n{triples_text}\n\n"
 
         prompt = f"""Task: You are deeply integrated into a Prolog GraphRAG pipeline.
@@ -321,7 +326,8 @@ Example:
         try:
             raw = self.llm.invoke(prompt)
             res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
-            print(f"DEBUG: Batch triple filter raw response: {repr(res[:200])}...", flush=True)
+            safe_res = str(res[:200]).encode('ascii', 'replace').decode('ascii')
+            print(f"DEBUG: Batch triple filter raw response: {repr(safe_res)}...", flush=True)
 
             if "```json" in res:
                 res = res.split("```json")[1].split("```")[0].strip()
