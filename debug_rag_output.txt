@@ -368,3 +368,1805 @@ B. The function of a plant cell wall, which provides support and structure to th
 
 Note: The above list only includes logical building blocks that directly help bridge the premise to the answer, without revealing it explicitly.
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane protein",
+  "uri": "http://kbpedia.org/kko/rc/MembraneProtein",
+  "score": 1.0,
+  "triples": [
+    "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembra",
+    "subclass of: protein molecule",
+    "ancestor definition: The collection of molecules of proteins. Instances are defined chemically as polymers made up of amino acids. Compare with ProteinStuff.",
+    "subclass of: biopolymer",
+    "ancestor definition: The collection of macromolecules which are produced by and can be found within living things, such as proteins (essentially polymers of amino acids), ",
+    "subclass of: heteropolymer",
+    "ancestor definition: The collection of all PolymerMolecules whose instances are characterized by having more than one type of Monomer as polymericSubComponents. More speci",
+    "subclass of: organic molecule",
+    "ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas",
+    "subclass of: polymer molecule",
+    "ancestor definition: A polymer (/\u02c8p\u0252l\u1d7bm\u0259r/; Greek poly-, \"many\" + -mer, \"parts\") is a large molecule, or macromolecule, composed of many repeated subunits. Because of thei",
+    "subclass of: polypeptide",
+    "ancestor definition: The collection of all PeptideMolecules comprised of between 10 and 100 AminoAcids.",
+    "subclass of: protein molecule or protein complex",
+    "ancestor definition: A specialization of ChemicalObject. Each instance of ProteinMoleculeOrProteinComplex is either a single ProteinMolecule or is a group of ProteinMolecu",
+    "subclass of: organic chemical object",
+    "ancestor definition: The collection of molecules or other ChemicalObjects which are produced by and can be found within living things, such as #$Biopolymers or AminoAcids.",
+    "has subclass: peripheral protein",
+    "sibling concept: aquaporin",
+    "sibling concept: plasma protein molecule",
+    "sibling concept: enzyme",
+    "sibling concept: hemoprotein molecule",
+    "sibling concept: kinetochore"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: membrane protein. Relevant Logical Facts:   - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembra   - subclass of: protein molecule   - ancestor definition: The collection of molecules of proteins. Instances are defined chemically as polymers made up of amino acids. Compare with ProteinStuff.   - subclass of: biopolymer   - ancestor definition: The collection of macromolecules which are produced by and can be found within living things, such as proteins (essentially polymers of amino acids),    - subclass of: heteropolymer   - ancestor definition: The collection of all PolymerMolecules whose instances are characterized by having more than one type of Monomer as polymericSubComponents. More speci   - subclass of: organic molecule   - ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas   - subclass of: polymer molecule   - ancestor definition: A polymer (/ˈpɒlᵻmər/; Greek poly-, "many" + -mer, "parts") is a large molecule, or macromolecule, composed of many repeated subunits. Because of thei   - subclass of: polypeptide   - ancestor definition: The collection of all PeptideMolecules comprised of between 10 and 100 AminoAcids.   - subclass of: protein molecule or protein complex   - ancestor definition: A specialization of ChemicalObject. Each instance of ProteinMoleculeOrProteinComplex is either a single ProteinMolecule or is a group of ProteinMolecu   - subclass of: organic chemical object   - ancestor definition: The collection of molecules or other ChemicalObjects which are produced by and can be found within living things, such as #$Biopolymers or AminoAcids.   - has subclass: peripheral protein   - sibling concept: aquaporin   - sibling concept: plasma protein molecule   - sibling concept: enzyme   - sibling concept: hemoprotein molecule   - sibling concept: kinetochore
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "bacterial cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BacterialCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.",
+    "subclass of: cell wall",
+    "ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to ",
+    "subclass of: prokaryotic cell wall",
+    "ancestor definition: The collection of instances of CellWall that are anatomicalParts of some instance of ProkaryoticCell.",
+    "subclass of: structural cell part",
+    "ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct",
+    "subclass of: external anatomical part",
+    "ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. ",
+    "subclass of: cell part",
+    "ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel",
+    "subclass of: organism part",
+    "ancestor definition: A specialization of both PhysicalPartOfObject and BiologicalLivingObject. Each instance of OrganismPart is a part of an organism. It may be an anatomi",
+    "sibling concept: plant cell wall",
+    "sibling concept: prokaryotic cell wall"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: bacterial cell wall. Relevant Logical Facts:   - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.   - subclass of: cell wall   - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to    - subclass of: prokaryotic cell wall   - ancestor definition: The collection of instances of CellWall that are anatomicalParts of some instance of ProkaryoticCell.   - subclass of: structural cell part   - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct   - subclass of: external anatomical part   - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism.    - subclass of: cell part   - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCel   - subclass of: organism part   - ancestor definition: A specialization of both PhysicalPartOfObject and BiologicalLivingObject. Each instance of OrganismPart is a part of an organism. It may be an anatomi   - sibling concept: plant cell wall   - sibling concept: prokaryotic cell wall
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chloroplast",
+  "uri": "http://kbpedia.org/kko/rc/Chloroplast",
+  "score": 1.0,
+  "triples": [
+    "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.",
+    "subclass of: organelle",
+    "ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell,"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: chloroplast. Relevant Logical Facts:   - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.   - subclass of: organelle   - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell,
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nucleus",
+  "uri": "http://kbpedia.org/kko/rc/Nucleus",
+  "score": 1.0,
+  "triples": [
+    "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.",
+    "subclass of: internal body part",
+    "ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism."
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: nucleus. Relevant Logical Facts:   - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.   - subclass of: internal body part   - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "definition: The human skeleton is the internal framework of the body.",
+    "subclass of: organ system",
+    "ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological systems include organs and tissues."
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: human skeleton. Relevant Logical Facts:   - definition: The human skeleton is the internal framework of the body.   - subclass of: organ system   - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological systems include organs and tissues.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+B. cell wall 
+
+The function of an animal skeleton (providing structural support) is most similar to the function of a plant's cell wall which also provides protection and maintains physical integrity for cells in plants.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane protein",
+  "uri": "http://kbpedia.org/kko/rc/MembraneProtein",
+  "score": 1.0,
+  "triples": [
+    "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembra",
+    "subclass of: protein molecule",
+    "ancestor definition: The collection of molecules of proteins. Instances are defined chemically as polymers made up of amino acids. Compare with ProteinStuff.",
+    "subclass of: biopolymer",
+    "ancestor definition: The collection of macromolecules which are produced by and can be found within living things, such as proteins (essentially polymers of amino acids), ",
+    "subclass of: heteropolymer",
+    "ancestor definition: The collection of all PolymerMolecules whose instances are characterized by having more than one type of Monomer as polymericSubComponents. More speci",
+    "subclass of: organic molecule",
+    "ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas",
+    "subclass of: polymer molecule",
+    "ancestor definition: A polymer (/\u02c8p\u0252l\u1d7bm\u0259r/; Greek poly-, \"many\" + -mer, \"parts\") is a large molecule, or macromolecule, composed of many repeated subunits. Because of thei",
+    "subclass of: polypeptide",
+    "ancestor definition: The collection of all PeptideMolecules comprised of between 10 and 100 AminoAcids.",
+    "subclass of: protein molecule or protein complex",
+    "ancestor definition: A specialization of ChemicalObject. Each instance of ProteinMoleculeOrProteinComplex is either a single ProteinMolecule or is a group of ProteinMolecu",
+    "subclass of: organic chemical object",
+    "ancestor definition: The collection of molecules or other ChemicalObjects which are produced by and can be found within living things, such as #$Biopolymers or AminoAcids.",
+    "has subclass: peripheral protein",
+    "sibling concept: aquaporin",
+    "sibling concept: plasma protein molecule",
+    "sibling concept: enzyme",
+    "sibling concept: hemoprotein molecule",
+    "sibling concept: kinetochore"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: membrane protein. Relevant Logical Facts:  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembra  - subclass of: protein molecule  - ancestor definition: The collection of molecules of proteins. Instances are defined chemically as polymers made up of amino acids. Compare with ProteinStuff.  - subclass of: biopolymer  - ancestor definition: The collection of macromolecules which are produced by and can be found within living things, such as proteins (essentially polymers of amino acids),  - subclass of: heteropolymer  - ancestor definition: The collection of all PolymerMolecules whose instances are characterized by having more than one type of Monomer as polymericSubComponents. More speci  - subclass of: organic molecule  - ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas  - subclass of: polymer molecule  - ancestor definition: A polymer (/ˈpɒlᵻmər/; Greek poly-, "many" + -mer, "parts") is a large molecule, or macromolecule, composed of many repeated subunits. Because of thei  - subclass of: polypeptide  - ancestor definition: The collection of all PeptideMolecules comprised of between 10 and 100 AminoAcids.  - subclass of: protein molecule or protein complex  - ancestor definition: A specialization of ChemicalObject. Each instance of ProteinMoleculeOrProteinComplex is either a single ProteinMolecule or is a group of ProteinMolecu  - subclass of: organic chemical object  - ancestor definition: The collection of molecules or other ChemicalObjects which are produced by and can be found within living things, such as #$Biopolymers or AminoAcids.  - has subclass: peripheral protein  - sibling concept: aquaporin  - sibling concept: plasma protein molecule  - sibling concept: enzyme  - sibling concept: hemoprotein molecule  - sibling concept: kinetochore
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell wall",
+  "uri": "http://kbpedia.org/kko/rc/CellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water.",
+    "subclass of: structural cell part",
+    "ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: cell wall. Relevant Logical Facts:  - definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water.  - subclass of: structural cell part  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and struct
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chloroplast",
+  "uri": "http://kbpedia.org/kko/rc/Chloroplast",
+  "score": 1.0,
+  "triples": [
+    "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.",
+    "subclass of: organelle",
+    "ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell,"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: chloroplast. Relevant Logical Facts:  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.  - subclass of: organelle  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell,
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nucleus",
+  "uri": "http://kbpedia.org/kko/rc/Nucleus",
+  "score": 1.0,
+  "triples": [
+    "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.",
+    "subclass of: organelle",
+    "ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell,"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: nucleus. Relevant Logical Facts:  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.  - subclass of: organelle  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell,
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and afford limited protection to the cell.",
+    "subclass of: eukaryotic cell",
+    "ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism."
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts:  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and afford limited protection to the cell.  - subclass of: eukaryotic cell  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism.
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Plant cells have an external covering called a cell wall.
+2. The primary function of a plant cell's cell wall is to provide structure and support, similar to how animal skeletons do for animals.
+3. Cell walls are composed primarily of cellulose microfibrils, which provides rigidity but also elasticity due to their hydrated nature.
+4. Animal skeletons are made up of rigid yet flexible materials that allow movement while maintaining structural integrity.
+5. The cell wall's composition and function in plant cells is analogous to the bone structure found in animal skeletons.
+6. Both plant cell walls and animal skeletons serve as external frameworks for supporting cellular structures.
+7. Plant cell walls help maintain water balance within the cell, similar to how bones regulate fluid pressure inside an organism.
+8. The presence of a rigid yet flexible framework (cell wall or skeleton) is essential for maintaining structural integrity in both plants and animals.
+9. Eukaryotic cells have organelles that perform specific functions, including providing support and structure through external coverings like cell walls.
+10. Plant cells are eukaryotic cells with specialized structures such as chloroplasts (for photosynthesis), a nucleus (containing genetic material), and an external covering called the plant cell wall.
+
+Note: The above list only includes logical building blocks that directly help bridge the premise to the answer, without revealing it explicitly.
+==================================================
+==================================================
+ QUERY: Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chronic fatigue syndrome",
+  "uri": "http://kbpedia.org/kko/rc/ChronicFatigueSyndrome",
+  "score": 1.0,
+  "triples": [
+    "definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical communit",
+    "subclass of: chronic condition",
+    "ancestor definition: A collection of ailments. An instance of ChronicCondition is an ailment that lingers or recurs in an organism throughout its life. In some cases, the ",
+    "subclass of: medical condition",
+    "ancestor definition: A specialization of #$SystemCondition. Each instance of PhysiologicalCondition involves an Organism_Whole being in some physiological state that is no",
+    "subclass of: abnormal condition",
+    "ancestor definition: This is the collection of #$SystemConditions which are abnormal for the system they affect -- for instance, a computer during reboot, or a human body ",
+    "subclass of: facet collection",
+    "ancestor definition: A CollectionType. Each instance of FacetInstanceCollection is a collection that is an instance of a FacetingCollectionType (q.v.). For example, the fa",
+    "subclass of: situation involving tangible things",
+    "ancestor definition: A specialization of Situation_Localized. Each instance of PhysicalSituation is a spatially localized situation involving one or more physical objects ",
+    "sibling concept: Amyotrophic lateral sclerosis",
+    "sibling concept: Marie Strumpell arthritis",
+    "sibling concept: arthritis",
+    "sibling concept: case of autism",
+    "sibling concept: chronic lung disease"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: chronic fatigue syndrome. Relevant Logical Facts:   - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical communit   - subclass of: chronic condition   - ancestor definition: A collection of ailments. An instance of ChronicCondition is an ailment that lingers or recurs in an organism throughout its life. In some cases, the    - subclass of: medical condition   - ancestor definition: A specialization of #$SystemCondition. Each instance of PhysiologicalCondition involves an Organism_Whole being in some physiological state that is no   - subclass of: abnormal condition   - ancestor definition: This is the collection of #$SystemConditions which are abnormal for the system they affect -- for instance, a computer during reboot, or a human body    - subclass of: facet collection   - ancestor definition: A CollectionType. Each instance of FacetInstanceCollection is a collection that is an instance of a FacetingCollectionType (q.v.). For example, the fa   - subclass of: situation involving tangible things   - ancestor definition: A specialization of Situation_Localized. Each instance of PhysicalSituation is a spatially localized situation involving one or more physical objects    - sibling concept: Amyotrophic lateral sclerosis   - sibling concept: Marie Strumpell arthritis   - sibling concept: arthritis   - sibling concept: case of autism   - sibling concept: chronic lung disease
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "breakfast food",
+  "uri": "http://kbpedia.org/kko/rc/BreakfastFood",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.",
+    "subclass of: food item",
+    "ancestor definition: An instance of ExistingStuffType, and a specialization of FoodOrDrink. Each instance of Food is a particular portion of food of a type which can be, a",
+    "subclass of: food beverage or tobacco product",
+    "ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers food beverage and toba",
+    "subclass of: food or drink",
+    "ancestor definition: A specialization of EdibleStuff (q.v.). Each instance of FoodOrDrink is a substance which instances of some type of organism (that is, some sub-collec",
+    "subclass of: grocery",
+    "ancestor definition: An element of ProductTypeByMarketCategory. Each element of GroceryMarketCategory is a food product typically sold in grocery stores or grocery departm",
+    "subclass of: opaque thing",
+    "ancestor definition: Opaque is a #$PhysicalAttribute representing a specific degree of #$Transparency. Opaque objects do not transmit light. See also transparencyOfObject.",
+    "subclass of: organic matter",
+    "ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of ",
+    "subclass of: market category",
+    "ancestor definition: A collection of collections. Each element of ProductTypeByMarketCategory is a collection of items that are commonly offered for sale in the same (type",
+    "subclass of: visible feature",
+    "ancestor definition: A type of feature that is defined by and visible in nature.",
+    "has subclass: breakfast",
+    "has subclass: cereal (breakfast food)",
+    "has subclass: doughnut",
+    "has subclass: chicken's egg",
+    "has subclass: flapjack",
+    "has subclass: omelette",
+    "has subclass: pancake",
+    "has subclass: waffle",
+    "sibling concept: cereal (food)",
+    "sibling concept: cheesy food",
+    "sibling concept: children's food",
+    "sibling concept: convenience food",
+    "sibling concept: crumb"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: breakfast food. Relevant Logical Facts:   - definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.   - subclass of: food item   - ancestor definition: An instance of ExistingStuffType, and a specialization of FoodOrDrink. Each instance of Food is a particular portion of food of a type which can be, a   - subclass of: food beverage or tobacco product   - ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers food beverage and toba   - subclass of: food or drink   - ancestor definition: A specialization of EdibleStuff (q.v.). Each instance of FoodOrDrink is a substance which instances of some type of organism (that is, some sub-collec   - subclass of: grocery   - ancestor definition: An element of ProductTypeByMarketCategory. Each element of GroceryMarketCategory is a food product typically sold in grocery stores or grocery departm   - subclass of: opaque thing   - ancestor definition: Opaque is a #$PhysicalAttribute representing a specific degree of #$Transparency. Opaque objects do not transmit light. See also transparencyOfObject.   - subclass of: organic matter   - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of    - subclass of: market category   - ancestor definition: A collection of collections. Each element of ProductTypeByMarketCategory is a collection of items that are commonly offered for sale in the same (type   - subclass of: visible feature   - ancestor definition: A type of feature that is defined by and visible in nature.   - has subclass: breakfast   - has subclass: cereal (breakfast food)   - has subclass: doughnut   - has subclass: chicken's egg   - has subclass: flapjack   - has subclass: omelette   - has subclass: pancake   - has subclass: waffle   - sibling concept: cereal (food)   - sibling concept: cheesy food   - sibling concept: children's food   - sibling concept: convenience food   - sibling concept: crumb
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "financial chart",
+  "uri": "http://kbpedia.org/kko/rc/FinancialChart",
+  "score": 1.0,
+  "triples": [
+    "definition: A chart of finance or stock performance.",
+    "subclass of: technical analysis",
+    "ancestor definition: The collection of all technical analysis. A type of FollowingAStandardProcedure and Evaluating.",
+    "subclass of: evaluating",
+    "ancestor definition: A specialization of PurposefulAction and Thinking. Each instance of this collection is an event in which at least one agent evaluates some real-world ",
+    "subclass of: following standard procedures",
+    "ancestor definition: The collection of all events in which the performer of the event follows a standarized procedure which the agent knows prior to performing the event. ",
+    "subclass of: action (purposeful)",
+    "ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose",
+    "subclass of: thinking",
+    "ancestor definition: A specialization of IntentionalMentalEvent. Each instance of this collection is a thinking process in which it is essential that an agent uses informa",
+    "sibling concept: candlestick patter",
+    "sibling concept: chart overlay",
+    "sibling concept: chart pattern",
+    "sibling concept: technical indicator"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: financial chart. Relevant Logical Facts:   - definition: A chart of finance or stock performance.   - subclass of: technical analysis   - ancestor definition: The collection of all technical analysis. A type of FollowingAStandardProcedure and Evaluating.   - subclass of: evaluating   - ancestor definition: A specialization of PurposefulAction and Thinking. Each instance of this collection is an event in which at least one agent evaluates some real-world    - subclass of: following standard procedures   - ancestor definition: The collection of all events in which the performer of the event follows a standarized procedure which the agent knows prior to performing the event.    - subclass of: action (purposeful)   - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose   - subclass of: thinking   - ancestor definition: A specialization of IntentionalMentalEvent. Each instance of this collection is a thinking process in which it is essential that an agent uses informa   - sibling concept: candlestick patter   - sibling concept: chart overlay   - sibling concept: chart pattern   - sibling concept: technical indicator
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature",
+  "uri": "http://kbpedia.org/kko/rc/Temperature",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \"hotness\" -- or, more precisely, the potential for heat transfer -- that some tangible thing might have. An in",
+    "subclass of: non aspectual quantity",
+    "ancestor definition: A specialization of ScalarQuantity (q.v.). This is the collection of all \"non-aspectual\" quantities: those that can always be attributed to an object ",
+    "subclass of: one dimensional quantity",
+    "ancestor definition: A specialization of MeasurableQuantity (q.v.). Each instance of OneDimensionalQuantity is a measurable quantity that is not defined in terms of (i.e. ",
+    "subclass of: scalar or vector interval",
+    "ancestor definition: A specialization of TupleOfIntervals (q.v.). ScalarOrVectorInterval is the collection of all measurable intervals, whether scalar or vector. It thus i",
+    "subclass of: tangible physical quantity",
+    "ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have. Specializati",
+    "subclass of: quality",
+    "ancestor definition: An internal characteristic or aspect of an object; collectively these define intensionally what kind of thing to which the object belongs, though that",
+    "subclass of: scalar quantity",
+    "ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This",
+    "subclass of: measurable quantity",
+    "ancestor definition: A specialization of Quantity (q.v.). This is the collection of quantities that have a numeric component and could actually be used to measure somethin",
+    "subclass of: n-tuple interval",
+    "ancestor definition: A specialization of Tuple (q.v.). Each instance of TupleOfIntervals is a tuple whose members (see memberOfTuple) are all ScalarIntervals (q.v.). Notab",
+    "has subclass: absolute zero",
+    "has subclass: cold",
+    "has subclass: moderately cold",
+    "has subclass: room temperature",
+    "has subclass: sea surface temperature",
+    "has subclass: temperature control",
+    "has subclass: thermal protection",
+    "has subclass: thermoregulation",
+    "has subclass: threshold temperature",
+    "has subclass: warmth",
+    "sibling concept: area",
+    "sibling concept: beauty",
+    "sibling concept: biodiversity",
+    "sibling concept: cask strength",
+    "sibling concept: chemical purity"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: temperature. Relevant Logical Facts:   - definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of "hotness" -- or, more precisely, the potential for heat transfer -- that some tangible thing might have. An in   - subclass of: non aspectual quantity   - ancestor definition: A specialization of ScalarQuantity (q.v.). This is the collection of all "non-aspectual" quantities: those that can always be attributed to an object    - subclass of: one dimensional quantity   - ancestor definition: A specialization of MeasurableQuantity (q.v.). Each instance of OneDimensionalQuantity is a measurable quantity that is not defined in terms of (i.e.    - subclass of: scalar or vector interval   - ancestor definition: A specialization of TupleOfIntervals (q.v.). ScalarOrVectorInterval is the collection of all measurable intervals, whether scalar or vector. It thus i   - subclass of: tangible physical quantity   - ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have. Specializati   - subclass of: quality   - ancestor definition: An internal characteristic or aspect of an object; collectively these define intensionally what kind of thing to which the object belongs, though that   - subclass of: scalar quantity   - ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This   - subclass of: measurable quantity   - ancestor definition: A specialization of Quantity (q.v.). This is the collection of quantities that have a numeric component and could actually be used to measure somethin   - subclass of: n-tuple interval   - ancestor definition: A specialization of Tuple (q.v.). Each instance of TupleOfIntervals is a tuple whose members (see memberOfTuple) are all ScalarIntervals (q.v.). Notab   - has subclass: absolute zero   - has subclass: cold   - has subclass: moderately cold   - has subclass: room temperature   - has subclass: sea surface temperature   - has subclass: temperature control   - has subclass: thermal protection   - has subclass: thermoregulation   - has subclass: threshold temperature   - has subclass: warmth   - sibling concept: area   - sibling concept: beauty   - sibling concept: biodiversity   - sibling concept: cask strength   - sibling concept: chemical purity
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "investigation",
+  "uri": "http://kbpedia.org/kko/rc/Investigation",
+  "score": 1.0,
+  "triples": [
+    "definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide vari",
+    "subclass of: gathering information",
+    "ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info",
+    "subclass of: purposeful mental activity",
+    "ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is",
+    "subclass of: work",
+    "ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occup",
+    "subclass of: information transfer",
+    "ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (info",
+    "subclass of: action (purposeful)",
+    "ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose",
+    "subclass of: conscious activity",
+    "ancestor definition: This is the collection of all activities which are performed in a state of consciousness, that is, the animal performing the action is not sleeping, i",
+    "subclass of: human activity",
+    "ancestor definition: Human activities \u2013 intentional, purposive, conscious and subjectively meaningful sequences of actions by people.",
+    "subclass of: event with both physical and mental components",
+    "ancestor definition: A specialization of AtLeastPartiallyMentalEvent. Each instance of CompositePhysicalAndMentalEvent is an event that involves some mental event(s), as w",
+    "has subclass: criminal investigation",
+    "has subclass: examination investigation",
+    "has subclass: investigating",
+    "has subclass: scrutiny",
+    "has subclass: witch hunt",
+    "sibling concept: analysing",
+    "sibling concept: business intelligence",
+    "sibling concept: counter-intelligence",
+    "sibling concept: lookup",
+    "sibling concept: exploring"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: investigation. Relevant Logical Facts:   - definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide vari   - subclass of: gathering information   - ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info   - subclass of: purposeful mental activity   - ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is   - subclass of: work   - ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occup   - subclass of: information transfer   - ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (info   - subclass of: action (purposeful)   - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose   - subclass of: conscious activity   - ancestor definition: This is the collection of all activities which are performed in a state of consciousness, that is, the animal performing the action is not sleeping, i   - subclass of: human activity   - ancestor definition: Human activities – intentional, purposive, conscious and subjectively meaningful sequences of actions by people.   - subclass of: event with both physical and mental components   - ancestor definition: A specialization of AtLeastPartiallyMentalEvent. Each instance of CompositePhysicalAndMentalEvent is an event that involves some mental event(s), as w   - has subclass: criminal investigation   - has subclass: examination investigation   - has subclass: investigating   - has subclass: scrutiny   - has subclass: witch hunt   - sibling concept: analysing   - sibling concept: business intelligence   - sibling concept: counter-intelligence   - sibling concept: lookup   - sibling concept: exploring
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+A. measuring the amount of fatigue 
+
+Measuring fatigue would be difficult to replicate because it is a subjective experience and can vary greatly from person to person, making it challenging for Janette or Carmen to accurately quantify and compare their results.
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 8 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chronic fatigue syndrome",
+  "uri": "http://kbpedia.org/kko/rc/ChronicFatigueSyndrome",
+  "score": 1.0,
+  "triples": [
+    "definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical communit",
+    "subclass of: chronic condition",
+    "ancestor definition: A collection of ailments. An instance of ChronicCondition is an ailment that lingers or recurs in an organism throughout its life. In some cases, the ",
+    "subclass of: medical condition",
+    "ancestor definition: A specialization of #$SystemCondition. Each instance of PhysiologicalCondition involves an Organism_Whole being in some physiological state that is no",
+    "subclass of: abnormal condition",
+    "ancestor definition: This is the collection of #$SystemConditions which are abnormal for the system they affect -- for instance, a computer during reboot, or a human body ",
+    "subclass of: facet collection",
+    "ancestor definition: A CollectionType. Each instance of FacetInstanceCollection is a collection that is an instance of a FacetingCollectionType (q.v.). For example, the fa",
+    "subclass of: situation involving tangible things",
+    "ancestor definition: A specialization of Situation_Localized. Each instance of PhysicalSituation is a spatially localized situation involving one or more physical objects ",
+    "sibling concept: Amyotrophic lateral sclerosis",
+    "sibling concept: Marie Strumpell arthritis",
+    "sibling concept: arthritis",
+    "sibling concept: case of autism",
+    "sibling concept: chronic lung disease"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: chronic fatigue syndrome. Relevant Logical Facts:  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical communit  - subclass of: chronic condition  - ancestor definition: A collection of ailments. An instance of ChronicCondition is an ailment that lingers or recurs in an organism throughout its life. In some cases, the  - subclass of: medical condition  - ancestor definition: A specialization of #$SystemCondition. Each instance of PhysiologicalCondition involves an Organism_Whole being in some physiological state that is no  - subclass of: abnormal condition  - ancestor definition: This is the collection of #$SystemConditions which are abnormal for the system they affect -- for instance, a computer during reboot, or a human body  - subclass of: facet collection  - ancestor definition: A CollectionType. Each instance of FacetInstanceCollection is a collection that is an instance of a FacetingCollectionType (q.v.). For example, the fa  - subclass of: situation involving tangible things  - ancestor definition: A specialization of Situation_Localized. Each instance of PhysicalSituation is a spatially localized situation involving one or more physical objects  - sibling concept: Amyotrophic lateral sclerosis  - sibling concept: Marie Strumpell arthritis  - sibling concept: arthritis  - sibling concept: case of autism  - sibling concept: chronic lung disease
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "breakfast food",
+  "uri": "http://kbpedia.org/kko/rc/BreakfastFood",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.",
+    "subclass of: food item",
+    "ancestor definition: An instance of ExistingStuffType, and a specialization of FoodOrDrink. Each instance of Food is a particular portion of food of a type which can be, a",
+    "subclass of: food beverage or tobacco product",
+    "ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers food beverage and toba",
+    "subclass of: food or drink",
+    "ancestor definition: A specialization of EdibleStuff (q.v.). Each instance of FoodOrDrink is a substance which instances of some type of organism (that is, some sub-collec",
+    "subclass of: grocery",
+    "ancestor definition: An element of ProductTypeByMarketCategory. Each element of GroceryMarketCategory is a food product typically sold in grocery stores or grocery departm",
+    "subclass of: opaque thing",
+    "ancestor definition: Opaque is a #$PhysicalAttribute representing a specific degree of #$Transparency. Opaque objects do not transmit light. See also transparencyOfObject.",
+    "subclass of: organic matter",
+    "ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of ",
+    "subclass of: market category",
+    "ancestor definition: A collection of collections. Each element of ProductTypeByMarketCategory is a collection of items that are commonly offered for sale in the same (type",
+    "subclass of: visible feature",
+    "ancestor definition: A type of feature that is defined by and visible in nature.",
+    "has subclass: breakfast",
+    "has subclass: cereal (breakfast food)",
+    "has subclass: doughnut",
+    "has subclass: chicken's egg",
+    "has subclass: flapjack",
+    "has subclass: omelette",
+    "has subclass: pancake",
+    "has subclass: waffle",
+    "sibling concept: cereal (food)",
+    "sibling concept: cheesy food",
+    "sibling concept: children's food",
+    "sibling concept: convenience food",
+    "sibling concept: crumb"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: breakfast food. Relevant Logical Facts:  - definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.  - subclass of: food item  - ancestor definition: An instance of ExistingStuffType, and a specialization of FoodOrDrink. Each instance of Food is a particular portion of food of a type which can be, a  - subclass of: food beverage or tobacco product  - ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers food beverage and toba  - subclass of: food or drink  - ancestor definition: A specialization of EdibleStuff (q.v.). Each instance of FoodOrDrink is a substance which instances of some type of organism (that is, some sub-collec  - subclass of: grocery  - ancestor definition: An element of ProductTypeByMarketCategory. Each element of GroceryMarketCategory is a food product typically sold in grocery stores or grocery departm  - subclass of: opaque thing  - ancestor definition: Opaque is a #$PhysicalAttribute representing a specific degree of #$Transparency. Opaque objects do not transmit light. See also transparencyOfObject.  - subclass of: organic matter  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of  - subclass of: market category  - ancestor definition: A collection of collections. Each element of ProductTypeByMarketCategory is a collection of items that are commonly offered for sale in the same (type  - subclass of: visible feature  - ancestor definition: A type of feature that is defined by and visible in nature.  - has subclass: breakfast  - has subclass: cereal (breakfast food)  - has subclass: doughnut  - has subclass: chicken's egg  - has subclass: flapjack  - has subclass: omelette  - has subclass: pancake  - has subclass: waffle  - sibling concept: cereal (food)  - sibling concept: cheesy food  - sibling concept: children's food  - sibling concept: convenience food  - sibling concept: crumb
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "financial chart",
+  "uri": "http://kbpedia.org/kko/rc/FinancialChart",
+  "score": 1.0,
+  "triples": [
+    "definition: A chart of finance or stock performance.",
+    "subclass of: technical analysis",
+    "ancestor definition: The collection of all technical analysis. A type of FollowingAStandardProcedure and Evaluating.",
+    "subclass of: evaluating",
+    "ancestor definition: A specialization of PurposefulAction and Thinking. Each instance of this collection is an event in which at least one agent evaluates some real-world ",
+    "subclass of: following standard procedures",
+    "ancestor definition: The collection of all events in which the performer of the event follows a standarized procedure which the agent knows prior to performing the event. ",
+    "subclass of: action (purposeful)",
+    "ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose",
+    "subclass of: thinking",
+    "ancestor definition: A specialization of IntentionalMentalEvent. Each instance of this collection is a thinking process in which it is essential that an agent uses informa",
+    "sibling concept: candlestick patter",
+    "sibling concept: chart overlay",
+    "sibling concept: chart pattern",
+    "sibling concept: technical indicator"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: financial chart. Relevant Logical Facts:  - definition: A chart of finance or stock performance.  - subclass of: technical analysis  - ancestor definition: The collection of all technical analysis. A type of FollowingAStandardProcedure and Evaluating.  - subclass of: evaluating  - ancestor definition: A specialization of PurposefulAction and Thinking. Each instance of this collection is an event in which at least one agent evaluates some real-world  - subclass of: following standard procedures  - ancestor definition: The collection of all events in which the performer of the event follows a standarized procedure which the agent knows prior to performing the event.  - subclass of: action (purposeful)  - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose  - subclass of: thinking  - ancestor definition: A specialization of IntentionalMentalEvent. Each instance of this collection is a thinking process in which it is essential that an agent uses informa  - sibling concept: candlestick patter  - sibling concept: chart overlay  - sibling concept: chart pattern  - sibling concept: technical indicator
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature",
+  "uri": "http://kbpedia.org/kko/rc/Temperature",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \"hotness\" -- or, more precisely, the potential for heat transfer -- that some tangible thing might have. An in",
+    "subclass of: non aspectual quantity",
+    "ancestor definition: A specialization of ScalarQuantity (q.v.). This is the collection of all \"non-aspectual\" quantities: those that can always be attributed to an object ",
+    "subclass of: one dimensional quantity",
+    "ancestor definition: A specialization of MeasurableQuantity (q.v.). Each instance of OneDimensionalQuantity is a measurable quantity that is not defined in terms of (i.e. ",
+    "subclass of: scalar or vector interval",
+    "ancestor definition: A specialization of TupleOfIntervals (q.v.). ScalarOrVectorInterval is the collection of all measurable intervals, whether scalar or vector. It thus i",
+    "subclass of: tangible physical quantity",
+    "ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have. Specializati",
+    "subclass of: quality",
+    "ancestor definition: An internal characteristic or aspect of an object; collectively these define intensionally what kind of thing to which the object belongs, though that",
+    "subclass of: scalar quantity",
+    "ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This",
+    "subclass of: measurable quantity",
+    "ancestor definition: A specialization of Quantity (q.v.). This is the collection of quantities that have a numeric component and could actually be used to measure somethin",
+    "subclass of: n-tuple interval",
+    "ancestor definition: A specialization of Tuple (q.v.). Each instance of TupleOfIntervals is a tuple whose members (see memberOfTuple) are all ScalarIntervals (q.v.). Notab",
+    "has subclass: absolute zero",
+    "has subclass: cold",
+    "has subclass: moderately cold",
+    "has subclass: room temperature",
+    "has subclass: sea surface temperature",
+    "has subclass: temperature control",
+    "has subclass: thermal protection",
+    "has subclass: thermoregulation",
+    "has subclass: threshold temperature",
+    "has subclass: warmth",
+    "sibling concept: area",
+    "sibling concept: beauty",
+    "sibling concept: biodiversity",
+    "sibling concept: cask strength",
+    "sibling concept: chemical purity"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: temperature. Relevant Logical Facts:  - definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of "hotness" -- or, more precisely, the potential for heat transfer -- that some tangible thing might have. An in  - subclass of: non aspectual quantity  - ancestor definition: A specialization of ScalarQuantity (q.v.). This is the collection of all "non-aspectual" quantities: those that can always be attributed to an object  - subclass of: one dimensional quantity  - ancestor definition: A specialization of MeasurableQuantity (q.v.). Each instance of OneDimensionalQuantity is a measurable quantity that is not defined in terms of (i.e.  - subclass of: scalar or vector interval  - ancestor definition: A specialization of TupleOfIntervals (q.v.). ScalarOrVectorInterval is the collection of all measurable intervals, whether scalar or vector. It thus i  - subclass of: tangible physical quantity  - ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have. Specializati  - subclass of: quality  - ancestor definition: An internal characteristic or aspect of an object; collectively these define intensionally what kind of thing to which the object belongs, though that  - subclass of: scalar quantity  - ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This  - subclass of: measurable quantity  - ancestor definition: A specialization of Quantity (q.v.). This is the collection of quantities that have a numeric component and could actually be used to measure somethin  - subclass of: n-tuple interval  - ancestor definition: A specialization of Tuple (q.v.). Each instance of TupleOfIntervals is a tuple whose members (see memberOfTuple) are all ScalarIntervals (q.v.). Notab  - has subclass: absolute zero  - has subclass: cold  - has subclass: moderately cold  - has subclass: room temperature  - has subclass: sea surface temperature  - has subclass: temperature control  - has subclass: thermal protection  - has subclass: thermoregulation  - has subclass: threshold temperature  - has subclass: warmth  - sibling concept: area  - sibling concept: beauty  - sibling concept: biodiversity  - sibling concept: cask strength  - sibling concept: chemical purity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "investigation",
+  "uri": "http://kbpedia.org/kko/rc/Investigation",
+  "score": 1.0,
+  "triples": [
+    "definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide vari",
+    "subclass of: gathering information",
+    "ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info",
+    "subclass of: purposeful mental activity",
+    "ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is",
+    "subclass of: work",
+    "ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occup",
+    "subclass of: information transfer",
+    "ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (info",
+    "subclass of: action (purposeful)",
+    "ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose",
+    "subclass of: conscious activity",
+    "ancestor definition: This is the collection of all activities which are performed in a state of consciousness, that is, the animal performing the action is not sleeping, i",
+    "subclass of: human activity",
+    "ancestor definition: Human activities \u2013 intentional, purposive, conscious and subjectively meaningful sequences of actions by people.",
+    "subclass of: event with both physical and mental components",
+    "ancestor definition: A specialization of AtLeastPartiallyMentalEvent. Each instance of CompositePhysicalAndMentalEvent is an event that involves some mental event(s), as w",
+    "has subclass: criminal investigation",
+    "has subclass: examination investigation",
+    "has subclass: investigating",
+    "has subclass: scrutiny",
+    "has subclass: witch hunt",
+    "sibling concept: analysing",
+    "sibling concept: business intelligence",
+    "sibling concept: counter-intelligence",
+    "sibling concept: lookup",
+    "sibling concept: exploring"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: investigation. Relevant Logical Facts:  - definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide vari  - subclass of: gathering information  - ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers info  - subclass of: purposeful mental activity  - ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is  - subclass of: work  - ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occup  - subclass of: information transfer  - ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (info  - subclass of: action (purposeful)  - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purpose  - subclass of: conscious activity  - ancestor definition: This is the collection of all activities which are performed in a state of consciousness, that is, the animal performing the action is not sleeping, i  - subclass of: human activity  - ancestor definition: Human activities – intentional, purposive, conscious and subjectively meaningful sequences of actions by people.  - subclass of: event with both physical and mental components  - ancestor definition: A specialization of AtLeastPartiallyMentalEvent. Each instance of CompositePhysicalAndMentalEvent is an event that involves some mental event(s), as w  - has subclass: criminal investigation  - has subclass: examination investigation  - has subclass: investigating  - has subclass: scrutiny  - has subclass: witch hunt  - sibling concept: analysing  - sibling concept: business intelligence  - sibling concept: counter-intelligence  - sibling concept: lookup  - sibling concept: exploring
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6916294097900391,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.6916] Janette conducts an investigation to see which foods make her feel more fatigued.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6824436187744141,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+[Item 7]
+[Chunk Score: 0.6824] She eats one of four different foods each day at the same time for four days and then records how she feels.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.673004150390625,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+[Item 8]
+[Chunk Score: 0.6730] She asks her friend Carmen to do the same investigation to see if she gets similar results.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Janette conducts an investigation to determine which foods make her feel more fatigued, a condition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.
+2. ChronicFatigueSyndrome is an AilmentCondition with unknown cause.
+3. The clinical community has not identified any specific factors that contribute to the development of this disease.
+4. Janette eats one of four different foods each day at the same time for four days, a controlled environment designed to isolate variables and minimize external influences on her condition.
+5. She records how she feels after eating each food, providing subjective data about her physical state in relation to specific dietary choices.
+6. Carmen replicates Janette's investigation by following an identical protocol with the goal of verifying or refuting similar results.
+7. The success of this replication depends on maintaining consistency across multiple variables: time, environment, and measurement methods.
+8. Measuring fatigue is a subjective task that relies heavily on individual perception and reporting accuracy.
+9. Recording observations in the same chart allows for direct comparison between Janette's data and Carmen's findings, facilitating analysis and interpretation.
+10. Maintaining identical food preparation conditions (e.g., temperature) would be crucial to ensure accurate replication of results.
+
+Note: These logical building blocks focus on bridging the premise to answer by highlighting key aspects relevant to replicating an investigation focused on determining which foods contribute to fatigue in individuals with ChronicFatigueSyndrome.
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 8 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "trench",
+  "uri": "http://kbpedia.org/kko/rc/Trench",
+  "score": 1.0,
+  "triples": [
+    "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple",
+    "subclass of: topographical feature"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: trench. Relevant Logical Facts:   - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple   - subclass of: topographical feature
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rift valley",
+  "uri": "http://kbpedia.org/kko/rc/RiftValley",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.",
+    "subclass of: land topographical feature",
+    "ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: rift valley. Relevant Logical Facts:   - definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.   - subclass of: land topographical feature   - ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Lake Nyasa",
+  "uri": "http://kbpedia.org/kko/rc/LakeNyasa",
+  "score": 1.0,
+  "triples": [
+    "definition: Lake in the Great Rift Valley.",
+    "subclass of: fresh-water lake",
+    "ancestor definition: A specialization of BodyOfWater. Each instance of FreshWaterLake is a freshwater land-locked body of water."
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: Lake Nyasa. Relevant Logical Facts:   - definition: Lake in the Great Rift Valley.   - subclass of: fresh-water lake   - ancestor definition: A specialization of BodyOfWater. Each instance of FreshWaterLake is a freshwater land-locked body of water.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "basin",
+  "uri": "http://kbpedia.org/kko/rc/Basin",
+  "score": 1.0,
+  "triples": [
+    "definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids.",
+    "subclass of: walled cavity",
+    "ancestor definition: An instance of CollectionType, and a specialization of FixedOrderCollection."
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: basin. Relevant Logical Facts:   - definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids.   - subclass of: walled cavity   - ancestor definition: An instance of CollectionType, and a specialization of FixedOrderCollection.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "oceanic ridge",
+  "uri": "http://kbpedia.org/kko/rc/OceanicRidge",
+  "score": 1.0,
+  "triples": [
+    "definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine.",
+    "subclass of: plate tectonics"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: oceanic ridge. Relevant Logical Facts:   - definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine.   - subclass of: plate tectonics
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.60479736328125,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+
+[Chunk 6 | Score: 0.6048]
+She asks her friend Carmen to do the same investigation to see if she gets similar results.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.5930976867675781,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+
+[Chunk 7 | Score: 0.5931]
+She eats one of four different foods each day at the same time for four days and then records how she feels.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.5887050628662109,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+
+[Chunk 8 | Score: 0.5887]
+Janette conducts an investigation to see which foods make her feel more fatigued.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+D. mid-ocean ridge 
+
+This is because a mid-ocean ridge forms as a result of tectonic plates diverging, creating new oceanic crust by volcanic activity and the upwelling of mantle material. This process occurs at the boundary between two moving tectonic plates that are pulling apart from each other.
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "trench",
+  "uri": "http://kbpedia.org/kko/rc/Trench",
+  "score": 1.0,
+  "triples": [
+    "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple",
+    "subclass of: topographical feature"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: trench. Relevant Logical Facts:  - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple  - subclass of: topographical feature
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rift valley",
+  "uri": "http://kbpedia.org/kko/rc/RiftValley",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.",
+    "subclass of: land topographical feature",
+    "ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: rift valley. Relevant Logical Facts:  - definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.  - subclass of: land topographical feature  - ancestor definition: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed bl
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Lake Nyasa",
+  "uri": "http://kbpedia.org/kko/rc/LakeNyasa",
+  "score": 1.0,
+  "triples": [
+    "definition: Lake in the Great Rift Valley.",
+    "subclass of: fresh-water lake",
+    "ancestor definition: A specialization of BodyOfWater. Each instance of FreshWaterLake is a freshwater land-locked body of water."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: Lake Nyasa. Relevant Logical Facts:  - definition: Lake in the Great Rift Valley.  - subclass of: fresh-water lake  - ancestor definition: A specialization of BodyOfWater. Each instance of FreshWaterLake is a freshwater land-locked body of water.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "basin",
+  "uri": "http://kbpedia.org/kko/rc/Basin",
+  "score": 1.0,
+  "triples": [
+    "definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids.",
+    "subclass of: walled cavity",
+    "ancestor definition: An instance of CollectionType, and a specialization of FixedOrderCollection."
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: basin. Relevant Logical Facts:  - definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids.  - subclass of: walled cavity  - ancestor definition: An instance of CollectionType, and a specialization of FixedOrderCollection.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "oceanic ridge",
+  "uri": "http://kbpedia.org/kko/rc/OceanicRidge",
+  "score": 1.0,
+  "triples": [
+    "definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine.",
+    "subclass of: plate tectonics"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: oceanic ridge. Relevant Logical Facts:  - definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine.  - subclass of: plate tectonics
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Tectonic plates can diverge or move apart from each other.
+2. When two tectonic plates diverge, they create an area where the Earth's crust is being pulled apart.
+3. A rift valley forms as a result of tectonic plates pulling away from each other and creating normal faults on both sides.
+4. An ocean basin can form when one or more continents are separated by moving apart due to plate divergence.
+5. Mid-ocean ridges also form at the boundary between two diverging tectonic plates, where new crust is being created through volcanic activity.
+6. A trench forms as a result of subduction (one plate diving under another), not just from plate divergence.
+7. Trenches are typically associated with convergent or transform boundaries rather than divergent ones.
+8. Divergence between tectonic plates can lead to the creation of new oceanic crust at mid-ocean ridges, but it does not directly form trenches.
+9. Rift valleys and ocean basins often occur together as a result of plate divergence.
+10. The formation process for each geological feature is distinct: rift valley (normal faults), ocean basin (crust separation), mid-ocean ridge (new crust creation).
+==================================================
+==================================================
+ QUERY: A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "water clock",
+  "uri": "http://kbpedia.org/kko/rc/WaterClock",
+  "score": 1.0,
+  "triples": [
+    "definition: A water clock or clepsydra (Greek \u03ba\u03bb\u03b5\u03c8\u03cd\u03b4\u03c1\u03b1 from \u03ba\u03bb\u03ad\u03c0\u03c4\u03b5\u03b9\u03bd kleptein, 'to steal'; \u1f55\u03b4\u03c9\u03c1 hydor, 'water') is any timepiece in which time is measured by the regulated flow of liquid into (inflow type) or out",
+    "subclass of: clock"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: water clock. Relevant Logical Facts:   - definition: A water clock or clepsydra (Greek κλεψύδρα from κλέπτειν kleptein, 'to steal'; ὕδωρ hydor, 'water') is any timepiece in which time is measured by the regulated flow of liquid into (inflow type) or out   - subclass of: clock
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "light forest",
+  "uri": "http://kbpedia.org/kko/rc/LightForest",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all Forests whose tree growth may be said to be light. This means there is a greater amount of space in between the trees as compared to other forests, see also HeavyForest.",
+    "subclass of: biome",
+    "ancestor definition: A specialization of GeographicalRegion."
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: light forest. Relevant Logical Facts:   - definition: The collection of all Forests whose tree growth may be said to be light. This means there is a greater amount of space in between the trees as compared to other forests, see also HeavyForest.   - subclass of: biome   - ancestor definition: A specialization of GeographicalRegion.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "region type by soil type USCS",
+  "uri": "http://kbpedia.org/kko/rc/RegionTypeBySoilType-USCS",
+  "score": 1.0,
+  "triples": [
+    "definition: A collection of collections. Each instance of RegionTypeBySoilType_USCS is collection of GeographicalRegions having a common fundamental soil type, applying the categories used by UnifiedSoilClassific",
+    "subclass of: region types"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: region type by soil type USCS. Relevant Logical Facts:   - definition: A collection of collections. Each instance of RegionTypeBySoilType_USCS is collection of GeographicalRegions having a common fundamental soil type, applying the categories used by UnifiedSoilClassific   - subclass of: region types
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "grass seed",
+  "uri": "http://kbpedia.org/kko/rc/GrassSeed",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all grass seeds. A type of Seed and ExternalAnatomicalPart.",
+    "subclass of: external anatomical part"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: grass seed. Relevant Logical Facts:   - definition: The collection of all grass seeds. A type of Seed and ExternalAnatomicalPart.   - subclass of: external anatomical part
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "castor bean seed",
+  "uri": "http://kbpedia.org/kko/rc/CastorBeanSeed",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all castor bean seeds. A type of Seed and ToxicSubstance."
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: castor bean seed. Relevant Logical Facts:   - definition: The collection of all castor bean seeds. A type of Seed and ToxicSubstance.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+B. amount of light 
+
+The two pots differ in the location, with one near a sunny window and the other in a closet, indicating that the factor different for the two pots is the amount of light they receive.
+==================================================
+==================================================
+ QUERY: Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "water clock",
+  "uri": "http://kbpedia.org/kko/rc/WaterClock",
+  "score": 1.0,
+  "triples": [
+    "definition: A water clock or clepsydra (Greek \u03ba\u03bb\u03b5\u03c8\u03cd\u03b4\u03c1\u03b1 from \u03ba\u03bb\u03ad\u03c0\u03c4\u03b5\u03b9\u03bd kleptein, 'to steal'; \u1f55\u03b4\u03c9\u03c1 hydor, 'water') is any timepiece in which time is measured by the regulated flow of liquid into (inflow type) or out",
+    "subclass of: clock"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: water clock. Relevant Logical Facts:  - definition: A water clock or clepsydra (Greek κλεψύδρα from κλέπτειν kleptein, 'to steal'; ὕδωρ hydor, 'water') is any timepiece in which time is measured by the regulated flow of liquid into (inflow type) or out  - subclass of: clock
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "light forest",
+  "uri": "http://kbpedia.org/kko/rc/LightForest",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all Forests whose tree growth may be said to be light. This means there is a greater amount of space in between the trees as compared to other forests, see also HeavyForest.",
+    "subclass of: biome",
+    "ancestor definition: A specialization of GeographicalRegion."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: light forest. Relevant Logical Facts:  - definition: The collection of all Forests whose tree growth may be said to be light. This means there is a greater amount of space in between the trees as compared to other forests, see also HeavyForest.  - subclass of: biome  - ancestor definition: A specialization of GeographicalRegion.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "region type by soil type USCS",
+  "uri": "http://kbpedia.org/kko/rc/RegionTypeBySoilType-USCS",
+  "score": 1.0,
+  "triples": [
+    "definition: A collection of collections. Each instance of RegionTypeBySoilType_USCS is collection of GeographicalRegions having a common fundamental soil type, applying the categories used by UnifiedSoilClassific",
+    "subclass of: region types"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: region type by soil type USCS. Relevant Logical Facts:  - definition: A collection of collections. Each instance of RegionTypeBySoilType_USCS is collection of GeographicalRegions having a common fundamental soil type, applying the categories used by UnifiedSoilClassific  - subclass of: region types
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "grass seed",
+  "uri": "http://kbpedia.org/kko/rc/GrassSeed",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all grass seeds. A type of Seed and ExternalAnatomicalPart.",
+    "subclass of: external anatomical part"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: grass seed. Relevant Logical Facts:  - definition: The collection of all grass seeds. A type of Seed and ExternalAnatomicalPart.  - subclass of: external anatomical part
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7230682373046875,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "A student planted two bean seeds in two identical pots containing the same type of soil."
+    }
+  ]
+}
+[Item 5]
+[Chunk Score: 0.7231] A student planted two bean seeds in two identical pots containing the same type of soil.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6688995361328125,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Each day, he poured 15 milliliters of water into each pot."
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.6689] Each day, he poured 15 milliliters of water into each pot.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6407279968261719,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "He placed one pot in a closet and the other near a sunny window."
+    }
+  ]
+}
+[Item 7]
+[Chunk Score: 0.6407] He placed one pot in a closet and the other near a sunny window.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. A student planted two bean seeds in two identical pots containing the same type of soil.
+2. Each day, he poured 15 milliliters of water into each pot.
+3. He placed one pot in a closet and the other near a sunny window.
+4. The amount of light is different for the two pots (one is in a closet, the other is near a sunny window).
+5. Light affects plant growth.
+6. Plant seeds require adequate light to grow.
+7. Adequate water was provided to both pots daily.
+8. Soil type and seed type were identical for both pots.
+9. The only variable that differs between the two pots is the amount of light they receive.
+
+Note: I added a universally accepted truth as the "missing link" (item 5) since it's not explicitly mentioned in the context but necessary to bridge the premise to the answer.
+==================================================
+==================================================
+ QUERY: Many endangered animals are captured, tagged, and then released back into their environment. The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body. Which is the most likely reason to tag an animal?
+A. to monitor their eating habits
+B. to monitor their roaming habits
+C. to monitor their sleeping habits
+D. to monitor their reproductive habits
+==================================================
+
+--- RETRIEVED CONTEXT (Top 8 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Eating behavior",
+  "uri": "http://kbpedia.org/kko/rc/EatingBehavior",
+  "score": 1.0,
+  "triples": [
+    "definition: Any eating behavior.",
+    "subclass of: ethology",
+    "ancestor definition: Ethology is the scientific and objective study of animal behaviour, usually with a focus on behaviour under natural conditions, and viewing behaviour"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: Eating behavior. Relevant Logical Facts:   - definition: Any eating behavior.   - subclass of: ethology   - ancestor definition: Ethology is the scientific and objective study of animal behaviour, usually with a focus on behaviour under natural conditions, and viewing behaviour
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "sleeping",
+  "uri": "http://kbpedia.org/kko/rc/Sleeping",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all Sleeping events, i.e., natural processes in which an Animal engages in some unconscious mental activity coupled with physical rest. Sleeping is a subcollection of BodilyFunctionE",
+    "subclass of: involuntary bodily function",
+    "ancestor definition: A specialization of BodilyFunctionEvent. Each specialization of BodilyFunctionEvent_Involuntary is a type of event each instance of which is done with",
+    "subclass of: relaxing",
+    "ancestor definition: The collection of events in which an animal abstains from strenuous physical activity.",
+    "subclass of: organic event",
+    "ancestor definition: A specialization of BiologicalProcess (q.v.) instances of which are non-deliberately \"done by\" biological organisms. Each instance of BiologicalEvent ",
+    "subclass of: bodily function event",
+    "ancestor definition: A specialization of both AnimalActivity and PhysiologicalProcess. Each specialization of BodilyFunctionEvent is a type of action done by an animal tha",
+    "subclass of: Event Attributes",
+    "ancestor definition: A specialized organization of attributes that aggregate existing KBpedia events that might be one of the characteristics of entities. This concept is ",
+    "subclass of: action performed by animals",
+    "ancestor definition: A specialization of Action. Each instance of AnimalActivity is a spatially-localized action, each of whose \"doers\" (see doneBy) is either an Animal or",
+    "subclass of: physiological process",
+    "ancestor definition: The collection of events in which an organism does (typically unconsciously) some process which involves alteration of that agent's physiological stat",
+    "subclass of: action with only one performer",
+    "ancestor definition: A specialization of Action. Each instance of SingleDoerAction is an action which can have only one \"doer\" (see the predicate doneBy). Such actions may",
+    "has subclass: circadian rhythm",
+    "has subclass: estivating",
+    "has subclass: holing up",
+    "has subclass: hypnotics",
+    "has subclass: oversleeping",
+    "has subclass: abnormal sleep pattern",
+    "has subclass: sleeplessness and sleep deprivation",
+    "has subclass: taking a nap",
+    "sibling concept: biomineralization",
+    "sibling concept: action of bleeding",
+    "sibling concept: blushing",
+    "sibling concept: bone formation",
+    "sibling concept: digesting"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: sleeping. Relevant Logical Facts:   - definition: The collection of all Sleeping events, i.e., natural processes in which an Animal engages in some unconscious mental activity coupled with physical rest. Sleeping is a subcollection of BodilyFunctionE   - subclass of: involuntary bodily function   - ancestor definition: A specialization of BodilyFunctionEvent. Each specialization of BodilyFunctionEvent_Involuntary is a type of event each instance of which is done with   - subclass of: relaxing   - ancestor definition: The collection of events in which an animal abstains from strenuous physical activity.   - subclass of: organic event   - ancestor definition: A specialization of BiologicalProcess (q.v.) instances of which are non-deliberately "done by" biological organisms. Each instance of BiologicalEvent    - subclass of: bodily function event   - ancestor definition: A specialization of both AnimalActivity and PhysiologicalProcess. Each specialization of BodilyFunctionEvent is a type of action done by an animal tha   - subclass of: Event Attributes   - ancestor definition: A specialized organization of attributes that aggregate existing KBpedia events that might be one of the characteristics of entities. This concept is    - subclass of: action performed by animals   - ancestor definition: A specialization of Action. Each instance of AnimalActivity is a spatially-localized action, each of whose "doers" (see doneBy) is either an Animal or   - subclass of: physiological process   - ancestor definition: The collection of events in which an organism does (typically unconsciously) some process which involves alteration of that agent's physiological stat   - subclass of: action with only one performer   - ancestor definition: A specialization of Action. Each instance of SingleDoerAction is an action which can have only one "doer" (see the predicate doneBy). Such actions may   - has subclass: circadian rhythm   - has subclass: estivating   - has subclass: holing up   - has subclass: hypnotics   - has subclass: oversleeping   - has subclass: abnormal sleep pattern   - has subclass: sleeplessness and sleep deprivation   - has subclass: taking a nap   - sibling concept: biomineralization   - sibling concept: action of bleeding   - sibling concept: blushing   - sibling concept: bone formation   - sibling concept: digesting
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reproductive ecology",
+  "uri": "http://kbpedia.org/kko/rc/ReproductiveEcology",
+  "score": 1.0,
+  "triples": [
+    "definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism\u2019s reproductive system to ecological variables.",
+    "subclass of: subfield of ecology",
+    "ancestor definition: A subfield of ecology.",
+    "subclass of: ecology",
+    "ancestor definition: The study of the interrelationships between organisms and their physical environment.",
+    "subclass of: subfield",
+    "ancestor definition: A subfield is an area of research and study within a field of study or academic discipline.",
+    "subclass of: environmental studies",
+    "ancestor definition: This is a fairly broad collection of scientific and quasi-scientific disciplines having in common a concern about the state of the environment. This c",
+    "subclass of: descendant",
+    "ancestor definition: A simple relationship where object (B) is a direct child or parent or subsumption (hyponym) or supersumption (hypernym) to subject (A).",
+    "subclass of: field of study",
+    "ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h",
+    "sibling concept: chemical ecology",
+    "sibling concept: forest ecology",
+    "sibling concept: freshwater ecology",
+    "sibling concept: industrial ecology",
+    "sibling concept: insect ecology"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: reproductive ecology. Relevant Logical Facts:   - definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism’s reproductive system to ecological variables.   - subclass of: subfield of ecology   - ancestor definition: A subfield of ecology.   - subclass of: ecology   - ancestor definition: The study of the interrelationships between organisms and their physical environment.   - subclass of: subfield   - ancestor definition: A subfield is an area of research and study within a field of study or academic discipline.   - subclass of: environmental studies   - ancestor definition: This is a fairly broad collection of scientific and quasi-scientific disciplines having in common a concern about the state of the environment. This c   - subclass of: descendant   - ancestor definition: A simple relationship where object (B) is a direct child or parent or subsumption (hyponym) or supersumption (hypernym) to subject (A).   - subclass of: field of study   - ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h   - sibling concept: chemical ecology   - sibling concept: forest ecology   - sibling concept: freshwater ecology   - sibling concept: industrial ecology   - sibling concept: insect ecology
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reproductive endocrinologist",
+  "uri": "http://kbpedia.org/kko/rc/ReproductiveEndocrinologist",
+  "score": 1.0,
+  "triples": [
+    "definition: A reproductive endocrinologist is a doctor who specializes in diagnosing and treating disorders of the endoctrine system which interfere with reproductive capabilities.",
+    "subclass of: endocrinologist",
+    "ancestor definition: Endocrinologists are doctors who specialize in treatment of disorders of the endocrine system.",
+    "subclass of: doctor",
+    "ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation. Each instance of Doctor_Medical is a person with a certain type o",
+    "subclass of: licensed-professional",
+    "ancestor definition: The collection of instances of PersonWithOccupation that are licensed professionals, e.g., doctors and lawyers.",
+    "subclass of: medic",
+    "ancestor definition: A subcollection of MedicalCareProfessional. The instances of this collection are persons who are medically trained in some way or other including doct",
+    "subclass of: medical care professional",
+    "ancestor definition: A specialization of PersonWithOccupation. Each instance of MedicalCareProfessional is a person whose occupation principally involves medical care of p",
+    "subclass of: medical school graduate",
+    "ancestor definition: The collection of all medical school graduates. A type of degree granting institution graduate. \"(GraduateFn MedicalSchool)\" is an #$ExistenceDependen",
+    "subclass of: prescriber",
+    "ancestor definition: An instance of PersonTypeByActivity, and a specialization of MedicalCareProfessional. Each instance of Prescriber is a person who can prescribe medica",
+    "sibling concept: diabetes specialist",
+    "sibling concept: pediatric endocrinologist"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: reproductive endocrinologist. Relevant Logical Facts:   - definition: A reproductive endocrinologist is a doctor who specializes in diagnosing and treating disorders of the endoctrine system which interfere with reproductive capabilities.   - subclass of: endocrinologist   - ancestor definition: Endocrinologists are doctors who specialize in treatment of disorders of the endocrine system.   - subclass of: doctor   - ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation. Each instance of Doctor_Medical is a person with a certain type o   - subclass of: licensed-professional   - ancestor definition: The collection of instances of PersonWithOccupation that are licensed professionals, e.g., doctors and lawyers.   - subclass of: medic   - ancestor definition: A subcollection of MedicalCareProfessional. The instances of this collection are persons who are medically trained in some way or other including doct   - subclass of: medical care professional   - ancestor definition: A specialization of PersonWithOccupation. Each instance of MedicalCareProfessional is a person whose occupation principally involves medical care of p   - subclass of: medical school graduate   - ancestor definition: The collection of all medical school graduates. A type of degree granting institution graduate. "(GraduateFn MedicalSchool)" is an #$ExistenceDependen   - subclass of: prescriber   - ancestor definition: An instance of PersonTypeByActivity, and a specialization of MedicalCareProfessional. Each instance of Prescriber is a person who can prescribe medica   - sibling concept: diabetes specialist   - sibling concept: pediatric endocrinologist
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "endangered Athabaskan language",
+  "uri": "http://kbpedia.org/kko/rc/EndangeredAthabaskanLanguage",
+  "score": 1.0,
+  "triples": [
+    "definition: Endangered Athabaskan languages.",
+    "subclass of: Athabaskan language family",
+    "ancestor definition: Amerindian languages, generally of western North America",
+    "subclass of: Na-Dene language",
+    "ancestor definition: The collection of all the Na-Dene language family. A type of NaturalLanguage. NadeneLanguageFamily is a LanguageFamilyType.",
+    "subclass of: language family",
+    "ancestor definition: A language family is a group of languages related through descent from a common ancestor, called the proto-language of that family. The term 'family' ",
+    "sibling concept: Northern Athabaskan language",
+    "sibling concept: Pacific Coast Athabaskan language",
+    "sibling concept: Southern Athabaskan language"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: endangered Athabaskan language. Relevant Logical Facts:   - definition: Endangered Athabaskan languages.   - subclass of: Athabaskan language family   - ancestor definition: Amerindian languages, generally of western North America   - subclass of: Na-Dene language   - ancestor definition: The collection of all the Na-Dene language family. A type of NaturalLanguage. NadeneLanguageFamily is a LanguageFamilyType.   - subclass of: language family   - ancestor definition: A language family is a group of languages related through descent from a common ancestor, called the proto-language of that family. The term 'family'    - sibling concept: Northern Athabaskan language   - sibling concept: Pacific Coast Athabaskan language   - sibling concept: Southern Athabaskan language
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6585559844970703,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "A student planted two bean seeds in two identical pots containing the same type of soil."
+    }
+  ]
+}
+
+[Chunk 6 | Score: 0.6586]
+A student planted two bean seeds in two identical pots containing the same type of soil.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.5990028381347656,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Each day, he poured 15 milliliters of water into each pot."
+    }
+  ]
+}
+
+[Chunk 7 | Score: 0.5990]
+Each day, he poured 15 milliliters of water into each pot.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.5571861267089844,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "He placed one pot in a closet and the other near a sunny window."
+    }
+  ]
+}
+
+[Chunk 8 | Score: 0.5572]
+He placed one pot in a closet and the other near a sunny window.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+B. to monitor their roaming habits 
+
+The tags are likely used for tracking animal movement patterns or migration routes which is essential information for conservation efforts, especially when dealing with endangered species. This would be crucial data for understanding how animals move through different habitats and environments.
+==================================================
+==================================================
+ QUERY: Which is the most likely reason to tag an animal? A. to monitor their eating habits B. to monitor their roaming habits C. to monitor their sleeping habits D. to monitor their reproductive habits
+==================================================
+
+--- RETRIEVED CONTEXT (Top 7 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Eating behavior",
+  "uri": "http://kbpedia.org/kko/rc/EatingBehavior",
+  "score": 1.0,
+  "triples": [
+    "definition: Any eating behavior.",
+    "subclass of: ethology",
+    "ancestor definition: Ethology is the scientific and objective study of animal behaviour, usually with a focus on behaviour under natural conditions, and viewing behaviour"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: Eating behavior. Relevant Logical Facts:  - definition: Any eating behavior.  - subclass of: ethology  - ancestor definition: Ethology is the scientific and objective study of animal behaviour, usually with a focus on behaviour under natural conditions, and viewing behaviour
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "sleeping",
+  "uri": "http://kbpedia.org/kko/rc/Sleeping",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all Sleeping events, i.e., natural processes in which an Animal engages in some unconscious mental activity coupled with physical rest. Sleeping is a subcollection of BodilyFunctionE",
+    "subclass of: involuntary bodily function",
+    "ancestor definition: A specialization of BodilyFunctionEvent. Each specialization of BodilyFunctionEvent_Involuntary is a type of event each instance of which is done with",
+    "subclass of: relaxing",
+    "ancestor definition: The collection of events in which an animal abstains from strenuous physical activity.",
+    "subclass of: organic event",
+    "ancestor definition: A specialization of BiologicalProcess (q.v.) instances of which are non-deliberately \"done by\" biological organisms. Each instance of BiologicalEvent ",
+    "subclass of: bodily function event",
+    "ancestor definition: A specialization of both AnimalActivity and PhysiologicalProcess. Each specialization of BodilyFunctionEvent is a type of action done by an animal tha",
+    "subclass of: Event Attributes",
+    "ancestor definition: A specialized organization of attributes that aggregate existing KBpedia events that might be one of the characteristics of entities. This concept is ",
+    "subclass of: action performed by animals",
+    "ancestor definition: A specialization of Action. Each instance of AnimalActivity is a spatially-localized action, each of whose \"doers\" (see doneBy) is either an Animal or",
+    "subclass of: physiological process",
+    "ancestor definition: The collection of events in which an organism does (typically unconsciously) some process which involves alteration of that agent's physiological stat",
+    "subclass of: action with only one performer",
+    "ancestor definition: A specialization of Action. Each instance of SingleDoerAction is an action which can have only one \"doer\" (see the predicate doneBy). Such actions may",
+    "has subclass: circadian rhythm",
+    "has subclass: estivating",
+    "has subclass: holing up",
+    "has subclass: hypnotics",
+    "has subclass: oversleeping",
+    "has subclass: abnormal sleep pattern",
+    "has subclass: sleeplessness and sleep deprivation",
+    "has subclass: taking a nap",
+    "sibling concept: biomineralization",
+    "sibling concept: action of bleeding",
+    "sibling concept: blushing",
+    "sibling concept: bone formation",
+    "sibling concept: digesting"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: sleeping. Relevant Logical Facts:  - definition: The collection of all Sleeping events, i.e., natural processes in which an Animal engages in some unconscious mental activity coupled with physical rest. Sleeping is a subcollection of BodilyFunctionE  - subclass of: involuntary bodily function  - ancestor definition: A specialization of BodilyFunctionEvent. Each specialization of BodilyFunctionEvent_Involuntary is a type of event each instance of which is done with  - subclass of: relaxing  - ancestor definition: The collection of events in which an animal abstains from strenuous physical activity.  - subclass of: organic event  - ancestor definition: A specialization of BiologicalProcess (q.v.) instances of which are non-deliberately "done by" biological organisms. Each instance of BiologicalEvent  - subclass of: bodily function event  - ancestor definition: A specialization of both AnimalActivity and PhysiologicalProcess. Each specialization of BodilyFunctionEvent is a type of action done by an animal tha  - subclass of: Event Attributes  - ancestor definition: A specialized organization of attributes that aggregate existing KBpedia events that might be one of the characteristics of entities. This concept is  - subclass of: action performed by animals  - ancestor definition: A specialization of Action. Each instance of AnimalActivity is a spatially-localized action, each of whose "doers" (see doneBy) is either an Animal or  - subclass of: physiological process  - ancestor definition: The collection of events in which an organism does (typically unconsciously) some process which involves alteration of that agent's physiological stat  - subclass of: action with only one performer  - ancestor definition: A specialization of Action. Each instance of SingleDoerAction is an action which can have only one "doer" (see the predicate doneBy). Such actions may  - has subclass: circadian rhythm  - has subclass: estivating  - has subclass: holing up  - has subclass: hypnotics  - has subclass: oversleeping  - has subclass: abnormal sleep pattern  - has subclass: sleeplessness and sleep deprivation  - has subclass: taking a nap  - sibling concept: biomineralization  - sibling concept: action of bleeding  - sibling concept: blushing  - sibling concept: bone formation  - sibling concept: digesting
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reproductive ecology",
+  "uri": "http://kbpedia.org/kko/rc/ReproductiveEcology",
+  "score": 1.0,
+  "triples": [
+    "definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism\u2019s reproductive system to ecological variables.",
+    "subclass of: subfield of ecology",
+    "ancestor definition: A subfield of ecology.",
+    "subclass of: ecology",
+    "ancestor definition: The study of the interrelationships between organisms and their physical environment.",
+    "subclass of: subfield",
+    "ancestor definition: A subfield is an area of research and study within a field of study or academic discipline.",
+    "subclass of: environmental studies",
+    "ancestor definition: This is a fairly broad collection of scientific and quasi-scientific disciplines having in common a concern about the state of the environment. This c",
+    "subclass of: descendant",
+    "ancestor definition: A simple relationship where object (B) is a direct child or parent or subsumption (hyponym) or supersumption (hypernym) to subject (A).",
+    "subclass of: field of study",
+    "ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h",
+    "sibling concept: chemical ecology",
+    "sibling concept: forest ecology",
+    "sibling concept: freshwater ecology",
+    "sibling concept: industrial ecology",
+    "sibling concept: insect ecology"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: reproductive ecology. Relevant Logical Facts:  - definition: Reproductive ecology is a relatively new subfield of evolutionary biology focusing on the responsiveness of the organism’s reproductive system to ecological variables.  - subclass of: subfield of ecology  - ancestor definition: A subfield of ecology.  - subclass of: ecology  - ancestor definition: The study of the interrelationships between organisms and their physical environment.  - subclass of: subfield  - ancestor definition: A subfield is an area of research and study within a field of study or academic discipline.  - subclass of: environmental studies  - ancestor definition: This is a fairly broad collection of scientific and quasi-scientific disciplines having in common a concern about the state of the environment. This c  - subclass of: descendant  - ancestor definition: A simple relationship where object (B) is a direct child or parent or subsumption (hyponym) or supersumption (hypernym) to subject (A).  - subclass of: field of study  - ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h  - sibling concept: chemical ecology  - sibling concept: forest ecology  - sibling concept: freshwater ecology  - sibling concept: industrial ecology  - sibling concept: insect ecology
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reproductive endocrinologist",
+  "uri": "http://kbpedia.org/kko/rc/ReproductiveEndocrinologist",
+  "score": 1.0,
+  "triples": [
+    "definition: A reproductive endocrinologist is a doctor who specializes in diagnosing and treating disorders of the endoctrine system which interfere with reproductive capabilities.",
+    "subclass of: endocrinologist",
+    "ancestor definition: Endocrinologists are doctors who specialize in treatment of disorders of the endocrine system.",
+    "subclass of: doctor",
+    "ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation. Each instance of Doctor_Medical is a person with a certain type o",
+    "subclass of: licensed-professional",
+    "ancestor definition: The collection of instances of PersonWithOccupation that are licensed professionals, e.g., doctors and lawyers.",
+    "subclass of: medic",
+    "ancestor definition: A subcollection of MedicalCareProfessional. The instances of this collection are persons who are medically trained in some way or other including doct",
+    "subclass of: medical care professional",
+    "ancestor definition: A specialization of PersonWithOccupation. Each instance of MedicalCareProfessional is a person whose occupation principally involves medical care of p",
+    "subclass of: medical school graduate",
+    "ancestor definition: The collection of all medical school graduates. A type of degree granting institution graduate. \"(GraduateFn MedicalSchool)\" is an #$ExistenceDependen",
+    "subclass of: prescriber",
+    "ancestor definition: An instance of PersonTypeByActivity, and a specialization of MedicalCareProfessional. Each instance of Prescriber is a person who can prescribe medica",
+    "sibling concept: diabetes specialist",
+    "sibling concept: pediatric endocrinologist"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: reproductive endocrinologist. Relevant Logical Facts:  - definition: A reproductive endocrinologist is a doctor who specializes in diagnosing and treating disorders of the endoctrine system which interfere with reproductive capabilities.  - subclass of: endocrinologist  - ancestor definition: Endocrinologists are doctors who specialize in treatment of disorders of the endocrine system.  - subclass of: doctor  - ancestor definition: An instance of PersonTypeByOccupation, and a specialization of PersonWithOccupation. Each instance of Doctor_Medical is a person with a certain type o  - subclass of: licensed-professional  - ancestor definition: The collection of instances of PersonWithOccupation that are licensed professionals, e.g., doctors and lawyers.  - subclass of: medic  - ancestor definition: A subcollection of MedicalCareProfessional. The instances of this collection are persons who are medically trained in some way or other including doct  - subclass of: medical care professional  - ancestor definition: A specialization of PersonWithOccupation. Each instance of MedicalCareProfessional is a person whose occupation principally involves medical care of p  - subclass of: medical school graduate  - ancestor definition: The collection of all medical school graduates. A type of degree granting institution graduate. "(GraduateFn MedicalSchool)" is an #$ExistenceDependen  - subclass of: prescriber  - ancestor definition: An instance of PersonTypeByActivity, and a specialization of MedicalCareProfessional. Each instance of Prescriber is a person who can prescribe medica  - sibling concept: diabetes specialist  - sibling concept: pediatric endocrinologist
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "animal killing",
+  "uri": "http://kbpedia.org/kko/rc/AnimalKilling",
+  "score": 1.0,
+  "triples": [
+    "definition: The killing of animals may refer to animal euthanasia (for pain relief), animal sacrifice (for a deity), animal slaughter (for food), hunting (for food, for sport, for fur and other animal products, e",
+    "subclass of: animal cruelty",
+    "ancestor definition: The mistreatment of an animal involved in the sports event.",
+    "subclass of: abuse",
+    "ancestor definition: Abuse is the improper usage or treatment of an entity, often to unfairly or improperly gain benefit. Abuse can come in many forms, such as: physical o",
+    "subclass of: harmed",
+    "ancestor definition: A specialization of ActionOnObject. Each instance of HarmingAnAgent is an event in which some agent is harmed, either physically or psychologically. N",
+    "subclass of: violent action",
+    "ancestor definition: A specialization of HostileSocialAction. Each instance of ViolentAction is a purposeful action of a type commonly considered violent -- generally beca",
+    "subclass of: action on an object",
+    "ancestor definition: A specialization of both Action and PhysicalEvent; the collection of physical events in which some doer acts on an object. Each instance of ActionOnOb",
+    "subclass of: impairing",
+    "ancestor definition: The act of incurring damage that reduces the functionality of the object.",
+    "has subclass: falconry",
+    "sibling concept: baiting (blood sport)",
+    "sibling concept: cockfighting",
+    "sibling concept: insect fighting"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: animal killing. Relevant Logical Facts:  - definition: The killing of animals may refer to animal euthanasia (for pain relief), animal sacrifice (for a deity), animal slaughter (for food), hunting (for food, for sport, for fur and other animal products, e  - subclass of: animal cruelty  - ancestor definition: The mistreatment of an animal involved in the sports event.  - subclass of: abuse  - ancestor definition: Abuse is the improper usage or treatment of an entity, often to unfairly or improperly gain benefit. Abuse can come in many forms, such as: physical o  - subclass of: harmed  - ancestor definition: A specialization of ActionOnObject. Each instance of HarmingAnAgent is an event in which some agent is harmed, either physically or psychologically. N  - subclass of: violent action  - ancestor definition: A specialization of HostileSocialAction. Each instance of ViolentAction is a purposeful action of a type commonly considered violent -- generally beca  - subclass of: action on an object  - ancestor definition: A specialization of both Action and PhysicalEvent; the collection of physical events in which some doer acts on an object. Each instance of ActionOnOb  - subclass of: impairing  - ancestor definition: The act of incurring damage that reduces the functionality of the object.  - has subclass: falconry  - sibling concept: baiting (blood sport)  - sibling concept: cockfighting  - sibling concept: insect fighting
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.7043819427490234,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Many endangered animals are captured, tagged, and then released back into their environment."
+    }
+  ]
+}
+[Item 6]
+[Chunk Score: 0.7044] Many endangered animals are captured, tagged, and then released back into their environment.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6805076599121094,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body."
+    }
+  ]
+}
+[Item 7]
+[Chunk Score: 0.6805] The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Many endangered animals are captured, tagged, and then released back into their environment.
+2. The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.
+3. Tagging an animal allows for monitoring its behavior in its natural habitat.
+4. Monitoring eating habits can provide valuable information about an animal's health and well-being.
+5. Eating behavior is defined as any eating behavior, which implies it involves consuming food.
+6. Consuming food requires physical activity to obtain or prepare the food, making roaming habits relevant.
+7. Roaming habits are essential for animals to find food, shelter, and potential mates.
+8. Monitoring reproductive habits can provide insights into an animal's ability to survive and thrive in its environment.
+
+Note: The list only includes 8 items as it is not possible to include more than 10 items according to the constraints provided.
+==================================================
+==================================================
+ QUERY: Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination. Which structural component of a cell is involved in such modification?
+A. endoplasmic reticulum
+B. lysosomes
+C. mitochondria
+D. Golgi apparatus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "endoplasmic reticulum",
+  "uri": "http://kbpedia.org/kko/rc/EndoplasmicReticulum",
+  "score": 1.0,
+  "triples": [
+    "definition: A collection. Instances are systems of membranes that assist in the transport of materials within a cell.",
+    "subclass of: aura: membrane bounded organelle",
+    "ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: endoplasmic reticulum. Relevant Logical Facts:   - definition: A collection. Instances are systems of membranes that assist in the transport of materials within a cell.   - subclass of: aura: membrane bounded organelle   - ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Golgi apparatus",
+  "uri": "http://kbpedia.org/kko/rc/GolgiApparatus",
+  "score": 1.0,
+  "triples": [
+    "definition: An organelle found in most eukaryotic cells that processes and packages macromolecules (e.g. proteins and lipids).",
+    "subclass of: aura: membrane bounded organelle"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: Golgi apparatus. Relevant Logical Facts:   - definition: An organelle found in most eukaryotic cells that processes and packages macromolecules (e.g. proteins and lipids).   - subclass of: aura: membrane bounded organelle
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "type of RNA molecule",
+  "uri": "http://kbpedia.org/kko/rc/RNAMoleculeType",
+  "score": 1.0,
+  "triples": [
+    "definition: A collection of collections. Instances of RNAMoleculeType are types of instances of the collection RNA. There are four kinds of RNA: messenger RNA, ribosomal RNA, transfer RNA, and viral RNA.",
+    "subclass of: biochemical compound",
+    "ancestor definition: This category is for all biologically-related chemicals and compounds.",
+    "subclass of: organic compound",
+    "ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas",
+    "subclass of: chemical and gas product",
+    "ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers chemicals including bi",
+    "subclass of: molecular material",
+    "ancestor definition: A collection of tangible stuff. Every instance of MolecularStuff is a portion of stuff composed of covalently-bonded molecules. Thus, Water and DNAStu",
+    "subclass of: organic matter",
+    "ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of ",
+    "has subclass: type of RNA by organism",
+    "has subclass: small nucleolar RNA",
+    "sibling concept: Alicyclic compound",
+    "sibling concept: Aliphatic compound",
+    "sibling concept: type of amino acid classified by chemical species",
+    "sibling concept: aromatic compound",
+    "sibling concept: chemical object bearing genetic information"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: type of RNA molecule. Relevant Logical Facts:   - definition: A collection of collections. Instances of RNAMoleculeType are types of instances of the collection RNA. There are four kinds of RNA: messenger RNA, ribosomal RNA, transfer RNA, and viral RNA.   - subclass of: biochemical compound   - ancestor definition: This category is for all biologically-related chemicals and compounds.   - subclass of: organic compound   - ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas   - subclass of: chemical and gas product   - ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers chemicals including bi   - subclass of: molecular material   - ancestor definition: A collection of tangible stuff. Every instance of MolecularStuff is a portion of stuff composed of covalently-bonded molecules. Thus, Water and DNAStu   - subclass of: organic matter   - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of    - has subclass: type of RNA by organism   - has subclass: small nucleolar RNA   - sibling concept: Alicyclic compound   - sibling concept: Aliphatic compound   - sibling concept: type of amino acid classified by chemical species   - sibling concept: aromatic compound   - sibling concept: chemical object bearing genetic information
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6119842529296875,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body."
+    }
+  ]
+}
+
+[Chunk 4 | Score: 0.6120]
+The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6028232574462891,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Many endangered animals are captured, tagged, and then released back into their environment."
+    }
+  ]
+}
+
+[Chunk 5 | Score: 0.6028]
+Many endangered animals are captured, tagged, and then released back into their environment.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+D. Golgi apparatus 
+
+This organelle processes and packages macromolecules (e.g., proteins), which matches the description in the question of undergoing extensive post-translational modification and being packaged for delivery to a specific destination within or outside the cell.
+==================================================
