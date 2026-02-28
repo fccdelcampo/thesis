@@ -25,6 +25,7 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 - Variables: CamelCase. Use `_` for singletons.
 - Closed-World: EVERY predicate in a body MUST be defined as a fact or rule head somewhere in the database.
 - Discontiguous: Group all clauses for the same predicate together.
+- Predicate Naming: ALWAYS invent meaningful predicate names that accurately describe the relationships in the specific question. NEVER blindly copy predicate names (like `forms_from`) or structures from the few-shot examples unless they are directly relevant.
 
 ### Query Formatting by Question Type
 1. **Multiple-Choice Questions (MCQ):**
@@ -198,6 +199,61 @@ forms_from(ocean_basin, plate_divergence).
 forms_from(mid_ocean_ridge, plate_divergence).
 
 answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+</database>
+
+<query>
+answer(OptionLetter).
+</query>
+---
+"""},
+
+    # Example 4: Multiple-Choice Logic (Different Domain)
+    {
+        "role": "user", 
+        "content": """
+Context: Mammals are warm-blooded vertebrates that have hair. Dogs, cats, and humans are mammals. Frogs are amphibians, which are cold-blooded.
+
+Question: Which of the following animals is NOT a mammal?
+A. dog
+B. cat
+C. human
+D. frog
+        """
+        },
+    {"role": "assistant", "content": r"""
+<reasoning_step>
+Encode options.
+choice(a, dog).
+choice(b, cat).
+choice(c, human).
+choice(d, frog).
+</reasoning_step>
+
+<reasoning_step>
+Encode biological classifications explicitly from context.
+is_mammal(dog).
+is_mammal(cat).
+is_mammal(human).
+is_amphibian(frog).
+</reasoning_step>
+
+<reasoning_step>
+Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with being a mammal.
+answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+</reasoning_step>
+
+<database>
+choice(a, dog).
+choice(b, cat).
+choice(c, human).
+choice(d, frog).
+
+is_mammal(dog).
+is_mammal(cat).
+is_mammal(human).
+is_amphibian(frog).
+
+answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
 </database>
 
 <query>

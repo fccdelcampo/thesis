@@ -253,9 +253,8 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                 hint = ("You called a predicate in a rule body that is NOT defined anywhere in the database (closed-world violation). "
                         "Every predicate that appears in a rule body MUST exist as a fact or the head of a rule in your database. "
                         "NEVER invent predicate names that have no corresponding definition. "
-                        "For MCQ 'which factor is DIFFERENT?' questions, use simple ground facts instead of undefined chains: "
-                        "`different(factor_name).` and `same(factor_name).` — then `answer(X) :- choice(X, Factor), different(Factor).` "
-                        "Also check for arity mismatches: if `choice/2` is defined, the rule must use `choice(Option, Value)`, NOT `choice(Option)`.")
+                        "If you use `choice(Option, Value)` in a rule body, you MUST define `choice/2` facts for every option. "
+                        "Make sure your predicate arities match (e.g., if `choice/2` is defined, use `choice(Option, Value)`).")
             else:
                 hint = "Ensure strict Prolog syntax. No bullets/hyphens. Predicates must be lowercase."
             _record_error(f"Prolog Error: {e}\nHint: {hint}")

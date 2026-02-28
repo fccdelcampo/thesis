@@ -35,12 +35,12 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
     retrieved_context_str = "\n".join(retrieved_context) if retrieved_context and isinstance(retrieved_context, list) else (str(retrieved_context) if retrieved_context is not None else "")
 
     print(f"DEBUG: retrieved_context_str type: {type(retrieved_context_str)}")
-    print(f"DEBUG: query: {query}")
+    print(f"DEBUG: original user_prompt (used for Prolog/LLM): {user_prompt}")
 
-    explainer_output = prolog_driver.run_pipeline(user_question=query, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt) if flag != "q" else None
+    explainer_output = prolog_driver.run_pipeline(user_question=user_prompt, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt) if flag != "q" else None
  
     llm_result = generate(
-        user_question=query, 
+        user_question=user_prompt, 
         retrieved_context=retrieved_context_str, 
         explainer_output=explainer_output["text_answer"] if explainer_output else "", 
         flag=flag,
