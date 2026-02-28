@@ -10,14 +10,9 @@ Usage:
 import sys
 import time
 from pathlib import Path
-from rdflib import Graph, Namespace, RDF, RDFS, OWL
 from neo4j import GraphDatabase
 
 from .config import NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD
-
-SKOS = Namespace("http://www.w3.org/2004/02/skos/core#")
-KKO = Namespace("http://kbpedia.org/ontologies/kko#")
-RC = Namespace("http://kbpedia.org/kko/rc/")
 
 N3_FILE = Path(__file__).resolve().parents[2] / "kbpedia_reference_concepts.n3"
 
