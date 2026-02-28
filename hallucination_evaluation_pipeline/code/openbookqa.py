@@ -113,7 +113,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     Runs a test case by calling each pipeline's run_pipeline function. 
     """
     question = test_case.get("formatted_input", "")
-    correct_answer = test_case.get("answer", "")
+    correct_answer = test_case.get("correct_answer", "")
     
     print(f"\n" + "="*80)
     print(f"[OpenBookQA #{test_case_id}] {question[:120]}...")

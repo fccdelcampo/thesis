@@ -138,7 +138,7 @@ def run_test_case(test_case: dict, test_case_id: int):
         test_case_id (int): The ID of the test case
     """
     formatted_input = format_mmlu_question(test_case)
-    correct_answer = test_case.get("answer", "")
+    correct_answer = test_case.get("correct_answer", "")
     raw_question = test_case.get("question", "")
     
     print(f"\n" + "="*80)

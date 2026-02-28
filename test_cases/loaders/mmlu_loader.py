@@ -42,7 +42,7 @@ class MMLULoader:
         print(f"[MMLULoader] File {self.file_path} missing or empty. Generating now...")
         self._generate_dataset()
 
-    def _generate_dataset(self):
+    def _generate_dataset(self, append=False):
         random.seed(self.RANDOM_SEED)
         all_selected_data = []
 
@@ -120,15 +120,16 @@ class MMLULoader:
 
         random.shuffle(all_selected_data)
 
+        mode = 'a' if append else 'w'
         os.makedirs(os.path.dirname(self.file_path), exist_ok=True)
-        with open(self.file_path, 'w', encoding='utf-8') as f:
+        with open(self.file_path, mode, encoding='utf-8') as f:
             for entry in all_selected_data:
                 f.write(json.dumps(entry) + '\n')
         
-        print(f"[MMLULoader] Successfully saved {len(all_selected_data)} questions to {self.file_path}")
+        print(f"[MMLULoader] Successfully saved {len(all_selected_data)} questions to {self.file_path} (Mode: {mode})")
     
-    def generate_dataset(self):
-        self._generate_dataset()
+    def generate_dataset(self, append=False):
+        self._generate_dataset(append=append)
 
     def load_data(self):
         # 1. Auto-Generate if missing
@@ -168,5 +169,16 @@ class MMLULoader:
         return data
 
 if __name__ == "__main__":
-    loader = MMLULoader()
-    test_cases = loader.generate_dataset()
+    import argparse
+    parser = argparse.ArgumentParser(description="MMLU Dataset Loader")
+    parser.add_argument("--subject", type=str, help="Specific subject to load (e.g. formal_logic)")
+    parser.add_argument("--n", type=int, help="Number of questions to approve from the subject")
+    parser.add_argument("--append", action="store_true", help="Append to the output file instead of overwriting")
+    args = parser.parse_args()
+
+    loader = MMLULoader(sample_size=args.n if args.n else None)
+    
+    if args.subject:
+        loader.TARGET_SUBJECTS = [args.subject]
+        
+    loader.generate_dataset(append=args.append)
