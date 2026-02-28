@@ -25,8 +25,9 @@ class KBPediaRetriever:
 
     _index_verified = False
 
-    def __init__(self, driver, llm=None, top_k: int = 4):
+    def __init__(self, driver, llm=None, top_k: int = 4, embedder=None):
         self.driver  = driver
+        self.embedder = embedder
         
         try:
             from graphrag_pipeline.graphrag.config import ENABLE_LLM_FILTERING
@@ -42,93 +43,39 @@ class KBPediaRetriever:
         self.top_k   = top_k
 
     def _verify_index(self):
-        """Check once whether the KBPedia fulltext index exists."""
+        """Check once whether the KBPedia vector index exists."""
         if KBPediaRetriever._index_verified:
             return True
         try:
             records, _, _ = self.driver.execute_query(
-                "SHOW FULLTEXT INDEXES YIELD name WHERE name = 'kbpediaConceptIndex' RETURN name",
+                "SHOW VECTOR INDEXES YIELD name WHERE name = 'kbpediaConceptVectorIndex' RETURN name",
                 database_="neo4j",
             )
             if records:
                 KBPediaRetriever._index_verified = True
                 return True
             else:
-                print("DEBUG: KBPedia fulltext index 'kbpediaConceptIndex' not found. "
-                      "Run kbpedia_loader.py first to load KBPedia into Neo4j.")
+                print("DEBUG: KBPedia vector index 'kbpediaConceptVectorIndex' not found. "
+                      "Run kbpedia_loader.py first to embed KBPedia concepts.")
                 return False
         except Exception as e:
-            print(f"DEBUG: Error verifying KBPedia index: {e}")
+            print(f"DEBUG: Error verifying KBPedia vector index: {e}")
             return False
 
-    def extract_entities(self, query: str, seeded_entities: List[str] = None) -> List[str]:
-        """
-        Entity extraction:
-        Now relies purely on the query text itself (basic word splitting) 
-        AND the vector similarity search entities passed in from standard GraphRAG.
-        LLM extraction has been removed.
-        """
-        stem = re.sub(r'[?!,;:()\[\]]', ' ', query).replace('\n', ' ')
-        words = [w.strip('.').lower() for w in stem.split() if len(w) >= 5]
-        
-        seen = set()
-        unique_entities = []
-        
-        # 1. Add seeded entities (from local vector similarity search)
-        if seeded_entities:
-            for e in seeded_entities:
-                if e and e.lower() not in seen:
-                    seen.add(e.lower())
-                    unique_entities.append(e)
-                    
-        # 2. Add raw keyword terms from the query itself
-        for w in words[:5]:
-            if w and w not in seen:
-                seen.add(w)
-                unique_entities.append(w)
-                
-        return unique_entities[:10]
-
-    def find_concepts(self, search_term: str, limit: int = 3) -> List[Dict[str, Any]]:
-        """
-        Fulltext search on KBPediaConcept nodes.
-        Fuzzy fallback: if the exact phrase returns nothing, tries only the LONGEST
-        word in the phrase (most specific/rare) rather than all words left-to-right.
-        This prevents generic words like 'skeleton' from matching off-topic concepts
-        like 'skeleton tarantula' when the original intent was 'animal skeleton'.
-        """
-        results = self._fulltext_search(search_term, limit)
-
-        # Fuzzy fallback: use only the longest (most specific) word
-        if not results and ' ' in search_term:
-            words = [w for w in search_term.split() if len(w) > 3]
-            if words:
-                # Sort by length descending — longer word = more specific/rare
-                longest_word = sorted(words, key=len, reverse=True)[0]
-                print(f"DEBUG: KBPedia exact search failed for '{search_term}'. Trying longest-word fallback: '{longest_word}'", flush=True)
-                results = self._fulltext_search(longest_word, limit=limit)
-
-        return results
-
-    def _fulltext_search(self, term: str, limit: int = 3) -> List[Dict[str, Any]]:
-        """Raw fulltext search against the index."""
-        # Sanitize for Lucene
-        safe_term = term.replace('"', '').replace('\\', '').replace('~', '').replace('*', '')
-        safe_term = re.sub(r'[+\-!(){}[\]^"~*?:\\/]', ' ', safe_term).strip()
-        if not safe_term:
+    def _vector_search(self, query_vector: List[float], limit: int = 5) -> List[Dict[str, Any]]:
+        """Vector similarity search against KBPedia concepts."""
+        if not query_vector:
             return []
 
         try:
             records, _, _ = self.driver.execute_query(
                 """
-                CALL db.index.fulltext.queryNodes('kbpediaConceptIndex', $term)
+                CALL db.index.vector.queryNodes('kbpediaConceptVectorIndex', $limit, $vector)
                 YIELD node, score
                 RETURN node.uri AS uri, node.name AS name, node.definition AS definition,
                        node.altLabels AS altLabels, score
-                ORDER BY score DESC
-                LIMIT $limit
                 """,
-                term=safe_term,
+                vector=query_vector,
                 limit=limit,
                 database_="neo4j",
             )
@@ -143,8 +90,10 @@ class KBPediaRetriever:
                 })
             return results
         except Exception as e:
-            print(f"DEBUG: KBPedia concept search error for '{safe_term}': {e}")
+            print(f"DEBUG: KBPedia concept vector search error: {e}")
             return []
+
+
 
     def get_neighborhood(self, uri: str) -> List[str]:
         """Get the ontology neighborhood of a concept (ancestors, children, siblings)."""
@@ -396,56 +345,62 @@ Output ONLY the JSON list, nothing else.
             return RetrieverResult(items=[], metadata={})
 
         # `original_query` = full user prompt (with MCQ choices) for LLM filtering.
-        # `query_text`     = extracted question stem, used for entity extraction.
-        # Fall back to query_text if original_query was not provided.
         filter_query = original_query if original_query else query_text
 
-        # ── Entity extraction ─────────────────────────────────────────────────
-        print(f"DEBUG: [KBPedia] Querying for: '{query_text}'", flush=True)
-        entities = self.extract_entities(query_text, seeded_entities=seeded_entities)
-        print(f"DEBUG: Extracted entities for KBPedia: {entities}", flush=True)
+        # ── Vector Search ───────────────────────────────────────────────────
+        print(f"DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...", flush=True)
+        try:
+            if self.embedder:
+                query_vector = self.embedder.embed_query(query_text)
+            else:
+                from sentence_transformers import SentenceTransformer
+                print("DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.", flush=True)
+                temp_embedder = SentenceTransformer("all-MiniLM-L6-v2")
+                query_vector = temp_embedder.encode(query_text).tolist()
+                
+            # Grab top_k * 2 candidates to feed into the LLM logic validator later
+            matches = self._vector_search(query_vector, limit=top_k * 2)
+        except Exception as e:
+            print(f"DEBUG: KBPedia embedding/search failed: {e}", flush=True)
+            matches = []
 
         seen_uris = set()
         candidates = []  # list of {name, uri, definition, triples}
         items = []       # final result items
 
-        for concept_name in entities:
-            matches = self.find_concepts(concept_name, limit=2)
+        if not matches:
+            print(f"DEBUG: KBPedia has no vector matches for '{query_text}'.", flush=True)
+        else:
+            print(f"DEBUG: KBPedia matched {len(matches)} concept(s) via vector similarity: {[m['name'] for m in matches]}", flush=True)
 
-            if not matches:
-                print(f"DEBUG: KBPedia has no match for '{concept_name}', skipping.", flush=True)
+        for match in matches:
+            uri = match["uri"]
+            if uri in seen_uris:
+                continue
+            seen_uris.add(uri)
+
+            # Build raw triples
+            raw_triples = []
+            if match["definition"]:
+                raw_triples.append(f"definition: {match['definition'][:400]}")
+            raw_triples.extend(self.get_neighborhood(uri))
+
+            # Defensive filter: remove any triple that looks like an MCQ option
+            mcq_pattern = re.compile(r'^[A-D][.):] ', re.IGNORECASE)
+            raw_triples = [t for t in raw_triples if not mcq_pattern.match(t)]
+
+            if not raw_triples:
+                print(f"DEBUG: No raw triples for '{match['name']}' ({uri}), skipping.", flush=True)
                 continue
 
-            print(f"DEBUG: KBPedia matched {len(matches)} concept(s) for '{concept_name}': {[m['name'] for m in matches]}", flush=True)
-
-            for match in matches:
-                uri = match["uri"]
-                if uri in seen_uris:
-                    continue
-                seen_uris.add(uri)
-
-                # Build raw triples
-                raw_triples = []
-                if match["definition"]:
-                    raw_triples.append(f"definition: {match['definition'][:400]}")
-                raw_triples.extend(self.get_neighborhood(uri))
-
-                # Defensive filter: remove any triple that looks like an MCQ option
-                mcq_pattern = re.compile(r'^[A-D][.):] ', re.IGNORECASE)
-                raw_triples = [t for t in raw_triples if not mcq_pattern.match(t)]
-
-                if not raw_triples:
-                    print(f"DEBUG: No raw triples for '{match['name']}' ({uri}), skipping.", flush=True)
-                    continue
-
-                # Buffer raw candidates for a single end-of-loop LLM pass
-                print(f"DEBUG: Buffered {len(raw_triples)} raw triple(s) for '{match['name']}'", flush=True)
-                candidates.append({
-                    "name": match["name"],
-                    "uri": uri,
-                    "definition": match.get("definition", ""),
-                    "triples": raw_triples,
-                })
+            # Buffer raw candidates for a single end-of-loop LLM pass
+            print(f"DEBUG: Buffered {len(raw_triples)} raw triple(s) for '{match['name']}'", flush=True)
+            candidates.append({
+                "name": match["name"],
+                "uri": uri,
+                "definition": match.get("definition", ""),
+                "triples": raw_triples,
+            })
 
         # ── Single LLM relevance filter over all candidates ─────────────
         if candidates:

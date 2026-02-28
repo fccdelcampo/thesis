@@ -58500,3 +58500,913 @@ D. mid-ocean ridge
 
 This is because a mid-ocean ridge forms as a result of tectonic plates diverging, creating new oceanic crust through seafloor spreading. This process results in the formation of an underwater mountain system where magma rises to fill the gap between the moving plates and solidifies into new rock.
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant epidermis",
+  "uri": "http://kbpedia.org/kko/rc/PlantEpidermis",
+  "score": 1.0,
+  "triples": [
+    "definition: The outermost cell layer covering a plant or part of a plant.",
+    "subclass of: external anatomical part",
+    "ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: plant epidermis. Relevant Logical Facts:   - definition: The outermost cell layer covering a plant or part of a plant.   - subclass of: external anatomical part   - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+B. Cell wall provides structural support and protection to the plant, similar to how an animal skeleton supports its body structure. This function aligns with the role of providing rigidity and shape to the organism.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane protein",
+  "uri": "http://kbpedia.org/kko/rc/MembraneProtein",
+  "score": 1.0,
+  "triples": [
+    "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.",
+    "subclass of: protein molecule"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: membrane protein. Relevant Logical Facts:  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.  - subclass of: protein molecule
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "bacterial cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BacterialCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: bacterial cell wall. Relevant Logical Facts:  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chloroplast",
+  "uri": "http://kbpedia.org/kko/rc/Chloroplast",
+  "score": 1.0,
+  "triples": [
+    "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.",
+    "subclass of: organelle"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: chloroplast. Relevant Logical Facts:  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.  - subclass of: organelle
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nucleus",
+  "uri": "http://kbpedia.org/kko/rc/Nucleus",
+  "score": 1.0,
+  "triples": [
+    "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells."
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: nucleus. Relevant Logical Facts:  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth \u2013 this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,",
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of BiologicalLivingObject (q.v). AnimalBodyPart includes both highly localized organs (for example, hearts) and physical systems composed of parts distributed throughout an animal's body (such as an animal's circulatory system and nervous system). Note t",
+    "subclass of: skeleton",
+    "ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of a body. Instances of this collection are either external structures (see Exoskeleton and Shell_AnimalBodyPart) or internally interlinked bones (see Bone_BodyPart) and cartilage (see Cartilage).",
+    "subclass of: region on an animal's body",
+    "ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivision in question is usually contiguous, and has some more or less clear boundary. Instances of this collection include anatomical parts (see the specialization AnimalBodyPart) , such as a person's head, beard, or right arm. In addition, this collection ",
+    "subclass of: organ system",
+    "ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological systems are populations of organisms, or on the organ- and tissue scale in mammals and other animals, the circulatory system, the respiratory system, the nervous system, etc. On the micro to the nanoscopic scale, examples of biological systems are cell",
+    "subclass of: animal or body part",
+    "ancestor definition: A specialization of BiologicalLivingObject that includes all living animals, body parts of living animals, and body regions of living animals. AnimalBLO is thus the \\",
+    "subclass of: organism part",
+    "ancestor definition: A specialization of both PhysicalPartOfObject and BiologicalLivingObject. Each instance of OrganismPart is a part of an organism. It may be an anatomical part or a pathological part such as a tumor. This collection includes the gross anatomical parts and microscopic anatomical parts of every individual of every species.",
+    "subclass of: anatomy",
+    "ancestor definition: Anatomy is the branch of biology concerned with the study of the structure of organisms and their parts. In some of its facets, anatomy is related to embryology and comparative anatomy, which itself is closely related to evolutionary biology and phylogeny. Human anatomy is one of the basic essential sciences of medicine. The discipline of anatomy is divided into macroscopic and microscopic anatomy",
+    "subclass of: connected biological path",
+    "ancestor definition: A biological system of physically connected parts.",
+    "sibling concept: abdomen",
+    "sibling concept: abdominal cavity",
+    "sibling concept: adrenal cortex",
+    "sibling concept: adrenal medulla",
+    "sibling concept: alimentary canal"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of BiologicalLivingObject (q.v). AnimalBodyPart includes both highly localized organs (for example, hearts) and physical systems composed of parts distributed throughout an animal's body (such as an animal's circulatory system and nervous system). Note t  - subclass of: skeleton  - ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of a body. Instances of this collection are either external structures (see Exoskeleton and Shell_AnimalBodyPart) or internally interlinked bones (see Bone_BodyPart) and cartilage (see Cartilage).  - subclass of: region on an animal's body  - ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivision in question is usually contiguous, and has some more or less clear boundary. Instances of this collection include anatomical parts (see the specialization AnimalBodyPart) , such as a person's head, beard, or right arm. In addition, this collection  - subclass of: organ system  - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological systems are populations of organisms, or on the organ- and tissue scale in mammals and other animals, the circulatory system, the respiratory system, the nervous system, etc. On the micro to the nanoscopic scale, examples of biological systems are cell  - subclass of: animal or body part  - ancestor definition: A specialization of BiologicalLivingObject that includes all living animals, body parts of living animals, and body regions of living animals. AnimalBLO is thus the \  - subclass of: organism part  - ancestor definition: A specialization of both PhysicalPartOfObject and BiologicalLivingObject. Each instance of OrganismPart is a part of an organism. It may be an anatomical part or a pathological part such as a tumor. This collection includes the gross anatomical parts and microscopic anatomical parts of every individual of every species.  - subclass of: anatomy  - ancestor definition: Anatomy is the branch of biology concerned with the study of the structure of organisms and their parts. In some of its facets, anatomy is related to embryology and comparative anatomy, which itself is closely related to evolutionary biology and phylogeny. Human anatomy is one of the basic essential sciences of medicine. The discipline of anatomy is divided into macroscopic and microscopic anatomy  - subclass of: connected biological path  - ancestor definition: A biological system of physically connected parts.  - sibling concept: abdomen  - sibling concept: abdominal cavity  - sibling concept: adrenal cortex  - sibling concept: adrenal medulla  - sibling concept: alimentary canal
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. The human skeleton is the internal framework of the body, composed of around 300 bones at birth that decrease to 206 by adulthood.
+2. A cell wall protects a bacterial cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+3. Membrane proteins are closely associated with biological membranes in all living cells.
+4. The nucleus is an organelle found in eukaryotic cells, enclosed within a membrane that regulates what enters or leaves it.
+5. A skeleton provides structural support and protection for other parts of the body.
+6. Chloroplasts have internal membranes but are primarily involved with photosynthesis rather than providing structural support.
+7. The cell wall is not present in all plant cells; some lack one, while others may have a modified form called a cuticle or epidermal layer.
+8. A skeleton can be composed of either external structures (exoskeleton) or internally interlinked bones and cartilage.
+9. Plant cells do not possess an internal framework like the human skeleton but instead rely on cell walls for structural support.
+10. The nucleus is responsible for storing genetic information, whereas a skeleton provides physical structure to the body.
+
+Note: These logical building blocks are extracted from the provided context without any additional universally accepted truths or assumptions beyond what's given in the text.
+==================================================
+==================================================
+ QUERY: Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "investigation",
+  "uri": "http://kbpedia.org/kko/rc/Investigation",
+  "score": 1.0,
+  "triples": [
+    "definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing.",
+    "subclass of: gathering information",
+    "ancestor definition: A specialization of both Action and InformationTransferEvent."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: investigation. Relevant Logical Facts:   - definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing.   - subclass of: gathering information   - ancestor definition: A specialization of both Action and InformationTransferEvent.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "foods featuring butter",
+  "uri": "http://kbpedia.org/kko/rc/FoodsFeaturingButter",
+  "score": 1.0,
+  "triples": [
+    "definition: This category covers foods that feature butter.",
+    "subclass of: condiment"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: foods featuring butter. Relevant Logical Facts:   - definition: This category covers foods that feature butter.   - subclass of: condiment
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "performer",
+  "uri": "http://kbpedia.org/kko/rc/Performer",
+  "score": 1.0,
+  "triples": [
+    "definition: A performer is a person who performs or conducts her occupation before an audience.",
+    "subclass of: worker",
+    "ancestor definition: The collection of persons who have a (skilled or unskilled) occupation."
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: performer. Relevant Logical Facts:   - definition: A performer is a person who performs or conducts her occupation before an audience.   - subclass of: worker   - ancestor definition: The collection of persons who have a (skilled or unskilled) occupation.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "conducting",
+  "uri": "http://kbpedia.org/kko/rc/MusicalConducting",
+  "score": 1.0,
+  "triples": [
+    "definition: A MusicalConductor conducts a group of musicians.",
+    "subclass of: performing arts activity"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: conducting. Relevant Logical Facts:   - definition: A MusicalConductor conducts a group of musicians.   - subclass of: performing arts activity
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+B. making sure the same foods are eaten 
+
+This would make the investigation most difficult to replicate because it requires both Janette and Carmen to eat exactly the same food items, which can be challenging due to individual differences in dietary preferences or availability of specific ingredients.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant epidermis",
+  "uri": "http://kbpedia.org/kko/rc/PlantEpidermis",
+  "score": 1.0,
+  "triples": [
+    "definition: The outermost cell layer covering a plant or part of a plant.",
+    "subclass of: external anatomical part",
+    "ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: plant epidermis. Relevant Logical Facts:   - definition: The outermost cell layer covering a plant or part of a plant.   - subclass of: external anatomical part   - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6508026123046875,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+
+[Chunk 2 | Score: 0.6508]
+She asks her friend Carmen to do the same investigation to see if she gets similar results.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6407356262207031,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+
+[Chunk 3 | Score: 0.6407]
+Janette conducts an investigation to see which foods make her feel more fatigued.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.6357746124267578,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+
+[Chunk 4 | Score: 0.6358]
+She eats one of four different foods each day at the same time for four days and then records how she feels.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+B. cell wall 
+
+The function of a plant cell's cell wall is similar to that of an animal skeleton, providing structural support and protection to the cell or organism.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane protein",
+  "uri": "http://kbpedia.org/kko/rc/MembraneProtein",
+  "score": 1.0,
+  "triples": [
+    "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.",
+    "subclass of: protein molecule"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: membrane protein. Relevant Logical Facts:  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.  - subclass of: protein molecule
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "bacterial cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BacterialCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: bacterial cell wall. Relevant Logical Facts:  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chloroplast",
+  "uri": "http://kbpedia.org/kko/rc/Chloroplast",
+  "score": 1.0,
+  "triples": [
+    "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.",
+    "subclass of: organelle"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: chloroplast. Relevant Logical Facts:  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.  - subclass of: organelle
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nucleus",
+  "uri": "http://kbpedia.org/kko/rc/Nucleus",
+  "score": 1.0,
+  "triples": [
+    "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells."
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: nucleus. Relevant Logical Facts:  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth \u2013 this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,",
+    "subclass of: body part",
+    "ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of BiologicalLivingObject (q.v). AnimalBodyPart includes both highly localized organs (for example, hearts) and physical systems composed of parts distributed throughout an animal's body (such as an animal's circulatory system and nervous system). Note t",
+    "subclass of: skeleton",
+    "ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of a body. Instances of this collection are either external structures (see Exoskeleton and Shell_AnimalBodyPart) or internally interlinked bones (see Bone_BodyPart) and cartilage (see Cartilage).",
+    "subclass of: region on an animal's body",
+    "ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivision in question is usually contiguous, and has some more or less clear boundary. Instances of this collection include anatomical parts (see the specialization AnimalBodyPart) , such as a person's head, beard, or right arm. In addition, this collection ",
+    "subclass of: organ system",
+    "ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological systems are populations of organisms, or on the organ- and tissue scale in mammals and other animals, the circulatory system, the respiratory system, the nervous system, etc. On the micro to the nanoscopic scale, examples of biological systems are cell",
+    "subclass of: animal or body part",
+    "ancestor definition: A specialization of BiologicalLivingObject that includes all living animals, body parts of living animals, and body regions of living animals. AnimalBLO is thus the \\",
+    "subclass of: organism part",
+    "ancestor definition: A specialization of both PhysicalPartOfObject and BiologicalLivingObject. Each instance of OrganismPart is a part of an organism. It may be an anatomical part or a pathological part such as a tumor. This collection includes the gross anatomical parts and microscopic anatomical parts of every individual of every species.",
+    "subclass of: anatomy",
+    "ancestor definition: Anatomy is the branch of biology concerned with the study of the structure of organisms and their parts. In some of its facets, anatomy is related to embryology and comparative anatomy, which itself is closely related to evolutionary biology and phylogeny. Human anatomy is one of the basic essential sciences of medicine. The discipline of anatomy is divided into macroscopic and microscopic anatomy",
+    "subclass of: connected biological path",
+    "ancestor definition: A biological system of physically connected parts.",
+    "sibling concept: abdomen",
+    "sibling concept: abdominal cavity",
+    "sibling concept: adrenal cortex",
+    "sibling concept: adrenal medulla",
+    "sibling concept: alimentary canal"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,  - subclass of: body part  - ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of BiologicalLivingObject (q.v). AnimalBodyPart includes both highly localized organs (for example, hearts) and physical systems composed of parts distributed throughout an animal's body (such as an animal's circulatory system and nervous system). Note t  - subclass of: skeleton  - ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of a body. Instances of this collection are either external structures (see Exoskeleton and Shell_AnimalBodyPart) or internally interlinked bones (see Bone_BodyPart) and cartilage (see Cartilage).  - subclass of: region on an animal's body  - ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivision in question is usually contiguous, and has some more or less clear boundary. Instances of this collection include anatomical parts (see the specialization AnimalBodyPart) , such as a person's head, beard, or right arm. In addition, this collection  - subclass of: organ system  - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological systems are populations of organisms, or on the organ- and tissue scale in mammals and other animals, the circulatory system, the respiratory system, the nervous system, etc. On the micro to the nanoscopic scale, examples of biological systems are cell  - subclass of: animal or body part  - ancestor definition: A specialization of BiologicalLivingObject that includes all living animals, body parts of living animals, and body regions of living animals. AnimalBLO is thus the \  - subclass of: organism part  - ancestor definition: A specialization of both PhysicalPartOfObject and BiologicalLivingObject. Each instance of OrganismPart is a part of an organism. It may be an anatomical part or a pathological part such as a tumor. This collection includes the gross anatomical parts and microscopic anatomical parts of every individual of every species.  - subclass of: anatomy  - ancestor definition: Anatomy is the branch of biology concerned with the study of the structure of organisms and their parts. In some of its facets, anatomy is related to embryology and comparative anatomy, which itself is closely related to evolutionary biology and phylogeny. Human anatomy is one of the basic essential sciences of medicine. The discipline of anatomy is divided into macroscopic and microscopic anatomy  - subclass of: connected biological path  - ancestor definition: A biological system of physically connected parts.  - sibling concept: abdomen  - sibling concept: abdominal cavity  - sibling concept: adrenal cortex  - sibling concept: adrenal medulla  - sibling concept: alimentary canal
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. The human skeleton is the internal framework of the body, composed of around 300 bones at birth that decrease to 206 by adulthood.
+2. A cell wall protects a bacterial cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+3. Membrane proteins are closely associated with biological membranes in all living cells.
+4. The nucleus is an organelle found in eukaryotic cells, enclosed within a membrane that regulates what enters or leaves it.
+5. A skeleton provides structural support and protection for other parts of the body.
+6. Chloroplasts have internal membranes but are primarily involved with photosynthesis rather than providing structural support.
+7. The cell wall is not present in all plant cells; some lack one, while others may have a modified form called a cuticle or epidermal layer.
+8. A skeleton can be composed of either external structures (exoskeleton) or internally interlinked bones and cartilage.
+9. Plant cells do not possess an internal framework like the human skeleton but instead rely on cell walls for structural support.
+10. The nucleus is responsible for storing genetic information, whereas a skeleton provides physical structure to the body.
+
+Note: These logical building blocks are extracted from the provided context without any additional universally accepted truths or assumptions beyond what's given in the text.
+==================================================
+==================================================
+ QUERY: Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "investigation",
+  "uri": "http://kbpedia.org/kko/rc/Investigation",
+  "score": 1.0,
+  "triples": [
+    "definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing.",
+    "subclass of: gathering information",
+    "ancestor definition: A specialization of both Action and InformationTransferEvent."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: investigation. Relevant Logical Facts:   - definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing.   - subclass of: gathering information   - ancestor definition: A specialization of both Action and InformationTransferEvent.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "foods featuring butter",
+  "uri": "http://kbpedia.org/kko/rc/FoodsFeaturingButter",
+  "score": 1.0,
+  "triples": [
+    "definition: This category covers foods that feature butter.",
+    "subclass of: condiment"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: foods featuring butter. Relevant Logical Facts:   - definition: This category covers foods that feature butter.   - subclass of: condiment
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "performer",
+  "uri": "http://kbpedia.org/kko/rc/Performer",
+  "score": 1.0,
+  "triples": [
+    "definition: A performer is a person who performs or conducts her occupation before an audience.",
+    "subclass of: worker",
+    "ancestor definition: The collection of persons who have a (skilled or unskilled) occupation."
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: performer. Relevant Logical Facts:   - definition: A performer is a person who performs or conducts her occupation before an audience.   - subclass of: worker   - ancestor definition: The collection of persons who have a (skilled or unskilled) occupation.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "conducting",
+  "uri": "http://kbpedia.org/kko/rc/MusicalConducting",
+  "score": 1.0,
+  "triples": [
+    "definition: A MusicalConductor conducts a group of musicians.",
+    "subclass of: performing arts activity"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: conducting. Relevant Logical Facts:   - definition: A MusicalConductor conducts a group of musicians.   - subclass of: performing arts activity
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+B. making sure the same foods are eaten 
+
+This would make the investigation most difficult to replicate because it requires both Janette and Carmen to eat exactly the same food items, which can be challenging due to individual differences in dietary preferences or availability of specific ingredients.
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fatigue",
+  "uri": "http://kbpedia.org/kko/rc/FatigueCondition",
+  "score": 1.0,
+  "triples": [
+    "definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue.",
+    "subclass of: illness",
+    "ancestor definition: A collection of ailments."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: fatigue. Relevant Logical Facts:  - definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue.  - subclass of: illness  - ancestor definition: A collection of ailments.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chronic fatigue syndrome",
+  "uri": "http://kbpedia.org/kko/rc/ChronicFatigueSyndrome",
+  "score": 1.0,
+  "triples": [
+    "definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.",
+    "subclass of: chronic condition"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: chronic fatigue syndrome. Relevant Logical Facts:  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.  - subclass of: chronic condition
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "breakfast food",
+  "uri": "http://kbpedia.org/kko/rc/BreakfastFood",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.",
+    "subclass of: food item",
+    "ancestor definition: An instance of ExistingStuffType, and a specialization of FoodOrDrink. Each instance of Food is a particular portion of food of a type which can be, and habitually is, eaten by humans or other animals. Here the notion of eating is important; eating an instance of Food will generally require biting or chewing, but if placed into the mouth (e.g. with a utensil) in a manner not considered to be drink",
+    "subclass of: food beverage or tobacco product",
+    "ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers food beverage and tobacco products. This product category corresponds to the UNSPSC code: 50000000.",
+    "subclass of: food or drink",
+    "ancestor definition: A specialization of EdibleStuff (q.v.). Each instance of FoodOrDrink is a substance which instances of some type of organism (that is, some sub-collection of Organism_Whole) normally consume a significant part of. Important specializations of FoodOrDrink include Food (instances of which require chewing in order to be consumed) and Drink (instances of which are liquids that can be consumed without ",
+    "subclass of: grocery",
+    "ancestor definition: An element of ProductTypeByMarketCategory. Each element of GroceryMarketCategory is a food product typically sold in grocery stores or grocery departments, e.g., canned foods, fresh produce, packaged cookies, frozen dinners.",
+    "subclass of: opaque thing",
+    "ancestor definition: Opaque is a #$PhysicalAttribute representing a specific degree of #$Transparency. Opaque objects do not transmit light. See also transparencyOfObject.",
+    "subclass of: organic matter",
+    "ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h",
+    "subclass of: market category",
+    "ancestor definition: A collection of collections. Each element of ProductTypeByMarketCategory is a collection of items that are commonly offered for sale in the same (type of) store, (type of) section of a store, or (type of) catalog. A specialty store might be devoted to a single element of ProductTypeByMarketCategory. The basis for a ProductTypeByMarketCategory includes both (1) different brands or variations of a c",
+    "subclass of: visible feature",
+    "ancestor definition: A type of feature that is defined by and visible in nature.",
+    "has subclass: breakfast",
+    "has subclass: cereal (breakfast food)",
+    "has subclass: doughnut",
+    "has subclass: chicken's egg",
+    "has subclass: flapjack",
+    "has subclass: omelette",
+    "has subclass: pancake",
+    "has subclass: waffle",
+    "sibling concept: cereal (food)",
+    "sibling concept: cheesy food",
+    "sibling concept: children's food",
+    "sibling concept: convenience food",
+    "sibling concept: crumb"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: breakfast food. Relevant Logical Facts:  - definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.  - subclass of: food item  - ancestor definition: An instance of ExistingStuffType, and a specialization of FoodOrDrink. Each instance of Food is a particular portion of food of a type which can be, and habitually is, eaten by humans or other animals. Here the notion of eating is important; eating an instance of Food will generally require biting or chewing, but if placed into the mouth (e.g. with a utensil) in a manner not considered to be drink  - subclass of: food beverage or tobacco product  - ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers food beverage and tobacco products. This product category corresponds to the UNSPSC code: 50000000.  - subclass of: food or drink  - ancestor definition: A specialization of EdibleStuff (q.v.). Each instance of FoodOrDrink is a substance which instances of some type of organism (that is, some sub-collection of Organism_Whole) normally consume a significant part of. Important specializations of FoodOrDrink include Food (instances of which require chewing in order to be consumed) and Drink (instances of which are liquids that can be consumed without  - subclass of: grocery  - ancestor definition: An element of ProductTypeByMarketCategory. Each element of GroceryMarketCategory is a food product typically sold in grocery stores or grocery departments, e.g., canned foods, fresh produce, packaged cookies, frozen dinners.  - subclass of: opaque thing  - ancestor definition: Opaque is a #$PhysicalAttribute representing a specific degree of #$Transparency. Opaque objects do not transmit light. See also transparencyOfObject.  - subclass of: organic matter  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h  - subclass of: market category  - ancestor definition: A collection of collections. Each element of ProductTypeByMarketCategory is a collection of items that are commonly offered for sale in the same (type of) store, (type of) section of a store, or (type of) catalog. A specialty store might be devoted to a single element of ProductTypeByMarketCategory. The basis for a ProductTypeByMarketCategory includes both (1) different brands or variations of a c  - subclass of: visible feature  - ancestor definition: A type of feature that is defined by and visible in nature.  - has subclass: breakfast  - has subclass: cereal (breakfast food)  - has subclass: doughnut  - has subclass: chicken's egg  - has subclass: flapjack  - has subclass: omelette  - has subclass: pancake  - has subclass: waffle  - sibling concept: cereal (food)  - sibling concept: cheesy food  - sibling concept: children's food  - sibling concept: convenience food  - sibling concept: crumb
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "financial chart",
+  "uri": "http://kbpedia.org/kko/rc/FinancialChart",
+  "score": 1.0,
+  "triples": [
+    "definition: A chart of finance or stock performance.",
+    "subclass of: technical analysis",
+    "ancestor definition: The collection of all technical analysis. A type of FollowingAStandardProcedure and Evaluating.",
+    "subclass of: evaluating",
+    "ancestor definition: A specialization of PurposefulAction and Thinking. Each instance of this collection is an event in which at least one agent evaluates some real-world thing or situation. Notable specializations of Evaluating include MeasuringSomething, MedicalTesting, and Navigating. This collection differs from AnalyzingSomething in that the latter does not necessarily involve some extra-mental entity.",
+    "subclass of: following standard procedures",
+    "ancestor definition: The collection of all events in which the performer of the event follows a standarized procedure which the agent knows prior to performing the event. The performer of some specialization of FollowingAStandardProcedure is apt to perform multiple instances of that event type.",
+    "subclass of: action (purposeful)",
+    "ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purposefully done by (see performedBy) at least one actor.",
+    "subclass of: thinking",
+    "ancestor definition: A specialization of IntentionalMentalEvent. Each instance of this collection is a thinking process in which it is essential that an agent uses information about the current state of the world (or some portion of the world). Notable specializations of Thinking include Evaluating, MakingAPlan, Negotiating, and InventingSomething.",
+    "sibling concept: candlestick patter",
+    "sibling concept: chart overlay",
+    "sibling concept: chart pattern",
+    "sibling concept: technical indicator"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: financial chart. Relevant Logical Facts:  - definition: A chart of finance or stock performance.  - subclass of: technical analysis  - ancestor definition: The collection of all technical analysis. A type of FollowingAStandardProcedure and Evaluating.  - subclass of: evaluating  - ancestor definition: A specialization of PurposefulAction and Thinking. Each instance of this collection is an event in which at least one agent evaluates some real-world thing or situation. Notable specializations of Evaluating include MeasuringSomething, MedicalTesting, and Navigating. This collection differs from AnalyzingSomething in that the latter does not necessarily involve some extra-mental entity.  - subclass of: following standard procedures  - ancestor definition: The collection of all events in which the performer of the event follows a standarized procedure which the agent knows prior to performing the event. The performer of some specialization of FollowingAStandardProcedure is apt to perform multiple instances of that event type.  - subclass of: action (purposeful)  - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purposefully done by (see performedBy) at least one actor.  - subclass of: thinking  - ancestor definition: A specialization of IntentionalMentalEvent. Each instance of this collection is a thinking process in which it is essential that an agent uses information about the current state of the world (or some portion of the world). Notable specializations of Thinking include Evaluating, MakingAPlan, Negotiating, and InventingSomething.  - sibling concept: candlestick patter  - sibling concept: chart overlay  - sibling concept: chart pattern  - sibling concept: technical indicator
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature",
+  "uri": "http://kbpedia.org/kko/rc/Temperature",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \\",
+    "subclass of: non aspectual quantity",
+    "ancestor definition: A specialization of ScalarQuantity (q.v.). This is the collection of all \\",
+    "subclass of: one dimensional quantity",
+    "ancestor definition: A specialization of MeasurableQuantity (q.v.). Each instance of OneDimensionalQuantity is a measurable quantity that is not defined in terms of (i.e. as the product or ratio of) other quantities. For example, (Mile 65) and (HoursDuration 1) are both instances of OneDimensionalQuantity; but (MilesPerHour 65), derived by dividing the former quantity by the latter, is not (cf. MultiDimensionalQuantit",
+    "subclass of: scalar or vector interval",
+    "ancestor definition: A specialization of TupleOfIntervals (q.v.). ScalarOrVectorInterval is the collection of all measurable intervals, whether scalar or vector. It thus includes all numbers, quantities, and vectors. For more information, see the specializations ScalarInterval and VectorInterval.",
+    "subclass of: tangible physical quantity",
+    "ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have. Specializations include Rigidity and Dirtiness. Conversely, physical quantity-types such as Area and Speed are not specializations of TangiblePhysicalQuantity, as they can also characterize (e.g.) intangible SpaceRegions and WavePropagation events, respectively.",
+    "subclass of: quality",
+    "ancestor definition: An internal characteristic or aspect of an object; collectively these define intensionally what kind of thing to which the object belongs, though that relationship is not intrinsic.",
+    "subclass of: scalar quantity",
+    "ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This is the collection of scalar quantities: at most partly numeric abstract individuals used as measurements or ratings of things. Specializations of ScalarQuantity include Distance, Temperature, Acceleration, Toxicity, and Loyalty (all of which save th",
+    "subclass of: measurable quantity",
+    "ancestor definition: A specialization of Quantity (q.v.). This is the collection of quantities that have a numeric component and could actually be used to measure something, as opposed to (say) merely ranking it on a scale. Arithmetic operations (such as addition and multiplication) can be performed on measurable quantities, as they can on purely numeric scalars (see NumericInterval). Specializations of MeasurableQuan",
+    "subclass of: n-tuple interval",
+    "ancestor definition: A specialization of Tuple (q.v.). Each instance of TupleOfIntervals is a tuple whose members (see memberOfTuple) are all ScalarIntervals (q.v.). Notable specializations of TupleOfIntervals include ScalarInterval itself (whose instances are one-tuples), VectorInterval (whose instances are two-tuples of scalars), and BloodPressureReading.",
+    "has subclass: absolute zero",
+    "has subclass: cold",
+    "has subclass: moderately cold",
+    "has subclass: room temperature",
+    "has subclass: sea surface temperature",
+    "has subclass: temperature control",
+    "has subclass: thermal protection",
+    "has subclass: thermoregulation",
+    "has subclass: threshold temperature",
+    "has subclass: warmth",
+    "sibling concept: area",
+    "sibling concept: beauty",
+    "sibling concept: biodiversity",
+    "sibling concept: cask strength",
+    "sibling concept: chemical purity"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: temperature. Relevant Logical Facts:  - definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \  - subclass of: non aspectual quantity  - ancestor definition: A specialization of ScalarQuantity (q.v.). This is the collection of all \  - subclass of: one dimensional quantity  - ancestor definition: A specialization of MeasurableQuantity (q.v.). Each instance of OneDimensionalQuantity is a measurable quantity that is not defined in terms of (i.e. as the product or ratio of) other quantities. For example, (Mile 65) and (HoursDuration 1) are both instances of OneDimensionalQuantity; but (MilesPerHour 65), derived by dividing the former quantity by the latter, is not (cf. MultiDimensionalQuantit  - subclass of: scalar or vector interval  - ancestor definition: A specialization of TupleOfIntervals (q.v.). ScalarOrVectorInterval is the collection of all measurable intervals, whether scalar or vector. It thus includes all numbers, quantities, and vectors. For more information, see the specializations ScalarInterval and VectorInterval.  - subclass of: tangible physical quantity  - ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have. Specializations include Rigidity and Dirtiness. Conversely, physical quantity-types such as Area and Speed are not specializations of TangiblePhysicalQuantity, as they can also characterize (e.g.) intangible SpaceRegions and WavePropagation events, respectively.  - subclass of: quality  - ancestor definition: An internal characteristic or aspect of an object; collectively these define intensionally what kind of thing to which the object belongs, though that relationship is not intrinsic.  - subclass of: scalar quantity  - ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This is the collection of scalar quantities: at most partly numeric abstract individuals used as measurements or ratings of things. Specializations of ScalarQuantity include Distance, Temperature, Acceleration, Toxicity, and Loyalty (all of which save th  - subclass of: measurable quantity  - ancestor definition: A specialization of Quantity (q.v.). This is the collection of quantities that have a numeric component and could actually be used to measure something, as opposed to (say) merely ranking it on a scale. Arithmetic operations (such as addition and multiplication) can be performed on measurable quantities, as they can on purely numeric scalars (see NumericInterval). Specializations of MeasurableQuan  - subclass of: n-tuple interval  - ancestor definition: A specialization of Tuple (q.v.). Each instance of TupleOfIntervals is a tuple whose members (see memberOfTuple) are all ScalarIntervals (q.v.). Notable specializations of TupleOfIntervals include ScalarInterval itself (whose instances are one-tuples), VectorInterval (whose instances are two-tuples of scalars), and BloodPressureReading.  - has subclass: absolute zero  - has subclass: cold  - has subclass: moderately cold  - has subclass: room temperature  - has subclass: sea surface temperature  - has subclass: temperature control  - has subclass: thermal protection  - has subclass: thermoregulation  - has subclass: threshold temperature  - has subclass: warmth  - sibling concept: area  - sibling concept: beauty  - sibling concept: biodiversity  - sibling concept: cask strength  - sibling concept: chemical purity
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Measuring the amount of fatigue is a subjective task that can be influenced by various factors, including individual perception and emotional state.
+2. Recording observations in the same chart may not guarantee consistency if multiple observers are involved or if there are changes to the observation method over time.
+3. Making sure the foods are at the same temperature could introduce variability due to differences in food types, cooking methods, and storage conditions.
+4. If different people eat varying amounts of fatigue-inducing substances (e.g., caffeine), it would be challenging to replicate the investigation's results accurately.
+5. The definition of chronic fatigue syndrome includes symptoms such as general pain, mental fogginess, and gastro-intestinal problems in addition to fatigue.
+6. Temperature is a measurable quantity that can vary depending on various factors like location, time of day, or environmental conditions.
+7. Measuring temperature requires specialized equipment (e.g., thermometers) and calibration procedures to ensure accuracy.
+8. The concept of "room temperature" is subjective and can differ between individuals due to variations in personal comfort levels.
+9. Temperature control systems are designed to maintain a stable environment within certain limits, but these settings may not be consistent across different locations or situations.
+10. Measuring fatigue requires assessing an individual's physical and mental state over time, which can be influenced by numerous factors including sleep patterns, diet, exercise habits, and stress levels.
+
+Note: These logical building blocks are designed to help bridge the premise of the question (which would make the investigation most difficult to replicate) with potential answers.
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "tectonic plate",
+  "uri": "http://kbpedia.org/kko/rc/TectonicPlate",
+  "score": 1.0,
+  "triples": [
+    "concept",
+    "subclass of: physical structural feature"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: tectonic plate. Relevant Logical Facts:   - concept   - subclass of: physical structural feature
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "visible feature",
+  "uri": "http://kbpedia.org/kko/rc/VisibleFeatureType",
+  "score": 1.0,
+  "triples": [
+    "subclass of: partially tangible types",
+    "definition: A type of feature that is defined by and visible in nature."
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: visible feature. Relevant Logical Facts:   - subclass of: partially tangible types   - definition: A type of feature that is defined by and visible in nature.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell plate",
+  "uri": "http://kbpedia.org/kko/rc/CellPlate",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all cell plates.",
+    "subclasses of: microscopic object, organic matter"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: cell plate. Relevant Logical Facts:   - definition: The collection of all cell plates.   - subclasses of: microscopic object, organic matter
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.60479736328125,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+    }
+  ]
+}
+
+[Chunk 4 | Score: 0.6048]
+She asks her friend Carmen to do the same investigation to see if she gets similar results.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.5930976867675781,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "She eats one of four different foods each day at the same time for four days and then records how she feels."
+    }
+  ]
+}
+
+[Chunk 5 | Score: 0.5931]
+She eats one of four different foods each day at the same time for four days and then records how she feels.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.5887050628662109,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Janette conducts an investigation to see which foods make her feel more fatigued."
+    }
+  ]
+}
+
+[Chunk 6 | Score: 0.5887]
+Janette conducts an investigation to see which foods make her feel more fatigued.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+D. mid-ocean ridge 
+
+When tectonic plates diverge, they move apart from one another, creating new crust as magma rises up to fill the gap and solidifies into new oceanic crust at a mid-ocean ridge. This process is responsible for forming mid-ocean ridges, which are underwater mountain ranges where seafloor spreading occurs.
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "trench",
+  "uri": "http://kbpedia.org/kko/rc/Trench",
+  "score": 1.0,
+  "triples": [
+    "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).",
+    "subclass of: topographical feature"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: trench. Relevant Logical Facts:  - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).  - subclass of: topographical feature
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Lake Nyasa",
+  "uri": "http://kbpedia.org/kko/rc/LakeNyasa",
+  "score": 1.0,
+  "triples": [
+    "definition: Lake in the Great Rift Valley.",
+    "subclass of: fresh-water lake"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: Lake Nyasa. Relevant Logical Facts:  - definition: Lake in the Great Rift Valley.  - subclass of: fresh-water lake
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "basin",
+  "uri": "http://kbpedia.org/kko/rc/Basin",
+  "score": 1.0,
+  "triples": [
+    "definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: basin. Relevant Logical Facts:  - definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "oceanic ridge",
+  "uri": "http://kbpedia.org/kko/rc/OceanicRidge",
+  "score": 1.0,
+  "triples": [
+    "definition: An underwater mountain system formed by plate tectonics.",
+    "subclass of: plate tectonics"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: oceanic ridge. Relevant Logical Facts:  - definition: An underwater mountain system formed by plate tectonics.  - subclass of: plate tectonics
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Tectonic plates can diverge, resulting in the formation of new crust on either side.
+2. Diverging tectonic plates create a rift valley as they move apart.
+3. A mid-ocean ridge is formed when two oceanic plates are moving away from each other and magma rises to fill the gap.
+4. Ocean basins can form due to plate divergence, where new crust is created on either side of the diverging plates.
+5. Trenches typically form as a result of subduction zones, not tectonic plate divergence.
+6. A trench is generally deeper than it is wide and narrow compared to its length.
+7. The formation of trenches requires one plate being forced beneath another (subduction), which contradicts the process of diverging plates.
+8. Divergence between oceanic plates results in seafloor spreading, creating new crust on either side.
+9. Ocean basins can be formed by tectonic plate divergence as well as other geological processes.
+10. A mid-ocean ridge is a type of underwater mountain system that forms due to the movement and interaction of tectonic plates.
+==================================================

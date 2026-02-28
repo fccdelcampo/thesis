@@ -110,10 +110,12 @@ class EnhancedRetriever(VectorCypherRetriever):
         extracted_entities = set()
         
         try:
+            print(f"DEBUG: --- Starting Local Vector Similarity Search for: '{query_text}' ---", flush=True)
             local_result = super().search(query_text=query_text, top_k=8, **kwargs)
             
             if local_result and local_result.items:
-                for item in local_result.items:
+                for idx, item in enumerate(local_result.items):
+                    clean_text = ""
                     # Fix Content: Unwrap if it is a Neo4j Record string representation
                     if item.metadata and 'local_context' in item.metadata:
                         local_ctx = item.metadata['local_context']
@@ -132,7 +134,8 @@ class EnhancedRetriever(VectorCypherRetriever):
                            import re
                            match = re.search(r"text='(.*?)'", item.content)
                            if match:
-                               item.content = match.group(1)
+                               clean_text = match.group(1)
+                               item.content = clean_text
                         except:
                             pass
                             
@@ -141,8 +144,10 @@ class EnhancedRetriever(VectorCypherRetriever):
                         item.content = item.content.replace('\n', ' ').replace('  ', ' ')
                         
                     local_items.append(item)
+                    print(f"DEBUG: Vector Match #{idx+1} (Score: {item.metadata.get('score', 0):.3f}): {item.content[:100]}...", flush=True)
                 
-                print(f"DEBUG: Local Vector Search returned {len(local_items)} chunks.")
+                print(f"DEBUG: Local Vector Search finished. Returned {len(local_items)} chunks.", flush=True)
+                print(f"DEBUG: Entities seeded from Vector Search: {list(extracted_entities)}", flush=True)
 
         except Exception as e:
             print(f"DEBUG: Main retriever failed: {e}")

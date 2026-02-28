@@ -148,26 +148,15 @@ FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown,
 '''
 
 # Retrieval query for HybridCypherRetriever/VectorCypherRetriever:
-# Takes the vector-matched local node and finds its local connections.
+# Takes the vector-matched local node and returns it as a standard chunk.
 RETRIEVAL_QUERY = '''
-// Part A: Local Document Retrieval (Vector/Keyword matches passed as `node`)
-WITH node, score
-OPTIONAL MATCH (node)-[:EXTRACTS]->(e)
-OPTIONAL MATCH (e)-[r]->(target)
-WITH node, score, collect(distinct {
-    source: "Local Document",
-    entity: e.name,
-    relationship: type(r),
-    target: target.name,
-    text: node.text
-}) as local_context
-
+// Part A: Local Document Retrieval (Vector matches passed as `node`)
 RETURN 
     node.text as text,
     score,
     {
-        local_context: local_context,
-        score: score
+        score: score,
+        source: "Local Document"
     } as metadata
 '''
 

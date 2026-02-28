@@ -111,6 +111,22 @@ def load_into_neo4j(concepts: dict, subclass_edges: list):
         concept_list = list(concepts.values())
         total = len(concept_list)
         print(f"Loading {total} concepts in batches of {BATCH_SIZE}...")
+        
+        print("Computing embeddings for KBPedia concepts...")
+        try:
+            from sentence_transformers import SentenceTransformer
+            embedder = SentenceTransformer("all-MiniLM-L6-v2")
+            
+            # Batch encode
+            texts = [f"{c['name']} {c['definition']}" for c in concept_list]
+            embeddings = embedder.encode(texts, show_progress_bar=True)
+            
+            for idx, c in enumerate(concept_list):
+                c['embedding'] = embeddings[idx].tolist()
+        except ImportError:
+            print("WARNING: sentence_transformers not installed. Skipping embeddings.")
+            for c in concept_list:
+                c['embedding'] = None
 
         for i in range(0, total, BATCH_SIZE):
             batch = concept_list[i : i + BATCH_SIZE]
@@ -121,7 +137,8 @@ def load_into_neo4j(concepts: dict, subclass_edges: list):
                 SET n.name = row.name,
                     n.definition = row.definition,
                     n.altLabels = row.altLabels,
-                    n.wikidata_qid = row.wikidata_qid
+                    n.wikidata_qid = row.wikidata_qid,
+                    n.embedding = row.embedding
                 """,
                 batch=batch,
             )
@@ -154,6 +171,19 @@ def load_into_neo4j(concepts: dict, subclass_edges: list):
             CREATE FULLTEXT INDEX kbpediaConceptIndex IF NOT EXISTS
             FOR (n:KBPediaConcept)
             ON EACH [n.name, n.definition]
+            """
+        )
+
+        # 5. Create vector index for KBPedia
+        print("Creating vector index on KBPediaConcept...")
+        session.run(
+            """
+            CREATE VECTOR INDEX kbpediaConceptVectorIndex IF NOT EXISTS
+            FOR (n:KBPediaConcept) ON (n.embedding)
+            OPTIONS {indexConfig: {
+              `vector.dimensions`: 384,
+              `vector.similarity_function`: 'cosine'
+            }}
             """
         )
 
