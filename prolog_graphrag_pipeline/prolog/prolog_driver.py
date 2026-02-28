@@ -19,7 +19,7 @@ except ImportError:
     import prolog_graphrag_pipeline.llm as llm
 
 SCASP_AVAILABLE = False
-ALLOW_LLM_FALLBACK = True
+ALLOW_LLM_FALLBACK = False
 
 def use_scasp():
     global SCASP_AVAILABLE
@@ -145,6 +145,8 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
         prolog_error = str(gen_err)
         print(f"[Prolog FAILED] {prolog_error} — falling back to unverified GraphRAG answer.")
         explainer_output = None  # No Prolog proof; LLM will answer from context alone
+        if not ALLOW_LLM_FALLBACK:
+            raise gen_err
 
     # ── Final synthesis (always runs unless fallback disabled) ───────────────
     if prolog_error is not None and not ALLOW_LLM_FALLBACK:

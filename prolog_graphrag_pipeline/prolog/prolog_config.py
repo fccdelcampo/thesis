@@ -16,8 +16,10 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 4. Output the <query>.
 
 ### Syntactic Requirements (s(CASP) Specific)
-- Disjunction: NEVER use `;`. Use separate rules.
-- Arithmetic: Use CLP operators `#=`, `#<`. NEVER use `=`, `is`, `>`.
+- Disjunction: NEVER use `;`. Use multiple separate rules with the same head instead.
+- Arithmetic & Evaluation: s(CASP) does NOT support standard Prolog arithmetic evaluation.
+   - NEVER use `is`, `=:=`, `=\=`, `<`, `>`, `<=`, `>=`.
+   - USE CLP(Q) constraints instead: `#=`, `#<>`, `#<`, `#>`, `#=<`, `#>=`. Example: `X #= Y + 1`.
 - Negation: Use `not`. NEVER use `\+`.
 - Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
 - Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
@@ -29,10 +31,14 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 
 ### Query Formatting by Question Type
 1. **Multiple-Choice Questions (MCQ):**
-   - Encode EACH option description: `choice(a, description).`
-   - Encode domain knowledge as GROUND FACTS.
-   - Write an `answer/1` rule unifying with the correct option based on facts.
-   - The <query> MUST be `answer(OptionLetter).`
+   - Encode EXACTLY FOUR choices as facts. The description MUST be a grounded lowercase atom, NEVER an uppercase variable!
+   - Example RIGHT: `choice(a, cell_wall).`
+   - Example WRONG: `choice(a, A).` (This will trivially unify with anything and fail the proof!)
+   - Encode retrieved domain knowledge as facts and rules.
+   - You MUST define an `answer/1` rule that unifies with the correct option letter.
+   - **CRITICAL:** Your logic MUST uniquely identify EXACTLY ONE correct choice. Do not write generic rules that might accidentally evaluate to true for multiple incorrect options. You must explicitly differentiate the correct target from the distractors based on the domain rules.
+   - Example DB Rule: `answer(OptionLetter) :- choice(OptionLetter, Target), matches_criteria(Target).`
+   - The <query> MUST ALWAYS BE EXACTLY: `answer(OptionLetter).`
 2. **Binary (True/False) Questions:**
    - Define specific instances from the question (e.g., `rock_one`, `rock_two`).
    - Write rules defining the condition context (e.g., `pulled_together(A, B) :- ...`).

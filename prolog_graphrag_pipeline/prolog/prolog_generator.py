@@ -165,10 +165,32 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
     unquoted_code = re.sub(r"'[^']*'", "''", combined_code)
     unquoted_code = re.sub(r"%.*$", "", unquoted_code, flags=re.MULTILINE)
 
+    # VALIDATION: MCQ Enforce answer/1
+    # If the database contains 'choice(', it is a Multiple-Choice Question.
+    # Therefore, the query MUST be 'answer(OptionLetter).' to unify against the choices.
+    if "choice(" in unquoted_code:
+        if "answer(" not in query:
+            raise ValueError("Multiple-Choice constraint violation: You defined 'choice/2' facts but your <query> does not use 'answer/1'. "
+                             "For MCQs, you MUST define an `answer(OptionLetter) :- ...` rule in the <database> "
+                             "and your <query> MUST be exactly `answer(OptionLetter).` to unify with the correct choice.")
+        
+        # Check for ungrounded choice facts: e.g. choice(a, A). or choice(A, b).
+        # We look for choice( followed by anything, where either argument starts with an Uppercase letter.
+        if re.search(r"choice\([a-z]+,\s*[A-Z_][a-zA-Z0-9_]*\)\.", unquoted_code):
+            raise ValueError("Multiple-Choice constraint violation: Your 'choice(letter, Description).' facts use UPPERCASE variables for the description (e.g., `choice(a, A).`). "
+                             "The description MUST be a grounded LOWERCASE atom (e.g., `choice(a, cell_wall).`). "
+                             "Uppercase variables will unify with anything and break the proof!")
+
+
     forbidden_patterns = [
         (r';', "Disjunction ';' is forbidden in s(CASP). Use multiple separate rules with the same head instead of ';'."),
         (r'=:=', "Arithmetic equality '=:=' is forbidden in s(CASP). Use '#=' for constraint arithmetic or '=' for unification."),
         (r'=\\=', "Arithmetic inequality '=\\=' is forbidden in s(CASP). Use '#=\\=' for constraint arithmetic."),
+        (r'\bis\b', "Evaluation 'is' is forbidden in s(CASP). Use '#=' for constraint arithmetic assignment."),
+        (r'(?<!#)<', "Standard arithmetic less-than '<' is forbidden. Use '#<' instead."),
+        (r'(?<!#)>', "Standard arithmetic greater-than '>' is forbidden. Use '#>' instead."),
+        (r'<=', "Standard arithmetic '<=' is forbidden. Use '#=<' instead."),
+        (r'>=', "Standard arithmetic '>=' is forbidden. Use '#>=' instead."),
         (r'->', "If-then '->' is forbidden in s(CASP). Use separate rules instead."),
         (r'[~⊃∨∧]', "Unquoted logic symbol found. Wrap logical formulas in single quotes or use 'not'/'-' for negation."),
         (r'\\\\\\+', "Negation '\\+' is forbidden in s(CASP). Use 'not' for negation as failure."),

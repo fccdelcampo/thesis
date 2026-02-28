@@ -10,8 +10,8 @@ from prolog_graphrag_pipeline.main_driver import run_pipeline as run_prolog_grap
 from hallucination_evaluation_pipeline.code.mmlu import load_test_cases, format_mmlu_question, extract_answer_letter, score_answer
 
 def main():
-    test_cases = load_test_cases(limit=8, start_idx=21)
-    for i, test_case in enumerate(test_cases, start=21):
+    test_cases = load_test_cases(limit=21, start_idx=0)
+    for i, test_case in enumerate(test_cases, start=0):
         formatted_input = format_mmlu_question(test_case)
         correct_answer = test_case.get("correct_answer", "")
         raw_question = test_case.get("question", "")

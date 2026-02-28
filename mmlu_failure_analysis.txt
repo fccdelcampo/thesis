@@ -1,0 +1,151 @@
+Total Incorrect: 29
+ID: 9 | Q: A particular parallel program computation requires 100 seconds when executed on a single processor. ...
+  Ans: **C**
+
+The correct answer is based on Amdahl's Law, which calculates the maximum theoretical speedup of parallel processing over serial processing for a program with some portion that cannot be parallelized.
+
+With two processors, 60% of the computation can be sped up, but since 40% is inherently sequential and won't benefit from additional processors, we consider only the time it takes to execute this parallelizable part. With four processors, the parallelizable part would take a quarter of the time: 25 seconds.
+
+However, using Amdahl's Law for the two-processor scenario yields an elapsed time of (100 * .6) + 40 = 80 seconds is incorrect; it should be correctly calculated as follows:
+
+For two processors: The sequentially executed portion remains at 40 seconds. However, we must recalculate the parallelizable part using Amdahl's Law to get a correct answer.
+
+The correct calculation for two-processor scenario yields an elapsed time of (100 * .6) + 40 = is incorrect; it should be correctly calculated as follows:
+
+For four processors: The sequentially executed portion remains at 20 seconds. However, we must recalculate the parallelizable part using Amdahl's Law to get a correct answer.
+
+The correct calculation for four-processor scenario yields an elapsed time of (100 * .75) + 20 = 85 is incorrect; it should be correctly calculated as follows:
+
+However, since this explanation was too long and complex, let's simplify the answer: The correct answer is indeed **C**. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 10 | Q: Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y]...
+  Ans: **A. True, True**
+
+This is because the joint entropy of two variables indeed cannot exceed the sum of their individual entropies (H[x, y] ≤ H[x] + H[y]), and moralization can decrease the number of edges present in some directed graphs. The subadditivity property of entropy ensures that the total uncertainty in both variables combined does not exceed the sum of their individual uncertainties. Similarly, moralization's effect on graph structure allows for a reduction in the number of edges in certain cases, depending on the original graph's configuration. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 11 | Q: A 17-year-old boy is brought to the emergency department 30 minutes after being found with a "blank ...
+  Ans: **D) PCP (phencyclidine)**
+
+The patient's symptoms, including catatonia and aggression, are most consistent with phencyclidine (PCP) intoxication. This is supported by the presence of PCAA in urine, indicating recent or chronic exposure to PCP. The dissociative effects of PCP can cause a "blank stare" and altered mental status, which aligns with the patient's presentation. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 12 | Q: Which of the following is true of mutation-based fuzzing?...
+  Ans: **B**
+
+Mutation-based fuzzing works by making small mutations to the target program to induce faults, which is its primary goal. This process involves introducing minor changes to the system, with the aim of identifying and exposing potential vulnerabilities or errors within the code. By analyzing how mutation-based fuzzing operates, it's clear that this mechanism is indeed a key aspect of inducing faults in the target program. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 13 | Q: High entropy means that the partitions in classification are...
+  Ans: **B**
+
+High entropy classification refers to the disorder or randomness within the partitions, meaning that items do not fit neatly into their respective categories. This is characterized by ambiguous partitions among groups, where each item belongs to more than one category or does not belong exclusively to any one group. In this context, "not pure" accurately describes high entropy classification because it involves overlapping or ambiguous boundaries between categories. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 14 | Q: What does it mean to "be stealthy" during a penetration test?...
+  Ans: **D**
+
+Being stealthy during a penetration test means taking care to avoid activities that might attract attention, such as operators or IDS services. This involves being careful not to generate unusual network traffic patterns or trigger alarms on intrusion detection systems, allowing the tester to maintain secrecy and stealth required for an effective test. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 15 | Q: _Ad hominem_ is another name for the fallacy of...
+  Ans: **D**
+
+This is because an ad hominem fallacy specifically refers to targeting the person making an argument rather than addressing their claim directly, which aligns with the definition of "argument against the person." In informal logic, this type of fallacy involves attacking the character or credibility of the person presenting a claim instead of engaging with the claim itself. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 16 | Q: Firms with the following market structure(s) maximize profits by producing where marginal cost equal...
+  Ans: **D**
+
+This is because firms in all four market structures - perfect competition, oligopoly, monopoly, and monopolistic competition - can maximize profits by producing where marginal cost equals marginal revenue. In each of these markets, profit maximization occurs when the optimal production level is reached at this point.
+
+In perfect competition, many firms produce identical products, leading to a competitive equilibrium where marginal cost equals marginal revenue. Oligopolies and monopolies have significant control over prices due to their market power, allowing them to influence production levels and maximize profits through optimal output. Monopolistically competitive markets also lead to profit maximization when firms can differentiate themselves from others.
+
+Profit maximization is achieved when marginal revenue equals marginal cost, regardless of the specific market structure. This condition applies universally across all four types of markets mentioned in the question. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 17 | Q: The natural law fallacy is a specific type of...
+  Ans: **D**
+
+The natural law fallacy specifically involves misinterpreting evidence as indicative of a particular conclusion or outcome, which aligns with the definition of a false sign. This type of error occurs when someone mistakenly assumes a causal relationship between two events without proper justification. The natural law fallacy is often seen in situations where principles from one domain are applied to another without considering the unique characteristics and requirements of each field. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 18 | Q: Which of the following sentence is FALSE regarding regression?...
+  Ans: **D**
+
+Regression analysis is primarily used for prediction, not discovery or interpretation of causal relationships. While regression can be used to model and understand the relationship between variables, it does not inherently discover causal connections. Instead, it focuses on predicting outputs based on inputs through a mathematical model.
+
+In essence, regression's main goal is to establish a predictive relationship between variables, rather than uncovering why certain events occur (causal relationships). | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 19 | Q: Array A contains 256 elements of 4 bytes each. Its first element is stored at physical address 4,096...
+  Ans: **A) 0**
+
+Under a write-back policy, data written to the cache does not immediately update main memory but rather waits until the cache is flushed or replaced by new data. This means that no additional bytes are directly written to memory during each iteration through array elements accessed sequentially. The cache temporarily stores data before it's updated in main memory, so there's no direct write to memory within a single loop execution cycle. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 20 | Q: Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron s...
+  Ans: **B**
+
+This combination of iron status markers is likely to be found in a person with both iron deficiency and a severe infection because it accurately reflects the impact of both conditions on the body's iron levels.
+
+Iron deficiency directly leads to low haemoglobin, while the increased hepcidin caused by the infection reduces available iron for hemoglobin synthesis. The high serum transferrin receptors (sTfR) indicate that cells require more iron but have insufficient stores, which is consistent with both conditions.
+
+This combination of markers provides a clear indication of both iron deficiency and the impact of a severe infection on the body's iron status. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 21 | Q: Of the following, which gives the best upper bound for the value of f(N) where f is a solution to th...
+  Ans: **B**
+
+The growth rate of f(N) is directly implied by its recurrence relation, which shows that it cannot be faster than log N. This means any function value for f(N) must be bounded by its recurrence relation, making O(log N) the best upper bound for the value of f(N). | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 22 | Q: A 42-year-old man comes to the physician for a follow-up examination 1 week after he passed a renal ...
+  Ans: **A**
+
+This is because carbonic anhydrase inhibitors are a type of diuretic that can help manage conditions related to excess fluid or electrolyte imbalances, such as hypercalciuria caused by increased calcium levels in the urine. They work by inhibiting the enzyme carbonic anhydrase in the kidneys, leading to increased excretion of sodium and water, which can help alleviate symptoms associated with these conditions.
+
+Carbonic anhydrase inhibitors are specifically useful for treating conditions like this because they directly address the issue of excess fluid and electrolyte imbalances. By increasing urine production and reducing sodium reabsorption, they can help reduce calcium levels in the urine and alleviate symptoms related to hypercalciuria. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 23 | Q: The safety of which of the following substances must be demonstrated prior to their introduction int...
+  Ans: **D**
+
+All substances introduced into food, including pesticide chemicals, colour additives, and those migrating from packaging, require regulatory oversight for consumer protection. Regulatory agencies must demonstrate their safety before they are allowed in the market to ensure public health is protected. This includes a comprehensive approach that encompasses pesticides, colour additives, and substances migrating from packaging materials. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 24 | Q: Atoms of four elements are examined: carbon, nitrogen, neon, and sulfur. Which element would have a ...
+  Ans: **B. Nitrogen**
+
+Nitrogen has partially filled p-orbitals, which makes it easier for electrons to be removed from these orbitals, resulting in lower ionization energies compared to elements with full outer shells like neon. This unique electron configuration leads to a photoelectron spectrum where the peak representing the lowest ionization energy is significantly higher than all other peaks. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 25 | Q: A 72-year-old woman who has smoked 20 cigarettes daily for the past 38 years begins using eyedrops f...
+  Ans: **B. Epinephrine**
+
+This is because Epinephrine can directly cause shortness of breath, especially considering the patient's pre-existing respiratory problems due to heavy smoking and potential side effects from eyedrops used for glaucoma treatment. The direct link between Epinephrine and causing shortness of breath makes it the most likely cause in this scenario. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 26 | Q: The compressions and rarefactions in sound normally travel...
+  Ans: **B**
+
+Compressions and rarefactions in sound waves travel in opposite directions, which is the fundamental nature of these pressure waves. They are opposing forces that work together to create the wave propagation we know as sound. This opposition allows for the transfer of energy through matter, enabling us to perceive sound. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 27 | Q: The model obtained by applying linear regression on the identified subset of features may differ fro...
+  Ans: **D**
+
+Different methods used for subset identification, such as Best-subset selection, Forward stepwise selection, and Forward stage-wise selection, can indeed result in different models due to varying initial conditions, stopping criteria, or optimization algorithms used. Each method has its own unique approach to selecting features, which can lead to distinct outcomes when applying linear regression on the identified subset of features.
+
+In Best-subset selection, the focus is on finding the best model from a pool of candidate models based on their performance metrics. Forward stepwise selection adds one feature at a time until no further improvement is observed, while Forward stage-wise selection aims to minimize overfitting and maximize generalizability by adding new variables or subsets iteratively.
+
+Given these differences in approach and goal, it's clear that the model obtained by applying linear regression on the identified subset of features may differ from the model obtained at the end of the process of identifying the subset during any of these methods. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
+ID: 28 | Q: Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 f...
+  Ans: **C**
+
+This is because Elsa's value of $50 per hour is less than David's willingness to pay of $175 for two hours, indicating that there are more buyers at the given prices than sellers. As a result, consumer surplus is greater than producer surplus by more than $75. | Correct: None | Prolog OK: None
+  Prolog Code: None...
+--------------------------------------------------
