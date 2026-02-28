@@ -55774,3 +55774,486 @@ Note: These logical evidence items aim to bridge the premise (prenatal programmi
 9. A chemical substance's composition can be analyzed for its constituent elements' percentages by mass.
 10. If the relative atomic mass of an element is known, then it can be used in calculations involving percentage compositions within compounds.
 ==================================================
+==================================================
+ QUERY: A radioactive sample has a half-life of 1 hour. If we start with 1.000 gram of it at noon, how much remains at 3:00 pm? A) 0.50 g B) 0.25 g C) 0.125 g D) 0.0625 g
+==================================================
+
+--- RETRIEVED CONTEXT (Top 3 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "G-string",
+  "uri": "http://kbpedia.org/kko/rc/G-string",
+  "score": 1.0,
+  "triples": [
+    "definition: A G-string (alternatively gee-string or gee string) is a type of thong, a narrow piece of cloth, leather, or plastic, that covers or holds the genitals, passes between the buttocks, and is attached to",
+    "subclass of: thong underwear",
+    "ancestor definition: The collection of Briefs for men or women that have just a thin vertical strip in the back, exposing most of the wearer's Buttocks.",
+    "subclass of: briefs",
+    "ancestor definition: The collection of briefs -- short-pant-like undergarments for the lower part of the body",
+    "subclass of: thong",
+    "ancestor definition: The collection of Garments designed to be worn around the LowerTorso, much like Briefs are, that leave the Buttocks of those who wear them completely ",
+    "subclass of: underpants",
+    "ancestor definition: The collection of Underwear, for either men or women, that is worn on the lower part of the body, with separate openings for each Leg.",
+    "subclass of: clothing item",
+    "ancestor definition: A specialization of Clothing_Generic. Each instance of ClothingItem is something that a person wears as a protective and/or decorative covering or orn"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: G-string. Relevant Logical Facts:  - definition: A G-string (alternatively gee-string or gee string) is a type of thong, a narrow piece of cloth, leather, or plastic, that covers or holds the genitals, passes between the buttocks, and is attached to  - subclass of: thong underwear  - ancestor definition: The collection of Briefs for men or women that have just a thin vertical strip in the back, exposing most of the wearer's Buttocks.  - subclass of: briefs  - ancestor definition: The collection of briefs -- short-pant-like undergarments for the lower part of the body  - subclass of: thong  - ancestor definition: The collection of Garments designed to be worn around the LowerTorso, much like Briefs are, that leave the Buttocks of those who wear them completely  - subclass of: underpants  - ancestor definition: The collection of Underwear, for either men or women, that is worn on the lower part of the body, with separate openings for each Leg.  - subclass of: clothing item  - ancestor definition: A specialization of Clothing_Generic. Each instance of ClothingItem is something that a person wears as a protective and/or decorative covering or orn
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "radioactive thallium",
+  "uri": "http://kbpedia.org/kko/rc/RadioactiveThallium",
+  "score": 1.0,
+  "triples": [
+    "definition: Radioactive Thallium, used, among other things, on Russian submarines.",
+    "subclass of: radioactive substance",
+    "ancestor definition: instances are radioactive substances"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: radioactive thallium. Relevant Logical Facts:  - definition: Radioactive Thallium, used, among other things, on Russian submarines.  - subclass of: radioactive substance  - ancestor definition: instances are radioactive substances
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Gram panchayat (India)",
+  "uri": "http://kbpedia.org/kko/rc/GramPanchayat-India",
+  "score": 1.0,
+  "triples": [
+    "definition: A gram panchayat is the cornerstone of a local self-government organisation in India of the panchayati raj system at the village or small town level and has a sarpanch as its elected head. The failed ",
+    "subclass of: administrative district",
+    "ancestor definition: A sub-collection of CountrySubsidiary. Each instance is a district defined for administrative purposes.",
+    "subclass of: administrative division",
+    "ancestor definition: An administrative division, unit, entity, area or region, also referred to as a subnational entity, constituent unit, or country subdivision, is a por",
+    "subclass of: administrative unit",
+    "ancestor definition: A sub-collection of (SubcollectionOfWithRelationFromTypeFn Organization subOrganizations Organization). Each instance is a unit with administrative re",
+    "subclass of: country subsidiary",
+    "ancestor definition: A specialization of GeopoliticalEntity. Each instance of CountrySubsidiary is a political region that is a direct subsidiary of some country. This col",
+    "sibling concept: apylink\u0117 (Lithuania SSR)",
+    "sibling concept: arrondissement",
+    "sibling concept: barrio of Puerto Rico",
+    "sibling concept: borough",
+    "sibling concept: civil parish"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: Gram panchayat (India). Relevant Logical Facts:  - definition: A gram panchayat is the cornerstone of a local self-government organisation in India of the panchayati raj system at the village or small town level and has a sarpanch as its elected head. The failed  - subclass of: administrative district  - ancestor definition: A sub-collection of CountrySubsidiary. Each instance is a district defined for administrative purposes.  - subclass of: administrative division  - ancestor definition: An administrative division, unit, entity, area or region, also referred to as a subnational entity, constituent unit, or country subdivision, is a por  - subclass of: administrative unit  - ancestor definition: A sub-collection of (SubcollectionOfWithRelationFromTypeFn Organization subOrganizations Organization). Each instance is a unit with administrative re  - subclass of: country subsidiary  - ancestor definition: A specialization of GeopoliticalEntity. Each instance of CountrySubsidiary is a political region that is a direct subsidiary of some country. This col  - sibling concept: apylinkė (Lithuania SSR)  - sibling concept: arrondissement  - sibling concept: barrio of Puerto Rico  - sibling concept: borough  - sibling concept: civil parish
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. A radioactive sample has a half-life of 1 hour.
+2. If we start with 1.000 gram of the sample at noon, it will decay by half every hour due to its short half-life.
+3. After one hour (at 1:00 pm), there will be 0.500 grams remaining from the original amount.
+4. The process of radioactive decay continues over time, and each subsequent hour reduces the remaining mass by another half.
+5. At two hours past noon (2:00 pm), there would have been a second round of halving, leaving approximately 0.250 grams.
+6. Continuing this pattern for three more hours will result in further reductions to the original amount.
+7. After one additional hour at 3:00 pm, we can calculate that only half of what remained from two hours ago is left.
+8. Therefore, if there were 0.25 g remaining after two hours (2:00 pm), then by three hours past noon (3:00 pm) the amount will be halved again to approximately 0.125 grams.
+
+Note: I added a universally accepted truth as "If we start with 1.000 gram of it at noon, it will decay by half every hour due to its short half-life" and broke compound sentences into independent logical units for clarity.
+==================================================
+==================================================
+ QUERY: The law of increasing costs is useful in describing A) a demand curve. B) a marginal benefit curve. C) a linear production possibility frontier. D) a concave production possibility frontier.
+==================================================
+
+--- RETRIEVED CONTEXT (Top 3 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "economics curve",
+  "uri": "http://kbpedia.org/kko/rc/EconomicsCurve",
+  "score": 1.0,
+  "triples": [
+    "definition: An empirical, calculated, or theoretical curve in economics.",
+    "subclass of: econometrics",
+    "ancestor definition: Econometrics is the application of statistical methods to economic data and is described as the branch of economics that aims to give empirical conten"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: economics curve. Relevant Logical Facts:  - definition: An empirical, calculated, or theoretical curve in economics.  - subclass of: econometrics  - ancestor definition: Econometrics is the application of statistical methods to economic data and is described as the branch of economics that aims to give empirical conten
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "regression and curve fitting software",
+  "uri": "http://kbpedia.org/kko/rc/RegressionAndCurveFittingSoftware",
+  "score": 1.0,
+  "triples": [
+    "definition: Software for conducting regression analysis and curve fitting on input datasets.",
+    "subclass of: regression analysis",
+    "ancestor definition: The collection of analysis events in which one tries to determine the values of certain parameters for a function so that it best fits with some preex"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: regression and curve fitting software. Relevant Logical Facts:  - definition: Software for conducting regression analysis and curve fitting on input datasets.  - subclass of: regression analysis  - ancestor definition: The collection of analysis events in which one tries to determine the values of certain parameters for a function so that it best fits with some preex
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "production\u2013possibility frontier",
+  "uri": "http://kbpedia.org/kko/rc/Production-Possibility-frontier",
+  "score": 1.0,
+  "triples": [
+    "definition: A production\u2013possibility frontier (PPF) or production possibility curve (PPC) is the possible tradeoff of producing combinations of goods with constant technology and resources per unit time. One good",
+    "subclass of: economics curve",
+    "ancestor definition: An empirical, calculated, or theoretical curve in economics."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: production–possibility frontier. Relevant Logical Facts:  - definition: A production–possibility frontier (PPF) or production possibility curve (PPC) is the possible tradeoff of producing combinations of goods with constant technology and resources per unit time. One good  - subclass of: economics curve  - ancestor definition: An empirical, calculated, or theoretical curve in economics.
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. The law of increasing costs is a concept used to describe production possibilities.
+2. A production possibility frontier (PPF) represents the possible tradeoff between producing combinations of goods with constant technology and resources per unit time.
+3. One good that can be represented on a PPF is capital, which has an inverse relationship with labor according to the law of increasing costs.
+4. The law of increasing costs states that as one factor (e.g., labor) increases while others remain fixed, its marginal product will eventually decrease and become negative.
+5. A concave production possibility frontier represents decreasing returns to scale in production.
+6. According to economic theory, a PPF is typically represented by an empirical curve due to the limitations of resources and technology.
+7. The law of increasing costs can be used to describe how changes in one factor affect output levels on a PPF.
+8. A concave shape indicates that as more units are produced with fixed inputs, each additional unit will have lower productivity than its predecessor.
+9. If production becomes less efficient due to the law of increasing costs, it would result in an inward shift or contraction of the PPF curve over time.
+10. The concept of a PPF is based on constant technology and resources per unit time, which implies that changes in one factor will lead to diminishing returns according to the law of increasing costs.
+==================================================
+==================================================
+ QUERY: The rate law may be written using stoichiometric coefficients for which of the following? A. Precipitation reactions B. Acid-base reactions C. Elementary processes D. Solubility reactions
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "precipitation reaction",
+  "uri": "http://kbpedia.org/kko/rc/PrecipitationReaction",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of ChemicalReactions in which an insoluble product is formed. Precipitation reactions occur when certain pairs of oppositely-charged ions attract each other so strongly that they form a",
+    "subclass of: metathesis reaction",
+    "ancestor definition: The collection of all instances of ChemicalReaction in which positive ions and negative ions swap 'partners,' and so conform to a general pattern: AX ",
+    "subclass of: binary chemical reaction",
+    "ancestor definition: The collection of all instances of ChemicalReaction in which two instances of Molecule come together interacting to produce one or two different insta",
+    "subclass of: displacement reaction",
+    "ancestor definition: A specialization of ChemicalReaction. Each instance of DisplacementReaction is a reaction between two substances in which one or more of the substance",
+    "subclass of: chemical reaction",
+    "ancestor definition: A collection of events; a subcollection of PhysicalTransformationEvent. Each instance of ChemicalReaction is an event in which two or more substances "
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: precipitation reaction. Relevant Logical Facts:  - definition: The collection of ChemicalReactions in which an insoluble product is formed. Precipitation reactions occur when certain pairs of oppositely-charged ions attract each other so strongly that they form a  - subclass of: metathesis reaction  - ancestor definition: The collection of all instances of ChemicalReaction in which positive ions and negative ions swap 'partners,' and so conform to a general pattern: AX  - subclass of: binary chemical reaction  - ancestor definition: The collection of all instances of ChemicalReaction in which two instances of Molecule come together interacting to produce one or two different insta  - subclass of: displacement reaction  - ancestor definition: A specialization of ChemicalReaction. Each instance of DisplacementReaction is a reaction between two substances in which one or more of the substance  - subclass of: chemical reaction  - ancestor definition: A collection of events; a subcollection of PhysicalTransformationEvent. Each instance of ChemicalReaction is an event in which two or more substances 
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "solubility",
+  "uri": "http://kbpedia.org/kko/rc/Solubility",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of DispositionalQuantity. Each instance of Solubility describes how readily some tangible substance dissolves in some kind of liquid. Different levels of Solubility may be represented",
+    "subclass of: disposition",
+    "ancestor definition: The collection of all the different quantities of dispositional properties; e.g. a particular degree of thermal conductivity. The various specializati",
+    "subclass of: measurable quantity",
+    "ancestor definition: A specialization of Quantity (q.v.). This is the collection of quantities that have a numeric component and could actually be used to measure somethin",
+    "subclass of: tangible physical quantity",
+    "ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have. Specializati",
+    "subclass of: scalar quantity",
+    "ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This",
+    "subclass of: type of quantity",
+    "ancestor definition: A SecondOrderCollection and a specialization of ObjectType. Each instance of QuantityType is a specialization of Quantity (q.v.). Notable specializati",
+    "subclass of: physical measurable quantity",
+    "ancestor definition: A physical quantity is a physical property of a phenomenon, body, or substance, that can be quantified by measurement. A physical quantity can be expr",
+    "subclass of: quantity",
+    "ancestor definition: A characteristic of a subject (A) that is expressed as a number quantity.",
+    "subclass of: scalar interval",
+    "ancestor definition: A specialization of TupleOfIntervals (q.v.). Roughly put, this is the collection of all things that can be ranked according to some one-dimensional sc",
+    "sibling concept: absorbency",
+    "sibling concept: accuracy",
+    "sibling concept: ability",
+    "sibling concept: level of compressibility",
+    "sibling concept: ductility"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: solubility. Relevant Logical Facts:  - definition: A specialization of DispositionalQuantity. Each instance of Solubility describes how readily some tangible substance dissolves in some kind of liquid. Different levels of Solubility may be represented  - subclass of: disposition  - ancestor definition: The collection of all the different quantities of dispositional properties; e.g. a particular degree of thermal conductivity. The various specializati  - subclass of: measurable quantity  - ancestor definition: A specialization of Quantity (q.v.). This is the collection of quantities that have a numeric component and could actually be used to measure somethin  - subclass of: tangible physical quantity  - ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have. Specializati  - subclass of: scalar quantity  - ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This  - subclass of: type of quantity  - ancestor definition: A SecondOrderCollection and a specialization of ObjectType. Each instance of QuantityType is a specialization of Quantity (q.v.). Notable specializati  - subclass of: physical measurable quantity  - ancestor definition: A physical quantity is a physical property of a phenomenon, body, or substance, that can be quantified by measurement. A physical quantity can be expr  - subclass of: quantity  - ancestor definition: A characteristic of a subject (A) that is expressed as a number quantity.  - subclass of: scalar interval  - ancestor definition: A specialization of TupleOfIntervals (q.v.). Roughly put, this is the collection of all things that can be ranked according to some one-dimensional sc  - sibling concept: absorbency  - sibling concept: accuracy  - sibling concept: ability  - sibling concept: level of compressibility  - sibling concept: ductility
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "civil law (common law)",
+  "uri": "http://kbpedia.org/kko/rc/CivilLawCommonLaw",
+  "score": 1.0,
+  "triples": [
+    "definition: Civil law is a branch of the law. In common law countries such as England, Wales, and the United States, the term refers to non-criminal law. The law relating to civil wrongs and quasi-contracts is pa",
+    "subclass of: civil law",
+    "ancestor definition: Civil law, or civilian law, is a legal system originating in Europe, intellectualised within the framework of Roman law, the main feature of which is ",
+    "subclass of: common law system",
+    "ancestor definition: A common law legal system is characterized by case law developed by judges, courts, and similar tribunals, when giving decisions in individual cases t",
+    "subclass of: law by type",
+    "ancestor definition: A branch of law focused on a specific subject.",
+    "subclass of: legal code",
+    "ancestor definition: A specialization of GovernmentCOC. Each instance of LegalCode is a code of conduct consisting of all the laws that hold in some instance of Geopolitic",
+    "subclass of: law",
+    "ancestor definition: A Law is a miniature GovernmentCOC that expresses a legal requirement or restriction. For instance, one Law might say, effectively, that bigamy is ill",
+    "subclass of: code of conduct",
+    "ancestor definition: A code of conduct is a set of rules outlining the social norms and rules and responsibilities of, or proper practices for, an individual, party or org",
+    "subclass of: code of conduct imposed by government",
+    "ancestor definition: A collection of codes of conduct; a subcollection of FormalCOC (the collection of formal codes of conduct). Each instance of GovernmentCOC is a formal",
+    "subclass of: group of things",
+    "ancestor definition: A collection of temporal objects. Each instance of Group is a composite object made up of one or more individual objects or events. A group is related",
+    "sibling concept: civil law",
+    "sibling concept: civil code",
+    "sibling concept: law of obligations",
+    "sibling concept: liability",
+    "sibling concept: ordinance"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: civil law (common law). Relevant Logical Facts:  - definition: Civil law is a branch of the law. In common law countries such as England, Wales, and the United States, the term refers to non-criminal law. The law relating to civil wrongs and quasi-contracts is pa  - subclass of: civil law  - ancestor definition: Civil law, or civilian law, is a legal system originating in Europe, intellectualised within the framework of Roman law, the main feature of which is  - subclass of: common law system  - ancestor definition: A common law legal system is characterized by case law developed by judges, courts, and similar tribunals, when giving decisions in individual cases t  - subclass of: law by type  - ancestor definition: A branch of law focused on a specific subject.  - subclass of: legal code  - ancestor definition: A specialization of GovernmentCOC. Each instance of LegalCode is a code of conduct consisting of all the laws that hold in some instance of Geopolitic  - subclass of: law  - ancestor definition: A Law is a miniature GovernmentCOC that expresses a legal requirement or restriction. For instance, one Law might say, effectively, that bigamy is ill  - subclass of: code of conduct  - ancestor definition: A code of conduct is a set of rules outlining the social norms and rules and responsibilities of, or proper practices for, an individual, party or org  - subclass of: code of conduct imposed by government  - ancestor definition: A collection of codes of conduct; a subcollection of FormalCOC (the collection of formal codes of conduct). Each instance of GovernmentCOC is a formal  - subclass of: group of things  - ancestor definition: A collection of temporal objects. Each instance of Group is a composite object made up of one or more individual objects or events. A group is related  - sibling concept: civil law  - sibling concept: civil code  - sibling concept: law of obligations  - sibling concept: liability  - sibling concept: ordinance
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "law",
+  "uri": "http://kbpedia.org/kko/rc/Law",
+  "score": 1.0,
+  "triples": [
+    "definition: A Law is a miniature GovernmentCOC that expresses a legal requirement or restriction. For instance, one Law might say, effectively, that bigamy is illegal. A Law is declared to be part of a LegalCode ",
+    "subclass of: code of conduct imposed by government",
+    "ancestor definition: A collection of codes of conduct; a subcollection of FormalCOC (the collection of formal codes of conduct). Each instance of GovernmentCOC is a formal",
+    "subclass of: nonfictional PCW",
+    "ancestor definition: The collection of all PropositionalConceptualWorks that are nonfictional.",
+    "subclass of: textual PCW",
+    "ancestor definition: A specialization of PropositionalConceptualWork. Each instance of TextualPCW is an abstract work whose propositional content is expressed, at least in",
+    "subclass of: formal code of conduct",
+    "ancestor definition: A specialization of CodeOfConduct. Each instance of FormalCOC is a code of conduct imposed by some organization. Formal codes of conduct typically are",
+    "subclass of: written or spoken work",
+    "ancestor definition: A specialization of ConceptualWork. Each instance of PropositionalConceptualWork is an abstract work constituted at least in part by propositional inf",
+    "subclass of: code of conduct",
+    "ancestor definition: A code of conduct is a set of rules outlining the social norms and rules and responsibilities of, or proper practices for, an individual, party or org",
+    "subclass of: conceptual work",
+    "ancestor definition: A specialization of DevisedPracticeOrWork (q.v.). Each instance of ConceptualWork is a partially abstract work (in the sense that each instance has a ",
+    "has subclass: banned work",
+    "has subclass: fundamental law",
+    "has subclass: gold legislation",
+    "has subclass: jurisprudence",
+    "has subclass: law by issue",
+    "has subclass: law by type",
+    "has subclass: legal code",
+    "has subclass: legal communication",
+    "has subclass: legal proceeding",
+    "has subclass: legal research",
+    "has subclass: promulgation",
+    "has subclass: sources of law",
+    "sibling concept: legal code",
+    "sibling concept: tax",
+    "sibling concept: paper (academic)",
+    "sibling concept: academic test",
+    "sibling concept: analysis diagram"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: law. Relevant Logical Facts:  - definition: A Law is a miniature GovernmentCOC that expresses a legal requirement or restriction. For instance, one Law might say, effectively, that bigamy is illegal. A Law is declared to be part of a LegalCode  - subclass of: code of conduct imposed by government  - ancestor definition: A collection of codes of conduct; a subcollection of FormalCOC (the collection of formal codes of conduct). Each instance of GovernmentCOC is a formal  - subclass of: nonfictional PCW  - ancestor definition: The collection of all PropositionalConceptualWorks that are nonfictional.  - subclass of: textual PCW  - ancestor definition: A specialization of PropositionalConceptualWork. Each instance of TextualPCW is an abstract work whose propositional content is expressed, at least in  - subclass of: formal code of conduct  - ancestor definition: A specialization of CodeOfConduct. Each instance of FormalCOC is a code of conduct imposed by some organization. Formal codes of conduct typically are  - subclass of: written or spoken work  - ancestor definition: A specialization of ConceptualWork. Each instance of PropositionalConceptualWork is an abstract work constituted at least in part by propositional inf  - subclass of: code of conduct  - ancestor definition: A code of conduct is a set of rules outlining the social norms and rules and responsibilities of, or proper practices for, an individual, party or org  - subclass of: conceptual work  - ancestor definition: A specialization of DevisedPracticeOrWork (q.v.). Each instance of ConceptualWork is a partially abstract work (in the sense that each instance has a  - has subclass: banned work  - has subclass: fundamental law  - has subclass: gold legislation  - has subclass: jurisprudence  - has subclass: law by issue  - has subclass: law by type  - has subclass: legal code  - has subclass: legal communication  - has subclass: legal proceeding  - has subclass: legal research  - has subclass: promulgation  - has subclass: sources of law  - sibling concept: legal code  - sibling concept: tax  - sibling concept: paper (academic)  - sibling concept: academic test  - sibling concept: analysis diagram
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "reagents for biochemistry",
+  "uri": "http://kbpedia.org/kko/rc/ReagentsForBiochemistry",
+  "score": 1.0,
+  "triples": [
+    "definition: This category is for chemical compounds that are widely used in stoichiometric quantities in biochemistry.",
+    "subclass of: biochemistry",
+    "ancestor definition: Biochemistry: a <a href=\"http://sw.opencyc.org/concept/Mx4rvVi3_JwpEbGdrcN5Y29ycA\">ScientificFieldOfStudy</a>.",
+    "subclass of: laboratory supply",
+    "ancestor definition: Consumable and material supplies useful to scientific studies or laboratory operation.",
+    "subclass of: organic chemistry",
+    "ancestor definition: The Organic Chemistry category of types is for all chemistry involving carbon, including the biochemistry of living organisms and the materials chemis",
+    "subclass of: scientific discipline",
+    "ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and pr",
+    "subclass of: supply",
+    "ancestor definition: The collection of food, clothes, and other materials that are stored for later use.",
+    "subclass of: chemistry",
+    "ancestor definition: Chemistry is the scientific discipline involved with elements and compounds composed of atoms, molecules and ions: their composition, structure, prope",
+    "subclass of: field of study",
+    "ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h",
+    "subclass of: store (generic)",
+    "ancestor definition: Not a store as in a business. A store of something, a clump of stored things amassed for future use. Not just a place for storing, but the store itsel",
+    "sibling concept: allelopathic substance",
+    "sibling concept: biochemistry method",
+    "sibling concept: bioinorganic chemistry",
+    "sibling concept: biology and pharmacology of chemical element",
+    "sibling concept: bioluminescence"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: reagents for biochemistry. Relevant Logical Facts:  - definition: This category is for chemical compounds that are widely used in stoichiometric quantities in biochemistry.  - subclass of: biochemistry  - ancestor definition: Biochemistry: a <a href="http://sw.opencyc.org/concept/Mx4rvVi3_JwpEbGdrcN5Y29ycA">ScientificFieldOfStudy</a>.  - subclass of: laboratory supply  - ancestor definition: Consumable and material supplies useful to scientific studies or laboratory operation.  - subclass of: organic chemistry  - ancestor definition: The Organic Chemistry category of types is for all chemistry involving carbon, including the biochemistry of living organisms and the materials chemis  - subclass of: scientific discipline  - ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and pr  - subclass of: supply  - ancestor definition: The collection of food, clothes, and other materials that are stored for later use.  - subclass of: chemistry  - ancestor definition: Chemistry is the scientific discipline involved with elements and compounds composed of atoms, molecules and ions: their composition, structure, prope  - subclass of: field of study  - ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h  - subclass of: store (generic)  - ancestor definition: Not a store as in a business. A store of something, a clump of stored things amassed for future use. Not just a place for storing, but the store itsel  - sibling concept: allelopathic substance  - sibling concept: biochemistry method  - sibling concept: bioinorganic chemistry  - sibling concept: biology and pharmacology of chemical element  - sibling concept: bioluminescence
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Precipitation reactions involve the formation of an insoluble product.
+2. Stoichiometric coefficients are used to describe the amount of reactants in a reaction.
+3. In precipitation reactions, oppositely-charged ions attract each other strongly enough to form a solid precipitate.
+4. The rate law may be written using stoichiometric coefficients for elementary processes.
+5. Elementary processes involve only one step and have no intermediate products or side reactions.
+6. Precipitation reactions are a subclass of metathesis reactions, which involve the exchange of partners between positive ions and negative ions.
+7. Stoichiometry is concerned with the quantitative relationships between reactants and products in chemical reactions.
+8. The rate law describes how the rates of reaction depend on concentrations or pressures of reactants.
+9. Precipitation reactions are a type of binary chemical reaction, which involves two substances interacting to produce one or more different instances.
+10. Stoichiometric coefficients can be used to write balanced equations for precipitation reactions.
+==================================================
+==================================================
+ QUERY: A particular parallel program computation requires 100 seconds when executed on a single processor. If 40 percent of this computation is "inherently sequential" (i.e., will not benefit from additional processors), then the theoretically best possible elapsed times for this program running with 2 and 4 processors, respectively, are
+A. 20 and 10 seconds
+B. 30 and 15 seconds
+C. 50 and 25 seconds
+D. 70 and 55 seconds
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "word processor",
+  "uri": "http://kbpedia.org/kko/rc/WordProcessor",
+  "score": 1.0,
+  "triples": [
+    "definition: An electronic device or computer software application, that performs the task of composition, editing, formatting, and sometimes printing of documents.",
+    "subclass of: typing machine",
+    "ancestor definition: This \u2018class\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product \u2018class\u2019 is an aggregate of typing m"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: word processor. Relevant Logical Facts:  - definition: An electronic device or computer software application, that performs the task of composition, editing, formatting, and sometimes printing of documents.  - subclass of: typing machine  - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of typing m
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "computational chemistry software",
+  "uri": "http://kbpedia.org/kko/rc/ComputationalChemistrySoftware",
+  "score": 1.0,
+  "triples": [
+    "definition: Software to conduct computation chemistry.",
+    "subclass of: scientific software",
+    "ancestor definition: Software related to science,and statistical  including mathematics software."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: computational chemistry software. Relevant Logical Facts:  - definition: Software to conduct computation chemistry.  - subclass of: scientific software  - ancestor definition: Software related to science,and statistical including mathematics software.
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. A parallel program requires 100 seconds when executed on a single processor.
+2. If a task is inherently sequential, it will not benefit from additional processors.
+3. The computation in question has an inherently sequential component of 40 percent.
+4. This means that only 60% of the computation can be sped up by using multiple processors.
+5. With two processors, this parallelizable part would take half the time (100 / 2 = 50 seconds).
+6. However, we must add back in the sequentially executed portion to get a total elapsed time with two processors: 40 + 10 = 50 seconds is incorrect; it should be 60% of original time plus sequential component.
+7. The correct calculation for two-processor scenario yields an elapsed time of (100 * .6) + 40 = 80 seconds, which matches option C's first number but not the second.
+8. With four processors, this parallelizable part would take a quarter of the time: 25 seconds.
+9. Adding back in the sequentially executed portion for four-processor scenario yields an elapsed time of (100 * .6) + 40 = 80 seconds is incorrect; it should be (100 * .75) + 20 = 85, which does not match any options but we can use a universally accepted truth: Amdahl's Law.
+10. According to Amdahl's law, the maximum theoretical speedup of parallel processing over serial processing for a program with some portion that cannot be parallelized is given by S = (1 - p) / (p * (n-1) + 1), where n is the number of processors and p is the proportion of the computation that can be parallelized.
+==================================================
+==================================================
+ QUERY: Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph.
+A. True, True
+B. False, False
+C. True, False
+D. False, True
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "true bug",
+  "uri": "http://kbpedia.org/kko/rc/Hemiptera",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Insect. The order Hemiptera consists of the \"true bugs\".",
+    "subclass of: insect",
+    "ancestor definition: This \u2018class\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: true bug. Relevant Logical Facts:  - definition: A specialization of Insect. The order Hemiptera consists of the "true bugs".  - subclass of: insect  - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "directed graph",
+  "uri": "http://kbpedia.org/kko/rc/DirectedGraph",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all directed simple graphs, i.e., node-and-link structure in which every link has one direction and no multiple links (between a pair of nodes) or loops are allowed",
+    "subclass of: multigraph"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: directed graph. Relevant Logical Facts:  - definition: The collection of all directed simple graphs, i.e., node-and-link structure in which every link has one direction and no multiple links (between a pair of nodes) or loops are allowed  - subclass of: multigraph
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Entropy is a measure of uncertainty that can be calculated for individual variables.
+2. The joint entropy of two variables x and y, H[x, y], represents the total amount of uncertainty in both variables combined.
+3. For any two variables with joint distribution p(x, y), their joint entropy cannot exceed the sum of their individual entropies: H[x, y] ≤ H[x] + H[y].
+4. Moralization is a process that adds edges to a directed graph based on its adjacency matrix.
+5. Directed graphs are a type of multigraph where each edge has direction and no loops or multiple links between nodes are allowed.
+6. The entropy function H can be used to calculate the uncertainty in individual variables as well as their joint distribution.
+7. If two random variables x and y have independent distributions, then their joint entropy is equal to the sum of their entropies: H[x, y] = H[x] + H[y].
+8. In a directed graph, moralization can decrease or increase the number of edges present in the original graph depending on its structure.
+9. The concept of true bugs refers specifically to insects within the order Hemiptera and is not related to entropy or graphs directly.
+10. Entropy has several properties that make it useful for measuring uncertainty, including non-negativity (H ≥ 0) and subadditivity (H[x, y] ≤ H[x] + H[y]).
+==================================================
