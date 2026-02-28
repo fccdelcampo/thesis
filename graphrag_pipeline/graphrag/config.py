@@ -12,6 +12,8 @@ class RETRIEVER_OPTIONS(Enum):
   
 RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
 
+ENABLE_WIKIDATA_FETCHING = True
+
 class SCHEMA_TYPE(Enum):
   STATIC = "Static Schema"
   EXTRACTED = "Extracted Schema"

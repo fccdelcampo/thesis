@@ -23,7 +23,78 @@ def generate(llm, retriever, query, original_query: str = "") -> dict:
     )
     
     retrieved_context = graph_rag_results.retriever_result
-    answer = graph_rag_results.answer
+    
+    # --- WIKIDATA INJECTION ---
+    try:
+        from graphrag_pipeline.graphrag.config import ENABLE_WIKIDATA_FETCHING
+    except ModuleNotFoundError:
+        from graphrag.config import ENABLE_WIKIDATA_FETCHING
+        
+    extracted_qids = set()
+    if getattr(ENABLE_WIKIDATA_FETCHING, 'value', ENABLE_WIKIDATA_FETCHING):
+        for item in retrieved_context.items:
+            # Check metadata or content directly for Q-ID assigned by kbpedia_retriever
+            if item.metadata and item.metadata.get('wikidata_qid'):
+                extracted_qids.add(item.metadata['wikidata_qid'])
+            elif item.content:
+                import re
+                qid_match = re.search(r'\b(Q[1-9]\d*)\b', item.content)
+                if qid_match:
+                    extracted_qids.add(qid_match.group(1))
+                    
+        if extracted_qids:
+            try:
+                from graphrag_pipeline.graphrag.wikidata_retriever import WikidataRetriever
+            except ModuleNotFoundError:
+                from graphrag.wikidata_retriever import WikidataRetriever
+                
+            print(f"DEBUG: Found {len(extracted_qids)} Wikidata Q-IDs. Fetching hybrid facts...")
+            wd_fetcher = WikidataRetriever()
+            
+            # Since generate() is synchronous, run an enclosed async loop for the fetcher
+            import asyncio
+            async def fetch_all_facts():
+                tasks = [wd_fetcher.get_wikidata_facts(qid) for qid in extracted_qids]
+                return await asyncio.gather(*tasks, return_exceptions=True)
+                
+            try:
+                loop = asyncio.get_event_loop()
+            except RuntimeError:
+                loop = asyncio.new_event_loop()
+                asyncio.set_event_loop(loop)
+                
+            if loop.is_running():
+                # We are already in an event loop (e.g. jupyter), use a synchronous run trick
+                import nest_asyncio
+                nest_asyncio.apply()
+                wd_results = loop.run_until_complete(fetch_all_facts())
+            else:
+                wd_results = asyncio.run(fetch_all_facts())
+            
+            # Create a synthetic result item to hold the Wikidata facts at the very top of context
+            combined_wd_text = ""
+            for res in wd_results:
+                if isinstance(res, str) and res.strip():
+                    combined_wd_text += res + "\n"
+                    
+            if combined_wd_text:
+                from neo4j_graphrag.types import RetrieverResultItem
+                wd_item = RetrieverResultItem(
+                    content=f"WIKIDATA FACTS:\n{combined_wd_text.strip()}",
+                    metadata={"source": "wikidata_hybrid"}
+                )
+                retrieved_context.items.insert(0, wd_item)
+    # --- END WIKIDATA INJECTION ---
+    
+    # We need to re-run graph_rag generation because we mutated the context but graph_rag already fired the LLM.
+    # To fix this cleanly without rewriting neo4j_graphrag, we just build the string manually and call the underlying LLM.
+    # The neo4j_graphrag implementation is basic so we can bypass it easily.
+    contexts_strings = [item.content for item in retrieved_context.items if item.content]
+    context_blob = "\n\n".join(contexts_strings)
+    
+    prompt = GRAPHRAG_TEMPLATE.format(query_text=query, context=context_blob)
+    response = llm.invoke(prompt)
+    answer = response.content if hasattr(response, 'content') else str(response)
 
     output_file = "debug_rag_output.txt"
     

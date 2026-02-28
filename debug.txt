@@ -185741,3 +185741,527 @@ Relevant Logical Facts:
 9. Low hepcidin would be expected in cases where there isn't sufficient or excessive iron available due to chronic conditions like iron deficiency.
 10. Therefore, a person with both iron deficiency and a severe infection is likely to have low haemoglobin levels, low ferritin indicating insufficient stored iron for the body's needs during an acute phase response, high sTfR as part of compensatory mechanisms for erythropoiesis under conditions of inflammation and reduced hepcidin due to chronic lack of sufficient or excessive iron.
 ===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query, extract the following: 1. **Explicit entities** mentioned in the question stem 2. **Implied functional concepts** the question is asking about  Query: "What is mitochondria? Q8288"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here are the extracted search terms:
+
+**Explicit entities**
+
+* Mitochondria
+* Q8288 (note: this is likely an identifier or a reference number, not a concept)
+
+**Implied functional concepts**
+
+* Cellular component
+* Energy production
+* Cell organelle 
+
+Note that "Q8288" does not seem to be related to the question being asked and might be ignored.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "What is mitochondria? Q8288"
+
+Candidates (index: concept name: short definition):
+[0] gentian order: Those structures which are capable of biological reproduction. This includes self-reproducing organelles like mitochondria and chloroplasts.
+[1] mitochondrial genetics: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell. Mitochondrial inheritan
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```
+[1]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "What is mitochondria? Q8288"
+
+Concept: 'mitochondrial genetics'
+Facts:
+  - definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell. Mitochondrial inheritan
+  - subclass of: genetics
+  - ancestor definition: Genetics: a <a href=\
+  - subclass of: biology
+  - ancestor definition: Biology is a natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, identification and taxonomy. However, despite the broad scope of biology, there are certain general and unifying concepts within it that govern all study and research, consolidating it into single, coherent field. In general, biology recognizes t
+  - subclass of: scientific discipline
+  - ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and problems, which together constitute the informational content of a systematic endeavor to explain (some part of) the natural world by rational (and frequently, quantifiable) methods, including, but not limited to, induction, falsifiable hypotheses test
+  - sibling concept: acquired disorder
+  - sibling concept: behavioural genetics
+  - sibling concept: classical genetics
+  - sibling concept: congenital disorder
+  - sibling concept: cytogenetics
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "mitochondrial genetics": [
+        "definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell.",
+        "subclass of: genetics"
+    ],
+    "genetics": [
+        "definition: Genetics: a <a href=\\",
+        "ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and problems, which together constitute the informational content of a systematic endeavor to explain (some part of) the natural world by rational (and frequently, quantifiable) methods, including, but not limited to, induction, falsifiable hypotheses test"
+    ],
+    "biology": [
+        "ancestor definition: Biology is a natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, identification and taxonomy. However, despite the broad scope of biology, there are certain general and unifying concepts within it that govern all study and research, consolidating it into single, coherent field."
+    ],
+    "scientific discipline": [
+        "subclass of: scientific discipline"
+    ]
+}
+```
+
+I have carefully filtered out irrelevant facts while keeping at least one or two definitional facts for each concept. I made sure to keep the core definition, subclass relationships, and what they do as per your instructions.
+
+Note that some concepts like 'acquired disorder', 'behavioural genetics' etc were removed because their definitions did not match any of the options in the user query.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+What is mitochondria? Q8288
+
+### Context:
+KBPedia Concept: mitochondrial genetics.
+Relevant Logical Facts:
+  - definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell.
+  - subclass of: genetics
+Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron status are altered by infection.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+A. Mitochondria are small structures in cells that generate energy for the cell, hence referred to as the powerhouses of the cell. They contain their own DNA (mitochondrial DNA) which is separate from the main cellular genetic material.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+What is mitochondria? Q8288
+
+### Context:
+KBPedia Concept: mitochondrial genetics.
+Relevant Logical Facts:
+  - definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell.
+  - subclass of: genetics
+
+Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron status are altered by infection.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+A. Mitochondria are small structures in cells that generate energy for the cell, hence referred to as the powerhouses of the cell. They contain their own DNA (mitochondrial genome) which is separate from the main cellular genetic material.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query, extract the following: 1. **Explicit entities** mentioned in the question stem 2. **Implied functional concepts** the question is asking about  Query: "What is mitochondria? Q8288"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here are the extracted search terms:
+
+**Explicit entities**
+
+* Mitochondria
+* Q8288 (note: this is likely an identifier or a reference number, but I've included it as per your request)
+
+**Implied functional concepts**
+
+* Cellular component
+* Energy production
+* Cell organelle
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "What is mitochondria? Q8288"
+
+Candidates (index: concept name: short definition):
+[0] gentian order: Those structures which are capable of biological reproduction. This includes self-reproducing organelles like mitochondria and chloroplasts.
+[1] mitochondrial genetics: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell. Mitochondrial inheritan
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```
+[1]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "What is mitochondria? Q8288"
+
+Concept: 'mitochondrial genetics'
+Facts:
+  - definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell. Mitochondrial inheritan
+  - subclass of: genetics
+  - ancestor definition: Genetics: a <a href=\
+  - subclass of: biology
+  - ancestor definition: Biology is a natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, identification and taxonomy. However, despite the broad scope of biology, there are certain general and unifying concepts within it that govern all study and research, consolidating it into single, coherent field. In general, biology recognizes t
+  - subclass of: scientific discipline
+  - ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and problems, which together constitute the informational content of a systematic endeavor to explain (some part of) the natural world by rational (and frequently, quantifiable) methods, including, but not limited to, induction, falsifiable hypotheses test
+  - sibling concept: acquired disorder
+  - sibling concept: behavioural genetics
+  - sibling concept: classical genetics
+  - sibling concept: congenital disorder
+  - sibling concept: cytogenetics
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "mitochondrial genetics": [
+        "definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell.",
+        "subclass of: genetics"
+    ],
+    "genetics": [
+        "definition: Genetics: a <a href=\\",
+        "ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and problems, which together constitute the informational content of a systematic endeavor to explain (some part of) the natural world by rational (and frequently, quantifiable) methods, including, but not limited to, induction, falsifiable hypotheses test"
+    ],
+    "biology": [
+        "definition: Biology is a natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, identification and taxonomy. However, despite the broad scope of biology, there are certain general and unifying concepts within it that govern all study and research, consolidating it into single, coherent field."
+    ],
+    "scientific discipline": [
+        "subclass of: scientific discipline"
+    ]
+}
+```
+
+I have carefully filtered out irrelevant facts while keeping at least one or two definitional facts for each concept. I made sure to keep the core definition, subclass relationships, and what they do as per your instructions.
+
+Note that some concepts like 'acquired disorder', 'behavioural genetics' etc were removed because their definitions did not match any of the options in the User Query.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+What is mitochondria? Q8288
+
+### Context:
+KBPedia Concept: mitochondrial genetics.
+Relevant Logical Facts:
+  - definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell.
+  - subclass of: genetics
+Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron status are altered by infection.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+A. Mitochondria are small structures in cells that generate energy for the cell, hence referred to as the powerhouses of the cell. They contain their own DNA (mitochondrial DNA) which is separate from the main cellular genetic material.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+What is mitochondria? Q8288
+
+### Context:
+KBPedia Concept: mitochondrial genetics.
+Relevant Logical Facts:
+  - definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell.
+  - subclass of: genetics
+
+Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron status are altered by infection.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+A. Mitochondria are small structures in cells that generate energy for the cell, hence referred to as the powerhouses of the cell. They contain their own DNA (mitochondrial genome) which is separate from the main cellular genetic material.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query, extract the following: 1. **Explicit entities** mentioned in the question stem 2. **Implied functional concepts** the question is asking about  Query: "What is mitochondria? Q8288"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here are the extracted search terms:
+
+**Explicit entities**
+
+* Mitochondria
+* Q8288 (note: this is likely an identifier or a reference number, but I've included it as per your request)
+
+**Implied functional concepts**
+
+* Cellular component
+* Energy production
+* Cell organelle
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "What is mitochondria? Q8288"
+
+Candidates (index: concept name: short definition):
+[0] gentian order: Those structures which are capable of biological reproduction. This includes self-reproducing organelles like mitochondria and chloroplasts.
+[1] mitochondrial genetics: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell. Mitochondrial inheritan
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```
+[1]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "What is mitochondria? Q8288"
+
+Concept: 'mitochondrial genetics'
+Facts:
+  - definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell. Mitochondrial inheritan
+  - subclass of: genetics
+  - ancestor definition: Genetics: a <a href=\
+  - subclass of: biology
+  - ancestor definition: Biology is a natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, identification and taxonomy. However, despite the broad scope of biology, there are certain general and unifying concepts within it that govern all study and research, consolidating it into single, coherent field. In general, biology recognizes t
+  - subclass of: scientific discipline
+  - ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and problems, which together constitute the informational content of a systematic endeavor to explain (some part of) the natural world by rational (and frequently, quantifiable) methods, including, but not limited to, induction, falsifiable hypotheses test
+  - sibling concept: acquired disorder
+  - sibling concept: behavioural genetics
+  - sibling concept: classical genetics
+  - sibling concept: congenital disorder
+  - sibling concept: cytogenetics
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "mitochondrial genetics": [
+        "definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell.",
+        "subclass of: genetics"
+    ],
+    "genetics": [
+        "definition: Genetics: a <a href=\\",
+        "ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and problems, which together constitute the informational content of a systematic endeavor to explain (some part of) the natural world by rational (and frequently, quantifiable) methods, including, but not limited to, induction, falsifiable hypotheses test"
+    ],
+    "biology": [
+        "definition: Biology is a natural science concerned with the study of life and living organisms, including their structure, function, growth, evolution, distribution, identification and taxonomy. However, despite the broad scope of biology, there are certain general and unifying concepts within it that govern all study and research, consolidating it into single, coherent field."
+    ],
+    "scientific discipline": [
+        "subclass of: scientific discipline"
+    ]
+}
+```
+
+I have carefully filtered out irrelevant facts while keeping at least one or two definitional facts for each concept. I made sure to keep the core definition, subclass relationships, and what they do as per your instructions.
+
+Note that some concepts like 'acquired disorder', 'behavioural genetics' etc were removed because their definitions did not match any of the options in the User Query.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+What is mitochondria? Q8288
+
+### Context:
+KBPedia Concept: mitochondrial genetics.
+Relevant Logical Facts:
+  - definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell.
+  - subclass of: genetics
+Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron status are altered by infection.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+A. Mitochondria are small structures in cells that generate energy for the cell, hence referred to as the powerhouses of the cell. They contain their own DNA (mitochondrial DNA) which is separate from the main cellular genetic material.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+What is mitochondria? Q8288
+
+### Context:
+KBPedia Concept: mitochondrial genetics.
+Relevant Logical Facts:
+  - definition: Human mitochondrial genetics is the study of the genetics of human mitochondrial DNA (the DNA contained in human mitochondria). The human mitochondrial genome is the entirety of hereditary information contained in human mitochondria. Mitochondria are small structures in cells that generate energy for the cell to use, and are hence referred to as the powerhouses of the cell.
+  - subclass of: genetics
+
+Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron status are altered by infection.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+A. Mitochondria are small structures in cells that generate energy for the cell, hence referred to as the powerhouses of the cell. They contain their own DNA (mitochondrial genome) which is separate from the main cellular genetic material.
+===================================
