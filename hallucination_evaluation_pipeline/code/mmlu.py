@@ -93,18 +93,23 @@ def extract_answer_letter(response: str) -> str:
     
     response = response.strip()
     
-    # Pattern 1: Standalone letter at the start (ignoring markdown *, spaces, etc.)
+    # Pattern 1: Explicit "Final Answer: X" or "The correct answer is X" anywhere
+    match = re.search(r'(?:final\s+answer|correct\s+answer\s+is|answer\s+is)[\s\*:-]*([A-D])\b', response, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
+        
+    # Pattern 2: "Answer: X" or "Choice: X" anywhere
+    match = re.search(r'(?:answer|choice)[\s\*:-]*([A-D])\b', response, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
+
+    # Pattern 3: Standalone letter at the VERY END of the response
+    match = re.search(r'(?:\*\*|\*|\s|^)([A-D])(?:\*\*|\*|\s|\.|\)|$)', response[-10:], re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
+    
+    # Pattern 4: Standalone letter at the VERY START (fallback for old outputs)
     match = re.match(r'^[\*\s]*([A-D])(?:[\.\)]|\b)', response, re.IGNORECASE)
-    if match:
-        return match.group(1).upper()
-    
-    # Pattern 2: "Answer: X" or "The answer is X"
-    match = re.search(r'(?:answer|choice)[^A-Za-z]*([A-D])\b', response, re.IGNORECASE)
-    if match:
-        return match.group(1).upper()
-    
-    # Pattern 3: Any standalone A-D bounded by markdown or punctuation
-    match = re.search(r'(?:\*\*|\*|\s|^)([A-D])(?:\*\*|\*|\s|\.|\)|$)', response, re.IGNORECASE)
     if match:
         return match.group(1).upper()
     
