@@ -106,10 +106,137 @@ class WikidataRetriever:
         try:
             loop = asyncio.get_event_loop()
             if loop.is_running():
-                # For Jupyter or already running loops
                 task = asyncio.ensure_future(self._fetch_facts_async(qid))
-                # Note: this blocks the sync flow; might need nest_asyncio in real env
                 return loop.run_until_complete(task)
         except RuntimeError:
             pass
         return asyncio.run(self._fetch_facts_async(qid))
+
+    # ── Wikidata REST Search API (for Q-ID discovery) ─────────────────────
+
+    async def _search_entity_async(self, name: str, limit: int = 5) -> List[dict]:
+        """
+        Search Wikidata's REST API for entity candidates by label.
+        Returns list of {qid, label, description}.
+        """
+        url = "https://www.wikidata.org/w/api.php"
+        params = {
+            "action": "wbsearchentities",
+            "search": name,
+            "language": "en",
+            "limit": limit,
+            "format": "json",
+        }
+        headers = {"User-Agent": self.user_agent}
+        timeout = aiohttp.ClientTimeout(total=15)
+
+        try:
+            async with aiohttp.ClientSession(timeout=timeout) as session:
+                async with session.get(url, params=params, headers=headers) as response:
+                    if response.status == 200:
+                        data = await response.json()
+                        candidates = []
+                        for item in data.get("search", []):
+                            candidates.append({
+                                "qid": item.get("id", ""),
+                                "label": item.get("label", ""),
+                                "description": item.get("description", ""),
+                            })
+                        return candidates
+                    else:
+                        self._record_error()
+                        logger.error(f"Wikidata search API returned HTTP {response.status} for '{name}'")
+        except Exception as e:
+            self._record_error()
+            logger.error(f"Wikidata search API error for '{name}': {e}")
+        return []
+
+    def search_entity(self, name: str, limit: int = 5) -> List[dict]:
+        """Synchronous wrapper: search Wikidata for entity candidates by label."""
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                task = asyncio.ensure_future(self._search_entity_async(name, limit))
+                return loop.run_until_complete(task)
+        except RuntimeError:
+            pass
+        return asyncio.run(self._search_entity_async(name, limit))
+
+    # ── Targeted Structural SPARQL (pre-filtered at DB level) ─────────────
+
+    async def _fetch_structural_facts_async(self, qid: str) -> List[str]:
+        """
+        Fetch ONLY structurally useful Wikidata properties for Prolog reasoning.
+        Properties: P31 (instance of), P279 (subclass of), P361 (part of),
+                    P527 (has part), P1542 (has effect).
+        """
+        async with self.semaphore:
+            sparql_query = f"""
+            SELECT ?pLabel ?oLabel WHERE {{
+              VALUES ?p {{
+                wdt:P31    # instance of
+                wdt:P279   # subclass of
+                wdt:P361   # part of
+                wdt:P527   # has part
+                wdt:P1542  # has effect
+              }}
+              wd:{qid} ?p ?o.
+              ?o rdfs:label ?oLabel.
+              ?property wikibase:directClaim ?p.
+              ?property rdfs:label ?pLabel.
+              FILTER(LANG(?oLabel) = "en")
+              FILTER(LANG(?pLabel) = "en")
+            }} LIMIT 15
+            """
+
+            headers = {
+                "User-Agent": self.user_agent,
+                "Accept": "application/sparql-results+json"
+            }
+            timeout = aiohttp.ClientTimeout(total=30)
+
+            max_retries = 2
+            for attempt in range(max_retries):
+                await self._check_error_rate()
+                try:
+                    async with aiohttp.ClientSession(timeout=timeout) as session:
+                        async with session.get(self.endpoint_url, params={"query": sparql_query}, headers=headers) as response:
+                            if response.status == 200:
+                                data = await response.json()
+                                facts = []
+                                for item in data.get("results", {}).get("bindings", []):
+                                    predicate = item.get("pLabel", {}).get("value", "")
+                                    obj = item.get("oLabel", {}).get("value", "")
+                                    # Python-level pre-filter: skip if object looks like a Q-ID with no label
+                                    if predicate and obj and not obj.startswith("Q"):
+                                        facts.append(f"{predicate.lower()}: {obj.lower()}")
+                                return facts
+                            elif response.status == 429:
+                                retry_after = int(response.headers.get("Retry-After", 10))
+                                logger.warning(f"HTTP 429 on structural SPARQL. Sleeping {retry_after}s.")
+                                await asyncio.sleep(retry_after)
+                                continue
+                            else:
+                                self._record_error()
+                                logger.error(f"HTTP {response.status} from structural SPARQL for {qid}")
+                                break
+                except asyncio.TimeoutError:
+                    self._record_error()
+                    logger.error(f"Structural SPARQL timeout for {qid}")
+                    break
+                except Exception as e:
+                    self._record_error()
+                    logger.error(f"Structural SPARQL error for {qid}: {e}")
+                    break
+            return []
+
+    def retrieve_structural_facts(self, qid: str) -> List[str]:
+        """Synchronous wrapper: fetch only structural Wikidata triples."""
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                task = asyncio.ensure_future(self._fetch_structural_facts_async(qid))
+                return loop.run_until_complete(task)
+        except RuntimeError:
+            pass
+        return asyncio.run(self._fetch_structural_facts_async(qid))

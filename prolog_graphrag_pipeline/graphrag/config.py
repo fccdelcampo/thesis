@@ -8,6 +8,10 @@ NEO4J_PASSWORD = "graphrag"
 # Global Knowledge Source Configuration
 GLOBAL_KB = "KBPEDIA"
 
+# Wikidata Fallback: When KBPedia has no match for an entity,
+# fall back to Wikidata REST Search API + structural SPARQL.
+ENABLE_WIKIDATA_FALLBACK = True
+
 
 class RETRIEVER_OPTIONS(Enum):
   HybridCypherRetriever = "HybridCypherRetriever"

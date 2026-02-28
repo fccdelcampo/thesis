@@ -440,11 +440,103 @@ Output ONLY the JSON list, nothing else.
         candidates = []  # list of {name, uri, definition, triples}
         items = []       # final result items
 
+        # ── Wikidata fallback setup ────────────────────────────────────────────
+        try:
+            from .config import ENABLE_WIKIDATA_FALLBACK
+        except ImportError:
+            ENABLE_WIKIDATA_FALLBACK = False
+
+        wikidata_fetcher = None
+        if ENABLE_WIKIDATA_FALLBACK:
+            try:
+                from .wikidata_retriever import WikidataRetriever
+                wikidata_fetcher = WikidataRetriever()
+            except ImportError:
+                print("DEBUG: WikidataRetriever not available. Skipping Wikidata fallback.", flush=True)
+
         for concept_name in entities:
             matches = self.find_concepts(concept_name, limit=2)
 
             if not matches:
-                print(f"DEBUG: KBPedia has no match for '{concept_name}', skipping.", flush=True)
+                print(f"DEBUG: KBPedia has no match for '{concept_name}'.", flush=True)
+
+                # ── Wikidata Fallback ──────────────────────────────────────
+                if wikidata_fetcher:
+                    print(f"DEBUG: [Wikidata Fallback] Searching Wikidata for '{concept_name}'...", flush=True)
+                    wd_candidates = wikidata_fetcher.search_entity(concept_name, limit=5)
+
+                    if not wd_candidates:
+                        print(f"DEBUG: [Wikidata Fallback] No Wikidata results for '{concept_name}'. Skipping.", flush=True)
+                        continue
+
+                    # Select the correct Q-ID
+                    selected = None
+                    if len(wd_candidates) == 1:
+                        selected = wd_candidates[0]
+                        print(f"DEBUG: [Wikidata Fallback] Single match: {selected['qid']} ({selected['label']})", flush=True)
+                    elif self.llm:
+                        # LLM picks the correct entity from the shortlist (reading comprehension, not generation)
+                        options_text = "\n".join(
+                            [f"  [{i}] {c['qid']} - {c['label']}: {c['description']}" for i, c in enumerate(wd_candidates)]
+                        )
+                        select_prompt = f"""You are disambiguating a Wikidata entity for a question-answering system.
+
+User question: "{filter_query}"
+Entity to find: "{concept_name}"
+
+Wikidata candidates:
+{options_text}
+
+Which candidate is the correct match for the entity "{concept_name}" in the context of the user's question?
+Reply with ONLY the index number (e.g., 0 or 1 or 2). Nothing else."""
+
+                        try:
+                            raw = self.llm.invoke(select_prompt)
+                            res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
+                            # Extract first digit found
+                            idx_match = re.search(r'\d+', res)
+                            if idx_match:
+                                idx = int(idx_match.group())
+                                if 0 <= idx < len(wd_candidates):
+                                    selected = wd_candidates[idx]
+                                    print(f"DEBUG: [Wikidata Fallback] LLM selected index {idx}: {selected['qid']} ({selected['label']})", flush=True)
+                        except Exception as e:
+                            print(f"DEBUG: [Wikidata Fallback] LLM selection failed: {e}. Using first candidate.", flush=True)
+
+                        if not selected:
+                            selected = wd_candidates[0]
+                            print(f"DEBUG: [Wikidata Fallback] Defaulting to first candidate: {selected['qid']} ({selected['label']})", flush=True)
+                    else:
+                        selected = wd_candidates[0]
+                        print(f"DEBUG: [Wikidata Fallback] No LLM available. Using first candidate: {selected['qid']} ({selected['label']})", flush=True)
+
+                    # Fetch structural triples from Wikidata
+                    print(f"DEBUG: [Wikidata Fallback] Fetching structural facts for {selected['qid']}...", flush=True)
+                    wd_triples = wikidata_fetcher.retrieve_structural_facts(selected['qid'])
+
+                    if wd_triples:
+                        # Add definition from Wikidata description
+                        all_triples = []
+                        if selected.get('description'):
+                            all_triples.append(f"definition: {selected['description']}")
+                        all_triples.extend(wd_triples)
+
+                        print(f"DEBUG: [Wikidata Fallback] Retrieved {len(all_triples)} structural triple(s) for '{selected['label']}'", flush=True)
+                        for t in all_triples:
+                            print(f"  > {t}", flush=True)
+
+                        wd_uri = f"wikidata:{selected['qid']}"
+                        if wd_uri not in seen_uris:
+                            seen_uris.add(wd_uri)
+                            candidates.append({
+                                "name": selected['label'],
+                                "uri": wd_uri,
+                                "definition": selected.get('description', ''),
+                                "triples": all_triples,
+                            })
+                    else:
+                        print(f"DEBUG: [Wikidata Fallback] No structural facts returned for {selected['qid']}. Skipping.", flush=True)
+                # ── End Wikidata Fallback ──────────────────────────────────
                 continue
 
             print(f"DEBUG: KBPedia matched {len(matches)} concept(s) for '{concept_name}': {[m['name'] for m in matches]}", flush=True)

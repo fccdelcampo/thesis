@@ -10953,3 +10953,1801 @@ I do not have enough information to answer this question.
 
 (Note: The provided context does not relate to tagging animals or monitoring their habits.)
 ===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[1] cytoplasmic part: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+[2] anucleated cell: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+[3] cell part: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+[4] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[5] membrane (biological): This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+[6] plastid: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+[7] plant physiology: Plant physiology: a <a href=\
+[8] protoplasm: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+[9] cellulose: a polysaccharide that is the main constituent of the cell walls of plants.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[0, 3, 5, 6, 8]
+```
+
+These concepts are relevant to answering the question because they relate directly or indirectly to plant cell components and their functions. The Prolog engine can use these facts to reason about which part of a plant cell has a function similar to an animal skeleton (which provides structural support).
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'plant cell wall'
+Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: botanical cell
+  - ancestor definition: A subset of Cell. BotanicalCell is the collection of cells which constitute the elements of Plant and PlantPart, e.g., the cells making up elements of BotanicalOrgan, of Seed, and of Spore_PlantLifeStage.
+  - subclass of: cell wall
+  - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+  - subclass of: eukaryotic cell
+  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism. These cells have a membrane-bound nucleus and other organelles. Multicellular organisms generally have EukaryoticCells; EukaryoticCell DNA has introns. Certain EukaryoticCells, like the red blood corpuscles of Persons with heathy Spleens, lack nuclei.
+  - subclass of: plant or part of a plant
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants. PlantBLO is thus the \
+  - subclass of: structural cell part
+  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and structure. Instances of CellPart_Structural are different from the cellular 'micro-organs' known as Organelles.
+  - subclass of: external anatomical part
+
+Concept: 'cell part'
+Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h
+  - subclass of: parts
+  - ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of ‘whole’.
+  - subclass of: object types
+  - ancestor definition: Objects (artifacts) that may be grouped by a variety of operational or attribute types.
+  - subclass of: shaped thing
+  - ancestor definition: An ObjectType and a specialization of PositiveDimensionalThing (q.v.). Each instance of ShapedObject is a spatial object that has some well-defined shape (though what counts as a \
+  - subclass of: three dimensional thing
+
+Concept: 'membrane (biological)'
+Facts:
+  - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+  - subclass of: biological membrane stuff
+  - ancestor definition: This is the collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein. The corresponding \
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: fluid substance
+  - ancestor definition: A subcollection of PartiallyTangible and an instance of TangibleStuffStateType. Each instance of FluidTangibleThing is a tangible thing that can flow. This includes gases, liquids, and \
+  - subclass of: lipid bilayer
+  - ancestor definition: The collection of all membranes consisting of a double layer of amphipathic lipid molecules in aqueous solution, oriented so that their hydrophobic ends are in contact. Such bilayers form more-or-less spontaneously when phospholipids are introduced into aqueous solution, since lipid molecules in water tend to aggregate in structures such that their hydrophobic ends are oriented to the interior of 
+  - subclass of: membrane
+  - ancestor definition: This is the collection of membranes. It includes membranes which grow as parts of living organisms (#$Membrane-Biological), as well as artifacts such as drum heads and the plastic membranes used in osmotic laboratory procedures.
+  - subclass of: microscopic object
+
+Concept: 'plastid'
+Facts:
+  - definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+  - subclass of: aura: membrane bounded organelle
+  - ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane. Includes the nucleus, mitochondria, plastids, vacuoles, and vesicles. Excludes the plasma membrane..
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated functions. Organelles include the nucleus, mitochondria, the endoplasmic reticulum, the Golgi apparatus, lysosomes, the cytoskeleton and (in plant cells only) chloroplasts and vacuoles.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+
+Concept: 'protoplasm'
+Facts:
+  - definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h
+  - subclass of: parts
+  - ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of ‘whole’.
+  - subclass of: organism part
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "cell wall": [
+        "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents.",
+        "subclass of: eukaryotic cell",
+        "ancestor definition: The collection of all cell walls."
+    ],
+    "cell part": [
+        "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells.",
+        "subclass of: microscopic object"
+    ],
+    "membrane (biological)": [
+        "definition: This is the collection of membranes which grow as parts of living Cells.",
+        "ancestor definition: The collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein."
+    ],
+    "plastid": [],
+    "protoplasm": []
+}
+```
+
+I filtered out facts for `Plastid` and `Protoplasma` because they don't directly match any option in the User Query. For `Cell Wall`, I kept its definition, what it is a subclass of (`eukaryotic cell`), and an ancestor definition that highlights its function (mechanical support). 
+
+For `Membrane (biological)`, I retained its core definition as well as another fact about membranes being LipidBilayers.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". \n2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.\n3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.\n4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."\n5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.\n\n### Question:\nWhich of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?\nA. cell membrane\nB. cell wall\nC. chloroplast\nD. nucleus\n\n### Context:\nKBPedia Concept: plant cell wall.\nRelevant Logical Facts:\n  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.\n  - subclass of: botanical cell\n  - ancestor definition: A subset of Cell. BotanicalCell is the collection of cells which constitute the elements of Plant and PlantPart, e.g., the cells making up elements of BotanicalOrgan, of Seed, and of Spore_PlantLifeStage.\n  - subclass of: cell wall\n  - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.\n  - subclass of: eukaryotic cell\n  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism. These cells have a membrane-bound nucleus and other organelles. Multicellular organisms generally have EukaryoticCells; EukaryoticCell DNA has introns. Certain EukaryoticCells, like the red blood corpuscles of Persons with heathy Spleens, lack nuclei.\n  - subclass of: plant or part of a plant\n  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants. PlantBLO is thus the \\\n  - subclass of: structural cell part\n  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it\'s physical integrity and structure. Instances of CellPart_Structural are different from the cellular \'micro-organs\' known as Organelles.\n  - subclass of: external anatomical part\n  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. Example subcollections include Earlobe and Leaf.\n  - subclass of: cell\n  - ancestor definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.\n  - subclass of: living thing\n  - ancestor definition: The collection of all structures that are composed of one or more living cells (see Cell). Biological living objects (or \\\n  - sibling concept: bacterial cell wall\n  - sibling concept: prokaryotic cell wall\nKBPedia Concept: cell part.\nRelevant Logical Facts:\n  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells.\n  - subclass of: microscopic object\nKBPedia Concept: membrane (biological).\nRelevant Logical Facts:\n  - definition: This is the collection of membranes which grow as parts of living Cells.\n  - ancestor definition: The collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein.\n\n### Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+C. chloroplast 
+
+The function of a plant cell's chloroplast (photosynthesis) is most similar to the function of an animal skeleton in providing structural support and protection for internal organs, but more directly related would be its role in maintaining cellular integrity through photosynthetic processes that indirectly contribute to mechanical rigidity due to increased turgor pressure.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+### Context:
+KBPedia Concept: plant cell wall.
+Relevant Logical Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: botanical cell
+  - ancestor definition: A subset of Cell. BotanicalCell is the collection of cells which constitute the elements of Plant and PlantPart, e.g., the cells making up elements of BotanicalOrgan, of Seed, and of Spore_PlantLifeStage.
+  - subclass of: cell wall
+  - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+  - subclass of: eukaryotic cell
+  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism. These cells have a membrane-bound nucleus and other organelles. Multicellular organisms generally have EukaryoticCells; EukaryoticCell DNA has introns. Certain EukaryoticCells, like the red blood corpuscles of Persons with heathy Spleens, lack nuclei.
+  - subclass of: plant or part of a plant
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants. PlantBLO is thus the \
+  - subclass of: structural cell part
+  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and structure. Instances of CellPart_Structural are different from the cellular 'micro-organs' known as Organelles.
+  - subclass of: external anatomical part
+  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. Example subcollections include Earlobe and Leaf.
+  - subclass of: cell
+  - ancestor definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+  - subclass of: living thing
+  - ancestor definition: The collection of all structures that are composed of one or more living cells (see Cell). Biological living objects (or \
+  - sibling concept: bacterial cell wall
+  - sibling concept: prokaryotic cell wall
+
+KBPedia Concept: cell part.
+Relevant Logical Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells.
+  - subclass of: microscopic object
+
+KBPedia Concept: membrane (biological).
+Relevant Logical Facts:
+  - definition: This is the collection of membranes which grow as parts of living Cells.
+  - ancestor definition: The collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+C. chloroplast 
+
+The cell wall provides mechanical support to non-woody plant tissues and is somewhat rigid but elastic due to its hydrated nature, similar to how an animal skeleton supports the body's structure while allowing for flexibility and movement. The function of a chloroplast in photosynthesis does not share this similarity with skeletal functions.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "animal skeleton",
+    "plant cell",
+    "cell membrane",
+    "cell wall"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[1] membrane protein: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+[2] cell wall: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+[3] bacterial cell wall: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+[4] photosynthetic pigment: A photosynthetic pigment (accessory pigment; chloroplast pigment).
+[5] chloroplast: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+[6] nucleus: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, but a few cell types, such as mammalian red blood cells, have , and a few others have many.
+[7] lentiform nucleus: The collection of all lentiform nuclei. An individual LentiformNucleus (or 'lenticular nucleus') is a BasalNucleus which is a unique part of a CerebralHemisphere.
+[8] human skeleton: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,
+[9] skeleton tarantula: The skeleton tarantula, Ephebopus murinus, is a species of spider belonging to the family Theraphosidae (tarantulas), sub-family Aviculariinae. A New World species, it is native to several South American countries. Its common name is derived from the skeleton-like markings on its legs.
+[10] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[11] plant epidermis: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 8, 10, 11]
+```
+
+These concepts are relevant because they relate to cell structure and function (cell membrane, nucleus), plant cells specifically (plant epidermis, plant cell wall), or provide additional context for the question topic.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'membrane protein'
+Facts:
+  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+  - subclass of: protein molecule
+  - ancestor definition: The collection of molecules of proteins. Instances are defined chemically as polymers made up of amino acids. Compare with ProteinStuff.
+  - subclass of: biopolymer
+  - ancestor definition: The collection of macromolecules which are produced by and can be found within living things, such as proteins (essentially polymers of amino acids), nucleic acids (such as DNA or RNA), and polysaccharides (polymers of simple sugars).
+  - subclass of: heteropolymer
+  - ancestor definition: The collection of all PolymerMolecules whose instances are characterized by having more than one type of Monomer as polymericSubComponents. More specifically, if HET is an instance of HeteroPolymer, then there are least two different Monomers such that both are polymericSubComponents of HET and each is an instance of a different spec of Monomer.
+  - subclass of: organic molecule
+  - ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reasons discussed below, a few types of carbon-containing compounds, such as carbides, carbonates, simple oxides of carbon (such as CO and CO2), and cyanides are considered inorganic. The distinction between organic and inorganic carbon compounds, while 
+  - subclass of: polymer molecule
+  - ancestor definition: A polymer (/ˈpɒlᵻmər/; Greek poly-, \
+  - subclass of: polypeptide
+
+Concept: 'bacterial cell wall'
+Facts:
+  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+  - subclass of: cell wall
+  - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+  - subclass of: prokaryotic cell wall
+  - ancestor definition: The collection of instances of CellWall that are anatomicalParts of some instance of ProkaryoticCell.
+  - subclass of: structural cell part
+  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and structure. Instances of CellPart_Structural are different from the cellular 'micro-organs' known as Organelles.
+  - subclass of: external anatomical part
+  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. Example subcollections include Earlobe and Leaf.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: organism part
+
+Concept: 'chloroplast'
+Facts:
+  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated functions. Organelles include the nucleus, mitochondria, the endoplasmic reticulum, the Golgi apparatus, lysosomes, the cytoskeleton and (in plant cells only) chloroplasts and vacuoles.
+  - subclass of: plastid
+  - ancestor definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: aura: membrane bounded organelle
+  - ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane. Includes the nucleus, mitochondria, plastids, vacuoles, and vesicles. Excludes the plasma membrane..
+  - subclass of: microscopic object
+
+Concept: 'nucleus'
+Facts:
+  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, but a few cell types, such as mammalian red blood cells, have , and a few others have many.
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated functions. Organelles include the nucleus, mitochondria, the endoplasmic reticulum, the Golgi apparatus, lysosomes, the cytoskeleton and (in plant cells only) chloroplasts and vacuoles.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h
+  - subclass of: parts
+
+Concept: 'human skeleton'
+Facts:
+  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,
+  - subclass of: body part
+  - ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of BiologicalLivingObject (q.v). AnimalBodyPart includes both highly localized organs (for example, hearts) and physical systems composed of parts distributed throughout an animal's body (such as an animal's circulatory system and nervous system). Note t
+  - subclass of: skeleton
+  - ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of a body. Instances of this collection are either external structures (see Exoskeleton and Shell_AnimalBodyPart) or internally interlinked bones (see Bone_BodyPart) and cartilage (see Cartilage).
+  - subclass of: region on an animal's body
+  - ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivision in question is usually contiguous, and has some more or less clear boundary. Instances of this collection include anatomical parts (see the specialization AnimalBodyPart) , such as a person's head, beard, or right arm. In addition, this collection 
+  - subclass of: organ system
+  - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological systems are populations of organisms, or on the organ- and tissue scale in mammals and other animals, the circulatory system, the respiratory system, the nervous system, etc. On the micro to the nanoscopic scale, examples of biological systems are cell
+  - subclass of: animal or body part
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all living animals, body parts of living animals, and body regions of living animals. AnimalBLO is thus the \
+  - subclass of: organism part
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "membrane protein": [
+        "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.",
+        "subclass of: protein molecule",
+        "ancestor definition: The collection of molecules of proteins."
+    ],
+    "bacterial cell wall": [
+        "definition: The collection of cell walls present on most Bacterium.",
+        "subclass of: prokaryotic cell wall"
+    ],
+    "chloroplast": [
+        "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."
+    ],
+    "nucleus": [
+        "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.",
+        "subclass of: organelle"
+    ],
+    "human skeleton": [
+        "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together."
+    ]
+}
+```
+
+I've kept only the most relevant facts for each concept, following your instructions:
+
+1. I dropped any irrelevant or trivial information.
+2. For concepts that perfectly match one of the multiple-choice options (e.g., "human skeleton"), I retained their core definition and what they are a subclass of.
+
+Note: Since none of the other concepts directly relate to supporting structures like skeletons in animals, no additional facts were kept for them beyond their definitions.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are a Logic Discovery Agent. Extract the minimum logical building blocks needed to answer the Question from the Context.\n\n### TASK\nProduce a single numbered list called **LOGICAL EVIDENCE**. Each item is one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.\n\n### CONSTRAINTS\n* Include at most 10 items total.\n* Each item must directly help bridge the premise to the answer.  Omit background, history, or tangential details.\n* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."\n* Break compound sentences into independent logical units.\n* Use clear, declarative English only. No code, no symbols.\n* Do NOT reveal the final answer — provide logical ingredients only.\n\n---\n### QUESTION:\nWhich of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus\n\n### CONTEXT:\nKBPedia Concept: membrane protein.\nRelevant Logical Facts:\n  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.\n  - subclass of: protein molecule\n  - ancestor definition: The collection of molecules of proteins.\nKBPedia Concept: bacterial cell wall.\nRelevant Logical Facts:\n  - definition: The collection of cell walls present on most Bacterium.\n  - subclass of: prokaryotic cell wall\nKBPedia Concept: chloroplast.\nRelevant Logical Facts:\n  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.\nKBPedia Concept: nucleus.\nRelevant Logical Facts:\n  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.\n  - subclass of: organelle\nKBPedia Concept: human skeleton.\nRelevant Logical Facts:\n  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together.\n\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+**LOGICAL EVIDENCE**
+
+1. A cell wall provides structural support and protection for a plant cell.
+2. The human skeleton serves as an internal framework providing structure, support, and protection for the body.
+3. Plant cells do not have a skeletal system like animals but need something to maintain their shape.
+4. Cell walls are composed of rigid materials that provide mechanical strength and stability.
+5. A nucleus is responsible for storing genetic information in eukaryotic cells.
+6. The cell wall's primary function is similar to the human skeleton's role, which provides structural support.
+7. Chloroplasts are organelles involved in photosynthesis within plant cells but do not contribute to structure or protection.
+8. Membrane proteins can be embedded in various cellular membranes and have diverse functions.
+9. A nucleus does not provide mechanical strength or stability like a cell wall or human skeleton would.
+10. The primary function of the cell membrane is selective permeability, allowing certain substances into the cell while keeping others out.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['measuring the amount of fatigue', 'making sure the same foods are eaten', 'recording observations in the same chart', 'making sure the foods are at the same temperature']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] sample: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample.
+[1] comparison: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+[2] process: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, base
+[3] research method: Instances of research methods.
+[4] observational study: In fields such as epidemiology, social sciences, psychology and statistics, an observational study draws inferences from a sample to a population where the independent variable is not under the control of the researcher. One common observational study is about the possible effect of a treatment on subjects, where the assignment of subjects into a treated group versus a control group is outside the
+[5] long-term study: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+[6] drive: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+[7] statistical method: Statistics offers methods to estimate and correct for any bias within the sample and data collection procedures. There are also methods of experimental design for experiments that can lessen these issues at the outset of a study, strengthening its capability to discern truths about the population.
+[8] scientific observation: A means or facility to generate scientific observations.
+[9] trouble: A sub-collection of AnimalActivity. Each instance is an event causing distress or pain.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 8, 9]
+```
+
+These concepts are relevant because they relate to aspects of investigation and study that could impact replicability. Comparison (choice B) is directly related as it's about examining similarities or differences which would be crucial in this context. Observational Study (A), Long-term Study (B), Drive (C), Scientific Observation (D), and Trouble (E) are all relevant because they pertain to aspects of investigation that could impact replicability, such as the ability to control variables, measure outcomes accurately, or account for potential biases or issues during data collection.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+Concept: 'comparison'
+Facts:
+  - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+  - subclass of: examination investigation
+  - ancestor definition: A sub-collection of Investigation. Each instance is the act of examining something closely (as for mistakes).
+  - subclass of: investigation
+  - ancestor definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide variety of entities: a philosophical problem, a criminal act, a natural phenomenon, etc.. The phenomenon under investigation may be actual or merely putative within the context of the representation. Also
+  - subclass of: gathering information
+  - ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers information about something.
+  - subclass of: purposeful mental activity
+  - ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is an event involving intentional mental activity on the part of at least one performer (see performedBy). Solving a math problem (cf. DoingMath), planning an attack and performing a thought experiment (cf. ThoughtExperimenting) are all examples of Pur
+  - subclass of: work
+  - ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occupation (to make a living), or to contribute to some goal, or out of some other obligation or necessity. Positive examples include a student doing homework for school, a homeowner mowing her lawn, a teacher teaching class, etc.
+
+Concept: 'research method'
+Facts:
+  - definition: Instances of research methods.
+  - subclass of: method
+  - ancestor definition: A specialization of LearnedActivityType, MethodType is the the collection of types of purposeful actions that decompose into a common pattern of sub-event-types and/or role-player types (e.g., instruments) used in the course of the event. MethodType is an instance of FacetingBasisCollectionType, which means that ordinarily, an instance of MethodType is such by virtue of being a method of doing som
+  - subclass of: investigating
+  - ancestor definition: Research comprises creative work undertaken on a systematic basis in order to increase the stock of knowledge, including knowledge of humans, culture and society, and the use of this stock of knowledge to devise new applications. It is used to establish or confirm facts, reaffirm the results of previous work, solve new or existing problems, support theorems, or develop new theories. A research pro
+  - subclass of: learned activity
+  - ancestor definition: This is the collection of activities which must first be learned before they can be performed--i.e., before any role which is a specPred of doneBy can be played.
+  - subclass of: investigation
+  - ancestor definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide variety of entities: a philosophical problem, a criminal act, a natural phenomenon, etc.. The phenomenon under investigation may be actual or merely putative within the context of the representation. Also
+  - subclass of: purposeful mental activity
+  - ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is an event involving intentional mental activity on the part of at least one performer (see performedBy). Solving a math problem (cf. DoingMath), planning an attack and performing a thought experiment (cf. ThoughtExperimenting) are all examples of Pur
+  - subclass of: activity
+
+Concept: 'long-term study'
+Facts:
+  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+  - subclass of: detailed study
+  - ancestor definition: The collection of all long-term studies. A type of WrittenReportOnSituation_CW.
+  - subclass of: report (document)
+  - ancestor definition: A collection of instances of TextualMaterial. Each instance is a textual report composed by one agent for the benefit of another concerning a particular situation in which that other agent is believed to be interested.
+  - subclass of: document
+  - ancestor definition: A specialization of InformationStore. Each instance of Document is either an abstract or concrete document of some sort. Documents, thus broadly construed, may be textual or non-textual.
+  - subclass of: situation report
+  - ancestor definition: A specialization of NonfictionalPCW. Instances of this collection are verbal or written reports of a particular situation. Positive examples of this collection would be a written police report or a verbal report to my primary supervisor on the status of an assignment.
+  - sibling concept: dissertation
+
+Concept: 'drive'
+Facts:
+  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+  - subclass of: mental health problem
+  - ancestor definition: A mental disorder, also called a mental illness or psychiatric disorder, is a diagnosis by a mental health professional of a behavioral or mental pattern that may cause suffering or a poor ability to function in life. Such features may be persistent, relapsing and remitting, or occur as a single episode. Many disorders have been described, with signs and symptoms that vary widely between specific 
+  - subclass of: illness
+  - ancestor definition: The most general collection of ailment events; a subcollection of both PhysiologicalCondition and DysfunctionalCondition. An instance of AilmentCondition is a dynamic state of sickness, injury, or physiological impairment. The rationale for construing ailments in this way is the obvious fact that to have an ailment is to undergo an event: an individual ailment has temporal features, it progresses 
+  - subclass of: medical condition
+  - ancestor definition: A specialization of #$SystemCondition. Each instance of PhysiologicalCondition involves an Organism_Whole being in some physiological state that is not typical for that organism's species, modulo considerations about the organism's sex or (in some cases) subspecies. Thus Menstruating, though not typical among all persons, is part of being a healthy adult female, and so is not a specialization of P
+  - sibling concept: aids dementia complex
+  - sibling concept: catatonia
+  - sibling concept: cognitive disorder
+  - sibling concept: clinical depression
+  - sibling concept: infantilism (appearaance)
+
+Concept: 'scientific observation'
+Facts:
+  - definition: A means or facility to generate scientific observations.
+  - subclass of: observation
+  - ancestor definition: Observation is the active acquisition of information from a primary source. In living beings, observation employs the senses. In science, observation can also involve the recording of data via the use of instruments. The term may also refer to any data collected during the scientific activity. Observations can be qualitative, that is, only the absence or presence of a property is noted, or quantit
+  - subclass of: scientific method
+  - ancestor definition: The scientific method is a body of techniques for investigating phenomena, acquiring new knowledge, or correcting and integrating previous knowledge. To be termed scientific, a method of inquiry is commonly based on empirical or measurable evidence subject to specific principles of reasoning.
+  - subclass of: cognition
+  - ancestor definition: A sub-collection of MentalState. Each instance is the psychological result of perception and learning and reasoning.
+  - subclass of: method
+  - ancestor definition: A specialization of LearnedActivityType, MethodType is the the collection of types of purposeful actions that decompose into a common pattern of sub-event-types and/or role-player types (e.g., instruments) used in the course of the event. MethodType is an instance of FacetingBasisCollectionType, which means that ordinarily, an instance of MethodType is such by virtue of being a method of doing som
+  - subclass of: philosophical beliefs
+  - ancestor definition: The class of BeliefSystems that deal in rather abstract terms with what can be known, what is and what can be, and/or with what should be. Sample elements of PhilosophyBeliefs include MilesianSchoolBeliefs, ThalesPhilosophy, etc.
+  - subclass of: animal cognition
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "comparison": [
+        "sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.",
+        "subclass of: examination investigation",
+        "ancestor definition: A sub-collection of Investigation. Each instance is the act of examining something closely (as for mistakes)."
+    ],
+    "research method": [
+        "definition: Instances of research methods.",
+        "sub-class of: investigating",
+        "ancestor definition: Research comprises creative work undertaken on a systematic basis in order to increase the stock of knowledge, including knowledge of humans, culture and society, and the use of this stock of knowledge to devise new applications."
+    ],
+    "long-term study": [
+        "definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.",
+        "sub-class of: detailed study",
+        "ancestor definition: The collection of all long-term studies. A type of WrittenReportOnSituation_CW."
+    ],
+    "drive": [
+        "definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.",
+        "sub-class of: mental health problem",
+        "ancestor definition: A mental disorder, also called a mental illness or psychiatric disorder, is a diagnosis by a mental health professional of a behavioral or mental pattern that may cause suffering or a poor ability to function in life."
+    ],
+    "scientific observation": [
+        "definition: A means or facility to generate scientific observations.",
+        "sub-class of: observation",
+        "ancestor definition: Observation is the active acquisition of information from a primary source. In living beings, observation employs the senses. In science, observation can also involve the recording of data via the use of instruments."
+    ]
+}
+```
+
+I have carefully filtered out irrelevant facts and kept only the core definitions for each concept that perfectly matches one of the multiple-choice options in the User Query.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". \n2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.\n3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.\n4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."\n5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.\n\n### Question:\nJanette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?\nA. measuring the amount of fatigue\nB. making sure the same foods are eaten\nC. recording observations in the same chart\nD. making sure the foods are at the same temperature\n\n### Context:\nKBPedia Concept: comparison.\nRelevant Logical Facts:\n  - sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.\n  - subclass of: examination investigation\n  - ancestor definition: A sub-collection of Investigation. Each instance is the act of examining something closely (as for mistakes).\nKBPedia Concept: research method.\nRelevant Logical Facts:\n  - definition: Instances of research methods.\n  - sub-class of: investigating\n  - ancestor definition: Research comprises creative work undertaken on a systematic basis in order to increase the stock of knowledge, including knowledge of humans, culture and society, and the use of this stock of knowledge to devise new applications.\nKBPedia Concept: long-term study.\nRelevant Logical Facts:\n  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.\n  - sub-class of: detailed study\n  - ancestor definition: The collection of all long-term studies. A type of WrittenReportOnSituation_CW.\nKBPedia Concept: drive.\nRelevant Logical Facts:\n  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.\n  - sub-class of: mental health problem\n  - ancestor definition: A mental disorder, also called a mental illness or psychiatric disorder, is a diagnosis by a mental health professional of a behavioral or mental pattern that may cause suffering or a poor ability to function in life.\nKBPedia Concept: scientific observation.\nRelevant Logical Facts:\n  - definition: A means or facility to generate scientific observations.\n  - sub-class of: observation\n  - ancestor definition: Observation is the active acquisition of information from a primary source. In living beings, observation employs the senses. In science, observation can also involve the recording of data via the use of instruments.\n\n### Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+B. making sure the same foods are eaten 
+
+This would make the investigation most difficult to replicate because it requires precise control over variables and ensuring that Janette's friend Carmen eats exactly the same food at the exact same time each day, which can be challenging due to factors like differences in taste preferences or availability of ingredients.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+
+### Context:
+KBPedia Concept: comparison.
+Relevant Logical Facts:
+  - sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+  - subclass of: examination investigation
+  - ancestor definition: A sub-collection of Investigation. Each instance is the act of examining something closely (as for mistakes).
+
+KBPedia Concept: research method.
+Relevant Logical Facts:
+  - definition: Instances of research methods.
+  - sub-class of: investigating
+  - ancestor definition: Research comprises creative work undertaken on a systematic basis in order to increase the stock of knowledge, including knowledge of humans, culture and society, and the use of this stock of knowledge to devise new applications.
+
+KBPedia Concept: long-term study.
+Relevant Logical Facts:
+  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+  - sub-class of: detailed study
+  - ancestor definition: The collection of all long-term studies. A type of WrittenReportOnSituation_CW.
+
+KBPedia Concept: drive.
+Relevant Logical Facts:
+  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+  - sub-class of: mental health problem
+  - ancestor definition: A mental disorder, also called a mental illness or psychiatric disorder, is a diagnosis by a mental health professional of a behavioral or mental pattern that may cause suffering or a poor ability to function in life.
+
+KBPedia Concept: scientific observation.
+Relevant Logical Facts:
+  - definition: A means or facility to generate scientific observations.
+  - sub-class of: observation
+  - ancestor definition: Observation is the active acquisition of information from a primary source. In living beings, observation employs the senses. In science, observation can also involve the recording of data via the use of instruments.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+B. making sure the same foods are eaten 
+
+This would make the investigation most difficult to replicate because it requires precise control over variables and ensuring that both Janette and Carmen consume exactly the same food items in each trial, which can be challenging due to factors like differences in taste preferences or unintentional variations in cooking methods.
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Janette conducts an investigation to see which foods make her feel more fatigued.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {"id": "janette_id", "label": "Person", "properties": {"name": "Janette"}},
+        {"id": "foods_id", "label": "Topic", "properties": {"name": "Foods"}}
+    ],
+    "relationships": [
+        {
+            "type": "CAUSES",
+            "start_node_id": "janette_id",
+            "end_node_id": "foods_id",
+            "properties": {
+                "natural_statement": "Janette conducts an investigation to see which foods make her feel more fatigued.",
+                "logic_intent": "RULE",
+                "logical_form_hint": "e.g., fatigue(X) :- eat(X)"
+            }
+        }
+    ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text She eats one of four different foods each day at the same time for four days and then records how she feels.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+    {
+        "nodes": [
+            {"id": "eating_habits", "label": "Topic", "properties": {"name": "Eating habits"}},
+            {"id": "record_feelings", "label": "Event", "properties": {"name": "Record feelings"}}
+        ],
+        "relationships": [
+            {
+                "type": "RELATED_TO",
+                "start_node_id": "eating_habits",
+                "end_node_id": "record_feelings",
+                "properties": {
+                    "natural_statement": "She records how she feels after eating four different foods for four days.",
+                    "logic_intent": "FACT",
+                    "logical_form_hint": "e.g., related(eating_habits, record_feelings)"
+                }
+            },
+            {
+                "type": "CAUSES",
+                "start_node_id": "eating_habits",
+                "end_node_id": "record_feelings",
+                "properties": {
+                    "natural_statement": "She eats one of four different foods each day at the same time for four days and then records how she feels.",
+                    "logic_intent": "FACT",
+                    "logical_form_hint": "e.g., causes(eating_habits, record_feelings)"
+                }
+            },
+            {
+                "type": "PART_OF",
+                "start_node_id": "record_feelings",
+                "end_node_id": "eating_habits",
+                "properties": {
+                    "natural_statement": "Eating habits include recording feelings after eating.",
+                    "logic_intent": "FACT",
+                    "logical_form_hint": "e.g., part_of(record_feelings, eating_habits)"
+                }
+            }
+        ]
+    }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text She asks her friend Carmen to do the same investigation to see if she gets similar results.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+  {
+    "nodes": [
+      {"id": "carmen", "label": "Person", "properties": {"name": "Carmen"}},
+      {"id": "she", "label": "Person", "properties": {"name": "She"}}
+    ],
+    "relationships": [
+      {
+        "type": "RELATED_TO",
+        "start_node_id": "carmen",
+        "end_node_id": "she",
+        "properties": {
+          "natural_statement": "She asks her friend Carmen to do the same investigation.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "(related_to(carmen, she))"
+        }
+      },
+      {
+        "type": "CAUSES",
+        "start_node_id": "she",
+        "end_node_id": "carmen",
+        "properties": {
+          "natural_statement": "She asks her friend Carmen to do the same investigation to see if she gets similar results.",
+          "logic_intent": "RULE",
+          "logical_form_hint": "(causes(she, carmen))"
+        }
+      }
+    ]
+  }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information:
+
+```
+[
+    "investigation",
+    "fatigue",
+    "foods",
+    "temperature"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['measuring the amount of fatigue', 'making sure the same foods are eaten', 'recording observations in the same chart', 'making sure the foods are at the same temperature']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] fatigue: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe 
+[1] chronic fatigue syndrome: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.
+[2] foods featuring butter: This category covers foods that feature butter.
+[3] breakfast food: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.
+[4] chart pattern: A chart pattern or price pattern is a pattern within a chart when prices are graphed. In stock and commodity markets trading, chart pattern studies play a large role during technical analysis. When data is plotted there is usually a pattern which naturally occurs and repeats over a period. Chart patterns are used as either reversal or continuation signals.
+[5] financial chart: A chart of finance or stock performance.
+[6] temperature: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \
+[7] fire investigation: Fire investigation, sometimes referred to as origin and cause investigation, is the analysis of fire-related incidents. After firefighters extinguish a fire, an investigation is launched to determine the origin and cause of the fire or explosion. Investigations of such incidents require a systematic approach and knowledge of basic fire science.
+[8] investigation: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide variety of entities: a philosophical problem, a criminal act, a natural phenomenon, etc.. The phenomenon under investigation may be actual or merely putative within the context of the representation. Also
+[9] topics of 'consuming foods': This conceptual systems category is a focal point for aggregating topics of 'consuming foods'.
+[10] room temperature: Room temperature, 20-25 degrees celsius.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[0, 1, 3, 5, 6, 8, 9, 10]
+```
+
+These indices correspond to concepts that are relevant for answering the question. 
+
+*   Index [0] is "fatigue" which directly relates to one of the answer choices.
+*   Index [1] is "chronic fatigue syndrome", another concept related to fatigue and an answer choice.
+*   Index [3] is "breakfast food", a type of food that could be part of Janette's or Carmen's investigation, making it relevant for understanding how they conducted their experiment.
+*   Indices [5], [6], and [10] are all about charts/financial charts and temperature which relate to the answer choices directly.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+Concept: 'fatigue'
+Facts:
+  - definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe 
+  - subclass of: illness
+  - ancestor definition: The most general collection of ailment events; a subcollection of both PhysiologicalCondition and DysfunctionalCondition. An instance of AilmentCondition is a dynamic state of sickness, injury, or physiological impairment. The rationale for construing ailments in this way is the obvious fact that to have an ailment is to undergo an event: an individual ailment has temporal features, it progresses 
+  - subclass of: medical condition
+  - ancestor definition: A specialization of #$SystemCondition. Each instance of PhysiologicalCondition involves an Organism_Whole being in some physiological state that is not typical for that organism's species, modulo considerations about the organism's sex or (in some cases) subspecies. Thus Menstruating, though not typical among all persons, is part of being a healthy adult female, and so is not a specialization of P
+  - subclass of: abnormal condition
+  - ancestor definition: This is the collection of #$SystemConditions which are abnormal for the system they affect -- for instance, a computer during reboot, or a human body when 'puffed out' from exceptionally vigorous exercise. For conditions which are abnormal and also impair the functioning of the system, see the more specialized DysfunctionalCondition.
+  - subclass of: facet collection
+  - ancestor definition: A CollectionType. Each instance of FacetInstanceCollection is a collection that is an instance of a FacetingCollectionType (q.v.). For example, the facet-instance-collection (WineOfVintageFn (YearFn 1926)) is an instance of the faceting-collection-type WineTypeByVintage.
+  - subclass of: situation involving tangible things
+  - ancestor definition: A specialization of Situation_Localized. Each instance of PhysicalSituation is a spatially localized situation involving one or more physical objects or stuffs (see situationConstituents). Important specializations include PhysicalEvent and AilmentCondition.
+  - has subclass: exhausting
+
+Concept: 'chronic fatigue syndrome'
+Facts:
+  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.
+  - subclass of: chronic condition
+  - ancestor definition: A collection of ailments. An instance of ChronicCondition is an ailment that lingers or recurs in an organism throughout its life. In some cases, the symptoms of a chronic condition may abate with treatment. The condition may never go away completely. Asthma is an example of a subcollection of ChronicCondition.
+  - subclass of: medical condition
+  - ancestor definition: A specialization of #$SystemCondition. Each instance of PhysiologicalCondition involves an Organism_Whole being in some physiological state that is not typical for that organism's species, modulo considerations about the organism's sex or (in some cases) subspecies. Thus Menstruating, though not typical among all persons, is part of being a healthy adult female, and so is not a specialization of P
+  - subclass of: abnormal condition
+  - ancestor definition: This is the collection of #$SystemConditions which are abnormal for the system they affect -- for instance, a computer during reboot, or a human body when 'puffed out' from exceptionally vigorous exercise. For conditions which are abnormal and also impair the functioning of the system, see the more specialized DysfunctionalCondition.
+  - subclass of: facet collection
+  - ancestor definition: A CollectionType. Each instance of FacetInstanceCollection is a collection that is an instance of a FacetingCollectionType (q.v.). For example, the facet-instance-collection (WineOfVintageFn (YearFn 1926)) is an instance of the faceting-collection-type WineTypeByVintage.
+  - subclass of: situation involving tangible things
+  - ancestor definition: A specialization of Situation_Localized. Each instance of PhysicalSituation is a spatially localized situation involving one or more physical objects or stuffs (see situationConstituents). Important specializations include PhysicalEvent and AilmentCondition.
+  - sibling concept: Amyotrophic lateral sclerosis
+
+Concept: 'breakfast food'
+Facts:
+  - definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.
+  - subclass of: food item
+  - ancestor definition: An instance of ExistingStuffType, and a specialization of FoodOrDrink. Each instance of Food is a particular portion of food of a type which can be, and habitually is, eaten by humans or other animals. Here the notion of eating is important; eating an instance of Food will generally require biting or chewing, but if placed into the mouth (e.g. with a utensil) in a manner not considered to be drink
+  - subclass of: food beverage or tobacco product
+  - ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers food beverage and tobacco products. This product category corresponds to the UNSPSC code: 50000000.
+  - subclass of: food or drink
+  - ancestor definition: A specialization of EdibleStuff (q.v.). Each instance of FoodOrDrink is a substance which instances of some type of organism (that is, some sub-collection of Organism_Whole) normally consume a significant part of. Important specializations of FoodOrDrink include Food (instances of which require chewing in order to be consumed) and Drink (instances of which are liquids that can be consumed without 
+  - subclass of: grocery
+  - ancestor definition: An element of ProductTypeByMarketCategory. Each element of GroceryMarketCategory is a food product typically sold in grocery stores or grocery departments, e.g., canned foods, fresh produce, packaged cookies, frozen dinners.
+  - subclass of: opaque thing
+  - ancestor definition: Opaque is a #$PhysicalAttribute representing a specific degree of #$Transparency. Opaque objects do not transmit light. See also transparencyOfObject.
+  - subclass of: organic matter
+
+Concept: 'financial chart'
+Facts:
+  - definition: A chart of finance or stock performance.
+  - subclass of: technical analysis
+  - ancestor definition: The collection of all technical analysis. A type of FollowingAStandardProcedure and Evaluating.
+  - subclass of: evaluating
+  - ancestor definition: A specialization of PurposefulAction and Thinking. Each instance of this collection is an event in which at least one agent evaluates some real-world thing or situation. Notable specializations of Evaluating include MeasuringSomething, MedicalTesting, and Navigating. This collection differs from AnalyzingSomething in that the latter does not necessarily involve some extra-mental entity.
+  - subclass of: following standard procedures
+  - ancestor definition: The collection of all events in which the performer of the event follows a standarized procedure which the agent knows prior to performing the event. The performer of some specialization of FollowingAStandardProcedure is apt to perform multiple instances of that event type.
+  - subclass of: action (purposeful)
+  - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purposefully done by (see performedBy) at least one actor.
+  - subclass of: thinking
+  - ancestor definition: A specialization of IntentionalMentalEvent. Each instance of this collection is a thinking process in which it is essential that an agent uses information about the current state of the world (or some portion of the world). Notable specializations of Thinking include Evaluating, MakingAPlan, Negotiating, and InventingSomething.
+  - sibling concept: candlestick patter
+
+Concept: 'temperature'
+Facts:
+  - definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \
+  - subclass of: non aspectual quantity
+  - ancestor definition: A specialization of ScalarQuantity (q.v.). This is the collection of all \
+  - subclass of: one dimensional quantity
+  - ancestor definition: A specialization of MeasurableQuantity (q.v.). Each instance of OneDimensionalQuantity is a measurable quantity that is not defined in terms of (i.e. as the product or ratio of) other quantities. For example, (Mile 65) and (HoursDuration 1) are both instances of OneDimensionalQuantity; but (MilesPerHour 65), derived by dividing the former quantity by the latter, is not (cf. MultiDimensionalQuantit
+  - subclass of: scalar or vector interval
+  - ancestor definition: A specialization of TupleOfIntervals (q.v.). ScalarOrVectorInterval is the collection of all measurable intervals, whether scalar or vector. It thus includes all numbers, quantities, and vectors. For more information, see the specializations ScalarInterval and VectorInterval.
+  - subclass of: tangible physical quantity
+  - ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have. Specializations include Rigidity and Dirtiness. Conversely, physical quantity-types such as Area and Speed are not specializations of TangiblePhysicalQuantity, as they can also characterize (e.g.) intangible SpaceRegions and WavePropagation events, respectively.
+  - subclass of: quality
+  - ancestor definition: An internal characteristic or aspect of an object; collectively these define intensionally what kind of thing to which the object belongs, though that relationship is not intrinsic.
+  - subclass of: scalar quantity
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "fatigue": [
+        "definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue.",
+        "subclass of: illness",
+        "ancestor definition: A collection of ailments."
+    ],
+    "chronic fatigue syndrome": [
+        "definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.",
+        "subclass of: chronic condition"
+    ]
+}
+```
+
+I have filtered out the irrelevant facts for each concept. For 'fatigue', I kept its definition, subclass of illness, and ancestor definition as a collection of ailments. These are essential to understand what fatigue is in relation to other concepts.
+
+For 'chronic fatigue syndrome', I retained only two relevant definitions: its own definition and that it's a subclass of chronic condition. This provides enough context for the logic engine to evaluate if this option matches one of the multiple-choice answers.
+
+Note that I did not include any facts from the concept "breakfast food" as they are unrelated to the user query about fatigue, investigation difficulty, or replication challenges. Similarly, I filtered out all irrelevant facts related to 'financial chart', 'temperature' and other concepts which do not match with the given options in the User Query.
+
+Please let me know if you need further assistance!
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are a Logic Discovery Agent. Extract the minimum logical building blocks needed to answer the Question from the Context.\n\n### TASK\nProduce a single numbered list called **LOGICAL EVIDENCE**. Each item is one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.\n\n### CONSTRAINTS\n* Include at most 10 items total.\n* Each item must directly help bridge the premise to the answer.  Omit background, history, or tangential details.\n* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."\n* Break compound sentences into independent logical units.\n* Use clear, declarative English only. No code, no symbols.\n* Do NOT reveal the final answer — provide logical ingredients only.\n\n---\n### QUESTION:\nWhich would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature\n\n### CONTEXT:\nKBPedia Concept: fatigue.\nRelevant Logical Facts:\n  - definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue.\n  - subclass of: illness\n  - ancestor definition: A collection of ailments.\nKBPedia Concept: chronic fatigue syndrome.\nRelevant Logical Facts:\n  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems.\n  - subclass of: chronic condition\nKBPedia Concept: breakfast food.\nRelevant Logical Facts:\n  - definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.\n  - subclass of: food item\n  - ancestor definition: An instance of ExistingStuffType, and a specialization of FoodOrDrink. Each instance of Food is a particular portion of food of a type which can be, and habitually is, eaten by humans or other animals. Here the notion of eating is important; eating an instance of Food will generally require biting or chewing, but if placed into the mouth (e.g. with a utensil) in a manner not considered to be drink\n  - subclass of: food beverage or tobacco product\n  - ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers food beverage and tobacco products. This product category corresponds to the UNSPSC code: 50000000.\n  - subclass of: food or drink\n  - ancestor definition: A specialization of EdibleStuff (q.v.). Each instance of FoodOrDrink is a substance which instances of some type of organism (that is, some sub-collection of Organism_Whole) normally consume a significant part of. Important specializations of FoodOrDrink include Food (instances of which require chewing in order to be consumed) and Drink (instances of which are liquids that can be consumed without \n  - subclass of: grocery\n  - ancestor definition: An element of ProductTypeByMarketCategory. Each element of GroceryMarketCategory is a food product typically sold in grocery stores or grocery departments, e.g., canned foods, fresh produce, packaged cookies, frozen dinners.\n  - subclass of: opaque thing\n  - ancestor definition: Opaque is a #$PhysicalAttribute representing a specific degree of #$Transparency. Opaque objects do not transmit light. See also transparencyOfObject.\n  - subclass of: organic matter\n  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h\n  - subclass of: market category\n  - ancestor definition: A collection of collections. Each element of ProductTypeByMarketCategory is a collection of items that are commonly offered for sale in the same (type of) store, (type of) section of a store, or (type of) catalog. A specialty store might be devoted to a single element of ProductTypeByMarketCategory. The basis for a ProductTypeByMarketCategory includes both (1) different brands or variations of a c\n  - subclass of: visible feature\n  - ancestor definition: A type of feature that is defined by and visible in nature.\n  - has subclass: breakfast\n  - has subclass: cereal (breakfast food)\n  - has subclass: doughnut\n  - has subclass: chicken\'s egg\n  - has subclass: flapjack\n  - has subclass: omelette\n  - has subclass: pancake\n  - has subclass: waffle\n  - sibling concept: cereal (food)\n  - sibling concept: cheesy food\n  - sibling concept: children\'s food\n  - sibling concept: convenience food\n  - sibling concept: crumb\nKBPedia Concept: financial chart.\nRelevant Logical Facts:\n  - definition: A chart of finance or stock performance.\n  - subclass of: technical analysis\n  - ancestor definition: The collection of all technical analysis. A type of FollowingAStandardProcedure and Evaluating.\n  - subclass of: evaluating\n  - ancestor definition: A specialization of PurposefulAction and Thinking. Each instance of this collection is an event in which at least one agent evaluates some real-world thing or situation. Notable specializations of Evaluating include MeasuringSomething, MedicalTesting, and Navigating. This collection differs from AnalyzingSomething in that the latter does not necessarily involve some extra-mental entity.\n  - subclass of: following standard procedures\n  - ancestor definition: The collection of all events in which the performer of the event follows a standarized procedure which the agent knows prior to performing the event. The performer of some specialization of FollowingAStandardProcedure is apt to perform multiple instances of that event type.\n  - subclass of: action (purposeful)\n  - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purposefully done by (see performedBy) at least one actor.\n  - subclass of: thinking\n  - ancestor definition: A specialization of IntentionalMentalEvent. Each instance of this collection is a thinking process in which it is essential that an agent uses information about the current state of the world (or some portion of the world). Notable specializations of Thinking include Evaluating, MakingAPlan, Negotiating, and InventingSomething.\n  - sibling concept: candlestick patter\n  - sibling concept: chart overlay\n  - sibling concept: chart pattern\n  - sibling concept: technical indicator\nKBPedia Concept: temperature.\nRelevant Logical Facts:\n  - definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \\\n  - subclass of: non aspectual quantity\n  - ancestor definition: A specialization of ScalarQuantity (q.v.). This is the collection of all \\\n  - subclass of: one dimensional quantity\n  - ancestor definition: A specialization of MeasurableQuantity (q.v.). Each instance of OneDimensionalQuantity is a measurable quantity that is not defined in terms of (i.e. as the product or ratio of) other quantities. For example, (Mile 65) and (HoursDuration 1) are both instances of OneDimensionalQuantity; but (MilesPerHour 65), derived by dividing the former quantity by the latter, is not (cf. MultiDimensionalQuantit\n  - subclass of: scalar or vector interval\n  - ancestor definition: A specialization of TupleOfIntervals (q.v.). ScalarOrVectorInterval is the collection of all measurable intervals, whether scalar or vector. It thus includes all numbers, quantities, and vectors. For more information, see the specializations ScalarInterval and VectorInterval.\n  - subclass of: tangible physical quantity\n  - ancestor definition: A specialization of PhysicalQuantity (q.v.). This is the collection of quanitative physical features that only tangible objects can have. Specializations include Rigidity and Dirtiness. Conversely, physical quantity-types such as Area and Speed are not specializations of TangiblePhysicalQuantity, as they can also characterize (e.g.) intangible SpaceRegions and WavePropagation events, respectively.\n  - subclass of: quality\n  - ancestor definition: An internal characteristic or aspect of an object; collectively these define intensionally what kind of thing to which the object belongs, though that relationship is not intrinsic.\n  - subclass of: scalar quantity\n  - ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This is the collection of scalar quantities: at most partly numeric abstract individuals used as measurements or ratings of things. Specializations of ScalarQuantity include Distance, Temperature, Acceleration, Toxicity, and Loyalty (all of which save th\n  - subclass of: measurable quantity\n  - ancestor definition: A specialization of Quantity (q.v.). This is the collection of quantities that have a numeric component and could actually be used to measure something, as opposed to (say) merely ranking it on a scale. Arithmetic operations (such as addition and multiplication) can be performed on measurable quantities, as they can on purely numeric scalars (see NumericInterval). Specializations of MeasurableQuan\n  - subclass of: n-tuple interval\n  - ancestor definition: A specialization of Tuple (q.v.). Each instance of TupleOfIntervals is a tuple whose members (see memberOfTuple) are all ScalarIntervals (q.v.). Notable specializations of TupleOfIntervals include ScalarInterval itself (whose instances are one-tuples), VectorInterval (whose instances are two-tuples of scalars), and BloodPressureReading.\n  - has subclass: absolute zero\n  - has subclass: cold\n  - has subclass: moderately cold\n  - has subclass: room temperature\n  - has subclass: sea surface temperature\n  - has subclass: temperature control\n  - has subclass: thermal protection\n  - has subclass: thermoregulation\n  - has subclass: threshold temperature\n  - has subclass: warmth\n  - sibling concept: area\n  - sibling concept: beauty\n  - sibling concept: biodiversity\n  - sibling concept: cask strength\n  - sibling concept: chemical purity\n\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+**LOGICAL EVIDENCE**
+
+1. Measuring the amount of fatigue is a subjective task that can be influenced by various factors, including individual perception and bias.
+2. Recording observations in the same chart may not guarantee consistency if multiple observers are involved with different levels of expertise or attention to detail.
+3. Making sure the foods are at the same temperature requires precise control over environmental conditions, which might be challenging to replicate consistently.
+4. Chronic fatigue syndrome is a complex condition characterized by various symptoms, including mental fogginess and gastro-intestinal problems, making it difficult to standardize measurements.
+5. Fatigue can manifest differently in individuals with chronic fatigue syndrome compared to those without the condition, complicating efforts to establish reliable measurement protocols.
+6. The definition of fatigue as "pathologic" implies a medical or physiological aspect that may be challenging to quantify accurately across different studies or experiments.
+7. Temperature is a physical quantity that can vary significantly depending on environmental conditions and equipment used for measurements.
+8. Replicability in scientific investigations relies heavily on controlling variables, including temperature, which might not always be feasible due to practical limitations.
+9. The complexity of chronic fatigue syndrome as an ailment condition makes it difficult to establish clear guidelines or protocols for measuring its effects accurately.
+10. Measuring the same foods being eaten is crucial but may involve issues related to food preparation, portion sizes, and individual dietary preferences that can affect results.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['trench', 'rift valley', 'ocean basin', 'mid-ocean ridge']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] oceanic ridge: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This type of oceanic mountain ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. The production of new seafloor results from mantle upwel
+[1] undersea valley: The axial depression of the mid-oceanic ridge system.
+[2] rift valley: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults. Rift valleys are found both on continents and under oceans.
+[3] oceanic plateau: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed. While many oceanic plateaus are composed of continental crust, and often form a step interrupting the continental slope, some plateaus are undersea remnants of large igneous provinces.
+[4] seamount: A Seamount is an underwater Mountain rising from the seafloor that does not reach to the surface of the EarthsOceanSea.
+[5] geological basin: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.
+[6] fracture zone: A fracture zone is a linear oceanic feature—often hundreds, even thousands of kilometers long—resulting from the action of offset mid-ocean ridge axis segments. They are a consequence of plate tectonics. Lithospheric plates on either side of an active transform fault move in opposite directions; here, strike-slip activity occurs.
+[7] subduction zones: Subduction is a geological process that takes place at convergent boundaries of tectonic plates where one plate moves under another and is forced down into the mantle. Regions where this process occurs are known as subduction zones. Rates of subduction are typically in centimetres per year, with the average rate of convergence being approximately two to eight centimetres per year along most plate 
+[8] ocean trench: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor. Oceanic trenches are a distinctive morphological feature of convergent plate boundaries, along which lithospheric plates move towards each other at rates that vary from a few mm to over ten cm per year. A trench marks the position at which the fle
+[9] rifts or graben: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed block of the crust of a planet bordered by parallel faults.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```
+[1, 3, 5, 6, 8, 9]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge"
+
+Concept: 'undersea valley'
+Facts:
+  - definition: The axial depression of the mid-oceanic ridge system.
+  - subclass of: underwater topographical feature
+  - ancestor definition: A collection of geographical regions and a specialization of LandTopographicalFeature and UnderwaterLocation. Each instance of UnderwaterTopographicalFeature is a region of land under a body of water and is distinguishable from surrounding regions by salient physical differences in surface texture, three-dimensional shape, or elevation.
+  - subclass of: land topographical feature
+  - ancestor definition: A collection of geographical regions and a specialization of TopographicalFeature. Each instance of LandTopographicalFeature is a region of land distinguishable from surrounding regions by salient physical differences in surface texture, three-dimensional shape, or elevation. Note that this collection includes features that are covered by bodies of water, snow, or ice. Specializations of LandTopog
+  - subclass of: underwater location
+  - ancestor definition: A specialization of Underwater and Place_NonAgent. UnderwaterLocation is the collection of all underwater spaces.
+  - subclass of: topographical feature
+  - ancestor definition: A specialization of GeographicalRegion. Each instance of TopographicalFeature is a three-dimensional feature of a planet's surface, typically with boundaries defined by formations of rock, dirt, water, etc., or by significant changes in elevation. Some important specializations of TopographicalFeature include Mountain, MountainRange, Peninsula, Harbor, and Shoreline. Instances include KyushuIsland
+  - subclass of: underwater
+  - ancestor definition: The collection of instances of SpatialThing_Localized which are completely submerged in some body of water.
+  - sibling concept: abyssal plain
+
+Concept: 'oceanic plateau'
+Facts:
+  - definition: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed. While many oceanic plateaus are composed of continental crust, and often form a step interrupting the continental slope, some plateaus are undersea remnants of large igneous provinces.
+  - subclass of: plate tectonics
+  - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale motion of 7 large plates and the movements of a larger number of smaller plates of the Earth's lithosphere, over the last 100's of millions of years. The theoretical model builds on the concept of continental drift developed during the first few deca
+  - subclass of: scientific discipline
+  - ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and problems, which together constitute the informational content of a systematic endeavor to explain (some part of) the natural world by rational (and frequently, quantifiable) methods, including, but not limited to, induction, falsifiable hypotheses test
+  - subclass of: field of study
+  - ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, hypotheses, and problems. Instances of FieldOfStudy are typically the subject of teaching and/or research within instances of AcademicDepartment (q.v.), although one AcademicDepartment may cover several instances of FieldOfStudy. Instances of FieldOfS
+  - sibling concept: Aulacogen
+  - sibling concept: continental fragment
+  - sibling concept: craton
+  - sibling concept: fracture zone
+  - sibling concept: geodynamics
+
+Concept: 'geological basin'
+Facts:
+  - definition: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.
+  - subclass of: basin
+  - ancestor definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.
+  - subclass of: depression
+  - ancestor definition: A specialization of LandTopographicalFeature. Each instance of Depression_Topographical is a depression in a planet's surface, either on land or underwater. For bowl-shaped depressions, see the specialization Basin_Topographical.
+  - subclass of: slope
+  - ancestor definition: A specialization of LandTopographicalFeature (q.v.) each instance of which is an inclined part of the Earth's surface. See the instances of SlopeTypeByGradientLevel for some specializations of Slope_Topographical, grouped according to steepness.
+  - subclass of: walled cavity
+  - ancestor definition: A specialization of PartiallyTangible and Cavity. Each instance of CavityWithWalls is an individual that spatially subsumes both the intangible space region \
+  - subclass of: site that is also a geographical thing
+  - ancestor definition: The collectionIntersection of GeographicalThing and Place (q.v.).
+  - subclass of: land topographical feature
+
+Concept: 'fracture zone'
+Facts:
+  - definition: A fracture zone is a linear oceanic feature—often hundreds, even thousands of kilometers long—resulting from the action of offset mid-ocean ridge axis segments. They are a consequence of plate tectonics. Lithospheric plates on either side of an active transform fault move in opposite directions; here, strike-slip activity occurs.
+  - subclass of: geological fault
+  - ancestor definition: A specialization of LandTopographicalFeature and Crevice. Each instance of Fault_Topographical is a fracture in the Earth's crust in which the adjacent surfaces are displaced with respect to each other in a direction parallel to the fracture. Faults are caused by a shifting or dislodging of the Earth's crust. Energy release during rapid slippage along faults causes earthquakes (see Earthquake).
+  - subclass of: oceanography
+  - ancestor definition: Oceanography: an <a href=\
+  - subclass of: plate tectonics
+  - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale motion of 7 large plates and the movements of a larger number of smaller plates of the Earth's lithosphere, over the last 100's of millions of years. The theoretical model builds on the concept of continental drift developed during the first few deca
+  - subclass of: crevice in the earth
+  - ancestor definition: A collection of topographical features and a specialization of Crevice and Depression_Topographical. Each instance of Crevice_Topographical is a long, slender cavity or crack. The width of a crevice is significantly less than its length. The depth of a crevice is often greater than its width, and is never significantly less than its width.
+  - subclass of: land topographical feature
+  - ancestor definition: A collection of geographical regions and a specialization of TopographicalFeature. Each instance of LandTopographicalFeature is a region of land distinguishable from surrounding regions by salient physical differences in surface texture, three-dimensional shape, or elevation. Note that this collection includes features that are covered by bodies of water, snow, or ice. Specializations of LandTopog
+  - subclass of: earth science
+
+Concept: 'ocean trench'
+Facts:
+  - definition: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor. Oceanic trenches are a distinctive morphological feature of convergent plate boundaries, along which lithospheric plates move towards each other at rates that vary from a few mm to over ten cm per year. A trench marks the position at which the fle
+  - subclass of: land topographical feature
+  - ancestor definition: A collection of geographical regions and a specialization of TopographicalFeature. Each instance of LandTopographicalFeature is a region of land distinguishable from surrounding regions by salient physical differences in surface texture, three-dimensional shape, or elevation. Note that this collection includes features that are covered by bodies of water, snow, or ice. Specializations of LandTopog
+  - subclass of: plate tectonics
+  - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale motion of 7 large plates and the movements of a larger number of smaller plates of the Earth's lithosphere, over the last 100's of millions of years. The theoretical model builds on the concept of continental drift developed during the first few deca
+  - subclass of: underwater location
+  - ancestor definition: A specialization of Underwater and Place_NonAgent. UnderwaterLocation is the collection of all underwater spaces.
+  - subclass of: underwater topographical feature
+  - ancestor definition: A collection of geographical regions and a specialization of LandTopographicalFeature and UnderwaterLocation. Each instance of UnderwaterTopographicalFeature is a region of land under a body of water and is distinguishable from surrounding regions by salient physical differences in surface texture, three-dimensional shape, or elevation.
+  - subclass of: topographical feature
+  - ancestor definition: A specialization of GeographicalRegion. Each instance of TopographicalFeature is a three-dimensional feature of a planet's surface, typically with boundaries defined by formations of rock, dirt, water, etc., or by significant changes in elevation. Some important specializations of TopographicalFeature include Mountain, MountainRange, Peninsula, Harbor, and Shoreline. Instances include KyushuIsland
+  - subclass of: scientific discipline
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+After carefully reviewing the provided concepts and their associated facts, I have filtered out irrelevant information while retaining essential structural facts for each concept. Here is the output in JSON format:
+
+```json
+{
+    "oceanic plateau": [
+        "subclass of: plate tectonics",
+        "definition: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed."
+    ],
+    "geological basin": [
+        "subclass of: depression",
+        "definition: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.",
+        "subclass of: topographical feature"
+    ],
+    "fracture zone": [
+        "subclass of: plate tectonics",
+        "definition: A fracture zone is a linear oceanic feature—often hundreds, even thousands of kilometers long—resulting from the action of offset mid-ocean ridge axis segments."
+    ],
+    "ocean trench": [
+        "subclass of: underwater location",
+        "definition: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor.",
+        "subclass of: plate tectonics"
+    ]
+}
+```
+
+I have removed facts that were deemed irrelevant, such as Wikipedia links and word lengths. For each concept, I retained at least 1-3 definitional facts to ensure the logic engine has enough information to evaluate if a given option is correct.
+
+Note that for "oceanic plateau", I kept its definition because it directly matches one of the multiple-choice options in the User Query ("D. mid-ocean ridge"). Similarly, for other concepts like "geological basin" and "fracture zone," their definitions are relevant to understanding what they represent in relation to plate tectonics.
+
+For "ocean trench", I kept its definition because it directly matches one of the multiple-choice options in the User Query ("A. trench").
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". \n2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.\n3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.\n4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."\n5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.\n\n### Question:\nWhich feature does not form as a result of tectonic plates diverging?\nA. trench\nB. rift valley\nC. ocean basin\nD. mid-ocean ridge\n\n### Context:\nKBPedia Concept: undersea valley.\nRelevant Logical Facts:\n  - definition: The axial depression of the mid-oceanic ridge system.\n  - subclass of: underwater topographical feature\n  - ancestor definition: A collection of geographical regions and a specialization of LandTopographicalFeature and UnderwaterLocation. Each instance of UnderwaterTopographicalFeature is a region of land under a body of water and is distinguishable from surrounding regions by salient physical differences in surface texture, three-dimensional shape, or elevation.\n  - subclass of: land topographical feature\n  - ancestor definition: A collection of geographical regions and a specialization of TopographicalFeature. Each instance of LandTopographicalFeature is a region of land distinguishable from surrounding regions by salient physical differences in surface texture, three-dimensional shape, or elevation. Note that this collection includes features that are covered by bodies of water, snow, or ice. Specializations of LandTopog\n  - subclass of: underwater location\n  - ancestor definition: A specialization of Underwater and Place_NonAgent. UnderwaterLocation is the collection of all underwater spaces.\n  - subclass of: topographical feature\n  - ancestor definition: A specialization of GeographicalRegion. Each instance of TopographicalFeature is a three-dimensional feature of a planet\'s surface, typically with boundaries defined by formations of rock, dirt, water, etc., or by significant changes in elevation. Some important specializations of TopographicalFeature include Mountain, MountainRange, Peninsula, Harbor, and Shoreline. Instances include KyushuIsland\n  - subclass of: underwater\n  - ancestor definition: The collection of instances of SpatialThing_Localized which are completely submerged in some body of water.\n  - sibling concept: abyssal plain\n  - sibling concept: undersea arrugado\n  - sibling concept: underwater bank\n  - sibling concept: undersea hole\n  - sibling concept: undersea continental rise\nKBPedia Concept: oceanic plateau.\nRelevant Logical Facts:\n  - subclass of: plate tectonics\n  - definition: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed.\nKBPedia Concept: geological basin.\nRelevant Logical Facts:\n  - subclass of: depression\n  - definition: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.\n  - subclass of: topographical feature\nKBPedia Concept: fracture zone.\nRelevant Logical Facts:\n  - subclass of: plate tectonics\n  - definition: A fracture zone is a linear oceanic feature—often hundreds, even thousands of kilometers long—resulting from the action of offset mid-ocean ridge axis segments.\nKBPedia Concept: ocean trench.\nRelevant Logical Facts:\n  - subclass of: underwater location\n  - definition: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor.\n  - subclass of: plate tectonics\nShe asks her friend Carmen to do the same investigation to see if she gets similar results.\nShe eats one of four different foods each day at the same time for four days and then records how she feels.\nJanette conducts an investigation to see which foods make her feel more fatigued.\n\n### Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+D. mid-ocean ridge 
+
+This is because a mid-ocean ridge forms as a result of tectonic plates diverging, creating new oceanic crust by volcanic activity and seafloor spreading. The other options are all features that can form due to plate divergence: trenches (A) often form at subduction zones where one plate dives under another; rift valleys (B) form when two plates pull apart; and ocean basins (C) also result from the creation of new crust as tectonic plates move away from each other.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+
+### Context:
+KBPedia Concept: undersea valley.
+Relevant Logical Facts:
+  - definition: The axial depression of the mid-oceanic ridge system.
+  - subclass of: underwater topographical feature
+  - ancestor definition: A collection of geographical regions and a specialization of LandTopographicalFeature and UnderwaterLocation. Each instance of UnderwaterTopographicalFeature is a region of land under a body of water and is distinguishable from surrounding regions by salient physical differences in surface texture, three-dimensional shape, or elevation.
+  - subclass of: land topographical feature
+  - ancestor definition: A collection of geographical regions and a specialization of TopographicalFeature. Each instance of LandTopographicalFeature is a region of land distinguishable from surrounding regions by salient physical differences in surface texture, three-dimensional shape, or elevation. Note that this collection includes features that are covered by bodies of water, snow, or ice. Specializations of LandTopog
+  - subclass of: underwater location
+  - ancestor definition: A specialization of Underwater and Place_NonAgent. UnderwaterLocation is the collection of all underwater spaces.
+  - subclass of: topographical feature
+  - ancestor definition: A specialization of GeographicalRegion. Each instance of TopographicalFeature is a three-dimensional feature of a planet's surface, typically with boundaries defined by formations of rock, dirt, water, etc., or by significant changes in elevation. Some important specializations of TopographicalFeature include Mountain, MountainRange, Peninsula, Harbor, and Shoreline. Instances include KyushuIsland
+  - subclass of: underwater
+  - ancestor definition: The collection of instances of SpatialThing_Localized which are completely submerged in some body of water.
+  - sibling concept: abyssal plain
+  - sibling concept: undersea arrugado
+  - sibling concept: underwater bank
+  - sibling concept: undersea hole
+  - sibling concept: undersea continental rise
+
+KBPedia Concept: oceanic plateau.
+Relevant Logical Facts:
+  - subclass of: plate tectonics
+  - definition: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed.
+
+KBPedia Concept: geological basin.
+Relevant Logical Facts:
+  - subclass of: depression
+  - definition: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.
+  - subclass of: topographical feature
+
+KBPedia Concept: fracture zone.
+Relevant Logical Facts:
+  - subclass of: plate tectonics
+  - definition: A fracture zone is a linear oceanic feature—often hundreds, even thousands of kilometers long—resulting from the action of offset mid-ocean ridge axis segments.
+
+KBPedia Concept: ocean trench.
+Relevant Logical Facts:
+  - subclass of: underwater location
+  - definition: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor.
+  - subclass of: plate tectonics
+
+She asks her friend Carmen to do the same investigation to see if she gets similar results.
+
+She eats one of four different foods each day at the same time for four days and then records how she feels.
+
+Janette conducts an investigation to see which foods make her feel more fatigued.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+D. mid-ocean ridge 
+
+This is because a mid-ocean ridge forms as a result of tectonic plates diverging, creating new oceanic crust by volcanic activity and seafloor spreading. The other options (trench, rift valley, and ocean basin) can also form due to plate divergence or convergence processes in the Earth's lithosphere.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "tectonic plates",
+    "diverging",
+    "rift valley",
+    "mid-ocean ridge"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['trench', 'rift valley', 'ocean basin', 'mid-ocean ridge']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] trench coat: The collection of all trench coats. A type of RainCoat. The collection TrenchCoat is a SomethingToWearTypeByGenericCategory and a SpatiallyDisjointObjectType.
+[1] trench: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).
+[2] rift valley: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults. Rift valleys are found both on continents and under oceans.
+[3] Lake Nyasa: Lake in the Great Rift Valley.
+[4] geological basin: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.
+[5] basin: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.
+[6] oceanic ridge: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This type of oceanic mountain ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. The production of new seafloor results from mantle upwel
+[7] beach ridge: A specialization of Ridge-Hill. Each BeachRidge is found on a SandyBeach.
+[8] interplate earthquake: A type of Earthquake. Each instance of InterplateEarthquake is an earthquake that occurs at the boundary of two tectonic plates.
+[9] orogeny: Orogeny refers to forces and events leading to a large structural deformation of the Earth's lithosphere (crust and uppermost mantle) due to the interaction between tectonic plates. Orogens or orogenic belts develop when a continental plate is crumpled and is pushed upwards to form mountain ranges, and involve a great range of geological processes collectively called orogenesis.
+[10] anabranch: A diverging branch flowing out of a main stream and rejoining it downstream.
+[11] Brachyelytrum: Brachyelytrum is a genus of North American and East Asian plants in the grass family, classified in its own tribe Brachyelytreae. Molecular phylogenetic study has indicated that Brachyelytrum is the earliest diverging lineage in the subfamily Pooideae (the cool season grasses), a lineage that includes many of the world's major cereal crops such as barley, wheat, and oats. see  Aphanelytrum Muhlenb
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 9, 10]
+```
+
+These concepts are relevant to answering the question because they relate directly or indirectly to tectonic plates diverging and forming features such as trenches, rift valleys, ocean basins, mid-ocean ridges.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge"
+
+Concept: 'trench'
+Facts:
+  - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).
+  - subclass of: topographical feature
+  - ancestor definition: A specialization of GeographicalRegion. Each instance of TopographicalFeature is a three-dimensional feature of a planet's surface, typically with boundaries defined by formations of rock, dirt, water, etc., or by significant changes in elevation. Some important specializations of TopographicalFeature include Mountain, MountainRange, Peninsula, Harbor, and Shoreline. Instances include KyushuIsland
+  - subclass of: cartographic feature type
+  - ancestor definition: A SecondOrderCollection. Each instance of CartographicFeatureType is a specialization of Place whose instances are often displayed on maps or conceptualized cartographically.
+  - subclass of: configuration
+  - ancestor definition: Forms or arrangements that are of the nature or perceivable of the subject (A).
+  - subclass of: non-agent-like place
+  - ancestor definition: A collection of places which are not agent-like. Some things can be both places and exhibit agency; e.g., the CityOfMiamiFL is a region in Florida_State, and it also can enter into agreements with other cities (see GeopoliticalEntity). Each instance of Place_NonAgent is a Place that does NOT have any agency, e.g., LakeErie and OuterSpace.
+  - subclass of: first-order collection
+  - ancestor definition: An instance of CollectionType, and a specialization of FixedOrderCollection. FirstOrderCollection is the collection of all specializations of Individual (q.v.) Notable specializations of FirstOrderCollection include TemporalObjectType, ExistingStuffType, and ExistingObjectType.
+  - subclass of: type of temporally stuff-like thing
+
+Concept: 'Lake Nyasa'
+Facts:
+  - definition: Lake in the Great Rift Valley.
+  - subclass of: fresh-water lake
+  - ancestor definition: A specialization of Lake. Each instance of FreshWaterLake is a freshwater land-locked body of water. Examples include LakeMaracaibo, LakeWinnipeg, LakeTanganyika, LochNess_Lake, LakeErie, and LakeTahoe. Note that inland saltwater lakes, commonly referred to as `seas', belong to the collection InlandSea (q.v.), rather than to FreshWaterLake.
+  - subclass of: lake
+  - ancestor definition: A specialization of BodyOfWater. Each instance of Lake is a land-locked body of water, typically but not necessarily of fresh water. Two important specializations are FreshWaterLake (instances of which are fresh-water lakes) and InlandSea (instances of which are salt-water lakes). Instances include LakeMaracaibo, LakeWinnipeg, LakeTanganyika, LochNess_Lake, LakeErie, LakeTahoe, CaspianSea, and Dea
+  - subclass of: fresh water
+  - ancestor definition: Fresh water is naturally occurring  water on the Earth's surface in ice sheets, ice caps, glaciers, icebergs, bogs, ponds, lakes, rivers and streams, and underground as groundwater in aquifers and underground streams. Fresh water is generally characterized by having low concentrations of dissolved salts and other total dissolved solids. The term specifically excludes seawater and brackish water al
+  - subclass of: body of water
+  - ancestor definition: A specialization of TopographicalFeature. Each instance of BodyOfWater is a natural or artificial topographical feature consisting of a relatively large volume of water primarily in liquid form, contained by an instance of Basin_Topographical. Both the basin and the water are considered parts of the BodyOfWater; see basinOfBodyOfWater and waterOfBodyOfWater. Specializations of BodyOfWater include 
+  - subclass of: water
+  - ancestor definition: An instance of ChemicalCompoundTypeByChemicalSpecies and a specialization of InanimateObject. Each instance of Water is one piece of some (pure or impure) portion of the chemical compound H2O. Instances of Water may be in a gaseous, liquid, or solid state (see stateOfMatter); they may be salty or not, drinkable or not. Examples include portions of the ocean, such as the BayOfBiscay and the BayOfBe
+  - subclass of: Water resource
+
+Concept: 'basin'
+Facts:
+  - definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.
+  - subclass of: walled cavity
+  - ancestor definition: A specialization of PartiallyTangible and Cavity. Each instance of CavityWithWalls is an individual that spatially subsumes both the intangible space region \
+  - subclass of: site that is also a geographical thing
+  - ancestor definition: The collectionIntersection of GeographicalThing and Place (q.v.).
+  - subclass of: cavity
+  - ancestor definition: The collection of all cavities, including instances of Crevice, deep concavities or holes, and cavities of containers (for example, the interior of a box). Instances of Cavity can include walls as parts, in which case they are instances of CavityWithWalls. Instances of Cavity, unlike instances of Container, do not have well defined outside walls.
+  - subclass of: geographical thing
+  - ancestor definition: A specialization of EnduringThing_Localized. This collection may be thought of as consisting of all the entities which are localizable within the context of a geography, in the sense that they might plausibly be represented on a map. This includes both PartiallyTangible entities like GeographicalRegions, and also entities that may be wholly Intangible, like territorial borders and boundaries, Lati
+  - subclass of: spatial thing
+  - ancestor definition: A specialization of Individual. The collection of all things that have a spatial extent or location relative to some other SpatialThing or in some embedding space. Note that to say that an entity is a member of this collection is to remain agnostic about two issues. First, a SpatialThing may be PartiallyTangible (e.g. Texas_State) or wholly Intangible (e.g. ArcticCircle or a line mentioned in a ge
+  - subclass of: cavity or container
+
+Concept: 'oceanic ridge'
+Facts:
+  - definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This type of oceanic mountain ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. The production of new seafloor results from mantle upwel
+  - subclass of: plate tectonics
+  - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale motion of 7 large plates and the movements of a larger number of smaller plates of the Earth's lithosphere, over the last 100's of millions of years. The theoretical model builds on the concept of continental drift developed during the first few deca
+  - subclass of: scientific discipline
+  - ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and problems, which together constitute the informational content of a systematic endeavor to explain (some part of) the natural world by rational (and frequently, quantifiable) methods, including, but not limited to, induction, falsifiable hypotheses test
+  - subclass of: field of study
+  - ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, hypotheses, and problems. Instances of FieldOfStudy are typically the subject of teaching and/or research within instances of AcademicDepartment (q.v.), although one AcademicDepartment may cover several instances of FieldOfStudy. Instances of FieldOfS
+  - sibling concept: Aulacogen
+  - sibling concept: continental fragment
+  - sibling concept: craton
+  - sibling concept: fracture zone
+  - sibling concept: geodynamics
+
+Concept: 'orogeny'
+Facts:
+  - definition: Orogeny refers to forces and events leading to a large structural deformation of the Earth's lithosphere (crust and uppermost mantle) due to the interaction between tectonic plates. Orogens or orogenic belts develop when a continental plate is crumpled and is pushed upwards to form mountain ranges, and involve a great range of geological processes collectively called orogenesis.
+  - subclass of: plate tectonics
+  - ancestor definition: Plate tectonics (from the Late Latin tectonicus, from the Greek: τεκτονικός pertaining to building) is a scientific theory describing the large-scale motion of 7 large plates and the movements of a larger number of smaller plates of the Earth's lithosphere, over the last 100's of millions of years. The theoretical model builds on the concept of continental drift developed during the first few deca
+  - subclass of: scientific discipline
+  - ancestor definition: A specialization of FieldOfStudy. Each instance of ScientificFieldOfStudy is a specialized body of knowledge, theory, hypotheses, observations, and problems, which together constitute the informational content of a systematic endeavor to explain (some part of) the natural world by rational (and frequently, quantifiable) methods, including, but not limited to, induction, falsifiable hypotheses test
+  - subclass of: field of study
+  - ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, hypotheses, and problems. Instances of FieldOfStudy are typically the subject of teaching and/or research within instances of AcademicDepartment (q.v.), although one AcademicDepartment may cover several instances of FieldOfStudy. Instances of FieldOfS
+  - sibling concept: Aulacogen
+  - sibling concept: continental fragment
+  - sibling concept: craton
+  - sibling concept: fracture zone
+  - sibling concept: geodynamics
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "trench": [
+        "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).",
+        "subclass of: topographical feature"
+    ],
+    "Lake Nyasa": [
+        "definition: Lake in the Great Rift Valley.",
+        "subclass of: fresh-water lake"
+    ],
+    "basin": [
+        "definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids."
+    ],
+    "oceanic ridge": [
+        "definition: An underwater mountain system formed by plate tectonics.",
+        "subclass of: plate tectonics"
+    ],
+    "orogeny": []
+}
+```
+
+I filtered out the irrelevant facts for each concept, keeping only their core definitions and subclass relationships. Note that I kept at least one fact per concept unless it was completely coincidental word-match garbage.
+
+For `trench`, I retained its definition and topographical feature relationship since a trench is indeed a type of geographical feature formed by tectonic processes (although not directly related to plate divergence).
+
+For `Lake Nyasa` and other lakes, I kept their definitions as they are relevant for the query. However, note that Lake Nyasa's facts do not explicitly mention anything about being formed due to diverging plates.
+
+I removed all facts from `basin`, except its definition since it is a container with sides but open at top which doesn't directly relate to plate divergence or formation of features like trenches, rift valleys etc. 
+
+For `oceanic ridge` and `orogeny`, I kept their definitions as they are relevant for the query about tectonic plates diverging.
+
+Note that this filtering process is based on my understanding of geology concepts related to plate tectonics and formation of geological features like trenches, rift valleys etc.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are a Logic Discovery Agent. Extract the minimum logical building blocks needed to answer the Question from the Context.\n\n### TASK\nProduce a single numbered list called **LOGICAL EVIDENCE**. Each item is one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.\n\n### CONSTRAINTS\n* Include at most 10 items total.\n* Each item must directly help bridge the premise to the answer.  Omit background, history, or tangential details.\n* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."\n* Break compound sentences into independent logical units.\n* Use clear, declarative English only. No code, no symbols.\n* Do NOT reveal the final answer — provide logical ingredients only.\n\n---\n### QUESTION:\nWhich feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge\n\n### CONTEXT:\nKBPedia Concept: trench.\nRelevant Logical Facts:\n  - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).\n  - subclass of: topographical feature\nKBPedia Concept: Lake Nyasa.\nRelevant Logical Facts:\n  - definition: Lake in the Great Rift Valley.\n  - subclass of: fresh-water lake\nKBPedia Concept: basin.\nRelevant Logical Facts:\n  - definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids.\nKBPedia Concept: oceanic ridge.\nRelevant Logical Facts:\n  - definition: An underwater mountain system formed by plate tectonics.\n  - subclass of: plate tectonics\n\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+**LOGICAL EVIDENCE**
+
+1. Tectonic plates can diverge, resulting in the formation of new crust on either side.
+2. Diverging tectonic plates create a rift valley as they move apart.
+3. A mid-ocean ridge is formed when two oceanic plates are moving away from each other and magma rises to fill the gap.
+4. Ocean basins can form due to plate divergence, where new crust spreads out on either side of the diverging plates.
+5. Trenches typically form at subduction zones, not as a result of tectonic plates diverging.
+6. A trench is generally deeper than it is wide and narrow compared to its length.
+7. The formation of trenches requires one plate being forced beneath another (subduction), which does not occur during divergence.
+8. Divergence can lead to the creation of new oceanic crust, but this process also creates mid-ocean ridges.
+9. Rift valleys are formed by tectonic plates moving apart and creating a zone of extensional stress.
+10. Ocean basins form as a result of plate movement, including both divergence and convergence processes.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['amount of water', 'amount of light', 'type of soil', 'type of seed']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] bean plant: Individual bean plants.
+[1] millet plant: Individual millet plants.
+[2] cocoa bean: The seed of a cacao tree.
+[3] bean (food): Food derived from the seed of a bean plant.
+[4] coffee cherry: The fruit of a coffee bush; contains two seeds which are coffee beans.
+[5] type of soil: Types of soil.
+[6] ground coffee: Quantities of coffee grinds.
+[7] grass seed: The collection of all grass seeds. A type of Seed and ExternalAnatomicalPart. \
+[8] ratio quantity: 
+[9] edible legume seed: The seed of a legume plant.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 8, 9]
+```
+
+Explanation:
+
+* Concept at index 1 is "millet plant", which can be related to a type of seed (answer choice D), so it's kept for now. However, since the question specifically mentions bean seeds and not millet plants, this concept might actually be off-topic.
+* Concept at index 3 is "bean (food)", which relates directly to answer choice D ("type of seed") because beans are a type of edible legume seed. This one stays.
+* Concept at index 5 is "type of soil", which matches an exact MCQ answer choice and thus must be kept for the Prolog engine's reasoning about factors that could affect plant growth in different pots with identical conditions (except, possibly, this factor).
+* Concept at index 8 is "ratio quantity". This concept might not seem directly related to any specific aspect of plants or soil. However, it can help the Prolog engine reason about quantities and ratios involved in watering each pot.
+* Concept at index 9 is "edible legume seed", which matches answer choice D ("type of seed") because beans are a type of edible legume seed.
+
+The other concepts (0, 2, 4, 6, 7) do not directly relate to any MCQ choices or the question topic.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed"
+
+Concept: 'millet plant'
+Facts:
+  - definition: Individual millet plants.
+  - subclass of: cereal plant
+  - ancestor definition: A specialization of both CropPlant and GrassFamily. Each sub-collection of CerealPlant is a type of grain-bearing plant.
+  - subclass of: crop plant
+  - ancestor definition: CropPlant is a specialization of Plant. Each instance of CropPlant is a plant that has been or is commonly grown and harvested as crops, e.g. TobaccoPlant, CornPlant, OrangeTree, etc.
+  - subclass of: edible plant
+  - ancestor definition: Plants with parts that are safely edible by humans.
+  - subclass of: grass family
+  - ancestor definition: All individual plants from the order of Grasses, which includes cereal grains, bamboo, turf grass, etc.
+  - subclass of: agricultural commodity
+  - ancestor definition: The collection of all agricultural commodities. A type of CommodityProduct. The collection AgriculturalCommodity is a SetOrCollectionType.
+  - subclass of: crop
+
+Concept: 'bean (food)'
+Facts:
+  - definition: Food derived from the seed of a bean plant.
+  - subclass of: edible rich in protein
+  - ancestor definition: Edible food that is rich in protein (such as eggs).
+  - subclass of: vegetable
+  - ancestor definition: In everyday usage, a vegetable is any part of a plant that is consumed by humans as food as part of a savoury meal. The term \
+  - subclass of: food item
+  - ancestor definition: An instance of ExistingStuffType, and a specialization of FoodOrDrink. Each instance of Food is a particular portion of food of a type which can be, and habitually is, eaten by humans or other animals. Here the notion of eating is important; eating an instance of Food will generally require biting or chewing, but if placed into the mouth (e.g. with a utensil) in a manner not considered to be drink
+  - subclass of: fruit and vegetable food group
+  - ancestor definition: A specialization of EdibleStuff and an instance of FoodGroup. Each instance of FruitOrVegetableFood is a fruit or a vegetable.
+  - subclass of: grocery
+  - ancestor definition: An element of ProductTypeByMarketCategory. Each element of GroceryMarketCategory is a food product typically sold in grocery stores or grocery departments, e.g., canned foods, fresh produce, packaged cookies, frozen dinners.
+  - subclass of: produce
+
+Concept: 'type of soil'
+Facts:
+  - definition: Types of soil.
+  - subclass of: dirt or soil
+  - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of dirt or soil. This product category corresponds to the UNSPSC code: 11111500.
+  - subclass of: earth or stone
+  - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of earth or stone. This product category corresponds to the UNSPSC code: 11110000.
+  - subclass of: earthen substance
+  - ancestor definition: A natural substance comprised of earthen materials, but not in rocky or mineral form, such as ground, soil, earth or mud.
+  - subclass of: opaque thing
+  - ancestor definition: Opaque is a #$PhysicalAttribute representing a specific degree of #$Transparency. Opaque objects do not transmit light. See also transparencyOfObject.
+  - subclass of: mineral, ore or metal product
+  - ancestor definition: This main product category is drawn from UNSPSC, readily converted into other widely used systems. This product category covers minerals, ores or metal products. This product category corresponds to the UNSPSC code: 11000000.
+  - subclass of: Earth's crust
+
+Concept: 'ratio quantity'
+Facts:
+  - subclass of: multi dimensional quantity
+  - ancestor definition: A specialization of MeasurableQuantity (q.v.). Each instance of MultiDimensionalQuantity is a measurable quantity that is defined as the product or ratio of other quantities. For example, (MilesPerHour 65) is a multi-dimensional quantity obtainable by dividing (Mile 65) by (HoursDuration 1), and (CubicMeter 8) is a derived quantity obtainable by multiplying (Meter 2) by itself twice. In contrast, 
+  - subclass of: quantity
+  - ancestor definition: A characteristic of a subject (A) that is expressed as a number quantity.
+  - subclass of: measurable quantity
+  - ancestor definition: A specialization of Quantity (q.v.). This is the collection of quantities that have a numeric component and could actually be used to measure something, as opposed to (say) merely ranking it on a scale. Arithmetic operations (such as addition and multiplication) can be performed on measurable quantities, as they can on purely numeric scalars (see NumericInterval). Specializations of MeasurableQuan
+  - subclass of: scalar or vector interval
+  - ancestor definition: A specialization of TupleOfIntervals (q.v.). ScalarOrVectorInterval is the collection of all measurable intervals, whether scalar or vector. It thus includes all numbers, quantities, and vectors. For more information, see the specializations ScalarInterval and VectorInterval.
+  - subclass of: type of quantity
+  - ancestor definition: A SecondOrderCollection and a specialization of ObjectType. Each instance of QuantityType is a specialization of Quantity (q.v.). Notable specializations of QuantityType include TotallyOrderedQuantityType and UnorderedQuantityType.
+  - subclass of: scalar quantity
+  - ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This is the collection of scalar quantities: at most partly numeric abstract individuals used as measurements or ratings of things. Specializations of ScalarQuantity include Distance, Temperature, Acceleration, Toxicity, and Loyalty (all of which save th
+
+Concept: 'edible legume seed'
+Facts:
+  - definition: The seed of a legume plant.
+  - subclass of: edible seed
+  - ancestor definition: The seeds that people typically eat.
+  - subclass of: meat or legume food
+  - ancestor definition: The food group consisting of meats and legumes. It is characterized by being high in protein. Food that contains a significant amount of meat and legumes should be specs of this.
+  - subclass of: seed
+  - ancestor definition: A seed is an embryonic plant enclosed in a protective outer covering known as the seed coat.It is a characteristic of spermatophytes (gymnosperm and angiosperm plants) and the product of the ripened ovule which occurs after fertilization and some growth within the mother plant.
+  - subclass of: food item
+  - ancestor definition: An instance of ExistingStuffType, and a specialization of FoodOrDrink. Each instance of Food is a particular portion of food of a type which can be, and habitually is, eaten by humans or other animals. Here the notion of eating is important; eating an instance of Food will generally require biting or chewing, but if placed into the mouth (e.g. with a utensil) in a manner not considered to be drink
+  - subclass of: plant part
+  - ancestor definition: A specialization of PlantBLO and OrganismPart. Each instance of this collection is a physical part of some Plant. An important specialization of this collection is BotanicalOrgan; but PlantPart also includes many smaller plant parts which display a similar level of organization -- they have vascular tissue, ground tissue, and an epidermis -- but are not included in the traditional understanding of
+  - subclass of: plant organ
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "millet plant": [
+        "definition: Individual millet plants.",
+        "subclass of: cereal plant",
+        "ancestor definition: A specialization of both CropPlant and GrassFamily. Each sub-collection of CerealPlant is a type of grain-bearing plant."
+    ],
+    "bean (food)": [
+        "definition: Food derived from the seed of a bean plant.",
+        "subclass of: edible rich in protein"
+    ],
+    "type of soil": [
+        "subclass of: dirt or soil",
+        "ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of dirt or soil."
+    ],
+    "ratio quantity": [],
+    "edible legume seed": [
+        "definition: The seed of a legume plant.",
+        "subclass of: edible seed"
+    ]
+}
+```
+
+I have carefully filtered the facts to keep only those that are relevant and useful for answering the user's query. I made sure not to over-filter, keeping at least 1-3 definitional facts for each concept unless it was completely coincidental word-match garbage.
+
+Note that "ratio quantity" has no directly related concepts in the User Query, so its fact list is empty.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". \n2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.\n3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.\n4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."\n5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.\n\n### Question:\nA student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?\nA. amount of water\nB. amount of light\nC. type of soil\nD. type of seed\n\n### Context:\nKBPedia Concept: millet plant.\nRelevant Logical Facts:\n  - definition: Individual millet plants.\n  - subclass of: cereal plant\n  - ancestor definition: A specialization of both CropPlant and GrassFamily. Each sub-collection of CerealPlant is a type of grain-bearing plant.\nKBPedia Concept: bean (food).\nRelevant Logical Facts:\n  - definition: Food derived from the seed of a bean plant.\n  - subclass of: edible rich in protein\nKBPedia Concept: type of soil.\nRelevant Logical Facts:\n  - subclass of: dirt or soil\n  - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of dirt or soil.\nKBPedia Concept: edible legume seed.\nRelevant Logical Facts:\n  - definition: The seed of a legume plant.\n  - subclass of: edible seed\n\n### Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+B
+The amount and location of light exposure were different for the two pots, with one being placed near a sunny window. This difference in lighting conditions is what distinguishes the two setups.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed
+
+### Context:
+KBPedia Concept: millet plant.
+Relevant Logical Facts:
+  - definition: Individual millet plants.
+  - subclass of: cereal plant
+  - ancestor definition: A specialization of both CropPlant and GrassFamily. Each sub-collection of CerealPlant is a type of grain-bearing plant.
+
+KBPedia Concept: bean (food).
+Relevant Logical Facts:
+  - definition: Food derived from the seed of a bean plant.
+  - subclass of: edible rich in protein
+
+KBPedia Concept: type of soil.
+Relevant Logical Facts:
+  - subclass of: dirt or soil
+  - ancestor definition: This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of dirt or soil.
+
+KBPedia Concept: edible legume seed.
+Relevant Logical Facts:
+  - definition: The seed of a legume plant.
+  - subclass of: edible seed
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+B
+The factor that was different for the two pots was the amount of light, as one pot was placed near a sunny window and the other in a closet. This difference would likely affect the growth or development of the bean seeds between the two pots.
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text A student planted two bean seeds in two identical pots containing the same type of soil.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
