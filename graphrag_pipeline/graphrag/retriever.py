@@ -123,7 +123,7 @@ class EnhancedRetriever(VectorCypherRetriever):
 
         # 2. Local Vector Search (Local Documents)
         local_items = []
-        MIN_SCORE = 0.4  # Minimum relevance threshold to filter noise
+        MIN_SCORE = 0.7  # Minimum relevance threshold to filter noise
         MIN_CONTENT_LENGTH = 20  # Reject chunks with very short content
         try:
             local_result = super().search(query_text=query_text, top_k=top_k, **kwargs)
