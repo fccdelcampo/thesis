@@ -1,5 +1,5 @@
 LLM_SYSTEM_PROMPT = """
-Answer the user's question. If it is a multiple choice question, answer with the letter of the correct choice first before explaining.
+Answer the user's question. If it is a multiple choice question, explain very briefly first then answer with your choice.
 """
 
 LLM_MESSAGES = [
