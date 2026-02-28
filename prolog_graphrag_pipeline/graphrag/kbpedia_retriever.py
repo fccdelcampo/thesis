@@ -213,7 +213,7 @@ Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
                     if a and a.get("name"):
                         triples.append(f"subclass of: {a['name']}")
                         if a.get("def"):
-                            triples.append(f"ancestor definition: {a['def'][:150]}")
+                            triples.append(f"ancestor definition: {a['def']}")
                 for c in row.get("children", []):
                     if c and c.get("name"):
                         triples.append(f"has subclass: {c['name']}")
@@ -381,7 +381,7 @@ Example:
 
         summary_lines = []
         for idx, c in enumerate(candidates):
-            defn = (c.get("definition") or "")[:150]
+            defn = (c.get("definition") or "")
             summary_lines.append(f"[{idx}] {c['name']}: {defn}")
         summary_text = "\n".join(summary_lines)
 
@@ -458,7 +458,7 @@ Output ONLY the JSON list, nothing else.
                 # Build raw triples
                 raw_triples = []
                 if match["definition"]:
-                    raw_triples.append(f"definition: {match['definition'][:200]}")
+                    raw_triples.append(f"definition: {match['definition']}")
                 raw_triples.extend(self.get_neighborhood(uri))
 
                 # Defensive filter: remove any triple that looks like an MCQ option
