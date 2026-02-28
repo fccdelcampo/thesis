@@ -469,50 +469,90 @@ Output ONLY the JSON list, nothing else.
                         print(f"DEBUG: [Wikidata Fallback] No Wikidata results for '{concept_name}'. Skipping.", flush=True)
                         continue
 
-                    # Select the correct Q-ID
+                    # Select the correct Q-ID + relevant property categories in ONE LLM call
                     selected = None
+                    extra_props = []  # additional P-codes from LLM-selected categories
+
                     if len(wd_candidates) == 1:
                         selected = wd_candidates[0]
                         print(f"DEBUG: [Wikidata Fallback] Single match: {selected['qid']} ({selected['label']})", flush=True)
-                    elif self.llm:
-                        # LLM picks the correct entity from the shortlist (reading comprehension, not generation)
+
+                    if self.llm:
+                        # Build candidate list
                         options_text = "\n".join(
                             [f"  [{i}] {c['qid']} - {c['label']}: {c['description']}" for i, c in enumerate(wd_candidates)]
                         )
-                        select_prompt = f"""You are disambiguating a Wikidata entity for a question-answering system.
+
+                        # Build extended property category descriptions
+                        from .wikidata_retriever import WikidataRetriever as WDR
+                        categories_text = "\n".join(
+                            [f"  - {cat}: {', '.join(pids)}" for cat, pids in WDR.EXTENDED_PROPERTIES.items()]
+                        )
+
+                        select_prompt = f"""You are disambiguating a Wikidata entity AND selecting which relationship types to fetch.
 
 User question: "{filter_query}"
 Entity to find: "{concept_name}"
 
-Wikidata candidates:
+TASK 1 — Entity Selection:
 {options_text}
 
-Which candidate is the correct match for the entity "{concept_name}" in the context of the user's question?
-Reply with ONLY the index number (e.g., 0 or 1 or 2). Nothing else."""
+TASK 2 — Property Categories:
+The system always fetches: instance of, subclass of, part of, has part, has effect.
+Below are OPTIONAL extended categories. Pick ONLY those relevant to the user's question:
+  - causality: has cause, has effect
+  - sequence: follows, followed by
+  - differentiation: different from, said to be the same as
+  - academic: studied in, main subject
+  - composition: has part, facet of
+  - function: has use, product/material produced
+
+Reply with a JSON object. Example: {{"index": 0, "categories": ["causality", "composition"]}}
+If no extended categories are needed, use an empty list: {{"index": 2, "categories": []}}
+Output ONLY the JSON object, nothing else."""
 
                         try:
                             raw = self.llm.invoke(select_prompt)
                             res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
-                            # Extract first digit found
-                            idx_match = re.search(r'\d+', res)
-                            if idx_match:
-                                idx = int(idx_match.group())
-                                if 0 <= idx < len(wd_candidates):
-                                    selected = wd_candidates[idx]
-                                    print(f"DEBUG: [Wikidata Fallback] LLM selected index {idx}: {selected['qid']} ({selected['label']})", flush=True)
+
+                            # Strip markdown fences
+                            if "```json" in res:
+                                res = res.split("```json")[1].split("```")[0].strip()
+                            elif "```" in res:
+                                res = res.split("```")[1].split("```")[0].strip()
+
+                            # Find JSON object
+                            brace_start = res.find("{")
+                            brace_end = res.rfind("}")
+                            if brace_start != -1 and brace_end != -1:
+                                res = res[brace_start:brace_end + 1]
+
+                            parsed = json.loads(res)
+                            idx = parsed.get("index", 0)
+                            categories = parsed.get("categories", [])
+
+                            if isinstance(idx, int) and 0 <= idx < len(wd_candidates):
+                                selected = wd_candidates[idx]
+                                print(f"DEBUG: [Wikidata Fallback] LLM selected index {idx}: {selected['qid']} ({selected['label']})", flush=True)
+
+                            # Resolve category names to P-codes
+                            if isinstance(categories, list):
+                                for cat in categories:
+                                    if cat in WDR.EXTENDED_PROPERTIES:
+                                        extra_props.extend(WDR.EXTENDED_PROPERTIES[cat])
+                                if extra_props:
+                                    print(f"DEBUG: [Wikidata Fallback] LLM selected extended categories: {categories} → {extra_props}", flush=True)
+
                         except Exception as e:
                             print(f"DEBUG: [Wikidata Fallback] LLM selection failed: {e}. Using first candidate.", flush=True)
 
-                        if not selected:
-                            selected = wd_candidates[0]
-                            print(f"DEBUG: [Wikidata Fallback] Defaulting to first candidate: {selected['qid']} ({selected['label']})", flush=True)
-                    else:
+                    if not selected:
                         selected = wd_candidates[0]
-                        print(f"DEBUG: [Wikidata Fallback] No LLM available. Using first candidate: {selected['qid']} ({selected['label']})", flush=True)
+                        print(f"DEBUG: [Wikidata Fallback] Defaulting to first candidate: {selected['qid']} ({selected['label']})", flush=True)
 
-                    # Fetch structural triples from Wikidata
+                    # Fetch structural triples from Wikidata (core + LLM-selected extended)
                     print(f"DEBUG: [Wikidata Fallback] Fetching structural facts for {selected['qid']}...", flush=True)
-                    wd_triples = wikidata_fetcher.retrieve_structural_facts(selected['qid'])
+                    wd_triples = wikidata_fetcher.retrieve_structural_facts(selected['qid'], extra_properties=extra_props if extra_props else None)
 
                     if wd_triples:
                         # Add definition from Wikidata description

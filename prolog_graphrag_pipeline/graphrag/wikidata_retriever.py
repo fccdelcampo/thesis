@@ -164,29 +164,41 @@ class WikidataRetriever:
 
     # ── Targeted Structural SPARQL (pre-filtered at DB level) ─────────────
 
-    async def _fetch_structural_facts_async(self, qid: str) -> List[str]:
+    # Core properties: ALWAYS fetched (fundamental ontological structure)
+    CORE_PROPERTIES = ["P31", "P279", "P361", "P527", "P1542"]
+
+    # Extended properties: only fetched when LLM deems them relevant to the query.
+    # Grouped by semantic category so the LLM picks categories, not raw P-codes.
+    EXTENDED_PROPERTIES = {
+        "causality":       ["P828", "P1542"],   # has cause, has effect
+        "sequence":        ["P155", "P156"],     # follows, followed by
+        "differentiation": ["P1889", "P460"],    # different from, said to be the same as
+        "academic":        ["P2579", "P921"],     # studied in, main subject
+        "composition":     ["P527", "P1269"],     # has part, facet of
+        "function":        ["P366", "P1056"],     # has use, product/material produced
+    }
+
+    async def _fetch_structural_facts_async(self, qid: str, extra_properties: list = None) -> List[str]:
         """
-        Fetch ONLY structurally useful Wikidata properties for Prolog reasoning.
-        Properties: P31 (instance of), P279 (subclass of), P361 (part of),
-                    P527 (has part), P1542 (has effect).
+        Fetch structurally useful Wikidata properties for Prolog reasoning.
+        Always fetches CORE_PROPERTIES. If extra_properties is provided,
+        those P-codes are added to the SPARQL VALUES clause.
         """
+        # Merge core + extra, deduplicate
+        all_pids = list(set(self.CORE_PROPERTIES + (extra_properties or [])))
+        values_clause = " ".join([f"wdt:{pid}" for pid in all_pids])
+
         async with self.semaphore:
             sparql_query = f"""
             SELECT ?pLabel ?oLabel WHERE {{
-              VALUES ?p {{
-                wdt:P31    # instance of
-                wdt:P279   # subclass of
-                wdt:P361   # part of
-                wdt:P527   # has part
-                wdt:P1542  # has effect
-              }}
+              VALUES ?p {{ {values_clause} }}
               wd:{qid} ?p ?o.
               ?o rdfs:label ?oLabel.
               ?property wikibase:directClaim ?p.
               ?property rdfs:label ?pLabel.
               FILTER(LANG(?oLabel) = "en")
               FILTER(LANG(?pLabel) = "en")
-            }} LIMIT 15
+            }} LIMIT 20
             """
 
             headers = {
@@ -230,13 +242,13 @@ class WikidataRetriever:
                     break
             return []
 
-    def retrieve_structural_facts(self, qid: str) -> List[str]:
-        """Synchronous wrapper: fetch only structural Wikidata triples."""
+    def retrieve_structural_facts(self, qid: str, extra_properties: list = None) -> List[str]:
+        """Synchronous wrapper: fetch structural Wikidata triples with optional extra properties."""
         try:
             loop = asyncio.get_event_loop()
             if loop.is_running():
-                task = asyncio.ensure_future(self._fetch_structural_facts_async(qid))
+                task = asyncio.ensure_future(self._fetch_structural_facts_async(qid, extra_properties))
                 return loop.run_until_complete(task)
         except RuntimeError:
             pass
-        return asyncio.run(self._fetch_structural_facts_async(qid))
+        return asyncio.run(self._fetch_structural_facts_async(qid, extra_properties))
