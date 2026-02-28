@@ -6,17 +6,17 @@ def capture_db_and_query(answer_text: str) -> tuple[str, str]:
     import re
 
     # Match everything after <database> until either </database>, <query>, or the end of the string
-    db_match = re.search(r"<database>(.*?)(?:</database>|<query>|\Z)", answer_text, re.DOTALL)
+    db_match = re.search(r"<database>(.*?)(?:</database>|<query>|\Z)", answer_text, re.DOTALL | re.IGNORECASE)
     
     # Match everything after <query> until </query>, </reasoning_step> (common hallucination), or the end of the string
-    query_match = re.search(r"<query>(.*?)(?:</query>|</reasoning_step>|\Z)", answer_text, re.DOTALL)
+    query_match = re.search(r"<query>(.*?)(?:</query>|</reasoning_step>|\Z)", answer_text, re.DOTALL | re.IGNORECASE)
 
     if not db_match:
-        raise ValueError(f"Database not found in LLM's response \n{answer_text}")
+        raise ValueError("Database not found in LLM's response. Ensure you wrap your facts and rules strictly inside `<database>` tags.")
     db = db_match.group(1).strip()
 
     if not query_match:
-        raise ValueError(f"Query not found in LLM's response: \n{answer_text}")
+        raise ValueError("Query not found in LLM's response. Ensure you wrap your goal strictly inside `<query>` tags.")
     query = query_match.group(1).strip()
 
     return {"database": db, "query": query}
