@@ -1,5 +1,6 @@
 import janus_swi as janus
 import re
+import sys
 
 def capture_db_and_query(answer_text: str) -> tuple[str, str]:
     import re

@@ -27,7 +27,8 @@ class KBPediaRetriever:
 
     def __init__(self, driver, llm=None, top_k: int = 4):
         self.driver  = driver
-        self.llm     = llm
+        # Force LLM to None to guarantee baseline GraphRAG uses ZERO LLM filtering for retrieval
+        self.llm     = None
         self.top_k   = top_k
 
     def _verify_index(self):

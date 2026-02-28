@@ -11,7 +11,8 @@ Usage:
     python hallucination_evaluation_pipeline\code\main_driver.py                    # Run full pipeline
     python hallucination_evaluation_pipeline\code\main_driver.py --generate-testset # Generate testset first, then run
     python hallucination_evaluation_pipeline\code\main_driver.py --metrics-only     # Run only hallucination metrics
-    python hallucination_evaluation_pipeline\code\main_driver.py --benchmarks-only  # Run only benchmarks
+    
+	  # Run only benchmarks
     python hallucination_evaluation_pipeline\code\main_driver.py --test-size n      # Run with n test cases
     python hallucination_evaluation_pipeline\code\main_driver.py --benchmarks ai2_arc openbookqa mmlu      # Run specific benchmarks
 """

@@ -132,10 +132,8 @@ class MMLULoader:
         self._generate_dataset(append=append)
 
     def load_data(self):
-        # 1. Auto-Generate if missing
         self.ensure_data_exists()
         
-        # 2. Load and Format
         data = []
         try:
             with open(self.file_path, 'r', encoding='utf-8') as f:
