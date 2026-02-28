@@ -105,24 +105,10 @@ class EnhancedRetriever(VectorCypherRetriever):
         # `original_query` carries the full MCQ prompt (with answer options) for LLM filtering.
         original_query = kwargs.pop("original_query", query_text)
 
-        # 1. KBPedia Search (Global Knowledge via Neo4j)
-        kb_items = []
-        if self.llm:
-            if not hasattr(self, 'kbpedia_retriever'):
-                from graphrag_pipeline.graphrag.kbpedia_retriever import KBPediaRetriever
-                self.kbpedia_retriever = KBPediaRetriever(driver=self.driver, llm=self.llm, top_k=top_k)
-
-            kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query)
-            if kb_result and kb_result.items:
-                for item in kb_result.items:
-                    kb_items.append(RetrieverResultItem(
-                        content=item.content,
-                        metadata=item.metadata
-                    ))
-                print(f"DEBUG: KBPedia returned {len(kb_items)} items.")
-
-        # 2. Local Vector Search (Local Documents)
+        # 1. Local Vector Search (Local Documents)
         local_items = []
+        extracted_entities = set()
+        
         try:
             local_result = super().search(query_text=query_text, top_k=8, **kwargs)
             
@@ -135,6 +121,11 @@ class EnhancedRetriever(VectorCypherRetriever):
                             clean_text = local_ctx[0].get('text')
                             if clean_text:
                                 item.content = clean_text
+                                
+                            # Extract entities for KBPedia
+                            for ctx in local_ctx:
+                                if ctx.get('entity'): extracted_entities.add(ctx['entity'])
+                                if ctx.get('target'): extracted_entities.add(ctx['target'])
                                 
                     elif item.content and "<Record" in str(item.content):
                         try:
@@ -155,6 +146,22 @@ class EnhancedRetriever(VectorCypherRetriever):
 
         except Exception as e:
             print(f"DEBUG: Main retriever failed: {e}")
+
+        # 2. KBPedia Search (Global Knowledge via Neo4j)
+        kb_items = []
+        if self.llm:
+            if not hasattr(self, 'kbpedia_retriever'):
+                from graphrag_pipeline.graphrag.kbpedia_retriever import KBPediaRetriever
+                self.kbpedia_retriever = KBPediaRetriever(driver=self.driver, llm=self.llm, top_k=top_k)
+
+            kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query, seeded_entities=list(extracted_entities))
+            if kb_result and kb_result.items:
+                for item in kb_result.items:
+                    kb_items.append(RetrieverResultItem(
+                        content=item.content,
+                        metadata=item.metadata
+                    ))
+                print(f"DEBUG: KBPedia returned {len(kb_items)} items.")
             
         # 3. Merge and Rerank
         all_items = kb_items + local_items

@@ -61,58 +61,31 @@ class KBPediaRetriever:
             print(f"DEBUG: Error verifying KBPedia index: {e}")
             return False
 
-    def extract_entities(self, query: str) -> List[str]:
+    def extract_entities(self, query: str, seeded_entities: List[str] = None) -> List[str]:
         """
         Entity extraction:
-        Uses LLM to extract explicit entities and implied conceptual terms from the question stem.
+        Now relies purely on the query text itself (basic word splitting) 
+        AND the vector similarity search entities passed in from standard GraphRAG.
+        LLM extraction has been removed.
         """
-        # --- 1. LLM Conceptual Extraction ---
-        llm_entities = []
-        if self.llm:
-            prompt = f"""You are extracting search terms for a knowledge base lookup.
-
-Given this query, extract the following:
-1. **Explicit entities** mentioned in the question stem
-2. **Implied functional concepts** the question is asking about
-
-Query: "{query}"
-
-Output a plain JSON list of strings. Include 4-8 terms maximum.
-Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
-            
-            try:
-                response = self.llm.invoke(prompt)
-                res_text = (response.content if hasattr(response, 'content') else str(response)).strip()
-                
-                # Robust JSON extraction: Find first '[' and last ']'
-                bracket_start = res_text.find('[')
-                bracket_end = res_text.rfind(']')
-                
-                if bracket_start != -1 and bracket_end != -1:
-                    json_str = res_text[bracket_start:bracket_end + 1]
-                    parsed = json.loads(json_str)
-                    if isinstance(parsed, list):
-                        llm_entities = [str(item).lower() for item in parsed]
-                else:
-                    print(f"DEBUG: Entity extraction LLM returned no JSON array. Raw: {repr(res_text[:100])}")
-            except Exception as e:
-                print(f"DEBUG: KBPedia entity extraction LLM failed: {e}")
-
-        # --- 2. Fallback ---
-        # If LLM fails or is missing, use basic word splitting for the stem
-        if not llm_entities:
-            stem = re.sub(r'[?!,;:()\[\]]', ' ', query).replace('\n', ' ')
-            words = [w.strip('.').lower() for w in stem.split() if len(w) >= 5]
-            llm_entities = words[:5]
-
-        # --- 3. Combine and deduplicate ---
-        unique_entities = []
-        seen = set()
+        stem = re.sub(r'[?!,;:()\[\]]', ' ', query).replace('\n', ' ')
+        words = [w.strip('.').lower() for w in stem.split() if len(w) >= 5]
         
-        for phrase in llm_entities:
-            if phrase and phrase not in seen:
-                seen.add(phrase)
-                unique_entities.append(phrase)
+        seen = set()
+        unique_entities = []
+        
+        # 1. Add seeded entities (from local vector similarity search)
+        if seeded_entities:
+            for e in seeded_entities:
+                if e and e.lower() not in seen:
+                    seen.add(e.lower())
+                    unique_entities.append(e)
+                    
+        # 2. Add raw keyword terms from the query itself
+        for w in words[:5]:
+            if w and w not in seen:
+                seen.add(w)
+                unique_entities.append(w)
                 
         return unique_entities[:10]
 
@@ -416,7 +389,7 @@ Output ONLY the JSON list, nothing else.
             print(f"DEBUG: End-filter LLM call failed: {e}. Returning all candidates.", flush=True)
             return candidates
 
-    def search(self, query_text: str, top_k: int = 5, original_query: str = "") -> Any:
+    def search(self, query_text: str, top_k: int = 5, original_query: str = "", seeded_entities: List[str] = None) -> Any:
         from .retriever import RetrieverResult, RetrieverResultItem
 
         if not self._verify_index():
@@ -429,7 +402,7 @@ Output ONLY the JSON list, nothing else.
 
         # ── Entity extraction ─────────────────────────────────────────────────
         print(f"DEBUG: [KBPedia] Querying for: '{query_text}'", flush=True)
-        entities = self.extract_entities(query_text)
+        entities = self.extract_entities(query_text, seeded_entities=seeded_entities)
         print(f"DEBUG: Extracted entities for KBPedia: {entities}", flush=True)
 
         seen_uris = set()
