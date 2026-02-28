@@ -172,7 +172,7 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
             "keep_alive": "20m",
             "options": { # in case parameters need to be nested
                 "temperature": 0,
-                "num_ctx": 2048,
+                "num_ctx": 4096,
                 "format": "json",
                 "repeat_penalty": 1.2,
                 "seed": 42 # for reproducibility

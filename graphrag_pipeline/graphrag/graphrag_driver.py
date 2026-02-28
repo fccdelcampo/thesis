@@ -191,14 +191,13 @@ def ensure_driver_connected():
                 raise ConnectionError(f"Failed to connect to Neo4j after {MAX_RETRIES} attempts: {e}") from e
 
 def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
-    # keep_alive=0 unloads VRAM after each document processing
     encoder_llm = DebugOllamaLLM(
         model_name=MODEL,
         model_params={
             "keep_alive": "20m",
             "options": { # in case parameters need to be nested
                 "temperature": 0,
-                "num_ctx": 2048,
+                "num_ctx": 4096,
                 "format": "json",
                 "repeat_penalty": 1.2,
                 "seed": 42 # for reproducibility
@@ -210,10 +209,10 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     retriever_llm = DebugOllamaLLM(
         model_name=MODEL,
         model_params={
-            "keep_alive": "5m", # Keep it loaded during an active chat session
+            "keep_alive": "5m",
             "options": {
                 "temperature": 0.1,
-                "num_ctx": 4096, # Increased to prevent context truncation
+                "num_ctx": 4096,
                 "format": "json",
                 "repeat_penalty": 1.2,
                 "seed": 42 # for reproducibility
