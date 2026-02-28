@@ -21,9 +21,9 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 ### Syntactic Requirements (s(CASP) Specific)
 - Disjunction: NEVER use `;`. Use multiple separate rules with the same head instead.
 - Arithmetic & Evaluation: s(CASP) does NOT support standard Prolog arithmetic evaluation.
-   - NEVER use `is`, `=:=`, `=\=`, `<`, `>`, `<=`, `>=`.
+   - NEVER use `is`, , `>=`, `=:=`, `=\\=`, `<`, `>`, `<=`.
    - USE CLP(Q) constraints instead: `#=`, `#<>`, `#<`, `#>`, `#=<`, `#>=`. Example: `X #= Y + 1`.
-- Negation: Use `not`. NEVER use `\+`.
+- Negation: Use `not`. NEVER use `\\+`.
 - Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
 - Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
 - Atoms: Must be lowercase. Quote special characters (e.g., `'(A ∨ B)'`).
@@ -63,6 +63,10 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 <query>
 [The query only]
 </query>
+
+### CRITICAL FINAL REMINDERS (DO NOT IGNORE):
+1. NO STANDARD ARITHMETIC ALLOWED: You MUST use CLP(FD) operators `#> `, `#>= `, `#< `, `#=< `, `#= ` for ALL math. `>` and `<` will instantly crash the parser!
+2. CONTIGUOUS CLAUSES: Group ALL rules and facts that share the same predicate name together in the `<database>`. Do NOT scatter them.
 ---
 """
 

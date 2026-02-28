@@ -78,23 +78,12 @@ RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
 
 RETRIEVAL_QUERY = '''
 // Part A: Local Document Retrieval (Vector/Keyword matches passed as `node`)
-WITH node, score
-OPTIONAL MATCH (node)-[:EXTRACTS]->(e)
-OPTIONAL MATCH (e)-[r]->(target)
-WITH node, score, collect(distinct {
-    source: "Local Document",
-    entity: e.name,
-    relationship: type(r),
-    target: target.name,
-    text: node.text
-}) as local_context
-
 RETURN 
     node.text as text,
     score,
     {
-        local_context: local_context,
-        score: score
+        score: score,
+        source: "Local Document"
     } as metadata
 '''
 

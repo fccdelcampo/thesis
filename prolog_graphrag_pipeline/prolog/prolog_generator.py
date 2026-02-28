@@ -44,7 +44,7 @@ def capture_predicate_and_arguments(query: str) -> dict:
         raise ValueError("Could not extract arguments from query")
     return {"predicate": predicate, "arguments": arguments}
 
-def generate_prolog_generation_prompt(user_question: str, retrieved_context: str, error_history: list) -> str:
+def generate_prolog_generation_prompt(user_question: str, retrieved_context: str, error_history: list, previous_code: str = None) -> str:
     prompt = f"""Now, process the following:
 Context:
 {retrieved_context}
@@ -63,6 +63,14 @@ The following errors occurred across prior attempts. Fix ALL of them before resp
 
 Analyze the errors carefully. Then, rewrite the ENTIRE `<database>` and `<query>` blocks incorporating your fixes. DO NOT output partial code.
 Ensure your `<database>` contains all facts and rules (using `:-`), and your `<query>` contains exactly one simple callable goal.
+"""
+        if previous_code:
+            prompt += f"""
+### YOUR PREVIOUS ATTEMPT (Contains Errors):
+```prolog
+{previous_code}
+```
+CRITICAL: Do not forget to transfer all the correct clauses from your previous attempt! Group clauses with the same name together consecutively.
 """
 
     return prompt
@@ -96,9 +104,9 @@ Answer with ONLY one word: YES or NO.
         return False
 
 
-def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_context: str, error_history: list):
-    """Single attempt of Prolog code generation + validation. Returns (database, query) on success."""
-    prompt = generate_prolog_generation_prompt(user_question, retrieved_context, error_history)
+def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_context: str, error_history: list, previous_code: str = None, last_attempt_tracker: list = None):
+    """Single attempt of Prolog code generation + validation."""
+    prompt = generate_prolog_generation_prompt(user_question, retrieved_context, error_history, previous_code)
 
     try:
         answer = generate_fn(prompt=prompt, flag="prolog")
@@ -161,8 +169,14 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
     if not query.endswith('.'):
         query += "."
 
-    # VALIDATION: Ensure no unquoted logic symbols exist
     combined_code = database + "\n" + query
+    
+    # Save the combined code to the tracker so if validation fails, 
+    # the next attempt still has access to this code to fix it.
+    if last_attempt_tracker is not None:
+        last_attempt_tracker[0] = combined_code
+
+    # VALIDATION: Ensure no unquoted logic symbols exist
     unquoted_code = re.sub(r"'[^']*'", "''", combined_code)
     unquoted_code = re.sub(r"%.*$", "", unquoted_code, flags=re.MULTILINE)
 
@@ -233,6 +247,7 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
                 
                 # Inject facts dynamically into the active Prolog Knowledge Base string as comments
                 if prolog_facts:
+                    print(f"Iteration {i} | Retrieved {len(prolog_facts)} facts for {qid}:\n" + "\n".join([f"  > {f}" for f in prolog_facts]))
                     database += f"\n% --- Dynamically Retrieved Wikidata Facts for {qid} ---\n"
                     database += "\n".join([f"% {fact}" for fact in prolog_facts]) + "\n"
     # --- END INJECTION ---
@@ -265,6 +280,7 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
     NORMAL_ATTEMPTS = 5
     EXTENSION_ATTEMPTS = 5
     error_history: list = []  # accumulates every unique error across all iterations
+    last_attempt_tracker: list = [None] # tracks the code generated before error is thrown
 
     def _record_error(msg: str):
         """Append error to history, deduplicating consecutive identical messages."""
@@ -273,7 +289,7 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
 
     for i in range(NORMAL_ATTEMPTS):
         try:
-            return _run_prolog_attempt(generate_fn, i, user_question, retrieved_context, error_history)
+            return _run_prolog_attempt(generate_fn, i, user_question, retrieved_context, error_history, last_attempt_tracker[0], last_attempt_tracker)
         except ValueError as e:
             err_str = str(e)
             print(f"Iteration {i} | Validation Error: {err_str}")
@@ -331,7 +347,7 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
         print(f"[Prolog retry] LLM says YES — granting {EXTENSION_ATTEMPTS} extension attempts.")
         for i in range(NORMAL_ATTEMPTS, NORMAL_ATTEMPTS + EXTENSION_ATTEMPTS):
             try:
-                return _run_prolog_attempt(generate_fn, i, user_question, retrieved_context, error_history)
+                return _run_prolog_attempt(generate_fn, i, user_question, retrieved_context, error_history, last_attempt_tracker[0], last_attempt_tracker)
             except ValueError as e:
                 err_str = str(e)
                 print(f"Extension {i} | Validation Error: {err_str}")
