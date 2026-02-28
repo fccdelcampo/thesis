@@ -1984,3 +1984,1183 @@ This option is correct because the speed at which sound travels depends on the m
 8. Saltwater has a higher elastic property than freshwater, which affects how it transmits sound.
 9. The speed at which sound travels in a substance depends on its physical characteristics (density, elasticity, etc.).
 ==================================================
+==================================================
+ QUERY: Different species of herbivorous rodents lived in the same ecosystem. Which factor most likely increased, causing more competition for resources among the rodents?
+A. the fertility of the soil
+B. the population of producers in the area
+C. the amount of food scraps left by predators
+D. the rate at which primary consumers moved into the area
+==================================================
+
+--- RETRIEVED CONTEXT (Top 3 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "herbivore",
+  "uri": "http://kbpedia.org/kko/rc/Herbivore",
+  "score": 1.0,
+  "triples": [
+    "definition: An animal is an instance of Herbivore just in case it is an animal whose natural diet consists exclusively of plants or plant parts.",
+    "subclass of: animal type by food",
+    "has subclass: equine"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: herbivore. Relevant Logical Facts:   - definition: An animal is an instance of Herbivore just in case it is an animal whose natural diet consists exclusively of plants or plant parts.   - subclass of: animal type by food   - has subclass: equine
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "behavioral ecology",
+  "uri": "http://kbpedia.org/kko/rc/BehavioralEcology",
+  "score": 1.0,
+  "triples": [
+    "definition: Behavioral ecology is the study of the evolutionary basis for animal behavior due to ecological pressures.",
+    "subclass of: ecology"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: behavioral ecology. Relevant Logical Facts:   - definition: Behavioral ecology is the study of the evolutionary basis for animal behavior due to ecological pressures.   - subclass of: ecology
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "squirrel",
+  "uri": "http://kbpedia.org/kko/rc/Squirrel",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all squirrels. A type of Rodent and Vermin."
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: squirrel. Relevant Logical Facts:   - definition: The collection of all squirrels. A type of Rodent and Vermin.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+B
+An increase in producers (plants) would lead to more competition for resources among herbivorous rodents, as they rely on plants as their primary food source. This aligns with the principles of behavioral ecology, which studies how ecological pressures influence animal behavior.
+==================================================
+==================================================
+ QUERY: Which factor most likely increased, causing more competition for resources among the rodents? A. the fertility of the soil B. the population of producers in the area C. the amount of food scraps left by predators D. the rate at which primary consumers moved into the area
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fertility",
+  "uri": "http://kbpedia.org/kko/rc/Fertility",
+  "score": 1.0,
+  "triples": [
+    "definition: Fertility is the natural capability to produce offspring. As a measure, fertility rate is the number of offspring born per mating pair, individual or population.",
+    "subclass of: human population",
+    "ancestor definition: In demographics, the world population is the total number of humans currently living,"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: fertility. Relevant Logical Facts:  - definition: Fertility is the natural capability to produce offspring. As a measure, fertility rate is the number of offspring born per mating pair, individual or population.  - subclass of: human population  - ancestor definition: In demographics, the world population is the total number of humans currently living,
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "population density",
+  "uri": "http://kbpedia.org/kko/rc/PopulationDensity",
+  "score": 1.0,
+  "triples": [
+    "definition: Population density (in agriculture : standing stock and standing crop) is a measurement of population per unit area or unit volume;",
+    "subclass of: geographical quantity"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: population density. Relevant Logical Facts:  - definition: Population density (in agriculture : standing stock and standing crop) is a measurement of population per unit area or unit volume;  - subclass of: geographical quantity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Funambulus",
+  "uri": "http://kbpedia.org/kko/rc/Funambulus",
+  "score": 1.0,
+  "triples": [
+    "definition: Funambulus is a genus of rodents in the Sciuridae (squirrel) family. ",
+    "subclass of: squirrel",
+    "ancestor definition: The collection of all squirrels. A type of Rodent and Vermin. Squirrel is a BiologicalTaxon.",
+    "subclass of: rodent",
+    "ancestor definition: The collection of all rodents. A type of Quadruped, Eutheria, NonPersonAnimal, and NonHumanAnimal. Rodent is a BiologicalTaxon.",
+    "subclass of: vermin",
+    "ancestor definition: A collection of animals considered undesirable to find living in human habitation buildings or other facilities.",
+    "subclass of: placental mammal",
+    "ancestor definition: Eutheria is a specialization of Mammal. Each instance of Eutheria is a placental mammal; most mammals are members of this collection. Eutheria are born live, nurse from their mothers' MammaryGlands and live outside their mothers' bodies.",
+    "subclass of: quadruped",
+    "ancestor definition: A specialization of Animal. Each instance of Quadruped is an animal that is a member of a class of animals instances of which tend to be capable of locomoting on four legs, and tend to use four-legged locomotion (see Locomotion_FourLegged) somewhat more regularly than other forms of leg-based locomotion.",
+    "subclass of: animal type by danger",
+    "ancestor definition: This category is for animal type by danger or level of concern to humans..",
+    "sibling concept: African bush squirrel",
+    "sibling concept: African giant squirrel",
+    "sibling concept: African ground squirrel",
+    "sibling concept: African Pygmy Squirrel",
+    "sibling concept: African striped squirrel"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: Funambulus. Relevant Logical Facts:  - definition: Funambulus is a genus of rodents in the Sciuridae (squirrel) family.  - subclass of: squirrel  - ancestor definition: The collection of all squirrels. A type of Rodent and Vermin. Squirrel is a BiologicalTaxon.  - subclass of: rodent  - ancestor definition: The collection of all rodents. A type of Quadruped, Eutheria, NonPersonAnimal, and NonHumanAnimal. Rodent is a BiologicalTaxon.  - subclass of: vermin  - ancestor definition: A collection of animals considered undesirable to find living in human habitation buildings or other facilities.  - subclass of: placental mammal  - ancestor definition: Eutheria is a specialization of Mammal. Each instance of Eutheria is a placental mammal; most mammals are members of this collection. Eutheria are born live, nurse from their mothers' MammaryGlands and live outside their mothers' bodies.  - subclass of: quadruped  - ancestor definition: A specialization of Animal. Each instance of Quadruped is an animal that is a member of a class of animals instances of which tend to be capable of locomoting on four legs, and tend to use four-legged locomotion (see Locomotion_FourLegged) somewhat more regularly than other forms of leg-based locomotion.  - subclass of: animal type by danger  - ancestor definition: This category is for animal type by danger or level of concern to humans..  - sibling concept: African bush squirrel  - sibling concept: African giant squirrel  - sibling concept: African ground squirrel  - sibling concept: African Pygmy Squirrel  - sibling concept: African striped squirrel
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.709716796875,
+  "local_context": [
+    {
+      "entity": null,
+      "relationship": null,
+      "source": "Local Document",
+      "target": null,
+      "text": "Different species of herbivorous rodents lived in the same ecosystem."
+    }
+  ]
+}
+[Item 4]
+[Chunk Score: 0.7097] Different species of herbivorous rodents lived in the same ecosystem.
+  [Local Connections]:
+   - None None None
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Different species of herbivorous rodents lived in the same ecosystem.
+2. Funambulus is a genus of rodents, which are typically herbivores or omnivores.
+3. Rodents compete with each other for resources such as food and shelter when they live together.
+4. The fertility rate does not directly affect competition among existing populations.
+5. An increase in the population density can lead to increased competition for resources.
+6. Population density is a measurement of population per unit area or volume.
+7. If there are more producers (e.g., plants) in an ecosystem, it may support a larger rodent population.
+8. The rate at which primary consumers move into an area does not directly affect the existing rodents' competition for resources.
+9. An increase in food scraps left by predators would likely benefit rather than harm the rodent populations.
+10. If there is more fertile soil (A), it may support a larger producer population, leading to increased competition among herbivorous rodents.
+==================================================
+==================================================
+ QUERY: Which of these objects will most likely float in water?
+A. glass marble
+B. steel ball
+C. hard rubber ball
+D. table tennis ball
+==================================================
+
+--- RETRIEVED CONTEXT (Top 6 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "afloat",
+  "uri": "http://kbpedia.org/kko/rc/Afloat-OnWater",
+  "score": 1.0,
+  "triples": [
+    "concept definition: The collection of instances of SpatialThing_Localized that are floating on some body of water.",
+    "subclass of: situational place",
+    "ancestor definition: A relative location or place in which the object is situated."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: afloat. Relevant Logical Facts:   - concept definition: The collection of instances of SpatialThing_Localized that are floating on some body of water.   - subclass of: situational place   - ancestor definition: A relative location or place in which the object is situated.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rubber ball",
+  "uri": "http://kbpedia.org/kko/rc/RubberBall",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Ball. Each instance of RubberBall is a ball made of rubber, with or without a hollow core or any additional material coating the exterior.",
+    "subclass of: user-guided device",
+    "ancestor definition: Device_UserControlled is a specialization of PhysicalDevice."
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: rubber ball. Relevant Logical Facts:   - definition: A specialization of Ball. Each instance of RubberBall is a ball made of rubber, with or without a hollow core or any additional material coating the exterior.   - subclass of: user-guided device   - ancestor definition: Device_UserControlled is a specialization of PhysicalDevice.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "marble (ball)",
+  "uri": "http://kbpedia.org/kko/rc/Marble-Ball",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all marbles. A type of Ball, ManufacturedGoods, and ConvexTangibleObject.",
+    "subclass of: ball"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: marble (ball). Relevant Logical Facts:   - definition: The collection of all marbles. A type of Ball, ManufacturedGoods, and ConvexTangibleObject.   - subclass of: ball
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "ball",
+  "uri": "http://kbpedia.org/kko/rc/Ball",
+  "score": 1.0,
+  "triples": [
+    "concept definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity.",
+    "subclass of: user-guided device",
+    "ancestor definition: Device_UserControlled is a specialization of PhysicalDevice."
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: ball. Relevant Logical Facts:   - concept definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity.   - subclass of: user-guided device   - ancestor definition: Device_UserControlled is a specialization of PhysicalDevice.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "water sports",
+  "uri": "http://kbpedia.org/kko/rc/WaterSports",
+  "score": 1.0,
+  "triples": [
+    "definition: A category for listing the various water (fresh and salt) sports.",
+    "subclass of: sport"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: water sports. Relevant Logical Facts:   - definition: A category for listing the various water (fresh and salt) sports.   - subclass of: sport
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.5860347747802734,
+  "source": "Local Document"
+}
+
+[Chunk 6 | Score: 0.5860]
+Different species of herbivorous rodents lived in the same ecosystem.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+D. table tennis ball 
+
+The context indicates that a "ball" is capable of floating on some body of water, as it's an instance of ArtifactTypeByGenericCategory and can be moved about (usually thrown or hit) as part of some Game or recreational activity. A rubber ball, which includes the definition for a hard rubber ball, has instances made with hollow cores that could potentially float in water due to their low density compared to other materials like glass or steel.
+==================================================
+==================================================
+ QUERY: Which of these objects will most likely float in water? A) glass marble B) steel ball C) hard rubber ball D) table tennis ball
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "marble edifice",
+  "uri": "http://kbpedia.org/kko/rc/MarbleEdifice",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all marble edifices. A #$BuildingCollection.",
+    "subclass of: vertical wall",
+    "ancestor definition: A planar object or surface that is by definition vertical. May have one or two sides; Two sides walls include stone walls; Great Wall of China. One sides walls include cliffs, `the walls in my office'. Why talk about the latter as one-sided when such walls have two sides? Well, identifying a unique surface facilitates identifying which surface we are talking about when we say, 'the wall of my offi",
+    "subclass of: facility component",
+    "ancestor definition: Any component or material that is used to build or construct a facility.",
+    "subclass of: wall",
+    "ancestor definition: The collection of all walls, those of construction artifacts as well as of other artifacts, e.g., container products, and of non-artifacts such as caves.",
+    "subclass of: wall orientation",
+    "ancestor definition: An orientation or directional attribute using the walls of a human occupied structure as the reference.",
+    "subclass of: construction material",
+    "ancestor definition: BuildingMaterial is a specialization of Artifact_NonAgentive and PartiallyTangibleProduct. Each instance of BuildingMaterial is an artifact of a type typically incorporated in the construction of new structures. Specializations of BuildingMaterial include lumber (but not wood), bricks (but not clay), quaried blocks of marble (but not rock in general), slabs of concrete, batches of wet concrete, ro",
+    "subclass of: man-made structure",
+    "ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection includes buildings and parts of buildings, as well as things like dams, railroad lines, and roads. Examples include the RomanColiseum, the ArcDeTriomphe, HooverDam, the EmpireStateBuilding, and the HollywoodBowl. Note that the collection Construction",
+    "subclass of: underspecified barrier",
+    "ancestor definition: The collection of all semantically underspecified barriers, whether spatial (and literal) like a Wall_GenericBarrier, or metaphoric (like NetscapeCommunicationsCorporation is to MicrosoftInc).",
+    "subclass of: directional attributes",
+    "ancestor definition: A specialized organization of attributes that help define the direction of an entity with respect to some frame of reference (such as compass points). This concept is NOT a part of OpenCyc but it works similar to a Cyc microtheory.",
+    "sibling concept: back wall",
+    "sibling concept: breakwater",
+    "sibling concept: cliff",
+    "sibling concept: dado",
+    "sibling concept: front wall"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: marble edifice. Relevant Logical Facts:  - definition: The collection of all marble edifices. A #$BuildingCollection.  - subclass of: vertical wall  - ancestor definition: A planar object or surface that is by definition vertical. May have one or two sides; Two sides walls include stone walls; Great Wall of China. One sides walls include cliffs, `the walls in my office'. Why talk about the latter as one-sided when such walls have two sides? Well, identifying a unique surface facilitates identifying which surface we are talking about when we say, 'the wall of my offi  - subclass of: facility component  - ancestor definition: Any component or material that is used to build or construct a facility.  - subclass of: wall  - ancestor definition: The collection of all walls, those of construction artifacts as well as of other artifacts, e.g., container products, and of non-artifacts such as caves.  - subclass of: wall orientation  - ancestor definition: An orientation or directional attribute using the walls of a human occupied structure as the reference.  - subclass of: construction material  - ancestor definition: BuildingMaterial is a specialization of Artifact_NonAgentive and PartiallyTangibleProduct. Each instance of BuildingMaterial is an artifact of a type typically incorporated in the construction of new structures. Specializations of BuildingMaterial include lumber (but not wood), bricks (but not clay), quaried blocks of marble (but not rock in general), slabs of concrete, batches of wet concrete, ro  - subclass of: man-made structure  - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection includes buildings and parts of buildings, as well as things like dams, railroad lines, and roads. Examples include the RomanColiseum, the ArcDeTriomphe, HooverDam, the EmpireStateBuilding, and the HollywoodBowl. Note that the collection Construction  - subclass of: underspecified barrier  - ancestor definition: The collection of all semantically underspecified barriers, whether spatial (and literal) like a Wall_GenericBarrier, or metaphoric (like NetscapeCommunicationsCorporation is to MicrosoftInc).  - subclass of: directional attributes  - ancestor definition: A specialized organization of attributes that help define the direction of an entity with respect to some frame of reference (such as compass points). This concept is NOT a part of OpenCyc but it works similar to a Cyc microtheory.  - sibling concept: back wall  - sibling concept: breakwater  - sibling concept: cliff  - sibling concept: dado  - sibling concept: front wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "steel industry",
+  "uri": "http://kbpedia.org/kko/rc/SteelIndustry",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all steel industries, each of which is a geographically defined steel Industry_Localized in a certain region. Steel industries have the primary function of producing pieces or rolls of Steel commercially in various forms. This includes industries that alter the composition or form of pieces of Steel, but it does not include the manufacture of steel products or structures in their",
+    "subclass of: manufacturing sector",
+    "ancestor definition: The collection of all localized groups of manufacturing enterprises that each together (each group) forms the major manufacturing economic sector for the region. An example instance would be the Manufacturing sector of Switzerland, or the worldwide manufacturing sector.",
+    "subclass of: metallurgy industry",
+    "ancestor definition: The collection of all metallurgy industries. A type of Industry_Localized. The concept MetallurgyIndustry is an IndustryType and an IndustrialConcept.",
+    "subclass of: industrial sector",
+    "ancestor definition: The collection of all localized groups of enterprises that are producers of industrial commodities, in which each such group together forms the major industrial sector for the region. 'Industrial commodities' includes MechanicalDevices and basic industrial materials. Examples include 'the world industrial sector', the 'industrial sector of China'. The Chinese water pump industry would not be an ex",
+    "subclass of: industry",
+    "ancestor definition: Industry is the production of goods or services within an economy. The major source of revenue of a group or company is the indicator of its relevant industry.  When a large group has multiple sources of revenue generation, it is considered to be working in different industries.   Manufacturing industry became a key sector of production and labour in European and North American countries during th",
+    "subclass of: secondary economic sector activity",
+    "ancestor definition: A secondary economic sector involves the transformation of raw or intermediate materials into goods e.g. manufacturing steel into cars, or textiles into clothing. (A builder and a dressmaker would be workers in the secondary sector.).",
+    "subclass of: agent non geographical",
+    "ancestor definition: A specialization of Agent_Generic and EnduringThing_Localized (qq.v.). Agent_NonGeographical is the collection of all spatially-located agents that are not geographical (cf. GeographicalAgent). Specializations include EmbodiedAgent, CommercialOrganization, and LegalCorporation.",
+    "subclass of: group of intelligent agents acting together",
+    "ancestor definition: The collection of groups of IntelligentAgents whose members operate together to form a kind of collective Agent_PartiallyTangible (cf. MultiIndividualAgent). Groups of this sort satisfy the minimal condition for intelligent agency, viz., they are capable of acting purposefully.",
+    "subclass of: social being",
+    "ancestor definition: A specialization of IntelligentAgent. Each instance of SocialBeing is an intelligent agent whose status as an agent is acknowledged within some social system, and who is capable of playing certain social roles within that system. Note that in many (but not all) cases, a SocialBeing will have certain rights and responsibilities associated with his/her/its status within the relevant social system. F",
+    "sibling concept: aircraft industry",
+    "sibling concept: aluminum industry",
+    "sibling concept: automobile industry",
+    "sibling concept: beer brewing industry",
+    "sibling concept: computer hardware industry"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: steel industry. Relevant Logical Facts:  - definition: The collection of all steel industries, each of which is a geographically defined steel Industry_Localized in a certain region. Steel industries have the primary function of producing pieces or rolls of Steel commercially in various forms. This includes industries that alter the composition or form of pieces of Steel, but it does not include the manufacture of steel products or structures in their  - subclass of: manufacturing sector  - ancestor definition: The collection of all localized groups of manufacturing enterprises that each together (each group) forms the major manufacturing economic sector for the region. An example instance would be the Manufacturing sector of Switzerland, or the worldwide manufacturing sector.  - subclass of: metallurgy industry  - ancestor definition: The collection of all metallurgy industries. A type of Industry_Localized. The concept MetallurgyIndustry is an IndustryType and an IndustrialConcept.  - subclass of: industrial sector  - ancestor definition: The collection of all localized groups of enterprises that are producers of industrial commodities, in which each such group together forms the major industrial sector for the region. 'Industrial commodities' includes MechanicalDevices and basic industrial materials. Examples include 'the world industrial sector', the 'industrial sector of China'. The Chinese water pump industry would not be an ex  - subclass of: industry  - ancestor definition: Industry is the production of goods or services within an economy. The major source of revenue of a group or company is the indicator of its relevant industry. When a large group has multiple sources of revenue generation, it is considered to be working in different industries.  Manufacturing industry became a key sector of production and labour in European and North American countries during th  - subclass of: secondary economic sector activity  - ancestor definition: A secondary economic sector involves the transformation of raw or intermediate materials into goods e.g. manufacturing steel into cars, or textiles into clothing. (A builder and a dressmaker would be workers in the secondary sector.).  - subclass of: agent non geographical  - ancestor definition: A specialization of Agent_Generic and EnduringThing_Localized (qq.v.). Agent_NonGeographical is the collection of all spatially-located agents that are not geographical (cf. GeographicalAgent). Specializations include EmbodiedAgent, CommercialOrganization, and LegalCorporation.  - subclass of: group of intelligent agents acting together  - ancestor definition: The collection of groups of IntelligentAgents whose members operate together to form a kind of collective Agent_PartiallyTangible (cf. MultiIndividualAgent). Groups of this sort satisfy the minimal condition for intelligent agency, viz., they are capable of acting purposefully.  - subclass of: social being  - ancestor definition: A specialization of IntelligentAgent. Each instance of SocialBeing is an intelligent agent whose status as an agent is acknowledged within some social system, and who is capable of playing certain social roles within that system. Note that in many (but not all) cases, a SocialBeing will have certain rights and responsibilities associated with his/her/its status within the relevant social system. F  - sibling concept: aircraft industry  - sibling concept: aluminum industry  - sibling concept: automobile industry  - sibling concept: beer brewing industry  - sibling concept: computer hardware industry
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "football ball",
+  "uri": "http://kbpedia.org/kko/rc/FootballBall-American",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all balls designed to be used to play American football. A type of Ball, ManufacturedGoods, and Projectile_Device. Each instance of FootballBall_American is a prolate spheroid ball with fairly pointed ends, made of leather, rubber or plastic, and filled with an inflatable bladder.",
+    "subclass of: ball",
+    "ancestor definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity. Most Balls are Spheres (or at least Spheroids), but some, such as instances of FootballBall_American, are not. However, Ball i",
+    "subclass of: projectile",
+    "ancestor definition: A projectile is any object  thrown into space (empty or not) by the exertion of a force.  Although any object in motion through space (for example a thrown baseball) may be called a projectile, the term more commonly refers to a ranged weapon. Mathematical equations of motion are used to analyze projectile trajectory.",
+    "subclass of: user-guided device",
+    "ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction. Tool is an important specialization of this collection, and further ex",
+    "subclass of: user-powered device",
+    "ancestor definition: A specialization of MusclePoweredDevice. Each instance of Device_UserPowered is an artifact deliberately designed to perform a particular function, and one which depends upon the physical efforts of the user to perform that function in part or in whole. A paradigm example would be a bicycle. However, the definition also leaves room for some counterintuitive cases -- for example, combs and forks al",
+    "subclass of: device with no moving parts",
+    "ancestor definition: The collection of all devices that have no moving parts, such as (non-mechanical) pencils, or shot puts. A type of PhysicalDevice. The collection DeviceWithNoMovingParts is an ArtifactTypeByGenericCategory and a SpatiallyDisjointObjectType.",
+    "subclass of: round thing",
+    "ancestor definition: A specialization of ShapedObject. Each instance of RoundObject is a tangible or intangible thing with an (at least nearly) round or elliptical shape in a least one dimension. A round object might be one-dimensional (e.g. a ring that bounds a 2-D Circle), two-dimensional (e.g. an intangible Ellipse) or three-dimensional (e.g. a Sphere or a chicken egg). Other specializations of RoundObject include ",
+    "subclass of: toy",
+    "ancestor definition: A toy is an item that can be used for play. Toys are generally played with by children and pets. Playing with toys is an enjoyable means of training the young for life in society. Different materials are used to make toys enjoyable to both young and old. Many items are designed to serve as toys, but goods produced for other purposes can also be used. For instance, a small child may pick up a house",
+    "subclass of: powered device",
+    "ancestor definition: A specialization of PhysicalDevice. Each instance of PoweredDevice is a device that requires some power input in order to perform its intended function(s). The power supplied might be muscle power, kinetic energy, electricity, fuel-generated, and so on. Note that PoweredDevice and NonPoweredDevice partition the collection PhysicalDevice.",
+    "sibling concept: baseball",
+    "sibling concept: basketball ball",
+    "sibling concept: bowling ball",
+    "sibling concept: hacky sack",
+    "sibling concept: golf ball"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: football ball. Relevant Logical Facts:  - definition: The collection of all balls designed to be used to play American football. A type of Ball, ManufacturedGoods, and Projectile_Device. Each instance of FootballBall_American is a prolate spheroid ball with fairly pointed ends, made of leather, rubber or plastic, and filled with an inflatable bladder.  - subclass of: ball  - ancestor definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity. Most Balls are Spheres (or at least Spheroids), but some, such as instances of FootballBall_American, are not. However, Ball i  - subclass of: projectile  - ancestor definition: A projectile is any object thrown into space (empty or not) by the exertion of a force. Although any object in motion through space (for example a thrown baseball) may be called a projectile, the term more commonly refers to a ranged weapon. Mathematical equations of motion are used to analyze projectile trajectory.  - subclass of: user-guided device  - ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction. Tool is an important specialization of this collection, and further ex  - subclass of: user-powered device  - ancestor definition: A specialization of MusclePoweredDevice. Each instance of Device_UserPowered is an artifact deliberately designed to perform a particular function, and one which depends upon the physical efforts of the user to perform that function in part or in whole. A paradigm example would be a bicycle. However, the definition also leaves room for some counterintuitive cases -- for example, combs and forks al  - subclass of: device with no moving parts  - ancestor definition: The collection of all devices that have no moving parts, such as (non-mechanical) pencils, or shot puts. A type of PhysicalDevice. The collection DeviceWithNoMovingParts is an ArtifactTypeByGenericCategory and a SpatiallyDisjointObjectType.  - subclass of: round thing  - ancestor definition: A specialization of ShapedObject. Each instance of RoundObject is a tangible or intangible thing with an (at least nearly) round or elliptical shape in a least one dimension. A round object might be one-dimensional (e.g. a ring that bounds a 2-D Circle), two-dimensional (e.g. an intangible Ellipse) or three-dimensional (e.g. a Sphere or a chicken egg). Other specializations of RoundObject include  - subclass of: toy  - ancestor definition: A toy is an item that can be used for play. Toys are generally played with by children and pets. Playing with toys is an enjoyable means of training the young for life in society. Different materials are used to make toys enjoyable to both young and old. Many items are designed to serve as toys, but goods produced for other purposes can also be used. For instance, a small child may pick up a house  - subclass of: powered device  - ancestor definition: A specialization of PhysicalDevice. Each instance of PoweredDevice is a device that requires some power input in order to perform its intended function(s). The power supplied might be muscle power, kinetic energy, electricity, fuel-generated, and so on. Note that PoweredDevice and NonPoweredDevice partition the collection PhysicalDevice.  - sibling concept: baseball  - sibling concept: basketball ball  - sibling concept: bowling ball  - sibling concept: hacky sack  - sibling concept: golf ball
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "table tennis ball",
+  "uri": "http://kbpedia.org/kko/rc/PingPongBall",
+  "score": 1.0,
+  "triples": [
+    "subclass of: user-guided device",
+    "ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction.",
+    "definition: The ball manipulated in a game of ping-pong (table-tennis)"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: table tennis ball. Relevant Logical Facts:  - subclass of: user-guided device  - ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction.  - definition: The ball manipulated in a game of ping-pong (table-tennis)
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "tennis ball",
+  "uri": "http://kbpedia.org/kko/rc/TennisBall",
+  "score": 1.0,
+  "triples": [
+    "definition: The ball manipulated in a tennis game.",
+    "subclass of: ball",
+    "ancestor definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity. Most Balls are Spheres (or at least Spheroids), but some, such as instances of FootballBall_American, are not. However, Ball i",
+    "subclass of: tennis equipment",
+    "ancestor definition: Sports equipment used in tennis.",
+    "subclass of: user-guided device",
+    "ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction. Tool is an important specialization of this collection, and further ex",
+    "subclass of: user-powered device",
+    "ancestor definition: A specialization of MusclePoweredDevice. Each instance of Device_UserPowered is an artifact deliberately designed to perform a particular function, and one which depends upon the physical efforts of the user to perform that function in part or in whole. A paradigm example would be a bicycle. However, the definition also leaves room for some counterintuitive cases -- for example, combs and forks al",
+    "subclass of: device with no moving parts",
+    "ancestor definition: The collection of all devices that have no moving parts, such as (non-mechanical) pencils, or shot puts. A type of PhysicalDevice. The collection DeviceWithNoMovingParts is an ArtifactTypeByGenericCategory and a SpatiallyDisjointObjectType.",
+    "subclass of: round thing",
+    "ancestor definition: A specialization of ShapedObject. Each instance of RoundObject is a tangible or intangible thing with an (at least nearly) round or elliptical shape in a least one dimension. A round object might be one-dimensional (e.g. a ring that bounds a 2-D Circle), two-dimensional (e.g. an intangible Ellipse) or three-dimensional (e.g. a Sphere or a chicken egg). Other specializations of RoundObject include ",
+    "subclass of: toy",
+    "ancestor definition: A toy is an item that can be used for play. Toys are generally played with by children and pets. Playing with toys is an enjoyable means of training the young for life in society. Different materials are used to make toys enjoyable to both young and old. Many items are designed to serve as toys, but goods produced for other purposes can also be used. For instance, a small child may pick up a house",
+    "subclass of: racket",
+    "ancestor definition: various paddles or rackets, hand-held devices used in sports like tennis, badminton, ping-pong etc. to knock balls around.",
+    "sibling concept: baseball",
+    "sibling concept: basketball ball",
+    "sibling concept: bowling ball",
+    "sibling concept: hacky sack",
+    "sibling concept: football ball"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: tennis ball. Relevant Logical Facts:  - definition: The ball manipulated in a tennis game.  - subclass of: ball  - ancestor definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity. Most Balls are Spheres (or at least Spheroids), but some, such as instances of FootballBall_American, are not. However, Ball i  - subclass of: tennis equipment  - ancestor definition: Sports equipment used in tennis.  - subclass of: user-guided device  - ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction. Tool is an important specialization of this collection, and further ex  - subclass of: user-powered device  - ancestor definition: A specialization of MusclePoweredDevice. Each instance of Device_UserPowered is an artifact deliberately designed to perform a particular function, and one which depends upon the physical efforts of the user to perform that function in part or in whole. A paradigm example would be a bicycle. However, the definition also leaves room for some counterintuitive cases -- for example, combs and forks al  - subclass of: device with no moving parts  - ancestor definition: The collection of all devices that have no moving parts, such as (non-mechanical) pencils, or shot puts. A type of PhysicalDevice. The collection DeviceWithNoMovingParts is an ArtifactTypeByGenericCategory and a SpatiallyDisjointObjectType.  - subclass of: round thing  - ancestor definition: A specialization of ShapedObject. Each instance of RoundObject is a tangible or intangible thing with an (at least nearly) round or elliptical shape in a least one dimension. A round object might be one-dimensional (e.g. a ring that bounds a 2-D Circle), two-dimensional (e.g. an intangible Ellipse) or three-dimensional (e.g. a Sphere or a chicken egg). Other specializations of RoundObject include  - subclass of: toy  - ancestor definition: A toy is an item that can be used for play. Toys are generally played with by children and pets. Playing with toys is an enjoyable means of training the young for life in society. Different materials are used to make toys enjoyable to both young and old. Many items are designed to serve as toys, but goods produced for other purposes can also be used. For instance, a small child may pick up a house  - subclass of: racket  - ancestor definition: various paddles or rackets, hand-held devices used in sports like tennis, badminton, ping-pong etc. to knock balls around.  - sibling concept: baseball  - sibling concept: basketball ball  - sibling concept: bowling ball  - sibling concept: hacky sack  - sibling concept: football ball
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Objects that are less dense than water will float in it.
+2. The density of a material is determined by its mass and volume.
+3. A glass marble has a high mass but a relatively small volume, making it denser than water.
+4. Steel balls have an even higher mass-to-volume ratio due to their metal composition.
+5. Hard rubber balls are made from materials that can be compressed or deformed under pressure, which affects their density.
+6. Table tennis balls are typically made of lightweight plastic and air-filled with a low-density gas.
+7. The buoyancy force on an object is proportional to its volume and the difference in densities between itself and the surrounding fluid (Archimedes' Principle).
+8. If two objects have different volumes but similar masses, the one with less mass will be denser than water if it has enough air inside or a low-density material.
+9. The table tennis ball's design allows for maximum volume while minimizing its overall weight due to being hollow and made of lightweight materials.
+
+Note: These logical building blocks are based on general principles from physics (density, buoyancy) rather than specific details about the objects in question.
+==================================================
+==================================================
+ QUERY: Which of the following describes the fallacy of appeal to common practice?
+
+A. eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source
+B. reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences
+C. drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim
+D. arguing that something is the right thing to do based only on evidence that other people are already doing it.
+
+Answer with the letter only (A, B, C, or D).
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "logical fallacy",
+  "uri": "http://kbpedia.org/kko/rc/LogicalFallacy",
+  "score": 1.0,
+  "triples": [
+    "definition: A fallacy is the use of invalid or otherwise faulty reasoning, or \\",
+    "subclass of: argument"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: logical fallacy. Relevant Logical Facts:   - definition: A fallacy is the use of invalid or otherwise faulty reasoning, or \   - subclass of: argument
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "syllogistic fallacy",
+  "uri": "http://kbpedia.org/kko/rc/SyllogisticFallacy",
+  "score": 1.0,
+  "triples": [
+    "definition: This category is for syllogistic fallacies, arguments which violate the rules of syllogisms.",
+    "subclass of: logical fallacy"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: syllogistic fallacy. Relevant Logical Facts:   - definition: This category is for syllogistic fallacies, arguments which violate the rules of syllogisms.   - subclass of: logical fallacy
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "causal fallacy",
+  "uri": "http://kbpedia.org/kko/rc/CausalFallacy",
+  "score": 1.0,
+  "triples": [
+    "definition: This category is for questionable cause fallacies, arguments where a cause is incorrectly identified."
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: causal fallacy. Relevant Logical Facts:   - definition: This category is for questionable cause fallacies, arguments where a cause is incorrectly identified.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "common law system",
+  "uri": "http://kbpedia.org/kko/rc/CommonLawSystem",
+  "score": 1.0,
+  "triples": [
+    "definition: A common law legal system is characterized by case law developed by judges, courts, and similar tribunals, when giving decisions in individual cases that have precedential effect on future cases. The body of past common law binds judges deciding later cases to ensure consistent treatment and so that consistent principles applied to similar facts yield similar outcomes. In common law cases, where t",
+    "subclass of: legal code",
+    "ancestor definition: A specialization of GovernmentCOC. Each instance of LegalCode is a code of conduct consisting of all the laws that hold in some instance of GeopoliticalEntity. One notable instance of LegalCode is UnitedStatesCode.",
+    "subclass of: common law system",
+    "ancestor definition: A common law legal system is characterized by case law developed by judges, courts, and similar tribunals, when giving decisions in individual cases that have precedential effect on future cases. The body of past common law binds judges deciding later cases to ensure consistent treatment and so that consistent principles applied to similar facts yield similar outcomes. In common law cases, where t",
+    "subclass of: code of conduct",
+    "ancestor definition: A code of conduct is a set of rules outlining the social norms and rules and responsibilities of, or proper practices for, an individual, party or organization. Related concepts include ethical, honor, moral codes and religious laws.",
+    "subclass of: code of conduct imposed by government",
+    "ancestor definition: A collection of codes of conduct; a subcollection of FormalCOC (the collection of formal codes of conduct). Each instance of GovernmentCOC is a formal regulation of behavior imposed upon agents -- including citizens, tourists, businesses, government entities, etc., in so far as they are subject to it -- who are located within the legal jurisdiction where that code of conduct holds. GovernmentCOC i",
+    "subclass of: group of things",
+    "ancestor definition: A collection of temporal objects. Each instance of Group is a composite object made up of one or more individual objects or events. A group is related to each of its members by the predicate groupMembers (q.v.). Note that instances of Group are not collections. A group has temporal extent and might have spatial location, while a collection is timeless and nonspatial. It is of course possible to de",
+    "subclass of: law",
+    "ancestor definition: A Law is a miniature GovernmentCOC that expresses a legal requirement or restriction. For instance, one Law might say, effectively, that bigamy is illegal. A Law is declared to be part of a LegalCode by using subWorks. Note that one Law can be part of more than one LegalCode.",
+    "subclass of: norm",
+    "ancestor definition: The common sub-collection of both Specification and Criterion. Each instance of NormativeSpecification is a conceptual work that describes how something should be. The instances can refer to instances or whole sub-collections of Situation or SomethingExisting. Thus, the conceptual work associated with an instance of Blueprint is an instance of NormativeSpecification because it describes what the p",
+    "subclass of: written or spoken work",
+    "ancestor definition: A specialization of ConceptualWork. Each instance of PropositionalConceptualWork is an abstract work constituted at least in part by propositional information. Propositional information is information which has a truth value in some context (see Proposition). Typically, instances of PropositionalConceptualWork will be works whose instantiations are composed of (or merely contain) one or more spoke",
+    "has subclass: common law system",
+    "has subclass: aboriginal title",
+    "has subclass: civil law (common law)",
+    "has subclass: common law offences in England and Wales",
+    "has subclass: common law rule",
+    "has subclass: estoppel",
+    "has subclass: probate courts in the United States",
+    "has subclass: sovereign immunity",
+    "sibling concept: bill (law)",
+    "sibling concept: judicial review",
+    "sibling concept: modern Western legal code",
+    "sibling concept: non-fatal offence against the person",
+    "sibling concept: parliamentary procedure"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: common law system. Relevant Logical Facts:   - definition: A common law legal system is characterized by case law developed by judges, courts, and similar tribunals, when giving decisions in individual cases that have precedential effect on future cases. The body of past common law binds judges deciding later cases to ensure consistent treatment and so that consistent principles applied to similar facts yield similar outcomes. In common law cases, where t   - subclass of: legal code   - ancestor definition: A specialization of GovernmentCOC. Each instance of LegalCode is a code of conduct consisting of all the laws that hold in some instance of GeopoliticalEntity. One notable instance of LegalCode is UnitedStatesCode.   - subclass of: common law system   - ancestor definition: A common law legal system is characterized by case law developed by judges, courts, and similar tribunals, when giving decisions in individual cases that have precedential effect on future cases. The body of past common law binds judges deciding later cases to ensure consistent treatment and so that consistent principles applied to similar facts yield similar outcomes. In common law cases, where t   - subclass of: code of conduct   - ancestor definition: A code of conduct is a set of rules outlining the social norms and rules and responsibilities of, or proper practices for, an individual, party or organization. Related concepts include ethical, honor, moral codes and religious laws.   - subclass of: code of conduct imposed by government   - ancestor definition: A collection of codes of conduct; a subcollection of FormalCOC (the collection of formal codes of conduct). Each instance of GovernmentCOC is a formal regulation of behavior imposed upon agents -- including citizens, tourists, businesses, government entities, etc., in so far as they are subject to it -- who are located within the legal jurisdiction where that code of conduct holds. GovernmentCOC i   - subclass of: group of things   - ancestor definition: A collection of temporal objects. Each instance of Group is a composite object made up of one or more individual objects or events. A group is related to each of its members by the predicate groupMembers (q.v.). Note that instances of Group are not collections. A group has temporal extent and might have spatial location, while a collection is timeless and nonspatial. It is of course possible to de   - subclass of: law   - ancestor definition: A Law is a miniature GovernmentCOC that expresses a legal requirement or restriction. For instance, one Law might say, effectively, that bigamy is illegal. A Law is declared to be part of a LegalCode by using subWorks. Note that one Law can be part of more than one LegalCode.   - subclass of: norm   - ancestor definition: The common sub-collection of both Specification and Criterion. Each instance of NormativeSpecification is a conceptual work that describes how something should be. The instances can refer to instances or whole sub-collections of Situation or SomethingExisting. Thus, the conceptual work associated with an instance of Blueprint is an instance of NormativeSpecification because it describes what the p   - subclass of: written or spoken work   - ancestor definition: A specialization of ConceptualWork. Each instance of PropositionalConceptualWork is an abstract work constituted at least in part by propositional information. Propositional information is information which has a truth value in some context (see Proposition). Typically, instances of PropositionalConceptualWork will be works whose instantiations are composed of (or merely contain) one or more spoke   - has subclass: common law system   - has subclass: aboriginal title   - has subclass: civil law (common law)   - has subclass: common law offences in England and Wales   - has subclass: common law rule   - has subclass: estoppel   - has subclass: probate courts in the United States   - has subclass: sovereign immunity   - sibling concept: bill (law)   - sibling concept: judicial review   - sibling concept: modern Western legal code   - sibling concept: non-fatal offence against the person   - sibling concept: parliamentary procedure
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "failing",
+  "uri": "http://kbpedia.org/kko/rc/FailingSomething",
+  "score": 1.0,
+  "triples": [
+    "definition: A collection of events; a subcollection of Evaluating. In each FailingSomething, someone judges something unacceptable.",
+    "subclass of: evaluating",
+    "ancestor definition: A specialization of PurposefulAction and Thinking. Each instance of this collection is an event in which at least one agent evaluates some real-world thing or situation. Notable specializations of Evaluating include MeasuringSomething, MedicalTesting, and Navigating. This collection differs from AnalyzingSomething in that the latter does not necessarily involve some extra-mental entity.",
+    "subclass of: fiasco",
+    "ancestor definition: Constraints necessary for success of a situation.",
+    "subclass of: action (purposeful)",
+    "ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purposefully done by (see performedBy) at least one actor.",
+    "subclass of: thinking",
+    "ancestor definition: A specialization of IntentionalMentalEvent. Each instance of this collection is a thinking process in which it is essential that an agent uses information about the current state of the world (or some portion of the world). Notable specializations of Thinking include Evaluating, MakingAPlan, Negotiating, and InventingSomething.",
+    "subclass of: spatially localized situation",
+    "ancestor definition: A specialization of Situation. Each instance of Situation_Localized is a situation whose temporal extent occurs at a specific location in space. Notable specializations of Situation_Localized include PhysiologicalCondition and Event_Localized.",
+    "subclass of: conscious activity",
+    "ancestor definition: This is the collection of all activities which are performed in a state of consciousness, that is, the animal performing the action is not sleeping, in a coma, or otherwise unconscious.",
+    "subclass of: intentional mental event",
+    "ancestor definition: A specialization of both AtLeastPartiallyMentalEvent and IntentionalMentalSituation (qq.v.). This is the collection of (at least partially) mental events whose instances are characterized by intentionality: they are \\",
+    "subclass of: situation",
+    "ancestor definition: A specialization of both IntangibleIndividual and TemporalThing. Each instance of Situation is a state or event consisting of one or more objects having certain properties or bearing certain relations to each other. Notable specializations of Situation are Event and StaticSituation; it is disjoint with SomethingExisting.",
+    "has subclass: engine problem",
+    "has subclass: Eurovision songs that scored no points",
+    "has subclass: market failure",
+    "sibling concept: appraisal",
+    "sibling concept: auditing",
+    "sibling concept: checking",
+    "sibling concept: comparing",
+    "sibling concept: contrasting"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: failing. Relevant Logical Facts:   - definition: A collection of events; a subcollection of Evaluating. In each FailingSomething, someone judges something unacceptable.   - subclass of: evaluating   - ancestor definition: A specialization of PurposefulAction and Thinking. Each instance of this collection is an event in which at least one agent evaluates some real-world thing or situation. Notable specializations of Evaluating include MeasuringSomething, MedicalTesting, and Navigating. This collection differs from AnalyzingSomething in that the latter does not necessarily involve some extra-mental entity.   - subclass of: fiasco   - ancestor definition: Constraints necessary for success of a situation.   - subclass of: action (purposeful)   - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purposefully done by (see performedBy) at least one actor.   - subclass of: thinking   - ancestor definition: A specialization of IntentionalMentalEvent. Each instance of this collection is a thinking process in which it is essential that an agent uses information about the current state of the world (or some portion of the world). Notable specializations of Thinking include Evaluating, MakingAPlan, Negotiating, and InventingSomething.   - subclass of: spatially localized situation   - ancestor definition: A specialization of Situation. Each instance of Situation_Localized is a situation whose temporal extent occurs at a specific location in space. Notable specializations of Situation_Localized include PhysiologicalCondition and Event_Localized.   - subclass of: conscious activity   - ancestor definition: This is the collection of all activities which are performed in a state of consciousness, that is, the animal performing the action is not sleeping, in a coma, or otherwise unconscious.   - subclass of: intentional mental event   - ancestor definition: A specialization of both AtLeastPartiallyMentalEvent and IntentionalMentalSituation (qq.v.). This is the collection of (at least partially) mental events whose instances are characterized by intentionality: they are \   - subclass of: situation   - ancestor definition: A specialization of both IntangibleIndividual and TemporalThing. Each instance of Situation is a state or event consisting of one or more objects having certain properties or bearing certain relations to each other. Notable specializations of Situation are Event and StaticSituation; it is disjoint with SomethingExisting.   - has subclass: engine problem   - has subclass: Eurovision songs that scored no points   - has subclass: market failure   - sibling concept: appraisal   - sibling concept: auditing   - sibling concept: checking   - sibling concept: comparing   - sibling concept: contrasting
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+D.
+==================================================
+==================================================
+ QUERY: Which of the following describes the fallacy of appeal to common practice? A) eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source B) reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences C) drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim D) arguing that something is the right thing to do based only on evidence that other people are already doing it.
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "source of current",
+  "uri": "http://kbpedia.org/kko/rc/CurrentSource",
+  "score": 1.0,
+  "triples": [
+    "definition: A source of electrical current"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: source of current. Relevant Logical Facts:  - definition: A source of electrical current
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "WWE No Way Out",
+  "uri": "http://kbpedia.org/kko/rc/WweNoWayOut",
+  "score": 1.0,
+  "triples": [
+    "definition: No Way Out is a professional wrestling pay-per-view event, produced by WWE, a professional wrestling promotion based in Connecticut.",
+    "subclass of: entertainment event",
+    "ancestor definition: A specialization of CulturalEvent and ServiceEvent. Each instance of this collection is an activity performed by one or more agents primarily to amuse, entertain or otherwise divert others."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: WWE No Way Out. Relevant Logical Facts:  - definition: No Way Out is a professional wrestling pay-per-view event, produced by WWE, a professional wrestling promotion based in Connecticut.  - subclass of: entertainment event  - ancestor definition: A specialization of CulturalEvent and ServiceEvent. Each instance of this collection is an activity performed by one or more agents primarily to amuse, entertain or otherwise divert others.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "false evidence",
+  "uri": "http://kbpedia.org/kko/rc/FalseEvidence",
+  "score": 1.0,
+  "triples": [
+    "definition: False evidence, fabricated evidence, forged evidence or tainted evidence is information created or obtained illegally, to sway the verdict in a court case.",
+    "subclass of: criminal act",
+    "ancestor definition: A FirstOrderCollection. Each instance of CriminalAct is a relatively serious IllegalAction."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: false evidence. Relevant Logical Facts:  - definition: False evidence, fabricated evidence, forged evidence or tainted evidence is information created or obtained illegally, to sway the verdict in a court case.  - subclass of: criminal act  - ancestor definition: A FirstOrderCollection. Each instance of CriminalAct is a relatively serious IllegalAction.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "probability fallacy",
+  "uri": "http://kbpedia.org/kko/rc/ProbabilityFallacy",
+  "score": 1.0,
+  "triples": [
+    "definition: A fallacy in probabilitistic interpretation or assessment.",
+    "subclass of: logical fallacy",
+    "ancestor definition: A fallacy is the use of invalid or otherwise faulty reasoning, or \\"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: probability fallacy. Relevant Logical Facts:  - definition: A fallacy in probabilitistic interpretation or assessment.  - subclass of: logical fallacy  - ancestor definition: A fallacy is the use of invalid or otherwise faulty reasoning, or \
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "logical fallacy",
+  "uri": "http://kbpedia.org/kko/rc/LogicalFallacy",
+  "score": 1.0,
+  "triples": [
+    "definition: A fallacy is the use of invalid or otherwise faulty reasoning, or \\",
+    "subclass of: argument",
+    "ancestor definition: In logic and philosophy, an argument is a series of statements typically used to persuade someone of something or to present reasons for accepting a conclusion. The general form of an argument in a natural language is that of premises (typically in the form of propositions, statements or sentences) in support of a claim: the conclusion."
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: logical fallacy. Relevant Logical Facts:  - definition: A fallacy is the use of invalid or otherwise faulty reasoning, or \  - subclass of: argument  - ancestor definition: In logic and philosophy, an argument is a series of statements typically used to persuade someone of something or to present reasons for accepting a conclusion. The general form of an argument in a natural language is that of premises (typically in the form of propositions, statements or sentences) in support of a claim: the conclusion.
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. A fallacy occurs when invalid reasoning leads to an incorrect conclusion.
+2. An appeal to common practice involves using others' actions as evidence for one's own decision-making process.
+3. The definition of logical fallacy is the use of invalid or otherwise faulty reasoning, or arguments that are unsound because they contain false premises.
+4. A source of electrical current can be considered a relevant context when discussing an appeal to common practice in relation to electricity usage.
+5. Ignoring evidence that contradicts one's claim constitutes flawed reasoning and may lead to incorrect conclusions.
+6. The definition of entertainment event includes activities performed by agents primarily to amuse, entertain or otherwise divert others.
+7. Using false information as evidence is a form of criminal act known as presenting tainted evidence in court cases.
+8. Probability fallacies occur when there's an error in probabilistic interpretation or assessment.
+9. An argument typically consists of premises supporting a claim and may be considered unsound if it contains faulty reasoning.
+10. Invalid reasoning can lead to incorrect conclusions, which is the essence of committing logical fallacy.
+==================================================
+==================================================
+ QUERY: Which of the following are most vulnerable to injection attacks?
+
+A. Session IDs
+B. Registry keys
+C. Network communications
+D. SQL queries based on user input
+
+Answer with the letter only (A, B, C, or D).
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "corruption of information attack",
+  "uri": "http://kbpedia.org/kko/rc/AttackByComputerOperation-CorruptionOfInformation",
+  "score": 1.0,
+  "triples": [
+    "definition: AttackByComputerOperation_CorruptionOfInformation is a subset of AttackByComputerOperation and AttackOnIBT. It is the collection of all electronic attacks whose primary purpose is the corruption of the information of the ComputationalSystem under attack.",
+    "subclass of: cyber attack",
+    "ancestor definition: A specialization of AttackOnObject, #$ActsCommonlyConsideredCriminal and ComputerActivity. Each instance of AttackByComputerOperation an attack executed using computer operations as weapons. Commonly, instances of this collection are called \\",
+    "subclass of: attack on information bearing things",
+    "ancestor definition: A specialization of AttackOnObject. Each instance of this collection is an action intentionally performedBy an Agent_PartiallyTangible who has the purposeInEvent that the action damages the objectActedOn. In such attacks, the attacker intends that the AspatialInformationStore that is encoded in the IBT (InformationBearingThing) attacked, be damaged or changed from one instance of AspatialInformati",
+    "subclass of: attack",
+    "ancestor definition: A specialization of PurposefulPhysicalAction and ActionOnObject. Each instance of AttackOnObject is an action intentionally performed by an actor or actors (see performedBy) with the goal (see purposeInEvent) that the action damages (see damages) the object attacked (see objectAttacked). The object that is attacked in an instance of AttackOnObject need not be a tangible object -- for example, it c",
+    "subclass of: computer activity",
+    "ancestor definition: A collection of events, and a specialization of both Action and PhysicalEvent. In each instance of ComputerActivity, at least one instance of Computer is somehow involved. An instance of Person may or may not be involved. (Instances of ComputerActivity where no Person is involved fall under the more specialized collection ComputerProcessRunning.) A wide variety of activities falls into this collec",
+    "subclass of: action (purposeful)",
+    "ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purposefully done by (see performedBy) at least one actor.",
+    "subclass of: action on an object",
+    "ancestor definition: A specialization of both Action and PhysicalEvent; the collection of physical events in which some doer acts on an object. Each instance of ActionOnObject is an action in which both the roles of doneBy and objectActedOn (qq.v.) are filled. Examples include someone typing on a keyboard, a dog scratching itself, and a tornado destroying a building. Non-examples include a person dancing and wind blow",
+    "subclass of: purposeful composite physical and mental activity",
+    "ancestor definition: The collection of CompositePhysicalAndMentalEvents that are performed purposively (see performedBy). This collection is the collection-intersection of PurposefulAction and CompositePhysicalAndMentalEvent. Since each instance of PurposefulPhysicalAction is also an instance of CompositePhysicalAndMentalEvent, each instance has both a mental and a physical component. Driving a car would be an instanc",
+    "subclass of: activity",
+    "ancestor definition: One of the major types of an event or action that results in changes of state.",
+    "has subclass: cyber vandalism",
+    "sibling concept: buffer overflow attack",
+    "sibling concept: denial of service attack",
+    "sibling concept: virus attack",
+    "sibling concept: cracking (code)",
+    "sibling concept: cyber terrorist attack"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: corruption of information attack. Relevant Logical Facts:   - definition: AttackByComputerOperation_CorruptionOfInformation is a subset of AttackByComputerOperation and AttackOnIBT. It is the collection of all electronic attacks whose primary purpose is the corruption of the information of the ComputationalSystem under attack.   - subclass of: cyber attack   - ancestor definition: A specialization of AttackOnObject, #$ActsCommonlyConsideredCriminal and ComputerActivity. Each instance of AttackByComputerOperation an attack executed using computer operations as weapons. Commonly, instances of this collection are called \   - subclass of: attack on information bearing things   - ancestor definition: A specialization of AttackOnObject. Each instance of this collection is an action intentionally performedBy an Agent_PartiallyTangible who has the purposeInEvent that the action damages the objectActedOn. In such attacks, the attacker intends that the AspatialInformationStore that is encoded in the IBT (InformationBearingThing) attacked, be damaged or changed from one instance of AspatialInformati   - subclass of: attack   - ancestor definition: A specialization of PurposefulPhysicalAction and ActionOnObject. Each instance of AttackOnObject is an action intentionally performed by an actor or actors (see performedBy) with the goal (see purposeInEvent) that the action damages (see damages) the object attacked (see objectAttacked). The object that is attacked in an instance of AttackOnObject need not be a tangible object -- for example, it c   - subclass of: computer activity   - ancestor definition: A collection of events, and a specialization of both Action and PhysicalEvent. In each instance of ComputerActivity, at least one instance of Computer is somehow involved. An instance of Person may or may not be involved. (Instances of ComputerActivity where no Person is involved fall under the more specialized collection ComputerProcessRunning.) A wide variety of activities falls into this collec   - subclass of: action (purposeful)   - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purposefully done by (see performedBy) at least one actor.   - subclass of: action on an object   - ancestor definition: A specialization of both Action and PhysicalEvent; the collection of physical events in which some doer acts on an object. Each instance of ActionOnObject is an action in which both the roles of doneBy and objectActedOn (qq.v.) are filled. Examples include someone typing on a keyboard, a dog scratching itself, and a tornado destroying a building. Non-examples include a person dancing and wind blow   - subclass of: purposeful composite physical and mental activity   - ancestor definition: The collection of CompositePhysicalAndMentalEvents that are performed purposively (see performedBy). This collection is the collection-intersection of PurposefulAction and CompositePhysicalAndMentalEvent. Since each instance of PurposefulPhysicalAction is also an instance of CompositePhysicalAndMentalEvent, each instance has both a mental and a physical component. Driving a car would be an instanc   - subclass of: activity   - ancestor definition: One of the major types of an event or action that results in changes of state.   - has subclass: cyber vandalism   - sibling concept: buffer overflow attack   - sibling concept: denial of service attack   - sibling concept: virus attack   - sibling concept: cracking (code)   - sibling concept: cyber terrorist attack
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "computer vulnerability",
+  "uri": "http://kbpedia.org/kko/rc/ComputerVulnerability",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of SystemVulnerableToAttackByComputerOperation and Computer. Each instance of ComputerVulnerability is a computer (not a computer network or a computer program copy) that is vulnerable to attack by computeroperation. In many cases, however, a computer is an instance of ComputerVulnerability because it has a faulty program running on it.",
+    "subclass of: computer",
+    "ancestor definition: A computer is a general-purpose device that can be programmed to carry out a set of arithmetic or logical operations automatically. Since a sequence of operations can be readily changed, the computer can solve more than one kind of problem.Conventionally, a computer consists of at least one processing element, typically a central processing unit (CPU), and some form of memory. This \u2018class\u2019 product",
+    "subclass of: computational system",
+    "ancestor definition: A specialization of InformationBearingObject and PoweredDevice. Each instance of this collection is a system used for computing purposes. It includes as specializations both Computer and ComputerNetwork. Anything that can be said about both collections can more efficiently be stated about this collection. For example, instead of saying that system administrators maintain instances of Computer and ",
+    "subclass of: computing thing",
+    "ancestor definition: A specialization of System and an immediate generalization of Computer. Each instance of Computer_Generic is either a physical computer (Computer) or a virtual computer (VirtualComputerInstance).",
+    "subclass of: computer hardware",
+    "ancestor definition: This \u2018family\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of computer equipment. This product category corresponds to the UNSPSC code: 43210000.",
+    "subclass of: computer hardware (item)",
+    "ancestor definition: A specialization of ElectronicDevice. Each instance of this collection is either an entire Computer, or a device used with or in computers to accomplish some computing-related task (for instance, computer terminals, printers, keyboards, etc.).",
+    "subclass of: file-sharing system",
+    "ancestor definition: FileSharingSystem is a specialization of ComputationalSystem. Every instance of FileSharingSystem is such that each node in it shares files with the other nodes in it. See nodeInFileSharingSystem and Filesystem.",
+    "subclass of: computer as system",
+    "ancestor definition: The nature and role of computers from a systems perspective.",
+    "subclass of: connected path system",
+    "ancestor definition: A subcollection of PathSystem instances of which are \\",
+    "sibling concept: accounting use",
+    "sibling concept: apollo computer",
+    "sibling concept: server",
+    "sibling concept: desktop computer",
+    "sibling concept: e-book reader"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: computer vulnerability. Relevant Logical Facts:   - definition: A specialization of SystemVulnerableToAttackByComputerOperation and Computer. Each instance of ComputerVulnerability is a computer (not a computer network or a computer program copy) that is vulnerable to attack by computeroperation. In many cases, however, a computer is an instance of ComputerVulnerability because it has a faulty program running on it.   - subclass of: computer   - ancestor definition: A computer is a general-purpose device that can be programmed to carry out a set of arithmetic or logical operations automatically. Since a sequence of operations can be readily changed, the computer can solve more than one kind of problem.Conventionally, a computer consists of at least one processing element, typically a central processing unit (CPU), and some form of memory. This ‘class’ product   - subclass of: computational system   - ancestor definition: A specialization of InformationBearingObject and PoweredDevice. Each instance of this collection is a system used for computing purposes. It includes as specializations both Computer and ComputerNetwork. Anything that can be said about both collections can more efficiently be stated about this collection. For example, instead of saying that system administrators maintain instances of Computer and    - subclass of: computing thing   - ancestor definition: A specialization of System and an immediate generalization of Computer. Each instance of Computer_Generic is either a physical computer (Computer) or a virtual computer (VirtualComputerInstance).   - subclass of: computer hardware   - ancestor definition: This ‘family’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product category is an aggregate of computer equipment. This product category corresponds to the UNSPSC code: 43210000.   - subclass of: computer hardware (item)   - ancestor definition: A specialization of ElectronicDevice. Each instance of this collection is either an entire Computer, or a device used with or in computers to accomplish some computing-related task (for instance, computer terminals, printers, keyboards, etc.).   - subclass of: file-sharing system   - ancestor definition: FileSharingSystem is a specialization of ComputationalSystem. Every instance of FileSharingSystem is such that each node in it shares files with the other nodes in it. See nodeInFileSharingSystem and Filesystem.   - subclass of: computer as system   - ancestor definition: The nature and role of computers from a systems perspective.   - subclass of: connected path system   - ancestor definition: A subcollection of PathSystem instances of which are \   - sibling concept: accounting use   - sibling concept: apollo computer   - sibling concept: server   - sibling concept: desktop computer   - sibling concept: e-book reader
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+D. SQL queries based on user input
+==================================================
+==================================================
+ QUERY: Which of the following are most vulnerable to injection attacks? A) Session IDs B) Registry keys C) Network communications D) SQL queries based on user input
+==================================================
+
+--- RETRIEVED CONTEXT (Top 2 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "session layer protocol",
+  "uri": "http://kbpedia.org/kko/rc/SessionLayerProtocol",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all network protocols that implement a session layer. An instance of SessionLayerProtocol allows sessions to be established between two machines. A session facilitates processes that involve intensive data transfer between two computers, such as transferring a large file. Most instances of NetworkProtocolStack do not include an instance of SessionLayerProtocol.",
+    "subclass of: protocol stack layer",
+    "ancestor definition: ProtocolStackLayer is the collection of all NetworkProtocols which are classifed relative to their position in a NetworkProtocolStack. An instance of ProtocolStackLayer is expected to provide certain services to other NetworkProtocols which are instances of different ProtocolStackLayers.",
+    "subclass of: machine protocol",
+    "ancestor definition: A specialization of Protocol and Specification. The collection of all protocols that specify how machines should behave in order to participate in some larger system or to be considered to be of a particular type. To be considered a Protocol, this interaction of system with system must involve communication, as opposed to direct action as gears perform on each other in a gearbox. Examples: There a",
+    "subclass of: network protocol",
+    "ancestor definition: NetworkProtocol is the collection of all protocols for communication over computer networks. Many of the protocols governing communication over the Internet find expression in so called \\",
+    "subclass of: program specification",
+    "ancestor definition: A specialization of Specification. Each instance of this collection is not a computer program itself (i.e. lines of code), but an abstract characterization of how a program should behave. For instance, a sorting program can be specified by requiring that the program's output be a list of the same elements as the input such that no element follows an element that is greater than it. A notable examp",
+    "subclass of: protocol",
+    "ancestor definition: A spec of Instructions. A Protocol specifies how one or more agents should behave, in order to be considered to form part of, or to be participating in, some larger system. Examples: there are certain rules about how a surrender should be negotiated in war. There are rules about a way a person should behave at a rave, or in the presence of the Queen of England. There are rules about how one should",
+    "subclass of: communication protocol",
+    "ancestor definition: The collection of CommunicationConventions which are actual standards or protocols; for example, TCP_IP.",
+    "sibling concept: application layer protocol",
+    "sibling concept: data link layer protocol",
+    "sibling concept: network layer protocol",
+    "sibling concept: physical layer protocol",
+    "sibling concept: presentation layer protocol"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: session layer protocol. Relevant Logical Facts:  - definition: The collection of all network protocols that implement a session layer. An instance of SessionLayerProtocol allows sessions to be established between two machines. A session facilitates processes that involve intensive data transfer between two computers, such as transferring a large file. Most instances of NetworkProtocolStack do not include an instance of SessionLayerProtocol.  - subclass of: protocol stack layer  - ancestor definition: ProtocolStackLayer is the collection of all NetworkProtocols which are classifed relative to their position in a NetworkProtocolStack. An instance of ProtocolStackLayer is expected to provide certain services to other NetworkProtocols which are instances of different ProtocolStackLayers.  - subclass of: machine protocol  - ancestor definition: A specialization of Protocol and Specification. The collection of all protocols that specify how machines should behave in order to participate in some larger system or to be considered to be of a particular type. To be considered a Protocol, this interaction of system with system must involve communication, as opposed to direct action as gears perform on each other in a gearbox. Examples: There a  - subclass of: network protocol  - ancestor definition: NetworkProtocol is the collection of all protocols for communication over computer networks. Many of the protocols governing communication over the Internet find expression in so called \  - subclass of: program specification  - ancestor definition: A specialization of Specification. Each instance of this collection is not a computer program itself (i.e. lines of code), but an abstract characterization of how a program should behave. For instance, a sorting program can be specified by requiring that the program's output be a list of the same elements as the input such that no element follows an element that is greater than it. A notable examp  - subclass of: protocol  - ancestor definition: A spec of Instructions. A Protocol specifies how one or more agents should behave, in order to be considered to form part of, or to be participating in, some larger system. Examples: there are certain rules about how a surrender should be negotiated in war. There are rules about a way a person should behave at a rave, or in the presence of the Queen of England. There are rules about how one should  - subclass of: communication protocol  - ancestor definition: The collection of CommunicationConventions which are actual standards or protocols; for example, TCP_IP.  - sibling concept: application layer protocol  - sibling concept: data link layer protocol  - sibling concept: network layer protocol  - sibling concept: physical layer protocol  - sibling concept: presentation layer protocol
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "parks in the Florida Keys",
+  "uri": "http://kbpedia.org/kko/rc/ParkInTheFloridaKeys",
+  "score": 1.0,
+  "triples": [
+    "definition: Parks in the Florida Keys.",
+    "subclass of: park",
+    "ancestor definition: A specialization of OutdoorRecreationArea and PublicProperty. Each instance of Park is an area of land set aside for outdoor recreational use; it is typically managed by a government. Specializations include Park_City and WildernessPark.",
+    "subclass of: commercial building",
+    "ancestor definition: The collection of all commercial buildings. A type of Building and CommercialFacility. This \u2018class\u2019 product category is drawn from UNSPSC, readily converted into other widely used systems. This product \u2018class\u2019 is an aggregate of commercial building or structure. This product category corresponds to the UNSPSC code: 95121500.",
+    "subclass of: outdoor recreation area",
+    "ancestor definition: A specialization of OutdoorLocation and Artifact. Each instance of OutdoorRecreationArea is an area designed to provide a venue for outdoor entertainment. Specializations include AmusementPark, SwimmingPool_Outdoor, SkiSlope, GolfCourse and DrivingRange. A natural beach that has not been crafted by human hands to serve as a venue for entertainment is not an instance of OutdoorRecreationArea, but a",
+    "subclass of: public property",
+    "ancestor definition: The collection of all public property. A type of PublicPlace and Property.",
+    "subclass of: building",
+    "ancestor definition: A specialization of both FixedStructure and HumanShelterConstruction. Each instance of Building is a (usually large) fixed structure with walls and a roof, and with some inside area or areas designed to be occupied by humans (but not necessarily as a residence). Examples include the EmpireStateBuilding, Hearst Castle, an AircraftHangar at O'Hare, a Lighthouse in the Mediterranean sea, the SydneyOp",
+    "subclass of: commercial facility",
+    "ancestor definition: A facility devoted to commercial or retail purposes.",
+    "subclass of: commercial public place",
+    "ancestor definition: A public place in which commercial activities may take place.",
+    "subclass of: commercial real estate",
+    "ancestor definition: The collection of real estate property which is usually intended for commercial, as opposed to residential, habitation.",
+    "sibling concept: battlefield park",
+    "sibling concept: Hudson River Park",
+    "sibling concept: Kananaskis Country, Alberta",
+    "sibling concept: city park",
+    "sibling concept: county park"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: parks in the Florida Keys. Relevant Logical Facts:  - definition: Parks in the Florida Keys.  - subclass of: park  - ancestor definition: A specialization of OutdoorRecreationArea and PublicProperty. Each instance of Park is an area of land set aside for outdoor recreational use; it is typically managed by a government. Specializations include Park_City and WildernessPark.  - subclass of: commercial building  - ancestor definition: The collection of all commercial buildings. A type of Building and CommercialFacility. This ‘class’ product category is drawn from UNSPSC, readily converted into other widely used systems. This product ‘class’ is an aggregate of commercial building or structure. This product category corresponds to the UNSPSC code: 95121500.  - subclass of: outdoor recreation area  - ancestor definition: A specialization of OutdoorLocation and Artifact. Each instance of OutdoorRecreationArea is an area designed to provide a venue for outdoor entertainment. Specializations include AmusementPark, SwimmingPool_Outdoor, SkiSlope, GolfCourse and DrivingRange. A natural beach that has not been crafted by human hands to serve as a venue for entertainment is not an instance of OutdoorRecreationArea, but a  - subclass of: public property  - ancestor definition: The collection of all public property. A type of PublicPlace and Property.  - subclass of: building  - ancestor definition: A specialization of both FixedStructure and HumanShelterConstruction. Each instance of Building is a (usually large) fixed structure with walls and a roof, and with some inside area or areas designed to be occupied by humans (but not necessarily as a residence). Examples include the EmpireStateBuilding, Hearst Castle, an AircraftHangar at O'Hare, a Lighthouse in the Mediterranean sea, the SydneyOp  - subclass of: commercial facility  - ancestor definition: A facility devoted to commercial or retail purposes.  - subclass of: commercial public place  - ancestor definition: A public place in which commercial activities may take place.  - subclass of: commercial real estate  - ancestor definition: The collection of real estate property which is usually intended for commercial, as opposed to residential, habitation.  - sibling concept: battlefield park  - sibling concept: Hudson River Park  - sibling concept: Kananaskis Country, Alberta  - sibling concept: city park  - sibling concept: county park
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Session IDs are used to identify and manage user sessions in a system.
+2. User input can be maliciously manipulated by an attacker through injection attacks.
+3. SQL queries based on user input are vulnerable to injection attacks if not properly sanitized or validated.
+4. Network communications involve the exchange of data between systems, which can potentially include malicious code or inputs.
+5. Injection attacks occur when an attacker injects malicious code into a system's parameters or variables.
+
+Note: The above list only includes 10 items as per the constraints provided and directly helps bridge the premise to the answer by highlighting the vulnerabilities related to injection attacks in each option (A, B, C, D).
+==================================================
+==================================================
+ QUERY: Which of these objects will most likely float in water?
+A. glass marble
+B. steel ball
+C. hard rubber ball
+D. table tennis ball
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "afloat",
+  "uri": "http://kbpedia.org/kko/rc/Afloat-OnWater",
+  "score": 1.0,
+  "triples": [
+    "concept definition: The collection of instances of SpatialThing_Localized that are floating on some body of water.",
+    "subclass of: situational place",
+    "ancestor definition: A relative location or place in which the object is situated."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: afloat. Relevant Logical Facts:   - concept definition: The collection of instances of SpatialThing_Localized that are floating on some body of water.   - subclass of: situational place   - ancestor definition: A relative location or place in which the object is situated.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rubber ball",
+  "uri": "http://kbpedia.org/kko/rc/RubberBall",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Ball. Each instance of RubberBall is a ball made of rubber, with or without a hollow core or any additional material coating the exterior.",
+    "subclass of: user-guided device",
+    "ancestor definition: Device_UserControlled is a specialization of PhysicalDevice."
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: rubber ball. Relevant Logical Facts:   - definition: A specialization of Ball. Each instance of RubberBall is a ball made of rubber, with or without a hollow core or any additional material coating the exterior.   - subclass of: user-guided device   - ancestor definition: Device_UserControlled is a specialization of PhysicalDevice.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "marble (ball)",
+  "uri": "http://kbpedia.org/kko/rc/Marble-Ball",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all marbles. A type of Ball, ManufacturedGoods, and ConvexTangibleObject.",
+    "subclass of: ball"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: marble (ball). Relevant Logical Facts:   - definition: The collection of all marbles. A type of Ball, ManufacturedGoods, and ConvexTangibleObject.   - subclass of: ball
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "ball",
+  "uri": "http://kbpedia.org/kko/rc/Ball",
+  "score": 1.0,
+  "triples": [
+    "concept definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity.",
+    "subclass of: user-guided device",
+    "ancestor definition: Device_UserControlled is a specialization of PhysicalDevice."
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: ball. Relevant Logical Facts:   - concept definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity.   - subclass of: user-guided device   - ancestor definition: Device_UserControlled is a specialization of PhysicalDevice.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "water sports",
+  "uri": "http://kbpedia.org/kko/rc/WaterSports",
+  "score": 1.0,
+  "triples": [
+    "definition: A category for listing the various water (fresh and salt) sports.",
+    "subclass of: sport"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: water sports. Relevant Logical Facts:   - definition: A category for listing the various water (fresh and salt) sports.   - subclass of: sport
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+D. table tennis ball 
+
+The table tennis ball has air inside, which makes it less dense than water, allowing it to float. This is a common characteristic among balls designed for games played on land that are adapted for floating in water.
+==================================================
+==================================================
+ QUERY: Which of these objects will most likely float in water? A) glass marble B) steel ball C) hard rubber ball D) table tennis ball
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "marble edifice",
+  "uri": "http://kbpedia.org/kko/rc/MarbleEdifice",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all marble edifices. A #$BuildingCollection.",
+    "subclass of: vertical wall",
+    "ancestor definition: A planar object or surface that is by definition vertical. May have one or two sides; Two sides walls include stone walls; Great Wall of China. One sides walls include cliffs, `the walls in my office'. Why talk about the latter as one-sided when such walls have two sides? Well, identifying a unique surface facilitates identifying which surface we are talking about when we say, 'the wall of my offi",
+    "subclass of: facility component",
+    "ancestor definition: Any component or material that is used to build or construct a facility.",
+    "subclass of: wall",
+    "ancestor definition: The collection of all walls, those of construction artifacts as well as of other artifacts, e.g., container products, and of non-artifacts such as caves.",
+    "subclass of: wall orientation",
+    "ancestor definition: An orientation or directional attribute using the walls of a human occupied structure as the reference.",
+    "subclass of: construction material",
+    "ancestor definition: BuildingMaterial is a specialization of Artifact_NonAgentive and PartiallyTangibleProduct. Each instance of BuildingMaterial is an artifact of a type typically incorporated in the construction of new structures. Specializations of BuildingMaterial include lumber (but not wood), bricks (but not clay), quaried blocks of marble (but not rock in general), slabs of concrete, batches of wet concrete, ro",
+    "subclass of: man-made structure",
+    "ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection includes buildings and parts of buildings, as well as things like dams, railroad lines, and roads. Examples include the RomanColiseum, the ArcDeTriomphe, HooverDam, the EmpireStateBuilding, and the HollywoodBowl. Note that the collection Construction",
+    "subclass of: underspecified barrier",
+    "ancestor definition: The collection of all semantically underspecified barriers, whether spatial (and literal) like a Wall_GenericBarrier, or metaphoric (like NetscapeCommunicationsCorporation is to MicrosoftInc).",
+    "subclass of: directional attributes",
+    "ancestor definition: A specialized organization of attributes that help define the direction of an entity with respect to some frame of reference (such as compass points). This concept is NOT a part of OpenCyc but it works similar to a Cyc microtheory.",
+    "sibling concept: back wall",
+    "sibling concept: breakwater",
+    "sibling concept: cliff",
+    "sibling concept: dado",
+    "sibling concept: front wall"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: marble edifice. Relevant Logical Facts:  - definition: The collection of all marble edifices. A #$BuildingCollection.  - subclass of: vertical wall  - ancestor definition: A planar object or surface that is by definition vertical. May have one or two sides; Two sides walls include stone walls; Great Wall of China. One sides walls include cliffs, `the walls in my office'. Why talk about the latter as one-sided when such walls have two sides? Well, identifying a unique surface facilitates identifying which surface we are talking about when we say, 'the wall of my offi  - subclass of: facility component  - ancestor definition: Any component or material that is used to build or construct a facility.  - subclass of: wall  - ancestor definition: The collection of all walls, those of construction artifacts as well as of other artifacts, e.g., container products, and of non-artifacts such as caves.  - subclass of: wall orientation  - ancestor definition: An orientation or directional attribute using the walls of a human occupied structure as the reference.  - subclass of: construction material  - ancestor definition: BuildingMaterial is a specialization of Artifact_NonAgentive and PartiallyTangibleProduct. Each instance of BuildingMaterial is an artifact of a type typically incorporated in the construction of new structures. Specializations of BuildingMaterial include lumber (but not wood), bricks (but not clay), quaried blocks of marble (but not rock in general), slabs of concrete, batches of wet concrete, ro  - subclass of: man-made structure  - ancestor definition: A specialization of Artifact. Each instance of ConstructionArtifact is a structure designed and built by agents (human or otherwise). This collection includes buildings and parts of buildings, as well as things like dams, railroad lines, and roads. Examples include the RomanColiseum, the ArcDeTriomphe, HooverDam, the EmpireStateBuilding, and the HollywoodBowl. Note that the collection Construction  - subclass of: underspecified barrier  - ancestor definition: The collection of all semantically underspecified barriers, whether spatial (and literal) like a Wall_GenericBarrier, or metaphoric (like NetscapeCommunicationsCorporation is to MicrosoftInc).  - subclass of: directional attributes  - ancestor definition: A specialized organization of attributes that help define the direction of an entity with respect to some frame of reference (such as compass points). This concept is NOT a part of OpenCyc but it works similar to a Cyc microtheory.  - sibling concept: back wall  - sibling concept: breakwater  - sibling concept: cliff  - sibling concept: dado  - sibling concept: front wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "steel industry",
+  "uri": "http://kbpedia.org/kko/rc/SteelIndustry",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all steel industries, each of which is a geographically defined steel Industry_Localized in a certain region. Steel industries have the primary function of producing pieces or rolls of Steel commercially in various forms. This includes industries that alter the composition or form of pieces of Steel, but it does not include the manufacture of steel products or structures in their",
+    "subclass of: manufacturing sector",
+    "ancestor definition: The collection of all localized groups of manufacturing enterprises that each together (each group) forms the major manufacturing economic sector for the region. An example instance would be the Manufacturing sector of Switzerland, or the worldwide manufacturing sector.",
+    "subclass of: metallurgy industry",
+    "ancestor definition: The collection of all metallurgy industries. A type of Industry_Localized. The concept MetallurgyIndustry is an IndustryType and an IndustrialConcept.",
+    "subclass of: industrial sector",
+    "ancestor definition: The collection of all localized groups of enterprises that are producers of industrial commodities, in which each such group together forms the major industrial sector for the region. 'Industrial commodities' includes MechanicalDevices and basic industrial materials. Examples include 'the world industrial sector', the 'industrial sector of China'. The Chinese water pump industry would not be an ex",
+    "subclass of: industry",
+    "ancestor definition: Industry is the production of goods or services within an economy. The major source of revenue of a group or company is the indicator of its relevant industry.  When a large group has multiple sources of revenue generation, it is considered to be working in different industries.   Manufacturing industry became a key sector of production and labour in European and North American countries during th",
+    "subclass of: secondary economic sector activity",
+    "ancestor definition: A secondary economic sector involves the transformation of raw or intermediate materials into goods e.g. manufacturing steel into cars, or textiles into clothing. (A builder and a dressmaker would be workers in the secondary sector.).",
+    "subclass of: agent non geographical",
+    "ancestor definition: A specialization of Agent_Generic and EnduringThing_Localized (qq.v.). Agent_NonGeographical is the collection of all spatially-located agents that are not geographical (cf. GeographicalAgent). Specializations include EmbodiedAgent, CommercialOrganization, and LegalCorporation.",
+    "subclass of: group of intelligent agents acting together",
+    "ancestor definition: The collection of groups of IntelligentAgents whose members operate together to form a kind of collective Agent_PartiallyTangible (cf. MultiIndividualAgent). Groups of this sort satisfy the minimal condition for intelligent agency, viz., they are capable of acting purposefully.",
+    "subclass of: social being",
+    "ancestor definition: A specialization of IntelligentAgent. Each instance of SocialBeing is an intelligent agent whose status as an agent is acknowledged within some social system, and who is capable of playing certain social roles within that system. Note that in many (but not all) cases, a SocialBeing will have certain rights and responsibilities associated with his/her/its status within the relevant social system. F",
+    "sibling concept: aircraft industry",
+    "sibling concept: aluminum industry",
+    "sibling concept: automobile industry",
+    "sibling concept: beer brewing industry",
+    "sibling concept: computer hardware industry"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: steel industry. Relevant Logical Facts:  - definition: The collection of all steel industries, each of which is a geographically defined steel Industry_Localized in a certain region. Steel industries have the primary function of producing pieces or rolls of Steel commercially in various forms. This includes industries that alter the composition or form of pieces of Steel, but it does not include the manufacture of steel products or structures in their  - subclass of: manufacturing sector  - ancestor definition: The collection of all localized groups of manufacturing enterprises that each together (each group) forms the major manufacturing economic sector for the region. An example instance would be the Manufacturing sector of Switzerland, or the worldwide manufacturing sector.  - subclass of: metallurgy industry  - ancestor definition: The collection of all metallurgy industries. A type of Industry_Localized. The concept MetallurgyIndustry is an IndustryType and an IndustrialConcept.  - subclass of: industrial sector  - ancestor definition: The collection of all localized groups of enterprises that are producers of industrial commodities, in which each such group together forms the major industrial sector for the region. 'Industrial commodities' includes MechanicalDevices and basic industrial materials. Examples include 'the world industrial sector', the 'industrial sector of China'. The Chinese water pump industry would not be an ex  - subclass of: industry  - ancestor definition: Industry is the production of goods or services within an economy. The major source of revenue of a group or company is the indicator of its relevant industry. When a large group has multiple sources of revenue generation, it is considered to be working in different industries.  Manufacturing industry became a key sector of production and labour in European and North American countries during th  - subclass of: secondary economic sector activity  - ancestor definition: A secondary economic sector involves the transformation of raw or intermediate materials into goods e.g. manufacturing steel into cars, or textiles into clothing. (A builder and a dressmaker would be workers in the secondary sector.).  - subclass of: agent non geographical  - ancestor definition: A specialization of Agent_Generic and EnduringThing_Localized (qq.v.). Agent_NonGeographical is the collection of all spatially-located agents that are not geographical (cf. GeographicalAgent). Specializations include EmbodiedAgent, CommercialOrganization, and LegalCorporation.  - subclass of: group of intelligent agents acting together  - ancestor definition: The collection of groups of IntelligentAgents whose members operate together to form a kind of collective Agent_PartiallyTangible (cf. MultiIndividualAgent). Groups of this sort satisfy the minimal condition for intelligent agency, viz., they are capable of acting purposefully.  - subclass of: social being  - ancestor definition: A specialization of IntelligentAgent. Each instance of SocialBeing is an intelligent agent whose status as an agent is acknowledged within some social system, and who is capable of playing certain social roles within that system. Note that in many (but not all) cases, a SocialBeing will have certain rights and responsibilities associated with his/her/its status within the relevant social system. F  - sibling concept: aircraft industry  - sibling concept: aluminum industry  - sibling concept: automobile industry  - sibling concept: beer brewing industry  - sibling concept: computer hardware industry
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "football ball",
+  "uri": "http://kbpedia.org/kko/rc/FootballBall-American",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all balls designed to be used to play American football. A type of Ball, ManufacturedGoods, and Projectile_Device. Each instance of FootballBall_American is a prolate spheroid ball with fairly pointed ends, made of leather, rubber or plastic, and filled with an inflatable bladder.",
+    "subclass of: ball",
+    "ancestor definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity. Most Balls are Spheres (or at least Spheroids), but some, such as instances of FootballBall_American, are not. However, Ball i",
+    "subclass of: projectile",
+    "ancestor definition: A projectile is any object  thrown into space (empty or not) by the exertion of a force.  Although any object in motion through space (for example a thrown baseball) may be called a projectile, the term more commonly refers to a ranged weapon. Mathematical equations of motion are used to analyze projectile trajectory.",
+    "subclass of: user-guided device",
+    "ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction. Tool is an important specialization of this collection, and further ex",
+    "subclass of: user-powered device",
+    "ancestor definition: A specialization of MusclePoweredDevice. Each instance of Device_UserPowered is an artifact deliberately designed to perform a particular function, and one which depends upon the physical efforts of the user to perform that function in part or in whole. A paradigm example would be a bicycle. However, the definition also leaves room for some counterintuitive cases -- for example, combs and forks al",
+    "subclass of: device with no moving parts",
+    "ancestor definition: The collection of all devices that have no moving parts, such as (non-mechanical) pencils, or shot puts. A type of PhysicalDevice. The collection DeviceWithNoMovingParts is an ArtifactTypeByGenericCategory and a SpatiallyDisjointObjectType.",
+    "subclass of: round thing",
+    "ancestor definition: A specialization of ShapedObject. Each instance of RoundObject is a tangible or intangible thing with an (at least nearly) round or elliptical shape in a least one dimension. A round object might be one-dimensional (e.g. a ring that bounds a 2-D Circle), two-dimensional (e.g. an intangible Ellipse) or three-dimensional (e.g. a Sphere or a chicken egg). Other specializations of RoundObject include ",
+    "subclass of: toy",
+    "ancestor definition: A toy is an item that can be used for play. Toys are generally played with by children and pets. Playing with toys is an enjoyable means of training the young for life in society. Different materials are used to make toys enjoyable to both young and old. Many items are designed to serve as toys, but goods produced for other purposes can also be used. For instance, a small child may pick up a house",
+    "subclass of: powered device",
+    "ancestor definition: A specialization of PhysicalDevice. Each instance of PoweredDevice is a device that requires some power input in order to perform its intended function(s). The power supplied might be muscle power, kinetic energy, electricity, fuel-generated, and so on. Note that PoweredDevice and NonPoweredDevice partition the collection PhysicalDevice.",
+    "sibling concept: baseball",
+    "sibling concept: basketball ball",
+    "sibling concept: bowling ball",
+    "sibling concept: hacky sack",
+    "sibling concept: golf ball"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: football ball. Relevant Logical Facts:  - definition: The collection of all balls designed to be used to play American football. A type of Ball, ManufacturedGoods, and Projectile_Device. Each instance of FootballBall_American is a prolate spheroid ball with fairly pointed ends, made of leather, rubber or plastic, and filled with an inflatable bladder.  - subclass of: ball  - ancestor definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity. Most Balls are Spheres (or at least Spheroids), but some, such as instances of FootballBall_American, are not. However, Ball i  - subclass of: projectile  - ancestor definition: A projectile is any object thrown into space (empty or not) by the exertion of a force. Although any object in motion through space (for example a thrown baseball) may be called a projectile, the term more commonly refers to a ranged weapon. Mathematical equations of motion are used to analyze projectile trajectory.  - subclass of: user-guided device  - ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction. Tool is an important specialization of this collection, and further ex  - subclass of: user-powered device  - ancestor definition: A specialization of MusclePoweredDevice. Each instance of Device_UserPowered is an artifact deliberately designed to perform a particular function, and one which depends upon the physical efforts of the user to perform that function in part or in whole. A paradigm example would be a bicycle. However, the definition also leaves room for some counterintuitive cases -- for example, combs and forks al  - subclass of: device with no moving parts  - ancestor definition: The collection of all devices that have no moving parts, such as (non-mechanical) pencils, or shot puts. A type of PhysicalDevice. The collection DeviceWithNoMovingParts is an ArtifactTypeByGenericCategory and a SpatiallyDisjointObjectType.  - subclass of: round thing  - ancestor definition: A specialization of ShapedObject. Each instance of RoundObject is a tangible or intangible thing with an (at least nearly) round or elliptical shape in a least one dimension. A round object might be one-dimensional (e.g. a ring that bounds a 2-D Circle), two-dimensional (e.g. an intangible Ellipse) or three-dimensional (e.g. a Sphere or a chicken egg). Other specializations of RoundObject include  - subclass of: toy  - ancestor definition: A toy is an item that can be used for play. Toys are generally played with by children and pets. Playing with toys is an enjoyable means of training the young for life in society. Different materials are used to make toys enjoyable to both young and old. Many items are designed to serve as toys, but goods produced for other purposes can also be used. For instance, a small child may pick up a house  - subclass of: powered device  - ancestor definition: A specialization of PhysicalDevice. Each instance of PoweredDevice is a device that requires some power input in order to perform its intended function(s). The power supplied might be muscle power, kinetic energy, electricity, fuel-generated, and so on. Note that PoweredDevice and NonPoweredDevice partition the collection PhysicalDevice.  - sibling concept: baseball  - sibling concept: basketball ball  - sibling concept: bowling ball  - sibling concept: hacky sack  - sibling concept: golf ball
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "table tennis ball",
+  "uri": "http://kbpedia.org/kko/rc/PingPongBall",
+  "score": 1.0,
+  "triples": [
+    "subclass of: user-guided device",
+    "ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction.",
+    "definition: The ball manipulated in a game of ping-pong (table-tennis)"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: table tennis ball. Relevant Logical Facts:  - subclass of: user-guided device  - ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction.  - definition: The ball manipulated in a game of ping-pong (table-tennis)
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "tennis ball",
+  "uri": "http://kbpedia.org/kko/rc/TennisBall",
+  "score": 1.0,
+  "triples": [
+    "definition: The ball manipulated in a tennis game.",
+    "subclass of: ball",
+    "ancestor definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity. Most Balls are Spheres (or at least Spheroids), but some, such as instances of FootballBall_American, are not. However, Ball i",
+    "subclass of: tennis equipment",
+    "ancestor definition: Sports equipment used in tennis.",
+    "subclass of: user-guided device",
+    "ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction. Tool is an important specialization of this collection, and further ex",
+    "subclass of: user-powered device",
+    "ancestor definition: A specialization of MusclePoweredDevice. Each instance of Device_UserPowered is an artifact deliberately designed to perform a particular function, and one which depends upon the physical efforts of the user to perform that function in part or in whole. A paradigm example would be a bicycle. However, the definition also leaves room for some counterintuitive cases -- for example, combs and forks al",
+    "subclass of: device with no moving parts",
+    "ancestor definition: The collection of all devices that have no moving parts, such as (non-mechanical) pencils, or shot puts. A type of PhysicalDevice. The collection DeviceWithNoMovingParts is an ArtifactTypeByGenericCategory and a SpatiallyDisjointObjectType.",
+    "subclass of: round thing",
+    "ancestor definition: A specialization of ShapedObject. Each instance of RoundObject is a tangible or intangible thing with an (at least nearly) round or elliptical shape in a least one dimension. A round object might be one-dimensional (e.g. a ring that bounds a 2-D Circle), two-dimensional (e.g. an intangible Ellipse) or three-dimensional (e.g. a Sphere or a chicken egg). Other specializations of RoundObject include ",
+    "subclass of: toy",
+    "ancestor definition: A toy is an item that can be used for play. Toys are generally played with by children and pets. Playing with toys is an enjoyable means of training the young for life in society. Different materials are used to make toys enjoyable to both young and old. Many items are designed to serve as toys, but goods produced for other purposes can also be used. For instance, a small child may pick up a house",
+    "subclass of: racket",
+    "ancestor definition: various paddles or rackets, hand-held devices used in sports like tennis, badminton, ping-pong etc. to knock balls around.",
+    "sibling concept: baseball",
+    "sibling concept: basketball ball",
+    "sibling concept: bowling ball",
+    "sibling concept: hacky sack",
+    "sibling concept: football ball"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: tennis ball. Relevant Logical Facts:  - definition: The ball manipulated in a tennis game.  - subclass of: ball  - ancestor definition: An instance of ArtifactTypeByGenericCategory and a specialization of PhysicalDevice. Each instance of Ball is a PortableObject, capable of RollingOnASurface, which is designed to be moved about (usually thrown, hit, or kicked) as part of some Game or recreational activity. Most Balls are Spheres (or at least Spheroids), but some, such as instances of FootballBall_American, are not. However, Ball i  - subclass of: tennis equipment  - ancestor definition: Sports equipment used in tennis.  - subclass of: user-guided device  - ancestor definition: Device_UserControlled is a specialization of PhysicalDevice. Each instance of Device_UserControlled is an artifact which is normally controlled by its user while serving its intended function(s). The artifact may be guided during part or all of its operation, and the user may guide it by hand or some other means of interaction. Tool is an important specialization of this collection, and further ex  - subclass of: user-powered device  - ancestor definition: A specialization of MusclePoweredDevice. Each instance of Device_UserPowered is an artifact deliberately designed to perform a particular function, and one which depends upon the physical efforts of the user to perform that function in part or in whole. A paradigm example would be a bicycle. However, the definition also leaves room for some counterintuitive cases -- for example, combs and forks al  - subclass of: device with no moving parts  - ancestor definition: The collection of all devices that have no moving parts, such as (non-mechanical) pencils, or shot puts. A type of PhysicalDevice. The collection DeviceWithNoMovingParts is an ArtifactTypeByGenericCategory and a SpatiallyDisjointObjectType.  - subclass of: round thing  - ancestor definition: A specialization of ShapedObject. Each instance of RoundObject is a tangible or intangible thing with an (at least nearly) round or elliptical shape in a least one dimension. A round object might be one-dimensional (e.g. a ring that bounds a 2-D Circle), two-dimensional (e.g. an intangible Ellipse) or three-dimensional (e.g. a Sphere or a chicken egg). Other specializations of RoundObject include  - subclass of: toy  - ancestor definition: A toy is an item that can be used for play. Toys are generally played with by children and pets. Playing with toys is an enjoyable means of training the young for life in society. Different materials are used to make toys enjoyable to both young and old. Many items are designed to serve as toys, but goods produced for other purposes can also be used. For instance, a small child may pick up a house  - subclass of: racket  - ancestor definition: various paddles or rackets, hand-held devices used in sports like tennis, badminton, ping-pong etc. to knock balls around.  - sibling concept: baseball  - sibling concept: basketball ball  - sibling concept: bowling ball  - sibling concept: hacky sack  - sibling concept: football ball
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Objects that are less dense than water will float in it.
+2. The density of a material is determined by its mass and volume.
+3. A glass marble has a high mass but a relatively small volume, making it denser than water.
+4. Steel balls have an even higher mass-to-volume ratio due to their metal composition.
+5. Hard rubber balls are made from materials that can be compressed or deformed under pressure, which affects their density.
+6. Table tennis balls are typically made of lightweight plastic and air-filled with a low-density gas.
+7. The buoyancy force on an object is proportional to its volume and the difference in densities between itself and the surrounding fluid (Archimedes' Principle).
+8. If two objects have different volumes but similar masses, the one with less mass will be denser than water if it has enough air inside or a low-density material.
+9. The table tennis ball's design allows for maximum volume while minimizing its overall weight due to being hollow and made of lightweight materials.
+
+Note: These logical building blocks are based on general principles from physics (density, buoyancy) rather than specific details about the objects in question.
+==================================================
