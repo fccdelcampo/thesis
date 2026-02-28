@@ -424,10 +424,15 @@ Output ONLY the JSON list, nothing else.
                     print(f"DEBUG: Batch LLM filter kept {len(selected)}/{len(c['triples'])} triple(s) for '{c['name']}'", flush=True)
                     c["triples"] = selected
 
+                # Remove concepts where LLM filter kept 0 triples (completely irrelevant)
+                before_count = len(filtered_concepts_to_use)
+                filtered_concepts_to_use = [c for c in filtered_concepts_to_use if c["triples"]]
+                removed = before_count - len(filtered_concepts_to_use)
+                if removed:
+                    print(f"DEBUG: Removed {removed} concept(s) with 0 surviving triples.", flush=True)
+
             for c in filtered_concepts_to_use:
                 selected_triples = c["triples"]
-                if not selected_triples:
-                    continue
 
                 triples_text = "\n".join([f"  - {t}" for t in selected_triples])
                 content = f"KBPedia Concept: {c['name']}.\nRelevant Logical Facts:\n{triples_text}"

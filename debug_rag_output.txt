@@ -4992,3 +4992,186 @@ KBPedia Concept: edible legume seed. Relevant Logical Facts:   - definition: The
 B
 The factor that was different for the two pots was the amount of light, as one pot was placed near a sunny window and the other in a closet. This difference would likely affect the growth or development of the bean seeds between the two pots.
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 3 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: botanical cell",
+    "ancestor definition: A subset of Cell. BotanicalCell is the collection of cells which constitute the elements of Plant and PlantPart, e.g., the cells making up elements of BotanicalOrgan, of Seed, and of Spore_PlantLifeStage.",
+    "subclass of: cell wall",
+    "ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.",
+    "subclass of: eukaryotic cell",
+    "ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism. These cells have a membrane-bound nucleus and other organelles. Multicellular organisms generally have EukaryoticCells; EukaryoticCell DNA has introns. Certain EukaryoticCells, like the red blood corpuscles of Persons with heathy Spleens, lack nuclei.",
+    "subclass of: plant or part of a plant",
+    "ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants. PlantBLO is thus the \\",
+    "subclass of: structural cell part",
+    "ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and structure. Instances of CellPart_Structural are different from the cellular 'micro-organs' known as Organelles.",
+    "subclass of: external anatomical part",
+    "ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. Example subcollections include Earlobe and Leaf.",
+    "subclass of: cell",
+    "ancestor definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.",
+    "subclass of: living thing",
+    "ancestor definition: The collection of all structures that are composed of one or more living cells (see Cell). Biological living objects (or \\",
+    "sibling concept: bacterial cell wall",
+    "sibling concept: prokaryotic cell wall"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: plant cell wall. Relevant Logical Facts:   - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.   - subclass of: botanical cell   - ancestor definition: A subset of Cell. BotanicalCell is the collection of cells which constitute the elements of Plant and PlantPart, e.g., the cells making up elements of BotanicalOrgan, of Seed, and of Spore_PlantLifeStage.   - subclass of: cell wall   - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.   - subclass of: eukaryotic cell   - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism. These cells have a membrane-bound nucleus and other organelles. Multicellular organisms generally have EukaryoticCells; EukaryoticCell DNA has introns. Certain EukaryoticCells, like the red blood corpuscles of Persons with heathy Spleens, lack nuclei.   - subclass of: plant or part of a plant   - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants. PlantBLO is thus the \   - subclass of: structural cell part   - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and structure. Instances of CellPart_Structural are different from the cellular 'micro-organs' known as Organelles.   - subclass of: external anatomical part   - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. Example subcollections include Earlobe and Leaf.   - subclass of: cell   - ancestor definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.   - subclass of: living thing   - ancestor definition: The collection of all structures that are composed of one or more living cells (see Cell). Biological living objects (or \   - sibling concept: bacterial cell wall   - sibling concept: prokaryotic cell wall
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells.",
+    "subclass of: microscopic object"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: cell part. Relevant Logical Facts:   - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells.   - subclass of: microscopic object
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane (biological)",
+  "uri": "http://kbpedia.org/kko/rc/BiologicalMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of membranes which grow as parts of living Cells.",
+    "ancestor definition: The collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein."
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: membrane (biological). Relevant Logical Facts:   - definition: This is the collection of membranes which grow as parts of living Cells.   - ancestor definition: The collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+C. chloroplast 
+
+The cell wall provides mechanical support to non-woody plant tissues and is somewhat rigid but elastic due to its hydrated nature, similar to how an animal skeleton supports the body's structure while allowing for flexibility and movement. The function of a chloroplast in photosynthesis does not share this similarity with skeletal functions.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane protein",
+  "uri": "http://kbpedia.org/kko/rc/MembraneProtein",
+  "score": 1.0,
+  "triples": [
+    "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.",
+    "subclass of: protein molecule",
+    "ancestor definition: The collection of molecules of proteins."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: membrane protein. Relevant Logical Facts:  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.  - subclass of: protein molecule  - ancestor definition: The collection of molecules of proteins.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "bacterial cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BacterialCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of cell walls present on most Bacterium.",
+    "subclass of: prokaryotic cell wall"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: bacterial cell wall. Relevant Logical Facts:  - definition: The collection of cell walls present on most Bacterium.  - subclass of: prokaryotic cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chloroplast",
+  "uri": "http://kbpedia.org/kko/rc/Chloroplast",
+  "score": 1.0,
+  "triples": [
+    "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: chloroplast. Relevant Logical Facts:  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nucleus",
+  "uri": "http://kbpedia.org/kko/rc/Nucleus",
+  "score": 1.0,
+  "triples": [
+    "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.",
+    "subclass of: organelle"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: nucleus. Relevant Logical Facts:  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.  - subclass of: organelle
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth \u2013 this total decreases to 206 bones by adulthood after some bones have fused together."
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together.
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. A cell wall provides structural support and protection for a plant cell.
+2. The human skeleton serves as an internal framework providing structure, support, and protection for the body.
+3. Plant cells do not have a skeletal system like animals but need something to maintain their shape.
+4. Cell walls are composed of rigid materials that provide mechanical strength and stability.
+5. A nucleus is responsible for storing genetic information in eukaryotic cells.
+6. The cell wall's primary function is similar to the human skeleton's role, which provides structural support.
+7. Chloroplasts are organelles involved in photosynthesis within plant cells but do not contribute to structure or protection.
+8. Membrane proteins can be embedded in various cellular membranes and have diverse functions.
+9. A nucleus does not provide mechanical strength or stability like a cell wall or human skeleton would.
+10. The primary function of the cell membrane is selective permeability, allowing certain substances into the cell while keeping others out.
+==================================================

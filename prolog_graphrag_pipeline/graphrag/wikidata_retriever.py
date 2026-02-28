@@ -165,7 +165,8 @@ class WikidataRetriever:
     # ── Targeted Structural SPARQL (pre-filtered at DB level) ─────────────
 
     # Core properties: ALWAYS fetched (fundamental ontological structure)
-    CORE_PROPERTIES = ["P31", "P279", "P361", "P527", "P1542"]
+    CORE_PROPERTIES = ["P31", "P279", "P361", "P527", "P1542"] # instance of, subclass of, part of, has part, has effect
+
 
     # Extended properties: only fetched when LLM deems them relevant to the query.
     # Grouped by semantic category so the LLM picks categories, not raw P-codes.

@@ -12751,3 +12751,873 @@ The factor that was different for the two pots was the amount of light, as one p
 --- [DEBUG] SENT PROMPT (Async) ---
  You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text A student planted two bean seeds in two identical pots containing the same type of soil.  Output JSON ONLY. No markdown, no preamble. 
 ----------------------------------
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[1] cytoplasmic part: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+[2] anucleated cell: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+[3] cell part: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+[4] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[5] membrane (biological): This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+[6] plastid: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+[7] plant physiology: Plant physiology: a <a href=\
+[8] protoplasm: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+[9] cellulose: a polysaccharide that is the main constituent of the cell walls of plants.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[0, 3, 5, 6, 8]
+```
+
+These concepts are relevant to answering the question because they relate directly or indirectly to plant cell components and their functions. The Prolog engine can use these facts to reason about which part of a plant cell has a function similar to an animal skeleton (which provides structural support).
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'plant cell wall'
+Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: botanical cell
+  - ancestor definition: A subset of Cell. BotanicalCell is the collection of cells which constitute the elements of Plant and PlantPart, e.g., the cells making up elements of BotanicalOrgan, of Seed, and of Spore_PlantLifeStage.
+  - subclass of: cell wall
+  - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+  - subclass of: eukaryotic cell
+  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism. These cells have a membrane-bound nucleus and other organelles. Multicellular organisms generally have EukaryoticCells; EukaryoticCell DNA has introns. Certain EukaryoticCells, like the red blood corpuscles of Persons with heathy Spleens, lack nuclei.
+  - subclass of: plant or part of a plant
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants. PlantBLO is thus the \
+  - subclass of: structural cell part
+  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and structure. Instances of CellPart_Structural are different from the cellular 'micro-organs' known as Organelles.
+  - subclass of: external anatomical part
+
+Concept: 'cell part'
+Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h
+  - subclass of: parts
+  - ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of ‘whole’.
+  - subclass of: object types
+  - ancestor definition: Objects (artifacts) that may be grouped by a variety of operational or attribute types.
+  - subclass of: shaped thing
+  - ancestor definition: An ObjectType and a specialization of PositiveDimensionalThing (q.v.). Each instance of ShapedObject is a spatial object that has some well-defined shape (though what counts as a \
+  - subclass of: three dimensional thing
+
+Concept: 'membrane (biological)'
+Facts:
+  - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+  - subclass of: biological membrane stuff
+  - ancestor definition: This is the collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein. The corresponding \
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: fluid substance
+  - ancestor definition: A subcollection of PartiallyTangible and an instance of TangibleStuffStateType. Each instance of FluidTangibleThing is a tangible thing that can flow. This includes gases, liquids, and \
+  - subclass of: lipid bilayer
+  - ancestor definition: The collection of all membranes consisting of a double layer of amphipathic lipid molecules in aqueous solution, oriented so that their hydrophobic ends are in contact. Such bilayers form more-or-less spontaneously when phospholipids are introduced into aqueous solution, since lipid molecules in water tend to aggregate in structures such that their hydrophobic ends are oriented to the interior of 
+  - subclass of: membrane
+  - ancestor definition: This is the collection of membranes. It includes membranes which grow as parts of living organisms (#$Membrane-Biological), as well as artifacts such as drum heads and the plastic membranes used in osmotic laboratory procedures.
+  - subclass of: microscopic object
+
+Concept: 'plastid'
+Facts:
+  - definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+  - subclass of: aura: membrane bounded organelle
+  - ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane. Includes the nucleus, mitochondria, plastids, vacuoles, and vesicles. Excludes the plasma membrane..
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated functions. Organelles include the nucleus, mitochondria, the endoplasmic reticulum, the Golgi apparatus, lysosomes, the cytoskeleton and (in plant cells only) chloroplasts and vacuoles.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+
+Concept: 'protoplasm'
+Facts:
+  - definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h
+  - subclass of: parts
+  - ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of ‘whole’.
+  - subclass of: organism part
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[1] cytoplasmic part: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+[2] anucleated cell: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+[3] cell part: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+[4] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[5] membrane (biological): This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+[6] plastid: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+[7] plant physiology: Plant physiology: a <a href=\
+[8] protoplasm: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+[9] cellulose: a polysaccharide that is the main constituent of the cell walls of plants.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[0, 3, 5, 6, 8]
+```
+
+These concepts are relevant to answering the question because they relate directly or indirectly to plant cell components and their functions. The Prolog engine can use these facts to reason about which part of a plant cell has a function similar to an animal skeleton (which provides structural support).
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'plant cell wall'
+Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: botanical cell
+  - ancestor definition: A subset of Cell. BotanicalCell is the collection of cells which constitute the elements of Plant and PlantPart, e.g., the cells making up elements of BotanicalOrgan, of Seed, and of Spore_PlantLifeStage.
+  - subclass of: cell wall
+  - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+  - subclass of: eukaryotic cell
+  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism. These cells have a membrane-bound nucleus and other organelles. Multicellular organisms generally have EukaryoticCells; EukaryoticCell DNA has introns. Certain EukaryoticCells, like the red blood corpuscles of Persons with heathy Spleens, lack nuclei.
+  - subclass of: plant or part of a plant
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants. PlantBLO is thus the \
+  - subclass of: structural cell part
+  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and structure. Instances of CellPart_Structural are different from the cellular 'micro-organs' known as Organelles.
+  - subclass of: external anatomical part
+
+Concept: 'cell part'
+Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h
+  - subclass of: parts
+  - ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of ‘whole’.
+  - subclass of: object types
+  - ancestor definition: Objects (artifacts) that may be grouped by a variety of operational or attribute types.
+  - subclass of: shaped thing
+  - ancestor definition: An ObjectType and a specialization of PositiveDimensionalThing (q.v.). Each instance of ShapedObject is a spatial object that has some well-defined shape (though what counts as a \
+  - subclass of: three dimensional thing
+
+Concept: 'membrane (biological)'
+Facts:
+  - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+  - subclass of: biological membrane stuff
+  - ancestor definition: This is the collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein. The corresponding \
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: fluid substance
+  - ancestor definition: A subcollection of PartiallyTangible and an instance of TangibleStuffStateType. Each instance of FluidTangibleThing is a tangible thing that can flow. This includes gases, liquids, and \
+  - subclass of: lipid bilayer
+  - ancestor definition: The collection of all membranes consisting of a double layer of amphipathic lipid molecules in aqueous solution, oriented so that their hydrophobic ends are in contact. Such bilayers form more-or-less spontaneously when phospholipids are introduced into aqueous solution, since lipid molecules in water tend to aggregate in structures such that their hydrophobic ends are oriented to the interior of 
+  - subclass of: membrane
+  - ancestor definition: This is the collection of membranes. It includes membranes which grow as parts of living organisms (#$Membrane-Biological), as well as artifacts such as drum heads and the plastic membranes used in osmotic laboratory procedures.
+  - subclass of: microscopic object
+
+Concept: 'plastid'
+Facts:
+  - definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+  - subclass of: aura: membrane bounded organelle
+  - ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane. Includes the nucleus, mitochondria, plastids, vacuoles, and vesicles. Excludes the plasma membrane..
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated functions. Organelles include the nucleus, mitochondria, the endoplasmic reticulum, the Golgi apparatus, lysosomes, the cytoskeleton and (in plant cells only) chloroplasts and vacuoles.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+
+Concept: 'protoplasm'
+Facts:
+  - definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h
+  - subclass of: parts
+  - ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of ‘whole’.
+  - subclass of: organism part
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "cell wall": [
+        "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents.",
+        "subclass of: eukaryotic cell",
+        "ancestor definition: The collection of all cell walls."
+    ],
+    "cell part": [
+        "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells.",
+        "subclass of: microscopic object"
+    ],
+    "membrane (biological)": [
+        "definition: This is the collection of membranes which grow as parts of living Cells.",
+        "ancestor definition: The collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein."
+    ],
+    "plastid": [],
+    "protoplasm": []
+}
+```
+
+I filtered out facts for `Plastid` and `Protoplasma` because they don't directly match any option in the User Query. For `Cell Wall`, I kept its definition, what it is a subclass of (`eukaryotic cell`), and an ancestor definition that highlights its function (mechanical support). 
+
+For `Membrane (biological)`, I retained its core definition as well as another fact about membranes being LipidBilayers.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". \n2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.\n3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.\n4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."\n5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.\n\n### Question:\nWhich of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?\nA. cell membrane\nB. cell wall\nC. chloroplast\nD. nucleus\n\n### Context:\nKBPedia Concept: plant cell wall.\nRelevant Logical Facts:\n  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.\n  - subclass of: botanical cell\n  - ancestor definition: A subset of Cell. BotanicalCell is the collection of cells which constitute the elements of Plant and PlantPart, e.g., the cells making up elements of BotanicalOrgan, of Seed, and of Spore_PlantLifeStage.\n  - subclass of: cell wall\n  - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.\n  - subclass of: eukaryotic cell\n  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism. These cells have a membrane-bound nucleus and other organelles. Multicellular organisms generally have EukaryoticCells; EukaryoticCell DNA has introns. Certain EukaryoticCells, like the red blood corpuscles of Persons with heathy Spleens, lack nuclei.\n  - subclass of: plant or part of a plant\n  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants. PlantBLO is thus the \\\n  - subclass of: structural cell part\n  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it\'s physical integrity and structure. Instances of CellPart_Structural are different from the cellular \'micro-organs\' known as Organelles.\n  - subclass of: external anatomical part\n  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. Example subcollections include Earlobe and Leaf.\n  - subclass of: cell\n  - ancestor definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.\n  - subclass of: living thing\n  - ancestor definition: The collection of all structures that are composed of one or more living cells (see Cell). Biological living objects (or \\\n  - sibling concept: bacterial cell wall\n  - sibling concept: prokaryotic cell wall\nKBPedia Concept: cell part.\nRelevant Logical Facts:\n  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells.\n  - subclass of: microscopic object\nKBPedia Concept: membrane (biological).\nRelevant Logical Facts:\n  - definition: This is the collection of membranes which grow as parts of living Cells.\n  - ancestor definition: The collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein.\n\n### Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+C. chloroplast 
+
+The function of a plant cell's chloroplast (photosynthesis) is most similar to the function of an animal skeleton in providing structural support and protection for internal organs, but more directly related would be its role in maintaining cellular integrity through photosynthetic processes that indirectly contribute to mechanical rigidity due to increased turgor pressure.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+### Context:
+KBPedia Concept: plant cell wall.
+Relevant Logical Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: botanical cell
+  - ancestor definition: A subset of Cell. BotanicalCell is the collection of cells which constitute the elements of Plant and PlantPart, e.g., the cells making up elements of BotanicalOrgan, of Seed, and of Spore_PlantLifeStage.
+  - subclass of: cell wall
+  - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+  - subclass of: eukaryotic cell
+  - ancestor definition: A specialization of Cell. Each instance of EukaryoticCell is a cell that serves as the basic structural unit of a eukaryotic organism. These cells have a membrane-bound nucleus and other organelles. Multicellular organisms generally have EukaryoticCells; EukaryoticCell DNA has introns. Certain EukaryoticCells, like the red blood corpuscles of Persons with heathy Spleens, lack nuclei.
+  - subclass of: plant or part of a plant
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all plants and parts of plants. PlantBLO is thus the \
+  - subclass of: structural cell part
+  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and structure. Instances of CellPart_Structural are different from the cellular 'micro-organs' known as Organelles.
+  - subclass of: external anatomical part
+  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. Example subcollections include Earlobe and Leaf.
+  - subclass of: cell
+  - ancestor definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+  - subclass of: living thing
+  - ancestor definition: The collection of all structures that are composed of one or more living cells (see Cell). Biological living objects (or \
+  - sibling concept: bacterial cell wall
+  - sibling concept: prokaryotic cell wall
+
+KBPedia Concept: cell part.
+Relevant Logical Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells.
+  - subclass of: microscopic object
+
+KBPedia Concept: membrane (biological).
+Relevant Logical Facts:
+  - definition: This is the collection of membranes which grow as parts of living Cells.
+  - ancestor definition: The collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+C. chloroplast 
+
+The cell wall provides mechanical support to non-woody plant tissues and is somewhat rigid but elastic due to its hydrated nature, similar to how an animal skeleton supports the body's structure while allowing for flexibility and movement. The function of a chloroplast in photosynthesis does not share this similarity with skeletal functions.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "animal skeleton",
+    "plant cell",
+    "cell membrane",
+    "cell wall"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[1] membrane protein: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+[2] cell wall: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+[3] bacterial cell wall: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+[4] photosynthetic pigment: A photosynthetic pigment (accessory pigment; chloroplast pigment).
+[5] chloroplast: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+[6] nucleus: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, but a few cell types, such as mammalian red blood cells, have , and a few others have many.
+[7] lentiform nucleus: The collection of all lentiform nuclei. An individual LentiformNucleus (or 'lenticular nucleus') is a BasalNucleus which is a unique part of a CerebralHemisphere.
+[8] human skeleton: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,
+[9] skeleton tarantula: The skeleton tarantula, Ephebopus murinus, is a species of spider belonging to the family Theraphosidae (tarantulas), sub-family Aviculariinae. A New World species, it is native to several South American countries. Its common name is derived from the skeleton-like markings on its legs.
+[10] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[11] plant epidermis: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 8, 10, 11]
+```
+
+These concepts are relevant because they relate to cell structure and function (cell membrane, nucleus), plant cells specifically (plant epidermis, plant cell wall), or provide additional context for the question topic.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'membrane protein'
+Facts:
+  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+  - subclass of: protein molecule
+  - ancestor definition: The collection of molecules of proteins. Instances are defined chemically as polymers made up of amino acids. Compare with ProteinStuff.
+  - subclass of: biopolymer
+  - ancestor definition: The collection of macromolecules which are produced by and can be found within living things, such as proteins (essentially polymers of amino acids), nucleic acids (such as DNA or RNA), and polysaccharides (polymers of simple sugars).
+  - subclass of: heteropolymer
+  - ancestor definition: The collection of all PolymerMolecules whose instances are characterized by having more than one type of Monomer as polymericSubComponents. More specifically, if HET is an instance of HeteroPolymer, then there are least two different Monomers such that both are polymericSubComponents of HET and each is an instance of a different spec of Monomer.
+  - subclass of: organic molecule
+  - ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reasons discussed below, a few types of carbon-containing compounds, such as carbides, carbonates, simple oxides of carbon (such as CO and CO2), and cyanides are considered inorganic. The distinction between organic and inorganic carbon compounds, while 
+  - subclass of: polymer molecule
+  - ancestor definition: A polymer (/ˈpɒlᵻmər/; Greek poly-, \
+  - subclass of: polypeptide
+
+Concept: 'bacterial cell wall'
+Facts:
+  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+  - subclass of: cell wall
+  - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+  - subclass of: prokaryotic cell wall
+  - ancestor definition: The collection of instances of CellWall that are anatomicalParts of some instance of ProkaryoticCell.
+  - subclass of: structural cell part
+  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and structure. Instances of CellPart_Structural are different from the cellular 'micro-organs' known as Organelles.
+  - subclass of: external anatomical part
+  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. Example subcollections include Earlobe and Leaf.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: organism part
+
+Concept: 'chloroplast'
+Facts:
+  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated functions. Organelles include the nucleus, mitochondria, the endoplasmic reticulum, the Golgi apparatus, lysosomes, the cytoskeleton and (in plant cells only) chloroplasts and vacuoles.
+  - subclass of: plastid
+  - ancestor definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: aura: membrane bounded organelle
+  - ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane. Includes the nucleus, mitochondria, plastids, vacuoles, and vesicles. Excludes the plasma membrane..
+  - subclass of: microscopic object
+
+Concept: 'nucleus'
+Facts:
+  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, but a few cell types, such as mammalian red blood cells, have , and a few others have many.
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated functions. Organelles include the nucleus, mitochondria, the endoplasmic reticulum, the Golgi apparatus, lysosomes, the cytoskeleton and (in plant cells only) chloroplasts and vacuoles.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h
+  - subclass of: parts
+
+Concept: 'human skeleton'
+Facts:
+  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,
+  - subclass of: body part
+  - ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of BiologicalLivingObject (q.v). AnimalBodyPart includes both highly localized organs (for example, hearts) and physical systems composed of parts distributed throughout an animal's body (such as an animal's circulatory system and nervous system). Note t
+  - subclass of: skeleton
+  - ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of a body. Instances of this collection are either external structures (see Exoskeleton and Shell_AnimalBodyPart) or internally interlinked bones (see Bone_BodyPart) and cartilage (see Cartilage).
+  - subclass of: region on an animal's body
+  - ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivision in question is usually contiguous, and has some more or less clear boundary. Instances of this collection include anatomical parts (see the specialization AnimalBodyPart) , such as a person's head, beard, or right arm. In addition, this collection 
+  - subclass of: organ system
+  - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological systems are populations of organisms, or on the organ- and tissue scale in mammals and other animals, the circulatory system, the respiratory system, the nervous system, etc. On the micro to the nanoscopic scale, examples of biological systems are cell
+  - subclass of: animal or body part
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all living animals, body parts of living animals, and body regions of living animals. AnimalBLO is thus the \
+  - subclass of: organism part
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "membrane protein": [
+        "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.",
+        "subclass of: protein molecule",
+        "ancestor definition: The collection of molecules of proteins."
+    ],
+    "bacterial cell wall": [
+        "definition: The collection of cell walls present on most Bacterium.",
+        "subclass of: prokaryotic cell wall"
+    ],
+    "chloroplast": [
+        "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."
+    ],
+    "nucleus": [
+        "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.",
+        "subclass of: organelle"
+    ],
+    "human skeleton": [
+        "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together."
+    ]
+}
+```
+
+I've kept only the most relevant facts for each concept, following your instructions:
+
+1. I dropped any irrelevant or trivial information.
+2. For concepts that perfectly match one of the multiple-choice options (e.g., "human skeleton"), I retained their core definition and what they are a subclass of.
+
+Note: Since none of the other concepts directly relate to supporting structures like skeletons in animals, no additional facts were kept for them beyond their definitions.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are a Logic Discovery Agent. Extract the minimum logical building blocks needed to answer the Question from the Context.\n\n### TASK\nProduce a single numbered list called **LOGICAL EVIDENCE**. Each item is one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.\n\n### CONSTRAINTS\n* Include at most 10 items total.\n* Each item must directly help bridge the premise to the answer.  Omit background, history, or tangential details.\n* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."\n* Break compound sentences into independent logical units.\n* Use clear, declarative English only. No code, no symbols.\n* Do NOT reveal the final answer — provide logical ingredients only.\n\n---\n### QUESTION:\nWhich of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus\n\n### CONTEXT:\nKBPedia Concept: membrane protein.\nRelevant Logical Facts:\n  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.\n  - subclass of: protein molecule\n  - ancestor definition: The collection of molecules of proteins.\nKBPedia Concept: bacterial cell wall.\nRelevant Logical Facts:\n  - definition: The collection of cell walls present on most Bacterium.\n  - subclass of: prokaryotic cell wall\nKBPedia Concept: chloroplast.\nRelevant Logical Facts:\n  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.\nKBPedia Concept: nucleus.\nRelevant Logical Facts:\n  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.\n  - subclass of: organelle\nKBPedia Concept: human skeleton.\nRelevant Logical Facts:\n  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together.\n\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+**LOGICAL EVIDENCE**
+
+1. A cell wall provides structural support and protection for a plant cell.
+2. The human skeleton serves as an internal framework providing structure, support, and protection for the body.
+3. Plant cells do not have a skeletal system like animals but need something to maintain their shape.
+4. Cell walls are composed of rigid materials that provide mechanical strength and stability.
+5. A nucleus is responsible for storing genetic information in eukaryotic cells.
+6. The cell wall's primary function is similar to the human skeleton's role, which provides structural support.
+7. Chloroplasts are organelles involved in photosynthesis within plant cells but do not contribute to structure or protection.
+8. Membrane proteins can be embedded in various cellular membranes and have diverse functions.
+9. A nucleus does not provide mechanical strength or stability like a cell wall or human skeleton would.
+10. The primary function of the cell membrane is selective permeability, allowing certain substances into the cell while keeping others out.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['measuring the amount of fatigue', 'making sure the same foods are eaten', 'recording observations in the same chart', 'making sure the foods are at the same temperature']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] sample: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample.
+[1] comparison: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+[2] process: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, base
+[3] research method: Instances of research methods.
+[4] observational study: In fields such as epidemiology, social sciences, psychology and statistics, an observational study draws inferences from a sample to a population where the independent variable is not under the control of the researcher. One common observational study is about the possible effect of a treatment on subjects, where the assignment of subjects into a treated group versus a control group is outside the
+[5] long-term study: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+[6] drive: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+[7] statistical method: Statistics offers methods to estimate and correct for any bias within the sample and data collection procedures. There are also methods of experimental design for experiments that can lessen these issues at the outset of a study, strengthening its capability to discern truths about the population.
+[8] scientific observation: A means or facility to generate scientific observations.
+[9] trouble: A sub-collection of AnimalActivity. Each instance is an event causing distress or pain.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 8, 9]
+```
+
+These concepts are relevant because they relate to aspects of investigation and study that could impact replicability. Comparison (choice B) is directly related as it's about examining similarities or differences which would be crucial in this context. Observational Study (A), Long-term Study (B), Drive (C), Scientific Observation (D), and Trouble (E) are all relevant because they pertain to aspects of investigation that could impact replicability, such as the ability to control variables, measure outcomes accurately, or account for potential biases or issues during data collection.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+Concept: 'comparison'
+Facts:
+  - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+  - subclass of: examination investigation
+  - ancestor definition: A sub-collection of Investigation. Each instance is the act of examining something closely (as for mistakes).
+  - subclass of: investigation
+  - ancestor definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide variety of entities: a philosophical problem, a criminal act, a natural phenomenon, etc.. The phenomenon under investigation may be actual or merely putative within the context of the representation. Also
+  - subclass of: gathering information
+  - ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers information about something.
+  - subclass of: purposeful mental activity
+  - ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is an event involving intentional mental activity on the part of at least one performer (see performedBy). Solving a math problem (cf. DoingMath), planning an attack and performing a thought experiment (cf. ThoughtExperimenting) are all examples of Pur
+  - subclass of: work
+  - ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occupation (to make a living), or to contribute to some goal, or out of some other obligation or necessity. Positive examples include a student doing homework for school, a homeowner mowing her lawn, a teacher teaching class, etc.
+
+Concept: 'research method'
+Facts:
+  - definition: Instances of research methods.
+  - subclass of: method
+  - ancestor definition: A specialization of LearnedActivityType, MethodType is the the collection of types of purposeful actions that decompose into a common pattern of sub-event-types and/or role-player types (e.g., instruments) used in the course of the event. MethodType is an instance of FacetingBasisCollectionType, which means that ordinarily, an instance of MethodType is such by virtue of being a method of doing som
+  - subclass of: investigating
+  - ancestor definition: Research comprises creative work undertaken on a systematic basis in order to increase the stock of knowledge, including knowledge of humans, culture and society, and the use of this stock of knowledge to devise new applications. It is used to establish or confirm facts, reaffirm the results of previous work, solve new or existing problems, support theorems, or develop new theories. A research pro
+  - subclass of: learned activity
+  - ancestor definition: This is the collection of activities which must first be learned before they can be performed--i.e., before any role which is a specPred of doneBy can be played.
+  - subclass of: investigation
+  - ancestor definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide variety of entities: a philosophical problem, a criminal act, a natural phenomenon, etc.. The phenomenon under investigation may be actual or merely putative within the context of the representation. Also
+  - subclass of: purposeful mental activity
+  - ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is an event involving intentional mental activity on the part of at least one performer (see performedBy). Solving a math problem (cf. DoingMath), planning an attack and performing a thought experiment (cf. ThoughtExperimenting) are all examples of Pur
+  - subclass of: activity
+
+Concept: 'long-term study'
+Facts:
+  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+  - subclass of: detailed study
+  - ancestor definition: The collection of all long-term studies. A type of WrittenReportOnSituation_CW.
+  - subclass of: report (document)
+  - ancestor definition: A collection of instances of TextualMaterial. Each instance is a textual report composed by one agent for the benefit of another concerning a particular situation in which that other agent is believed to be interested.
+  - subclass of: document
+  - ancestor definition: A specialization of InformationStore. Each instance of Document is either an abstract or concrete document of some sort. Documents, thus broadly construed, may be textual or non-textual.
+  - subclass of: situation report
+  - ancestor definition: A specialization of NonfictionalPCW. Instances of this collection are verbal or written reports of a particular situation. Positive examples of this collection would be a written police report or a verbal report to my primary supervisor on the status of an assignment.
+  - sibling concept: dissertation
+
+Concept: 'drive'
+Facts:
+  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+  - subclass of: mental health problem
+  - ancestor definition: A mental disorder, also called a mental illness or psychiatric disorder, is a diagnosis by a mental health professional of a behavioral or mental pattern that may cause suffering or a poor ability to function in life. Such features may be persistent, relapsing and remitting, or occur as a single episode. Many disorders have been described, with signs and symptoms that vary widely between specific 
+  - subclass of: illness
+  - ancestor definition: The most general collection of ailment events; a subcollection of both PhysiologicalCondition and DysfunctionalCondition. An instance of AilmentCondition is a dynamic state of sickness, injury, or physiological impairment. The rationale for construing ailments in this way is the obvious fact that to have an ailment is to undergo an event: an individual ailment has temporal features, it progresses 
+  - subclass of: medical condition
+  - ancestor definition: A specialization of #$SystemCondition. Each instance of PhysiologicalCondition involves an Organism_Whole being in some physiological state that is not typical for that organism's species, modulo considerations about the organism's sex or (in some cases) subspecies. Thus Menstruating, though not typical among all persons, is part of being a healthy adult female, and so is not a specialization of P
+  - sibling concept: aids dementia complex
+  - sibling concept: catatonia
+  - sibling concept: cognitive disorder
+  - sibling concept: clinical depression
+  - sibling concept: infantilism (appearaance)
+
+Concept: 'scientific observation'
+Facts:
+  - definition: A means or facility to generate scientific observations.
+  - subclass of: observation
+  - ancestor definition: Observation is the active acquisition of information from a primary source. In living beings, observation employs the senses. In science, observation can also involve the recording of data via the use of instruments. The term may also refer to any data collected during the scientific activity. Observations can be qualitative, that is, only the absence or presence of a property is noted, or quantit
+  - subclass of: scientific method
+  - ancestor definition: The scientific method is a body of techniques for investigating phenomena, acquiring new knowledge, or correcting and integrating previous knowledge. To be termed scientific, a method of inquiry is commonly based on empirical or measurable evidence subject to specific principles of reasoning.
+  - subclass of: cognition
+  - ancestor definition: A sub-collection of MentalState. Each instance is the psychological result of perception and learning and reasoning.
+  - subclass of: method
+  - ancestor definition: A specialization of LearnedActivityType, MethodType is the the collection of types of purposeful actions that decompose into a common pattern of sub-event-types and/or role-player types (e.g., instruments) used in the course of the event. MethodType is an instance of FacetingBasisCollectionType, which means that ordinarily, an instance of MethodType is such by virtue of being a method of doing som
+  - subclass of: philosophical beliefs
+  - ancestor definition: The class of BeliefSystems that deal in rather abstract terms with what can be known, what is and what can be, and/or with what should be. Sample elements of PhilosophyBeliefs include MilesianSchoolBeliefs, ThalesPhilosophy, etc.
+  - subclass of: animal cognition
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "comparison": [
+        "sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.",
+        "subclass of: examination investigation",
+        "ancestor definition: A sub-collection of Investigation. Each instance is the act of examining something closely (as for mistakes)."
+    ],
+    "research method": [
+        "definition: Instances of research methods.",
+        "sub-class of: investigating",
+        "ancestor definition: Research comprises creative work undertaken on a systematic basis in order to increase the stock of knowledge, including knowledge of humans, culture and society, and the use of this stock of knowledge to devise new applications."
+    ],
+    "long-term study": [
+        "definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.",
+        "sub-class of: detailed study",
+        "ancestor definition: The collection of all long-term studies. A type of WrittenReportOnSituation_CW."
+    ],
+    "drive": [
+        "definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.",
+        "sub-class of: mental health problem",
+        "ancestor definition: A mental disorder, also called a mental illness or psychiatric disorder, is a diagnosis by a mental health professional of a behavioral or mental pattern that may cause suffering or a poor ability to function in life."
+    ],
+    "scientific observation": [
+        "definition: A means or facility to generate scientific observations.",
+        "sub-class of: observation",
+        "ancestor definition: Observation is the active acquisition of information from a primary source. In living beings, observation employs the senses. In science, observation can also involve the recording of data via the use of instruments."
+    ]
+}
+```
+
+I have carefully filtered out irrelevant facts and kept only the core definitions for each concept that perfectly matches one of the multiple-choice options in the User Query.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". \n2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.\n3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.\n4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."\n5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.\n\n### Question:\nJanette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?\nA. measuring the amount of fatigue\nB. making sure the same foods are eaten\nC. recording observations in the same chart\nD. making sure the foods are at the same temperature\n\n### Context:\nKBPedia Concept: comparison.\nRelevant Logical Facts:\n  - sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.\n  - subclass of: examination investigation\n  - ancestor definition: A sub-collection of Investigation. Each instance is the act of examining something closely (as for mistakes).\nKBPedia Concept: research method.\nRelevant Logical Facts:\n  - definition: Instances of research methods.\n  - sub-class of: investigating\n  - ancestor definition: Research comprises creative work undertaken on a systematic basis in order to increase the stock of knowledge, including knowledge of humans, culture and society, and the use of this stock of knowledge to devise new applications.\nKBPedia Concept: long-term study.\nRelevant Logical Facts:\n  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.\n  - sub-class of: detailed study\n  - ancestor definition: The collection of all long-term studies. A type of WrittenReportOnSituation_CW.\nKBPedia Concept: drive.\nRelevant Logical Facts:\n  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.\n  - sub-class of: mental health problem\n  - ancestor definition: A mental disorder, also called a mental illness or psychiatric disorder, is a diagnosis by a mental health professional of a behavioral or mental pattern that may cause suffering or a poor ability to function in life.\nKBPedia Concept: scientific observation.\nRelevant Logical Facts:\n  - definition: A means or facility to generate scientific observations.\n  - sub-class of: observation\n  - ancestor definition: Observation is the active acquisition of information from a primary source. In living beings, observation employs the senses. In science, observation can also involve the recording of data via the use of instruments.\n\n### Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+B. making sure the same foods are eaten 
+
+This would make the investigation most difficult to replicate because it requires precise control over variables and ensuring that Janette's friend Carmen eats exactly the same food at the exact same time each day, which can be challenging due to factors like differences in taste preferences or availability of ingredients.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+
+### Context:
+KBPedia Concept: comparison.
+Relevant Logical Facts:
+  - sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+  - subclass of: examination investigation
+  - ancestor definition: A sub-collection of Investigation. Each instance is the act of examining something closely (as for mistakes).
+
+KBPedia Concept: research method.
+Relevant Logical Facts:
+  - definition: Instances of research methods.
+  - sub-class of: investigating
+  - ancestor definition: Research comprises creative work undertaken on a systematic basis in order to increase the stock of knowledge, including knowledge of humans, culture and society, and the use of this stock of knowledge to devise new applications.
+
+KBPedia Concept: long-term study.
+Relevant Logical Facts:
+  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+  - sub-class of: detailed study
+  - ancestor definition: The collection of all long-term studies. A type of WrittenReportOnSituation_CW.
+
+KBPedia Concept: drive.
+Relevant Logical Facts:
+  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+  - sub-class of: mental health problem
+  - ancestor definition: A mental disorder, also called a mental illness or psychiatric disorder, is a diagnosis by a mental health professional of a behavioral or mental pattern that may cause suffering or a poor ability to function in life.
+
+KBPedia Concept: scientific observation.
+Relevant Logical Facts:
+  - definition: A means or facility to generate scientific observations.
+  - sub-class of: observation
+  - ancestor definition: Observation is the active acquisition of information from a primary source. In living beings, observation employs the senses. In science, observation can also involve the recording of data via the use of instruments.
+
+### Answer:
+
+----------------------------------
