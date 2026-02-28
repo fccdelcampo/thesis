@@ -204,29 +204,36 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
     print(f"Iteration {i} | Extracted Query:\n{query}\n")
     
     # --- NEW DYNAMIC WIKIDATA INJECTION ---
-    # Parse retrieved_context to detect Wikidata Q-IDs to fetch
-    qids_to_fetch = set(re.findall(r'wikidata_qid:\s*(Q\d+)', retrieved_context, re.IGNORECASE))
-    
-    if qids_to_fetch:
-        print(f"Iteration {i} | Identified Wikidata IDs: {qids_to_fetch}")
+    # Global Config Toggle
+    try:
+        from .prolog_config import ENABLE_WIKIDATA_FETCHING
+    except ImportError:
         try:
-            from prolog_graphrag_pipeline.graphrag.wikidata_retriever import WikidataRetriever
+            from prolog_graphrag_pipeline.prolog.prolog_config import ENABLE_WIKIDATA_FETCHING
         except ImportError:
-            from graphrag.wikidata_retriever import WikidataRetriever
+            ENABLE_WIKIDATA_FETCHING = True
             
-        fetcher = WikidataRetriever()
-        for qid in qids_to_fetch:
-            print(f"Iteration {i} | Fetching active facts for {qid}...")
-            # Bridge to Prolog logic engine: get assertions
-            prolog_facts = fetcher.retrieve_facts(qid)
-            
-            # Inject facts dynamically into the active Prolog Knowledge Base string as comments
-            # (Since they are GraphRAG textual strings now, we inject them as commented context 
-            #  so the logic engine doesn't crash on standard English strings, but the LLM can 
-            #  still read them if they get passed along to another stage)
-            if prolog_facts:
-                database += f"\n% --- Dynamically Retrieved Wikidata Facts for {qid} ---\n"
-                database += "\n".join([f"% {fact}" for fact in prolog_facts]) + "\n"
+    if getattr(sys.modules[__name__], 'ENABLE_WIKIDATA_FETCHING', ENABLE_WIKIDATA_FETCHING):
+        # Parse retrieved_context to detect Wikidata Q-IDs to fetch
+        qids_to_fetch = set(re.findall(r'wikidata_qid:\s*(Q\d+)', retrieved_context, re.IGNORECASE))
+        
+        if qids_to_fetch:
+            print(f"Iteration {i} | Identified Wikidata IDs: {qids_to_fetch}")
+            try:
+                from prolog_graphrag_pipeline.graphrag.wikidata_retriever import WikidataRetriever
+            except ImportError:
+                from graphrag.wikidata_retriever import WikidataRetriever
+                
+            fetcher = WikidataRetriever()
+            for qid in qids_to_fetch:
+                print(f"Iteration {i} | Fetching active facts for {qid}...")
+                # Bridge to Prolog logic engine: get assertions
+                prolog_facts = fetcher.retrieve_facts(qid)
+                
+                # Inject facts dynamically into the active Prolog Knowledge Base string as comments
+                if prolog_facts:
+                    database += f"\n% --- Dynamically Retrieved Wikidata Facts for {qid} ---\n"
+                    database += "\n".join([f"% {fact}" for fact in prolog_facts]) + "\n"
     # --- END INJECTION ---
 
     janus.query_once("unload_file(user)")

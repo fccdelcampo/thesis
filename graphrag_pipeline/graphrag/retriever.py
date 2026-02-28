@@ -123,10 +123,8 @@ class EnhancedRetriever(VectorCypherRetriever):
 
         # 2. Local Vector Search (Local Documents)
         local_items = []
-        MIN_SCORE = 0.7  # Minimum relevance threshold to filter noise
-        MIN_CONTENT_LENGTH = 20  # Reject chunks with very short content
         try:
-            local_result = super().search(query_text=query_text, top_k=top_k, **kwargs)
+            local_result = super().search(query_text=query_text, top_k=8, **kwargs)
             
             if local_result and local_result.items:
                 for item in local_result.items:
@@ -146,25 +144,14 @@ class EnhancedRetriever(VectorCypherRetriever):
                                item.content = match.group(1)
                         except:
                             pass
+                            
+                    # Clean newlines from content
+                    if item.content:
+                        item.content = item.content.replace('\n', ' ').replace('  ', ' ')
+                        
+                    local_items.append(item)
                 
-                # Filter out low-quality chunks
-                filtered_items = []
-                for item in local_result.items:
-                    score = item.metadata.get('score', 0.0) if item.metadata else 0.0
-                    content = (item.content or "").strip()
-                    
-                    if score < MIN_SCORE:
-                        print(f"DEBUG: Filtered out low-score chunk ({score:.4f}): '{content[:50]}...'")
-                        continue
-                    
-                    if len(content) < MIN_CONTENT_LENGTH:
-                        print(f"DEBUG: Filtered out short chunk ({len(content)} chars): '{content}'")
-                        continue
-                    
-                    filtered_items.append(item)
-                
-                local_items = filtered_items
-                print(f"DEBUG: Local Vector Search returned {len(local_items)} chunks (after filtering).")
+                print(f"DEBUG: Local Vector Search returned {len(local_items)} chunks.")
 
         except Exception as e:
             print(f"DEBUG: Main retriever failed: {e}")
@@ -182,16 +169,15 @@ class EnhancedRetriever(VectorCypherRetriever):
         seen_content = set()
         unique_items = []
         for item in all_items:
-            sig = item.content[:50]
+            content = item.content or ""
+            sig = content[:50]
             if sig not in seen_content:
                 seen_content.add(sig)
                 unique_items.append(item)
         
         print(f"DEBUG: Merged Result Count: {len(unique_items)}")
         
-        final_top_k = top_k * 2 if (kb_items and local_items) else top_k
-        
-        return RetrieverResult(items=unique_items[:final_top_k], metadata={})
+        return RetrieverResult(items=unique_items[:8], metadata={})
 
 
 def create_retriever(driver, embedder):

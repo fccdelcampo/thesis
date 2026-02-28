@@ -2,6 +2,9 @@
 # False = Fast linear flattening for benchmarks. True = Stable prefix caching for Chat UIs.
 USE_KV_CACHE = False
 
+# Global configuration toggle for dynamic Wikidata fetching
+ENABLE_WIKIDATA_FETCHING = True
+
 GENERATOR_SYSTEM_PROMPT = r"""
 ### Role
 You are an expert Prolog programmer specializing in Knowledge Representation for the s(CASP) solver.

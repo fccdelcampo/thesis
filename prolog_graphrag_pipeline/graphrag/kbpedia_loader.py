@@ -14,7 +14,7 @@ from neo4j import GraphDatabase
 
 from .config import NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD
 
-N3_FILE = Path(__file__).resolve().parents[2] / "kbpedia_reference_concepts.n3"
+N3_FILE = Path(__file__).resolve().parents[2] / "kbpedia_reference_concepts_linkage.n3"
 
 BATCH_SIZE = 500
 
@@ -32,82 +32,63 @@ def parse_n3(filepath: Path):
     concepts = {}        # uri -> {uri, name, definition, altLabels, wikidata_qid}
     subclass_edges = []  # (child_uri, parent_uri)
     
-    # Pre-compile regex for speed
-    # Subjects are typically <http://kbpedia.org/kko/rc/ConceptName>
-    subject_pattern = re.compile(r'^<([^>]+)>')
-    
-    # RDF/OWL properties we care about
-    type_class_pattern = re.compile(r'<http://www\.w3\.org/1999/02/22-rdf-syntax-ns#type>\s+<http://www\.w3\.org/2002/07/owl#Class>')
-    subclass_pattern = re.compile(r'<http://www\.w3\.org/2000/01/rdf-schema#subClassOf>\s+<([^>]+)>')
-    pref_label_pattern = re.compile(r'<http://www\.w3\.org/2004/02/skos/core#prefLabel>\s+"([^"]+)"')
-    alt_label_pattern = re.compile(r'<http://www\.w3\.org/2004/02/skos/core#altLabel>\s+"([^"]+)"')
-    def_pattern = re.compile(r'<http://www\.w3\.org/2004/02/skos/core#definition>\s+"([^"]+)"')
-    
-    # Mappings to Wikidata
-    wikidata_pattern = re.compile(r'<(?:http://www\.w3\.org/2004/02/skos/core#exactMatch|http://www\.w3\.org/2002/07/owl#sameAs)>\s+<http://www\.wikidata\.org/entity/(Q\d+)>')
-
-    current_uri = None
     current_concept = None
 
     with open(filepath, 'r', encoding='utf-8') as f:
         for line in f:
             line = line.strip()
-            if not line or line.startswith('@'):
+            if not line or line.startswith('@') or line.startswith('#'):
                 continue
                 
-            # If the line starts with a URI, it is a new subject block
-            if line.startswith('<'):
-                subj_match = subject_pattern.search(line)
-                if subj_match:
-                    current_uri = subj_match.group(1)
-                    if current_uri not in concepts:
-                        concepts[current_uri] = {
-                            "uri": current_uri,
-                            "name": current_uri.split("/")[-1].replace("-", " "),
-                            "definition": "",
-                            "altLabels": [],
-                            "wikidata_qid": None
-                        }
-                    current_concept = concepts[current_uri]
+            # If the line starts with a colon, it's a new subject block (e.g. :Person a owl:Class)
+            if line.startswith(':'):
+                match = re.search(r'^:([A-Za-z0-9_-]+)\s+a\s+owl:Class', line)
+                if match:
+                    current_uri = "http://kbpedia.org/kko/rc/" + match.group(1)
+                    current_concept = {
+                        "uri": current_uri,
+                        "name": match.group(1).replace("-", " "),
+                        "definition": "",
+                        "altLabels": [],
+                        "wikidata_qid": None
+                    }
+                    concepts[current_uri] = current_concept
+                else:
+                    # Not an owl:Class, skip reading properties for this block
+                    current_concept = None
             
-            # If we don\'t have an active subject block, skip
+            # If we don't have an active subject block, skip property extraction
             if not current_concept:
                 continue
                 
-            # Check properties within the block
-            if type_class_pattern.search(line):
-                pass # We already created it
+            # Extract standard properties
+            if "skos:prefLabel" in line:
+                m = re.search(r'skos:prefLabel\s+"([^"]+)"', line)
+                if m: current_concept["name"] = m.group(1)
                 
-            label_match = pref_label_pattern.search(line)
-            if label_match:
-                current_concept["name"] = label_match.group(1).strip()
+            if "skos:definition" in line:
+                m = re.search(r'skos:definition\s+"([^"]+)"', line)
+                if m: current_concept["definition"] = m.group(1)
                 
-            def_match = def_pattern.search(line)
-            if def_match:
-                current_concept["definition"] = def_match.group(1).strip()
-                
-            alt_match = alt_label_pattern.search(line)
-            if alt_match:
-                raw_alt = alt_match.group(1).strip()
-                for part in raw_alt.split("||"):
-                    part = part.strip()
-                    if part:
-                         current_concept["altLabels"].append(part)
-                         
-            wd_match = wikidata_pattern.search(line)
-            if wd_match:
-                current_concept["wikidata_qid"] = wd_match.group(1)
-                
-            subclass_match = subclass_pattern.search(line)
-            if subclass_match:
-                parent_uri = subclass_match.group(1)
-                if parent_uri.startswith("http"):
+            if "skos:altLabel" in line:
+                m = re.search(r'skos:altLabel\s+"([^"]+)"', line)
+                if m:
+                    for part in m.group(1).split("||"):
+                        if part.strip(): current_concept["altLabels"].append(part.strip())
+                        
+            if "rdfs:subClassOf" in line:
+                m = re.search(r'rdfs:subClassOf\s+:([A-Za-z0-9_-]+)', line)
+                if m:
+                    parent_uri = "http://kbpedia.org/kko/rc/" + m.group(1)
                     subclass_edges.append((current_concept["uri"], parent_uri))
+                    
+            # Look for Wikidata Q-ID anywhere in the line for this concept
+            # Wikidata IDs are usually enclosed in parentheses or pipes, e.g. (Q42) or ||Q42
+            if not current_concept["wikidata_qid"]:
+                qid_m = re.search(r'\b(Q[1-9]\d*)\b', line)
+                if qid_m:
+                    current_concept["wikidata_qid"] = qid_m.group(1)
 
-
-    # Filter to only keep concepts that actually had OWL:Class (or keep all KBPedia subjects to be safe)
-    # The original kept only those explicitly typed OWL:Class. Because of how the n3 is structured,
-    # usually every core concept block has the type. We keep all matched.
 
     elapsed = time.time() - start
     print(f"Iteratively parsed {len(concepts)} concepts and {len(subclass_edges)} edges in {elapsed:.1f}s.")

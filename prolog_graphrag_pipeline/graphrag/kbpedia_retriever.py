@@ -52,27 +52,17 @@ class KBPediaRetriever:
 
     def extract_entities(self, query: str) -> List[str]:
         """
-        Hybrid entity extraction:
-        1. Uses Regex to accurately pull exact MCQ choices (fast and prevents LLM formatting crashes).
-        2. Uses LLM to extract explicit entities and implied conceptual terms from the question stem.
-        3. Combines and prioritizes the lists.
+        Entity extraction:
+        Uses LLM to extract explicit entities and implied conceptual terms from the question stem.
         """
-        # --- 1. Regex MCQ Extraction ---
-        mcq_choices = [c.strip() for c in re.findall(r'\b[A-D][.)]\s*(.+?)(?=\s+\b[A-D][.)]|$)', query)]
-        # Clean up any trailing punctuation from choices
-        mcq_choices = [re.sub(r'[?!.]+$', '', c).strip().lower() for c in mcq_choices if c.strip()]
-        
-        # --- 2. LLM Conceptual Extraction ---
+        # --- 1. LLM Conceptual Extraction ---
         llm_entities = []
         if self.llm:
-            # We provide the FULL query (stem + options) to the LLM so it can deduce context
-            # and extract underlying concepts from the answer choices as well.
             prompt = f"""You are extracting search terms for a knowledge base lookup.
 
-Given this query (which may include multiple-choice options), extract the following:
-1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton")
-2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis")
-3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").
+Given this query, extract the following:
+1. **Explicit entities** mentioned in the question stem
+2. **Implied functional concepts** the question is asking about
 
 Query: "{query}"
 
@@ -97,27 +87,22 @@ Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
             except Exception as e:
                 print(f"DEBUG: KBPedia entity extraction LLM failed: {e}")
 
-        # --- 3. Fallback ---
+        # --- 2. Fallback ---
         # If LLM fails or is missing, use basic word splitting for the stem
         if not llm_entities:
-            stem = re.sub(r'\b[A-D][.)]\s?', ' ', query)
-            stem = re.sub(r'[?!,;:()\[\]]', ' ', stem).replace('\n', ' ')
+            stem = re.sub(r'[?!,;:()\[\]]', ' ', query).replace('\n', ' ')
             words = [w.strip('.').lower() for w in stem.split() if len(w) >= 5]
             llm_entities = words[:5]
 
-        # --- 4. Combine and deduplicate ---
+        # --- 3. Combine and deduplicate ---
         unique_entities = []
         seen = set()
         
-        # Prioritize MCQ choices first, then LLM concepts
-        for phrase in mcq_choices + llm_entities:
+        for phrase in llm_entities:
             if phrase and phrase not in seen:
                 seen.add(phrase)
                 unique_entities.append(phrase)
                 
-        # We don't want to sort by length anymore because LLM gives high-quality short phrases too.
-        # MCQ choices naturally stay at the top.
-        
         return unique_entities[:10]
 
     def find_concepts(self, search_term: str, limit: int = 3) -> List[Dict[str, Any]]:
