@@ -6,7 +6,7 @@ uri = "bolt://localhost:7687"
 username = "neo4j"
 password = "password"  # Replace with actual password if different, or we can check config.py
 
-from prolog_graphrag_pipeline.config import NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD
+from prolog_graphrag_pipeline.graphrag.config import NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD
 
 driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USERNAME, NEO4J_PASSWORD))
 

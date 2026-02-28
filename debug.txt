@@ -178414,3 +178414,216 @@ The cache has a write-back policy.
 9. The write-back policy implies that data is stored in the cache temporarily before being updated in main memory; this means additional bytes may need to be allocated for temporary storage within the cache itself during each iteration through array elements accessed sequentially by a loop executing on an architecture with such caching behavior enabled as part of its normal operation cycle.
 10. Given these conditions, we can conclude that if there is at least one element from Array A stored in the cache (due to spatial locality or temporal locality), then every subsequent access within this same iteration will also be cached until either it gets replaced by another data item due to capacity constraints on our particular caching system being used here today.
 ===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron status are altered by infection.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+    {
+        "nodes": [
+            {"id": "iron_deficiency", "label": "Topic", "properties": {"name": "Diagnosis of Iron Deficiency"}},
+            {"id": "concurrent_infection", "label": "Concept", "properties": {"name": "Concurrent Infection"}},
+            {"id": "markers_of_iron_status", "label": "Definition", "properties": {"name": "Markers of Iron Status"}}
+        ],
+        "relationships": [
+            {
+                "type": "DEFINES",
+                "start_node_id": "iron_deficiency",
+                "end_node_id": "markers_of_iron_status",
+                "properties": {
+                    "natural_statement": "Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron status are altered by infection.",
+                    "logic_intent": "RULE",
+                    "logical_form_hint": "e.g., diagnosis(Iron Deficiency) :- concurrent_infection, alters(Markers of Iron Status)"
+                }
+            },
+            {
+                "type": "IS_A",
+                "start_node_id": "concurrent_infection",
+                "end_node_id": "iron_deficiency",
+                "properties": {
+                    "natural_statement": "Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron status are altered by infection.",
+                    "logic_intent": "FACT",
+                    "logical_form_hint": "e.g., is_a(Concurrent Infection, Iron Deficiency)"
+                }
+            }
+        ]
+    }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which of the following combinations of iron status markers is likely to be found in a person with both iron deficiency and a severe infection? A) Low haemoglobin, high ferritin, high serum transferrin receptors, high hepcidin B) Low haemoglobin, low ferritin, high serum transferrin receptors, low hepcidin C) Low haemoglobin, low ferritin, normal serum transferrin receptors, high hepcidin D) Low haemoglobin, low ferritin, low serum transferrin receptors, high hepcidin"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "iron status markers",
+    "haemoglobin",
+    "ferritin",
+    "serum transferrin receptors",
+    "hepcidin"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron status are altered by infection. Which of the following combinations of iron status markers is likely to be found in a person with both iron deficiency and a severe infection?
+
+
+A. Low haemoglobin, high ferritin, high serum transferrin receptors, high hepcidin
+B. Low haemoglobin, low ferritin, high serum transferrin receptors, low hepcidin
+C. Low haemoglobin, low ferritin, normal serum transferrin receptors, high hepcidin
+D. Low haemoglobin, low ferritin, low serum transferrin receptors, high hepcidin
+
+Answer with the letter only (A, B, C, or D)."
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['Low haemoglobin, high ferritin, high serum transferrin receptors, high hepcidin', 'Low haemoglobin, low ferritin, high serum transferrin receptors, low hepcidin', 'Low haemoglobin, low ferritin, normal serum transferrin receptors, high hepcidin', 'Low haemoglobin, low ferritin, low serum transferrin receptors, high hepcidin', '.']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] high fantasy: High fantasy is a subgenre of fantasy, defined either by its setting in an imaginary world or by the epic stature of its characters, themes and plot. 
+[1] high school: The collection of high schools. This ‘commodity’ product category is drawn from UNSPSC, readily converted into other widely used systems. This commodi
+[2] low explosive: A specialization of ExplosiveMaterial. Each instace of LowExplosive is an explosive that releases its energy too slowly to support a detonation. Low e
+[3] low-level cloud: A cloud that is very low to the ground.
+[4] iron mineral: Iron minerals are those containing iron as a necessary component.
+[5] iron hydroxide: Iron(II) hydroxide or ferrous hydroxide is a compound with the formula Fe(OH)2. It is produced when iron(II) ions, from a compound such as iron(II) su
+[6] hemoglobin: Hemoglobin (American) or haemoglobin (British), abbreviated Hb or Hgb, is the iron-containing oxygen-transport metalloprotein in the red blood cells (
+[7] Blood lead level: Blood lead level (BLL), is a measure of lead in the blood. It is often measured in micrograms of lead per deciliter of blood (μg/dL) especially in the
+[8] Bacterioferritin: Bacterioferritin (Bfr) is an oligomeric protein containing both a binuclear iron centre and haem b. The tertiary and quaternary structure of Bfr is ve
+[9] serology: Serology is the scientific study of serum and other bodily fluids. In practice, the term usually refers to the diagnostic identification of antibodies
+[10] g protein coupled receptor: G protein-coupled receptors (GPCRs), also known as seven-(pass)-transmembrane domain receptors, 7TM receptors, heptahelical receptors, serpentine rece
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```
+[1, 6, 8, 9, 10]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Diagnosis of iron deficiency can be complicated by concurrent infection since many markers of iron status are altered by infection. Which of the following combinations of iron status markers is likely to be found in a person with both iron deficiency and a severe infection?
+
+
+A. Low haemoglobin, high ferritin, high serum transferrin receptors, high hepcidin
+B. Low haemoglobin, low ferritin, high serum transferrin receptors, low hepcidin
+C. Low haemoglobin, low ferritin, normal serum transferrin receptors, high hepcidin
+D. Low haemoglobin, low ferritin, low serum transferrin receptors, high hepcidin
+
+Answer with the letter only (A, B, C, or D)."
+
+Concept: 'high school'
+Facts:
+  - definition: The collection of high schools. This ‘commodity’ product category is drawn from UNSPSC, readily converted into other widely used systems. This commodity category is for high school. This product categ
+  - subclass of: secondary school
+  - ancestor definition: A secondary school, often referred to as a high school or a senior high school, is a school which provides secondary education, between the ages of 11
+  - subclass of: educational institution
+  - ancestor definition: An education institution is a place where people of different ages gain an education, including preschools, childcare, elementary schools, and univers
+  - subclass of: K-12 institution
+  - ancestor definition: SchoolInstitution_KThrough12 is a specialization of AcademicOrganization. Each instance of SchoolInstitution_KThrough12 is a school which provides ins
+  - subclass of: educational organization
+  - ancestor definition: A specialization of Organization. Each instance of EducationalOrganization is an organization whose primary function is to provide teaching and/or tra
+  - subclass of: academic organization
+  - ancestor definition: The collection of all EducationalOrganizations whose educators consist of AcademicProfessionals. For example, SchoolInstitution_KThrough12, and Higher
+  - sibling concept: istituto professionale
+
+Concept: 'hemoglobin'
+Facts:
+  - definition: Hemoglobin (American) or haemoglobin (British), abbreviated Hb or Hgb, is the iron-containing oxygen-transport metalloprotein in the red blood cells (erythrocytes) of almost all vertebrates, the excep
+  - subclass of: plasma protein molecule
+  - ancestor definition: A specialization of ProteinMolecule. Each instance of BloodProteinMolecule is a molecule of a protein that naturally occurs in the blood of a living a
+  - subclass of: metalloprotein
+  - ancestor definition: Metalloprotein is a generic term for a protein that contains a metal ion cofactor. A large number of all proteins are part of this category. For insta
+  - subclass of: protein molecule
+  - ancestor definition: The collection of molecules of proteins. Instances are defined chemically as polymers made up of amino acids. Compare with ProteinStuff.
+  - subclass of: protein
+  - ancestor definition: Proteins (/ˈproʊˌtiːnz/ or /ˈproʊti.ɨnz/) are large biomolecules, or macromolecules, consisting of one or more long chains of amino acid residues. Pro
+  - subclass of: biopolymer
+  - ancestor definition: The collection of macromolecules which are produced by and can be found within living things, such as proteins (essentially polymers of amino acids), 
+  - subclass of: heteropolymer
+
+Concept: 'Bacterioferritin'
+Facts:
+  - definition: Bacterioferritin (Bfr) is an oligomeric protein containing both a binuclear iron centre and haem b. The tertiary and quaternary structure of Bfr is very similar to that of ferritin. The physiological 
+  - subclass of: protein
+  - ancestor definition: Proteins (/ˈproʊˌtiːnz/ or /ˈproʊti.ɨnz/) are large biomolecules, or macromolecules, consisting of one or more long chains of amino acid residues. Pro
+  - subclass of: peptide molecule
+  - ancestor definition: Peptides (from Greek language πεπτός, peptós "digested"; derived from πέσσειν, péssein "to digest") are short chains of amino acids linked by peptide 
+  - subclass of: molecular material
+  - ancestor definition: A collection of tangible stuff. Every instance of MolecularStuff is a portion of stuff composed of covalently-bonded molecules. Thus, Water and DNAStu
+  - subclass of: nutrient
+  - ancestor definition: Nutrients are components in foods that an organism uses to survive and grow. Macronutrients provide the bulk energy an organism's metabolic system nee
+  - subclass of: organic compound
+  - ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reas
+  - subclass of: polymer molecule
+
+Concept: 'serology'
+Facts:
+  - definition: Serology is the scientific study of serum and other bodily fluids. In practice, the term usually refers to the diagnostic identification of antibodies in the serum.
+  - subclass of: medicine (field of study)
+  - ancestor definition: This article is about the science and art of healing.
+  - subclass of: field of study
+  - ancestor definition: A specialization of AspatialInformationStore. Each instance of FieldOfStudy is a particular area of study, with its own distinctive set of theories, h
+  - subclass of: facet collection
+  - ancestor definition: A CollectionType. Each instance of FacetInstanceCollection is a collection that is an instance of a FacetingCollectionType (q.v.). For example, the fa
+  - sibling concept: alternative health
+  - sibling concept: anatomy
+  - sibling concept: aviation medicine
+  - sibling concept: bacteriology
+  - sibling concept: biomedicine
+
+Concept: 'g protein coupled receptor'
+Facts:
+  - definition: G protein-coupled receptors (GPCRs), also known as seven-(pass)-transmembrane domain receptors, 7TM receptors, heptahelical receptors, serpentine receptor, and G protein–linked receptors (GPLR), const
+  - subclass of: signal transduction
+  - ancestor definition: Signal transduction occurs when an extracellular signaling molecule activates a specific receptor located on the cell surface or inside the cell. In t
+  - subclass of: biochemical process
+  - ancestor definition: The collection intersection of ChemicalInteraction and BiologicalProcess. Each instance of this collection is a chemical interaction in which a biolog
+  - subclass of: single cell process
+  - ancestor definition: The collection of instances of BiologicalProcess_CellularLevel that take place entirely within a single cell. Contrast with BiologicalProcess_Cellular
+  - subclass of: biological process
+  - ancestor definition: Biological processes are the processes vital for a living organism to live. Biological processes are made up of many chemical reactions or other event
+  - subclass of: chemical process
+  - ancestor definition: The collection of all instances of chemical interactions and series of chemical interactions.
+  - subclass of: cellular level biological process
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------

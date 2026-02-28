@@ -24,60 +24,98 @@ N3_FILE = Path(__file__).resolve().parents[2] / "kbpedia_reference_concepts.n3"
 BATCH_SIZE = 500
 
 
+import re
+
 def parse_n3(filepath: Path):
-    """Parse the N3 file with rdflib and extract class data."""
-    print(f"Parsing N3 file: {filepath} (this may take a minute)...")
+    """
+    Parse the N3 file iteratively without rdflib to prevent OOM errors on 10.5MB+ files.
+    Extracts class data and Wikidata Q-ID mappings.
+    """
+    print(f"Iteratively parsing N3 file: {filepath} (this may take a minute)...")
     start = time.time()
 
-    g = Graph()
-    g.parse(str(filepath), format="n3")
+    concepts = {}        # uri -> {uri, name, definition, altLabels, wikidata_qid}
+    subclass_edges = []  # (child_uri, parent_uri)
+    
+    # Pre-compile regex for speed
+    # Subjects are typically <http://kbpedia.org/kko/rc/ConceptName>
+    subject_pattern = re.compile(r'^<([^>]+)>')
+    
+    # RDF/OWL properties we care about
+    type_class_pattern = re.compile(r'<http://www\.w3\.org/1999/02/22-rdf-syntax-ns#type>\s+<http://www\.w3\.org/2002/07/owl#Class>')
+    subclass_pattern = re.compile(r'<http://www\.w3\.org/2000/01/rdf-schema#subClassOf>\s+<([^>]+)>')
+    pref_label_pattern = re.compile(r'<http://www\.w3\.org/2004/02/skos/core#prefLabel>\s+"([^"]+)"')
+    alt_label_pattern = re.compile(r'<http://www\.w3\.org/2004/02/skos/core#altLabel>\s+"([^"]+)"')
+    def_pattern = re.compile(r'<http://www\.w3\.org/2004/02/skos/core#definition>\s+"([^"]+)"')
+    
+    # Mappings to Wikidata
+    wikidata_pattern = re.compile(r'<(?:http://www\.w3\.org/2004/02/skos/core#exactMatch|http://www\.w3\.org/2002/07/owl#sameAs)>\s+<http://www\.wikidata\.org/entity/(Q\d+)>')
+
+    current_uri = None
+    current_concept = None
+
+    with open(filepath, 'r', encoding='utf-8') as f:
+        for line in f:
+            line = line.strip()
+            if not line or line.startswith('@'):
+                continue
+                
+            # If the line starts with a URI, it is a new subject block
+            if line.startswith('<'):
+                subj_match = subject_pattern.search(line)
+                if subj_match:
+                    current_uri = subj_match.group(1)
+                    if current_uri not in concepts:
+                        concepts[current_uri] = {
+                            "uri": current_uri,
+                            "name": current_uri.split("/")[-1].replace("-", " "),
+                            "definition": "",
+                            "altLabels": [],
+                            "wikidata_qid": None
+                        }
+                    current_concept = concepts[current_uri]
+            
+            # If we don\'t have an active subject block, skip
+            if not current_concept:
+                continue
+                
+            # Check properties within the block
+            if type_class_pattern.search(line):
+                pass # We already created it
+                
+            label_match = pref_label_pattern.search(line)
+            if label_match:
+                current_concept["name"] = label_match.group(1).strip()
+                
+            def_match = def_pattern.search(line)
+            if def_match:
+                current_concept["definition"] = def_match.group(1).strip()
+                
+            alt_match = alt_label_pattern.search(line)
+            if alt_match:
+                raw_alt = alt_match.group(1).strip()
+                for part in raw_alt.split("||"):
+                    part = part.strip()
+                    if part:
+                         current_concept["altLabels"].append(part)
+                         
+            wd_match = wikidata_pattern.search(line)
+            if wd_match:
+                current_concept["wikidata_qid"] = wd_match.group(1)
+                
+            subclass_match = subclass_pattern.search(line)
+            if subclass_match:
+                parent_uri = subclass_match.group(1)
+                if parent_uri.startswith("http"):
+                    subclass_edges.append((current_concept["uri"], parent_uri))
+
+
+    # Filter to only keep concepts that actually had OWL:Class (or keep all KBPedia subjects to be safe)
+    # The original kept only those explicitly typed OWL:Class. Because of how the n3 is structured,
+    # usually every core concept block has the type. We keep all matched.
 
     elapsed = time.time() - start
-    print(f"Parsed {len(g)} triples in {elapsed:.1f}s.")
-
-    concepts = {}   # uri -> {name, definition, altLabels}
-    subclass_edges = []  # (child_uri, parent_uri)
-
-    for s in g.subjects(RDF.type, OWL.Class):
-        uri = str(s)
-
-        name = None
-        for label in g.objects(s, SKOS.prefLabel):
-            name = str(label).strip()
-            break
-
-        if not name:
-            # Fallback to local name from URI
-            name = uri.split("/")[-1].replace("-", " ")
-
-        definition = None
-        for defn in g.objects(s, SKOS.definition):
-            definition = str(defn).strip()
-            break
-
-        alt_labels = []
-        for alt in g.objects(s, SKOS.altLabel):
-            raw = str(alt).strip()
-            # KBPedia uses || as separator for multiple alt labels in one literal
-            for part in raw.split("||"):
-                part = part.strip()
-                if part:
-                    alt_labels.append(part)
-
-        concepts[uri] = {
-            "uri": uri,
-            "name": name,
-            "definition": definition or "",
-            "altLabels": alt_labels,
-        }
-
-        # rdfs:subClassOf edges
-        for parent in g.objects(s, RDFS.subClassOf):
-            parent_uri = str(parent)
-            if parent_uri.startswith("http"):
-                subclass_edges.append((uri, parent_uri))
-
-    print(f"Extracted {len(concepts)} concepts, {len(subclass_edges)} subclass edges.")
+    print(f"Iteratively parsed {len(concepts)} concepts and {len(subclass_edges)} edges in {elapsed:.1f}s.")
     return concepts, subclass_edges
 
 
@@ -106,7 +144,8 @@ def load_into_neo4j(concepts: dict, subclass_edges: list):
                 MERGE (n:KBPediaConcept {uri: row.uri})
                 SET n.name = row.name,
                     n.definition = row.definition,
-                    n.altLabels = row.altLabels
+                    n.altLabels = row.altLabels,
+                    n.wikidata_qid = row.wikidata_qid
                 """,
                 batch=batch,
             )
