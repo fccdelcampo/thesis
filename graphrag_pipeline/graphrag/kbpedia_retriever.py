@@ -27,8 +27,18 @@ class KBPediaRetriever:
 
     def __init__(self, driver, llm=None, top_k: int = 4):
         self.driver  = driver
-        # Force LLM to None to guarantee baseline GraphRAG uses ZERO LLM filtering for retrieval
-        self.llm     = None
+        
+        try:
+            from graphrag_pipeline.graphrag.config import ENABLE_LLM_FILTERING
+        except ModuleNotFoundError:
+            try:
+                from graphrag.config import ENABLE_LLM_FILTERING
+            except ImportError:
+                ENABLE_LLM_FILTERING = True
+
+        # Nullify LLM if the global config toggle is disabled
+        self.llm = llm if ENABLE_LLM_FILTERING else None
+        
         self.top_k   = top_k
 
     def _verify_index(self):

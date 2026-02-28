@@ -31,11 +31,11 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
         context_from_prompt = ""
         retrieved_context = []
         
-    # Convert list to string for Prolog and LLM (they expect string input)
-    retrieved_context_str = "\n".join(retrieved_context) if retrieved_context and isinstance(retrieved_context, list) else (str(retrieved_context) if retrieved_context is not None else "")
-
-    print(f"DEBUG: retrieved_context_str type: {type(retrieved_context_str)}")
-    print(f"DEBUG: original user_prompt (used for Prolog/LLM): {user_prompt}")
+    # Convert to string for Prolog and LLM (they expect string input)
+    if isinstance(retrieved_context, list):
+        retrieved_context_str = "\n".join(str(c) for c in retrieved_context)
+    else:
+        retrieved_context_str = str(retrieved_context) if retrieved_context else ""
 
     explainer_output = prolog_driver.run_pipeline(user_question=user_prompt, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt) if flag != "q" else None
  

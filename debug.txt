@@ -186265,3 +186265,425 @@ Diagnosis of iron deficiency can be complicated by concurrent infection since ma
 === [DEBUG] RAW RESPONSE (Sync) ===
 A. Mitochondria are small structures in cells that generate energy for the cell, hence referred to as the powerhouses of the cell. They contain their own DNA (mitochondrial genome) which is separate from the main cellular genetic material.
 ===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". \n2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.\n3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.\n4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."\n5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.\n\n### Question:\nWhich of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?\nA. cell membrane\nB. cell wall\nC. chloroplast\nD. nucleus\n\n### Context:\nKBPedia Concept: fluid movement in which a liquid moves.\nRelevant Logical Facts:\n  - definition: The collection of instances of FluidFlowEvent in which the primaryObjectMoving is some instance(s) of LiquidTangibleThing.\n  - subclass of: fluid movement\n  - ancestor definition: A specialization of MovementOrShapeChangeEvent. Each instance of FluidFlowEvent is an event in which a fluid moves (or a group of particles collectively moves). The spatial extent of the fluid may change (i.e. expansion or contraction, see ShapingSomething) and/or they may undergo a MovementEvent such as rotation (e.g. a whirlpool or a tornado) and/or translation. If the fluid undergoes translatio\n  - subclass of: movement event\n  - ancestor definition: A specialization of GeneralizedTransfer and MovementOrShapeChangeEvent (qq.v.). This is the most general collection of physical movements. Each instance of MovementEvent is an event in which at least one object (see objectMoving) either translates some distance or moves from one rotational orientation to another, relative to a frame of reference that is not part of the translating/rotating object.\n  - subclass of: movement or shape change\n  - ancestor definition: A specialization of PhysicalEvent whose instances include translational or rotational movements of whole objects (see MovementEvent), objects changing shape (see ShapeChangeEvent), as well as events in which salient parts of an object move or change shape in relation to the reference frame of the whole object. For example, although a ticking grandfather clock is not normally undergoing either a Mo\n  - subclass of: transfer\n  - ancestor definition: A specialization of Event. Each instance of GeneralizedTransfer is an event in which something (tangible or intangible) is transferred from one \'place\' to another. GeneralizedTransfer includes changes in physical location, in ownership or possession, transfer of information, and propagation of wave phenomena through space. See also the related predicate transferredThing, and the specializations of\n  - subclass of: physical event\nKBPedia Concept: manner in which an action is performed.\nRelevant Logical Facts:\n  - definition: The most general type of attribute describing the manner in which an actor performs an action; specializations of this include CorrectnessOfPosture, Competence, Precision, Dexterity, Gracefulness, Creativity, etc. The elements of Precision, e.g., represent the various qualitative levels such as high precision, low precision, etc.\n  - subclass of: action attribute level quantity\n  - ancestor definition: A specialization of Quantity. Each instance of ActionAttributeLevelQuantity is a particular level or amount of a certain type of quantity that an Action, or the performance of it, can exhibit. For example, (HighAmountFn Dangerousness) is an ActionAttributeLevelQuantity possessed by actions that are highly dangerous. (MediumAmountFn Gracefulness) is an action-attribute-level quantity exhibited by a\n  - subclass of: rating\n  - ancestor definition: An assigned value or characterization that orders subject (A) in relation to other subjects for a given attribute.\n  - subclass of: scalar quantity\n  - ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This is the collection of scalar quantities: at most partly numeric abstract individuals used as measurements or ratings of things. Specializations of ScalarQuantity include Distance, Temperature, Acceleration, Toxicity, and Loyalty (all of which save th\n  - subclass of: social quantity\n  - ancestor definition: A type of ScalarQuantity. SocialQuantity is a QuantityType.\n  - subclass of: quantity\nKBPedia Concept: following.\nRelevant Logical Facts:\n  - definition: A cult following is a group of fans who are highly dedicated to a work of culture, often referred to as a cult classic. A film, book, musical artist, television series or video game, among other things, is said to have a cult following when it has a small but very passionate fanbase.\n  - subclass of: group of social beings\n  - ancestor definition: In the social sciences, a social group has been defined as two or more people who interact with one another, share similar characteristics, and collectively have a sense of unity.\n  - subclass of: group of intelligent agents\n  - ancestor definition: A group of intelligent agents capable of acting with purpose and direction.\n  - sibling concept: militant group\n  - sibling concept: social group\nKBPedia Concept: following standard procedures.\nRelevant Logical Facts:\n  - definition: The collection of all events in which the performer of the event follows a standarized procedure which the agent knows prior to performing the event. The performer of some specialization of FollowingAStandardProcedure is apt to perform multiple instances of that event type.\n  - subclass of: action (purposeful)\n  - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purposefully done by (see performedBy) at least one actor.\n  - subclass of: conscious activity\n  - ancestor definition: This is the collection of all activities which are performed in a state of consciousness, that is, the animal performing the action is not sleeping, in a coma, or otherwise unconscious.\n  - subclass of: activity\n  - ancestor definition: One of the major types of an event or action that results in changes of state.\n  - subclass of: intelligent agent activity\n  - ancestor definition: A specialization of Action (q.v.). Every instance of IntelligentAgentActivity is an action, each of whose \\\n  - has subclass: appraisal\nKBPedia Concept: topics of \'parts\'.\nRelevant Logical Facts:\n  - definition: This conceptual systems category is a focal point for aggregating topics of \'parts\'.\n  - subclass of: parts\n  - ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of ‘whole’.\n  - subclass of: topics of \'physical stuff and objects\'\n  - ancestor definition: This conceptual systems category is a focal point for aggregating topics of \'physical stuff and objects\'.\n  - sibling concept: cell part\n  - sibling concept: mereology\n  - sibling concept: organism part\n  - sibling concept: part\n  - sibling concept: pittance\nJanette conducts an investigation to see which foods make her feel more fatigued.\n\n### Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+B. cell wall 
+
+The function of a plant cell's cell wall is similar to that of an animal skeleton, as both provide structural support and maintain the shape of their respective organisms.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+### Context:
+KBPedia Concept: fluid movement in which a liquid moves.
+Relevant Logical Facts:
+  - definition: The collection of instances of FluidFlowEvent in which the primaryObjectMoving is some instance(s) of LiquidTangibleThing.
+  - subclass of: fluid movement
+  - ancestor definition: A specialization of MovementOrShapeChangeEvent. Each instance of FluidFlowEvent is an event in which a fluid moves (or a group of particles collectively moves). The spatial extent of the fluid may change (i.e. expansion or contraction, see ShapingSomething) and/or they may undergo a MovementEvent such as rotation (e.g. a whirlpool or a tornado) and/or translation. If the fluid undergoes translatio
+  - subclass of: movement event
+  - ancestor definition: A specialization of GeneralizedTransfer and MovementOrShapeChangeEvent (qq.v.). This is the most general collection of physical movements. Each instance of MovementEvent is an event in which at least one object (see objectMoving) either translates some distance or moves from one rotational orientation to another, relative to a frame of reference that is not part of the translating/rotating object.
+  - subclass of: movement or shape change
+  - ancestor definition: A specialization of PhysicalEvent whose instances include translational or rotational movements of whole objects (see MovementEvent), objects changing shape (see ShapeChangeEvent), as well as events in which salient parts of an object move or change shape in relation to the reference frame of the whole object. For example, although a ticking grandfather clock is not normally undergoing either a Mo
+  - subclass of: transfer
+  - ancestor definition: A specialization of Event. Each instance of GeneralizedTransfer is an event in which something (tangible or intangible) is transferred from one 'place' to another. GeneralizedTransfer includes changes in physical location, in ownership or possession, transfer of information, and propagation of wave phenomena through space. See also the related predicate transferredThing, and the specializations of
+  - subclass of: physical event
+
+KBPedia Concept: manner in which an action is performed.
+Relevant Logical Facts:
+  - definition: The most general type of attribute describing the manner in which an actor performs an action; specializations of this include CorrectnessOfPosture, Competence, Precision, Dexterity, Gracefulness, Creativity, etc. The elements of Precision, e.g., represent the various qualitative levels such as high precision, low precision, etc.
+  - subclass of: action attribute level quantity
+  - ancestor definition: A specialization of Quantity. Each instance of ActionAttributeLevelQuantity is a particular level or amount of a certain type of quantity that an Action, or the performance of it, can exhibit. For example, (HighAmountFn Dangerousness) is an ActionAttributeLevelQuantity possessed by actions that are highly dangerous. (MediumAmountFn Gracefulness) is an action-attribute-level quantity exhibited by a
+  - subclass of: rating
+  - ancestor definition: An assigned value or characterization that orders subject (A) in relation to other subjects for a given attribute.
+  - subclass of: scalar quantity
+  - ancestor definition: A specialization of ScalarInterval and Quantity (qq.v.) that includes all scalars other than those that are purely numeric (cf. NumericInterval). This is the collection of scalar quantities: at most partly numeric abstract individuals used as measurements or ratings of things. Specializations of ScalarQuantity include Distance, Temperature, Acceleration, Toxicity, and Loyalty (all of which save th
+  - subclass of: social quantity
+  - ancestor definition: A type of ScalarQuantity. SocialQuantity is a QuantityType.
+  - subclass of: quantity
+
+KBPedia Concept: following.
+Relevant Logical Facts:
+  - definition: A cult following is a group of fans who are highly dedicated to a work of culture, often referred to as a cult classic. A film, book, musical artist, television series or video game, among other things, is said to have a cult following when it has a small but very passionate fanbase.
+  - subclass of: group of social beings
+  - ancestor definition: In the social sciences, a social group has been defined as two or more people who interact with one another, share similar characteristics, and collectively have a sense of unity.
+  - subclass of: group of intelligent agents
+  - ancestor definition: A group of intelligent agents capable of acting with purpose and direction.
+  - sibling concept: militant group
+  - sibling concept: social group
+
+KBPedia Concept: following standard procedures.
+Relevant Logical Facts:
+  - definition: The collection of all events in which the performer of the event follows a standarized procedure which the agent knows prior to performing the event. The performer of some specialization of FollowingAStandardProcedure is apt to perform multiple instances of that event type.
+  - subclass of: action (purposeful)
+  - ancestor definition: A specialization of both Action and AtLeastPartiallyMentalEvent. Each instance of PurposefulAction is an action consciously, volitionally, and purposefully done by (see performedBy) at least one actor.
+  - subclass of: conscious activity
+  - ancestor definition: This is the collection of all activities which are performed in a state of consciousness, that is, the animal performing the action is not sleeping, in a coma, or otherwise unconscious.
+  - subclass of: activity
+  - ancestor definition: One of the major types of an event or action that results in changes of state.
+  - subclass of: intelligent agent activity
+  - ancestor definition: A specialization of Action (q.v.). Every instance of IntelligentAgentActivity is an action, each of whose \
+  - has subclass: appraisal
+
+KBPedia Concept: topics of 'parts'.
+Relevant Logical Facts:
+  - definition: This conceptual systems category is a focal point for aggregating topics of 'parts'.
+  - subclass of: parts
+  - ancestor definition: A simple relationship where the object (B) is a part of or component of subjext (A), including the idea of ‘whole’.
+  - subclass of: topics of 'physical stuff and objects'
+  - ancestor definition: This conceptual systems category is a focal point for aggregating topics of 'physical stuff and objects'.
+  - sibling concept: cell part
+  - sibling concept: mereology
+  - sibling concept: organism part
+  - sibling concept: part
+  - sibling concept: pittance
+
+Janette conducts an investigation to see which foods make her feel more fatigued.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+I do not have enough information to answer this question.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "animal skeleton",
+    "plant cell",
+    "cell membrane",
+    "cell wall"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[1] membrane protein: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+[2] cell wall: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+[3] bacterial cell wall: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+[4] photosynthetic pigment: A photosynthetic pigment (accessory pigment; chloroplast pigment).
+[5] chloroplast: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+[6] nucleus: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, but a few cell types, such as mammalian red blood cells, have , and a few others have many.
+[7] lentiform nucleus: The collection of all lentiform nuclei. An individual LentiformNucleus (or 'lenticular nucleus') is a BasalNucleus which is a unique part of a CerebralHemisphere.
+[8] human skeleton: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,
+[9] skeleton tarantula: The skeleton tarantula, Ephebopus murinus, is a species of spider belonging to the family Theraphosidae (tarantulas), sub-family Aviculariinae. A New World species, it is native to several South American countries. Its common name is derived from the skeleton-like markings on its legs.
+[10] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[11] plant epidermis: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 8, 10, 11]
+```
+
+These concepts are relevant to answering the question because they relate directly or indirectly to cell walls (option B), which is a key concept in plant cells. The Prolog engine can use these facts and rules to reason about the functions of different parts of a plant cell compared to an animal skeleton.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are deeply integrated into a Prolog GraphRAG pipeline.
+Below are lists of known facts (triples) for MULTIPLE entities.
+Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'membrane protein'
+Facts:
+  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+  - subclass of: protein molecule
+  - ancestor definition: The collection of molecules of proteins. Instances are defined chemically as polymers made up of amino acids. Compare with ProteinStuff.
+  - subclass of: biopolymer
+  - ancestor definition: The collection of macromolecules which are produced by and can be found within living things, such as proteins (essentially polymers of amino acids), nucleic acids (such as DNA or RNA), and polysaccharides (polymers of simple sugars).
+  - subclass of: heteropolymer
+  - ancestor definition: The collection of all PolymerMolecules whose instances are characterized by having more than one type of Monomer as polymericSubComponents. More specifically, if HET is an instance of HeteroPolymer, then there are least two different Monomers such that both are polymericSubComponents of HET and each is an instance of a different spec of Monomer.
+  - subclass of: organic molecule
+  - ancestor definition: An organic compound is any member of a large class of gaseous, liquid, or solid chemical compounds whose molecules contain carbon. For historical reasons discussed below, a few types of carbon-containing compounds, such as carbides, carbonates, simple oxides of carbon (such as CO and CO2), and cyanides are considered inorganic. The distinction between organic and inorganic carbon compounds, while 
+  - subclass of: polymer molecule
+  - ancestor definition: A polymer (/ˈpɒlᵻmər/; Greek poly-, \
+  - subclass of: polypeptide
+
+Concept: 'bacterial cell wall'
+Facts:
+  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+  - subclass of: cell wall
+  - ancestor definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+  - subclass of: prokaryotic cell wall
+  - ancestor definition: The collection of instances of CellWall that are anatomicalParts of some instance of ProkaryoticCell.
+  - subclass of: structural cell part
+  - ancestor definition: The collection of all instances of CellPart that are specifically concerned with helping a particular Cell maintain it's physical integrity and structure. Instances of CellPart_Structural are different from the cellular 'micro-organs' known as Organelles.
+  - subclass of: external anatomical part
+  - ancestor definition: ExternalAnatomicalPart is a specialization of OrganismPart. Each instance of ExternalAnatomicalPart is a part of the external anatomy of an organism. Example subcollections include Earlobe and Leaf.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: organism part
+
+Concept: 'chloroplast'
+Facts:
+  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated functions. Organelles include the nucleus, mitochondria, the endoplasmic reticulum, the Golgi apparatus, lysosomes, the cytoskeleton and (in plant cells only) chloroplasts and vacuoles.
+  - subclass of: plastid
+  - ancestor definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: aura: membrane bounded organelle
+  - ancestor definition: Organized structure of distinctive morphology and function, bounded by a single or double lipid bilayer membrane. Includes the nucleus, mitochondria, plastids, vacuoles, and vesicles. Excludes the plasma membrane..
+  - subclass of: microscopic object
+
+Concept: 'nucleus'
+Facts:
+  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, but a few cell types, such as mammalian red blood cells, have , and a few others have many.
+  - subclass of: organelle
+  - ancestor definition: This is the collection of organelles (individuals, not types). An organelle is a specialized structure or compartment within a eukaryotic cell, which is responsible for carrying out certain isolated functions. Organelles include the nucleus, mitochondria, the endoplasmic reticulum, the Golgi apparatus, lysosomes, the cytoskeleton and (in plant cells only) chloroplasts and vacuoles.
+  - subclass of: cell part
+  - ancestor definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: internal body part
+  - ancestor definition: InternalAnatomicalPart is a specialization of OrganismPart. Each instance of InternalAnatomicalPart is a part of the internal anatomy of an organism. Example subcollections include CirculatorySystem and MiddleEar.
+  - subclass of: microscopic object
+  - ancestor definition: A specialization of PartiallyTangible. Each instance of MicroscopicScaleObject is a partially tangible object which is so small that human beings cannot perceive it, except (perhaps) with the use of special devices such as Microscopes or ElectronMicroscopes. Specializations of MicroscopicScaleObject include Molecule, Atom, SubAtomicParticle, Chloroplast, and Mitochondrion.
+  - subclass of: organic matter
+  - ancestor definition: A collection of tangible things. Each instance of OrganicMaterial is a tangible thing composed of one or more types of organic Molecule. Instances of OrganicMaterial usually have their origin in the bodies (or other products) of living things. Since some organic substances can be synthesized, OrganicMaterial is not a subcollection of NaturalTangibleStuff. Chemically, instances of OrganicMaterial h
+  - subclass of: parts
+
+Concept: 'human skeleton'
+Facts:
+  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,
+  - subclass of: body part
+  - ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of BiologicalLivingObject (q.v). AnimalBodyPart includes both highly localized organs (for example, hearts) and physical systems composed of parts distributed throughout an animal's body (such as an animal's circulatory system and nervous system). Note t
+  - subclass of: skeleton
+  - ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of a body. Instances of this collection are either external structures (see Exoskeleton and Shell_AnimalBodyPart) or internally interlinked bones (see Bone_BodyPart) and cartilage (see Cartilage).
+  - subclass of: region on an animal's body
+  - ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivision in question is usually contiguous, and has some more or less clear boundary. Instances of this collection include anatomical parts (see the specialization AnimalBodyPart) , such as a person's head, beard, or right arm. In addition, this collection 
+  - subclass of: organ system
+  - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological systems are populations of organisms, or on the organ- and tissue scale in mammals and other animals, the circulatory system, the respiratory system, the nervous system, etc. On the micro to the nanoscopic scale, examples of biological systems are cell
+  - subclass of: animal or body part
+  - ancestor definition: A specialization of BiologicalLivingObject that includes all living animals, body parts of living animals, and body regions of living animals. AnimalBLO is thus the \
+  - subclass of: organism part
+
+
+
+CRITICAL INSTRUCTIONS:
+1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
+2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
+3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Example:
+{
+  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
+  "Concept B": ["definition: a long narrow ditch"]
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output in JSON format:
+
+```json
+{
+    "membrane protein": [
+        "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.",
+        "subclass of: protein molecule"
+    ],
+    "bacterial cell wall": [
+        "definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell."
+    ],
+    "chloroplast": [
+        "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.",
+        "subclass of: organelle"
+    ],
+    "nucleus": [
+        "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells."
+    ]
+}
+```
+
+I have carefully filtered out irrelevant facts and kept only the core definitions for each concept that matches one of the multiple-choice options in the User Query.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are a Logic Discovery Agent. Extract the minimum logical building blocks needed to answer the Question from the Context.\n\n### TASK\nProduce a single numbered list called **LOGICAL EVIDENCE**. Each item is one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.\n\n### CONSTRAINTS\n* Include at most 10 items total.\n* Each item must directly help bridge the premise to the answer.  Omit background, history, or tangential details.\n* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."\n* Break compound sentences into independent logical units.\n* Use clear, declarative English only. No code, no symbols.\n* Do NOT reveal the final answer — provide logical ingredients only.\n\n---\n### QUESTION:\nWhich of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus\n\n### CONTEXT:\nKBPedia Concept: membrane protein.\nRelevant Logical Facts:\n  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.\n  - subclass of: protein molecule\nKBPedia Concept: bacterial cell wall.\nRelevant Logical Facts:\n  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.\nKBPedia Concept: chloroplast.\nRelevant Logical Facts:\n  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.\n  - subclass of: organelle\nKBPedia Concept: nucleus.\nRelevant Logical Facts:\n  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells.\nKBPedia Concept: human skeleton.\nRelevant Logical Facts:\n  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,\n  - subclass of: body part\n  - ancestor definition: A specialization of AnimalBodyRegion. Each instance of AnimalBodyPart is an anatomical part of some living animal, and thus is itself an instance of BiologicalLivingObject (q.v). AnimalBodyPart includes both highly localized organs (for example, hearts) and physical systems composed of parts distributed throughout an animal\'s body (such as an animal\'s circulatory system and nervous system). Note t\n  - subclass of: skeleton\n  - ancestor definition: A specialization of AnimalBodyPart. Each instance of SkeletalSystem is a system of body parts used to support, separate, and protect the other parts of a body. Instances of this collection are either external structures (see Exoskeleton and Shell_AnimalBodyPart) or internally interlinked bones (see Bone_BodyPart) and cartilage (see Cartilage).\n  - subclass of: region on an animal\'s body\n  - ancestor definition: A specialization of AnimalBLO. Each instance of AnimalBodyRegion is a significant spatial subdivision of the body of some animal, where the subdivision in question is usually contiguous, and has some more or less clear boundary. Instances of this collection include anatomical parts (see the specialization AnimalBodyPart) , such as a person\'s head, beard, or right arm. In addition, this collection \n  - subclass of: organ system\n  - ancestor definition: A biological system is a complex network of biologically relevant entities. As biological organization spans several scales, examples of biological systems are populations of organisms, or on the organ- and tissue scale in mammals and other animals, the circulatory system, the respiratory system, the nervous system, etc. On the micro to the nanoscopic scale, examples of biological systems are cell\n  - subclass of: animal or body part\n  - ancestor definition: A specialization of BiologicalLivingObject that includes all living animals, body parts of living animals, and body regions of living animals. AnimalBLO is thus the \\\n  - subclass of: organism part\n  - ancestor definition: A specialization of both PhysicalPartOfObject and BiologicalLivingObject. Each instance of OrganismPart is a part of an organism. It may be an anatomical part or a pathological part such as a tumor. This collection includes the gross anatomical parts and microscopic anatomical parts of every individual of every species.\n  - subclass of: anatomy\n  - ancestor definition: Anatomy is the branch of biology concerned with the study of the structure of organisms and their parts. In some of its facets, anatomy is related to embryology and comparative anatomy, which itself is closely related to evolutionary biology and phylogeny. Human anatomy is one of the basic essential sciences of medicine. The discipline of anatomy is divided into macroscopic and microscopic anatomy\n  - subclass of: connected biological path\n  - ancestor definition: A biological system of physically connected parts.\n  - sibling concept: abdomen\n  - sibling concept: abdominal cavity\n  - sibling concept: adrenal cortex\n  - sibling concept: adrenal medulla\n  - sibling concept: alimentary canal\n\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+**LOGICAL EVIDENCE**
+
+1. The human skeleton is the internal framework of the body, composed of around 300 bones at birth that decrease to 206 by adulthood.
+2. A cell wall protects a bacterial cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+3. Membrane proteins are closely associated with biological membranes in all living cells.
+4. The nucleus is an organelle found in eukaryotic cells, enclosed within a membrane that regulates what enters or leaves it.
+5. A skeleton provides structural support and protection for other parts of the body.
+6. Chloroplasts have internal membranes but are primarily involved with photosynthesis rather than providing structural support.
+7. The cell wall is not present in all plant cells; some lack one, while others may have a modified form called a cuticle or epidermal layer.
+8. A skeleton can be composed of either external structures (exoskeleton) or internally interlinked bones and cartilage.
+9. Plant cells do not possess an internal framework like the human skeleton but instead rely on cell walls for structural support.
+10. The nucleus is responsible for storing genetic information, whereas a skeleton provides physical structure to the body.
+
+Note: These logical building blocks are extracted from the provided context without any additional universally accepted truths or assumptions beyond what's given in the text.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". \n2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.\n3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.\n4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."\n5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.\n\n### Question:\nJanette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?\nA. measuring the amount of fatigue\nB. making sure the same foods are eaten\nC. recording observations in the same chart\nD. making sure the foods are at the same temperature\n\n### Context:\nKBPedia Concept: conducting.\nRelevant Logical Facts:\n  - definition: A MusicalConductor conducts a group of musicians.\n  - subclass of: performing arts activity\n  - ancestor definition: The collection of activities that Artist_Performers do. Its subsets include things like Singing, Dancing_Human, DramaticActing, PlayingAMusicalInstrument, etc. What is being captured in this collection are the actions that Artist_Performers do, both in preparation for and during a performance. For the collection of performace events, see EntertainmentPerformance.\n  - subclass of: visual communication\n  - ancestor definition: A specialization of Communicating. Each instance of VisualCommunicating is an action in which information is transmitted by visual media. Every instance of VisualCommunicating has at least one communicationToken (q.v.) which is an instance of VisualInformationBearingThing. Examples of VisualCommunicating include: a performance by mime Marcel Marceau; Seiji Ozawa conducting the Boston Symphony Orch\n  - subclass of: cultural activity\n  - ancestor definition: The collection of all CulturalThings that are PurposefulActions.\n  - subclass of: information-bearing thing\n  - ancestor definition: A collection of spatially-localized individuals, including various actions and events as well as physical objects. Each instance of InformationBearingThing (or \\\n  - subclass of: purposeful composite physical and mental activity\nKBPedia Concept: performer.\nRelevant Logical Facts:\n  - definition: A performer is a person who performs or conducts her occupation before an audience.\n  - subclass of: worker\n  - ancestor definition: The collection of persons who have a (skilled or unskilled) occupation. Most (but not all) instances of PersonWithOccupation spend a significant part of their waking hours doing activities that are characteristic of their occupations. Typically their actions are performed for pay (but not always: consider a \\\n  - subclass of: business related thing\n  - ancestor definition: Something related to business.\n  - subclass of: person\n  - ancestor definition: A specialization of SocialBeing and IndividualAgent: the collection of all persons. Personhood is a vague, emotionally loaded yet extremely salient concept with respect to common-sense reasoning. Something is an instance of Person if it is an individual IntelligentAgent with perceptual sensibility, capable of complex social relationships, and possessing a certain moral sophistication and an intrin\n  - subclass of: occupation type\n  - ancestor definition: A collection of collections and a specialization of PersonTypeByActivity (q.v.). Each instance of PersonTypeByOccupation is a collection of workers (see PersonWithOccupation) and is defined in terms of the kind of work done. The various instances of PersonTypeByOccupation correspond to jobs of all kinds, and not just to those colloquially called \\\n  - subclass of: thing that exists in time\nKBPedia Concept: fire investigation.\nRelevant Logical Facts:\n  - definition: Fire investigation, sometimes referred to as origin and cause investigation, is the analysis of fire-related incidents. After firefighters extinguish a fire, an investigation is launched to determine the origin and cause of the fire or explosion. Investigations of such incidents require a systematic approach and knowledge of basic fire science.\n  - subclass of: firefighting\n  - ancestor definition: A FirstOrderCollection and specialization of (AttemptingFn ExtinguishingAFire). Each instance of Firefighting is an event in which an agent (often a Firefighter) attempts to put out a CombustionProcess that is in some way dangerous or unwanted. (This rules out, e.g., typical instances of snuffing out a candle or extinguishing a campfire.)\n  - subclass of: dangerous activity\n  - ancestor definition: The collection of activities that pose an inherent risk to the health or well-being of its doer or those nearby when the event unfolds.\n  - subclass of: action performed by animals\n  - ancestor definition: A specialization of Action. Each instance of AnimalActivity is a spatially-localized action, each of whose \\\n  - subclass of: dangerous\n  - ancestor definition: A specialization of Individual. Each instance of DangerousThing poses danger to either just humans or organisms in general. Important specializations include DangerousTangibleThing and DangerousSituation.\n  - sibling concept: aerial firefighting\nKBPedia Concept: investigation.\nRelevant Logical Facts:\n  - definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide variety of entities: a philosophical problem, a criminal act, a natural phenomenon, etc.. The phenomenon under investigation may be actual or merely putative within the context of the representation. Also\n  - subclass of: gathering information\n  - ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers information about something.\n  - subclass of: purposeful mental activity\n  - ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is an event involving intentional mental activity on the part of at least one performer (see performedBy). Solving a math problem (cf. DoingMath), planning an attack and performing a thought experiment (cf. ThoughtExperimenting) are all examples of Pur\n  - subclass of: work\n  - ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occupation (to make a living), or to contribute to some goal, or out of some other obligation or necessity. Positive examples include a student doing homework for school, a homeowner mowing her lawn, a teacher teaching class, etc.\n  - subclass of: information transfer\n  - ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (informationOrigin) to one or more destinations (informationDestination), where the source and the various destinations are either intelligent agents or InformationBearingThings (IBTs). Examples include reading a book (transfer of information from the boo\n  - subclass of: action (purposeful)\nKBPedia Concept: fluid movement in which a liquid moves.\nRelevant Logical Facts:\n  - definition: The collection of instances of FluidFlowEvent in which the primaryObjectMoving is some instance(s) of LiquidTangibleThing.\n  - subclass of: fluid movement\n  - ancestor definition: A specialization of MovementOrShapeChangeEvent. Each instance of FluidFlowEvent is an event in which a fluid moves (or a group of particles collectively moves). The spatial extent of the fluid may change (i.e. expansion or contraction, see ShapingSomething) and/or they may undergo a MovementEvent such as rotation (e.g. a whirlpool or a tornado) and/or translation. If the fluid undergoes translatio\n  - subclass of: movement event\n  - ancestor definition: A specialization of GeneralizedTransfer and MovementOrShapeChangeEvent (qq.v.). This is the most general collection of physical movements. Each instance of MovementEvent is an event in which at least one object (see objectMoving) either translates some distance or moves from one rotational orientation to another, relative to a frame of reference that is not part of the translating/rotating object.\n  - subclass of: movement or shape change\n  - ancestor definition: A specialization of PhysicalEvent whose instances include translational or rotational movements of whole objects (see MovementEvent), objects changing shape (see ShapeChangeEvent), as well as events in which salient parts of an object move or change shape in relation to the reference frame of the whole object. For example, although a ticking grandfather clock is not normally undergoing either a Mo\n  - subclass of: transfer\n  - ancestor definition: A specialization of Event. Each instance of GeneralizedTransfer is an event in which something (tangible or intangible) is transferred from one \'place\' to another. GeneralizedTransfer includes changes in physical location, in ownership or possession, transfer of information, and propagation of wave phenomena through space. See also the related predicate transferredThing, and the specializations of\n  - subclass of: physical event\n\n### Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+A. measuring the amount of fatigue 
+
+Measuring fatigue is subjective and can be influenced by various factors such as individual tolerance levels or external conditions like weather or time of day. This makes it challenging to replicate results accurately, especially when comparing different individuals' experiences with similar foods.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
+2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+
+### Question:
+Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+
+### Context:
+KBPedia Concept: conducting.
+Relevant Logical Facts:
+  - definition: A MusicalConductor conducts a group of musicians.
+  - subclass of: performing arts activity
+  - ancestor definition: The collection of activities that Artist_Performers do. Its subsets include things like Singing, Dancing_Human, DramaticActing, PlayingAMusicalInstrument, etc. What is being captured in this collection are the actions that Artist_Performers do, both in preparation for and during a performance. For the collection of performace events, see EntertainmentPerformance.
+  - subclass of: visual communication
+  - ancestor definition: A specialization of Communicating. Each instance of VisualCommunicating is an action in which information is transmitted by visual media. Every instance of VisualCommunicating has at least one communicationToken (q.v.) which is an instance of VisualInformationBearingThing. Examples of VisualCommunicating include: a performance by mime Marcel Marceau; Seiji Ozawa conducting the Boston Symphony Orch
+  - subclass of: cultural activity
+  - ancestor definition: The collection of all CulturalThings that are PurposefulActions.
+  - subclass of: information-bearing thing
+  - ancestor definition: A collection of spatially-localized individuals, including various actions and events as well as physical objects. Each instance of InformationBearingThing (or \
+  - subclass of: purposeful composite physical and mental activity
+
+KBPedia Concept: performer.
+Relevant Logical Facts:
+  - definition: A performer is a person who performs or conducts her occupation before an audience.
+  - subclass of: worker
+  - ancestor definition: The collection of persons who have a (skilled or unskilled) occupation. Most (but not all) instances of PersonWithOccupation spend a significant part of their waking hours doing activities that are characteristic of their occupations. Typically their actions are performed for pay (but not always: consider a \
+  - subclass of: business related thing
+  - ancestor definition: Something related to business.
+  - subclass of: person
+  - ancestor definition: A specialization of SocialBeing and IndividualAgent: the collection of all persons. Personhood is a vague, emotionally loaded yet extremely salient concept with respect to common-sense reasoning. Something is an instance of Person if it is an individual IntelligentAgent with perceptual sensibility, capable of complex social relationships, and possessing a certain moral sophistication and an intrin
+  - subclass of: occupation type
+  - ancestor definition: A collection of collections and a specialization of PersonTypeByActivity (q.v.). Each instance of PersonTypeByOccupation is a collection of workers (see PersonWithOccupation) and is defined in terms of the kind of work done. The various instances of PersonTypeByOccupation correspond to jobs of all kinds, and not just to those colloquially called \
+  - subclass of: thing that exists in time
+
+KBPedia Concept: fire investigation.
+Relevant Logical Facts:
+  - definition: Fire investigation, sometimes referred to as origin and cause investigation, is the analysis of fire-related incidents. After firefighters extinguish a fire, an investigation is launched to determine the origin and cause of the fire or explosion. Investigations of such incidents require a systematic approach and knowledge of basic fire science.
+  - subclass of: firefighting
+  - ancestor definition: A FirstOrderCollection and specialization of (AttemptingFn ExtinguishingAFire). Each instance of Firefighting is an event in which an agent (often a Firefighter) attempts to put out a CombustionProcess that is in some way dangerous or unwanted. (This rules out, e.g., typical instances of snuffing out a candle or extinguishing a campfire.)
+  - subclass of: dangerous activity
+  - ancestor definition: The collection of activities that pose an inherent risk to the health or well-being of its doer or those nearby when the event unfolds.
+  - subclass of: action performed by animals
+  - ancestor definition: A specialization of Action. Each instance of AnimalActivity is a spatially-localized action, each of whose \
+  - subclass of: dangerous
+  - ancestor definition: A specialization of Individual. Each instance of DangerousThing poses danger to either just humans or organisms in general. Important specializations include DangerousTangibleThing and DangerousSituation.
+  - sibling concept: aerial firefighting
+
+KBPedia Concept: investigation.
+Relevant Logical Facts:
+  - definition: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide variety of entities: a philosophical problem, a criminal act, a natural phenomenon, etc.. The phenomenon under investigation may be actual or merely putative within the context of the representation. Also
+  - subclass of: gathering information
+  - ancestor definition: A specialization of both Action and InformationTransferEvent. In each instance of InformationGathering, some instance of IntelligentAgent gathers information about something.
+  - subclass of: purposeful mental activity
+  - ancestor definition: The intersection of StrictlyMentalEvent and PurposefulAction, and also a specialization of IntentionalMentalEvent. Each instance of this collection is an event involving intentional mental activity on the part of at least one performer (see performedBy). Solving a math problem (cf. DoingMath), planning an attack and performing a thought experiment (cf. ThoughtExperimenting) are all examples of Pur
+  - subclass of: work
+  - ancestor definition: Activities which require a certain amount of physical or mental exertion, and which are not done purely for recreation, but rather as part of an occupation (to make a living), or to contribute to some goal, or out of some other obligation or necessity. Positive examples include a student doing homework for school, a homeowner mowing her lawn, a teacher teaching class, etc.
+  - subclass of: information transfer
+  - ancestor definition: A specialization of GeneralizedTransfer. Each instance of InformationTransferEvent is an event in which information is transferred from a source (informationOrigin) to one or more destinations (informationDestination), where the source and the various destinations are either intelligent agents or InformationBearingThings (IBTs). Examples include reading a book (transfer of information from the boo
+  - subclass of: action (purposeful)
+
+KBPedia Concept: fluid movement in which a liquid moves.
+Relevant Logical Facts:
+  - definition: The collection of instances of FluidFlowEvent in which the primaryObjectMoving is some instance(s) of LiquidTangibleThing.
+  - subclass of: fluid movement
+  - ancestor definition: A specialization of MovementOrShapeChangeEvent. Each instance of FluidFlowEvent is an event in which a fluid moves (or a group of particles collectively moves). The spatial extent of the fluid may change (i.e. expansion or contraction, see ShapingSomething) and/or they may undergo a MovementEvent such as rotation (e.g. a whirlpool or a tornado) and/or translation. If the fluid undergoes translatio
+  - subclass of: movement event
+  - ancestor definition: A specialization of GeneralizedTransfer and MovementOrShapeChangeEvent (qq.v.). This is the most general collection of physical movements. Each instance of MovementEvent is an event in which at least one object (see objectMoving) either translates some distance or moves from one rotational orientation to another, relative to a frame of reference that is not part of the translating/rotating object.
+  - subclass of: movement or shape change
+  - ancestor definition: A specialization of PhysicalEvent whose instances include translational or rotational movements of whole objects (see MovementEvent), objects changing shape (see ShapeChangeEvent), as well as events in which salient parts of an object move or change shape in relation to the reference frame of the whole object. For example, although a ticking grandfather clock is not normally undergoing either a Mo
+  - subclass of: transfer
+  - ancestor definition: A specialization of Event. Each instance of GeneralizedTransfer is an event in which something (tangible or intangible) is transferred from one 'place' to another. GeneralizedTransfer includes changes in physical location, in ownership or possession, transfer of information, and propagation of wave phenomena through space. See also the related predicate transferredThing, and the specializations of
+  - subclass of: physical event
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+A.
+
+Measuring fatigue is subjective and can be influenced by various factors such as mood, sleep quality, or other health conditions, making it difficult to replicate results accurately.
+===================================
