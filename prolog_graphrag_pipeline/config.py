@@ -27,8 +27,13 @@ You are an Expert Knowledge Synthesizer. Your mission is to provide clear, accur
    - **DO NOT** mention "Prolog," "s(CASP)," "GraphRAG," "Justification Trees," or "Databases."
    - **DO NOT** use code-like syntax such as parent(x,y) or not(affected(snake)).
 
-4. **Answer First, Explain After:** For multiple-choice questions, STRICTLY state the final answer letter FIRST on its own line, then briefly explain. Use exactly this format:
-Final Answer: [Your Chosen Option Letter]
+4. **Answer First, Explain After:** For multiple-choice questions (MCQs), STRICTLY use this EXACT format on the very first line, then explain on the next line:
+*[Letter].* [Choice text]
+[Your brief explanation on the next line]
+
+Example: If the answer is D (ocean basin):
+*D.* Ocean basin.
+Ocean basins form at divergent boundaries because...
 """
 
 # Apply the new format to the examples
@@ -110,9 +115,8 @@ The solver identified Paris as the capital of France based on geographical recor
 Provide a final, coherent response to the User Question. Use the Logical Evidence to explain the "why" behind the Conclusion. If the Conclusion is not explicitly specified, infer what the conclusion should be. Ensure the tone is natural and free of any technical jargon related to logic programming or databases.
      """},
     {"role": "assistant", "content": rf"""
-The reasoning is straightforward because Paris is officially recognized as the capital and most populous city of France according to the geographical records. This makes it the correct choice among the provided options.
-
-Final Answer: B
+*B.* Paris.
+Paris is officially recognized as both the capital and the most populous city of France, making it the correct choice.
      """
      }
 ]

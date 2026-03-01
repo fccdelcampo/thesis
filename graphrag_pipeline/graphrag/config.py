@@ -171,13 +171,15 @@ GRAPHRAG_TEMPLATE = '''
 You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
 
 ### STRICT INSTRUCTIONS
-1. **Answer First**: STRICTLY state the Final Answer letter immediately on the first line, then briefly explain your reasoning in 1-2 sentences.
-2. **If Multiple Choice**: Your response MUST begin with exactly:
-Final Answer: [Correct Option Letter]
-Then follow with a short explanation.
-3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
-4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
-5. **Format Consistency**: Avoid conversational filler. Explain the logic, then state the Final Answer.
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*[Letter].* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+Example correct format (if D is the answer):
+*D.* ocean basin.
+Ocean basins form at divergent boundaries where plates pull apart, creating a depression that fills with water.
 
 ### Question:
 {query_text}
@@ -185,7 +187,7 @@ Then follow with a short explanation.
 ### Context:
 {context}
 
-### Explanation and Answer:
+### Answer:
 '''
 
 DOC_PATH = Path(__file__).resolve().parents[2] / "documents"

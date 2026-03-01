@@ -86,33 +86,43 @@ def format_mmlu_question(test_case: dict) -> str:
 def extract_answer_letter(response: str) -> str:
     """
     Extracts the answer letter (A, B, C, or D) from the pipeline's response.
-    Tries multiple patterns: standalone letter, "Answer: X", "The answer is X", etc.
+    Priority order (highest first):
+      1. Bold format: *D.* or **D.** — the canonical output format
+      2. 'Final Answer: D' / 'The correct answer is D'
+      3. 'Answer: D' or 'choice D'
+      4. Standalone letter at the end
+      5. Standalone letter at the start (last resort)
     """
     if not response:
         return ""
-    
+
     response = response.strip()
-    
-    # Pattern 1: Explicit "Final Answer: X" or "The correct answer is X" anywhere
-    match = re.search(r'(?:final\s+answer|correct\s+answer\s+is|answer\s+is)[\s\*:-]*([A-D])\b', response, re.IGNORECASE)
-    if match:
-        return match.group(1).upper()
-        
-    # Pattern 2: "Answer: X" or "Choice: X" anywhere
-    match = re.search(r'(?:answer|choice)[\s\*:-]*([A-D])\b', response, re.IGNORECASE)
+
+    # Pattern 0: Bold/italic format *D.* or **D.** at the start of a line
+    match = re.search(r'(?:^|\n)\s*\*{1,2}([A-D])\.?\*{1,2}', response, re.IGNORECASE)
     if match:
         return match.group(1).upper()
 
-    # Pattern 3: Standalone letter at the VERY END of the response
+    # Pattern 1: Explicit "Final Answer: X"
+    match = re.search(r'(?:final\s+answer|correct\s+answer\s+is|answer\s+is)[\s\*:\-]*([A-D])\b', response, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
+
+    # Pattern 2: "Answer: X" or "Choice: X"
+    match = re.search(r'(?:answer|choice)[\s\*:\-]*([A-D])\b', response, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
+
+    # Pattern 3: Standalone letter at the VERY END
     match = re.search(r'(?:\*\*|\*|\s|^)([A-D])(?:\*\*|\*|\s|\.|\)|$)', response[-10:], re.IGNORECASE)
     if match:
         return match.group(1).upper()
-    
-    # Pattern 4: Standalone letter at the VERY START (fallback for old outputs)
+
+    # Pattern 4: Standalone letter at the VERY START
     match = re.match(r'^[\*\s]*([A-D])(?:[\.\)]|\b)', response, re.IGNORECASE)
     if match:
         return match.group(1).upper()
-    
+
     return ""
 
 
