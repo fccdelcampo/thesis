@@ -25755,3 +25755,296 @@ DEBUG: Removed 1 concept(s) with 0 surviving triples.
 DEBUG: KBPedia found 4 grounded concept contexts.
 DEBUG: KBPedia returned 4 items.
 DEBUG: Merged Result Count: 4
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 87 MMLU test cases (starting from index 13).
+
+================================================================================
+[MMLU #13] High entropy means that the partitions in classification are...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'High entropy means that the partitions in classification are
+
+A. pure
+B. not pure
+C. useful
+D. useless
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['biological subdivision', 'biological subclass', 'mixture', 'combination antineoplastic', 'classification', 'high level cloud', 'combination antiarrhythmic', 'high plasticity soil region', 'type of organism', 'antineoplastic']
+DEBUG: Buffered 8 raw triple(s) for 'biological subdivision'
+DEBUG: Buffered 8 raw triple(s) for 'biological subclass'
+DEBUG: Buffered 20 raw triple(s) for 'mixture'
+DEBUG: Buffered 9 raw triple(s) for 'combination antineoplastic'
+DEBUG: Buffered 7 raw triple(s) for 'classification'
+DEBUG: Buffered 14 raw triple(s) for 'high level cloud'
+DEBUG: Buffered 8 raw triple(s) for 'combination antiarrhythmic'
+DEBUG: Buffered 9 raw triple(s) for 'high plasticity soil region'
+DEBUG: Buffered 12 raw triple(s) for 'type of organism'
+DEBUG: Buffered 9 raw triple(s) for 'antineoplastic'
+DEBUG: End-filter LLM kept indices: [0, 4, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "classification": ["definition: Classification is a general process related to categorization, the process in which ideas and objects are recognized, differentiated, and understood."],\n  "high pla'...
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'biological subdivision'
+DEBUG: Batch LLM filter kept 1/7 triple(s) for 'classification'
+DEBUG: Batch LLM filter kept 1/9 triple(s) for 'high plasticity soil region'
+DEBUG: Batch LLM filter kept 1/12 triple(s) for 'type of organism'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'antineoplastic'
+DEBUG: Removed 1 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 4 grounded concept contexts.
+DEBUG: KBPedia returned 4 items.
+DEBUG: Merged Result Count: 4
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "This is a multiple choice question. The options must be preserved in the question field.",
+  "question": "High entropy means that the partitions in classification are A) pure B) not pure C) useful D) useless",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'This is a multiple choice question. The options must be preserved in the question field.', 'question': 'High entropy means that the partitions in classification are A) pure B) not pure C) useful D) useless', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: High entropy means that the partitions in classification are A) pure B) not pure C) useful D) useless
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='High entropy means that the partitions in classification are A) pure B) not pure' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'High entropy means that the partitions in classification are A) pure B) not pure C) useful D) useless'
+DEBUG: Extracted entities for KBPedia: ['pure', 'not pure', 'useful', 'useless', 'entropy', 'partitions', 'classification']
+DEBUG: KBPedia fulltext matched for 'pure': ['pure substance', 'pure silica fertilizer']
+DEBUG: KBPedia fulltext matched for 'not pure': ['pure substance', 'pure silica fertilizer']
+DEBUG: KBPedia fulltext matched for 'useful': ['energy source', 'mathematical typeface']
+DEBUG: KBPedia fulltext matched for 'useless': ['excreting', 'machine pistol']
+DEBUG: KBPedia fulltext matched for 'entropy': ['thermodynamic entropy', 'entropy and information']
+DEBUG: KBPedia fulltext matched for 'partitions': ['glass architecture', 'peer-to-peer']
+DEBUG: KBPedia fulltext matched for 'classification': ['classification', 'report classification US']
+DEBUG: KBPedia total matches: ['pure substance', 'pure silica fertilizer', 'pure substance', 'pure silica fertilizer', 'energy source', 'mathematical typeface', 'excreting', 'machine pistol', 'thermodynamic entropy', 'entropy and information', 'glass architecture', 'peer-to-peer', 'classification', 'report classification US']
+DEBUG: Buffered 3 raw triple(s) for 'pure substance'
+DEBUG: Buffered 6 raw triple(s) for 'pure silica fertilizer'
+DEBUG: Buffered 13 raw triple(s) for 'energy source'
+DEBUG: Buffered 11 raw triple(s) for 'mathematical typeface'
+DEBUG: Buffered 18 raw triple(s) for 'excreting'
+DEBUG: Buffered 11 raw triple(s) for 'machine pistol'
+DEBUG: Buffered 8 raw triple(s) for 'thermodynamic entropy'
+DEBUG: Buffered 8 raw triple(s) for 'entropy and information'
+DEBUG: Buffered 6 raw triple(s) for 'glass architecture'
+DEBUG: Buffered 3 raw triple(s) for 'peer-to-peer'
+DEBUG: Buffered 7 raw triple(s) for 'classification'
+DEBUG: Buffered 10 raw triple(s) for 'report classification US'
+DEBUG: End-filter LLM kept indices: [0, 2, 4, 6, 7, 9, 10, 11] from 12 candidates.
+DEBUG: End-filter kept 8/12 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "High entropy": [\n    "definition: Entropy, in thermodynamics, is a state function originally introduced to explain why part of a thermodynamic system\'s total energy is unavailable to do useful wo'...
+DEBUG: Batch LLM filter kept 3/3 triple(s) for 'pure substance'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'energy source'
+DEBUG: Batch LLM filter kept 18/18 triple(s) for 'excreting'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'thermodynamic entropy'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'entropy and information'
+DEBUG: KBPedia found 5 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+High entropy means that the partitions in classification are
+
+A. pure
+B. not pure
+C. useful
+D. useless
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. High entropy is a state of disorder or randomness.
+2. Thermodynamic entropy is a measure of the unavailable energy in a system.
+3. Unavailable energy is energy that cannot be used to do useful work.
+4. Useful work is work that achieves a desired outcome or goal.
+5. A system with high entropy has many possible states or configurations.
+6. A system with many possible states or configurations is less predictable.
+7. A less predictable system is more difficult to classify or partition.
+8. Classification or partitioning requires clear and distinct boundaries.
+9. High entropy means that the boundaries between classifications are not clear.
+10. Unclear boundaries imply that the classifications are not pure.
+11. Pure classifications have clear and distinct boundaries.
+12. High entropy is associated with disorder or randomness.
+13. Disorder or randomness implies a lack of useful organization.
+14. A lack of useful organization means that the classifications are not useful.
+15. If a system has high entropy, then its classifications are not pure.
+**Context from Prompt:**
+High entropy means that the partitions in classification are
+
+A. pure
+B. not pure
+C. useful
+D. useless
+
+Answer with the letter only (A, B, C, or D).
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, pure).
+choice(b, not_pure).
+choice(c, useful).
+choice(d, useless).
+
+high_entropy_implies_disorder.
+disorder_implies_lack_of_organization.
+lack_of_organization_implies_not_pure_classifications.
+
+answer(OptionLetter) :- choice(OptionLetter, Classification), high_entropy_implies_disorder, disorder_implies_lack_of_organization, lack_of_organization_implies_not_pure_classifications.
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, pure).
+choice(b, not_pure).
+choice(c, useful).
+choice(d, useless).
+
+high_entropy_implies_disorder.
+disorder_implies_lack_of_organization.
+lack_of_organization_implies_not_pure_classifications.
+
+answer(OptionLetter) :- choice(OptionLetter, Classification), high_entropy_implies_disorder, disorder_implies_lack_of_organization, lack_of_organization_implies_not_pure_classifications.
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and pure, and\n      high_entropy_implies_disorder holds, and\n      disorder_implies_lack_of_organization holds, and\n      lack_of_organization_implies_not_pure_classifications holds\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and pure, and
+      high_entropy_implies_disorder holds, and
+      disorder_implies_lack_of_organization holds, and
+      lack_of_organization_implies_not_pure_classifications holds
+
+
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 87 MMLU test cases (starting from index 13).
+
+================================================================================
+[MMLU #13] High entropy means that the partitions in classification are...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'High entropy means that the partitions in classification are
+
+A. pure
+B. not pure
+C. useful
+D. useless
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['biological subdivision', 'biological subclass', 'mixture', 'combination antineoplastic', 'classification', 'high level cloud', 'combination antiarrhythmic', 'high plasticity soil region', 'type of organism', 'antineoplastic']
+DEBUG: Buffered 8 raw triple(s) for 'biological subdivision'
+DEBUG: Buffered 8 raw triple(s) for 'biological subclass'
+DEBUG: Buffered 20 raw triple(s) for 'mixture'
+DEBUG: Buffered 9 raw triple(s) for 'combination antineoplastic'
+DEBUG: Buffered 7 raw triple(s) for 'classification'
+DEBUG: Buffered 14 raw triple(s) for 'high level cloud'
+DEBUG: Buffered 8 raw triple(s) for 'combination antiarrhythmic'
+DEBUG: Buffered 9 raw triple(s) for 'high plasticity soil region'
+DEBUG: Buffered 12 raw triple(s) for 'type of organism'
+DEBUG: Buffered 9 raw triple(s) for 'antineoplastic'
+DEBUG: End-filter LLM kept indices: [0, 4, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Request timed out.. Using all raw triples.
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'biological subdivision'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'classification'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'high plasticity soil region'
+DEBUG: Batch LLM filter kept 12/12 triple(s) for 'type of organism'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'antineoplastic'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Error in run_pipeline: Request timed out.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Request timed out.
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Request timed out.
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+LLM Response: {
+  "rationale": "High entropy in classification implies that the partitions are not well-defined or distinct.",
+  "question": "High entropy means that the partitions in classification are A. pure B. not pure C. useful D. useless",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'High entropy in classification implies that the partitions are not well-defined or distinct.', 'question': 'High entropy means that the partitions in classification are A. pure B. not pure C. useful D. useless', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: High entropy means that the partitions in classification are A. pure B. not pure C. useful D. useless
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='High entropy means that the partitions in classification are A. pure B. not pure' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'High entropy means that the partitions in classification are A. pure B. not pure C. useful D. useless'

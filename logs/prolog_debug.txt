@@ -4714,4 +4714,11 @@ Traceback (most recent call last):
   File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 708, in create_default_context
     context.load_verify_locations(cafile, capath, cadata)
 KeyboardInterrupt
-MMLU:   0%|                                                           | 0/90 [00:00<?, ?it/s]MMLU:   0%|                                                           | 0/90 [00:00<?, ?it/s]MMLU:   1%|5                                                  | 1/90 [00:27<41:24, 27.92s/it]MMLU:   2%|#1                                                 | 2/90 [01:00<44:46, 30.53s/it]MMLU:   3%|#5                                             | 3/90 [16:24<10:35:48, 438.49s/it]
+MMLU:   0%|                                                           | 0/90 [00:00<?, ?it/s]MMLU:   0%|                                                           | 0/90 [00:00<?, ?it/s]MMLU:   1%|5                                                  | 1/90 [00:27<41:24, 27.92s/it]MMLU:   2%|#1                                                 | 2/90 [01:00<44:46, 30.53s/it]MMLU:   3%|#5                                             | 3/90 [16:24<10:35:48, 438.49s/it]MMLU:   0%|                                                           | 0/87 [00:00<?, ?it/s]MMLU:   0%|                                                           | 0/87 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\encoder.py", line 63, in extract_query_and_context
+    raise ValueError("Failed to get a response from the LLM.")
+ValueError: Failed to get a response from the LLM.
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\encoder.py", line 63, in extract_query_and_context
+    raise ValueError("Failed to get a response from the LLM.")
+ValueError: Failed to get a response from the LLM.

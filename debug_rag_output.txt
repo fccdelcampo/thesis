@@ -44987,3 +44987,228 @@ This is because the concept of mutation is applied to the target program, simila
 14. The primary goal of mutation-based fuzzing is to induce faults in a program by making small changes to the input.
 15. Faults induced by mutation-based fuzzing can provide valuable information about the robustness and reliability of a program.
 ==================================================
+==================================================
+ QUERY: High entropy means that the partitions in classification are
+
+A. pure
+B. not pure
+C. useful
+D. useless
+
+Answer with the letter only (A, B, C, or D).
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "biological subdivision",
+  "uri": "http://kbpedia.org/kko/rc/BiologicalSubdivision",
+  "score": 1.0,
+  "triples": [
+    "definition: A more specific partition than Biological Division; more general than Biological Class."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: biological subdivision. Relevant Logical Facts:   - definition: A more specific partition than Biological Division; more general than Biological Class.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "classification",
+  "uri": "http://kbpedia.org/kko/rc/Classification",
+  "score": 1.0,
+  "triples": [
+    "definition: Classification is a general process related to categorization, the process in which ideas and objects are recognized, differentiated, and understood."
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: classification. Relevant Logical Facts:   - definition: Classification is a general process related to categorization, the process in which ideas and objects are recognized, differentiated, and understood.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "high plasticity soil region",
+  "uri": "http://kbpedia.org/kko/rc/HighPlasticitySoilRegion",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of FineGrainedSoilRegion. HighPlasticitySoilRegion is the collection of GeographicalRegions where the soil has high plasticity, meaning it consists of silt or clay with a liquid limit of more than 50%."
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: high plasticity soil region. Relevant Logical Facts:   - definition: A specialization of FineGrainedSoilRegion. HighPlasticitySoilRegion is the collection of GeographicalRegions where the soil has high plasticity, meaning it consists of silt or clay with a liquid limit of more than 50%.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "type of organism",
+  "uri": "http://kbpedia.org/kko/rc/OrganismClassificationType",
+  "score": 1.0,
+  "triples": [
+    "definition: A collection of collections. Each instance of OrganismClassificationType is a specialization of Organism_Whole (q.v.), where membership in that sub-collection is determined by satisfaction of some set of classificatory criteria accepted by some scientific community."
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: type of organism. Relevant Logical Facts:   - definition: A collection of collections. Each instance of OrganismClassificationType is a specialization of Organism_Whole (q.v.), where membership in that sub-collection is determined by satisfaction of some set of classificatory criteria accepted by some scientific community.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+*B.* High entropy means that the partitions in classification are not pure because it implies a high degree of variation or randomness within the categories.
+==================================================
+==================================================
+ QUERY: High entropy means that the partitions in classification are A) pure B) not pure C) useful D) useless
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "pure substance",
+  "uri": "http://kbpedia.org/kko/rc/PureSubstance",
+  "score": 1.0,
+  "triples": [
+    "definition: A collection of tangible stuffs. Each instance of PureSubstance is a chemically pure portion of stuff belonging to some particular ChemicalSubstanceType (e.g. Water or Cellulose). `Chemically pure' applies to a piece of stuff which has no sub-portions that fail to conform to the chemical composition of its (single) ChemicalSubstanceType. In typical contexts, most common portions of a ChemicalSubst",
+    "has subclass: anhydrous ammonia",
+    "has subclass: hydrocyanic acid"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: pure substance. Relevant Logical Facts:  - definition: A collection of tangible stuffs. Each instance of PureSubstance is a chemically pure portion of stuff belonging to some particular ChemicalSubstanceType (e.g. Water or Cellulose). `Chemically pure' applies to a piece of stuff which has no sub-portions that fail to conform to the chemical composition of its (single) ChemicalSubstanceType. In typical contexts, most common portions of a ChemicalSubst  - has subclass: anhydrous ammonia  - has subclass: hydrocyanic acid
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "energy source",
+  "uri": "http://kbpedia.org/kko/rc/EnergySource",
+  "score": 1.0,
+  "triples": [
+    "definition: A source of useful energy.",
+    "subclass of: energy",
+    "has subclass: alternative energy",
+    "has subclass: clean energy",
+    "has subclass: renewable energy",
+    "has subclass: nuclear energy",
+    "has subclass: sound energy",
+    "has subclass: thermal energy",
+    "sibling concept: alternative energy",
+    "sibling concept: electricity",
+    "sibling concept: energetic material",
+    "sibling concept: energetics",
+    "sibling concept: energy phenomena"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: energy source. Relevant Logical Facts:  - definition: A source of useful energy.  - subclass of: energy  - has subclass: alternative energy  - has subclass: clean energy  - has subclass: renewable energy  - has subclass: nuclear energy  - has subclass: sound energy  - has subclass: thermal energy  - sibling concept: alternative energy  - sibling concept: electricity  - sibling concept: energetic material  - sibling concept: energetics  - sibling concept: energy phenomena
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "excreting",
+  "uri": "http://kbpedia.org/kko/rc/Excreting",
+  "score": 1.0,
+  "triples": [
+    "definition: The process in which a living structure excretes useless substances.",
+    "subclass of: bodily function event",
+    "subclass of: emission of an object",
+    "subclass of: biological transport",
+    "subclass of: action performed by animals",
+    "subclass of: physiological process",
+    "subclass of: action with only one performer",
+    "subclass of: emitting",
+    "subclass of: change of location",
+    "has subclass: crap",
+    "has subclass: exuding",
+    "has subclass: urinary incontinence",
+    "has subclass: urinating",
+    "sibling concept: involuntary bodily function",
+    "sibling concept: breaking down",
+    "sibling concept: crying",
+    "sibling concept: exhalation",
+    "sibling concept: absorbing through the eye"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: excreting. Relevant Logical Facts:  - definition: The process in which a living structure excretes useless substances.  - subclass of: bodily function event  - subclass of: emission of an object  - subclass of: biological transport  - subclass of: action performed by animals  - subclass of: physiological process  - subclass of: action with only one performer  - subclass of: emitting  - subclass of: change of location  - has subclass: crap  - has subclass: exuding  - has subclass: urinary incontinence  - has subclass: urinating  - sibling concept: involuntary bodily function  - sibling concept: breaking down  - sibling concept: crying  - sibling concept: exhalation  - sibling concept: absorbing through the eye
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "thermodynamic entropy",
+  "uri": "http://kbpedia.org/kko/rc/ThermodynamicEntropy",
+  "score": 1.0,
+  "triples": [
+    "definition: Entropy, in thermodynamics, is a state function originally introduced to explain why part of a thermodynamic system's total energy is unavailable to do useful work.",
+    "subclass of: statistical mechanics",
+    "subclass of: physics",
+    "sibling concept: critical phenomena",
+    "sibling concept: equations of state",
+    "sibling concept: lattice mode",
+    "sibling concept: Monte Carlo method",
+    "sibling concept: partition function"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: thermodynamic entropy. Relevant Logical Facts:  - definition: Entropy, in thermodynamics, is a state function originally introduced to explain why part of a thermodynamic system's total energy is unavailable to do useful work.  - subclass of: statistical mechanics  - subclass of: physics  - sibling concept: critical phenomena  - sibling concept: equations of state  - sibling concept: lattice mode  - sibling concept: Monte Carlo method  - sibling concept: partition function
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "entropy and information",
+  "uri": "http://kbpedia.org/kko/rc/EntropyAndInformation",
+  "score": 1.0,
+  "triples": [
+    "definition: Information entropy is the average rate at which information is produced by a stochastic source of data.",
+    "subclass of: information theory",
+    "subclass of: scientific discipline",
+    "sibling concept: algorithmic information theory",
+    "sibling concept: coding theory",
+    "sibling concept: data compression",
+    "sibling concept: data differencing",
+    "sibling concept: detection theory"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: entropy and information. Relevant Logical Facts:  - definition: Information entropy is the average rate at which information is produced by a stochastic source of data.  - subclass of: information theory  - subclass of: scientific discipline  - sibling concept: algorithmic information theory  - sibling concept: coding theory  - sibling concept: data compression  - sibling concept: data differencing  - sibling concept: detection theory
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. High entropy is a state of disorder or randomness.
+2. Thermodynamic entropy is a measure of the unavailable energy in a system.
+3. Unavailable energy is energy that cannot be used to do useful work.
+4. Useful work is work that achieves a desired outcome or goal.
+5. A system with high entropy has many possible states or configurations.
+6. A system with many possible states or configurations is less predictable.
+7. A less predictable system is more difficult to classify or partition.
+8. Classification or partitioning requires clear and distinct boundaries.
+9. High entropy means that the boundaries between classifications are not clear.
+10. Unclear boundaries imply that the classifications are not pure.
+11. Pure classifications have clear and distinct boundaries.
+12. High entropy is associated with disorder or randomness.
+13. Disorder or randomness implies a lack of useful organization.
+14. A lack of useful organization means that the classifications are not useful.
+15. If a system has high entropy, then its classifications are not pure.
+==================================================

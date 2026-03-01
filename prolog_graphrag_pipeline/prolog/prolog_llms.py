@@ -14,7 +14,7 @@ from llm_config import MODEL_NAME, USE_TOGETHER_API, get_openai_client
 # Prolog code generation and NL tasks both use the configured model
 PROLOG_MODEL = MODEL_NAME
 NL_MODEL = MODEL_NAME
-LLM_TIMEOUT = 600  # seconds per LLM call (10 minutes)
+LLM_TIMEOUT = 60  # seconds per LLM call (1 minute)
 
 client = get_openai_client()
 

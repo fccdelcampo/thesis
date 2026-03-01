@@ -11,6 +11,7 @@ from .config import PROMPT_TEMPLATE, NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD, 
 # However, this will fail when you run this file directly. For debugging purposes, you can run 'python -m graphrag-pipeline.graphrag.graphrag_driver' in the terminal.
 import asyncio
 import time
+import threading
 import sys
 
 # Persistent event loop to avoid "RuntimeError: Event loop is closed" on Windows.
@@ -167,9 +168,10 @@ class DebugOllamaLLM(OllamaLLM):
         return input_data
 
     def _openai_invoke(self, input, message_history=None, system_instruction=None):
-        """Route through the openai client when USE_TOGETHER_API=True."""
+        """Route through the openai client when USE_TOGETHER_API=True with retries and hard timeouts."""
         from neo4j_graphrag.llm.types import LLMResponse
         _client = get_openai_client()
+        
         if isinstance(input, list):
             messages = input
         else:
@@ -179,14 +181,55 @@ class DebugOllamaLLM(OllamaLLM):
             if message_history:
                 messages.extend([{"role": m.get("role", "user"), "content": m.get("content", "")} for m in message_history])
             messages.append({"role": "user", "content": str(input)})
-        response = _client.chat.completions.create(
-            model=ENCODER_MODEL,
-            messages=messages,
-            temperature=0.0,
-            timeout=300.0,
-        )
-        content = response.choices[0].message.content or ""
-        return LLMResponse(content=self._clean_response_text(content))
+
+        # Log prompt if it's an answer generation (not just a tiny fragment)
+        log_input = str(messages[-1]['content']) if messages else ""
+        if len(log_input) > 100:
+             self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Together AI) ---\n{log_input}\n----------------------------------")
+
+        max_retries = 3
+        timeout_sec = 120.0
+        
+        for attempt in range(max_retries):
+            result_holder = [None]
+            error_holder = [None]
+
+            def _target():
+                try:
+                    # Provide an internal timeout to the client as well
+                    resp = _client.chat.completions.create(
+                        model=ENCODER_MODEL,
+                        messages=messages,
+                        temperature=0.0,
+                        timeout=timeout_sec
+                    )
+                    result_holder[0] = resp
+                except Exception as e:
+                    error_holder[0] = e
+
+            thread = threading.Thread(target=_target, daemon=True)
+            thread.start()
+            thread.join(timeout=timeout_sec + 5) # Slight buffer for thread overhead
+
+            if thread.is_alive():
+                print(f"  > [LLM TIMEOUT] Together AI attempt {attempt+1}/{max_retries} stalled. Retrying...", flush=True)
+                continue # Next attempt
+            
+            if error_holder[0]:
+                print(f"  > [LLM ERROR] Together AI attempt {attempt+1}/{max_retries} failed: {error_holder[0]}", flush=True)
+                if attempt < max_retries - 1:
+                    time.sleep(2)
+                    continue
+                else:
+                    return LLMResponse(content="Error: Together AI failed after multiple retries.")
+
+            response = result_holder[0]
+            if response:
+                content = response.choices[0].message.content or ""
+                self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Together AI) ===\n{content}\n===================================")
+                return LLMResponse(content=self._clean_response_text(content))
+        
+        return LLMResponse(content="Error: Together AI call timed out.")
 
     def invoke(self, input, message_history=None, system_instruction=None, **kwargs):
         if USE_TOGETHER_API:
