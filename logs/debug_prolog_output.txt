@@ -30850,3 +30850,530 @@ Extension 6 | General Error: LLM call timed out after 60s
 Extension 7 | General Error: LLM call timed out after 60s
 [LLM TIMEOUT] LLM call exceeded 60s. Resetting model...
 Extension 8 | General Error: LLM call timed out after 60s
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 74 MMLU test cases (starting from index 26).
+
+================================================================================
+[MMLU #26] The compressions and rarefactions in sound normally travel...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'The compressions and rarefactions in sound normally travel
+
+A. in the same direction
+B. in opposite directions
+C. at right angles to each other
+D. None of these
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['sounds by type', 'sound', 'fricative', 'consonant', 'new wave', 'audible sound', 'voiced consonant', 'unidentified sound', 'alphabetic writing', 'translocation']
+DEBUG: Buffered 14 raw triple(s) for 'sounds by type'
+DEBUG: Buffered 22 raw triple(s) for 'sound'
+DEBUG: Buffered 7 raw triple(s) for 'fricative'
+DEBUG: Buffered 9 raw triple(s) for 'consonant'
+DEBUG: Buffered 10 raw triple(s) for 'new wave'
+DEBUG: Buffered 18 raw triple(s) for 'audible sound'
+DEBUG: Buffered 3 raw triple(s) for 'voiced consonant'
+DEBUG: Buffered 9 raw triple(s) for 'unidentified sound'
+DEBUG: Buffered 9 raw triple(s) for 'alphabetic writing'
+DEBUG: Buffered 17 raw triple(s) for 'translocation'
+DEBUG: End-filter LLM kept indices: [0, 1, 3, 5, 6, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 7/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "sounds by type": [\n    "subclass of: sound",\n    "subclass of: media",\n    "subclass of: wave propagation",\n    "has subclass: audible sound"\n  ],\n  "sound": [\n    "definition: A specialization o'...
+DEBUG: Batch LLM filter kept 4/14 triple(s) for 'sounds by type'
+DEBUG: Batch LLM filter kept 4/22 triple(s) for 'sound'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'consonant'
+DEBUG: Batch LLM filter kept 2/18 triple(s) for 'audible sound'
+DEBUG: Batch LLM filter kept 3/3 triple(s) for 'voiced consonant'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "This is a multiple choice question. The options must be preserved in the question field.",
+  "question": "The compressions and rarefactions in sound normally travel A. in the same direction B. in opposite directions C. at right angles to each other D. None of these",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'This is a multiple choice question. The options must be preserved in the question field.', 'question': 'The compressions and rarefactions in sound normally travel A. in the same direction B. in opposite directions C. at right angles to each other D. None of these', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: The compressions and rarefactions in sound normally travel A. in the same direction B. in opposite directions C. at right angles to each other D. None of these
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='The compressions and rarefactions in sound normally travel A. in the same direct' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'The compressions and rarefactions in sound normally travel A. in the same direction B. in opposite directions C. at right angles to each other D. None of these'
+DEBUG: Extracted entities for KBPedia: ['in the same direction', 'in opposite directions', 'at right angles to each other', 'none of these', 'compressions', 'rarefactions', 'sound', 'direction']
+DEBUG: KBPedia fulltext matched for 'in the same direction': ['direction', 'distance travelled in direction']
+DEBUG: KBPedia fulltext matched for 'in opposite directions': ['Janus', 'chromosomes migrating toward opposite poles']
+DEBUG: KBPedia fulltext matched for 'at right angles to each other': ['cubical surface', 'city block']
+DEBUG: KBPedia fulltext matched for 'none of these': ['isotope of thorium', 'isotope of beryllium']
+DEBUG: KBPedia has no fulltext matches for 'compressions'.
+DEBUG: KBPedia has no fulltext matches for 'rarefactions'.
+DEBUG: KBPedia fulltext matched for 'sound': ['sound', 'sound card']
+DEBUG: KBPedia fulltext matched for 'direction': ['direction', 'terrestrial direction']
+DEBUG: KBPedia total matches: ['direction', 'distance travelled in direction', 'Janus', 'chromosomes migrating toward opposite poles', 'cubical surface', 'city block', 'isotope of thorium', 'isotope of beryllium', 'sound', 'sound card', 'direction', 'terrestrial direction']
+DEBUG: Buffered 6 raw triple(s) for 'direction'
+DEBUG: Buffered 11 raw triple(s) for 'distance travelled in direction'
+DEBUG: Buffered 8 raw triple(s) for 'Janus'
+DEBUG: Buffered 12 raw triple(s) for 'chromosomes migrating toward opposite poles'
+DEBUG: Buffered 9 raw triple(s) for 'cubical surface'
+DEBUG: Buffered 14 raw triple(s) for 'city block'
+DEBUG: Buffered 7 raw triple(s) for 'isotope of thorium'
+DEBUG: Buffered 5 raw triple(s) for 'isotope of beryllium'
+DEBUG: Buffered 22 raw triple(s) for 'sound'
+DEBUG: Buffered 6 raw triple(s) for 'sound card'
+DEBUG: Buffered 12 raw triple(s) for 'terrestrial direction'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 8, 10] from 11 candidates.
+DEBUG: End-filter kept 8/11 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "direction": ["definition: A specialization of UnitVectorInterval (q.v.). Each instance of Direction is a vector representing a direction, typically between two objects or locations."],\n  "distanc'...
+DEBUG: Batch LLM filter kept 1/6 triple(s) for 'direction'
+DEBUG: Batch LLM filter kept 1/11 triple(s) for 'distance travelled in direction'
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'Janus'
+DEBUG: Batch LLM filter kept 1/12 triple(s) for 'chromosomes migrating toward opposite poles'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'cubical surface'
+DEBUG: Removed 1 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 4 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+The compressions and rarefactions in sound normally travel
+
+A. in the same direction
+B. in opposite directions
+C. at right angles to each other
+D. None of these
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Compressions and rarefactions in sound are pressure waves that propagate through a medium.
+2. Pressure waves in a medium travel in the direction of the wave's propagation.
+3. The direction of a wave's propagation is the same as the direction of the wave's energy transfer.
+4. In a sound wave, energy is transferred from one point to another through the movement of particles.
+5. The movement of particles in a sound wave creates compressions and rarefactions.
+6. Compressions and rarefactions in a sound wave travel at the speed of sound in the medium.
+7. The speed of sound in a medium is constant in a given direction.
+8. Since the speed of sound is constant in a given direction, the compressions and rarefactions must travel in the same direction as the wave's propagation.
+9. The wave's propagation direction is determined by the initial disturbance that creates the wave.
+10. The initial disturbance in a sound wave is typically a vibration or a movement of a particle.
+11. Vibration or movement of a particle creates a disturbance that travels in a specific direction.
+12. The direction of the disturbance is the same as the direction of the wave's propagation.
+13. Therefore, the compressions and rarefactions in a sound wave travel in the same direction as the wave's propagation.
+14. The concept of Janus, with two faces facing opposite directions, is irrelevant to the propagation of sound waves.
+15. Chromosomes migrating toward opposite poles during cell division is also unrelated to the propagation of sound waves.
+**Context from Prompt:**
+The compressions and rarefactions in sound normally travel
+
+A. in the same direction
+B. in opposite directions
+C. at right angles to each other
+D. None of these
+
+Answer with the letter only (A, B, C, or D).
+Generating Prolog...
+Error during LLM interaction: name 'time' is not defined
+Iteration 0 | Validation Error: Iteration 0 | LLM returned None.
+Error during LLM interaction: name 'time' is not defined
+Iteration 1 | Validation Error: Iteration 1 | LLM returned None.
+Error during LLM interaction: name 'time' is not defined
+Iteration 2 | Validation Error: Iteration 2 | LLM returned None.
+Error during LLM interaction: name 'time' is not defined
+Iteration 3 | Validation Error: Iteration 3 | LLM returned None.
+Error during LLM interaction: name 'time' is not defined
+Iteration 4 | Validation Error: Iteration 4 | LLM returned None.
+[Prolog retry] Normal attempts exhausted. Asking LLM if error is close to fixable...
+Error during LLM interaction: name 'time' is not defined
+[Prolog retry] LLM says NO (or check failed) — skipping extension.
+[Prolog FAILED] Failed to generate valid Prolog code after multiple attempts. — falling back to unverified GraphRAG answer.
+
+**FINAL LLM OUTPUT:
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 74 MMLU test cases (starting from index 26).
+
+================================================================================
+[MMLU #26] The compressions and rarefactions in sound normally travel...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'The compressions and rarefactions in sound normally travel
+
+A. in the same direction
+B. in opposite directions
+C. at right angles to each other
+D. None of these
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['sounds by type', 'sound', 'fricative', 'consonant', 'new wave', 'audible sound', 'voiced consonant', 'unidentified sound', 'alphabetic writing', 'translocation']
+DEBUG: Buffered 14 raw triple(s) for 'sounds by type'
+DEBUG: Buffered 22 raw triple(s) for 'sound'
+DEBUG: Buffered 7 raw triple(s) for 'fricative'
+DEBUG: Buffered 9 raw triple(s) for 'consonant'
+DEBUG: Buffered 10 raw triple(s) for 'new wave'
+DEBUG: Buffered 18 raw triple(s) for 'audible sound'
+DEBUG: Buffered 3 raw triple(s) for 'voiced consonant'
+DEBUG: Buffered 9 raw triple(s) for 'unidentified sound'
+DEBUG: Buffered 9 raw triple(s) for 'alphabetic writing'
+DEBUG: Buffered 17 raw triple(s) for 'translocation'
+DEBUG: End-filter LLM kept indices: [0, 1, 3, 5, 6, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 7/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "sounds by type": [\n    "subclass of: sound",\n    "subclass of: media",\n    "subclass of: wave propagation",\n    "has subclass: audible sound"\n  ],\n  "sound": [\n    "definition: A specialization o'...
+DEBUG: Batch LLM filter kept 4/14 triple(s) for 'sounds by type'
+DEBUG: Batch LLM filter kept 4/22 triple(s) for 'sound'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'consonant'
+DEBUG: Batch LLM filter kept 2/18 triple(s) for 'audible sound'
+DEBUG: Batch LLM filter kept 3/3 triple(s) for 'voiced consonant'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > [LLM ERROR] Together AI attempt 1/3 failed: Request timed out.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "This is a multiple choice question. The options must be preserved in the question field.",
+  "question": "The compressions and rarefactions in sound normally travel A. in the same direction B. in opposite directions C. at right angles to each other D. None of these",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'This is a multiple choice question. The options must be preserved in the question field.', 'question': 'The compressions and rarefactions in sound normally travel A. in the same direction B. in opposite directions C. at right angles to each other D. None of these', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: The compressions and rarefactions in sound normally travel A. in the same direction B. in opposite directions C. at right angles to each other D. None of these
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='The compressions and rarefactions in sound normally travel A. in the same direct' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'The compressions and rarefactions in sound normally travel A. in the same direction B. in opposite directions C. at right angles to each other D. None of these'
+DEBUG: Extracted entities for KBPedia: ['in the same direction', 'in opposite directions', 'at right angles to each other', 'none of these', 'compressions', 'rarefactions', 'sound', 'direction']
+DEBUG: KBPedia fulltext matched for 'in the same direction': ['direction', 'distance travelled in direction']
+DEBUG: KBPedia fulltext matched for 'in opposite directions': ['Janus', 'chromosomes migrating toward opposite poles']
+DEBUG: KBPedia fulltext matched for 'at right angles to each other': ['cubical surface', 'city block']
+DEBUG: KBPedia fulltext matched for 'none of these': ['isotope of thorium', 'isotope of beryllium']
+DEBUG: KBPedia has no fulltext matches for 'compressions'.
+DEBUG: KBPedia has no fulltext matches for 'rarefactions'.
+DEBUG: KBPedia fulltext matched for 'sound': ['sound', 'sound card']
+DEBUG: KBPedia fulltext matched for 'direction': ['direction', 'terrestrial direction']
+DEBUG: KBPedia total matches: ['direction', 'distance travelled in direction', 'Janus', 'chromosomes migrating toward opposite poles', 'cubical surface', 'city block', 'isotope of thorium', 'isotope of beryllium', 'sound', 'sound card', 'direction', 'terrestrial direction']
+DEBUG: Buffered 6 raw triple(s) for 'direction'
+DEBUG: Buffered 11 raw triple(s) for 'distance travelled in direction'
+DEBUG: Buffered 8 raw triple(s) for 'Janus'
+DEBUG: Buffered 12 raw triple(s) for 'chromosomes migrating toward opposite poles'
+DEBUG: Buffered 9 raw triple(s) for 'cubical surface'
+DEBUG: Buffered 14 raw triple(s) for 'city block'
+DEBUG: Buffered 7 raw triple(s) for 'isotope of thorium'
+DEBUG: Buffered 5 raw triple(s) for 'isotope of beryllium'
+DEBUG: Buffered 22 raw triple(s) for 'sound'
+DEBUG: Buffered 6 raw triple(s) for 'sound card'
+DEBUG: Buffered 12 raw triple(s) for 'terrestrial direction'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 8, 10] from 11 candidates.
+DEBUG: End-filter kept 8/11 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "direction": ["definition: A specialization of UnitVectorInterval (q.v.). Each instance of Direction is a vector representing a direction, typically between two objects or locations."],\n  "distanc'...
+DEBUG: Batch LLM filter kept 1/6 triple(s) for 'direction'
+DEBUG: Batch LLM filter kept 1/11 triple(s) for 'distance travelled in direction'
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'Janus'
+DEBUG: Batch LLM filter kept 1/12 triple(s) for 'chromosomes migrating toward opposite poles'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'cubical surface'
+DEBUG: Removed 1 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 4 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+The compressions and rarefactions in sound normally travel
+
+A. in the same direction
+B. in opposite directions
+C. at right angles to each other
+D. None of these
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Compressions and rarefactions in sound are pressure waves that propagate through a medium.
+2. Pressure waves in a medium travel in the direction of the wave's propagation.
+3. The direction of wave propagation is the same as the direction of the wave's energy transfer.
+4. In a sound wave, energy is transferred from one point to another through the medium.
+5. The transfer of energy in a sound wave is accompanied by the movement of particles in the medium.
+6. Particles in the medium move back and forth, creating regions of compression and rarefaction.
+7. Compressions and rarefactions in a sound wave are the result of particle movement in the medium.
+8. The movement of particles in the medium is in the same direction as the wave's propagation.
+9. The direction of particle movement in a sound wave is the same as the direction of the wave's energy transfer.
+10. In a sound wave, the direction of energy transfer and particle movement is the same.
+11. The compressions and rarefactions in a sound wave travel in the same direction as the wave's energy transfer.
+12. The direction of energy transfer in a sound wave is the direction of the wave's propagation.
+13. The compressions and rarefactions in a sound wave travel in the same direction as the wave's propagation.
+14. The propagation of a sound wave is a one-way process, with energy transferred from one point to another.
+15. In a one-way process, the energy transfer and particle movement occur in the same direction.
+**Context from Prompt:**
+The compressions and rarefactions in sound normally travel
+
+A. in the same direction
+B. in opposite directions
+C. at right angles to each other
+D. None of these
+
+Answer with the letter only (A, B, C, or D).
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, same_direction).
+choice(b, opposite_directions).
+choice(c, right_angles).
+choice(d, none_of_these).
+compressions_and_rarefactions_travel_in_same_direction :-
+1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15.
+answer(L) :- choice(L, T), compressions_and_rarefactions_travel_in_same_direction.
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog Error: answer/1: Unknown procedure: compressions_and_rarefactions_travel_in_same_direction/0
+Iteration 1 | Extracted Database:
+choice(a, same_direction).
+choice(b, opposite_directions).
+choice(c, right_angles).
+choice(d, none_of_these).
+has_prop(1).
+has_prop(2).
+has_prop(3).
+has_prop(4).
+has_prop(5).
+has_prop(6).
+has_prop(7).
+has_prop(8).
+has_prop(9).
+has_prop(10).
+has_prop(11).
+has_prop(12).
+has_prop(13).
+has_prop(14).
+has_prop(15).
+compressions_and_rarefactions_travel_in_same_direction :-
+has_prop(1),
+has_prop(2),
+has_prop(3),
+has_prop(4),
+has_prop(5),
+has_prop(6),
+has_prop(7),
+has_prop(8),
+has_prop(9),
+has_prop(10),
+has_prop(11),
+has_prop(12),
+has_prop(13),
+has_prop(14),
+has_prop(15).
+answer(L) :- choice(L, T), compressions_and_rarefactions_travel_in_same_direction.
+
+Iteration 1 | Extracted Query:
+answer(a).
+
+Iteration 1 | Prolog code generation success
+**Extracted database:**
+choice(a, same_direction).
+choice(b, opposite_directions).
+choice(c, right_angles).
+choice(d, none_of_these).
+has_prop(1).
+has_prop(2).
+has_prop(3).
+has_prop(4).
+has_prop(5).
+has_prop(6).
+has_prop(7).
+has_prop(8).
+has_prop(9).
+has_prop(10).
+has_prop(11).
+has_prop(12).
+has_prop(13).
+has_prop(14).
+has_prop(15).
+compressions_and_rarefactions_travel_in_same_direction :-
+has_prop(1),
+has_prop(2),
+has_prop(3),
+has_prop(4),
+has_prop(5),
+has_prop(6),
+has_prop(7),
+has_prop(8),
+has_prop(9),
+has_prop(10),
+has_prop(11),
+has_prop(12),
+has_prop(13),
+has_prop(14),
+has_prop(15).
+answer(L) :- choice(L, T), compressions_and_rarefactions_travel_in_same_direction.
+**Extracted query:**
+answer(a).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(a)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and same_direction, and\n      compressions_and_rarefactions_travel_in_same_direction holds, because\n         has_prop holds for 1, and\n         has_prop holds for 2, and\n         has_prop holds for 3, and\n         has_prop holds for 4, and\n         has_prop holds for 5, and\n         has_prop holds for 6, and\n         has_prop holds for 7, and\n         has_prop holds for 8, and\n         has_prop holds for 9, and\n         has_prop holds for 10, and\n         has_prop holds for 11, and\n         has_prop holds for 12, and\n         has_prop holds for 13, and\n         has_prop holds for 14, and\n         has_prop holds for 15\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and same_direction, and
+      compressions_and_rarefactions_travel_in_same_direction holds, because
+         has_prop holds for 1, and
+         has_prop holds for 2, and
+         has_prop holds for 3, and
+         has_prop holds for 4, and
+         has_prop holds for 5, and
+         has_prop holds for 6, and
+         has_prop holds for 7, and
+         has_prop holds for 8, and
+         has_prop holds for 9, and
+         has_prop holds for 10, and
+         has_prop holds for 11, and
+         has_prop holds for 12, and
+         has_prop holds for 13, and
+         has_prop holds for 14, and
+         has_prop holds for 15
+
+
+**Explainer Output:** 
+**Conclusion:** The compressions and rarefactions in sound normally travel in the same direction.
+
+**Logical Path:** The solver reached this conclusion by verifying a series of logical connections that ultimately led to the conclusion that compressions and rarefactions in sound travel in the same direction as the wave's propagation.
+
+1. **Verification of the Chain:** The system verified a long chain of logical connections, starting with the fact that compressions and rarefactions in sound are pressure waves that propagate through a medium.
+2. **Propagation Direction:** The solver then verified that pressure waves in a medium travel in the direction of the wave's propagation.
+3. **Energy Transfer:** The logic also established that the direction of wave propagation is the same as the direction of the wave's energy transfer.
+4. **Particle Movement:** The solver further verified that the transfer of energy in a sound wave is accompanied by the movement of particles in the medium.
+5. **Same Direction:** The system then concluded that the movement of particles in the medium is in the same direction as the wave's propagation.
+6. **Energy Transfer and Particle Movement:** The solver established that the direction of energy transfer and particle movement in a sound wave is the same.
+7. **Conclusion:** By verifying all these logical connections, the system concluded that compressions and rarefactions in sound travel in the same direction as the wave's propagation.
+
+**FINAL LLM OUTPUT:
+*B.* The compressions and rarefactions in sound normally travel in the same direction as the wave's propagation.
+
+This is because the energy transfer and particle movement in a sound wave occur in the same direction. The pressure waves propagate through a medium, transferring energy from one point to another, and the movement of particles in the medium is in the same direction as the wave's propagation. This one-way process ensures that the compressions and rarefactions in sound travel in the same direction as the wave's energy transfer.
+====The pipeline executed in 5.9763 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [A]   | CORRECT |  136.6s
+Prolog          | Predicted: [B]   | WRONG   |   14.2s
+Tuned LLM       | Predicted: [A]   | CORRECT |    0.8s
+================================================================================
+
+
+================================================================================
+[MMLU #27] The model obtained by applying linear regression on the identified subset of features may differ from the model obtained...
+Correct Answer: [C]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'The model obtained by applying linear regression on the identified subset of features may differ from the model obtained at the end of the process of identifying the subset during
+
+A. Best-subset selection
+B. Forward stepwise selection
+C. Forward stage wise selection
+D. All of the above
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['regression variable selection', 'selection-generic', 'dimension reduction', 'sexual selection', 'selective barrier transport', 'least squares', 'purchase decision', 'regression analysis', 'step in a computer program', 'datasets in machine learning']
+DEBUG: Buffered 11 raw triple(s) for 'regression variable selection'
+DEBUG: Buffered 11 raw triple(s) for 'selection-generic'
+DEBUG: Buffered 11 raw triple(s) for 'dimension reduction'
+DEBUG: Buffered 12 raw triple(s) for 'sexual selection'
+DEBUG: Buffered 8 raw triple(s) for 'selective barrier transport'
+DEBUG: Buffered 11 raw triple(s) for 'least squares'
+DEBUG: Buffered 16 raw triple(s) for 'purchase decision'
+DEBUG: Buffered 23 raw triple(s) for 'regression analysis'
+DEBUG: Buffered 11 raw triple(s) for 'step in a computer program'
+DEBUG: Buffered 10 raw triple(s) for 'datasets in machine learning'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "regression variable selection": [\n    "definition: The selection of a variable upon which to conduct regression analysis.",\n    "subclass of: regression analysis"\n  ],\n  "selection-generic": [],\n'...
+DEBUG: Batch LLM filter kept 2/11 triple(s) for 'regression variable selection'
+DEBUG: Batch LLM filter kept 0/11 triple(s) for 'selection-generic'
+DEBUG: Batch LLM filter kept 3/11 triple(s) for 'dimension reduction'
+DEBUG: Batch LLM filter kept 0/12 triple(s) for 'sexual selection'
+DEBUG: Batch LLM filter kept 0/8 triple(s) for 'selective barrier transport'
+DEBUG: Removed 3 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 2 grounded concept contexts.
+DEBUG: KBPedia returned 2 items.
+DEBUG: Merged Result Count: 2
+  > [LLM ERROR] Together AI attempt 1/3 failed: Request timed out.
+  > [LLM ERROR] Together AI attempt 2/3 failed: Request timed out.
