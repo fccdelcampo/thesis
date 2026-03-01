@@ -18,57 +18,34 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 3. Output the full <database>.
 4. Output the <query>.
 
-### Syntactic Requirements (s(CASP) Specific)
-- Disjunction: NEVER use `;`. Use multiple separate rules with the same head instead.
-- Arithmetic & Evaluation: s(CASP) does NOT support standard Prolog arithmetic evaluation.
-   - NEVER use `is`, , `>=`, `=:=`, `=\\=`, `<`, `>`, `<=`.
-   - USE CLP(Q) constraints instead: `#=`, `#<>`, `#<`, `#>`, `#=<`, `#>=`. Example: `X #= Y + 1`.
-- Negation: Use `not`. NEVER use `\\+`.
-- Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
-- Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
-- Atoms: Must be lowercase. Quote special characters (e.g., `'(A ∨ B)'`).
-- Variables: CamelCase. Use `_` for singletons.
-- Concise Atoms: Keep snake_case atoms as short as possible to save tokens. Condense long phrases into 1-3 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
-- Closed-World: EVERY predicate in a body MUST be defined as a fact or rule head somewhere in the database.
-- Discontiguous: Group all clauses for the same predicate together.
-- Predicate Naming: ALWAYS invent meaningful predicate names that accurately describe the relationships in the specific question. NEVER blindly copy predicate names (like `forms_from`) or structures from the few-shot examples unless they are directly relevant.
+### Syntactic Requirements
+- Disjunction: NO `;`. Use multiple rules with same head.
+- Math: NO `is`, `=`, `>=`, `=:=`, `=\\=`, `<`, `>`, `<=`.
+- Math: USE CLP(Q) constraints: `#=`, `#<>`, `#<`, `#>`, `#=<`, `#>=`. (e.g. `X #= Y + 1`).
+- Negation: Use `not`. NO `\\+`. Classical: `-` (e.g. `-mortal(X).`).
+- Banned: NO `option`. Use `choice` or `mcq_choice`.
+- Atoms: lowercase. Quote specials (e.g. `'(A ∨ B)'`).
+- Variables: CamelCase. Singletons: `_`.
+- Predicates: same name clauses must be grouped (contiguous).
 
-### Query Formatting by Question Type
-1. **Multiple-Choice Questions (MCQ):**
-   - Encode EXACTLY FOUR choices as facts. The description MUST be a grounded lowercase snake_case atom derived from the ACTUAL option text, NEVER an uppercase variable!
-   - Example CORRECT: `choice(a, eliminating_a_source).`
-   - Example WRONG: `choice(a, A).` (This will trivially unify with anything and fail the proof!)
-   - Encode retrieved domain knowledge as facts and rules.
-   - You MUST define an `answer/1` rule that unifies with the correct option letter.
+### Query Formatting
+1. MCQ:
+   - Facts: `choice(Letter, lowercase_snake_atom).` (EXACTLY 4 CHOICES).
+   - Rule: `answer(L) :- choice(L, T), domain_logic(T).` You must define an answer/1 rule.
    - **CRITICAL:** Your logic MUST uniquely identify EXACTLY ONE correct choice. Do not write generic rules that might accidentally evaluate to true for multiple incorrect options. You must explicitly differentiate the correct target from the distractors based on the domain rules.
-   - Example DB Rule: `answer(OptionLetter) :- choice(OptionLetter, Target), matches_criteria(Target).`
-   - The <query> MUST ALWAYS BE EXACTLY: `answer(OptionLetter).`
-2. **Binary (True/False) Questions:**
+   - Query: `answer(OptionLetter).` (STRICT)
+2. Binary/Freeform:
    - Define specific instances from the question (e.g., `rock_one`, `rock_two`).
    - Write rules defining the condition context (e.g., `pulled_together(A, B) :- ...`).
-   - The <query> MUST test the fully grounded relationship directly (e.g., `pulled_together(rock_one, rock_two).`).
-3. **Freeform / Open Logic:**
    - Define relationships and rules governing propagation or constraints.
-   - The <query> queries the primary target entity state.
+   - The <query> queries the primary target entity state
 
-### Output Format (Strict)
-<reasoning_step>
-[Reasoning in English]
-[Prolog code snippets]
-</reasoning_step>
+### Output Format
+<reasoning_step> Explain logic in English, then snippets. </reasoning_step>
+<database> Combined facts/rules </database>
+<query> The query only </query>
 
-<database>
-[All facts and rules combined]
-</database>
-
-<query>
-[The query only]
-</query>
-
-### CRITICAL FINAL REMINDERS (DO NOT IGNORE):
-1. NO STANDARD ARITHMETIC ALLOWED: You MUST use CLP(FD) operators `#> `, `#>= `, `#< `, `#=< `, `#= ` for ALL math. `>` and `<` will instantly crash the parser!
-2. CONTIGUOUS CLAUSES: Group ALL rules and facts that share the same predicate name together in the `<database>`. Do NOT scatter them.
----
+CRITICAL: NO `>`, `<`, or `<=`. USE `#>`,  `#<` or `#<=`. GROUP same predicates together. REMEMBER the #.
 """
 
 GENERATOR_FEW_SHOT_EXAMPLES = [
@@ -93,6 +70,7 @@ affected(Predator) :- eats(Predator, Prey), affected(Prey).
 </reasoning_step>
 
 <database>
+is_contaminated(grass).
 eats(grasshopper, grass).
 eats(frog, grasshopper).
 eats(snake, frog).
@@ -104,7 +82,6 @@ affected(Predator) :- eats(Predator, Prey), affected(Prey).
 <query>
 affected(snake).
 </query>
----
 """},
 
     # Example 2: Binary (True/False) Question Logic
@@ -145,22 +122,17 @@ has_magnetic_properties(ObjectB).
 </reasoning_step>
 
 <database>
-lacks_magnetic_properties(rock_one).
-lacks_magnetic_properties(rock_two).
-far_apart(rock_one, rock_two).
-
--pulled_by_magnetism(RockA, _) :- lacks_magnetic_properties(RockA).
--pulled_by_magnetism(_, RockB) :- lacks_magnetic_properties(RockB).
-
-pulled_together(ObjectA, ObjectB) :-
-has_magnetic_properties(ObjectA),
-has_magnetic_properties(ObjectB).
+lacks_mag(rock1).
+lacks_mag(rock2).
+far(rock1, rock2).
+-pulled(R1, _) :- lacks_mag(R1).
+-pulled(_, R2) :- lacks_mag(R2).
+pulled(ObjA, ObjB) :- has_mag(ObjA), has_mag(ObjB).
 </database>
 
 <query>
-pulled_together(rock_one, rock_two).
+pulled(rock1, rock2).
 </query>
----
 """
     },
 
@@ -179,46 +151,25 @@ D. mid-ocean ridge
         },
     {"role": "assistant", "content": r"""
 <reasoning_step>
-Encode options.
-choice(a, trench).
-choice(b, rift_valley).
-choice(c, ocean_basin).
-choice(d, mid_ocean_ridge).
-</reasoning_step>
-
-<reasoning_step>
-Encode formation logic explicitly from context.
-forms_from(trench, subduction_zone).
-forms_from(trench, plate_convergence).
-forms_from(rift_valley, plate_divergence).
-forms_from(ocean_basin, plate_divergence).
-forms_from(mid_ocean_ridge, plate_divergence).
-</reasoning_step>
-
-<reasoning_step>
-Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with plate_divergence.
-answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+Choices: Choice(a, trench), Chooice(b, rift_valley), etc.
+Logic: Encode formation logic explicitly from context. from(trench, subduction). from(others, divergence). answer if NOT divergence.
 </reasoning_step>
 
 <database>
 choice(a, trench).
-choice(b, rift_valley).
-choice(c, ocean_basin).
-choice(d, mid_ocean_ridge).
-
-forms_from(trench, subduction_zone).
-forms_from(trench, plate_convergence).
-forms_from(rift_valley, plate_divergence).
-forms_from(ocean_basin, plate_divergence).
-forms_from(mid_ocean_ridge, plate_divergence).
-
-answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+choice(b, rift).
+choice(c, basin).
+choice(d, ridge).
+from(trench, subduction).
+from(rift, divergence).
+from(basin, divergence).
+from(ridge, divergence).
+answer(L) :- choice(L, F), not from(F, divergence).
 </database>
 
 <query>
 answer(OptionLetter).
 </query>
----
 """},
 
     # Example 4: Multiple-Choice Logic (Different Domain)
@@ -236,24 +187,8 @@ D. frog
         },
     {"role": "assistant", "content": r"""
 <reasoning_step>
-Encode options.
-choice(a, dog).
-choice(b, cat).
-choice(c, human).
-choice(d, frog).
-</reasoning_step>
-
-<reasoning_step>
-Encode biological classifications explicitly from context.
-is_mammal(dog).
-is_mammal(cat).
-is_mammal(human).
-is_amphibian(frog).
-</reasoning_step>
-
-<reasoning_step>
-Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with being a mammal.
-answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+Encode options: Choice(a, dog), Choice(b, cat), etc.
+Logic: Encode properties explicitly from context. is_mammal(a), is_mamal(cat), etc. answer if NOT mammal.
 </reasoning_step>
 
 <database>
@@ -261,19 +196,16 @@ choice(a, dog).
 choice(b, cat).
 choice(c, human).
 choice(d, frog).
-
 is_mammal(dog).
 is_mammal(cat).
 is_mammal(human).
-is_amphibian(frog).
-
-answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+is_mamal(frog)
+answer(L) :- choice(L, A), not is_mammal(A).
 </database>
 
 <query>
 answer(OptionLetter).
 </query>
----
 """},
 ]
 EXPLAINER_SYSTEM_PROMPT = rf"""

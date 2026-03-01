@@ -30296,3 +30296,175 @@ truth Found: True
       not_characteristic_of_epidermis holds for chloroplasts
 
 
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 72 MMLU test cases (starting from index 28).
+
+================================================================================
+[MMLU #28] Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tuto...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['barter', 'consumer theory', 'bargaining theory', 'bargaining', 'inventory buying agent', 'ratio quantity', 'commodities trader', 'bid for an item', 'shortage', 'supplier']
+DEBUG: Buffered 13 raw triple(s) for 'barter'
+DEBUG: Buffered 8 raw triple(s) for 'consumer theory'
+DEBUG: Buffered 9 raw triple(s) for 'bargaining theory'
+DEBUG: Buffered 7 raw triple(s) for 'bargaining'
+DEBUG: Buffered 8 raw triple(s) for 'inventory buying agent'
+DEBUG: Buffered 19 raw triple(s) for 'ratio quantity'
+DEBUG: Buffered 10 raw triple(s) for 'commodities trader'
+DEBUG: Buffered 6 raw triple(s) for 'bid for an item'
+DEBUG: Buffered 23 raw triple(s) for 'shortage'
+DEBUG: Buffered 5 raw triple(s) for 'supplier'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "barter": [],\n  "consumer theory": [],\n  "bargaining theory": [],\n  "bargaining": [],\n  "shortage": [\n    "definition: In economics, a shortage or excess demand is a situation in which the demand '...
+DEBUG: Batch LLM filter kept 0/13 triple(s) for 'barter'
+DEBUG: Batch LLM filter kept 0/8 triple(s) for 'consumer theory'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'bargaining theory'
+DEBUG: Batch LLM filter kept 0/7 triple(s) for 'bargaining'
+DEBUG: Batch LLM filter kept 1/23 triple(s) for 'shortage'
+DEBUG: Removed 4 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 1 grounded concept contexts.
+DEBUG: KBPedia returned 1 items.
+DEBUG: Merged Result Count: 1
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Analyzing the transaction to determine the relationship between consumer and producer surplus.",
+  "question": "Which of the following statements is true about the transaction above: A) Consumer surplus is greater than producer surplus by between $50 and $75. B) Producer surplus is greater than consumer surplus by between $50 and $75. C) Consumer surplus is greater than producer surplus by more than $75. D) The difference between consumer and producer surplus is $25.",
+  "context": [
+    "Elsa values her time at $50 per hour, and tutors David for two hours.",
+    "David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Analyzing the transaction to determine the relationship between consumer and producer surplus.', 'question': 'Which of the following statements is true about the transaction above: A) Consumer surplus is greater than producer surplus by between $50 and $75. B) Producer surplus is greater than consumer surplus by between $50 and $75. C) Consumer surplus is greater than producer surplus by more than $75. D) The difference between consumer and producer surplus is $25.', 'context': ['Elsa values her time at $50 per hour, and tutors David for two hours.', 'David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following statements is true about the transaction above: A) Consumer surplus is greater than producer surplus by between $50 and $75. B) Producer surplus is greater than consumer surplus by between $50 and $75. C) Consumer surplus is greater than producer surplus by more than $75. D) The difference between consumer and producer surplus is $25.
+DEBUG: EXTRACTED CONTEXT (Len: 2): ['Elsa values her time at $50 per hour, and tutors David for two hours.', 'David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following statements is true about the transaction above: A) Consum' | context items=2
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 2 text chunk(s)...
+Processing text context: Elsa values her time at $50 per hour, and tutors David for two hours.
+Text context processed: run_id='0777537b-c6ef-44f9-af17-d0f59cc8e199' result={'resolver': {'number_of_nodes_to_resolve': 5, 'number_of_created_nodes': 5}}
+Processing text context: David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours.
+Text context processed: run_id='f439869f-0265-463f-9c65-d96f55ca7706' result={'resolver': {'number_of_nodes_to_resolve': 10, 'number_of_created_nodes': 9}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which of the following statements is true about the transaction above: A) Consumer surplus is greater than producer surplus by between $50 and $75. B) Producer surplus is greater than consumer surplus by between $50 and $75. C) Consumer surplus is greater than producer surplus by more than $75. D) The difference between consumer and producer surplus is $25.'
+DEBUG: Extracted entities for KBPedia: ['consumer surplus is greater than producer surplus by between $50 and $75', 'producer surplus is greater than consumer surplus by between $50 and $75', 'consumer surplus is greater than producer surplus by more than $75', 'the difference between consumer and producer surplus is $25', 'transaction', 'consumer surplus', 'producer surplus', 'surplus', 'consumer', 'producer']
+DEBUG: KBPedia fulltext matched for 'consumer surplus is greater than producer surplus by between $50 and $75': ['surplus', 'Aerozine 50']
+DEBUG: KBPedia fulltext matched for 'producer surplus is greater than consumer surplus by between $50 and $75': ['surplus', 'Aerozine 50']
+DEBUG: KBPedia fulltext matched for 'consumer surplus is greater than producer surplus by more than $75': ['surplus', 'real number greater than or equal to one']
+DEBUG: KBPedia fulltext matched for 'the difference between consumer and producer surplus is $25': ['surplus', 'consumer information']
+DEBUG: KBPedia fulltext matched for 'transaction': ['transaction', 'ATM transaction fee']
+DEBUG: KBPedia fulltext matched for 'consumer surplus': ['surplus', 'consumer good']
+DEBUG: KBPedia fulltext matched for 'producer surplus': ['surplus', 'producer']
+DEBUG: KBPedia fulltext matched for 'surplus': ['surplus', 'spillway']
+DEBUG: KBPedia fulltext matched for 'consumer': ['consumer good', 'consumer activism']
+DEBUG: KBPedia fulltext matched for 'producer': ['producer', 'Robinson Crusoe economy']
+DEBUG: KBPedia total matches: ['surplus', 'Aerozine 50', 'surplus', 'Aerozine 50', 'surplus', 'real number greater than or equal to one', 'surplus', 'consumer information', 'transaction', 'ATM transaction fee', 'surplus', 'consumer good', 'surplus', 'producer', 'surplus', 'spillway', 'consumer good', 'consumer activism', 'producer', 'Robinson Crusoe economy']
+DEBUG: Buffered 15 raw triple(s) for 'surplus'
+DEBUG: Buffered 7 raw triple(s) for 'Aerozine 50'
+DEBUG: Buffered 7 raw triple(s) for 'real number greater than or equal to one'
+DEBUG: Buffered 11 raw triple(s) for 'consumer information'
+DEBUG: Buffered 18 raw triple(s) for 'transaction'
+DEBUG: Buffered 8 raw triple(s) for 'ATM transaction fee'
+DEBUG: Buffered 21 raw triple(s) for 'consumer good'
+DEBUG: Buffered 10 raw triple(s) for 'producer'
+DEBUG: Buffered 14 raw triple(s) for 'spillway'
+DEBUG: Buffered 12 raw triple(s) for 'consumer activism'
+DEBUG: Buffered 9 raw triple(s) for 'Robinson Crusoe economy'
+DEBUG: End-filter LLM kept indices: [0, 4, 7, 9] from 11 candidates.
+DEBUG: End-filter kept 4/11 concepts.
+DEBUG: Batch sending 4 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "surplus": [\n    "definition: The collection of all surpluses. A type of ScalarQuantity. Surplus is a QuantityType.",\n    "has subclass: runoff"\n  ],\n  "transaction": [\n    "definition: A speciali'...
+DEBUG: Batch LLM filter kept 2/15 triple(s) for 'surplus'
+DEBUG: Batch LLM filter kept 2/18 triple(s) for 'transaction'
+DEBUG: Batch LLM filter kept 2/10 triple(s) for 'producer'
+DEBUG: Batch LLM filter kept 0/12 triple(s) for 'consumer activism'
+DEBUG: Removed 1 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 3 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Consumer surplus is the difference between what consumers are willing to pay and what they actually pay.
+2. Producer surplus is the difference between what producers receive and their minimum acceptable price.
+3. The minimum acceptable price for the two-hour tutoring session is $125.
+4. David is willing to pay $175 for the two-hour tutoring session.
+5. Elsa values her time at $50 per hour.
+6. The total value of Elsa's time for the two-hour session is $100.
+7. The actual price paid for the two-hour session is $125.
+8. Consumer surplus is greater than the actual price paid.
+9. Producer surplus is greater than the minimum acceptable price.
+10. The difference between the minimum acceptable price and the actual price paid is $0.
+11. The difference between the actual price paid and the value of Elsa's time is $25.
+12. The difference between the value of Elsa's time and the minimum acceptable price is $25.
+13. The difference between the value of Elsa's time and the actual price paid is $25.
+14. The difference between the value of Elsa's time and the minimum acceptable price is equal to the difference between the actual price paid and the value of Elsa's time.
+15. If the difference between the value of Elsa's time and the minimum acceptable price is equal to the difference between the actual price paid and the value of Elsa's time, then the difference between consumer and producer surplus is $25.
+**Context from Prompt:**
+Elsa values her time at $50 per hour, and tutors David for two hours.
+David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours.
+Generating Prolog...
+[LLM TIMEOUT] LLM call exceeded 60s. Resetting model...
+Iteration 0 | General Error: LLM call timed out after 60s
+[LLM TIMEOUT] LLM call exceeded 60s. Resetting model...
+Iteration 1 | General Error: LLM call timed out after 60s
+Iteration 2 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+Iteration 3 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+Iteration 4 | Validation Error: The <query> tag contains a rule definition (with ':-'), but queries must be plain goals. Rule definitions (Head :- Body.) belong inside <database> tags. The <query> tag must contain ONLY a single callable goal, e.g.: `answer(X).` or `my_predicate(foo).` Move the rule bodies to <database> and call the predicate head in <query>.
+[Prolog retry] Normal attempts exhausted. Asking LLM if error is close to fixable...
+[Prolog retry] Close-check answer: 'YES'
+[Prolog retry] LLM says YES — granting 5 extension attempts.
+Extension 5 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+Extension 6 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+Extension 7 | Validation Error: The <query> tag contains a rule definition (with ':-'), but queries must be plain goals. Rule definitions (Head :- Body.) belong inside <database> tags. The <query> tag must contain ONLY a single callable goal, e.g.: `answer(X).` or `my_predicate(foo).` Move the rule bodies to <database> and call the predicate head in <query>.
+Extension 8 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.

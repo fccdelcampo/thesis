@@ -48695,3 +48695,131 @@ What is the primary function of the plant epidermis?
 14. It is not a type of hair, such as a sensory hair.
 15. The primary function of the plant epidermis is to protect the plant from external factors, such as water loss and pathogen invasion.
 ==================================================
+==================================================
+ QUERY: Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D).
+==================================================
+
+--- RETRIEVED CONTEXT (Top 1 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "shortage",
+  "uri": "http://kbpedia.org/kko/rc/Shortage",
+  "score": 1.0,
+  "triples": [
+    "definition: In economics, a shortage or excess demand is a situation in which the demand for a product or service exceeds its supply in a market. It is the opposite of an excess supply (surplus)."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: shortage. Relevant Logical Facts:   - definition: In economics, a shortage or excess demand is a situation in which the demand for a product or service exceeds its supply in a market. It is the opposite of an excess supply (surplus).
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+*None.* I do not have enough information to answer this question.
+==================================================
+==================================================
+ QUERY: Which of the following statements is true about the transaction above: A) Consumer surplus is greater than producer surplus by between $50 and $75. B) Producer surplus is greater than consumer surplus by between $50 and $75. C) Consumer surplus is greater than producer surplus by more than $75. D) The difference between consumer and producer surplus is $25.
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "surplus",
+  "uri": "http://kbpedia.org/kko/rc/Surplus",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all surpluses. A type of ScalarQuantity. Surplus is a QuantityType.",
+    "has subclass: runoff"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: surplus. Relevant Logical Facts:  - definition: The collection of all surpluses. A type of ScalarQuantity. Surplus is a QuantityType.  - has subclass: runoff
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "transaction",
+  "uri": "http://kbpedia.org/kko/rc/Transaction",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of CooperationEvent. Each instance of Transaction is an event in which goods, services, or funds are willingly exchanged or transferred.",
+    "has subclass: money transfer"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: transaction. Relevant Logical Facts:  - definition: A specialization of CooperationEvent. Each instance of Transaction is an event in which goods, services, or funds are willingly exchanged or transferred.  - has subclass: money transfer
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "producer",
+  "uri": "http://kbpedia.org/kko/rc/Producer",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all producers. A SpatiallyDisjointObjectType.",
+    "subclass of: worker"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: producer. Relevant Logical Facts:  - definition: The collection of all producers. A SpatiallyDisjointObjectType.  - subclass of: worker
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8899397850036621,
+  "source": "Local Document"
+}
+[Item 4]
+[Chunk Score: 0.8899] David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "score": 0.8682559728622437,
+  "source": "Local Document"
+}
+[Item 5]
+[Chunk Score: 0.8683] Elsa values her time at $50 per hour, and tutors David for two hours.
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Consumer surplus is the difference between what consumers are willing to pay and what they actually pay.
+2. Producer surplus is the difference between what producers receive and their minimum acceptable price.
+3. The minimum acceptable price for the two-hour tutoring session is $125.
+4. David is willing to pay $175 for the two-hour tutoring session.
+5. Elsa values her time at $50 per hour.
+6. The total value of Elsa's time for the two-hour session is $100.
+7. The actual price paid for the two-hour session is $125.
+8. Consumer surplus is greater than the actual price paid.
+9. Producer surplus is greater than the minimum acceptable price.
+10. The difference between the minimum acceptable price and the actual price paid is $0.
+11. The difference between the actual price paid and the value of Elsa's time is $25.
+12. The difference between the value of Elsa's time and the minimum acceptable price is $25.
+13. The difference between the value of Elsa's time and the actual price paid is $25.
+14. The difference between the value of Elsa's time and the minimum acceptable price is equal to the difference between the actual price paid and the value of Elsa's time.
+15. If the difference between the value of Elsa's time and the minimum acceptable price is equal to the difference between the actual price paid and the value of Elsa's time, then the difference between consumer and producer surplus is $25.
+==================================================

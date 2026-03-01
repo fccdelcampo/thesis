@@ -65,6 +65,16 @@ def _inject_inline_errors(code: str, last_error: str) -> str:
             m = re.search(r"'(.+?)'\s+is forbidden", last_error)
             if m:
                 forbidden_match = m.group(1)
+            elif "arithmetic '>='" in last_error:
+                forbidden_match = '>='
+            elif "arithmetic '<='" in last_error:
+                forbidden_match = '<='
+            elif "arithmetic '>'" in last_error:
+                forbidden_match = '>'
+            elif "arithmetic '<'" in last_error:
+                forbidden_match = '<'
+            elif "Evaluation 'is'" in last_error:
+                forbidden_match = 'is'
 
     # Extract Singleton variables: [Var1, Var2]
     singleton_vars = []
@@ -92,6 +102,11 @@ def _inject_inline_errors(code: str, last_error: str) -> str:
             comment_text = f"% ERROR TRIGGERED HERE: REMOVE THIS FORBIDDEN OPERATOR '{forbidden_match}'."
             if forbidden_match == ';':
                 comment_text += " Disjunction is forbidden. Use multiple separate rules instead."
+            elif forbidden_match in ['>=', '<=', '>', '<']:
+                correct = {'+': '#+', '-': '#-', '>=': '#>=', '<=': '#=<', '>': '#>', '<': '#<'}.get(forbidden_match, '#=')
+                comment_text += f" Use '{correct}' for s(CASP) constraint arithmetic."
+            elif forbidden_match == 'is':
+                comment_text += " Use '#=' for s(CASP) constraint assignment."
             
         elif singleton_vars and ":-" in content_only:
             for v in singleton_vars:
@@ -135,16 +150,7 @@ User Question:
                 
         penalty_prompt = ""
         if same_error_count >= 2:
-            penalty_prompt = f"""
-################################################################################
-### CRITICAL WARNING: PERSISTENT ERROR DETECTED
-### 
-### You have failed to fix the EXACT SAME error {same_error_count} times in a row.
-### The previous code provided below is BLOCKED. You MUST find the lines 
-### marked with '% ERROR TRIGGERED HERE' and rewrite them fundamentally. 
-### DO NOT repeat the same mistake again.
-################################################################################
-"""
+            penalty_prompt = f"\n!!! PERSISTENT ERROR: You failed to fix this {same_error_count}x. PREVIOUS CODE IS BLOCKED. Fix or remove lines with '% ERROR TRIGGERED HERE'.\n"
 
 
         # ── Targeted example-driven guidance keyed to the last error ──────
@@ -153,118 +159,37 @@ User Question:
 
         if "query" in last_error.lower() and ":-" in last_error:
             targeted_fix = """
-###  WHAT YOU KEEP DOING WRONG (rule definition inside <query>):
-```prolog
-<query>
-answer(OptionLetter) :- choice(OptionLetter, Task), difficult_to_replicate(Task).
-</query>
-```
-
-### CORRECT — rule goes in <database>, only the plain goal in <query>:
-```prolog
-<database>
-...
-answer(OptionLetter) :- choice(OptionLetter, Task), difficult_to_replicate(Task).
-</database>
-
-<query>
-answer(OptionLetter).
-</query>
-```
-The `<query>` tag MUST contain ONLY a single atom like `answer(X).` with NO `:-` anywhere.
+WRONG (rule in <query>): <query> answer(X) :- choice(X, T). </query>
+CORRECT (rule in <database>): <database> answer(X) :- choice(X, T). </database> <query> answer(X). </query>
 """
         elif "Unknown procedure" in last_error:
             targeted_fix = """
-###  WHAT YOU KEEP DOING WRONG (calling an undefined predicate):
-```prolog
-<database>
-answer(X) :- choice(X, Y), undefined_predicate(Y).
-</database>
-```
-
-### CORRECT — every predicate called in a body MUST be defined as a fact:
-```prolog
-<database>
-choice(a, opt_a).
-choice(b, opt_b).
-has_property(opt_a).          % <- define it!
-answer(X) :- choice(X, Y), has_property(Y).
-</database>
-```
+WRONG: answer(X) :- undefined(X).
+CORRECT: has_prop(X). answer(X) :- has_prop(X). (every body predicate MUST be defined)
 """
         elif "choice" in last_error.lower() and "UPPERCASE" in last_error:
-            targeted_fix = """
-###  WHAT YOU KEEP DOING WRONG (uppercase variable as atom):
-```prolog
-choice(a, A).   % A is an unbound variable — WRONG
-```
-
-### CORRECT — use a lowercase atom derived from the ACTUAL prompt choices:
-```prolog
-choice(a, actual_option_text).   % lowercase atom — CORRECT
-```
-"""
+            targeted_fix = "WRONG: choice(a, A). CORRECT: choice(a, atom_text). (use grounded lowercase atoms)\n"
         elif "Disjunction" in last_error or "';'" in last_error:
-            targeted_fix = """
-###  WHAT YOU KEEP DOING WRONG (using semicolon disjunction):
-```prolog
-answer(X) :- choice_a(X) ; choice_b(X).
-```
-
-### CORRECT — split into two separate rules:
-```prolog
-answer(X) :- choice_a(X).
-answer(X) :- choice_b(X).
-```
-"""
+            targeted_fix = "WRONG: a :- b ; c. CORRECT: a :- b. a :- c. (NO disjunction)\n"
         elif "Singleton variables" in last_error:
-            targeted_fix = """
-###  WHAT YOU KEEP DOING WRONG (variable appears only once):
-```prolog
-answer(X) :- choice(X, Desc), has_property(X).   % Desc is singleton!
-```
-
-### CORRECT — replace unused variables with underscore:
-```prolog
-answer(X) :- choice(X, _), has_property(X).
-```
-"""
+            targeted_fix = "WRONG: a(X) :- b(X, Y). CORRECT: a(X) :- b(X, _). (use _ for singletons)\n"
         elif "time_limit_exceeded" in last_error or "infinite loop" in last_error.lower():
-            targeted_fix = """
-### WHAT YOU KEEP DOING WRONG (circular rule with no base case):
-```prolog
-is_valid(X) :- is_valid(Y), related(X, Y).   % infinite recursion!
-```
-
-### CORRECT — every recursive rule MUST bottom out at a ground fact:
-```prolog
-is_valid(cat).              % ground fact terminates recursion
-is_valid(X) :- related(X, Y), is_valid(Y).
-```
-"""
+            targeted_fix = "WRONG: a :- a, b. CORRECT: a. a :- b, a. (recursive rules need ground base cases)\n"
 
         prompt += f"""
-### FIX REQUIRED
-The following errors occurred across prior attempts. Fix ALL of them before responding.
-
+### ERRORS TO FIX
 {numbered}
 {targeted_fix}
-Analyze the errors carefully. Then, rewrite the ENTIRE `<database>` and `<query>` blocks incorporating your fixes. DO NOT output partial code.
-Ensure your `<database>` contains all facts and rules (using `:-`), and your `<query>` contains exactly one simple callable goal with NO `:-`.
+Rewrite ENTIRE <database> and <query>. <database> must have rules (:-); <query> exactly one plain goal.
 """
         if previous_code:
             annotated_code = _inject_inline_errors(previous_code, last_error)
             prompt += f"""
 {penalty_prompt}
-### YOUR PREVIOUS DATABASE ATTEMPT (Contains Errors):
-```prolog
+### PREVIOUS CODE (FIX MARKED LINES):
 <database>
 {annotated_code}
 </database>
-```
-CRITICAL: Locate every `% ERROR TRIGGERED HERE` line in the block above. These lines MUST be fixed or removed.
-If you see a semicolon (`;`), REMOVE IT and split the logic into separate rules.
-Carry forward all other correct facts and group rules for the same predicate together.
 """
 
     return prompt
@@ -457,10 +382,7 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             err_str = str(e)
             print(f"Iteration {i} | Validation Error: {err_str}")
             if "Disjunction" in err_str or "';'" in err_str:
-                hint = ("Forbidden: ';' (disjunction) is not allowed in s(CASP). "
-                        "Replace it with multiple rules that share the same head. "
-                        "Example — WRONG: `answer(X) :- choice_a(X) ; choice_b(X).` "
-                        "CORRECT: `answer(X) :- choice_a(X).` and `answer(X) :- choice_b(X).`")
+                hint = "Forbidden: ';'. Use separate rules. WRONG: answer(X) :- choice_a(X) ; choice_b(X). CORRECT: answer(X):-choice_a(X). answer(X) :- choice_b(X)."
                 _record_error(f"{err_str} {hint}")
             else:
                 _record_error(f"{err_str} Ensure the query is a valid Prolog predicate.")
@@ -468,29 +390,17 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             print(f"Iteration {i} | Prolog Error: {e}")
             error_str = str(e)
             if "Singleton variables" in error_str:
-                hint = "Fix the singleton variables by ensuring each variable appears at least twice in a rule (e.g., replace an unused variable with an underscore '_', or reuse it in the body)."
+                hint = "Use each variable twice or use '_' for singletons."
             elif "Syntax error: Operator expected" in error_str:
                 hint = "Wrap any mathematical/logical symbols (=>, ⊃, ∨, ∧, ~, +, -, (, )) entirely in single quotes (like `'(G ∨ H) ⊃ ~I'`) to make them valid Prolog atoms. Do not leave them unquoted."
             elif "time_limit_exceeded" in error_str or "Time limit" in error_str:
-                hint = ("The query timed out — your rules form an INFINITE LOOP with no ground base case. "
-                        "Check for circular rule chains (e.g., A :- B. and B :- A.) with nothing to terminate them. "
-                        "Every recursive rule MUST bottom out at a plain ground fact (e.g., `animal(cat).` not `animal(Animal).`). "
-                        "Also: bare facts like `claw.` do NOT give any predicate a value — use `is_choice_claw).` instead.")
+                hint = "Infinite loop. Ensure recursive rules bottom out at ground facts (no variables)."
             elif "not sufficiently instantiated" in error_str:
-                hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `choice(A, option_text).` where A is unbound). "
-                        "Use LOWERCASE atoms for constants in facts (e.g., `choice(a, option_text).`). "
-                        "Variables (uppercase) should only appear in rule heads/bodies where they are instantiated by matching facts.")
+                hint = "Use lowercase atoms for facts (e.g. choice(a, text).), not Uppercase variables, which only appear in rule heads/bodies with instantiated matching facts."
             elif "(:-)/2" in error_str or "Rules must be loaded from a file" in error_str:
-                hint = ("You put a rule definition (Head :- Body.) inside the <query> tag. "
-                        "The <query> tag must contain ONLY a plain callable goal, e.g.: `answer(X).` "
-                        "Rule definitions with ':-' belong inside <database> tags. "
-                        "Move the rule body to <database> and call the rule's head predicate in <query>.")
+                hint = "Rule (:-) in <query>. Move to <database>."
             elif "Unknown procedure" in error_str:
-                hint = ("You called a predicate in a rule body that is NOT defined anywhere in the database (closed-world violation). "
-                        "Every predicate that appears in a rule body MUST exist as a fact or the head of a rule in your database. "
-                        "NEVER invent predicate names that have no corresponding definition. "
-                        "If you use `choice(Option, Value)` in a rule body, you MUST define `choice/2` facts for every option. "
-                        "Make sure your predicate arities match (e.g., if `choice/2` is defined, use `choice(Option, Value)`).")
+                hint = "Undefined predicate. Every body predicate must be defined as a fact or rule head."
             else:
                 hint = "Ensure strict Prolog syntax. No bullets/hyphens. Predicates must be lowercase."
             _record_error(f"Prolog Error: {e}\nHint: {hint}")
@@ -523,10 +433,7 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                 err_str = str(e)
                 print(f"Extension {i} | Validation Error: {err_str}")
                 if "Disjunction" in err_str or "';'" in err_str:
-                    hint = ("Forbidden: ';' (disjunction) is not allowed in s(CASP). "
-                            "Replace it with multiple rules that share the same head. "
-                            "Example — WRONG: `answer(X) :- choice_a(X) ; choice_b(X).` "
-                            "CORRECT: `answer(X) :- choice_a(X).` and `answer(X) :- choice_b(X).`")
+                    hint = "Forbidden: ';'. Use separate rules. WRONG: `answer(X) :- choice_a(X) ; choice_b(X).`  CORRECT: `answer(X) :- choice_a(X).` and `answer(X) :- choice_b(X).`"
                     _record_error(f"{err_str} {hint}")
                 else:
                     _record_error(f"{err_str} Ensure the query is a valid Prolog predicate.")
@@ -534,20 +441,17 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                 print(f"Extension {i} | Prolog Error: {e}")
                 error_str = str(e)
                 if "Singleton variables" in error_str:
-                    hint = "Fix the singleton variables by ensuring each variable appears at least twice in a rule."
+                    hint = "Use each variable twice or use '_' for singletons."
                 elif "Syntax error: Operator expected" in error_str:
                     hint = "Wrap mathematical/logical symbols in single quotes."
                 elif "time_limit_exceeded" in error_str or "Time" in error_str:
-                    hint = ("The query timed out — your rules form an infinite loop with no ground base case. "
-                            "Break the cycle: ensure every recursive rule bottoms out at a grounded fact.")
+                    hint = "Infinite loop. Recursive rules must bottom out at ground facts."
                 elif "not sufficiently instantiated" in error_str:
-                    hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `choice(A, option_text).`). "
-                            "Use LOWERCASE atoms instead (e.g., `choice(a, option_text).`).")
+                    hint = "Use lowercase atoms for facts, not Uppercase variables."
                 elif "Unknown procedure" in error_str:
-                    hint = ("Arity mismatch: ensure the predicate in the query uses the same number of arguments as its definition in the database. "
-                            "Also ensure the predicate is actually defined.")
+                    hint = "Undefined predicate. Every body predicate must be defined."
                 else:
-                    hint = "Ensure strict Prolog syntax. No bullets/hyphens. Predicates must be lowercase."
+                    hint = "Use strict Prolog syntax. Lowercase predicates."
                 _record_error(f"Prolog Error: {e}\nHint: {hint}")
             except Exception as e:
                 print(f"Extension {i} | General Error: {e}")

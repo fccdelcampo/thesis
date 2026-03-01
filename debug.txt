@@ -165777,3 +165777,762 @@ What is the primary function of the plant epidermis?
 14. It is not a type of hair, such as a sensory hair.
 15. The primary function of the plant epidermis is to protect the plant from external factors, such as water loss and pathogen invasion.
 ===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D)."
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['Consumer surplus is greater than producer surplus by between $50 and $75.', 'Producer surplus is greater than consumer surplus by between $50 and $75.', 'Consumer surplus is greater than producer surplus by more than $75.', 'The difference between consumer and producer surplus is $25.', '.']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] barter: The collection of transactions between two Agent_PartiallyTangibles in which one Agent_PartiallyTangible gives items or services to another Agent_PartiallyTangible, and the other Agent_PartiallyTangible gives items or services in return, and neither of the items or services is money, credit, or payment of money.
+[1] consumer theory: The theory of consumer choice is the branch of microeconomics that relates preferences to consumption expenditures and to consumer demand curves. It analyzes how consumers maximize the desirability of their consumption as measured by their preferences subject to limitations on their expenditures, by maximizing utility subject to a consumer budget constraint. In addition, as the wealth of the indiv
+[2] bargaining theory: Bargaining or haggling is a type of negotiation in which the buyer and seller of a good or service debate the price and exact nature of a transaction. If the bargaining produces agreement on terms, the transaction takes place. Bargaining is an alternative pricing strategy to fixed prices. Optimally, if it costs the retailer nothing to engage and allow bargaining, he/she can divine the buyer's will
+[3] bargaining: Bargaining or haggling is a type of negotiation in which the buyer and seller of a good or service debate the price and exact nature of a transaction. If the bargaining produces agreement on terms, the transaction takes place. Bargaining is an alternative pricing strategy to fixed prices. Optimally, if it costs the retailer nothing to engage and allow bargaining, he/she can divine the buyer's will
+[4] inventory buying agent: An employee who purchases inventory of a company. **
+[5] ratio quantity: 
+[6] commodities trader: CommoditiesTrader buys and sells commodities.
+[7] bid for an item: A bid for a particular item.
+[8] shortage: In economics, a shortage or excess demand is a situation in which the demand for a product or service exceeds its supply in a market. It is the opposite of an excess supply (surplus).
+[9] supplier: The class of relationships in which one agent supplies merchandise or materials to the other.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+[0, 1, 2, 3, 8, 9]
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D)."
+
+Concept: 'barter'
+Facts:
+  - definition: The collection of transactions between two Agent_PartiallyTangibles in which one Agent_PartiallyTangible gives items or services to another Agent_PartiallyTangible, and the other Agent_PartiallyTangible gives items or services in return, and neither of the items or services is money, credit, or payment of money.
+  - subclass of: exchange of user rights
+  - subclass of: transaction
+  - subclass of: change in user rights
+  - subclass of: social action
+  - subclass of: cooperation activity
+  - subclass of: devised structured activity
+  - subclass of: purposeful composite physical and mental activity
+  - sibling concept: monetary exchange
+  - sibling concept: exchange of user rights
+  - sibling concept: payment by wire transfers of funds
+  - sibling concept: money transfer
+
+Concept: 'consumer theory'
+Facts:
+  - definition: The theory of consumer choice is the branch of microeconomics that relates preferences to consumption expenditures and to consumer demand curves. It analyzes how consumers maximize the desirability of their consumption as measured by their preferences subject to limitations on their expenditures, by maximizing utility subject to a consumer budget constraint. In addition, as the wealth of the indiv
+  - subclass of: microeconomics
+  - subclass of: economics by specialty
+  - sibling concept: analysis of collective decision-making
+  - sibling concept: behavioral economics
+  - sibling concept: classical economics
+  - sibling concept: economic engineering
+  - sibling concept: general equilibrium and disequilibrium
+
+Concept: 'bargaining theory'
+Facts:
+  - definition: Bargaining or haggling is a type of negotiation in which the buyer and seller of a good or service debate the price and exact nature of a transaction. If the bargaining produces agreement on terms, the transaction takes place. Bargaining is an alternative pricing strategy to fixed prices. Optimally, if it costs the retailer nothing to engage and allow bargaining, he/she can divine the buyer's will
+  - subclass of: game theory
+  - subclass of: mathematical theory
+  - subclass of: scientific discipline
+  - sibling concept: chess theory
+  - sibling concept: combinatorial game theory
+  - sibling concept: evolutionary game theory
+  - sibling concept: game artificial intelligence
+  - sibling concept: Go opening
+
+Concept: 'bargaining'
+Facts:
+  - definition: Bargaining or haggling is a type of negotiation in which the buyer and seller of a good or service debate the price and exact nature of a transaction. If the bargaining produces agreement on terms, the transaction takes place. Bargaining is an alternative pricing strategy to fixed prices. Optimally, if it costs the retailer nothing to engage and allow bargaining, he/she can divine the buyer's will
+  - subclass of: negotiating
+  - subclass of: dialogue
+  - subclass of: social action
+  - subclass of: thinking
+  - sibling concept: contract negotiation
+  - sibling concept: negotiation
+
+Concept: 'shortage'
+Facts:
+  - definition: In economics, a shortage or excess demand is a situation in which the demand for a product or service exceeds its supply in a market. It is the opposite of an excess supply (surplus).
+  - subclass of: evaluative quantity
+  - subclass of: inhibiting
+  - subclass of: non aspectual quantity
+  - subclass of: rating
+  - subclass of: situation
+  - has subclass: crunch
+  - has subclass: deficit
+  - has subclass: disgrace
+  - has subclass: drawback
+  - has subclass: famine
+  - has subclass: flaw
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+{
+  "barter": [],
+  "consumer theory": [],
+  "bargaining theory": [],
+  "bargaining": [],
+  "shortage": [
+    "definition: In economics, a shortage or excess demand is a situation in which the demand for a product or service exceeds its supply in a market. It is the opposite of an excess supply (surplus)."
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*Letter.* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+
+### Question:
+Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D).
+
+### Context:
+KBPedia Concept: shortage.
+Relevant Logical Facts:
+  - definition: In economics, a shortage or excess demand is a situation in which the demand for a product or service exceeds its supply in a market. It is the opposite of an excess supply (surplus).
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+*B.* Producer surplus is greater than consumer surplus by between $50 and $75. 
+
+The producer surplus is the difference between the price the producer is willing to accept ($125) and the price they actually receive ($125), which is $0. However, if we consider the initial price David was willing to pay ($175), the producer surplus would be $50. The consumer surplus is the difference between the price the consumer is willing to pay ($175) and the price they actually pay ($125), which is $50.
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*Letter.* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+
+### Question:
+Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D).
+
+### Context:
+KBPedia Concept: shortage.
+Relevant Logical Facts:
+  - definition: In economics, a shortage or excess demand is a situation in which the demand for a product or service exceeds its supply in a market. It is the opposite of an excess supply (surplus).
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+*None.* I do not have enough information to answer this question.
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.
+
+For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.
+
+### JSON FORMAT:
+{
+  "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],
+  "relationships": [{
+    "type": "PREDICATE_TYPE",
+    "start_node_id": "id1",
+    "end_node_id": "id2",
+    "properties": {
+      "natural_statement": "full extracted fact or rule",
+      "logic_intent": "FACT | RULE | EXCEPTION",
+      "logical_form_hint": "e.g., mortal(X) :- man(X)"
+    }
+  }]
+}
+
+### Constraints
+- IDs and types: lowercase_with_underscores (Prolog atom style).
+- Do not hallucinate. Return empty arrays if no clear logic exists.
+- {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}
+
+### Examples
+
+
+### Input Text
+Elsa values her time at $50 per hour, and tutors David for two hours.
+
+Output JSON ONLY. No markdown, no preamble.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+{
+  "nodes": [
+    {"id": "elisa", "label": "Person", "properties": {"name": "Elsa"}},
+    {"id": "david", "label": "Person", "properties": {"name": "David"}},
+    {"id": "hourly_rate", "label": "Definition", "properties": {"name": "$50 per hour"}},
+    {"id": "tutoring_session", "label": "Event", "properties": {"name": "tutoring session"}},
+    {"id": "time_value", "label": "Concept", "properties": {"name": "time value"}}
+  ],
+  "relationships": [
+    {
+      "type": "CAUSES",
+      "start_node_id": "elisa",
+      "end_node_id": "hourly_rate",
+      "properties": {
+        "natural_statement": "Elsa values her time at $50 per hour",
+        "logic_intent": "FACT",
+        "logical_form_hint": "value(X, Y) :- person(X), value(X, Y)"
+      }
+    },
+    {
+      "type": "PART_OF",
+      "start_node_id": "tutoring_session",
+      "end_node_id": "hourly_rate",
+      "properties": {
+        "natural_statement": "the tutoring session is part of the hourly rate",
+        "logic_intent": "FACT",
+        "logical_form_hint": "part_of(X, Y) :- event(X), part_of(X, Y)"
+      }
+    },
+    {
+      "type": "ILLUSTRATES",
+      "start_node_id": "tutoring_session",
+      "end_node_id": "time_value",
+      "properties": {
+        "natural_statement": "the tutoring session illustrates the time value",
+        "logic_intent": "FACT",
+        "logical_form_hint": "illustrates(X, Y) :- event(X), concept(Y)"
+      }
+    },
+    {
+      "type": "CAUSES",
+      "start_node_id": "elisa",
+      "end_node_id": "tutoring_session",
+      "properties": {
+        "natural_statement": "Elsa causes the tutoring session",
+        "logic_intent": "FACT",
+        "logical_form_hint": "causes(X, Y) :- person(X), event(Y)"
+      }
+    },
+    {
+      "type": "CAUSES",
+      "start_node_id": "tutoring_session",
+      "end_node_id": "david",
+      "properties": {
+        "natural_statement": "the tutoring session causes David",
+        "logic_intent": "FACT",
+        "logical_form_hint": "causes(X, Y) :- event(X), person(Y)"
+      }
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "hourly_rate",
+      "end_node_id": "time_value",
+      "properties": {
+        "natural_statement": "the hourly rate defines the time value",
+        "logic_intent": "FACT",
+        "logical_form_hint": "defines(X, Y) :- definition(X), concept(Y)"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.
+
+For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.
+
+### JSON FORMAT:
+{
+  "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],
+  "relationships": [{
+    "type": "PREDICATE_TYPE",
+    "start_node_id": "id1",
+    "end_node_id": "id2",
+    "properties": {
+      "natural_statement": "full extracted fact or rule",
+      "logic_intent": "FACT | RULE | EXCEPTION",
+      "logical_form_hint": "e.g., mortal(X) :- man(X)"
+    }
+  }]
+}
+
+### Constraints
+- IDs and types: lowercase_with_underscores (Prolog atom style).
+- Do not hallucinate. Return empty arrays if no clear logic exists.
+- {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}
+
+### Examples
+
+
+### Input Text
+David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours.
+
+Output JSON ONLY. No markdown, no preamble.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+{
+  "nodes": [
+    {"id": "david", "label": "Person", "properties": {"name": "David"}},
+    {"id": "tutoring", "label": "Event", "properties": {"name": "tutoring"}},
+    {"id": "price", "label": "Concept", "properties": {"name": "price"}},
+    {"id": "hours", "label": "Concept", "properties": {"name": "hours"}},
+    {"id": "negotiation", "label": "Event", "properties": {"name": "negotiation"}}
+  ],
+  "relationships": [
+    {
+      "type": "IS_A",
+      "start_node_id": "david",
+      "end_node_id": "person",
+      "properties": {
+        "natural_statement": "David is a person",
+        "logic_intent": "FACT",
+        "logical_form_hint": "person(david)"
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "tutoring",
+      "end_node_id": "event",
+      "properties": {
+        "natural_statement": "Tutoring is an event",
+        "logic_intent": "FACT",
+        "logical_form_hint": "event(tutoring)"
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "price",
+      "end_node_id": "concept",
+      "properties": {
+        "natural_statement": "Price is a concept",
+        "logic_intent": "FACT",
+        "logical_form_hint": "concept(price)"
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "hours",
+      "end_node_id": "concept",
+      "properties": {
+        "natural_statement": "Hours is a concept",
+        "logic_intent": "FACT",
+        "logical_form_hint": "concept(hours)"
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "negotiation",
+      "end_node_id": "event",
+      "properties": {
+        "natural_statement": "Negotiation is an event",
+        "logic_intent": "FACT",
+        "logical_form_hint": "event(negotiation)"
+      }
+    },
+    {
+      "type": "CAUSES",
+      "start_node_id": "negotiation",
+      "end_node_id": "price",
+      "properties": {
+        "natural_statement": "The negotiation causes the price to be $125",
+        "logic_intent": "FACT",
+        "logical_form_hint": "causes(negotiation, price, 125)"
+      }
+    },
+    {
+      "type": "PART_OF",
+      "start_node_id": "tutoring",
+      "end_node_id": "hours",
+      "properties": {
+        "natural_statement": "The tutoring is part of the two hours",
+        "logic_intent": "FACT",
+        "logical_form_hint": "part_of(tutoring, hours)"
+      }
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "price",
+      "end_node_id": "175",
+      "properties": {
+        "natural_statement": "The price is defined as $175",
+        "logic_intent": "FACT",
+        "logical_form_hint": "defines(price, 175)"
+      }
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "price",
+      "end_node_id": "125",
+      "properties": {
+        "natural_statement": "The price is defined as $125",
+        "logic_intent": "FACT",
+        "logical_form_hint": "defines(price, 125)"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are extracting search terms for a knowledge base lookup.
+
+Given this query (which may include multiple-choice options), extract the following:
+1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton")
+2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis")
+3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").
+
+Query: "Which of the following statements is true about the transaction above: A) Consumer surplus is greater than producer surplus by between $50 and $75. B) Producer surplus is greater than consumer surplus by between $50 and $75. C) Consumer surplus is greater than producer surplus by more than $75. D) The difference between consumer and producer surplus is $25."
+
+Output a plain JSON list of strings. Include 4-8 terms maximum.
+Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+Based on the query, here are the extracted terms:
+
+1. **Explicit entities**: 
+   - "transaction"
+   - "consumer surplus"
+   - "producer surplus"
+
+2. **Implied functional concepts**: 
+   - "surplus" (in the context of economics)
+
+3. **Core scientific terms** from the answer options:
+   - "Consumer"
+   - "Producer"
+
+Here's the output in a plain JSON list of strings:
+
+```json
+[
+  "transaction",
+  "consumer surplus",
+  "producer surplus",
+  "surplus",
+  "Consumer",
+  "Producer"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D)."
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['Consumer surplus is greater than producer surplus by between $50 and $75.', 'Producer surplus is greater than consumer surplus by between $50 and $75.', 'Consumer surplus is greater than producer surplus by more than $75.', 'The difference between consumer and producer surplus is $25.', '.']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] surplus: The collection of all surpluses. A type of ScalarQuantity. Surplus is a QuantityType.
+[1] Aerozine 50: Aerozine 50 is a 50/50 mix by weight of hydrazine and unsymmetrical dimethylhydrazine (UDMH). Originally developed in the late 1950s by Aerojet General Corporation as a storable, high-energy, hypergolic fuel for the Titan II ICBM rocket engines, Aerozine continues in wide use as a rocket fuel, typically with dinitrogen tetroxide as the oxidizer, with which it is hypergolic. Aerozine 50 is more sta
+[2] real number greater than or equal to one: Real1_Infinity is the subcollection of RealNumber that excludes numbers less than 1. Each instance of Real1_Infinity is a number greater than or equal to 1.
+[3] consumer information: Consumer Reports is an American magazine published since 1936 by Consumers Union, a nonprofit organization dedicated to unbiased product testing, consumer-oriented research, public education, and advocacy. Consumer Reports publishes reviews and comparisons of consumer products and services based on reporting and results from its in-house testing laboratory and survey research center. The magazine 
+[4] transaction: A specialization of CooperationEvent. Each instance of Transaction is an event in which goods, services, or funds are willingly exchanged or transferred. Specializations include Investing, MoneyTransfer, and Bartering.
+[5] ATM transaction fee: The collection of all ATM transaction fees. A type of BankCharge.
+[6] consumer good: A consumer good or final good is any commodity that is produced or consumed by the consumer to satisfy current wants or needs. Consumer goods are ultimately consumed, rather than used in the production of another good. For example, a microwave oven or a bicycle that is sold to a consumer is a final good or consumer good, but the components that are sold to be used in those goods are intermediate g
+[7] producer: The collection of all producers. A SpatiallyDisjointObjectType.
+[8] spillway: A specialization of FluidConduit. Each instance of Spillway is a conduit through which surplus water flows over or around a dam (see the collection Dam).
+[9] consumer activism: The collection of all consumer activism. A type of Activism.
+[10] Robinson Crusoe economy: A Robinson Crusoe economy is a simple framework used to study some fundamental issues in economics. It assumes an economy with one consumer, one producer and two goods.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+[0, 4, 7, 9]
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D)."
+
+Concept: 'surplus'
+Facts:
+  - definition: The collection of all surpluses. A type of ScalarQuantity. Surplus is a QuantityType.
+  - subclass of: non numeric scalar quantity
+  - subclass of: rating
+  - subclass of: scalar quantity
+  - subclass of: scalar property interval
+  - subclass of: social quantity
+  - subclass of: quantity
+  - subclass of: type of quantity
+  - subclass of: scalar interval
+  - has subclass: runoff
+  - sibling concept: completed thing
+  - sibling concept: completely flawed
+
+Concept: 'transaction'
+Facts:
+  - definition: A specialization of CooperationEvent. Each instance of Transaction is an event in which goods, services, or funds are willingly exchanged or transferred. Specializations include Investing, MoneyTransfer, and Bartering.
+  - subclass of: cooperation activity
+  - subclass of: devised structured activity
+  - subclass of: purposeful composite physical and mental activity
+  - subclass of: social event
+  - subclass of: practice
+  - subclass of: human activity
+  - subclass of: action (purposeful)
+  - has subclass: barter
+  - has subclass: exchange of user rights
+  - has subclass: payment by wire transfers of funds
+  - has subclass: money transfer
+
+Concept: 'producer'
+Facts:
+  - definition: The collection of all producers. A SpatiallyDisjointObjectType.
+  - subclass of: worker
+  - subclass of: business related thing
+  - subclass of: person
+  - subclass of: occupation type
+  - sibling concept: announcer
+  - sibling concept: arborist
+  - sibling concept: archivist
+  - sibling concept: artist
+  - sibling concept: assemblyman
+
+Concept: 'consumer activism'
+Facts:
+  - definition: The collection of all consumer activism. A type of Activism.
+  - subclass of: activism by type
+  - subclass of: political protestation
+  - has subclass: consumer protection in the United Kingdom
+  - has subclass: consumer protection in the United States
+  - has subclass: product safety
+  - has subclass: product testing
+  - sibling concept: anti corporate activism
+  - sibling concept: environmental activist
+  - sibling concept: human rights activism
+  - sibling concept: labor activism
+  - sibling concept: political activism
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+{
+  "surplus": [
+    "definition: The collection of all surpluses. A type of ScalarQuantity. Surplus is a QuantityType.",
+    "has subclass: runoff"
+  ],
+  "transaction": [
+    "definition: A specialization of CooperationEvent. Each instance of Transaction is an event in which goods, services, or funds are willingly exchanged or transferred.",
+    "has subclass: money transfer"
+  ],
+  "producer": [
+    "definition: The collection of all producers. A SpatiallyDisjointObjectType.",
+    "subclass of: worker"
+  ],
+  "consumer activism": [],
+  "consumer surplus": [
+    "definition: The amount by which the consumer's willingness to pay exceeds the market price.",
+    "has subclass: consumer surplus"
+  ],
+  "producer surplus": [
+    "definition: The amount by which the market price exceeds the producer's minimum willingness to sell.",
+    "has subclass: producer surplus"
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are a Logic Discovery Agent. Extract concise, factual, and structural logical building blocks needed to answer the Question from the Context.
+
+### TASK
+Produce a single numbered list called **LOGICAL EVIDENCE**. 
+First, gather evidence and definitions for all concepts related to the Question, especially focusing on each of the provided MCQ choices. 
+Then, add other structural logical evidence that bridges the premise to the answer.
+Each item must be one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.
+
+### CONSTRAINTS
+* Include at most 15 items total. Keep them highly concise but strictly factual.
+* Each item must directly help bridge the premise to the answer. Omit background, history, or tangential details.
+* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."
+* Break compound sentences into independent logical units.
+* Use clear, declarative English only. No code, no symbols.
+* Do NOT reveal the final answer — provide logical ingredients only.
+
+---
+### QUESTION:
+Which of the following statements is true about the transaction above: A) Consumer surplus is greater than producer surplus by between $50 and $75. B) Producer surplus is greater than consumer surplus by between $50 and $75. C) Consumer surplus is greater than producer surplus by more than $75. D) The difference between consumer and producer surplus is $25.
+
+### CONTEXT:
+KBPedia Concept: surplus.
+Relevant Logical Facts:
+  - definition: The collection of all surpluses. A type of ScalarQuantity. Surplus is a QuantityType.
+  - has subclass: runoff
+KBPedia Concept: transaction.
+Relevant Logical Facts:
+  - definition: A specialization of CooperationEvent. Each instance of Transaction is an event in which goods, services, or funds are willingly exchanged or transferred.
+  - has subclass: money transfer
+KBPedia Concept: producer.
+Relevant Logical Facts:
+  - definition: The collection of all producers. A SpatiallyDisjointObjectType.
+  - subclass of: worker
+David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours.
+Elsa values her time at $50 per hour, and tutors David for two hours.
+
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+**LOGICAL EVIDENCE**
+
+1. Consumer surplus is the difference between what consumers are willing to pay and what they actually pay.
+2. Producer surplus is the difference between what producers receive and their minimum acceptable price.
+3. The minimum acceptable price for the two-hour tutoring session is $125.
+4. David is willing to pay $175 for the two-hour tutoring session.
+5. Elsa values her time at $50 per hour.
+6. The total value of Elsa's time for the two-hour session is $100.
+7. The actual price paid for the two-hour session is $125.
+8. Consumer surplus is greater than the actual price paid.
+9. Producer surplus is greater than the minimum acceptable price.
+10. The difference between the minimum acceptable price and the actual price paid is $0.
+11. The difference between the actual price paid and the value of Elsa's time is $25.
+12. The difference between the value of Elsa's time and the minimum acceptable price is $25.
+13. The difference between the value of Elsa's time and the actual price paid is $25.
+14. The difference between the value of Elsa's time and the minimum acceptable price is equal to the difference between the actual price paid and the value of Elsa's time.
+15. If the difference between the value of Elsa's time and the minimum acceptable price is equal to the difference between the actual price paid and the value of Elsa's time, then the difference between consumer and producer surplus is $25.
+===================================

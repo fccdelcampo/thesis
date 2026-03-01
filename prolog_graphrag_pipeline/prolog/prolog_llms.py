@@ -15,6 +15,15 @@ from llm_config import MODEL_NAME, USE_TOGETHER_API, get_openai_client
 PROLOG_MODEL = MODEL_NAME
 NL_MODEL = MODEL_NAME
 LLM_TIMEOUT = 60  # seconds per LLM call (1 minute)
+DEBUG_FILE = "debug.txt"
+
+def _log_to_file(message: str):
+    """Appends a message to debug.txt with UTF-8 encoding."""
+    try:
+        with open(DEBUG_FILE, "a", encoding="utf-8") as f:
+            f.write(message + "\n")
+    except Exception as e:
+        print(f"[Prolog LLM Error] Could not write to {DEBUG_FILE}: {e}")
 
 client = get_openai_client()
 
@@ -139,20 +148,21 @@ def generate_response(prompt: str, flag: str) -> dict:
     else:
         raise ValueError(f"Flag {flag} is invalid. Only 'prolog', 'explanation', and 'q' are accepted.")
 
-    if USE_KV_CACHE and not USE_TOGETHER_API:
-        # Proper KV Caching: Send system instructions/few-shots as distinct message objects.
-        # This builds a stable prefix that Ollama caches in memory, but has a large initial overhead.
+    if USE_TOGETHER_API:
+        # Together AI: Use full multi-turn history (better for Llama 3.1 8B focus/logic)
+        llm_messages = base_messages + [{'role': 'user', 'content': prompt}]
+    elif USE_KV_CACHE:
+        # Ollama KV Caching: Send as distinct objects for stable prefix caching
         llm_messages = base_messages + [{'role': 'user', 'content': prompt}]
     else:
-        # Linear/No Cache (Default for fast Testing, and always for Together AI):
-        # Flatten all system instructions and few-shots into a single raw text block.
+        # Ollama Linear: Flatten for fast single-turn processing
         flattened_context = ""
         for msg in base_messages:
             role = msg.get('role', 'system').upper()
             content = msg.get('content', '')
             flattened_context += f"<{role}>\n{content}\n</{role}>\n\n"
         
-        dynamic_prompt = f"{flattened_context}\nPlease answer the following query based on the above instructions and examples:\n{prompt}"
+        dynamic_prompt = f"{flattened_context}\nPlease answer the following query based on past instructions:\n{prompt}"
         llm_messages = [{'role': 'user', 'content': dynamic_prompt}]
 
     # Use a thread to enforce a hard timeout on the LLM call
@@ -161,6 +171,9 @@ def generate_response(prompt: str, flag: str) -> dict:
 
     def _call_llm():
         try:
+            # Log the outgoing prompt
+            _log_to_file(f"\n--- [DEBUG] PROLOG PROMPT ({flag.upper()}) ---\n{dynamic_prompt if 'dynamic_prompt' in locals() else str(llm_messages)}\n----------------------------------")
+            
             response = client.chat.completions.create(
                 model=model,
                 messages=llm_messages,
@@ -168,6 +181,11 @@ def generate_response(prompt: str, flag: str) -> dict:
                 timeout=LLM_TIMEOUT,
             )
             result_holder[0] = response
+            
+            # Log the response content
+            if response and response.choices:
+                content = response.choices[0].message.content
+                _log_to_file(f"\n=== [DEBUG] PROLOG RESPONSE ({flag.upper()}) ===\n{content}\n===================================")
         except Exception as e:
             error_holder[0] = e
 
