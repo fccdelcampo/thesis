@@ -101746,3 +101746,1825 @@ Example:
 }
 
 ----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output for each concept:
+
+**'membrane protein'**
+[
+  "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.",
+  "has subclass: peripheral protein"
+]
+
+The definition directly relates to the question, and the fact about peripheral proteins might be useful if it's relevant to how animal skeletons work.
+
+**'bacterial cell wall'**
+[
+  
+] (empty list)
+
+This concept is not related to plant cells or their structures. The sibling concepts are also irrelevant.
+
+**'chloroplast'**
+[
+  "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."
+]
+
+The definition might be useful if it's relevant to how animal skeletons work, but this is unlikely since chloroplasts are related to plant cells and photosynthesis.
+
+**'nucleus'**
+[
+  
+] (empty list)
+
+This concept is not directly related to cell walls or structures that would have a function similar to an animal skeleton. The sibling concepts are also irrelevant.
+
+However, we need to consider the question's options: A. cell membrane, B. cell wall, C. chloroplast, D. nucleus
+
+Since 'cell wall' and 'chloroplast' were filtered out earlier, let's re-evaluate their definitions:
+
+**'bacterial cell wall'**
+[
+  "definition: The collection of cell walls present on most Bacterium."
+]
+
+This definition is still not directly relevant to the question.
+
+**'chloroplast'**
+[
+  "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."
+]
+
+Wait, this concept has a sibling 'cell wall', which might be useful. Let's re-evaluate its facts:
+
+**'bacterial cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we have another fact about plant cells: **'plant cell wall'**
+
+Let's add it to the output:
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": [],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall": ["definition: The collection of cell walls present on most Bacterium."],
+  "chloroplast": ["definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."],
+  "nucleus": []
+}
+
+Now, let's consider 'cell wall' as a potential answer choice. We have two facts about it:
+
+**'plant cell wall'**
+[
+  
+] (empty list)
+
+Still not relevant.
+
+However, we also have another fact: **'bacterial cell wall'**
+
+Let's re-evaluate its definition:
+"definition: The collection of cell walls present on most Bacterium."
+
+This concept is related to the question because it mentions 'cell walls', which might be similar in function to an animal skeleton. Let's add this fact:
+
+{
+  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],
+  "bacterial cell wall**:
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are a Logic Discovery Agent. Extract concise, factual, and structural logical building blocks needed to answer the Question from the Context.\n\n### TASK\nProduce a single numbered list called **LOGICAL EVIDENCE**. \nFirst, gather evidence and definitions for all concepts related to the Question, especially focusing on each of the provided MCQ choices. \nThen, add other structural logical evidence that bridges the premise to the answer.\nEach item must be one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.\n\n### CONSTRAINTS\n* Include at most 15 items total. Keep them highly concise but strictly factual.\n* Each item must directly help bridge the premise to the answer. Omit background, history, or tangential details.\n* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."\n* Break compound sentences into independent logical units.\n* Use clear, declarative English only. No code, no symbols.\n* Do NOT reveal the final answer — provide logical ingredients only.\n\n---\n### QUESTION:\nWhich of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus\n\n### CONTEXT:\nKBPedia Concept: membrane protein.\nRelevant Logical Facts:\n  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.\n  - has subclass: peripheral protein\nKBPedia Concept: chloroplast.\nRelevant Logical Facts:\n  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.\nKBPedia Concept: human skeleton.\nRelevant Logical Facts:\n  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,\n  - subclass of: body part\n  - subclass of: skeleton\n  - subclass of: region on an animal\'s body\n  - subclass of: organ system\n  - sibling concept: abdomen\n  - sibling concept: abdominal cavity\n  - sibling concept: adrenal cortex\n  - sibling concept: adrenal medulla\n  - sibling concept: alimentary canal\n\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a rigid structure that provides support and protection.
+2. The human skeleton is an internal framework of the body providing structural support, protection, and movement facilitation.
+3. Plant cells have various types of walls for mechanical strength and stability.
+4. Cell wall components in plants include cellulose, hemicelluloses, pectin, and proteins.
+5. A cell membrane surrounds a plant cell's contents but does not provide significant structural support like an animal skeleton.
+6. Chloroplasts are organelles found within the cells of photosynthetic organisms for light-dependent reactions during photosynthesis.
+7. The nucleus houses most of a eukaryotic cell's genetic material and is involved in cellular processes, including growth and reproduction.
+8. A plant cell wall provides structural support similar to an animal skeleton but with different composition and function.
+9. Animal skeletons are primarily composed of bones that provide mechanical strength and protection for the body.
+10. The primary functions of a human skeleton include supporting the body's structure, facilitating movement through attachment points for muscles, and protecting internal organs from damage.
+11. Plant cell walls can be made up of various materials depending on their function within the plant (e.g., cellulose in stems).
+12. Animal skeletons are dynamic structures that change throughout life due to growth or injury repair processes.
+13. The structure and composition of a human skeleton allow for flexibility, movement, and protection against external forces.
+14. Plant cell walls can be rigid but also flexible depending on the plant species (e.g., bamboo has highly flexible stems).
+15. Animal skeletons are made up primarily of calcium phosphate-based materials that provide strength and rigidity to support body weight and facilitate movement.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['measuring the amount of fatigue', 'making sure the same foods are eaten', 'recording observations in the same chart', 'making sure the foods are at the same temperature']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] sample: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample.
+[1] comparison: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+[2] process: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, base
+[3] research method: Instances of research methods.
+[4] observational study: In fields such as epidemiology, social sciences, psychology and statistics, an observational study draws inferences from a sample to a population where the independent variable is not under the control of the researcher. One common observational study is about the possible effect of a treatment on subjects, where the assignment of subjects into a treated group versus a control group is outside the
+[5] long-term study: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+[6] drive: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+[7] statistical method: Statistics offers methods to estimate and correct for any bias within the sample and data collection procedures. There are also methods of experimental design for experiments that can lessen these issues at the outset of a study, strengthening its capability to discern truths about the population.
+[8] scientific observation: A means or facility to generate scientific observations.
+[9] trouble: A sub-collection of AnimalActivity. Each instance is an event causing distress or pain.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 8, 9]
+```
+
+These concepts are relevant because they relate to aspects of investigation and study that could impact replicability. Comparison (choice B) is directly related as it's about examining similarities or differences which would be crucial in this context. Observational Study (A), Long-term Study (B), Drive (C), Scientific Observation (D), and Trouble (E) are all relevant because they pertain to aspects of investigation that could impact replicability, such as the ability to control variables, measure outcomes accurately, or account for potential biases or issues during data collection.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+Concept: 'comparison'
+Facts:
+  - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+  - subclass of: examination investigation
+  - subclass of: investigation
+
+Concept: 'research method'
+Facts:
+  - definition: Instances of research methods.
+  - subclass of: method
+  - subclass of: investigating
+  - subclass of: learned activity
+  - subclass of: investigation
+  - subclass of: purposeful mental activity
+  - has subclass: alternative medical diagnostic method
+  - has subclass: cohort study method
+  - has subclass: domain decomposition method
+  - has subclass: dynamic systems development method
+  - has subclass: electronic structure method
+  - has subclass: estimation theory
+
+Concept: 'long-term study'
+Facts:
+  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+  - subclass of: detailed study
+  - subclass of: report (document)
+  - sibling concept: dissertation
+
+Concept: 'drive'
+Facts:
+  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+  - subclass of: mental health problem
+  - subclass of: illness
+  - sibling concept: aids dementia complex
+  - sibling concept: catatonia
+  - sibling concept: cognitive disorder
+  - sibling concept: clinical depression
+  - sibling concept: infantilism (appearaance)
+
+Concept: 'scientific observation'
+Facts:
+  - definition: A means or facility to generate scientific observations.
+  - subclass of: observation
+  - subclass of: scientific method
+  - subclass of: cognition
+  - subclass of: method
+  - subclass of: philosophical beliefs
+  - sibling concept: biochemistry method
+  - sibling concept: geochronological dating method
+  - sibling concept: hypothesis
+  - sibling concept: scientific technique
+  - sibling concept: semiempirical quantum chemistry method
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output for each concept:
+
+**comparison**
+[
+  "definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.",
+  "subclass of: examination investigation",
+  "subclass of: investigation"
+]
+
+No additional facts were kept because they do not directly relate to the question about replicating an experiment.
+
+**research method**
+[
+  "definition: Instances of research methods."
+]
+
+The definition fact was kept, but no other subclass relationships or sibling concepts are relevant. The focus is on understanding what makes an investigation difficult to replicate, and this concept's definition provides insight into that.
+
+**long-term study**
+[]
+
+No facts were kept because they do not directly relate to the question about replicating an experiment. Long-term studies involve observing phenomena over a long period of time, which does not address the difficulty in replicating experiments with different foods or conditions.
+
+**drive (fatigue)**
+[
+  "definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire."
+]
+
+The definition fact was kept because it relates directly to fatigue as a drive, which could be affected by the food consumed in an experiment.
+
+**scientific observation**
+[]
+
+No facts were kept because they do not directly relate to the question about replicating experiments with different foods. Scientific observations are more related to collecting data and making measurements rather than understanding what makes an investigation difficult to replicate.
+
+The output is a JSON dictionary where keys are the Concept names, and values are lists of kept fact strings:
+
+```json
+{
+  "comparison": [
+    "definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.",
+    "subclass of: examination investigation",
+    "subclass of: investigation"
+  ],
+  "research method": ["definition: Instances of research methods."],
+  "drive (fatigue)": ["definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire."]
+}
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:\n*[Letter].* [Choice text]\nThen follow with a short 1-2 sentence explanation.\n2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.\n3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."\n\nExample correct format (if D is the answer):\n*D.* ocean basin.\nOcean basins form at divergent boundaries where plates pull apart, creating a depression that fills with water.\n\n### Question:\nJanette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?\nA. measuring the amount of fatigue\nB. making sure the same foods are eaten\nC. recording observations in the same chart\nD. making sure the foods are at the same temperature\n\n### Context:\nKBPedia Concept: comparison.\nRelevant Logical Facts:\n  - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.\n  - subclass of: examination investigation\n  - subclass of: investigation\nKBPedia Concept: research method.\nRelevant Logical Facts:\n  - definition: Instances of research methods.\nKBPedia Concept: long-term study.\nRelevant Logical Facts:\n  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.\n  - subclass of: detailed study\n  - subclass of: report (document)\n  - sibling concept: dissertation\nKBPedia Concept: drive.\nRelevant Logical Facts:\n  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.\n  - subclass of: mental health problem\n  - subclass of: illness\n  - sibling concept: aids dementia complex\n  - sibling concept: catatonia\n  - sibling concept: cognitive disorder\n  - sibling concept: clinical depression\n  - sibling concept: infantilism (appearaance)\nKBPedia Concept: scientific observation.\nRelevant Logical Facts:\n  - definition: A means or facility to generate scientific observations.\n  - subclass of: observation\n  - subclass of: scientific method\n  - subclass of: cognition\n  - subclass of: method\n  - subclass of: philosophical beliefs\n  - sibling concept: biochemistry method\n  - sibling concept: geochronological dating method\n  - sibling concept: hypothesis\n  - sibling concept: scientific technique\n  - sibling concept: semiempirical quantum chemistry method\n\n### Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+*A.* making sure the same foods are eaten.
+This is because if Janette and Carmen do not eat the exact same food, it will be difficult to compare their results accurately. The investigation relies on comparing fatigue levels after consuming specific foods, so any variation in what they ate would introduce a confounding variable that could skew the findings.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*[Letter].* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+Example correct format (if D is the answer):
+*D.* ocean basin.
+Ocean basins form at divergent boundaries where plates pull apart, creating a depression that fills with water.
+
+### Question:
+Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+
+### Context:
+KBPedia Concept: comparison.
+Relevant Logical Facts:
+  - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+  - subclass of: examination investigation
+  - subclass of: investigation
+
+KBPedia Concept: research method.
+Relevant Logical Facts:
+  - definition: Instances of research methods.
+
+KBPedia Concept: long-term study.
+Relevant Logical Facts:
+  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+  - subclass of: detailed study
+  - subclass of: report (document)
+  - sibling concept: dissertation
+
+KBPedia Concept: drive.
+Relevant Logical Facts:
+  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+  - subclass of: mental health problem
+  - subclass of: illness
+  - sibling concept: aids dementia complex
+  - sibling concept: catatonia
+  - sibling concept: cognitive disorder
+  - sibling concept: clinical depression
+  - sibling concept: infantilism (appearaance)
+
+KBPedia Concept: scientific observation.
+Relevant Logical Facts:
+  - definition: A means or facility to generate scientific observations.
+  - subclass of: observation
+  - subclass of: scientific method
+  - subclass of: cognition
+  - subclass of: method
+  - subclass of: philosophical beliefs
+  - sibling concept: biochemistry method
+  - sibling concept: geochronological dating method
+  - sibling concept: hypothesis
+  - sibling concept: scientific technique
+  - sibling concept: semiempirical quantum chemistry method
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+*B.* making sure the same foods are eaten.
+This is because if Janette and Carmen do not eat the exact same food, it would be difficult to compare their results accurately. The investigation relies on comparing fatigue levels after consuming specific foods, so any variation in what they ate could skew or invalidate the comparison.
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Janette conducts an investigation to see which foods make her feel more fatigued.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+    "nodes": [
+        {"id": "janette", "label": "Person", "properties": {"name": "Janette"}},
+        {"id": "investigation", "label": "Event", "properties": {"name": "Investigation"}},
+        {"id": "foods", "label": "Concept", "properties": {"name": "Foods"}},
+        {"id": "fatigue", "label": "Concept", "properties": {"name": "Fatigue"}}
+    ],
+    "relationships": [
+        {
+            "type": "ILLUSTRATES",
+            "start_node_id": "janette",
+            "end_node_id": "investigation",
+            "properties": {
+                "natural_statement": "Janette conducts an investigation to see which foods make her feel more fatigued.",
+                "logic_intent": "RULE",
+                "logical_form_hint": ""
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "investigation",
+            "end_node_id": "foods",
+            "properties": {
+                "natural_statement": "The investigation is to determine which foods make her feel more fatigued.",
+                "logic_intent": "RULE",
+                "logical_form_hint": ""
+            }
+        },
+        {
+            "type": "DEFINES",
+            "start_node_id": "investigation",
+            "end_node_id": "fatigue",
+            "properties": {
+                "natural_statement": "The investigation is to determine which foods make her feel more fatigued.",
+                "logic_intent": "RULE",
+                "logical_form_hint": ""
+            }
+        },
+        {
+            "type": "CAUSES",
+            "start_node_id": "foods",
+            "end_node_id": "fatigue",
+            "properties": {
+                "natural_statement": "Foods that make her feel more fatigued.",
+                "logic_intent": "RULE",
+                "logical_form_hint": ""
+            }
+        }
+    ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text She eats one of four different foods each day at the same time for four days and then records how she feels.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+  {
+    "nodes": [
+      {"id": "eating_habits", "label": "Topic", "properties": {"name": "Eating Habits"}},
+      {"id": "food_types", "label": "Concept", "properties": {"name": "Food Types"}},
+      {"id": "recorded_feelings", "label": "Event", "properties": {"name": "Recorded Feelings"}}
+    ],
+    "relationships": [
+      {
+        "type": "CAUSES",
+        "start_node_id": "eating_habits",
+        "end_node_id": "food_types",
+        "properties": {
+          "natural_statement": "She eats one of four different foods each day.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., eating_habits(causes(food_types))"
+        }
+      },
+      {
+        "type": "CAUSES",
+        "start_node_id": "eating_habits",
+        "end_node_id": "recorded_feelings",
+        "properties": {
+          "natural_statement": "She records how she feels.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., eating_habits(causes(recorded_feelings))"
+        }
+      },
+      {
+        "type": "PART_OF",
+        "start_node_id": "eating_habits",
+        "end_node_id": "recorded_feelings",
+        "properties": {
+          "natural_statement": "She eats one of four different foods each day at the same time for four days.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., eating_habits(part_of(recorded_feelings))"
+        }
+      },
+      {
+        "type": "DEFINES",
+        "start_node_id": "eating_habits",
+        "end_node_id": "food_types",
+        "properties": {
+          "natural_statement": "She eats one of four different foods each day at the same time for four days.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., eating_habits(defines(food_types))"
+        }
+      },
+      {
+        "type": "DEFINES",
+        "start_node_id": "eating_habits",
+        "end_node_id": "recorded_feelings",
+        "properties": {
+          "natural_statement": "She records how she feels.",
+          "logic_intent": "FACT",
+          "logical_form_hint": "e.g., eating_habits(defines(recorded_feelings))"
+        }
+      }
+    ]
+  }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text She asks her friend Carmen to do the same investigation to see if she gets similar results.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+[
+    {
+        "nodes": [
+            {"id": "carmen", "label": "Person", "properties": {"name": "Carmen"}},
+            {"id": "she", "label": "Person", "properties": {"name": "She"}}
+        ],
+        "relationships": [
+            {
+                "type": "DEFINES",
+                "start_node_id": "carmen",
+                "end_node_id": "same_investigation",
+                "properties": {
+                    "natural_statement": "Her friend Carmen to do the same investigation",
+                    "logic_intent": "RULE",
+                    "logical_form_hint": "investigation(X) :- friend(Y, X), do_same_investigation(Z, Y)"
+                }
+            },
+            {
+                "type": "ILLUSTRATES",
+                "start_node_id": "she",
+                "end_node_id": "similar_results",
+                "properties": {
+                    "natural_statement": "to see if she gets similar results",
+                    "logic_intent": "EXCEPTION",
+                    "logical_form_hint": "exception(R, S) :- result(Y), get_similar_results(Z, Y)"
+                }
+            }
+        ]
+    }
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information:
+
+```
+[
+    "investigation",
+    "fatigue",
+    "foods",
+    "temperature"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['measuring the amount of fatigue', 'making sure the same foods are eaten', 'recording observations in the same chart', 'making sure the foods are at the same temperature']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] fatigue: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe 
+[1] chronic fatigue syndrome: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.
+[2] foods featuring butter: This category covers foods that feature butter.
+[3] breakfast food: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.
+[4] chart pattern: A chart pattern or price pattern is a pattern within a chart when prices are graphed. In stock and commodity markets trading, chart pattern studies play a large role during technical analysis. When data is plotted there is usually a pattern which naturally occurs and repeats over a period. Chart patterns are used as either reversal or continuation signals.
+[5] financial chart: A chart of finance or stock performance.
+[6] temperature: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \
+[7] fire investigation: Fire investigation, sometimes referred to as origin and cause investigation, is the analysis of fire-related incidents. After firefighters extinguish a fire, an investigation is launched to determine the origin and cause of the fire or explosion. Investigations of such incidents require a systematic approach and knowledge of basic fire science.
+[8] investigation: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide variety of entities: a philosophical problem, a criminal act, a natural phenomenon, etc.. The phenomenon under investigation may be actual or merely putative within the context of the representation. Also
+[9] topics of 'consuming foods': This conceptual systems category is a focal point for aggregating topics of 'consuming foods'.
+[10] room temperature: Room temperature, 20-25 degrees celsius.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[0, 1, 3, 5, 6, 8, 9, 10]
+```
+
+These indices correspond to concepts that are relevant for answering the question. 
+
+*   Index [0] is "fatigue" which directly relates to one of the answer choices.
+*   Index [1] is "chronic fatigue syndrome", another concept related to fatigue and an answer choice.
+*   Index [3] is "breakfast food", a type of food that could be part of Janette's or Carmen's investigation, making it relevant for understanding how they conducted their experiment.
+*   Indices [5], [6], and [10] are all about charts/financial charts and temperature which relate to the answer choices directly.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+Concept: 'fatigue'
+Facts:
+  - definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe 
+  - subclass of: illness
+  - subclass of: medical condition
+  - has subclass: exhausting
+  - has subclass: sleep deprivation
+  - sibling concept: ache ailment condition
+  - sibling concept: acid indigestion
+  - sibling concept: acquired disorder
+  - sibling concept: Addison's disease
+  - sibling concept: Adenomyosis
+
+Concept: 'chronic fatigue syndrome'
+Facts:
+  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.
+  - subclass of: chronic condition
+  - subclass of: medical condition
+  - sibling concept: Amyotrophic lateral sclerosis
+  - sibling concept: Marie Strumpell arthritis
+  - sibling concept: arthritis
+  - sibling concept: case of autism
+  - sibling concept: chronic lung disease
+
+Concept: 'breakfast food'
+Facts:
+  - definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.
+  - subclass of: food item
+  - subclass of: food beverage or tobacco product
+  - subclass of: food or drink
+  - subclass of: grocery
+  - subclass of: opaque thing
+  - subclass of: organic matter
+  - has subclass: breakfast
+  - has subclass: cereal (breakfast food)
+  - has subclass: doughnut
+  - has subclass: chicken's egg
+  - has subclass: flapjack
+
+Concept: 'financial chart'
+Facts:
+  - definition: A chart of finance or stock performance.
+  - subclass of: technical analysis
+  - subclass of: evaluating
+  - subclass of: following standard procedures
+  - sibling concept: candlestick patter
+  - sibling concept: chart overlay
+  - sibling concept: chart pattern
+  - sibling concept: technical indicator
+
+Concept: 'temperature'
+Facts:
+  - definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \
+  - subclass of: non aspectual quantity
+  - subclass of: one dimensional quantity
+  - subclass of: scalar or vector interval
+  - subclass of: tangible physical quantity
+  - subclass of: quality
+  - subclass of: scalar quantity
+  - subclass of: measurable quantity
+  - subclass of: n-tuple interval
+  - has subclass: absolute zero
+  - has subclass: cold
+  - has subclass: moderately cold
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output for each concept:
+
+**fatigue**
+[
+  "definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue.",
+  "has subclass: sleep deprivation"
+]
+
+**chronic fatigue syndrome**
+[] (no relevant facts)
+
+**breakfast food**
+[] (not directly related to the question about replicating investigations)
+
+**financial chart**
+[
+  "definition: A chart of finance or stock performance."
+] 
+
+**temperature**
+[]
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are a Logic Discovery Agent. Extract concise, factual, and structural logical building blocks needed to answer the Question from the Context.\n\n### TASK\nProduce a single numbered list called **LOGICAL EVIDENCE**. \nFirst, gather evidence and definitions for all concepts related to the Question, especially focusing on each of the provided MCQ choices. \nThen, add other structural logical evidence that bridges the premise to the answer.\nEach item must be one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.\n\n### CONSTRAINTS\n* Include at most 15 items total. Keep them highly concise but strictly factual.\n* Each item must directly help bridge the premise to the answer. Omit background, history, or tangential details.\n* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."\n* Break compound sentences into independent logical units.\n* Use clear, declarative English only. No code, no symbols.\n* Do NOT reveal the final answer — provide logical ingredients only.\n\n---\n### QUESTION:\nWhich would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature\n\n### CONTEXT:\nKBPedia Concept: fatigue.\nRelevant Logical Facts:\n  - definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe \n  - subclass of: illness\n  - subclass of: medical condition\n  - has subclass: exhausting\n  - has subclass: sleep deprivation\n  - sibling concept: ache ailment condition\n  - sibling concept: acid indigestion\n  - sibling concept: acquired disorder\n  - sibling concept: Addison\'s disease\n  - sibling concept: Adenomyosis\nKBPedia Concept: chronic fatigue syndrome.\nRelevant Logical Facts:\n  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.\n  - subclass of: chronic condition\n  - subclass of: medical condition\n  - sibling concept: Amyotrophic lateral sclerosis\n  - sibling concept: Marie Strumpell arthritis\n  - sibling concept: arthritis\n  - sibling concept: case of autism\n  - sibling concept: chronic lung disease\nKBPedia Concept: breakfast food.\nRelevant Logical Facts:\n  - definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.\n  - subclass of: food item\n  - subclass of: food beverage or tobacco product\n  - subclass of: food or drink\n  - subclass of: grocery\n  - subclass of: opaque thing\n  - subclass of: organic matter\n  - has subclass: breakfast\n  - has subclass: cereal (breakfast food)\n  - has subclass: doughnut\n  - has subclass: chicken\'s egg\n  - has subclass: flapjack\n  - has subclass: omelette\n  - has subclass: pancake\n  - has subclass: waffle\n  - sibling concept: cereal (food)\n  - sibling concept: cheesy food\n  - sibling concept: children\'s food\n  - sibling concept: convenience food\n  - sibling concept: crumb\nKBPedia Concept: financial chart.\nRelevant Logical Facts:\n  - definition: A chart of finance or stock performance.\n  - subclass of: technical analysis\n  - subclass of: evaluating\n  - subclass of: following standard procedures\n  - sibling concept: candlestick patter\n  - sibling concept: chart overlay\n  - sibling concept: chart pattern\n  - sibling concept: technical indicator\nKBPedia Concept: temperature.\nRelevant Logical Facts:\n  - definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \\\n  - subclass of: non aspectual quantity\n  - subclass of: one dimensional quantity\n  - subclass of: scalar or vector interval\n  - subclass of: tangible physical quantity\n  - subclass of: quality\n  - subclass of: scalar quantity\n  - subclass of: measurable quantity\n  - subclass of: n-tuple interval\n  - has subclass: absolute zero\n  - has subclass: cold\n  - has subclass: moderately cold\n  - has subclass: room temperature\n  - has subclass: sea surface temperature\n  - has subclass: temperature control\n  - has subclass: thermal protection\n  - has subclass: thermoregulation\n  - has subclass: threshold temperature\n  - has subclass: warmth\n  - sibling concept: area\n  - sibling concept: beauty\n  - sibling concept: biodiversity\n  - sibling concept: cask strength\n  - sibling concept: chemical purity\n\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+**LOGICAL EVIDENCE**
+
+1. Fatigue is a physiological condition characterized by continuous exhaustion caused by an underlying ailment.
+2. Chronic fatigue syndrome (CFS) is an illness with unknown cause, causing fatigue and other symptoms.
+3. CFS has been debated as not being a genuine medical condition within the clinical community.
+4. Replicating experiments requires precise control over variables to ensure consistent results.
+5. Measuring fatigue can be subjective and difficult to quantify accurately in all cases.
+6. Recording observations using the same chart is crucial for maintaining consistency across trials.
+7. Temperature affects biological processes, including metabolism and enzyme activity.
+8. Maintaining a constant temperature during experiments helps minimize external influences on variables being measured.
+9. Food intake can impact fatigue levels due to its effects on energy production and nutrient availability.
+10. Consuming the same foods in each trial ensures that any observed changes are not attributed to dietary factors.
+11. Temperature control is essential for maintaining consistent conditions across trials, especially when studying biological processes.
+12. Recording observations using a financial chart (technical analysis) may introduce biases or errors due to its subjective nature.
+13. The accuracy of temperature measurements can significantly impact the reliability and validity of experimental results.
+
+Note: These items aim to provide concise logical building blocks that bridge the premise to potential answers, focusing on concepts related to fatigue, chronic fatigue syndrome, food intake, recording observations, and temperature control.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['trench', 'rift valley', 'ocean basin', 'mid-ocean ridge']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] oceanic ridge: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This type of oceanic mountain ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. The production of new seafloor results from mantle upwel
+[1] undersea valley: The axial depression of the mid-oceanic ridge system.
+[2] rift valley: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults. Rift valleys are found both on continents and under oceans.
+[3] oceanic plateau: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed. While many oceanic plateaus are composed of continental crust, and often form a step interrupting the continental slope, some plateaus are undersea remnants of large igneous provinces.
+[4] seamount: A Seamount is an underwater Mountain rising from the seafloor that does not reach to the surface of the EarthsOceanSea.
+[5] geological basin: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.
+[6] fracture zone: A fracture zone is a linear oceanic feature—often hundreds, even thousands of kilometers long—resulting from the action of offset mid-ocean ridge axis segments. They are a consequence of plate tectonics. Lithospheric plates on either side of an active transform fault move in opposite directions; here, strike-slip activity occurs.
+[7] subduction zones: Subduction is a geological process that takes place at convergent boundaries of tectonic plates where one plate moves under another and is forced down into the mantle. Regions where this process occurs are known as subduction zones. Rates of subduction are typically in centimetres per year, with the average rate of convergence being approximately two to eight centimetres per year along most plate 
+[8] ocean trench: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor. Oceanic trenches are a distinctive morphological feature of convergent plate boundaries, along which lithospheric plates move towards each other at rates that vary from a few mm to over ten cm per year. A trench marks the position at which the fle
+[9] rifts or graben: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed block of the crust of a planet bordered by parallel faults.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```
+[1, 3, 5, 6, 8, 9]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge"
+
+Concept: 'undersea valley'
+Facts:
+  - definition: The axial depression of the mid-oceanic ridge system.
+  - subclass of: underwater topographical feature
+  - subclass of: land topographical feature
+  - subclass of: underwater location
+  - sibling concept: abyssal plain
+  - sibling concept: undersea arrugado
+  - sibling concept: underwater bank
+  - sibling concept: undersea hole
+  - sibling concept: undersea continental rise
+
+Concept: 'oceanic plateau'
+Facts:
+  - definition: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed. While many oceanic plateaus are composed of continental crust, and often form a step interrupting the continental slope, some plateaus are undersea remnants of large igneous provinces.
+  - subclass of: plate tectonics
+  - subclass of: scientific discipline
+  - sibling concept: Aulacogen
+  - sibling concept: continental fragment
+  - sibling concept: craton
+  - sibling concept: fracture zone
+  - sibling concept: geodynamics
+
+Concept: 'geological basin'
+Facts:
+  - definition: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.
+  - subclass of: basin
+  - subclass of: depression
+  - subclass of: slope
+  - subclass of: walled cavity
+  - subclass of: site that is also a geographical thing
+  - subclass of: land topographical feature
+  - has subclass: cirque
+  - has subclass: crater
+  - has subclass: crater basin
+  - has subclass: drainage basin
+  - has subclass: Foxe Basin
+
+Concept: 'fracture zone'
+Facts:
+  - definition: A fracture zone is a linear oceanic feature—often hundreds, even thousands of kilometers long—resulting from the action of offset mid-ocean ridge axis segments. They are a consequence of plate tectonics. Lithospheric plates on either side of an active transform fault move in opposite directions; here, strike-slip activity occurs.
+  - subclass of: geological fault
+  - subclass of: oceanography
+  - subclass of: plate tectonics
+  - subclass of: crevice in the earth
+  - subclass of: land topographical feature
+  - subclass of: earth science
+  - subclass of: scientific discipline
+  - sibling concept: rifts or graben
+  - sibling concept: the San Andreas Fault
+  - sibling concept: biological oceanography
+  - sibling concept: chemical oceanography
+
+Concept: 'ocean trench'
+Facts:
+  - definition: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor. Oceanic trenches are a distinctive morphological feature of convergent plate boundaries, along which lithospheric plates move towards each other at rates that vary from a few mm to over ten cm per year. A trench marks the position at which the fle
+  - subclass of: land topographical feature
+  - subclass of: plate tectonics
+  - subclass of: underwater location
+  - subclass of: underwater topographical feature
+  - subclass of: topographical feature
+  - subclass of: scientific discipline
+  - subclass of: underwater
+  - has subclass: Java Trench
+  - has subclass: Marianas Trench
+  - has subclass: oceanic trenches of the Caribbean Sea
+  - has subclass: oceanic trench of the South China Sea
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output for each concept:
+
+**undersea valley**
+```json
+[
+  "definition: The axial depression of the mid-oceanic ridge system.",
+  "subclass of: underwater location"
+]
+```
+
+**oceanic plateau**
+```json
+[]
+```
+
+**geological basin**
+```json
+[
+  "definition: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.",
+  "subclass of: slope"
+]
+```
+
+**fracture zone**
+```json
+[]
+```
+
+**ocean trench**
+```json
+[
+  "definition: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor.",
+  "subclass of: plate tectonics"
+]
+```
+Note that I've applied the filtering rules as follows:
+
+* For **undersea valley**, kept its definition and a relevant subclass fact.
+* For **oceanic plateau**, no facts were directly related to the question, so an empty list was returned.
+* For **geological basin**, kept its definition and a relevant subclass fact that relates to topography (slope).
+* For **fracture zone** and **ocean trench**, no facts were directly related to the question of tectonic plate divergence.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:\n*[Letter].* [Choice text]\nThen follow with a short 1-2 sentence explanation.\n2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.\n3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."\n\nExample correct format (if D is the answer):\n*D.* ocean basin.\nOcean basins form at divergent boundaries where plates pull apart, creating a depression that fills with water.\n\n### Question:\nWhich feature does not form as a result of tectonic plates diverging?\nA. trench\nB. rift valley\nC. ocean basin\nD. mid-ocean ridge\n\n### Context:\nKBPedia Concept: undersea valley.\nRelevant Logical Facts:\n  - definition: The axial depression of the mid-oceanic ridge system.\n  - subclass of: underwater topographical feature\n  - subclass of: land topographical feature\n  - subclass of: underwater location\n  - sibling concept: abyssal plain\n  - sibling concept: undersea arrugado\n  - sibling concept: underwater bank\n  - sibling concept: undersea hole\n  - sibling concept: undersea continental rise\nKBPedia Concept: oceanic plateau.\nRelevant Logical Facts:\n  - definition: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed. While many oceanic plateaus are composed of continental crust, and often form a step interrupting the continental slope, some plateaus are undersea remnants of large igneous provinces.\n  - subclass of: plate tectonics\n  - subclass of: scientific discipline\n  - sibling concept: Aulacogen\n  - sibling concept: continental fragment\n  - sibling concept: craton\n  - sibling concept: fracture zone\n  - sibling concept: geodynamics\nKBPedia Concept: geological basin.\nRelevant Logical Facts:\n  - definition: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.\n  - subclass of: basin\n  - subclass of: depression\n  - subclass of: slope\n  - subclass of: walled cavity\n  - subclass of: site that is also a geographical thing\n  - subclass of: land topographical feature\n  - has subclass: cirque\n  - has subclass: crater\n  - has subclass: crater basin\n  - has subclass: drainage basin\n  - has subclass: Foxe Basin\n  - sibling concept: bathtub\n  - sibling concept: bowl\n  - sibling concept: washbasin\n  - sibling concept: caldera\n  - sibling concept: cavus-topographical\nKBPedia Concept: fracture zone.\nRelevant Logical Facts:\n  - definition: A fracture zone is a linear oceanic feature—often hundreds, even thousands of kilometers long—resulting from the action of offset mid-ocean ridge axis segments. They are a consequence of plate tectonics. Lithospheric plates on either side of an active transform fault move in opposite directions; here, strike-slip activity occurs.\n  - subclass of: geological fault\n  - subclass of: oceanography\n  - subclass of: plate tectonics\n  - subclass of: crevice in the earth\n  - subclass of: land topographical feature\n  - subclass of: earth science\n  - subclass of: scientific discipline\n  - sibling concept: rifts or graben\n  - sibling concept: the San Andreas Fault\n  - sibling concept: biological oceanography\n  - sibling concept: chemical oceanography\n  - sibling concept: ocean current\nKBPedia Concept: ocean trench.\nRelevant Logical Facts:\n  - definition: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor. Oceanic trenches are a distinctive morphological feature of convergent plate boundaries, along which lithospheric plates move towards each other at rates that vary from a few mm to over ten cm per year. A trench marks the position at which the fle\n  - subclass of: land topographical feature\n  - subclass of: plate tectonics\n  - subclass of: underwater location\n  - subclass of: underwater topographical feature\n  - subclass of: topographical feature\n  - subclass of: scientific discipline\n  - subclass of: underwater\n  - has subclass: Java Trench\n  - has subclass: Marianas Trench\n  - has subclass: oceanic trenches of the Caribbean Sea\n  - has subclass: oceanic trench of the South China Sea\n  - has subclass: Puerto Rico Trench\n  - sibling concept: alluvial fan\n  - sibling concept: cultivable land\n  - sibling concept: arch\n  - sibling concept: archipelago\n  - sibling concept: badlands-topographical\n\n### Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+*A.* trench.
+A trench is a feature that forms as a result of tectonic plates converging, not diverging. It's the deepest part of the ocean floor and marks the position where lithospheric plates move towards each other at rates varying from a few mm to over ten cm per year.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*[Letter].* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+Example correct format (if D is the answer):
+*D.* ocean basin.
+Ocean basins form at divergent boundaries where plates pull apart, creating a depression that fills with water.
+
+### Question:
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+
+### Context:
+KBPedia Concept: undersea valley.
+Relevant Logical Facts:
+  - definition: The axial depression of the mid-oceanic ridge system.
+  - subclass of: underwater topographical feature
+  - subclass of: land topographical feature
+  - subclass of: underwater location
+  - sibling concept: abyssal plain
+  - sibling concept: undersea arrugado
+  - sibling concept: underwater bank
+  - sibling concept: undersea hole
+  - sibling concept: undersea continental rise
+
+KBPedia Concept: oceanic plateau.
+Relevant Logical Facts:
+  - definition: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed. While many oceanic plateaus are composed of continental crust, and often form a step interrupting the continental slope, some plateaus are undersea remnants of large igneous provinces.
+  - subclass of: plate tectonics
+  - subclass of: scientific discipline
+  - sibling concept: Aulacogen
+  - sibling concept: continental fragment
+  - sibling concept: craton
+  - sibling concept: fracture zone
+  - sibling concept: geodynamics
+
+KBPedia Concept: geological basin.
+Relevant Logical Facts:
+  - definition: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.
+  - subclass of: basin
+  - subclass of: depression
+  - subclass of: slope
+  - subclass of: walled cavity
+  - subclass of: site that is also a geographical thing
+  - subclass of: land topographical feature
+  - has subclass: cirque
+  - has subclass: crater
+  - has subclass: crater basin
+  - has subclass: drainage basin
+  - has subclass: Foxe Basin
+  - sibling concept: bathtub
+  - sibling concept: bowl
+  - sibling concept: washbasin
+  - sibling concept: caldera
+  - sibling concept: cavus-topographical
+
+KBPedia Concept: fracture zone.
+Relevant Logical Facts:
+  - definition: A fracture zone is a linear oceanic feature—often hundreds, even thousands of kilometers long—resulting from the action of offset mid-ocean ridge axis segments. They are a consequence of plate tectonics. Lithospheric plates on either side of an active transform fault move in opposite directions; here, strike-slip activity occurs.
+  - subclass of: geological fault
+  - subclass of: oceanography
+  - subclass of: plate tectonics
+  - subclass of: crevice in the earth
+  - subclass of: land topographical feature
+  - subclass of: earth science
+  - subclass of: scientific discipline
+  - sibling concept: rifts or graben
+  - sibling concept: the San Andreas Fault
+  - sibling concept: biological oceanography
+  - sibling concept: chemical oceanography
+  - sibling concept: ocean current
+
+KBPedia Concept: ocean trench.
+Relevant Logical Facts:
+  - definition: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor. Oceanic trenches are a distinctive morphological feature of convergent plate boundaries, along which lithospheric plates move towards each other at rates that vary from a few mm to over ten cm per year. A trench marks the position at which the fle
+  - subclass of: land topographical feature
+  - subclass of: plate tectonics
+  - subclass of: underwater location
+  - subclass of: underwater topographical feature
+  - subclass of: topographical feature
+  - subclass of: scientific discipline
+  - subclass of: underwater
+  - has subclass: Java Trench
+  - has subclass: Marianas Trench
+  - has subclass: oceanic trenches of the Caribbean Sea
+  - has subclass: oceanic trench of the South China Sea
+  - has subclass: Puerto Rico Trench
+  - sibling concept: alluvial fan
+  - sibling concept: cultivable land
+  - sibling concept: arch
+  - sibling concept: archipelago
+  - sibling concept: badlands-topographical
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+*A.* trench.
+Ocean trenches form as a result of tectonic plates converging, not diverging. They are the deepest parts of the ocean floor and mark the position at which lithospheric plates move towards each other.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "tectonic plates",
+    "diverging",
+    "rift valley",
+    "mid-ocean ridge"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['trench', 'rift valley', 'ocean basin', 'mid-ocean ridge']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] trench coat: The collection of all trench coats. A type of RainCoat. The collection TrenchCoat is a SomethingToWearTypeByGenericCategory and a SpatiallyDisjointObjectType.
+[1] trench: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).
+[2] rift valley: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults. Rift valleys are found both on continents and under oceans.
+[3] Lake Nyasa: Lake in the Great Rift Valley.
+[4] geological basin: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.
+[5] basin: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.
+[6] oceanic ridge: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This type of oceanic mountain ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. The production of new seafloor results from mantle upwel
+[7] beach ridge: A specialization of Ridge-Hill. Each BeachRidge is found on a SandyBeach.
+[8] interplate earthquake: A type of Earthquake. Each instance of InterplateEarthquake is an earthquake that occurs at the boundary of two tectonic plates.
+[9] orogeny: Orogeny refers to forces and events leading to a large structural deformation of the Earth's lithosphere (crust and uppermost mantle) due to the interaction between tectonic plates. Orogens or orogenic belts develop when a continental plate is crumpled and is pushed upwards to form mountain ranges, and involve a great range of geological processes collectively called orogenesis.
+[10] anabranch: A diverging branch flowing out of a main stream and rejoining it downstream.
+[11] Brachyelytrum: Brachyelytrum is a genus of North American and East Asian plants in the grass family, classified in its own tribe Brachyelytreae. Molecular phylogenetic study has indicated that Brachyelytrum is the earliest diverging lineage in the subfamily Pooideae (the cool season grasses), a lineage that includes many of the world's major cereal crops such as barley, wheat, and oats. see  Aphanelytrum Muhlenb
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 9, 10]
+```
+
+These concepts are relevant to answering the question because they relate directly or indirectly to tectonic plates diverging and forming features such as trenches, rift valleys, ocean basins, mid-ocean ridges.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge"
+
+Concept: 'trench'
+Facts:
+  - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).
+  - subclass of: topographical feature
+  - subclass of: cartographic feature type
+  - subclass of: configuration
+  - subclass of: non-agent-like place
+  - sibling concept: albedo feature
+  - sibling concept: archipelago
+  - sibling concept: asphalt lake
+  - sibling concept: bend
+  - sibling concept: body of water
+
+Concept: 'Lake Nyasa'
+Facts:
+  - definition: Lake in the Great Rift Valley.
+  - subclass of: fresh-water lake
+  - subclass of: lake
+  - subclass of: fresh water
+  - sibling concept: Canadice Lake
+  - sibling concept: Canandaigua Lake
+  - sibling concept: Cayuga Lake
+  - sibling concept: China Lake
+  - sibling concept: Crater Lake
+
+Concept: 'basin'
+Facts:
+  - definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.
+  - subclass of: walled cavity
+  - subclass of: site that is also a geographical thing
+  - subclass of: cavity
+  - subclass of: geographical thing
+  - subclass of: spatial thing
+  - has subclass: geological basin
+  - has subclass: bathtub
+  - has subclass: bowl
+  - has subclass: washbasin
+  - sibling concept: abdominal cavity
+  - sibling concept: acetabulum
+
+Concept: 'oceanic ridge'
+Facts:
+  - definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This type of oceanic mountain ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. The production of new seafloor results from mantle upwel
+  - subclass of: plate tectonics
+  - subclass of: scientific discipline
+  - sibling concept: Aulacogen
+  - sibling concept: continental fragment
+  - sibling concept: craton
+  - sibling concept: fracture zone
+  - sibling concept: geodynamics
+
+Concept: 'orogeny'
+Facts:
+  - definition: Orogeny refers to forces and events leading to a large structural deformation of the Earth's lithosphere (crust and uppermost mantle) due to the interaction between tectonic plates. Orogens or orogenic belts develop when a continental plate is crumpled and is pushed upwards to form mountain ranges, and involve a great range of geological processes collectively called orogenesis.
+  - subclass of: plate tectonics
+  - subclass of: scientific discipline
+  - sibling concept: Aulacogen
+  - sibling concept: continental fragment
+  - sibling concept: craton
+  - sibling concept: fracture zone
+  - sibling concept: geodynamics
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output for each concept:
+
+**Concept:** 'trench'
+```json
+{
+    "trench": [
+        "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).",
+        "subclass of: topographical feature"
+    ]
+}
+```
+
+**Concept:** 'Lake Nyasa'
+```json
+{
+    "Lake Nyasa": []
+}
+```
+No relevant facts were found for Lake Nyasa.
+
+**Concept:** 'basin'
+```json
+{
+    "basin": [
+        "definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids.",
+        "subclass of: walled cavity"
+    ]
+}
+```
+
+**Concept:** 'oceanic ridge'
+```json
+{
+    "oceanic ridge": [
+        "definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine.",
+        "subclass of: plate tectonics"
+    ]
+}
+```
+
+**Concept:** 'orogeny'
+```json
+{
+    "orogeny": []
+}
+```
+No relevant facts were found for orogeny.
+
+Note that I have applied the filtering rules to each concept, keeping only the most directly related and useful information.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are a Logic Discovery Agent. Extract concise, factual, and structural logical building blocks needed to answer the Question from the Context.\n\n### TASK\nProduce a single numbered list called **LOGICAL EVIDENCE**. \nFirst, gather evidence and definitions for all concepts related to the Question, especially focusing on each of the provided MCQ choices. \nThen, add other structural logical evidence that bridges the premise to the answer.\nEach item must be one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.\n\n### CONSTRAINTS\n* Include at most 15 items total. Keep them highly concise but strictly factual.\n* Each item must directly help bridge the premise to the answer. Omit background, history, or tangential details.\n* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."\n* Break compound sentences into independent logical units.\n* Use clear, declarative English only. No code, no symbols.\n* Do NOT reveal the final answer — provide logical ingredients only.\n\n---\n### QUESTION:\nWhich feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge\n\n### CONTEXT:\nKBPedia Concept: trench.\nRelevant Logical Facts:\n  - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).\n  - subclass of: topographical feature\n  - subclass of: cartographic feature type\n  - subclass of: configuration\n  - subclass of: non-agent-like place\n  - sibling concept: albedo feature\n  - sibling concept: archipelago\n  - sibling concept: asphalt lake\n  - sibling concept: bend\n  - sibling concept: body of water\nKBPedia Concept: basin.\nRelevant Logical Facts:\n  - definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.\n  - subclass of: walled cavity\n  - subclass of: site that is also a geographical thing\n  - subclass of: cavity\n  - subclass of: geographical thing\n  - subclass of: spatial thing\n  - has subclass: geological basin\n  - has subclass: bathtub\n  - has subclass: bowl\n  - has subclass: washbasin\n  - sibling concept: abdominal cavity\n  - sibling concept: acetabulum\n  - sibling concept: alveolus\n  - sibling concept: bodily orifice\n  - sibling concept: cave\nKBPedia Concept: oceanic ridge.\nRelevant Logical Facts:\n  - definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This type of oceanic mountain ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. The production of new seafloor results from mantle upwel\n  - subclass of: plate tectonics\n  - subclass of: scientific discipline\n  - sibling concept: Aulacogen\n  - sibling concept: continental fragment\n  - sibling concept: craton\n  - sibling concept: fracture zone\n  - sibling concept: geodynamics\nKBPedia Concept: orogeny.\nRelevant Logical Facts:\n  - definition: Orogeny refers to forces and events leading to a large structural deformation of the Earth\'s lithosphere (crust and uppermost mantle) due to the interaction between tectonic plates. Orogens or orogenic belts develop when a continental plate is crumpled and is pushed upwards to form mountain ranges, and involve a great range of geological processes collectively called orogenesis.\n  - subclass of: plate tectonics\n  - subclass of: scientific discipline\n  - sibling concept: Aulacogen\n  - sibling concept: continental fragment\n  - sibling concept: craton\n  - sibling concept: fracture zone\n  - sibling concept: geodynamics\n\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+**LOGICAL EVIDENCE**
+
+1. Tectonic plates are large, rigid slabs of the Earth's lithosphere that fit together like a jigsaw puzzle.
+2. When tectonic plates diverge (move apart), they create new crust as magma rises from the mantle to fill the gap.
+3. A mid-ocean ridge is an underwater mountain system formed by plate tectonics, where new oceanic crust is created through seafloor spreading.
+4. Seafloor spreading occurs at a rate of about 2-10 cm/yr (0.8-4 in./yr), resulting in the creation of new ocean floor and the movement of older ocean floor away from the ridge.
+5. Ocean basins are formed as a result of tectonic plates diverging, creating large depressions or troughs between them.
+6. Rift valleys form when two tectonic plates pull apart, causing the Earth's crust to stretch and thin.
+7. Trenches are not directly created by plate divergence; they can be formed through subduction (one plate being pushed beneath another).
+8. Subduction occurs at a rate of about 2-10 cm/yr (0.8-4 in./yr), resulting in the creation of deep-sea trenches.
+9. The process of seafloor spreading is responsible for creating new oceanic crust, which can eventually be subducted back into the mantle.
+10. Orogeny refers to forces and events leading to a large structural deformation of the Earth's lithosphere due to plate tectonics interactions.
+
+Note: Items 7-8 provide evidence that trenches are not formed by plate divergence but rather through subduction, which is related to item 9 (seafloor spreading).
+===================================

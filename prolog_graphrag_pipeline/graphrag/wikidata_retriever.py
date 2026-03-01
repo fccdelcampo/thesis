@@ -191,15 +191,24 @@ class WikidataRetriever:
 
         async with self.semaphore:
             sparql_query = f"""
-            SELECT ?pLabel ?oLabel WHERE {{
-              VALUES ?p {{ {values_clause} }}
-              wd:{qid} ?p ?o.
-              ?o rdfs:label ?oLabel.
-              ?property wikibase:directClaim ?p.
-              ?property rdfs:label ?pLabel.
-              FILTER(LANG(?oLabel) = "en")
-              FILTER(LANG(?pLabel) = "en")
-            }} LIMIT 20
+            SELECT ?pLabel ?oLabel ?desc WHERE {{
+              {{
+                # Fetch structural facts
+                VALUES ?p {{ {values_clause} }}
+                wd:{qid} ?p ?o.
+                ?o rdfs:label ?oLabel.
+                ?property wikibase:directClaim ?p.
+                ?property rdfs:label ?pLabel.
+                FILTER(LANG(?oLabel) = "en")
+                FILTER(LANG(?pLabel) = "en")
+              }}
+              UNION
+              {{
+                # Fetch the text description of the entity
+                wd:{qid} schema:description ?desc.
+                FILTER(LANG(?desc) = "en")
+              }}
+            }} LIMIT 10
             """
 
             headers = {
@@ -218,11 +227,17 @@ class WikidataRetriever:
                                 data = await response.json()
                                 facts = []
                                 for item in data.get("results", {}).get("bindings", []):
+                                    desc = item.get("desc", {}).get("value", "")
+                                    if desc and f"defines: {desc.lower()}" not in facts:
+                                        facts.insert(0, f"defines: {desc.lower()}") # Prioritize definition
+                                        
                                     predicate = item.get("pLabel", {}).get("value", "")
                                     obj = item.get("oLabel", {}).get("value", "")
                                     # Python-level pre-filter: skip if object looks like a Q-ID with no label
-                                    if predicate and obj and not obj.startswith("Q"):
-                                        facts.append(f"{predicate.lower()}: {obj.lower()}")
+                                    if predicate and obj and not obj.startswith("Q") and len(facts) < 10:
+                                        fact_str = f"{predicate.lower()}: {obj.lower()}"
+                                        if fact_str not in facts:
+                                            facts.append(fact_str)
                                 return facts
                             elif response.status == 429:
                                 retry_after = int(response.headers.get("Retry-After", 10))

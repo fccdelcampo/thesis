@@ -4758,4 +4758,401 @@ DEBUG: Buffered 11 raw triple(s) for 'plant epidermis'
 DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 10, 11] from 12 candidates.
 DEBUG: End-filter kept 7/12 concepts.
 DEBUG: Batch sending 5 concepts to LLM triple filter...
-  > Sending chunk to LLM (4849 chars)...
+  > Sending chunk to LLM (4849 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],\n  "bacter'...
+DEBUG: Batch LLM filter kept 2/14 triple(s) for 'membrane protein'
+DEBUG: Batch LLM filter kept 0/7 triple(s) for 'bacterial cell wall'
+DEBUG: Batch LLM filter kept 1/11 triple(s) for 'chloroplast'
+DEBUG: Batch LLM filter kept 0/11 triple(s) for 'nucleus'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'human skeleton'
+DEBUG: Removed 2 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 3 grounded concept contexts.
+  > Sending chunk to LLM (2715 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a rigid structure that provides support and protection.
+2. The human skeleton is an internal framework of the body providing structural support, protection, and movement facilitation.
+3. Plant cells have various types of walls for mechanical strength and stability.
+4. Cell wall components in plants include cellulose, hemicelluloses, pectin, and proteins.
+5. A cell membrane surrounds a plant cell's contents but does not provide significant structural support like an animal skeleton.
+6. Chloroplasts are organelles found within the cells of photosynthetic organisms for light-dependent reactions during photosynthesis.
+7. The nucleus houses most of a eukaryotic cell's genetic material and is involved in cellular processes, including growth and reproduction.
+8. A plant cell wall provides structural support similar to an animal skeleton but with different composition and function.
+9. Animal skeletons are primarily composed of bones that provide mechanical strength and protection for the body.
+10. The primary functions of a human skeleton include supporting the body's structure, facilitating movement through attachment points for muscles, and protecting internal organs from damage.
+11. Plant cell walls can be made up of various materials depending on their function within the plant (e.g., cellulose in stems).
+12. Animal skeletons are dynamic structures that change throughout life due to growth or injury repair processes.
+13. The structure and composition of a human skeleton allow for flexibility, movement, and protection against external forces.
+14. Plant cell walls can be rigid but also flexible depending on the plant species (e.g., bamboo has highly flexible stems).
+15. Animal skeletons are made up primarily of calcium phosphate-based materials that provide strength and rigidity to support body weight and facilitate movement.
+**Context from Prompt:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+has_structural_support(cell_wall).
+has_protection(cell_wall).
+has_movement_facilitation(cell_wall).
+is_composed_of_cellulose(cell_wall).
+is_composed_of_hemicelluloses(cell_wall).
+is_composed_of_pectin(cell_wall).
+is_composed_of_proteins(cell_wall).
+
+answer(OptionLetter) :- choice(OptionLetter, Component), has_structural_support(Component).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+has_structural_support(cell_wall).
+has_protection(cell_wall).
+has_movement_facilitation(cell_wall).
+is_composed_of_cellulose(cell_wall).
+is_composed_of_hemicelluloses(cell_wall).
+is_composed_of_pectin(cell_wall).
+is_composed_of_proteins(cell_wall).
+
+answer(OptionLetter) :- choice(OptionLetter, Component), has_structural_support(Component).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for b, because\n      choice holds for b, and cell_wall, and\n      has_structural_support holds for cell_wall\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for b, because
+      choice holds for b, and cell_wall, and
+      has_structural_support holds for cell_wall
+
+
+**Explainer Output:** 
+**Conclusion:** The part of a plant cell that has a function most similar to the function of an animal skeleton is the cell wall.
+
+**Logical Path:** The solver arrived at this conclusion by identifying the structural support and protection provided by the cell wall, which are key functions also attributed to an animal skeleton. Here's how it broke down:
+
+1. **Primary Rule:** The system defined a relationship between options that provide structural support and those similar in function to an animal skeleton.
+2. **Cell Wall Characteristics:** The solver verified that the cell wall provides both structural support and protection, which are crucial functions of an animal skeleton.
+3. **Composition Analysis:** It examined the composition of the cell wall, noting its inclusion of cellulose, hemicelluloses, pectin, and proteins, all of which contribute to its mechanical strength and stability.
+4. **Comparison with Animal Skeletons:** The solver compared these characteristics with those of animal skeletons, primarily composed of calcium phosphate-based materials that provide strength and rigidity for supporting body weight and facilitating movement.
+5. **Conclusion Based on Similarity:** Given the cell wall's ability to offer structural support similar to an animal skeleton but through different means (composition), the system concluded that the cell wall is the part of a plant cell with a function most similar to that of an animal skeleton.
+
+This logical path demonstrates how the solver used the provided database and rules to arrive at its conclusion, emphasizing the importance of understanding the structural support and protection functions in both plant cells and animal skeletons.
+
+**FINAL LLM OUTPUT:
+*B.* The cell wall.
+The part of a plant cell that has a function most similar to the function of an animal skeleton is indeed the cell wall, primarily due to its role in providing structural support and protection, which are key functions also attributed to an animal skeleton.
+====The pipeline executed in 33.4587 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | CORRECT |   31.9s
+Prolog          | Predicted: [B]   | CORRECT |  283.4s
+Tuned LLM       | Predicted: [B]   | CORRECT |    2.9s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #1] Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods e...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['sample', 'comparison', 'process', 'research method', 'observational study', 'long-term study', 'drive', 'statistical method', 'scientific observation', 'trouble']
+DEBUG: Buffered 10 raw triple(s) for 'sample'
+DEBUG: Buffered 3 raw triple(s) for 'comparison'
+DEBUG: Buffered 11 raw triple(s) for 'process'
+DEBUG: Buffered 23 raw triple(s) for 'research method'
+DEBUG: Buffered 13 raw triple(s) for 'observational study'
+DEBUG: Buffered 4 raw triple(s) for 'long-term study'
+DEBUG: Buffered 8 raw triple(s) for 'drive'
+DEBUG: Buffered 10 raw triple(s) for 'statistical method'
+DEBUG: Buffered 11 raw triple(s) for 'scientific observation'
+DEBUG: Buffered 11 raw triple(s) for 'trouble'
+  > Sending chunk to LLM (3740 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4075 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n  "comparison": [\n    "definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.",\n    "subclass of: examination investigation",\n    "s'...
+DEBUG: Batch LLM filter kept 3/3 triple(s) for 'comparison'
+DEBUG: Batch LLM filter kept 1/23 triple(s) for 'research method'
+DEBUG: Batch LLM filter kept 4/4 triple(s) for 'long-term study'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'drive'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'scientific observation'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (3223 chars)... Done!
+  > Sending chunk to LLM (3044 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Identifying the factor that makes replication challenging.",
+  "question": "Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature",
+  "context": [
+    "Janette conducts an investigation to see which foods make her feel more fatigued.",
+    "She eats one of four different foods each day at the same time for four days and then records how she feels.",
+    "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the factor that makes replication challenging.', 'question': 'Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature', 'context': ['Janette conducts an investigation to see which foods make her feel more fatigued.', 'She eats one of four different foods each day at the same time for four days and then records how she feels.', 'She asks her friend Carmen to do the same investigation to see if she gets similar results.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+DEBUG: EXTRACTED CONTEXT (Len: 3): ['Janette conducts an investigation to see which foods make her feel more fatigued.', 'She eats one of four different foods each day at the same time for four days and then records how she feels.', 'She asks her friend Carmen to do the same investigation to see if she gets similar results.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which would make the investigation most difficult to replicate? A) measuring the' | context items=3
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 3 text chunk(s)...
+Processing text context: Janette conducts an investigation to see which foods make her feel more fatigued.
+  > [Async] Sending chunk to LLM (2664 chars) and waiting for extraction... Done!
+Text context processed: run_id='fd6286fc-4c5c-4b62-a530-094f2ed908dc' result={'resolver': {'number_of_nodes_to_resolve': 4, 'number_of_created_nodes': 4}}
+Processing text context: She eats one of four different foods each day at the same time for four days and then records how she feels.
+  > [Async] Sending chunk to LLM (2691 chars) and waiting for extraction... Done!
+Text context processed: run_id='2caa3d27-eca1-4485-a687-88c8d9befa81' result={'resolver': {'number_of_nodes_to_resolve': 7, 'number_of_created_nodes': 7}}
+Processing text context: She asks her friend Carmen to do the same investigation to see if she gets similar results.
+  > [Async] Sending chunk to LLM (2674 chars) and waiting for extraction... Done!
+Text context processed: run_id='cbbc7d31-8211-4810-8bc2-cce26a3bc5ef' result={'resolver': {'number_of_nodes_to_resolve': 9, 'number_of_created_nodes': 9}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature'
+  > Sending chunk to LLM (885 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['measuring the amount of fatigue', 'making sure the same foods are eaten', 'recording observations in the same chart', 'making sure the foods are at the same temperature', 'investigation', 'fatigue', 'foods', 'temperature']
+DEBUG: KBPedia matched 2 concept(s) for 'measuring the amount of fatigue': ['fatigue', 'chronic fatigue syndrome']
+DEBUG: Buffered 10 raw triple(s) for 'fatigue'
+DEBUG: Buffered 8 raw triple(s) for 'chronic fatigue syndrome'
+DEBUG: KBPedia matched 2 concept(s) for 'making sure the same foods are eaten': ['foods featuring butter', 'breakfast food']
+DEBUG: Buffered 10 raw triple(s) for 'foods featuring butter'
+DEBUG: Buffered 20 raw triple(s) for 'breakfast food'
+DEBUG: KBPedia matched 2 concept(s) for 'recording observations in the same chart': ['chart pattern', 'financial chart']
+DEBUG: Buffered 8 raw triple(s) for 'chart pattern'
+DEBUG: Buffered 8 raw triple(s) for 'financial chart'
+DEBUG: KBPedia matched 2 concept(s) for 'making sure the foods are at the same temperature': ['temperature', 'foods featuring butter']
+DEBUG: Buffered 24 raw triple(s) for 'temperature'
+DEBUG: KBPedia matched 2 concept(s) for 'investigation': ['fire investigation', 'investigation']
+DEBUG: Buffered 8 raw triple(s) for 'fire investigation'
+DEBUG: Buffered 19 raw triple(s) for 'investigation'
+DEBUG: KBPedia matched 2 concept(s) for 'fatigue': ['fatigue', 'chronic fatigue syndrome']
+DEBUG: KBPedia matched 2 concept(s) for 'foods': ['foods featuring butter', "topics of 'consuming foods'"]
+DEBUG: Buffered 7 raw triple(s) for 'topics of 'consuming foods''
+DEBUG: KBPedia matched 2 concept(s) for 'temperature': ['temperature', 'room temperature']
+DEBUG: Buffered 11 raw triple(s) for 'room temperature'
+  > Sending chunk to LLM (4165 chars)... Done!
+DEBUG: End-filter LLM kept indices: [0, 1, 3, 5, 6, 8, 9, 10] from 11 candidates.
+DEBUG: End-filter kept 8/11 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4802 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**fatigue**\n[\n  "definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue.",\n  "has subclass: sleep depriva'...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'fatigue'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'chronic fatigue syndrome'
+DEBUG: Batch LLM filter kept 20/20 triple(s) for 'breakfast food'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'financial chart'
+DEBUG: Batch LLM filter kept 24/24 triple(s) for 'temperature'
+DEBUG: KBPedia found 5 grounded concept contexts.
+  > Sending chunk to LLM (5164 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+**User Question:**
+Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Fatigue is a physiological condition characterized by continuous exhaustion caused by an underlying ailment.
+2. Chronic fatigue syndrome (CFS) is an illness with unknown cause, causing fatigue and other symptoms.
+3. CFS has been debated as not being a genuine medical condition within the clinical community.
+4. Replicating experiments requires precise control over variables to ensure consistent results.
+5. Measuring fatigue can be subjective and difficult to quantify accurately in all cases.
+6. Recording observations using the same chart is crucial for maintaining consistency across trials.
+7. Temperature affects biological processes, including metabolism and enzyme activity.
+8. Maintaining a constant temperature during experiments helps minimize external influences on variables being measured.
+9. Food intake can impact fatigue levels due to its effects on energy production and nutrient availability.
+10. Consuming the same foods in each trial ensures that any observed changes are not attributed to dietary factors.
+11. Temperature control is essential for maintaining consistent conditions across trials, especially when studying biological processes.
+12. Recording observations using a financial chart (technical analysis) may introduce biases or errors due to its subjective nature.
+13. The accuracy of temperature measurements can significantly impact the reliability and validity of experimental results.
+
+Note: These items aim to provide concise logical building blocks that bridge the premise to potential answers, focusing on concepts related to fatigue, chronic fatigue syndrome, food intake, recording observations, and temperature control.
+**Context from Prompt:**
+Janette conducts an investigation to see which foods make her feel more fatigued.
+She eats one of four different foods each day at the same time for four days and then records how she feels.
+She asks her friend Carmen to do the same investigation to see if she gets similar results.
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, measuring_the_amount_of_fatigue).
+choice(b, making_sure_the_same_foods_are_eaten).
+choice(c, recording_observations_in_the_same_chart).
+choice(d, making_sure_the_foods_are_at_the_same_temperature).
+
+is_subjective(measuring_fatigue).
+requires_precise_control(replicating_experiments).
+maintaining_constant_temperature_affects_biological_processes.
+food_intake_impacts_fatigue_levels.
+recording_observations_using_same_chart_is_crucial.
+
+answer(OptionLetter) :- choice(OptionLetter, Factor), not is_easily_replicable(Factor).
+
+is_easily_replicable(Factor) :-
+Factor = making_sure_the_same_foods_are_eaten,
+!.
+is_easily_replicable(Factor) :-
+Factor = recording_observations_in_the_same_chart,
+!.
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, measuring_the_amount_of_fatigue).
+choice(b, making_sure_the_same_foods_are_eaten).
+choice(c, recording_observations_in_the_same_chart).
+choice(d, making_sure_the_foods_are_at_the_same_temperature).
+
+is_subjective(measuring_fatigue).
+requires_precise_control(replicating_experiments).
+maintaining_constant_temperature_affects_biological_processes.
+food_intake_impacts_fatigue_levels.
+recording_observations_using_same_chart_is_crucial.
+
+answer(OptionLetter) :- choice(OptionLetter, Factor), not is_easily_replicable(Factor).
+
+is_easily_replicable(Factor) :-
+Factor = making_sure_the_same_foods_are_eaten,
+!.
+is_easily_replicable(Factor) :-
+Factor = recording_observations_in_the_same_chart,
+!.
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+Error: No permission to scasp procedure `system:!/0'
+**Explainer Output:** 
+**Conclusion:** The investigation would be most difficult to replicate if Janette and Carmen make sure the same foods are eaten.
+
+**Logical Path:** The solver determined this by analyzing the logical connections between the factors affecting replicability:
+
+1. **Replicating Experiments Requires Precise Control:** The system first identifies that replicating experiments requires precise control over variables.
+2. **Measuring Fatigue is Subjective:** It then notes that measuring fatigue can be subjective and difficult to quantify accurately in all cases, which could introduce variability.
+3. **Food Intake Impacts Fatigue Levels:** However, the solver also recognizes that food intake can impact fatigue levels due to its effects on energy production and nutrient availability.
+4. **Maintaining Constant Temperature Affects Biological Processes:** The system acknowledges that maintaining a constant temperature during experiments helps minimize external influences on variables being measured.
+5. **Recording Observations Using Same Chart is Crucial:** It also emphasizes the importance of recording observations using the same chart to maintain consistency across trials.
+
+However, the solver concludes that making sure the same foods are eaten (Option B) would make the investigation most difficult to replicate because it directly addresses a critical variable affecting fatigue levels. This factor is crucial for ensuring consistent results in an experiment studying fatigue, as small variations in diet can significantly impact outcomes.
+
+**FINAL LLM OUTPUT:
+*B.* 
+Making sure the same foods are eaten is crucial for replicating fatigue experiments, as even small variations in diet can significantly impact outcomes and make it difficult to isolate the effects of different foods on fatigue levels.
+
+Final Answer: B.
+====The pipeline executed in 35.5844 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | WRONG   |   34.7s
+Prolog          | Predicted: [B]   | WRONG   |  129.9s
+Tuned LLM       | Predicted: [C]   | WRONG   |    2.8s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #2] Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-oce...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['oceanic ridge', 'undersea valley', 'rift valley', 'oceanic plateau', 'seamount', 'geological basin', 'fracture zone', 'subduction zones', 'ocean trench', 'rifts or graben']
+DEBUG: Buffered 8 raw triple(s) for 'oceanic ridge'
+DEBUG: Buffered 9 raw triple(s) for 'undersea valley'
+DEBUG: Buffered 14 raw triple(s) for 'rift valley'
+DEBUG: Buffered 8 raw triple(s) for 'oceanic plateau'
+DEBUG: Buffered 12 raw triple(s) for 'seamount'
+DEBUG: Buffered 17 raw triple(s) for 'geological basin'
+DEBUG: Buffered 13 raw triple(s) for 'fracture zone'
+DEBUG: Buffered 8 raw triple(s) for 'subduction zones'
+DEBUG: Buffered 18 raw triple(s) for 'ocean trench'
+DEBUG: Buffered 13 raw triple(s) for 'rifts or graben'
+  > Sending chunk to LLM (4078 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4975 chars)...

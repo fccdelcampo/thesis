@@ -29277,3 +29277,637 @@ KBPedia Concept: protoplasm. Relevant Logical Facts:   - definition: The living 
 *B.* cell wall.
 The function of a plant cell's cell wall is to provide mechanical support and protection, similar to the role an animal skeleton plays in supporting its body structure. The rigid yet elastic nature of the cell wall allows it to withstand internal pressures from the cell contents while also providing some degree of flexibility.
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 3 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane protein",
+  "uri": "http://kbpedia.org/kko/rc/MembraneProtein",
+  "score": 1.0,
+  "triples": [
+    "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.",
+    "has subclass: peripheral protein"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: membrane protein. Relevant Logical Facts:  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.  - has subclass: peripheral protein
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chloroplast",
+  "uri": "http://kbpedia.org/kko/rc/Chloroplast",
+  "score": 1.0,
+  "triples": [
+    "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: chloroplast. Relevant Logical Facts:  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth \u2013 this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,",
+    "subclass of: body part",
+    "subclass of: skeleton",
+    "subclass of: region on an animal's body",
+    "subclass of: organ system",
+    "sibling concept: abdomen",
+    "sibling concept: abdominal cavity",
+    "sibling concept: adrenal cortex",
+    "sibling concept: adrenal medulla",
+    "sibling concept: alimentary canal"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,  - subclass of: body part  - subclass of: skeleton  - subclass of: region on an animal's body  - subclass of: organ system  - sibling concept: abdomen  - sibling concept: abdominal cavity  - sibling concept: adrenal cortex  - sibling concept: adrenal medulla  - sibling concept: alimentary canal
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a rigid structure that provides support and protection.
+2. The human skeleton is an internal framework of the body providing structural support, protection, and movement facilitation.
+3. Plant cells have various types of walls for mechanical strength and stability.
+4. Cell wall components in plants include cellulose, hemicelluloses, pectin, and proteins.
+5. A cell membrane surrounds a plant cell's contents but does not provide significant structural support like an animal skeleton.
+6. Chloroplasts are organelles found within the cells of photosynthetic organisms for light-dependent reactions during photosynthesis.
+7. The nucleus houses most of a eukaryotic cell's genetic material and is involved in cellular processes, including growth and reproduction.
+8. A plant cell wall provides structural support similar to an animal skeleton but with different composition and function.
+9. Animal skeletons are primarily composed of bones that provide mechanical strength and protection for the body.
+10. The primary functions of a human skeleton include supporting the body's structure, facilitating movement through attachment points for muscles, and protecting internal organs from damage.
+11. Plant cell walls can be made up of various materials depending on their function within the plant (e.g., cellulose in stems).
+12. Animal skeletons are dynamic structures that change throughout life due to growth or injury repair processes.
+13. The structure and composition of a human skeleton allow for flexibility, movement, and protection against external forces.
+14. Plant cell walls can be rigid but also flexible depending on the plant species (e.g., bamboo has highly flexible stems).
+15. Animal skeletons are made up primarily of calcium phosphate-based materials that provide strength and rigidity to support body weight and facilitate movement.
+==================================================
+==================================================
+ QUERY: Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "comparison",
+  "uri": "http://kbpedia.org/kko/rc/Comparison-Examination",
+  "score": 1.0,
+  "triples": [
+    "definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.",
+    "subclass of: examination investigation",
+    "subclass of: investigation"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: comparison. Relevant Logical Facts:   - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.   - subclass of: examination investigation   - subclass of: investigation
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "research method",
+  "uri": "http://kbpedia.org/kko/rc/ResearchMethod",
+  "score": 1.0,
+  "triples": [
+    "definition: Instances of research methods."
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: research method. Relevant Logical Facts:   - definition: Instances of research methods.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "long-term study",
+  "uri": "http://kbpedia.org/kko/rc/LongTermStudy",
+  "score": 1.0,
+  "triples": [
+    "definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.",
+    "subclass of: detailed study",
+    "subclass of: report (document)",
+    "sibling concept: dissertation"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: long-term study. Relevant Logical Facts:   - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.   - subclass of: detailed study   - subclass of: report (document)   - sibling concept: dissertation
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "drive",
+  "uri": "http://kbpedia.org/kko/rc/Drive-PhysiologicalCondition",
+  "score": 1.0,
+  "triples": [
+    "definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.",
+    "subclass of: mental health problem",
+    "subclass of: illness",
+    "sibling concept: aids dementia complex",
+    "sibling concept: catatonia",
+    "sibling concept: cognitive disorder",
+    "sibling concept: clinical depression",
+    "sibling concept: infantilism (appearaance)"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: drive. Relevant Logical Facts:   - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.   - subclass of: mental health problem   - subclass of: illness   - sibling concept: aids dementia complex   - sibling concept: catatonia   - sibling concept: cognitive disorder   - sibling concept: clinical depression   - sibling concept: infantilism (appearaance)
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "scientific observation",
+  "uri": "http://kbpedia.org/kko/rc/ScientificObservation",
+  "score": 1.0,
+  "triples": [
+    "definition: A means or facility to generate scientific observations.",
+    "subclass of: observation",
+    "subclass of: scientific method",
+    "subclass of: cognition",
+    "subclass of: method",
+    "subclass of: philosophical beliefs",
+    "sibling concept: biochemistry method",
+    "sibling concept: geochronological dating method",
+    "sibling concept: hypothesis",
+    "sibling concept: scientific technique",
+    "sibling concept: semiempirical quantum chemistry method"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: scientific observation. Relevant Logical Facts:   - definition: A means or facility to generate scientific observations.   - subclass of: observation   - subclass of: scientific method   - subclass of: cognition   - subclass of: method   - subclass of: philosophical beliefs   - sibling concept: biochemistry method   - sibling concept: geochronological dating method   - sibling concept: hypothesis   - sibling concept: scientific technique   - sibling concept: semiempirical quantum chemistry method
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+*B.* making sure the same foods are eaten.
+This is because if Janette and Carmen do not eat the exact same food, it would be difficult to compare their results accurately. The investigation relies on comparing fatigue levels after consuming specific foods, so any variation in what they ate could skew or invalidate the comparison.
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fatigue",
+  "uri": "http://kbpedia.org/kko/rc/FatigueCondition",
+  "score": 1.0,
+  "triples": [
+    "definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe ",
+    "subclass of: illness",
+    "subclass of: medical condition",
+    "has subclass: exhausting",
+    "has subclass: sleep deprivation",
+    "sibling concept: ache ailment condition",
+    "sibling concept: acid indigestion",
+    "sibling concept: acquired disorder",
+    "sibling concept: Addison's disease",
+    "sibling concept: Adenomyosis"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: fatigue. Relevant Logical Facts:  - definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe  - subclass of: illness  - subclass of: medical condition  - has subclass: exhausting  - has subclass: sleep deprivation  - sibling concept: ache ailment condition  - sibling concept: acid indigestion  - sibling concept: acquired disorder  - sibling concept: Addison's disease  - sibling concept: Adenomyosis
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chronic fatigue syndrome",
+  "uri": "http://kbpedia.org/kko/rc/ChronicFatigueSyndrome",
+  "score": 1.0,
+  "triples": [
+    "definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.",
+    "subclass of: chronic condition",
+    "subclass of: medical condition",
+    "sibling concept: Amyotrophic lateral sclerosis",
+    "sibling concept: Marie Strumpell arthritis",
+    "sibling concept: arthritis",
+    "sibling concept: case of autism",
+    "sibling concept: chronic lung disease"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: chronic fatigue syndrome. Relevant Logical Facts:  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.  - subclass of: chronic condition  - subclass of: medical condition  - sibling concept: Amyotrophic lateral sclerosis  - sibling concept: Marie Strumpell arthritis  - sibling concept: arthritis  - sibling concept: case of autism  - sibling concept: chronic lung disease
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "breakfast food",
+  "uri": "http://kbpedia.org/kko/rc/BreakfastFood",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.",
+    "subclass of: food item",
+    "subclass of: food beverage or tobacco product",
+    "subclass of: food or drink",
+    "subclass of: grocery",
+    "subclass of: opaque thing",
+    "subclass of: organic matter",
+    "has subclass: breakfast",
+    "has subclass: cereal (breakfast food)",
+    "has subclass: doughnut",
+    "has subclass: chicken's egg",
+    "has subclass: flapjack",
+    "has subclass: omelette",
+    "has subclass: pancake",
+    "has subclass: waffle",
+    "sibling concept: cereal (food)",
+    "sibling concept: cheesy food",
+    "sibling concept: children's food",
+    "sibling concept: convenience food",
+    "sibling concept: crumb"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: breakfast food. Relevant Logical Facts:  - definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.  - subclass of: food item  - subclass of: food beverage or tobacco product  - subclass of: food or drink  - subclass of: grocery  - subclass of: opaque thing  - subclass of: organic matter  - has subclass: breakfast  - has subclass: cereal (breakfast food)  - has subclass: doughnut  - has subclass: chicken's egg  - has subclass: flapjack  - has subclass: omelette  - has subclass: pancake  - has subclass: waffle  - sibling concept: cereal (food)  - sibling concept: cheesy food  - sibling concept: children's food  - sibling concept: convenience food  - sibling concept: crumb
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "financial chart",
+  "uri": "http://kbpedia.org/kko/rc/FinancialChart",
+  "score": 1.0,
+  "triples": [
+    "definition: A chart of finance or stock performance.",
+    "subclass of: technical analysis",
+    "subclass of: evaluating",
+    "subclass of: following standard procedures",
+    "sibling concept: candlestick patter",
+    "sibling concept: chart overlay",
+    "sibling concept: chart pattern",
+    "sibling concept: technical indicator"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: financial chart. Relevant Logical Facts:  - definition: A chart of finance or stock performance.  - subclass of: technical analysis  - subclass of: evaluating  - subclass of: following standard procedures  - sibling concept: candlestick patter  - sibling concept: chart overlay  - sibling concept: chart pattern  - sibling concept: technical indicator
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature",
+  "uri": "http://kbpedia.org/kko/rc/Temperature",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \\",
+    "subclass of: non aspectual quantity",
+    "subclass of: one dimensional quantity",
+    "subclass of: scalar or vector interval",
+    "subclass of: tangible physical quantity",
+    "subclass of: quality",
+    "subclass of: scalar quantity",
+    "subclass of: measurable quantity",
+    "subclass of: n-tuple interval",
+    "has subclass: absolute zero",
+    "has subclass: cold",
+    "has subclass: moderately cold",
+    "has subclass: room temperature",
+    "has subclass: sea surface temperature",
+    "has subclass: temperature control",
+    "has subclass: thermal protection",
+    "has subclass: thermoregulation",
+    "has subclass: threshold temperature",
+    "has subclass: warmth",
+    "sibling concept: area",
+    "sibling concept: beauty",
+    "sibling concept: biodiversity",
+    "sibling concept: cask strength",
+    "sibling concept: chemical purity"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: temperature. Relevant Logical Facts:  - definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \  - subclass of: non aspectual quantity  - subclass of: one dimensional quantity  - subclass of: scalar or vector interval  - subclass of: tangible physical quantity  - subclass of: quality  - subclass of: scalar quantity  - subclass of: measurable quantity  - subclass of: n-tuple interval  - has subclass: absolute zero  - has subclass: cold  - has subclass: moderately cold  - has subclass: room temperature  - has subclass: sea surface temperature  - has subclass: temperature control  - has subclass: thermal protection  - has subclass: thermoregulation  - has subclass: threshold temperature  - has subclass: warmth  - sibling concept: area  - sibling concept: beauty  - sibling concept: biodiversity  - sibling concept: cask strength  - sibling concept: chemical purity
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Fatigue is a physiological condition characterized by continuous exhaustion caused by an underlying ailment.
+2. Chronic fatigue syndrome (CFS) is an illness with unknown cause, causing fatigue and other symptoms.
+3. CFS has been debated as not being a genuine medical condition within the clinical community.
+4. Replicating experiments requires precise control over variables to ensure consistent results.
+5. Measuring fatigue can be subjective and difficult to quantify accurately in all cases.
+6. Recording observations using the same chart is crucial for maintaining consistency across trials.
+7. Temperature affects biological processes, including metabolism and enzyme activity.
+8. Maintaining a constant temperature during experiments helps minimize external influences on variables being measured.
+9. Food intake can impact fatigue levels due to its effects on energy production and nutrient availability.
+10. Consuming the same foods in each trial ensures that any observed changes are not attributed to dietary factors.
+11. Temperature control is essential for maintaining consistent conditions across trials, especially when studying biological processes.
+12. Recording observations using a financial chart (technical analysis) may introduce biases or errors due to its subjective nature.
+13. The accuracy of temperature measurements can significantly impact the reliability and validity of experimental results.
+
+Note: These items aim to provide concise logical building blocks that bridge the premise to potential answers, focusing on concepts related to fatigue, chronic fatigue syndrome, food intake, recording observations, and temperature control.
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "undersea valley",
+  "uri": "http://kbpedia.org/kko/rc/Valley-Undersea",
+  "score": 1.0,
+  "triples": [
+    "definition: The axial depression of the mid-oceanic ridge system.",
+    "subclass of: underwater topographical feature",
+    "subclass of: land topographical feature",
+    "subclass of: underwater location",
+    "sibling concept: abyssal plain",
+    "sibling concept: undersea arrugado",
+    "sibling concept: underwater bank",
+    "sibling concept: undersea hole",
+    "sibling concept: undersea continental rise"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: undersea valley. Relevant Logical Facts:   - definition: The axial depression of the mid-oceanic ridge system.   - subclass of: underwater topographical feature   - subclass of: land topographical feature   - subclass of: underwater location   - sibling concept: abyssal plain   - sibling concept: undersea arrugado   - sibling concept: underwater bank   - sibling concept: undersea hole   - sibling concept: undersea continental rise
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "oceanic plateau",
+  "uri": "http://kbpedia.org/kko/rc/OceanicPlateau",
+  "score": 1.0,
+  "triples": [
+    "definition: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed. While many oceanic plateaus are composed of continental crust, and often form a step interrupting the continental slope, some plateaus are undersea remnants of large igneous provinces.",
+    "subclass of: plate tectonics",
+    "subclass of: scientific discipline",
+    "sibling concept: Aulacogen",
+    "sibling concept: continental fragment",
+    "sibling concept: craton",
+    "sibling concept: fracture zone",
+    "sibling concept: geodynamics"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: oceanic plateau. Relevant Logical Facts:   - definition: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed. While many oceanic plateaus are composed of continental crust, and often form a step interrupting the continental slope, some plateaus are undersea remnants of large igneous provinces.   - subclass of: plate tectonics   - subclass of: scientific discipline   - sibling concept: Aulacogen   - sibling concept: continental fragment   - sibling concept: craton   - sibling concept: fracture zone   - sibling concept: geodynamics
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "geological basin",
+  "uri": "http://kbpedia.org/kko/rc/Basin-Topographical",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.",
+    "subclass of: basin",
+    "subclass of: depression",
+    "subclass of: slope",
+    "subclass of: walled cavity",
+    "subclass of: site that is also a geographical thing",
+    "subclass of: land topographical feature",
+    "has subclass: cirque",
+    "has subclass: crater",
+    "has subclass: crater basin",
+    "has subclass: drainage basin",
+    "has subclass: Foxe Basin",
+    "sibling concept: bathtub",
+    "sibling concept: bowl",
+    "sibling concept: washbasin",
+    "sibling concept: caldera",
+    "sibling concept: cavus-topographical"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: geological basin. Relevant Logical Facts:   - definition: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.   - subclass of: basin   - subclass of: depression   - subclass of: slope   - subclass of: walled cavity   - subclass of: site that is also a geographical thing   - subclass of: land topographical feature   - has subclass: cirque   - has subclass: crater   - has subclass: crater basin   - has subclass: drainage basin   - has subclass: Foxe Basin   - sibling concept: bathtub   - sibling concept: bowl   - sibling concept: washbasin   - sibling concept: caldera   - sibling concept: cavus-topographical
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fracture zone",
+  "uri": "http://kbpedia.org/kko/rc/FractureZone",
+  "score": 1.0,
+  "triples": [
+    "definition: A fracture zone is a linear oceanic feature\u2014often hundreds, even thousands of kilometers long\u2014resulting from the action of offset mid-ocean ridge axis segments. They are a consequence of plate tectonics. Lithospheric plates on either side of an active transform fault move in opposite directions; here, strike-slip activity occurs.",
+    "subclass of: geological fault",
+    "subclass of: oceanography",
+    "subclass of: plate tectonics",
+    "subclass of: crevice in the earth",
+    "subclass of: land topographical feature",
+    "subclass of: earth science",
+    "subclass of: scientific discipline",
+    "sibling concept: rifts or graben",
+    "sibling concept: the San Andreas Fault",
+    "sibling concept: biological oceanography",
+    "sibling concept: chemical oceanography",
+    "sibling concept: ocean current"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: fracture zone. Relevant Logical Facts:   - definition: A fracture zone is a linear oceanic feature—often hundreds, even thousands of kilometers long—resulting from the action of offset mid-ocean ridge axis segments. They are a consequence of plate tectonics. Lithospheric plates on either side of an active transform fault move in opposite directions; here, strike-slip activity occurs.   - subclass of: geological fault   - subclass of: oceanography   - subclass of: plate tectonics   - subclass of: crevice in the earth   - subclass of: land topographical feature   - subclass of: earth science   - subclass of: scientific discipline   - sibling concept: rifts or graben   - sibling concept: the San Andreas Fault   - sibling concept: biological oceanography   - sibling concept: chemical oceanography   - sibling concept: ocean current
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "ocean trench",
+  "uri": "http://kbpedia.org/kko/rc/OceanTrench",
+  "score": 1.0,
+  "triples": [
+    "definition: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor. Oceanic trenches are a distinctive morphological feature of convergent plate boundaries, along which lithospheric plates move towards each other at rates that vary from a few mm to over ten cm per year. A trench marks the position at which the fle",
+    "subclass of: land topographical feature",
+    "subclass of: plate tectonics",
+    "subclass of: underwater location",
+    "subclass of: underwater topographical feature",
+    "subclass of: topographical feature",
+    "subclass of: scientific discipline",
+    "subclass of: underwater",
+    "has subclass: Java Trench",
+    "has subclass: Marianas Trench",
+    "has subclass: oceanic trenches of the Caribbean Sea",
+    "has subclass: oceanic trench of the South China Sea",
+    "has subclass: Puerto Rico Trench",
+    "sibling concept: alluvial fan",
+    "sibling concept: cultivable land",
+    "sibling concept: arch",
+    "sibling concept: archipelago",
+    "sibling concept: badlands-topographical"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: ocean trench. Relevant Logical Facts:   - definition: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor. Oceanic trenches are a distinctive morphological feature of convergent plate boundaries, along which lithospheric plates move towards each other at rates that vary from a few mm to over ten cm per year. A trench marks the position at which the fle   - subclass of: land topographical feature   - subclass of: plate tectonics   - subclass of: underwater location   - subclass of: underwater topographical feature   - subclass of: topographical feature   - subclass of: scientific discipline   - subclass of: underwater   - has subclass: Java Trench   - has subclass: Marianas Trench   - has subclass: oceanic trenches of the Caribbean Sea   - has subclass: oceanic trench of the South China Sea   - has subclass: Puerto Rico Trench   - sibling concept: alluvial fan   - sibling concept: cultivable land   - sibling concept: arch   - sibling concept: archipelago   - sibling concept: badlands-topographical
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+*A.* trench.
+Ocean trenches form as a result of tectonic plates converging, not diverging. They are the deepest parts of the ocean floor and mark the position at which lithospheric plates move towards each other.
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 4 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "trench",
+  "uri": "http://kbpedia.org/kko/rc/Trench",
+  "score": 1.0,
+  "triples": [
+    "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).",
+    "subclass of: topographical feature",
+    "subclass of: cartographic feature type",
+    "subclass of: configuration",
+    "subclass of: non-agent-like place",
+    "sibling concept: albedo feature",
+    "sibling concept: archipelago",
+    "sibling concept: asphalt lake",
+    "sibling concept: bend",
+    "sibling concept: body of water"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: trench. Relevant Logical Facts:  - definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compared to its length (as opposed to a simple hole).  - subclass of: topographical feature  - subclass of: cartographic feature type  - subclass of: configuration  - subclass of: non-agent-like place  - sibling concept: albedo feature  - sibling concept: archipelago  - sibling concept: asphalt lake  - sibling concept: bend  - sibling concept: body of water
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "basin",
+  "uri": "http://kbpedia.org/kko/rc/Basin",
+  "score": 1.0,
+  "triples": [
+    "definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.",
+    "subclass of: walled cavity",
+    "subclass of: site that is also a geographical thing",
+    "subclass of: cavity",
+    "subclass of: geographical thing",
+    "subclass of: spatial thing",
+    "has subclass: geological basin",
+    "has subclass: bathtub",
+    "has subclass: bowl",
+    "has subclass: washbasin",
+    "sibling concept: abdominal cavity",
+    "sibling concept: acetabulum",
+    "sibling concept: alveolus",
+    "sibling concept: bodily orifice",
+    "sibling concept: cave"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: basin. Relevant Logical Facts:  - definition: A container with sides and bottom, but open at the top. The sides and bottom of instances of Basin are usually impermeable to liquids. Instances of Basin may be bowl-shaped, box-shaped, etc.  - subclass of: walled cavity  - subclass of: site that is also a geographical thing  - subclass of: cavity  - subclass of: geographical thing  - subclass of: spatial thing  - has subclass: geological basin  - has subclass: bathtub  - has subclass: bowl  - has subclass: washbasin  - sibling concept: abdominal cavity  - sibling concept: acetabulum  - sibling concept: alveolus  - sibling concept: bodily orifice  - sibling concept: cave
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "oceanic ridge",
+  "uri": "http://kbpedia.org/kko/rc/OceanicRidge",
+  "score": 1.0,
+  "triples": [
+    "definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This type of oceanic mountain ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. The production of new seafloor results from mantle upwel",
+    "subclass of: plate tectonics",
+    "subclass of: scientific discipline",
+    "sibling concept: Aulacogen",
+    "sibling concept: continental fragment",
+    "sibling concept: craton",
+    "sibling concept: fracture zone",
+    "sibling concept: geodynamics"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: oceanic ridge. Relevant Logical Facts:  - definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This type of oceanic mountain ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. The production of new seafloor results from mantle upwel  - subclass of: plate tectonics  - subclass of: scientific discipline  - sibling concept: Aulacogen  - sibling concept: continental fragment  - sibling concept: craton  - sibling concept: fracture zone  - sibling concept: geodynamics
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "orogeny",
+  "uri": "http://kbpedia.org/kko/rc/Orogeny",
+  "score": 1.0,
+  "triples": [
+    "definition: Orogeny refers to forces and events leading to a large structural deformation of the Earth's lithosphere (crust and uppermost mantle) due to the interaction between tectonic plates. Orogens or orogenic belts develop when a continental plate is crumpled and is pushed upwards to form mountain ranges, and involve a great range of geological processes collectively called orogenesis.",
+    "subclass of: plate tectonics",
+    "subclass of: scientific discipline",
+    "sibling concept: Aulacogen",
+    "sibling concept: continental fragment",
+    "sibling concept: craton",
+    "sibling concept: fracture zone",
+    "sibling concept: geodynamics"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: orogeny. Relevant Logical Facts:  - definition: Orogeny refers to forces and events leading to a large structural deformation of the Earth's lithosphere (crust and uppermost mantle) due to the interaction between tectonic plates. Orogens or orogenic belts develop when a continental plate is crumpled and is pushed upwards to form mountain ranges, and involve a great range of geological processes collectively called orogenesis.  - subclass of: plate tectonics  - subclass of: scientific discipline  - sibling concept: Aulacogen  - sibling concept: continental fragment  - sibling concept: craton  - sibling concept: fracture zone  - sibling concept: geodynamics
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Tectonic plates are large, rigid slabs of the Earth's lithosphere that fit together like a jigsaw puzzle.
+2. When tectonic plates diverge (move apart), they create new crust as magma rises from the mantle to fill the gap.
+3. A mid-ocean ridge is an underwater mountain system formed by plate tectonics, where new oceanic crust is created through seafloor spreading.
+4. Seafloor spreading occurs at a rate of about 2-10 cm/yr (0.8-4 in./yr), resulting in the creation of new ocean floor and the movement of older ocean floor away from the ridge.
+5. Ocean basins are formed as a result of tectonic plates diverging, creating large depressions or troughs between them.
+6. Rift valleys form when two tectonic plates pull apart, causing the Earth's crust to stretch and thin.
+7. Trenches are not directly created by plate divergence; they can be formed through subduction (one plate being pushed beneath another).
+8. Subduction occurs at a rate of about 2-10 cm/yr (0.8-4 in./yr), resulting in the creation of deep-sea trenches.
+9. The process of seafloor spreading is responsible for creating new oceanic crust, which can eventually be subducted back into the mantle.
+10. Orogeny refers to forces and events leading to a large structural deformation of the Earth's lithosphere due to plate tectonics interactions.
+
+Note: Items 7-8 provide evidence that trenches are not formed by plate divergence but rather through subduction, which is related to item 9 (seafloor spreading).
+==================================================
