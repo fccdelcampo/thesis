@@ -343,8 +343,8 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
 
     janus.query_once("unload_file(user)")
     janus.consult("user", database)
-    # Run query with a 120-second hard timeout to catch infinite recursive loops
-    safe_query = f"call_with_time_limit(120, ({query[:-1]}))"
+    # Run query with a 80-second hard timeout to catch infinite recursive loops
+    safe_query = f"call_with_time_limit(80, ({query[:-1]}))"
     janus.query_once(safe_query)
 
     print(f"Iteration {i} | Prolog code generation success")
