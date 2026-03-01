@@ -163,11 +163,13 @@ Ensure your `<database>` contains all facts and rules (using `:-`), and your `<q
 """
         if previous_code:
             prompt += f"""
-### YOUR PREVIOUS ATTEMPT (Contains Errors):
+### YOUR PREVIOUS DATABASE ATTEMPT (Contains Errors - Copy ALL correct facts and rules forward):
 ```prolog
+<database>
 {previous_code}
+</database>
 ```
-CRITICAL: Do not forget to transfer all the correct clauses from your previous attempt! Group clauses with the same name together consecutively.
+CRITICAL: You MUST carry forward every correct fact and rule clause from the above database into your new <database> block. Only fix the clauses that caused the error. Group clauses with the same predicate name together consecutively.
 """
 
     return prompt
@@ -268,10 +270,10 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
 
     combined_code = database + "\n" + query
     
-    # Save the combined code to the tracker so if validation fails, 
-    # the next attempt still has access to this code to fix it.
+    # Save ONLY the database block (not the query) so the LLM can cleanly
+    # copy all correct facts+rules forward without being confused by the old query.
     if last_attempt_tracker is not None:
-        last_attempt_tracker[0] = combined_code
+        last_attempt_tracker[0] = database
 
     # VALIDATION: Ensure no unquoted logic symbols exist
     unquoted_code = re.sub(r"'[^']*'", "''", combined_code)
@@ -315,39 +317,9 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
     print(f"Iteration {i} | Extracted Database:\n{database}\n")
     print(f"Iteration {i} | Extracted Query:\n{query}\n")
     
-    # --- NEW DYNAMIC WIKIDATA INJECTION ---
-    # Global Config Toggle
-    try:
-        from .prolog_config import ENABLE_WIKIDATA_FETCHING
-    except ImportError:
-        try:
-            from prolog_graphrag_pipeline.prolog.prolog_config import ENABLE_WIKIDATA_FETCHING
-        except ImportError:
-            ENABLE_WIKIDATA_FETCHING = True
-            
-    if getattr(sys.modules[__name__], 'ENABLE_WIKIDATA_FETCHING', ENABLE_WIKIDATA_FETCHING):
-        # Parse retrieved_context to detect Wikidata Q-IDs to fetch
-        qids_to_fetch = set(re.findall(r'wikidata_qid:\s*(Q\d+)', retrieved_context, re.IGNORECASE))
-        
-        if qids_to_fetch:
-            print(f"Iteration {i} | Identified Wikidata IDs: {qids_to_fetch}")
-            try:
-                from prolog_graphrag_pipeline.graphrag.wikidata_retriever import WikidataRetriever
-            except ImportError:
-                from graphrag.wikidata_retriever import WikidataRetriever
-                
-            fetcher = WikidataRetriever()
-            for qid in qids_to_fetch:
-                print(f"Iteration {i} | Fetching active facts for {qid}...")
-                # Bridge to Prolog logic engine: get assertions
-                prolog_facts = fetcher.retrieve_facts(qid)
-                
-                # Inject facts dynamically into the active Prolog Knowledge Base string as comments
-                if prolog_facts:
-                    print(f"Iteration {i} | Retrieved {len(prolog_facts)} facts for {qid}:\n" + "\n".join([f"  > {f}" for f in prolog_facts]))
-                    database += f"\n% --- Dynamically Retrieved Wikidata Facts for {qid} ---\n"
-                    database += "\n".join([f"% {fact}" for fact in prolog_facts]) + "\n"
-    # --- END INJECTION ---
+    # NOTE: Wikidata facts for missing KBPedia entities are now retrieved and
+    # filtered upstream by kbpedia_retriever.py (ENABLE_WIKIDATA_FALLBACK) and
+    # flow into `retrieved_context` as plain text triples — no Q-ID scanning needed here.
 
     janus.query_once("unload_file(user)")
     janus.consult("user", database)

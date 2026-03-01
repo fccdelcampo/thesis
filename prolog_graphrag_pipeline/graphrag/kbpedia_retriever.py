@@ -570,6 +570,46 @@ Output ONLY the JSON object, nothing else."""
                             all_triples.append(f"definition: {selected['description']}")
                         all_triples.extend(wd_triples)
 
+                        # ── Query-alignment filter for Wikidata triples ────────────
+                        # Wikidata returns broad ontological properties (instance of,
+                        # subclass of, etc.). Filter to only those directly relevant
+                        # to the user's question so the Prolog generator isn't misled.
+                        if self.llm and len(all_triples) > 1:
+                            triples_text = "\n".join([f"  - {t}" for t in all_triples])
+                            wd_filter_prompt = f"""You are filtering Wikidata facts for a Prolog-based MCQ answering system.
+
+User's Question: "{filter_query}"
+Wikidata Entity: "{selected['label']}" (description: {selected.get('description', 'N/A')})
+
+Retrieved facts:
+{triples_text}
+
+KEEP a fact ONLY if it directly disambiguates this entity in the context of the question,
+or if it tells us what category/type/property the entity has that is relevant to the MCQ choices.
+DROP facts that are purely bibliographic, historical, or about unrelated domains.
+If unsure whether a fact helps, DROP it.
+
+Output: A JSON list of the kept fact strings (exactly as shown above).
+Example output: ["definition: a long, narrow, deep trench", "subclass of: oceanic trench"]
+Output ONLY the JSON list, nothing else."""
+                            try:
+                                raw = self.llm.invoke(wd_filter_prompt)
+                                res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
+                                if "```" in res:
+                                    res = res.split("```")[1].split("```")[0].strip()
+                                b_start = res.find('['); b_end = res.rfind(']')
+                                if b_start != -1 and b_end != -1:
+                                    filtered_wd = json.loads(res[b_start:b_end+1])
+                                    if isinstance(filtered_wd, list) and filtered_wd:
+                                        print(f"DEBUG: [Wikidata Filter] Kept {len(filtered_wd)}/{len(all_triples)} triple(s) for '{selected['label']}'", flush=True)
+                                        all_triples = filtered_wd
+                                    else:
+                                        print(f"DEBUG: [Wikidata Filter] Filter returned empty — keeping definition only.", flush=True)
+                                        all_triples = [t for t in all_triples if t.startswith("definition:")]
+                            except Exception as wf_e:
+                                print(f"DEBUG: [Wikidata Filter] Failed ({wf_e}), using all fetched triples.", flush=True)
+                        # ── End query-alignment filter ─────────────────────────────
+
                         print(f"DEBUG: [Wikidata Fallback] Retrieved {len(all_triples)} structural triple(s) for '{selected['label']}'", flush=True)
                         for t in all_triples:
                             print(f"  > {t}", flush=True)
@@ -587,6 +627,7 @@ Output ONLY the JSON object, nothing else."""
                         print(f"DEBUG: [Wikidata Fallback] No structural facts returned for {selected['qid']}. Skipping.", flush=True)
                 # ── End Wikidata Fallback ──────────────────────────────────
                 continue
+
 
             print(f"DEBUG: KBPedia matched {len(matches)} concept(s) for '{concept_name}': {[m['name'] for m in matches]}", flush=True)
 
