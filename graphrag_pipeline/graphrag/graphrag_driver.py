@@ -311,6 +311,20 @@ if __name__ == "__main__":
 
 from .retriever import get_retriever, create_indexes, wait_for_indexes
 
+
+def clear_local_data():
+    """
+    Deletes pipeline-generated nodes/relationships, preserving KBPedia reference concepts.
+    Called at the start of every run to flush any stale data from interrupted runs.
+    """
+    try:
+        with neo4j_driver.session(database="neo4j") as session:
+            session.run("MATCH (n) WHERE NOT n:KBPediaConcept DETACH DELETE n")
+        print("DEBUG: Stale local documents cleared (KBPedia preserved).", flush=True)
+    except Exception as e:
+        print(f"DEBUG: clear_local_data failed (non-fatal): {e}", flush=True)
+
+
 def run_pipeline(question: str) -> dict:
     """
     Runs the GraphRAG pipeline for a given question.
@@ -319,6 +333,9 @@ def run_pipeline(question: str) -> dict:
     """
     try:
         ensure_driver_connected()
+
+        # 0. Clear any stale local documents from a previous (possibly interrupted) run
+        clear_local_data()
 
         # 1. Initialize models
         encoder_llm, retriever_llm, embedder = initialize_models()

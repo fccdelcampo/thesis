@@ -769,4 +769,48 @@ DEBUG: Buffered 13 raw triple(s) for 'fracture zone'
 DEBUG: Buffered 8 raw triple(s) for 'subduction zones'
 DEBUG: Buffered 18 raw triple(s) for 'ocean trench'
 DEBUG: Buffered 13 raw triple(s) for 'rifts or graben'
-  > Sending chunk to LLM (4078 chars)...
+  > Sending chunk to LLM (4078 chars)...C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 100 AI2 ARC test cases (starting from index 0).
+
+================================================================================
+[AI2 ARC #0] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus' ---
+DEBUG: Vector Match #1 (Score: 0.649): She asks her friend Carmen to do the same investigation to see if she gets similar results....
+DEBUG: Vector Match #2 (Score: 0.640): She eats one of four different foods each day at the same time for four days and then records how sh...
+DEBUG: Vector Match #3 (Score: 0.638): Janette conducts an investigation to see which foods make her feel more fatigued....
+DEBUG: Local Vector Search finished. Returned 3 chunks.
+DEBUG: Entities seeded from Vector Search: []
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['plant cell wall', 'cytoplasmic part', 'anucleated cell', 'cell part', 'cell', 'membrane (biological)', 'plastid', 'plant physiology', 'protoplasm', 'cellulose']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+  > Sending chunk to LLM (3448 chars)...

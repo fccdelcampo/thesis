@@ -89115,3 +89115,43 @@ Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
 Output ONLY the JSON list, nothing else.
 
 ----------------------------------
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[1] cytoplasmic part: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+[2] anucleated cell: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+[3] cell part: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+[4] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[5] membrane (biological): This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+[6] plastid: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+[7] plant physiology: Plant physiology: a <a href=\
+[8] protoplasm: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+[9] cellulose: a polysaccharide that is the main constituent of the cell walls of plants.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------

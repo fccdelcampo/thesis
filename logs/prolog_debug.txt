@@ -88,3 +88,124 @@ INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
 INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
 
 Batches:   0%|                                                    | 0/1 [00:00<?, ?it/s][ABatches: 100%|############################################| 1/1 [00:00<00:00, 49.37it/s]
+AI2 ARC:   0%|                                                                                                                                  | 0/100 [00:00<?, ?it/s]AI2 ARC:   0%|                                                                                                                                  | 0/100 [00:17<?, ?it/s]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 185, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 158, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 91, in run_benchmarks
+    ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 222, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 213, in run_test_cases
+    run_test_case(t, i)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 129, in run_test_case
+    gr_result = run_pipeline_safe(run_graphrag, question)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 110, in run_pipeline_safe
+    return pipeline_fn(question, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 337, in run_pipeline
+    result = generate_answer(question, retriever, retriever_llm, original_query=question)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 270, in generate_answer
+    return generate(llm, retriever, query, original_query=original_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\llm.py", line 19, in generate
+    graph_rag_results = graph_rag.search(
+                        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\generation\graphrag.py", line 138, in search
+    retriever_result: RetrieverResult = self.retriever.search(
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\retriever.py", line 162, in search
+    kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query, seeded_entities=list(extracted_entities))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 458, in search
+    filtered_candidates = self._filter_concepts_once(query_text, candidates, original_query=filter_query)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 375, in _filter_concepts_once
+    raw = self.llm.invoke(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 94, in invoke
+    response = super().invoke(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 216, in wrapper
+    return active_handler.handle_sync(inner_func)()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\tenacity\__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\tenacity\__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\tenacity\__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\tenacity\__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 210, in inner_func
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 122, in invoke
+    response = self.client.chat(
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\ollama\_client.py", line 365, in chat
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\ollama\_client.py", line 189, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\ollama\_client.py", line 129, in _request_raw
+    r = self._client.request(*args, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_sync\connection.py", line 103, in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_sync\http11.py", line 136, in handle_request
+    raise exc
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_sync\http11.py", line 106, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_sync\http11.py", line 177, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_sync\http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\httpcore\_backends\sync.py", line 128, in read
+    return self._sock.recv(max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

@@ -111,7 +111,7 @@ class EnhancedRetriever(VectorCypherRetriever):
         
         try:
             print(f"DEBUG: --- Starting Local Vector Similarity Search for: '{query_text}' ---", flush=True)
-            local_result = super().search(query_text=query_text, top_k=8, **kwargs)
+            local_result = super().search(query_text=query_text, top_k=5, **kwargs)
             
             if local_result and local_result.items:
                 for idx, item in enumerate(local_result.items):
