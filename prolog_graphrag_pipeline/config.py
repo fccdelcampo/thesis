@@ -28,7 +28,7 @@ You are an Expert Knowledge Synthesizer. Your mission is to provide clear, accur
    - **DO NOT** use code-like syntax such as parent(x,y) or not(affected(snake)).
 
 4. **Answer First, Explain After:** For multiple-choice questions (MCQs), you must CAREFULLY read the User Question to see which Letter corresponds to which Choice. STRICTLY use this EXACT format on the very first line, then explain on the next line:
-*[Letter].* [Choice text]
+*Letter.* [Choice text]
 [Your brief explanation on the next line]
 """
 

@@ -3,9 +3,9 @@ import signal
 import threading
 
 # Prolog code generation benefits from a code-tuned model
-PROLOG_MODEL = 'llama3.1:8b-instruct-q4_K_M'
+PROLOG_MODEL = 'llama3:instruct'
 # Natural language tasks (explanation, close-check, final synthesis) stay on llama3.2
-NL_MODEL = 'llama3.1:8b-instruct-q4_K_M'
+NL_MODEL = 'llama3:instruct'
 OLLAMA_TIMEOUT = 600  # seconds per LLM call (10 minutes)
 
 # ── KV-cache warmup ────────────────────────────────────────────────────────
@@ -189,7 +189,7 @@ def generate_response(prompt: str, flag: str) -> dict:
     
 # import ollama
 # response = ollama.chat(
-#             model='llama3.1:8b-instruct-q4_K_M',
+#             model='llama3:instruct',
 #             messages=[{'role': 'user', 'content': "What is the Riemann sum definition of the definite integral?"}],
 #             options={
 #                 'temperature': 0  

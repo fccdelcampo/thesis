@@ -10,7 +10,7 @@ from graphrag_pipeline.graphrag.graphrag_driver import DebugOllamaLLM
 
 print("Initializing Real LLM from Baseline GraphRAG...")
 retriever_llm = DebugOllamaLLM(
-    model_name="llama3.1:8b-instruct-q4_K_M",
+    model_name="llama3:instruct",
     model_params={
         "keep_alive": "5m", 
         "options": {

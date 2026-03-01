@@ -18,7 +18,7 @@ except ImportError:
     import ollama
     def run_tuned_pipeline(q):
         try:
-            res = ollama.chat(model='llama3.1:8b-instruct-q4_K_M', messages=[{'role': 'user', 'content': q}])
+            res = ollama.chat(model='llama3:instruct', messages=[{'role': 'user', 'content': q}])
             return {"answer": res['message']['content'], "contexts": []}
         except:
             return {"answer": "Error", "contexts": []}

@@ -26,7 +26,7 @@ def generate(user_question: str):
     try:
         answer = dict()
         response = ollama.chat(
-                model='llama3.1:8b-instruct-q4_K_M',
+                model='llama3:instruct',
                 messages=LLM_MESSAGES + [{"role": "user", "content": user_question}],
                 options={
                     'temperature': 0.4,

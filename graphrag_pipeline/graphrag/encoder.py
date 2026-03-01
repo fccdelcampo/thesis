@@ -19,7 +19,7 @@ from typing import Optional
 def generate_with_ollama(messages) -> Optional[str]: 
     try:
         response = ollama.chat(
-            model='llama3.1:8b-instruct-q4_K_M',
+            model='llama3:instruct',
             messages=messages,
             options={
                 'temperature': 0  

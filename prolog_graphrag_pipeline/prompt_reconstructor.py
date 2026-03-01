@@ -57,7 +57,7 @@ USER QUESTION: {user_question}
 Provide a direct, confident answer to the User Question.
 1. Answer Naturally: Respond as if you already know the answer. Do NOT mention "the context" or "the evidence".
 2. Answer First, Explain After: For multiple-choice questions (MCQs), you MUST begin your answer using this EXACT format on the very first line, then explain on the next line:
-*[Letter].* [Choice text]
+*Letter.* [Choice text]
 3. Smooth Tone: Write as a knowledgeable person would naturally explain something in conversation.
     """
      

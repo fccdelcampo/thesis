@@ -1,7 +1,7 @@
 import requests
 from langchain_community.chat_models import ChatOllama
 
-MODEL_NAME = "llama3.1:8b-instruct-q4_K_M"
+MODEL_NAME = "llama3:instruct"
 
 def unload_ollama_model():
     """Force-unload the model from VRAM so RAGAS can use it without OOM."""
