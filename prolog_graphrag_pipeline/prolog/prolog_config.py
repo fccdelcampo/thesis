@@ -1,6 +1,6 @@
 # Global configuration toggle for LLM KV Cache prefix priming. 
 # False = Fast linear flattening for benchmarks. True = Stable prefix caching for Chat UIs.
-USE_KV_CACHE = False
+USE_KV_CACHE = True
 
 # Global configuration toggle for dynamic Wikidata fetching
 ENABLE_WIKIDATA_FETCHING = True

@@ -241966,3 +241966,2471 @@ C. chloroplast
 D. nucleus
 
 ----------------------------------
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[1] cytoplasmic part: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+[2] anucleated cell: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+[3] cell part: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+[4] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[5] membrane (biological): This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+[6] plastid: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+[7] plant physiology: Plant physiology: a <a href=\
+[8] protoplasm: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+[9] cellulose: a polysaccharide that is the main constituent of the cell walls of plants.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+[0, 1, 2, 3, 4, 5, 6, 8, 9]
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'plant cell wall'
+Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: botanical cell
+  - subclass of: cell wall
+  - subclass of: eukaryotic cell
+  - subclass of: plant or part of a plant
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+  - sibling concept: bacterial cell wall
+  - sibling concept: prokaryotic cell wall
+
+Concept: 'cytoplasmic part'
+Facts:
+  - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+  - subclass of: cytoplasm
+  - subclass of: cell part
+  - subclass of: protoplasm
+  - sibling concept: cytosol
+
+Concept: 'anucleated cell'
+Facts:
+  - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+  - subclass of: cell
+  - subclass of: living thing
+  - has subclass: prokaryotic organism
+  - sibling concept: cell capable of further differentiation
+  - sibling concept: cell line
+  - sibling concept: diploid cell
+  - sibling concept: eukaryotic cell
+  - sibling concept: haploid cell
+
+Concept: 'cell part'
+Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: microscopic object
+  - subclass of: organic matter
+  - subclass of: parts
+  - subclass of: object types
+  - subclass of: shaped thing
+  - subclass of: three dimensional thing
+  - subclass of: material
+  - has subclass: aster (cell part)
+  - has subclass: axon
+  - has subclass: biological membrane stuff
+  - has subclass: bacterial capsule
+
+Concept: 'cell'
+Facts:
+  - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+  - subclass of: living thing
+  - subclass of: biological matter
+  - subclass of: finite spatial thing
+  - subclass of: naturally-occurring tangible substance
+  - subclass of: organic matter
+  - subclass of: temporally continuous thing
+  - has subclass: anucleated cell
+  - has subclass: cell capable of further differentiation
+  - has subclass: cell line
+  - has subclass: diploid cell
+  - has subclass: eukaryotic cell
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+To answer the question, we need to find the concept that has a function most similar to the function of an animal skeleton. An animal skeleton provides structural support and protection to the body. 
+
+Based on the given ontology facts, we can filter the concepts as follows:
+
+1. 'plant cell wall'
+   - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+   - subclass of: structural cell part (relevant because it relates to the mechanism of providing mechanical support)
+   - subclass of: external anatomical part (relevant because it relates to the mechanism of providing mechanical support)
+   - sibling concept: bacterial cell wall (not relevant because it's not one of the MCQ choices)
+   - sibling concept: prokaryotic cell wall (not relevant because it's not one of the MCQ choices)
+
+2. 'cytoplasmic part'
+   - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+   - subclass of: cell part (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: protoplasm (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - sibling concept: cytosol (not relevant because it's not one of the MCQ choices)
+
+3. 'anucleated cell'
+   - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+   - subclass of: cell (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: living thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: prokaryotic organism (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - sibling concept: cell capable of further differentiation (not relevant because it's not one of the MCQ choices)
+   - sibling concept: cell line (not relevant because it's not one of the MCQ choices)
+   - sibling concept: diploid cell (not relevant because it's not one of the MCQ choices)
+   - sibling concept: eukaryotic cell (not relevant because it's not one of the MCQ choices)
+   - sibling concept: haploid cell (not relevant because it's not one of the MCQ choices)
+
+4. 'cell part'
+   - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+   - subclass of: microscopic object (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: organic matter (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: parts (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: object types (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: shaped thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: three dimensional thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: material (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: aster (cell part) (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: axon (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: biological membrane stuff (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: bacterial capsule (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+
+5. 'cell'
+   - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+   - subclass of: living thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: biological matter (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: finite spatial thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: naturally-occurring tangible substance (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: organic matter (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: temporally continuous thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: anucleated cell (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: cell capable of further differentiation (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: cell line (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: diploid cell (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: eukaryotic cell (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+
+Based on the filtering rules, the output will be:
+
+{
+  "plant cell wall": ["definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.", "subclass of: structural cell part", "subclass of: external anatomical part"],
+  "cell membrane": [],
+  "cell wall": [],
+  "chloroplast": [],
+  "nucleus": []
+}
+
+The 'plant cell wall' concept has a function that is most similar to the function of an animal skeleton, as it provides mechanical support to non-woody plant tissues.
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*Letter.* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+
+### Question:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+### Context:
+KBPedia Concept: plant cell wall.
+Relevant Logical Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+KBPedia Concept: cytoplasmic part.
+Relevant Logical Facts:
+  - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+  - subclass of: cytoplasm
+  - subclass of: cell part
+  - subclass of: protoplasm
+  - sibling concept: cytosol
+KBPedia Concept: anucleated cell.
+Relevant Logical Facts:
+  - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+  - subclass of: cell
+  - subclass of: living thing
+  - has subclass: prokaryotic organism
+  - sibling concept: cell capable of further differentiation
+  - sibling concept: cell line
+  - sibling concept: diploid cell
+  - sibling concept: eukaryotic cell
+  - sibling concept: haploid cell
+KBPedia Concept: cell part.
+Relevant Logical Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: microscopic object
+  - subclass of: organic matter
+  - subclass of: parts
+  - subclass of: object types
+  - subclass of: shaped thing
+  - subclass of: three dimensional thing
+  - subclass of: material
+  - has subclass: aster (cell part)
+  - has subclass: axon
+  - has subclass: biological membrane stuff
+  - has subclass: bacterial capsule
+  - has subclass: structural cell part
+  - has subclass: cell plate
+  - has subclass: chromatin
+  - has subclass: chromosome
+  - has subclass: cytoplasm
+  - has subclass: intracellular part
+  - has subclass: membrane
+  - has subclass: microtubule
+  - sibling concept: atomic nucleus
+  - sibling concept: chemical object
+  - sibling concept: microorganism
+  - sibling concept: nanotube
+  - sibling concept: polymer molecule
+KBPedia Concept: cell.
+Relevant Logical Facts:
+  - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+  - subclass of: living thing
+  - subclass of: biological matter
+  - subclass of: finite spatial thing
+  - subclass of: naturally-occurring tangible substance
+  - subclass of: organic matter
+  - subclass of: temporally continuous thing
+  - has subclass: anucleated cell
+  - has subclass: cell capable of further differentiation
+  - has subclass: cell line
+  - has subclass: diploid cell
+  - has subclass: eukaryotic cell
+  - has subclass: haploid cell
+  - has subclass: aura: heterotrophic cell
+  - has subclass: prokaryotic organism
+  - has subclass: single-cell organism
+  - has subclass: somatic cell
+  - has subclass: stem cell
+  - sibling concept: aerobic thing
+  - sibling concept: anaerobic thing
+  - sibling concept: animal or body part
+  - sibling concept: asexual organism
+  - sibling concept: tissue
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+*B.* The cell wall has a function that is most similar to the function of an animal skeleton because it provides mechanical support to non-woody plant tissues, similar to how an animal skeleton provides structural support to the body.
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*Letter.* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+
+### Question:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+### Context:
+KBPedia Concept: plant cell wall.
+Relevant Logical Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+
+KBPedia Concept: cytoplasmic part.
+Relevant Logical Facts:
+  - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+  - subclass of: cytoplasm
+  - subclass of: cell part
+  - subclass of: protoplasm
+  - sibling concept: cytosol
+
+KBPedia Concept: anucleated cell.
+Relevant Logical Facts:
+  - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+  - subclass of: cell
+  - subclass of: living thing
+  - has subclass: prokaryotic organism
+  - sibling concept: cell capable of further differentiation
+  - sibling concept: cell line
+  - sibling concept: diploid cell
+  - sibling concept: eukaryotic cell
+  - sibling concept: haploid cell
+
+KBPedia Concept: cell part.
+Relevant Logical Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: microscopic object
+  - subclass of: organic matter
+  - subclass of: parts
+  - subclass of: object types
+  - subclass of: shaped thing
+  - subclass of: three dimensional thing
+  - subclass of: material
+  - has subclass: aster (cell part)
+  - has subclass: axon
+  - has subclass: biological membrane stuff
+  - has subclass: bacterial capsule
+  - has subclass: structural cell part
+  - has subclass: cell plate
+  - has subclass: chromatin
+  - has subclass: chromosome
+  - has subclass: cytoplasm
+  - has subclass: intracellular part
+  - has subclass: membrane
+  - has subclass: microtubule
+  - sibling concept: atomic nucleus
+  - sibling concept: chemical object
+  - sibling concept: microorganism
+  - sibling concept: nanotube
+  - sibling concept: polymer molecule
+
+KBPedia Concept: cell.
+Relevant Logical Facts:
+  - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+  - subclass of: living thing
+  - subclass of: biological matter
+  - subclass of: finite spatial thing
+  - subclass of: naturally-occurring tangible substance
+  - subclass of: organic matter
+  - subclass of: temporally continuous thing
+  - has subclass: anucleated cell
+  - has subclass: cell capable of further differentiation
+  - has subclass: cell line
+  - has subclass: diploid cell
+  - has subclass: eukaryotic cell
+  - has subclass: haploid cell
+  - has subclass: aura: heterotrophic cell
+  - has subclass: prokaryotic organism
+  - has subclass: single-cell organism
+  - has subclass: somatic cell
+  - has subclass: stem cell
+  - sibling concept: aerobic thing
+  - sibling concept: anaerobic thing
+  - sibling concept: animal or body part
+  - sibling concept: asexual organism
+  - sibling concept: tissue
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+* B. cell wall *
+The cell wall provides mechanical support to non-woody plant tissues, similar to how an animal skeleton provides structural support to the body. This is due to the rigid yet elastic nature of the cell wall, which experiences pressure from the cell contents.
+===================================
+
+[LLM_EVENT] ENCODER_EXTRACT | LATENCY: 0.8766s
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are extracting search terms for a knowledge base lookup.
+
+Given this query (which may include multiple-choice options), extract the following:
+1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton")
+2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis")
+3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").
+
+Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"
+
+Output a plain JSON list of strings. Include 4-8 terms maximum.
+Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+[LLM_EVENT] GRAG_INVOKE | LATENCY: 0.7881s
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+Based on the query, here's the extracted list of terms:
+
+- **Explicit entities**: 
+  - "plant cell"
+  - "animal skeleton"
+  - "cell membrane"
+  - "cell wall"
+  - "chloroplast"
+  - "nucleus"
+
+- **Implied functional concepts**: 
+  - "structural support"
+
+- **Core scientific terms** from answer options:
+  - "cell membrane"
+  - "cell wall"
+  - "chloroplast"
+  - "nucleus"
+
+Here's the combined list in a plain JSON format:
+
+```json
+[
+  "plant cell",
+  "animal skeleton",
+  "structural support",
+  "cell wall",
+  "chloroplast",
+  "nucleus"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[1] membrane protein: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+[2] cell wall: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+[3] bacterial cell wall: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+[4] photosynthetic pigment: A photosynthetic pigment (accessory pigment; chloroplast pigment).
+[5] chloroplast: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+[6] nucleus: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, but a few cell types, such as mammalian red blood cells, have , and a few others have many.
+[7] lentiform nucleus: The collection of all lentiform nuclei. An individual LentiformNucleus (or 'lenticular nucleus') is a BasalNucleus which is a unique part of a CerebralHemisphere.
+[8] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[9] plant epidermis: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+[10] human skeleton: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,
+[11] skeleton tarantula: The skeleton tarantula, Ephebopus murinus, is a species of spider belonging to the family Theraphosidae (tarantulas), sub-family Aviculariinae. A New World species, it is native to several South American countries. Its common name is derived from the skeleton-like markings on its legs.
+[12] structural system: The term structural system or structural frame in structural engineering refers to load-resisting sub-system of a structure. The structural system transfers loads through interconnected structural components or members. Commonly used structures can be classified into five major categories, depending on the type of primary stress that may arise in the members of the structures under major design lo
+[13] structural connector: This category is for components that connect structural systems or structural elements together in reference to buildings and structures.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+[LLM_EVENT] GRAG_INVOKE | LATENCY: 0.5361s
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+[0, 1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 13]
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'cell'
+Facts:
+  - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+  - subclass of: living thing
+  - subclass of: biological matter
+  - subclass of: finite spatial thing
+  - subclass of: naturally-occurring tangible substance
+  - subclass of: organic matter
+  - subclass of: temporally continuous thing
+  - has subclass: anucleated cell
+  - has subclass: cell capable of further differentiation
+  - has subclass: cell line
+  - has subclass: diploid cell
+  - has subclass: eukaryotic cell
+
+Concept: 'membrane protein'
+Facts:
+  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+  - subclass of: protein molecule
+  - subclass of: biopolymer
+  - subclass of: heteropolymer
+  - subclass of: organic molecule
+  - subclass of: polymer molecule
+  - subclass of: polypeptide
+  - subclass of: protein molecule or protein complex
+  - has subclass: peripheral protein
+  - sibling concept: aquaporin
+  - sibling concept: plasma protein molecule
+  - sibling concept: enzyme
+
+Concept: 'cell wall'
+Facts:
+  - definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+  - subclass of: cell part
+  - subclass of: organism part
+  - has subclass: bacterial cell wall
+  - has subclass: plant cell wall
+  - has subclass: prokaryotic cell wall
+  - sibling concept: cell membrane
+  - sibling concept: cytoskeleton
+  - sibling concept: nuclear envelope
+  - sibling concept: abdomen
+
+Concept: 'bacterial cell wall'
+Facts:
+  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+  - subclass of: cell wall
+  - subclass of: prokaryotic cell wall
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+  - sibling concept: plant cell wall
+  - sibling concept: prokaryotic cell wall
+
+Concept: 'photosynthetic pigment'
+Facts:
+  - definition: A photosynthetic pigment (accessory pigment; chloroplast pigment).
+  - subclass of: organic compound
+  - subclass of: pigment
+  - subclass of: chemical and gas product
+  - subclass of: molecular material
+  - subclass of: organic matter
+  - subclass of: colorant
+  - has subclass: bacteriochlorophyll
+  - has subclass: chlorophyll
+  - has subclass: photosynthetic accessory pigment
+  - sibling concept: acetate
+  - sibling concept: alcohol
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+[LLM_EVENT] GRAG_INVOKE | LATENCY: 2.0563s
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+```python
+import json
+
+# Define the ontology facts as dictionaries
+ontology_facts = {
+    'cell': {
+        'definition': 'The collection of living cells; a specialization of BiologicalLivingObject.',
+        'subclass of': ['living thing', 'biological matter', 'finite spatial thing', 'naturally-occurring tangible substance', 'organic matter', 'temporally continuous thing'],
+        'has subclass': ['anucleated cell', 'cell capable of further differentiation', 'cell line', 'diploid cell', 'eukaryotic cell']
+    },
+    'membrane protein': {
+        'definition': 'A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.',
+        'subclass of': ['protein molecule', 'biopolymer', 'heteropolymer', 'organic molecule', 'polymer molecule', 'polypeptide', 'protein molecule or protein complex'],
+        'has subclass': ['peripheral protein']
+    },
+    'cell wall': {
+        'definition': 'The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water.',
+        'subclass of': ['structural cell part', 'external anatomical part', 'cell part', 'organism part'],
+        'has subclass': ['bacterial cell wall', 'plant cell wall', 'prokaryotic cell wall'],
+        'sibling concept': ['cell membrane', 'cytoskeleton', 'nuclear envelope', 'abdomen']
+    },
+    'bacterial cell wall': {
+        'definition': 'The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.',
+        'subclass of': ['cell wall', 'prokaryotic cell wall', 'structural cell part', 'external anatomical part'],
+        'sibling concept': ['plant cell wall', 'prokaryotic cell wall']
+    },
+    'photosynthetic pigment': {
+        'definition': 'A photosynthetic pigment (accessory pigment; chloroplast pigment).',
+        'subclass of': ['organic compound', 'pigment', 'chemical and gas product', 'molecular material', 'organic matter', 'colorant'],
+        'has subclass': ['bacteriochlorophyll', 'chlorophyll', 'photosynthetic accessory pigment'],
+        'sibling concept': ['acetate', 'alcohol']
+    }
+}
+
+# Define the MCQ question and answer choices
+mcq_question = "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?"
+mcq_answer_choices = ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+
+# Filter the ontology facts based on the MCQ question and answer choices
+filtered_facts = {}
+for concept in ontology_facts:
+    relevant_facts = []
+    if concept in mcq_answer_choices:
+        relevant_facts.append(ontology_facts[concept]['definition'])
+        if concept == 'cell wall':
+            relevant_facts.append(ontology_facts[concept]['definition'])
+            relevant_facts.append('Notably, cell walls do not occur in animal cells.')
+    filtered_facts[concept] = relevant_facts
+
+# Print the filtered facts in JSON format
+print(json.dumps(filtered_facts, indent=4))
+```
+
+Output:
+```json
+{
+    "cell": [
+        "The collection of living cells; a specialization of BiologicalLivingObject.",
+        "Notably, cell walls do not occur in animal cells."
+    ],
+    "cell wall": [
+        "The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water.",
+        "Notably, cell walls do not occur in animal cells."
+    ],
+    "chloroplast": [],
+    "nucleus": []
+}
+```
+
+Note that the `chloroplast` and `nucleus` concepts have no relevant facts after filtering, so their lists are empty. The `cell` and `cell wall` concepts have relevant facts that explain how/why they form or don't form under the conditions described in the question.
+===================================
+
+[LLM_EVENT] EMBED_QUERY | LATENCY: 0.4513s
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are a Logic Discovery Agent. Extract concise, factual, and structural logical building blocks needed to answer the Question from the Context.
+
+### TASK
+Produce a single numbered list called **LOGICAL EVIDENCE**. 
+First, gather evidence and definitions for all concepts related to the Question, especially focusing on each of the provided MCQ choices. 
+Then, add other structural logical evidence that bridges the premise to the answer.
+Each item must be one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.
+
+### CONSTRAINTS
+* Include at most 15 items total. Keep them highly concise but strictly factual.
+* Each item must directly help bridge the premise to the answer. Omit background, history, or tangential details.
+* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."
+* Break compound sentences into independent logical units.
+* Use clear, declarative English only. No code, no symbols.
+* Do NOT reveal the final answer — provide logical ingredients only.
+
+---
+### QUESTION:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+
+### CONTEXT:
+KBPedia Concept: cell.
+Relevant Logical Facts:
+  - The collection of living cells; a specialization of BiologicalLivingObject.
+  - Notably, cell walls do not occur in animal cells.
+KBPedia Concept: membrane protein.
+Relevant Logical Facts:
+  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+  - subclass of: protein molecule
+  - subclass of: biopolymer
+  - subclass of: heteropolymer
+  - subclass of: organic molecule
+  - subclass of: polymer molecule
+  - subclass of: polypeptide
+  - subclass of: protein molecule or protein complex
+  - has subclass: peripheral protein
+  - sibling concept: aquaporin
+  - sibling concept: plasma protein molecule
+  - sibling concept: enzyme
+  - sibling concept: hemoprotein molecule
+  - sibling concept: kinetochore
+KBPedia Concept: cell wall.
+Relevant Logical Facts:
+  - The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water.
+  - Notably, cell walls do not occur in animal cells.
+KBPedia Concept: bacterial cell wall.
+Relevant Logical Facts:
+  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+  - subclass of: cell wall
+  - subclass of: prokaryotic cell wall
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+  - sibling concept: plant cell wall
+  - sibling concept: prokaryotic cell wall
+KBPedia Concept: photosynthetic pigment.
+Relevant Logical Facts:
+  - definition: A photosynthetic pigment (accessory pigment; chloroplast pigment).
+  - subclass of: organic compound
+  - subclass of: pigment
+  - subclass of: chemical and gas product
+  - subclass of: molecular material
+  - subclass of: organic matter
+  - subclass of: colorant
+  - has subclass: bacteriochlorophyll
+  - has subclass: chlorophyll
+  - has subclass: photosynthetic accessory pigment
+  - sibling concept: acetate
+  - sibling concept: alcohol
+  - sibling concept: aldehyde
+  - sibling concept: Alicyclic compound
+  - sibling concept: Aliphatic compound
+
+
+----------------------------------
+
+[LLM_EVENT] GRAG_INVOKE | LATENCY: 1.1317s
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a cell wall that provides structural support.
+2. Animal cells do not have cell walls.
+3. The cell wall in a plant cell is similar to an animal skeleton in function.
+4. A cell wall is an external covering of a cell.
+5. An animal skeleton is an external structure that provides support and protection.
+6. Both a plant cell wall and an animal skeleton provide structural support.
+7. The cell wall in a plant cell is composed of cellulose and other materials.
+8. Cellulose is a rigid polysaccharide that provides structural support.
+9. An animal skeleton is composed of rigid materials such as bone and cartilage.
+10. Both a plant cell wall and an animal skeleton provide protection to the cell or organism.
+11. The cell wall in a plant cell helps to maintain the cell's shape.
+12. An animal skeleton helps to maintain the organism's shape.
+13. The cell wall in a plant cell is essential for the cell's survival.
+14. An animal skeleton is essential for the organism's survival.
+15. The function of a plant cell wall is most similar to the function of an animal skeleton.
+===================================
+
+--- [DEBUG] PROLOG PROMPT (PROLOG) ---
+<SYSTEM>
+
+### Role
+You are an expert Prolog programmer specializing in Knowledge Representation for the s(CASP) solver.
+
+### Task
+Translate the provided Context into a formal Prolog database. Generate rules (Head :- Body.) rather than just facts.
+
+### Execution Flow
+1. Use a SEPARATE <reasoning_step> tag for each logical leap. Explain in English, then provide Prolog code.
+2. Formulate implicit domain rules if necessary.
+3. Output the full <database>.
+4. Output the <query>.
+
+### Syntactic Requirements (s(CASP) Specific)
+- Disjunction: NEVER use `;`. Use multiple separate rules with the same head instead.
+- Arithmetic & Evaluation: s(CASP) does NOT support standard Prolog arithmetic evaluation.
+   - NEVER use `is`, , `>=`, `=:=`, `=\\=`, `<`, `>`, `<=`.
+   - USE CLP(Q) constraints instead: `#=`, `#<>`, `#<`, `#>`, `#=<`, `#>=`. Example: `X #= Y + 1`.
+- Negation: Use `not`. NEVER use `\\+`.
+- Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
+- Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
+- Atoms: Must be lowercase. Quote special characters (e.g., `'(A ∨ B)'`).
+- Variables: CamelCase. Use `_` for singletons.
+- Concise Atoms: Keep snake_case atoms as short as possible to save tokens. Condense long phrases into 1-3 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
+- Closed-World: EVERY predicate in a body MUST be defined as a fact or rule head somewhere in the database.
+- Discontiguous: Group all clauses for the same predicate together.
+- Predicate Naming: ALWAYS invent meaningful predicate names that accurately describe the relationships in the specific question. NEVER blindly copy predicate names (like `forms_from`) or structures from the few-shot examples unless they are directly relevant.
+
+### Query Formatting by Question Type
+1. **Multiple-Choice Questions (MCQ):**
+   - Encode EXACTLY FOUR choices as facts. The description MUST be a grounded lowercase snake_case atom derived from the ACTUAL option text, NEVER an uppercase variable!
+   - Example CORRECT: `choice(a, eliminating_a_source).`
+   - Example WRONG: `choice(a, A).` (This will trivially unify with anything and fail the proof!)
+   - Encode retrieved domain knowledge as facts and rules.
+   - You MUST define an `answer/1` rule that unifies with the correct option letter.
+   - **CRITICAL:** Your logic MUST uniquely identify EXACTLY ONE correct choice. Do not write generic rules that might accidentally evaluate to true for multiple incorrect options. You must explicitly differentiate the correct target from the distractors based on the domain rules.
+   - Example DB Rule: `answer(OptionLetter) :- choice(OptionLetter, Target), matches_criteria(Target).`
+   - The <query> MUST ALWAYS BE EXACTLY: `answer(OptionLetter).`
+2. **Binary (True/False) Questions:**
+   - Define specific instances from the question (e.g., `rock_one`, `rock_two`).
+   - Write rules defining the condition context (e.g., `pulled_together(A, B) :- ...`).
+   - The <query> MUST test the fully grounded relationship directly (e.g., `pulled_together(rock_one, rock_two).`).
+3. **Freeform / Open Logic:**
+   - Define relationships and rules governing propagation or constraints.
+   - The <query> queries the primary target entity state.
+
+### Output Format (Strict)
+<reasoning_step>
+[Reasoning in English]
+[Prolog code snippets]
+</reasoning_step>
+
+<database>
+[All facts and rules combined]
+</database>
+
+<query>
+[The query only]
+</query>
+
+### CRITICAL FINAL REMINDERS (DO NOT IGNORE):
+1. NO STANDARD ARITHMETIC ALLOWED: You MUST use CLP(FD) operators `#> `, `#>= `, `#< `, `#=< `, `#= ` for ALL math. `>` and `<` will instantly crash the parser!
+2. CONTIGUOUS CLAUSES: Group ALL rules and facts that share the same predicate name together in the `<database>`. Do NOT scatter them.
+---
+
+</SYSTEM>
+
+<USER>
+
+Context: In a food web, grass is a producer. Grasshoppers eat grass. Frogs eat grasshoppers. Snakes eat frogs. 
+Question: If the grass is contaminated, are the snakes affected?
+
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode relationships and premise.
+eats(grasshopper, grass).
+eats(frog, grasshopper).
+eats(snake, frog).
+is_contaminated(grass).
+</reasoning_step>
+
+<reasoning_step>
+Contamination logic.
+affected(Species) :- is_contaminated(Species).
+affected(Predator) :- eats(Predator, Prey), affected(Prey).
+</reasoning_step>
+
+<database>
+eats(grasshopper, grass).
+eats(frog, grasshopper).
+eats(snake, frog).
+is_contaminated(grass).
+affected(Species) :- is_contaminated(Species).
+affected(Predator) :- eats(Predator, Prey), affected(Prey).
+</database>
+
+<query>
+affected(snake).
+</query>
+---
+
+</ASSISTANT>
+
+<USER>
+
+Question: If two rocks are lacking magnetic properties and far apart, can a magnetic effect pull them together? 
+
+Retrieved Context: 
+LOGICAL EVIDENCE:
+1. A magnetic effect can pull two objects together.
+2. Magnetic properties are necessary for a magnetic force to act between two rocks.
+3. Rocks that lack magnetic properties will not be pulled towards each other by magnetism.
+4. If an object has magnetic properties, it may exert a magnetic force on another object with similar properties.
+        
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode specific instances for this binary question.
+lacks_magnetic_properties(rock_one).
+lacks_magnetic_properties(rock_two).
+far_apart(rock_one, rock_two).
+</reasoning_step>
+
+<reasoning_step>
+Explicit falsehood limits.
+-pulled_by_magnetism(RockA, _) :- lacks_magnetic_properties(RockA).
+-pulled_by_magnetism(_, RockB) :- lacks_magnetic_properties(RockB).
+</reasoning_step>
+
+<reasoning_step>
+Positive conditions.
+pulled_together(ObjectA, ObjectB) :-
+has_magnetic_properties(ObjectA),
+has_magnetic_properties(ObjectB).
+</reasoning_step>
+
+<database>
+lacks_magnetic_properties(rock_one).
+lacks_magnetic_properties(rock_two).
+far_apart(rock_one, rock_two).
+
+-pulled_by_magnetism(RockA, _) :- lacks_magnetic_properties(RockA).
+-pulled_by_magnetism(_, RockB) :- lacks_magnetic_properties(RockB).
+
+pulled_together(ObjectA, ObjectB) :-
+has_magnetic_properties(ObjectA),
+has_magnetic_properties(ObjectB).
+</database>
+
+<query>
+pulled_together(rock_one, rock_two).
+</query>
+---
+
+</ASSISTANT>
+
+<USER>
+
+Context: A trench forms when one plate moves under another at a subduction zone (plate convergence). A rift valley forms when tectonic plates diverge. An ocean basin forms when tectonic plates diverge, creating new crust. Mid-ocean ridges are areas where tectonic plates diverge.
+
+Question: Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+        
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode options.
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+</reasoning_step>
+
+<reasoning_step>
+Encode formation logic explicitly from context.
+forms_from(trench, subduction_zone).
+forms_from(trench, plate_convergence).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+</reasoning_step>
+
+<reasoning_step>
+Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with plate_divergence.
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+</reasoning_step>
+
+<database>
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(trench, plate_convergence).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+</database>
+
+<query>
+answer(OptionLetter).
+</query>
+---
+
+</ASSISTANT>
+
+<USER>
+
+Context: Mammals are warm-blooded vertebrates that have hair. Dogs, cats, and humans are mammals. Frogs are amphibians, which are cold-blooded.
+
+Question: Which of the following animals is NOT a mammal?
+A. dog
+B. cat
+C. human
+D. frog
+        
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode options.
+choice(a, dog).
+choice(b, cat).
+choice(c, human).
+choice(d, frog).
+</reasoning_step>
+
+<reasoning_step>
+Encode biological classifications explicitly from context.
+is_mammal(dog).
+is_mammal(cat).
+is_mammal(human).
+is_amphibian(frog).
+</reasoning_step>
+
+<reasoning_step>
+Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with being a mammal.
+answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+</reasoning_step>
+
+<database>
+choice(a, dog).
+choice(b, cat).
+choice(c, human).
+choice(d, frog).
+
+is_mammal(dog).
+is_mammal(cat).
+is_mammal(human).
+is_amphibian(frog).
+
+answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+</database>
+
+<query>
+answer(OptionLetter).
+</query>
+---
+
+</ASSISTANT>
+
+
+Please answer the following query based on past instructions:
+Now, process the following:
+Context:
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a cell wall that provides structural support.
+2. Animal cells do not have cell walls.
+3. The cell wall in a plant cell is similar to an animal skeleton in function.
+4. A cell wall is an external covering of a cell.
+5. An animal skeleton is an external structure that provides support and protection.
+6. Both a plant cell wall and an animal skeleton provide structural support.
+7. The cell wall in a plant cell is composed of cellulose and other materials.
+8. Cellulose is a rigid polysaccharide that provides structural support.
+9. An animal skeleton is composed of rigid materials such as bone and cartilage.
+10. Both a plant cell wall and an animal skeleton provide protection to the cell or organism.
+11. The cell wall in a plant cell helps to maintain the cell's shape.
+12. An animal skeleton helps to maintain the organism's shape.
+13. The cell wall in a plant cell is essential for the cell's survival.
+14. An animal skeleton is essential for the organism's survival.
+15. The function of a plant cell wall is most similar to the function of an animal skeleton.
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+User Question:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+----------------------------------
+
+--- [DEBUG] PROLOG PROMPT (PROLOG) ---
+<SYSTEM>
+
+### Role
+You are an expert Prolog programmer specializing in Knowledge Representation for the s(CASP) solver.
+
+### Task
+Translate the provided Context into a formal Prolog database. Generate rules (Head :- Body.) rather than just facts.
+
+### Execution Flow
+1. Use a SEPARATE <reasoning_step> tag for each logical leap. Explain in English, then provide Prolog code.
+2. Formulate implicit domain rules if necessary.
+3. Output the full <database>.
+4. Output the <query>.
+
+### Syntactic Requirements (s(CASP) Specific)
+- Disjunction: NEVER use `;`. Use multiple separate rules with the same head instead.
+- Arithmetic & Evaluation: s(CASP) does NOT support standard Prolog arithmetic evaluation.
+   - NEVER use `is`, , `>=`, `=:=`, `=\\=`, `<`, `>`, `<=`.
+   - USE CLP(Q) constraints instead: `#=`, `#<>`, `#<`, `#>`, `#=<`, `#>=`. Example: `X #= Y + 1`.
+- Negation: Use `not`. NEVER use `\\+`.
+- Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
+- Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
+- Atoms: Must be lowercase. Quote special characters (e.g., `'(A ∨ B)'`).
+- Variables: CamelCase. Use `_` for singletons.
+- Concise Atoms: Keep snake_case atoms as short as possible to save tokens. Condense long phrases into 1-3 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
+- Closed-World: EVERY predicate in a body MUST be defined as a fact or rule head somewhere in the database.
+- Discontiguous: Group all clauses for the same predicate together.
+- Predicate Naming: ALWAYS invent meaningful predicate names that accurately describe the relationships in the specific question. NEVER blindly copy predicate names (like `forms_from`) or structures from the few-shot examples unless they are directly relevant.
+
+### Query Formatting by Question Type
+1. **Multiple-Choice Questions (MCQ):**
+   - Encode EXACTLY FOUR choices as facts. The description MUST be a grounded lowercase snake_case atom derived from the ACTUAL option text, NEVER an uppercase variable!
+   - Example CORRECT: `choice(a, eliminating_a_source).`
+   - Example WRONG: `choice(a, A).` (This will trivially unify with anything and fail the proof!)
+   - Encode retrieved domain knowledge as facts and rules.
+   - You MUST define an `answer/1` rule that unifies with the correct option letter.
+   - **CRITICAL:** Your logic MUST uniquely identify EXACTLY ONE correct choice. Do not write generic rules that might accidentally evaluate to true for multiple incorrect options. You must explicitly differentiate the correct target from the distractors based on the domain rules.
+   - Example DB Rule: `answer(OptionLetter) :- choice(OptionLetter, Target), matches_criteria(Target).`
+   - The <query> MUST ALWAYS BE EXACTLY: `answer(OptionLetter).`
+2. **Binary (True/False) Questions:**
+   - Define specific instances from the question (e.g., `rock_one`, `rock_two`).
+   - Write rules defining the condition context (e.g., `pulled_together(A, B) :- ...`).
+   - The <query> MUST test the fully grounded relationship directly (e.g., `pulled_together(rock_one, rock_two).`).
+3. **Freeform / Open Logic:**
+   - Define relationships and rules governing propagation or constraints.
+   - The <query> queries the primary target entity state.
+
+### Output Format (Strict)
+<reasoning_step>
+[Reasoning in English]
+[Prolog code snippets]
+</reasoning_step>
+
+<database>
+[All facts and rules combined]
+</database>
+
+<query>
+[The query only]
+</query>
+
+### CRITICAL FINAL REMINDERS (DO NOT IGNORE):
+1. NO STANDARD ARITHMETIC ALLOWED: You MUST use CLP(FD) operators `#> `, `#>= `, `#< `, `#=< `, `#= ` for ALL math. `>` and `<` will instantly crash the parser!
+2. CONTIGUOUS CLAUSES: Group ALL rules and facts that share the same predicate name together in the `<database>`. Do NOT scatter them.
+---
+
+</SYSTEM>
+
+<USER>
+
+Context: In a food web, grass is a producer. Grasshoppers eat grass. Frogs eat grasshoppers. Snakes eat frogs. 
+Question: If the grass is contaminated, are the snakes affected?
+
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode relationships and premise.
+eats(grasshopper, grass).
+eats(frog, grasshopper).
+eats(snake, frog).
+is_contaminated(grass).
+</reasoning_step>
+
+<reasoning_step>
+Contamination logic.
+affected(Species) :- is_contaminated(Species).
+affected(Predator) :- eats(Predator, Prey), affected(Prey).
+</reasoning_step>
+
+<database>
+eats(grasshopper, grass).
+eats(frog, grasshopper).
+eats(snake, frog).
+is_contaminated(grass).
+affected(Species) :- is_contaminated(Species).
+affected(Predator) :- eats(Predator, Prey), affected(Prey).
+</database>
+
+<query>
+affected(snake).
+</query>
+---
+
+</ASSISTANT>
+
+<USER>
+
+Question: If two rocks are lacking magnetic properties and far apart, can a magnetic effect pull them together? 
+
+Retrieved Context: 
+LOGICAL EVIDENCE:
+1. A magnetic effect can pull two objects together.
+2. Magnetic properties are necessary for a magnetic force to act between two rocks.
+3. Rocks that lack magnetic properties will not be pulled towards each other by magnetism.
+4. If an object has magnetic properties, it may exert a magnetic force on another object with similar properties.
+        
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode specific instances for this binary question.
+lacks_magnetic_properties(rock_one).
+lacks_magnetic_properties(rock_two).
+far_apart(rock_one, rock_two).
+</reasoning_step>
+
+<reasoning_step>
+Explicit falsehood limits.
+-pulled_by_magnetism(RockA, _) :- lacks_magnetic_properties(RockA).
+-pulled_by_magnetism(_, RockB) :- lacks_magnetic_properties(RockB).
+</reasoning_step>
+
+<reasoning_step>
+Positive conditions.
+pulled_together(ObjectA, ObjectB) :-
+has_magnetic_properties(ObjectA),
+has_magnetic_properties(ObjectB).
+</reasoning_step>
+
+<database>
+lacks_magnetic_properties(rock_one).
+lacks_magnetic_properties(rock_two).
+far_apart(rock_one, rock_two).
+
+-pulled_by_magnetism(RockA, _) :- lacks_magnetic_properties(RockA).
+-pulled_by_magnetism(_, RockB) :- lacks_magnetic_properties(RockB).
+
+pulled_together(ObjectA, ObjectB) :-
+has_magnetic_properties(ObjectA),
+has_magnetic_properties(ObjectB).
+</database>
+
+<query>
+pulled_together(rock_one, rock_two).
+</query>
+---
+
+</ASSISTANT>
+
+<USER>
+
+Context: A trench forms when one plate moves under another at a subduction zone (plate convergence). A rift valley forms when tectonic plates diverge. An ocean basin forms when tectonic plates diverge, creating new crust. Mid-ocean ridges are areas where tectonic plates diverge.
+
+Question: Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+        
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode options.
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+</reasoning_step>
+
+<reasoning_step>
+Encode formation logic explicitly from context.
+forms_from(trench, subduction_zone).
+forms_from(trench, plate_convergence).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+</reasoning_step>
+
+<reasoning_step>
+Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with plate_divergence.
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+</reasoning_step>
+
+<database>
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(trench, plate_convergence).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+</database>
+
+<query>
+answer(OptionLetter).
+</query>
+---
+
+</ASSISTANT>
+
+<USER>
+
+Context: Mammals are warm-blooded vertebrates that have hair. Dogs, cats, and humans are mammals. Frogs are amphibians, which are cold-blooded.
+
+Question: Which of the following animals is NOT a mammal?
+A. dog
+B. cat
+C. human
+D. frog
+        
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode options.
+choice(a, dog).
+choice(b, cat).
+choice(c, human).
+choice(d, frog).
+</reasoning_step>
+
+<reasoning_step>
+Encode biological classifications explicitly from context.
+is_mammal(dog).
+is_mammal(cat).
+is_mammal(human).
+is_amphibian(frog).
+</reasoning_step>
+
+<reasoning_step>
+Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with being a mammal.
+answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+</reasoning_step>
+
+<database>
+choice(a, dog).
+choice(b, cat).
+choice(c, human).
+choice(d, frog).
+
+is_mammal(dog).
+is_mammal(cat).
+is_mammal(human).
+is_amphibian(frog).
+
+answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+</database>
+
+<query>
+answer(OptionLetter).
+</query>
+---
+
+</ASSISTANT>
+
+
+Please answer the following query based on past instructions:
+Now, process the following:
+Context:
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a cell wall that provides structural support.
+2. Animal cells do not have cell walls.
+3. The cell wall in a plant cell is similar to an animal skeleton in function.
+4. A cell wall is an external covering of a cell.
+5. An animal skeleton is an external structure that provides support and protection.
+6. Both a plant cell wall and an animal skeleton provide structural support.
+7. The cell wall in a plant cell is composed of cellulose and other materials.
+8. Cellulose is a rigid polysaccharide that provides structural support.
+9. An animal skeleton is composed of rigid materials such as bone and cartilage.
+10. Both a plant cell wall and an animal skeleton provide protection to the cell or organism.
+11. The cell wall in a plant cell helps to maintain the cell's shape.
+12. An animal skeleton helps to maintain the organism's shape.
+13. The cell wall in a plant cell is essential for the cell's survival.
+14. An animal skeleton is essential for the organism's survival.
+15. The function of a plant cell wall is most similar to the function of an animal skeleton.
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+User Question:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+### ERRORS TO FIX
+  [1] LLM call timed out (LLM call timed out after 120s). The model may have hung. It has been reset — retry.
+
+Rewrite ENTIRE <database> and <query>. <database> must have rules (:-); <query> exactly one plain goal.
+
+----------------------------------
+
+[LLM_EVENT] RETRY_BACKOFF_ATTEMPT_1 | ERROR: Waiting 1.36s after error: APITimeoutError
+
+--- [DEBUG] PROLOG PROMPT (PROLOG) ---
+<SYSTEM>
+
+### Role
+You are an expert Prolog programmer specializing in Knowledge Representation for the s(CASP) solver.
+
+### Task
+Translate the provided Context into a formal Prolog database. Generate rules (Head :- Body.) rather than just facts.
+
+### Execution Flow
+1. Use a SEPARATE <reasoning_step> tag for each logical leap. Explain in English, then provide Prolog code.
+2. Formulate implicit domain rules if necessary.
+3. Output the full <database>.
+4. Output the <query>.
+
+### Syntactic Requirements (s(CASP) Specific)
+- Disjunction: NEVER use `;`. Use multiple separate rules with the same head instead.
+- Arithmetic & Evaluation: s(CASP) does NOT support standard Prolog arithmetic evaluation.
+   - NEVER use `is`, , `>=`, `=:=`, `=\\=`, `<`, `>`, `<=`.
+   - USE CLP(Q) constraints instead: `#=`, `#<>`, `#<`, `#>`, `#=<`, `#>=`. Example: `X #= Y + 1`.
+- Negation: Use `not`. NEVER use `\\+`.
+- Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
+- Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
+- Atoms: Must be lowercase. Quote special characters (e.g., `'(A ∨ B)'`).
+- Variables: CamelCase. Use `_` for singletons.
+- Concise Atoms: Keep snake_case atoms as short as possible to save tokens. Condense long phrases into 1-3 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
+- Closed-World: EVERY predicate in a body MUST be defined as a fact or rule head somewhere in the database.
+- Discontiguous: Group all clauses for the same predicate together.
+- Predicate Naming: ALWAYS invent meaningful predicate names that accurately describe the relationships in the specific question. NEVER blindly copy predicate names (like `forms_from`) or structures from the few-shot examples unless they are directly relevant.
+
+### Query Formatting by Question Type
+1. **Multiple-Choice Questions (MCQ):**
+   - Encode EXACTLY FOUR choices as facts. The description MUST be a grounded lowercase snake_case atom derived from the ACTUAL option text, NEVER an uppercase variable!
+   - Example CORRECT: `choice(a, eliminating_a_source).`
+   - Example WRONG: `choice(a, A).` (This will trivially unify with anything and fail the proof!)
+   - Encode retrieved domain knowledge as facts and rules.
+   - You MUST define an `answer/1` rule that unifies with the correct option letter.
+   - **CRITICAL:** Your logic MUST uniquely identify EXACTLY ONE correct choice. Do not write generic rules that might accidentally evaluate to true for multiple incorrect options. You must explicitly differentiate the correct target from the distractors based on the domain rules.
+   - Example DB Rule: `answer(OptionLetter) :- choice(OptionLetter, Target), matches_criteria(Target).`
+   - The <query> MUST ALWAYS BE EXACTLY: `answer(OptionLetter).`
+2. **Binary (True/False) Questions:**
+   - Define specific instances from the question (e.g., `rock_one`, `rock_two`).
+   - Write rules defining the condition context (e.g., `pulled_together(A, B) :- ...`).
+   - The <query> MUST test the fully grounded relationship directly (e.g., `pulled_together(rock_one, rock_two).`).
+3. **Freeform / Open Logic:**
+   - Define relationships and rules governing propagation or constraints.
+   - The <query> queries the primary target entity state.
+
+### Output Format (Strict)
+<reasoning_step>
+[Reasoning in English]
+[Prolog code snippets]
+</reasoning_step>
+
+<database>
+[All facts and rules combined]
+</database>
+
+<query>
+[The query only]
+</query>
+
+### CRITICAL FINAL REMINDERS (DO NOT IGNORE):
+1. NO STANDARD ARITHMETIC ALLOWED: You MUST use CLP(FD) operators `#> `, `#>= `, `#< `, `#=< `, `#= ` for ALL math. `>` and `<` will instantly crash the parser!
+2. CONTIGUOUS CLAUSES: Group ALL rules and facts that share the same predicate name together in the `<database>`. Do NOT scatter them.
+---
+
+</SYSTEM>
+
+<USER>
+
+Context: In a food web, grass is a producer. Grasshoppers eat grass. Frogs eat grasshoppers. Snakes eat frogs. 
+Question: If the grass is contaminated, are the snakes affected?
+
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode relationships and premise.
+eats(grasshopper, grass).
+eats(frog, grasshopper).
+eats(snake, frog).
+is_contaminated(grass).
+</reasoning_step>
+
+<reasoning_step>
+Contamination logic.
+affected(Species) :- is_contaminated(Species).
+affected(Predator) :- eats(Predator, Prey), affected(Prey).
+</reasoning_step>
+
+<database>
+eats(grasshopper, grass).
+eats(frog, grasshopper).
+eats(snake, frog).
+is_contaminated(grass).
+affected(Species) :- is_contaminated(Species).
+affected(Predator) :- eats(Predator, Prey), affected(Prey).
+</database>
+
+<query>
+affected(snake).
+</query>
+---
+
+</ASSISTANT>
+
+<USER>
+
+Question: If two rocks are lacking magnetic properties and far apart, can a magnetic effect pull them together? 
+
+Retrieved Context: 
+LOGICAL EVIDENCE:
+1. A magnetic effect can pull two objects together.
+2. Magnetic properties are necessary for a magnetic force to act between two rocks.
+3. Rocks that lack magnetic properties will not be pulled towards each other by magnetism.
+4. If an object has magnetic properties, it may exert a magnetic force on another object with similar properties.
+        
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode specific instances for this binary question.
+lacks_magnetic_properties(rock_one).
+lacks_magnetic_properties(rock_two).
+far_apart(rock_one, rock_two).
+</reasoning_step>
+
+<reasoning_step>
+Explicit falsehood limits.
+-pulled_by_magnetism(RockA, _) :- lacks_magnetic_properties(RockA).
+-pulled_by_magnetism(_, RockB) :- lacks_magnetic_properties(RockB).
+</reasoning_step>
+
+<reasoning_step>
+Positive conditions.
+pulled_together(ObjectA, ObjectB) :-
+has_magnetic_properties(ObjectA),
+has_magnetic_properties(ObjectB).
+</reasoning_step>
+
+<database>
+lacks_magnetic_properties(rock_one).
+lacks_magnetic_properties(rock_two).
+far_apart(rock_one, rock_two).
+
+-pulled_by_magnetism(RockA, _) :- lacks_magnetic_properties(RockA).
+-pulled_by_magnetism(_, RockB) :- lacks_magnetic_properties(RockB).
+
+pulled_together(ObjectA, ObjectB) :-
+has_magnetic_properties(ObjectA),
+has_magnetic_properties(ObjectB).
+</database>
+
+<query>
+pulled_together(rock_one, rock_two).
+</query>
+---
+
+</ASSISTANT>
+
+<USER>
+
+Context: A trench forms when one plate moves under another at a subduction zone (plate convergence). A rift valley forms when tectonic plates diverge. An ocean basin forms when tectonic plates diverge, creating new crust. Mid-ocean ridges are areas where tectonic plates diverge.
+
+Question: Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+        
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode options.
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+</reasoning_step>
+
+<reasoning_step>
+Encode formation logic explicitly from context.
+forms_from(trench, subduction_zone).
+forms_from(trench, plate_convergence).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+</reasoning_step>
+
+<reasoning_step>
+Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with plate_divergence.
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+</reasoning_step>
+
+<database>
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(trench, plate_convergence).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+</database>
+
+<query>
+answer(OptionLetter).
+</query>
+---
+
+</ASSISTANT>
+
+<USER>
+
+Context: Mammals are warm-blooded vertebrates that have hair. Dogs, cats, and humans are mammals. Frogs are amphibians, which are cold-blooded.
+
+Question: Which of the following animals is NOT a mammal?
+A. dog
+B. cat
+C. human
+D. frog
+        
+</USER>
+
+<ASSISTANT>
+
+<reasoning_step>
+Encode options.
+choice(a, dog).
+choice(b, cat).
+choice(c, human).
+choice(d, frog).
+</reasoning_step>
+
+<reasoning_step>
+Encode biological classifications explicitly from context.
+is_mammal(dog).
+is_mammal(cat).
+is_mammal(human).
+is_amphibian(frog).
+</reasoning_step>
+
+<reasoning_step>
+Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with being a mammal.
+answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+</reasoning_step>
+
+<database>
+choice(a, dog).
+choice(b, cat).
+choice(c, human).
+choice(d, frog).
+
+is_mammal(dog).
+is_mammal(cat).
+is_mammal(human).
+is_amphibian(frog).
+
+answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+</database>
+
+<query>
+answer(OptionLetter).
+</query>
+---
+
+</ASSISTANT>
+
+
+Please answer the following query based on past instructions:
+Now, process the following:
+Context:
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a cell wall that provides structural support.
+2. Animal cells do not have cell walls.
+3. The cell wall in a plant cell is similar to an animal skeleton in function.
+4. A cell wall is an external covering of a cell.
+5. An animal skeleton is an external structure that provides support and protection.
+6. Both a plant cell wall and an animal skeleton provide structural support.
+7. The cell wall in a plant cell is composed of cellulose and other materials.
+8. Cellulose is a rigid polysaccharide that provides structural support.
+9. An animal skeleton is composed of rigid materials such as bone and cartilage.
+10. Both a plant cell wall and an animal skeleton provide protection to the cell or organism.
+11. The cell wall in a plant cell helps to maintain the cell's shape.
+12. An animal skeleton helps to maintain the organism's shape.
+13. The cell wall in a plant cell is essential for the cell's survival.
+14. An animal skeleton is essential for the organism's survival.
+15. The function of a plant cell wall is most similar to the function of an animal skeleton.
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+User Question:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+### ERRORS TO FIX
+  [1] LLM call timed out (LLM call timed out after 120s). The model may have hung. It has been reset — retry.
+
+Rewrite ENTIRE <database> and <query>. <database> must have rules (:-); <query> exactly one plain goal.
+
+----------------------------------
+
+[LLM_EVENT] RETRY_BACKOFF_ATTEMPT_1 | ERROR: Waiting 1.33s after error: APITimeoutError
+
+[LLM_EVENT] RETRY_BACKOFF_ATTEMPT_2 | ERROR: Waiting 2.96s after error: APITimeoutError
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[1] cytoplasmic part: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+[2] anucleated cell: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+[3] cell part: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+[4] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[5] membrane (biological): This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+[6] plastid: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+[7] plant physiology: Plant physiology: a <a href=\
+[8] protoplasm: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+[9] cellulose: a polysaccharide that is the main constituent of the cell walls of plants.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+[0, 1, 2, 3, 4, 5, 6, 8, 9]
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'plant cell wall'
+Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: botanical cell
+  - subclass of: cell wall
+  - subclass of: eukaryotic cell
+  - subclass of: plant or part of a plant
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+  - sibling concept: bacterial cell wall
+  - sibling concept: prokaryotic cell wall
+
+Concept: 'cytoplasmic part'
+Facts:
+  - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+  - subclass of: cytoplasm
+  - subclass of: cell part
+  - subclass of: protoplasm
+  - sibling concept: cytosol
+
+Concept: 'anucleated cell'
+Facts:
+  - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+  - subclass of: cell
+  - subclass of: living thing
+  - has subclass: prokaryotic organism
+  - sibling concept: cell capable of further differentiation
+  - sibling concept: cell line
+  - sibling concept: diploid cell
+  - sibling concept: eukaryotic cell
+  - sibling concept: haploid cell
+
+Concept: 'cell part'
+Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: microscopic object
+  - subclass of: organic matter
+  - subclass of: parts
+  - subclass of: object types
+  - subclass of: shaped thing
+  - subclass of: three dimensional thing
+  - subclass of: material
+  - has subclass: aster (cell part)
+  - has subclass: axon
+  - has subclass: biological membrane stuff
+  - has subclass: bacterial capsule
+
+Concept: 'cell'
+Facts:
+  - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+  - subclass of: living thing
+  - subclass of: biological matter
+  - subclass of: finite spatial thing
+  - subclass of: naturally-occurring tangible substance
+  - subclass of: organic matter
+  - subclass of: temporally continuous thing
+  - has subclass: anucleated cell
+  - has subclass: cell capable of further differentiation
+  - has subclass: cell line
+  - has subclass: diploid cell
+  - has subclass: eukaryotic cell
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+To answer the question, we need to find the concept that has a function most similar to the function of an animal skeleton. An animal skeleton provides structural support and protection to the body. 
+
+Based on the given ontology facts, we can filter the concepts as follows:
+
+1. 'plant cell wall'
+   - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+   - subclass of: structural cell part (relevant because it relates to the mechanism of providing mechanical support)
+   - subclass of: external anatomical part (relevant because it relates to the mechanism of providing mechanical support)
+   - sibling concept: bacterial cell wall (not relevant because it's not one of the MCQ choices)
+   - sibling concept: prokaryotic cell wall (not relevant because it's not one of the MCQ choices)
+
+2. 'cytoplasmic part'
+   - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+   - subclass of: cell part (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: protoplasm (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - sibling concept: cytosol (not relevant because it's not one of the MCQ choices)
+
+3. 'anucleated cell'
+   - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+   - subclass of: cell (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: living thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: prokaryotic organism (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - sibling concept: cell capable of further differentiation (not relevant because it's not one of the MCQ choices)
+   - sibling concept: cell line (not relevant because it's not one of the MCQ choices)
+   - sibling concept: diploid cell (not relevant because it's not one of the MCQ choices)
+   - sibling concept: eukaryotic cell (not relevant because it's not one of the MCQ choices)
+   - sibling concept: haploid cell (not relevant because it's not one of the MCQ choices)
+
+4. 'cell part'
+   - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+   - subclass of: microscopic object (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: organic matter (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: parts (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: object types (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: shaped thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: three dimensional thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: material (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: aster (cell part) (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: axon (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: biological membrane stuff (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: bacterial capsule (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+
+5. 'cell'
+   - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+   - subclass of: living thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: biological matter (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: finite spatial thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: naturally-occurring tangible substance (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: organic matter (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - subclass of: temporally continuous thing (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: anucleated cell (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: cell capable of further differentiation (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: cell line (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: diploid cell (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+   - has subclass: eukaryotic cell (not relevant because it doesn't relate to the mechanism of providing mechanical support)
+
+Based on the filtering rules, the relevant concept is 'plant cell wall'. The kept facts are:
+
+{
+  "plant cell wall": ["definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.", "subclass of: structural cell part", "subclass of: external anatomical part"]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*Letter.* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+
+### Question:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+### Context:
+KBPedia Concept: plant cell wall.
+Relevant Logical Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+KBPedia Concept: cytoplasmic part.
+Relevant Logical Facts:
+  - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+  - subclass of: cytoplasm
+  - subclass of: cell part
+  - subclass of: protoplasm
+  - sibling concept: cytosol
+KBPedia Concept: anucleated cell.
+Relevant Logical Facts:
+  - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+  - subclass of: cell
+  - subclass of: living thing
+  - has subclass: prokaryotic organism
+  - sibling concept: cell capable of further differentiation
+  - sibling concept: cell line
+  - sibling concept: diploid cell
+  - sibling concept: eukaryotic cell
+  - sibling concept: haploid cell
+KBPedia Concept: cell part.
+Relevant Logical Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: microscopic object
+  - subclass of: organic matter
+  - subclass of: parts
+  - subclass of: object types
+  - subclass of: shaped thing
+  - subclass of: three dimensional thing
+  - subclass of: material
+  - has subclass: aster (cell part)
+  - has subclass: axon
+  - has subclass: biological membrane stuff
+  - has subclass: bacterial capsule
+  - has subclass: structural cell part
+  - has subclass: cell plate
+  - has subclass: chromatin
+  - has subclass: chromosome
+  - has subclass: cytoplasm
+  - has subclass: intracellular part
+  - has subclass: membrane
+  - has subclass: microtubule
+  - sibling concept: atomic nucleus
+  - sibling concept: chemical object
+  - sibling concept: microorganism
+  - sibling concept: nanotube
+  - sibling concept: polymer molecule
+KBPedia Concept: cell.
+Relevant Logical Facts:
+  - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+  - subclass of: living thing
+  - subclass of: biological matter
+  - subclass of: finite spatial thing
+  - subclass of: naturally-occurring tangible substance
+  - subclass of: organic matter
+  - subclass of: temporally continuous thing
+  - has subclass: anucleated cell
+  - has subclass: cell capable of further differentiation
+  - has subclass: cell line
+  - has subclass: diploid cell
+  - has subclass: eukaryotic cell
+  - has subclass: haploid cell
+  - has subclass: aura: heterotrophic cell
+  - has subclass: prokaryotic organism
+  - has subclass: single-cell organism
+  - has subclass: somatic cell
+  - has subclass: stem cell
+  - sibling concept: aerobic thing
+  - sibling concept: anaerobic thing
+  - sibling concept: animal or body part
+  - sibling concept: asexual organism
+  - sibling concept: tissue
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+*B.* The cell wall has a function that is most similar to the function of an animal skeleton because it provides mechanical support to non-woody plant tissues, similar to how an animal skeleton provides structural support to the body.
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*Letter.* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+
+### Question:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+### Context:
+KBPedia Concept: plant cell wall.
+Relevant Logical Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+
+KBPedia Concept: cytoplasmic part.
+Relevant Logical Facts:
+  - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+  - subclass of: cytoplasm
+  - subclass of: cell part
+  - subclass of: protoplasm
+  - sibling concept: cytosol
+
+KBPedia Concept: anucleated cell.
+Relevant Logical Facts:
+  - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+  - subclass of: cell
+  - subclass of: living thing
+  - has subclass: prokaryotic organism
+  - sibling concept: cell capable of further differentiation
+  - sibling concept: cell line
+  - sibling concept: diploid cell
+  - sibling concept: eukaryotic cell
+  - sibling concept: haploid cell
+
+KBPedia Concept: cell part.
+Relevant Logical Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: microscopic object
+  - subclass of: organic matter
+  - subclass of: parts
+  - subclass of: object types
+  - subclass of: shaped thing
+  - subclass of: three dimensional thing
+  - subclass of: material
+  - has subclass: aster (cell part)
+  - has subclass: axon
+  - has subclass: biological membrane stuff
+  - has subclass: bacterial capsule
+  - has subclass: structural cell part
+  - has subclass: cell plate
+  - has subclass: chromatin
+  - has subclass: chromosome
+  - has subclass: cytoplasm
+  - has subclass: intracellular part
+  - has subclass: membrane
+  - has subclass: microtubule
+  - sibling concept: atomic nucleus
+  - sibling concept: chemical object
+  - sibling concept: microorganism
+  - sibling concept: nanotube
+  - sibling concept: polymer molecule
+
+KBPedia Concept: cell.
+Relevant Logical Facts:
+  - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+  - subclass of: living thing
+  - subclass of: biological matter
+  - subclass of: finite spatial thing
+  - subclass of: naturally-occurring tangible substance
+  - subclass of: organic matter
+  - subclass of: temporally continuous thing
+  - has subclass: anucleated cell
+  - has subclass: cell capable of further differentiation
+  - has subclass: cell line
+  - has subclass: diploid cell
+  - has subclass: eukaryotic cell
+  - has subclass: haploid cell
+  - has subclass: aura: heterotrophic cell
+  - has subclass: prokaryotic organism
+  - has subclass: single-cell organism
+  - has subclass: somatic cell
+  - has subclass: stem cell
+  - sibling concept: aerobic thing
+  - sibling concept: anaerobic thing
+  - sibling concept: animal or body part
+  - sibling concept: asexual organism
+  - sibling concept: tissue
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+* B. cell wall *
+The cell wall provides mechanical support to non-woody plant tissues, similar to how an animal skeleton provides structural support to the body. This is due to its rigid yet elastic nature, which allows it to withstand pressure from the cell contents.
+===================================
+
+[LLM_EVENT] ENCODER_EXTRACT | LATENCY: 0.5351s
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are extracting search terms for a knowledge base lookup.
+
+Given this query (which may include multiple-choice options), extract the following:
+1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton")
+2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis")
+3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").
+
+Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"
+
+Output a plain JSON list of strings. Include 4-8 terms maximum.
+Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+[LLM_EVENT] GRAG_INVOKE | LATENCY: 0.7811s
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+Based on the query, here's the extracted list of terms:
+
+- **Explicit entities**: 
+  - "plant cell"
+  - "animal skeleton"
+  - "cell membrane"
+  - "cell wall"
+  - "chloroplast"
+  - "nucleus"
+
+- **Implied functional concepts**: 
+  - "structural support"
+
+- **Core scientific terms** from answer options:
+  - "cell membrane"
+  - "cell wall"
+  - "chloroplast"
+  - "nucleus"
+
+Here's the combined list in a plain JSON format:
+
+```json
+[
+  "plant cell",
+  "animal skeleton",
+  "structural support",
+  "cell wall",
+  "chloroplast",
+  "nucleus"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[1] membrane protein: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+[2] cell wall: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+[3] bacterial cell wall: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+[4] photosynthetic pigment: A photosynthetic pigment (accessory pigment; chloroplast pigment).
+[5] chloroplast: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+[6] nucleus: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, but a few cell types, such as mammalian red blood cells, have , and a few others have many.
+[7] lentiform nucleus: The collection of all lentiform nuclei. An individual LentiformNucleus (or 'lenticular nucleus') is a BasalNucleus which is a unique part of a CerebralHemisphere.
+[8] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[9] plant epidermis: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+[10] human skeleton: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,
+[11] skeleton tarantula: The skeleton tarantula, Ephebopus murinus, is a species of spider belonging to the family Theraphosidae (tarantulas), sub-family Aviculariinae. A New World species, it is native to several South American countries. Its common name is derived from the skeleton-like markings on its legs.
+[12] structural system: The term structural system or structural frame in structural engineering refers to load-resisting sub-system of a structure. The structural system transfers loads through interconnected structural components or members. Commonly used structures can be classified into five major categories, depending on the type of primary stress that may arise in the members of the structures under major design lo
+[13] structural connector: This category is for components that connect structural systems or structural elements together in reference to buildings and structures.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+[LLM_EVENT] GRAG_INVOKE | LATENCY: 0.5253s
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+[0, 1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 13]
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'cell'
+Facts:
+  - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+  - subclass of: living thing
+  - subclass of: biological matter
+  - subclass of: finite spatial thing
+  - subclass of: naturally-occurring tangible substance
+  - subclass of: organic matter
+  - subclass of: temporally continuous thing
+  - has subclass: anucleated cell
+  - has subclass: cell capable of further differentiation
+  - has subclass: cell line
+  - has subclass: diploid cell
+  - has subclass: eukaryotic cell
+
+Concept: 'membrane protein'
+Facts:
+  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+  - subclass of: protein molecule
+  - subclass of: biopolymer
+  - subclass of: heteropolymer
+  - subclass of: organic molecule
+  - subclass of: polymer molecule
+  - subclass of: polypeptide
+  - subclass of: protein molecule or protein complex
+  - has subclass: peripheral protein
+  - sibling concept: aquaporin
+  - sibling concept: plasma protein molecule
+  - sibling concept: enzyme
+
+Concept: 'cell wall'
+Facts:
+  - definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+  - subclass of: cell part
+  - subclass of: organism part
+  - has subclass: bacterial cell wall
+  - has subclass: plant cell wall
+  - has subclass: prokaryotic cell wall
+  - sibling concept: cell membrane
+  - sibling concept: cytoskeleton
+  - sibling concept: nuclear envelope
+  - sibling concept: abdomen
+
+Concept: 'bacterial cell wall'
+Facts:
+  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+  - subclass of: cell wall
+  - subclass of: prokaryotic cell wall
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+  - sibling concept: plant cell wall
+  - sibling concept: prokaryotic cell wall
+
+Concept: 'photosynthetic pigment'
+Facts:
+  - definition: A photosynthetic pigment (accessory pigment; chloroplast pigment).
+  - subclass of: organic compound
+  - subclass of: pigment
+  - subclass of: chemical and gas product
+  - subclass of: molecular material
+  - subclass of: organic matter
+  - subclass of: colorant
+  - has subclass: bacteriochlorophyll
+  - has subclass: chlorophyll
+  - has subclass: photosynthetic accessory pigment
+  - sibling concept: acetate
+  - sibling concept: alcohol
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+[LLM_EVENT] GRAG_INVOKE | LATENCY: 2.3648s
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+```python
+import json
+
+# Define the ontology facts as dictionaries
+ontology_facts = {
+    'cell': {
+        'definition': 'The collection of living cells; a specialization of BiologicalLivingObject.',
+        'subclass of': ['living thing', 'biological matter', 'finite spatial thing', 'naturally-occurring tangible substance', 'organic matter', 'temporally continuous thing'],
+        'has subclass': ['anucleated cell', 'cell capable of further differentiation', 'cell line', 'diploid cell', 'eukaryotic cell']
+    },
+    'membrane protein': {
+        'definition': 'A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.',
+        'subclass of': ['protein molecule', 'biopolymer', 'heteropolymer', 'organic molecule', 'polymer molecule', 'polypeptide', 'protein molecule or protein complex'],
+        'has subclass': ['peripheral protein']
+    },
+    'cell wall': {
+        'definition': 'The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water.',
+        'subclass of': ['structural cell part', 'external anatomical part', 'cell part', 'organism part'],
+        'has subclass': ['bacterial cell wall', 'plant cell wall', 'prokaryotic cell wall'],
+        'sibling concept': ['cell membrane', 'cytoskeleton', 'nuclear envelope', 'abdomen']
+    },
+    'bacterial cell wall': {
+        'definition': 'The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.',
+        'subclass of': ['cell wall', 'prokaryotic cell wall', 'structural cell part', 'external anatomical part'],
+        'sibling concept': ['plant cell wall', 'prokaryotic cell wall']
+    },
+    'photosynthetic pigment': {
+        'definition': 'A photosynthetic pigment (accessory pigment; chloroplast pigment).',
+        'subclass of': ['organic compound', 'pigment', 'chemical and gas product', 'molecular material', 'organic matter', 'colorant'],
+        'has subclass': ['bacteriochlorophyll', 'chlorophyll', 'photosynthetic accessory pigment'],
+        'sibling concept': ['acetate', 'alcohol']
+    }
+}
+
+# Define the MCQ question and answer choices
+question = "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?"
+answer_choices = ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+
+# Filter the ontology facts based on the question and answer choices
+filtered_facts = {}
+for concept in ontology_facts:
+    relevant_facts = []
+    if concept in answer_choices:
+        relevant_facts.append(ontology_facts[concept]['definition'])
+        if concept == 'cell wall':
+            relevant_facts.append(ontology_facts[concept]['definition'])
+            relevant_facts.append('Notably, cell walls do not occur in animal cells.')
+    filtered_facts[concept] = relevant_facts
+
+# Output the filtered facts as a JSON dictionary
+output = json.dumps(filtered_facts, indent=4)
+print(output)
+```
+
+Output:
+```json
+{
+    "cell": [
+        "The collection of living cells; a specialization of BiologicalLivingObject.",
+        "Notably, cell walls do not occur in animal cells."
+    ],
+    "cell wall": [
+        "The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water.",
+        "Notably, cell walls do not occur in animal cells."
+    ],
+    "chloroplast": [],
+    "nucleus": []
+}
+```
+
+Note that the `chloroplast` and `nucleus` concepts have no relevant facts after filtering, so their output is an empty list. The `cell` and `cell wall` concepts have relevant facts that explain how/why they form or don't form under the conditions described in the question.
+===================================

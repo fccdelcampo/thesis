@@ -54787,3 +54787,442 @@ The cell wall provides mechanical support to non-woody plant tissues, similar to
 14. The absence of a cell wall in animal cells is a key characteristic of animal cells.
 15. The presence of a cell wall in plant cells is a key characteristic of plant cells.
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: plant cell wall. Relevant Logical Facts:   - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.   - subclass of: structural cell part   - subclass of: external anatomical part
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cytoplasmic part",
+  "uri": "http://kbpedia.org/kko/rc/CytoplasmicPart",
+  "score": 1.0,
+  "triples": [
+    "definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.",
+    "subclass of: cytoplasm",
+    "subclass of: cell part",
+    "subclass of: protoplasm",
+    "sibling concept: cytosol"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: cytoplasmic part. Relevant Logical Facts:   - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.   - subclass of: cytoplasm   - subclass of: cell part   - subclass of: protoplasm   - sibling concept: cytosol
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "anucleated cell",
+  "uri": "http://kbpedia.org/kko/rc/AnucleatedCell",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.",
+    "subclass of: cell",
+    "subclass of: living thing",
+    "has subclass: prokaryotic organism",
+    "sibling concept: cell capable of further differentiation",
+    "sibling concept: cell line",
+    "sibling concept: diploid cell",
+    "sibling concept: eukaryotic cell",
+    "sibling concept: haploid cell"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: anucleated cell. Relevant Logical Facts:   - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.   - subclass of: cell   - subclass of: living thing   - has subclass: prokaryotic organism   - sibling concept: cell capable of further differentiation   - sibling concept: cell line   - sibling concept: diploid cell   - sibling concept: eukaryotic cell   - sibling concept: haploid cell
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.",
+    "subclass of: microscopic object",
+    "subclass of: organic matter",
+    "subclass of: parts",
+    "subclass of: object types",
+    "subclass of: shaped thing",
+    "subclass of: three dimensional thing",
+    "subclass of: material",
+    "has subclass: aster (cell part)",
+    "has subclass: axon",
+    "has subclass: biological membrane stuff",
+    "has subclass: bacterial capsule",
+    "has subclass: structural cell part",
+    "has subclass: cell plate",
+    "has subclass: chromatin",
+    "has subclass: chromosome",
+    "has subclass: cytoplasm",
+    "has subclass: intracellular part",
+    "has subclass: membrane",
+    "has subclass: microtubule",
+    "sibling concept: atomic nucleus",
+    "sibling concept: chemical object",
+    "sibling concept: microorganism",
+    "sibling concept: nanotube",
+    "sibling concept: polymer molecule"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: cell part. Relevant Logical Facts:   - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.   - subclass of: microscopic object   - subclass of: organic matter   - subclass of: parts   - subclass of: object types   - subclass of: shaped thing   - subclass of: three dimensional thing   - subclass of: material   - has subclass: aster (cell part)   - has subclass: axon   - has subclass: biological membrane stuff   - has subclass: bacterial capsule   - has subclass: structural cell part   - has subclass: cell plate   - has subclass: chromatin   - has subclass: chromosome   - has subclass: cytoplasm   - has subclass: intracellular part   - has subclass: membrane   - has subclass: microtubule   - sibling concept: atomic nucleus   - sibling concept: chemical object   - sibling concept: microorganism   - sibling concept: nanotube   - sibling concept: polymer molecule
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell",
+  "uri": "http://kbpedia.org/kko/rc/Cell",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.",
+    "subclass of: living thing",
+    "subclass of: biological matter",
+    "subclass of: finite spatial thing",
+    "subclass of: naturally-occurring tangible substance",
+    "subclass of: organic matter",
+    "subclass of: temporally continuous thing",
+    "has subclass: anucleated cell",
+    "has subclass: cell capable of further differentiation",
+    "has subclass: cell line",
+    "has subclass: diploid cell",
+    "has subclass: eukaryotic cell",
+    "has subclass: haploid cell",
+    "has subclass: aura: heterotrophic cell",
+    "has subclass: prokaryotic organism",
+    "has subclass: single-cell organism",
+    "has subclass: somatic cell",
+    "has subclass: stem cell",
+    "sibling concept: aerobic thing",
+    "sibling concept: anaerobic thing",
+    "sibling concept: animal or body part",
+    "sibling concept: asexual organism",
+    "sibling concept: tissue"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: cell. Relevant Logical Facts:   - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.   - subclass of: living thing   - subclass of: biological matter   - subclass of: finite spatial thing   - subclass of: naturally-occurring tangible substance   - subclass of: organic matter   - subclass of: temporally continuous thing   - has subclass: anucleated cell   - has subclass: cell capable of further differentiation   - has subclass: cell line   - has subclass: diploid cell   - has subclass: eukaryotic cell   - has subclass: haploid cell   - has subclass: aura: heterotrophic cell   - has subclass: prokaryotic organism   - has subclass: single-cell organism   - has subclass: somatic cell   - has subclass: stem cell   - sibling concept: aerobic thing   - sibling concept: anaerobic thing   - sibling concept: animal or body part   - sibling concept: asexual organism   - sibling concept: tissue
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+* B. cell wall *
+The cell wall provides mechanical support to non-woody plant tissues, similar to how an animal skeleton provides structural support to the body. This is due to the rigid yet elastic nature of the cell wall, which experiences pressure from the cell contents.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell",
+  "uri": "http://kbpedia.org/kko/rc/Cell",
+  "score": 1.0,
+  "triples": [
+    "The collection of living cells; a specialization of BiologicalLivingObject.",
+    "Notably, cell walls do not occur in animal cells."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: cell. Relevant Logical Facts:  - The collection of living cells; a specialization of BiologicalLivingObject.  - Notably, cell walls do not occur in animal cells.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane protein",
+  "uri": "http://kbpedia.org/kko/rc/MembraneProtein",
+  "score": 1.0,
+  "triples": [
+    "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.",
+    "subclass of: protein molecule",
+    "subclass of: biopolymer",
+    "subclass of: heteropolymer",
+    "subclass of: organic molecule",
+    "subclass of: polymer molecule",
+    "subclass of: polypeptide",
+    "subclass of: protein molecule or protein complex",
+    "has subclass: peripheral protein",
+    "sibling concept: aquaporin",
+    "sibling concept: plasma protein molecule",
+    "sibling concept: enzyme",
+    "sibling concept: hemoprotein molecule",
+    "sibling concept: kinetochore"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: membrane protein. Relevant Logical Facts:  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.  - subclass of: protein molecule  - subclass of: biopolymer  - subclass of: heteropolymer  - subclass of: organic molecule  - subclass of: polymer molecule  - subclass of: polypeptide  - subclass of: protein molecule or protein complex  - has subclass: peripheral protein  - sibling concept: aquaporin  - sibling concept: plasma protein molecule  - sibling concept: enzyme  - sibling concept: hemoprotein molecule  - sibling concept: kinetochore
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell wall",
+  "uri": "http://kbpedia.org/kko/rc/CellWall",
+  "score": 1.0,
+  "triples": [
+    "The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water.",
+    "Notably, cell walls do not occur in animal cells."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: cell wall. Relevant Logical Facts:  - The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water.  - Notably, cell walls do not occur in animal cells.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "bacterial cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BacterialCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.",
+    "subclass of: cell wall",
+    "subclass of: prokaryotic cell wall",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part",
+    "sibling concept: plant cell wall",
+    "sibling concept: prokaryotic cell wall"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: bacterial cell wall. Relevant Logical Facts:  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.  - subclass of: cell wall  - subclass of: prokaryotic cell wall  - subclass of: structural cell part  - subclass of: external anatomical part  - sibling concept: plant cell wall  - sibling concept: prokaryotic cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "photosynthetic pigment",
+  "uri": "http://kbpedia.org/kko/rc/PhotosyntheticPigment",
+  "score": 1.0,
+  "triples": [
+    "definition: A photosynthetic pigment (accessory pigment; chloroplast pigment).",
+    "subclass of: organic compound",
+    "subclass of: pigment",
+    "subclass of: chemical and gas product",
+    "subclass of: molecular material",
+    "subclass of: organic matter",
+    "subclass of: colorant",
+    "has subclass: bacteriochlorophyll",
+    "has subclass: chlorophyll",
+    "has subclass: photosynthetic accessory pigment",
+    "sibling concept: acetate",
+    "sibling concept: alcohol",
+    "sibling concept: aldehyde",
+    "sibling concept: Alicyclic compound",
+    "sibling concept: Aliphatic compound"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: photosynthetic pigment. Relevant Logical Facts:  - definition: A photosynthetic pigment (accessory pigment; chloroplast pigment).  - subclass of: organic compound  - subclass of: pigment  - subclass of: chemical and gas product  - subclass of: molecular material  - subclass of: organic matter  - subclass of: colorant  - has subclass: bacteriochlorophyll  - has subclass: chlorophyll  - has subclass: photosynthetic accessory pigment  - sibling concept: acetate  - sibling concept: alcohol  - sibling concept: aldehyde  - sibling concept: Alicyclic compound  - sibling concept: Aliphatic compound
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a cell wall that provides structural support.
+2. Animal cells do not have cell walls.
+3. The cell wall in a plant cell is similar to an animal skeleton in function.
+4. A cell wall is an external covering of a cell.
+5. An animal skeleton is an external structure that provides support and protection.
+6. Both a plant cell wall and an animal skeleton provide structural support.
+7. The cell wall in a plant cell is composed of cellulose and other materials.
+8. Cellulose is a rigid polysaccharide that provides structural support.
+9. An animal skeleton is composed of rigid materials such as bone and cartilage.
+10. Both a plant cell wall and an animal skeleton provide protection to the cell or organism.
+11. The cell wall in a plant cell helps to maintain the cell's shape.
+12. An animal skeleton helps to maintain the organism's shape.
+13. The cell wall in a plant cell is essential for the cell's survival.
+14. An animal skeleton is essential for the organism's survival.
+15. The function of a plant cell wall is most similar to the function of an animal skeleton.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: plant cell wall. Relevant Logical Facts:   - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.   - subclass of: structural cell part   - subclass of: external anatomical part
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cytoplasmic part",
+  "uri": "http://kbpedia.org/kko/rc/CytoplasmicPart",
+  "score": 1.0,
+  "triples": [
+    "definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.",
+    "subclass of: cytoplasm",
+    "subclass of: cell part",
+    "subclass of: protoplasm",
+    "sibling concept: cytosol"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: cytoplasmic part. Relevant Logical Facts:   - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.   - subclass of: cytoplasm   - subclass of: cell part   - subclass of: protoplasm   - sibling concept: cytosol
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "anucleated cell",
+  "uri": "http://kbpedia.org/kko/rc/AnucleatedCell",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.",
+    "subclass of: cell",
+    "subclass of: living thing",
+    "has subclass: prokaryotic organism",
+    "sibling concept: cell capable of further differentiation",
+    "sibling concept: cell line",
+    "sibling concept: diploid cell",
+    "sibling concept: eukaryotic cell",
+    "sibling concept: haploid cell"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: anucleated cell. Relevant Logical Facts:   - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.   - subclass of: cell   - subclass of: living thing   - has subclass: prokaryotic organism   - sibling concept: cell capable of further differentiation   - sibling concept: cell line   - sibling concept: diploid cell   - sibling concept: eukaryotic cell   - sibling concept: haploid cell
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.",
+    "subclass of: microscopic object",
+    "subclass of: organic matter",
+    "subclass of: parts",
+    "subclass of: object types",
+    "subclass of: shaped thing",
+    "subclass of: three dimensional thing",
+    "subclass of: material",
+    "has subclass: aster (cell part)",
+    "has subclass: axon",
+    "has subclass: biological membrane stuff",
+    "has subclass: bacterial capsule",
+    "has subclass: structural cell part",
+    "has subclass: cell plate",
+    "has subclass: chromatin",
+    "has subclass: chromosome",
+    "has subclass: cytoplasm",
+    "has subclass: intracellular part",
+    "has subclass: membrane",
+    "has subclass: microtubule",
+    "sibling concept: atomic nucleus",
+    "sibling concept: chemical object",
+    "sibling concept: microorganism",
+    "sibling concept: nanotube",
+    "sibling concept: polymer molecule"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: cell part. Relevant Logical Facts:   - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.   - subclass of: microscopic object   - subclass of: organic matter   - subclass of: parts   - subclass of: object types   - subclass of: shaped thing   - subclass of: three dimensional thing   - subclass of: material   - has subclass: aster (cell part)   - has subclass: axon   - has subclass: biological membrane stuff   - has subclass: bacterial capsule   - has subclass: structural cell part   - has subclass: cell plate   - has subclass: chromatin   - has subclass: chromosome   - has subclass: cytoplasm   - has subclass: intracellular part   - has subclass: membrane   - has subclass: microtubule   - sibling concept: atomic nucleus   - sibling concept: chemical object   - sibling concept: microorganism   - sibling concept: nanotube   - sibling concept: polymer molecule
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell",
+  "uri": "http://kbpedia.org/kko/rc/Cell",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.",
+    "subclass of: living thing",
+    "subclass of: biological matter",
+    "subclass of: finite spatial thing",
+    "subclass of: naturally-occurring tangible substance",
+    "subclass of: organic matter",
+    "subclass of: temporally continuous thing",
+    "has subclass: anucleated cell",
+    "has subclass: cell capable of further differentiation",
+    "has subclass: cell line",
+    "has subclass: diploid cell",
+    "has subclass: eukaryotic cell",
+    "has subclass: haploid cell",
+    "has subclass: aura: heterotrophic cell",
+    "has subclass: prokaryotic organism",
+    "has subclass: single-cell organism",
+    "has subclass: somatic cell",
+    "has subclass: stem cell",
+    "sibling concept: aerobic thing",
+    "sibling concept: anaerobic thing",
+    "sibling concept: animal or body part",
+    "sibling concept: asexual organism",
+    "sibling concept: tissue"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: cell. Relevant Logical Facts:   - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.   - subclass of: living thing   - subclass of: biological matter   - subclass of: finite spatial thing   - subclass of: naturally-occurring tangible substance   - subclass of: organic matter   - subclass of: temporally continuous thing   - has subclass: anucleated cell   - has subclass: cell capable of further differentiation   - has subclass: cell line   - has subclass: diploid cell   - has subclass: eukaryotic cell   - has subclass: haploid cell   - has subclass: aura: heterotrophic cell   - has subclass: prokaryotic organism   - has subclass: single-cell organism   - has subclass: somatic cell   - has subclass: stem cell   - sibling concept: aerobic thing   - sibling concept: anaerobic thing   - sibling concept: animal or body part   - sibling concept: asexual organism   - sibling concept: tissue
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+* B. cell wall *
+The cell wall provides mechanical support to non-woody plant tissues, similar to how an animal skeleton provides structural support to the body. This is due to its rigid yet elastic nature, which allows it to withstand pressure from the cell contents.
+==================================================

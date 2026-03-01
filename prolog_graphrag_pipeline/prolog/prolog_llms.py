@@ -149,9 +149,12 @@ def generate_response(prompt: str, flag: str) -> dict:
     else:
         raise ValueError(f"Flag {flag} is invalid. Only 'prolog', 'explanation', and 'q' are accepted.")
 
-    if USE_TOGETHER_API or not USE_KV_CACHE:
-        # Reverted: Flatten all system instructions and few-shots into a single raw text block.
-        # This is requested by the user for Together AI stability.
+    if USE_KV_CACHE:
+        # KV Caching ENABLED: Send as distinct objects to trigger prefix caching in Together/Ollama
+        llm_messages = base_messages + [{'role': 'user', 'content': prompt}]
+    else:
+        # KV Caching DISABLED: Flatten context into a single "raw" user prompt block.
+        # Useful for models that prefer single-turn instructions or when benchmarking linear performance.
         flattened_context = ""
         for msg in base_messages:
             role = msg.get('role', 'system').upper()
@@ -160,9 +163,6 @@ def generate_response(prompt: str, flag: str) -> dict:
         
         dynamic_prompt = f"{flattened_context}\nPlease answer the following query based on past instructions:\n{prompt}"
         llm_messages = [{'role': 'user', 'content': dynamic_prompt}]
-    else:
-        # Ollama KV Caching: Send as distinct objects for stable prefix caching
-        llm_messages = base_messages + [{'role': 'user', 'content': prompt}]
 
     # Use a thread to enforce a hard timeout on the LLM call
     result_holder = [None]

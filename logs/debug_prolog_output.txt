@@ -39264,3 +39264,156 @@ B. cell wall
 C. chloroplast
 D. nucleus
 Generating Prolog...
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['openbookqa', 'ai2_arc']
+============================================================
+
+--- AI2 ARC ---
+Loaded 100 AI2 ARC test cases (starting from index 0).
+
+================================================================================
+[AI2 ARC #0] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['plant cell wall', 'cytoplasmic part', 'anucleated cell', 'cell part', 'cell', 'membrane (biological)', 'plastid', 'plant physiology', 'protoplasm', 'cellulose']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 9/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "plant cell wall": ["definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but ela'...
+DEBUG: Batch LLM filter kept 3/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'cytoplasmic part'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'anucleated cell'
+DEBUG: Batch LLM filter kept 25/25 triple(s) for 'cell part'
+DEBUG: Batch LLM filter kept 23/23 triple(s) for 'cell'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "This is a multiple choice question. The options must be preserved in the question field.",
+  "question": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'This is a multiple choice question. The options must be preserved in the question field.', 'question': 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following parts of a plant cell has a function that is most similar' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus'
+DEBUG: Extracted entities for KBPedia: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus', 'plant cell', 'animal skeleton', 'structural support']
+DEBUG: KBPedia fulltext matched for 'cell membrane': ['cell', 'membrane protein']
+DEBUG: KBPedia fulltext matched for 'cell wall': ['cell wall', 'bacterial cell wall']
+DEBUG: KBPedia fulltext matched for 'chloroplast': ['photosynthetic pigment', 'chloroplast']
+DEBUG: KBPedia fulltext matched for 'nucleus': ['nucleus', 'lentiform nucleus']
+DEBUG: KBPedia fulltext matched for 'plant cell': ['plant cell wall', 'plant epidermis']
+DEBUG: KBPedia fulltext matched for 'animal skeleton': ['human skeleton', 'skeleton tarantula']
+DEBUG: KBPedia fulltext matched for 'structural support': ['structural system', 'structural connector']
+DEBUG: KBPedia total matches: ['cell', 'membrane protein', 'cell wall', 'bacterial cell wall', 'photosynthetic pigment', 'chloroplast', 'nucleus', 'lentiform nucleus', 'plant cell wall', 'plant epidermis', 'human skeleton', 'skeleton tarantula', 'structural system', 'structural connector']
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 14 raw triple(s) for 'membrane protein'
+DEBUG: Buffered 13 raw triple(s) for 'cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'bacterial cell wall'
+DEBUG: Buffered 15 raw triple(s) for 'photosynthetic pigment'
+DEBUG: Buffered 11 raw triple(s) for 'chloroplast'
+DEBUG: Buffered 11 raw triple(s) for 'nucleus'
+DEBUG: Buffered 6 raw triple(s) for 'lentiform nucleus'
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 11 raw triple(s) for 'plant epidermis'
+DEBUG: Buffered 10 raw triple(s) for 'human skeleton'
+DEBUG: Buffered 9 raw triple(s) for 'skeleton tarantula'
+DEBUG: Buffered 11 raw triple(s) for 'structural system'
+DEBUG: Buffered 8 raw triple(s) for 'structural connector'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 8, 10, 11, 12, 13] from 14 candidates.
+DEBUG: End-filter kept 12/14 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: "{\n    'cell': {\n        'definition': 'The collection of living cells; a specialization of BiologicalLivingObject.',\n        'subclass of': ['living thing', 'biological matter', 'finite spatial thing'"...
+DEBUG: Batch LLM filter kept 2/23 triple(s) for 'cell'
+DEBUG: Batch LLM filter kept 14/14 triple(s) for 'membrane protein'
+DEBUG: Batch LLM filter kept 2/13 triple(s) for 'cell wall'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'bacterial cell wall'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'photosynthetic pigment'
+DEBUG: KBPedia found 5 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a cell wall that provides structural support.
+2. Animal cells do not have cell walls.
+3. The cell wall in a plant cell is similar to an animal skeleton in function.
+4. A cell wall is an external covering of a cell.
+5. An animal skeleton is an external structure that provides support and protection.
+6. Both a plant cell wall and an animal skeleton provide structural support.
+7. The cell wall in a plant cell is composed of cellulose and other materials.
+8. Cellulose is a rigid polysaccharide that provides structural support.
+9. An animal skeleton is composed of rigid materials such as bone and cartilage.
+10. Both a plant cell wall and an animal skeleton provide protection to the cell or organism.
+11. The cell wall in a plant cell helps to maintain the cell's shape.
+12. An animal skeleton helps to maintain the organism's shape.
+13. The cell wall in a plant cell is essential for the cell's survival.
+14. An animal skeleton is essential for the organism's survival.
+15. The function of a plant cell wall is most similar to the function of an animal skeleton.
+**Context from Prompt:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+Generating Prolog...
+[LLM TIMEOUT] LLM call exceeded 120s. Resetting model...
+Iteration 0 | General Error: LLM call timed out after 120s
+  > [LLM BACKOFF] Attempt 1 failed (APITimeoutError). Retrying in 1.36s...
+[LLM TIMEOUT] LLM call exceeded 120s. Resetting model...
+Iteration 1 | General Error: LLM call timed out after 120s
+  > [LLM BACKOFF] Attempt 1 failed (APITimeoutError). Retrying in 1.33s...
+  > [LLM BACKOFF] Attempt 2 failed (APITimeoutError). Retrying in 2.96s...
