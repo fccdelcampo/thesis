@@ -9,6 +9,11 @@ Both providers are accessed through the standard `openai` Python package.
 
 import os
 from openai import OpenAI
+import logging
+
+# Suppress verbose httpx/openai INFO logs (which spam terminal on API retries)
+logging.getLogger("httpx").setLevel(logging.WARNING)
+logging.getLogger("openai").setLevel(logging.WARNING)
 
 # ── Provider Toggle ──────────────────────────────────────────────────────────
 # True  → Together AI  (cloud)
@@ -20,7 +25,7 @@ if USE_TOGETHER_API:
     BASE_URL = "https://api.together.xyz/v1"
     API_KEY = os.environ.get("TOGETHER_API_KEY", "")
     MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
-    EMBED_MODEL = "BAAI/bge-large-en-v1.5"
+    EMBED_MODEL = "intfloat/multilingual-e5-large-instruct"
     EMBED_DIM = 1024
     if not API_KEY:
         raise EnvironmentError(

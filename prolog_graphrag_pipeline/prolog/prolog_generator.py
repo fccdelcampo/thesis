@@ -44,6 +44,57 @@ def capture_predicate_and_arguments(query: str) -> dict:
         raise ValueError("Could not extract arguments from query")
     return {"predicate": predicate, "arguments": arguments}
 
+def _inject_inline_errors(code: str, last_error: str) -> str:
+    if not code:
+        return code
+        
+    lines = code.split('\n')
+    new_lines = []
+    
+    # Extract "Unknown procedure: name/arity"
+    unknown_match = re.search(r"Unknown procedure: ([a-zA-Z0-9_]+)/(\d+)", last_error)
+    missing_pred = unknown_match.group(1) if unknown_match else None
+    
+    # Extract forbidden pattern
+    forbidden_match = None
+    if "is forbidden" in last_error:
+        m = re.search(r"'(.+?)'\s+is forbidden", last_error)
+        if m:
+            forbidden_match = m.group(1)
+
+    # Extract Singleton variables: [Var1, Var2]
+    singleton_vars = []
+    if "Singleton variables" in last_error:
+        m = re.search(r"Singleton variables: \[([^\]]+)\]", last_error)
+        if m:
+            singleton_vars = [v.strip() for v in m.group(1).split(',')]
+
+    for line in lines:
+        needs_comment = False
+        comment_text = ""
+        
+        if missing_pred and re.search(rf"\b{missing_pred}\(", line):
+            needs_comment = True
+            comment_text = f"% ERROR TRIGGERED HERE: You called '{missing_pred}' but it is NEVER defined as a fact or rule."
+            
+        elif forbidden_match and forbidden_match in line:
+            needs_comment = True
+            comment_text = f"% ERROR TRIGGERED HERE: You used the forbidden operator '{forbidden_match}'."
+            
+        elif singleton_vars and ":-" in line:
+            for v in singleton_vars:
+                if re.search(rf"\b{v}\b", line):
+                    needs_comment = True
+                    comment_text = f"% ERROR TRIGGERED HERE: Variable '{v}' is a singleton (only used once). Replace with '_' or use it again."
+                    break
+
+        if needs_comment and not line.strip().startswith("%"):
+            new_lines.append(comment_text)
+        new_lines.append(line)
+        
+    return "\n".join(new_lines)
+
+
 def generate_prolog_generation_prompt(user_question: str, retrieved_context: str, error_history: list, previous_code: str = None) -> str:
     prompt = f"""Now, process the following:
 Context:
@@ -54,7 +105,26 @@ User Question:
 """
 
     if error_history:
-        numbered = "\n".join(f"  [{i+1}] {e}" for i, e in enumerate(error_history))
+        # Deduplicate error history for printing so prompt isn't bloated
+        unique_errors = []
+        for e in error_history:
+            if not unique_errors or unique_errors[-1] != e:
+                unique_errors.append(e)
+        numbered = "\n".join(f"  [{i+1}] {e}" for i, e in enumerate(unique_errors))
+
+        # Check consecutive identical errors
+        last_error = error_history[-1]
+        same_error_count = 0
+        for e in reversed(error_history):
+            if e == last_error:
+                same_error_count += 1
+            else:
+                break
+                
+        penalty_prompt = ""
+        if same_error_count >= 2:
+            penalty_prompt = f"### CRITICAL WARNING\nYou have failed to fix this exact error for    {same_error_count} consecutive times. You must change your approach or start completely from scratch. Do not generate the same broken code again.\n\n"
+
 
         # ── Targeted example-driven guidance keyed to the last error ──────
         last_error = error_history[-1]
@@ -162,11 +232,12 @@ Analyze the errors carefully. Then, rewrite the ENTIRE `<database>` and `<query>
 Ensure your `<database>` contains all facts and rules (using `:-`), and your `<query>` contains exactly one simple callable goal with NO `:-`.
 """
         if previous_code:
+            annotated_code = _inject_inline_errors(previous_code, last_error)
             prompt += f"""
-### YOUR PREVIOUS DATABASE ATTEMPT (Contains Errors - Copy ALL correct facts and rules forward):
+{penalty_prompt}### YOUR PREVIOUS DATABASE ATTEMPT (Contains Errors - Copy ALL correct facts and rules forward):
 ```prolog
 <database>
-{previous_code}
+{annotated_code}
 </database>
 ```
 CRITICAL: You MUST carry forward every correct fact and rule clause from the above database into your new <database> block. Only fix the clauses that caused the error. Group clauses with the same predicate name together consecutively.
@@ -352,9 +423,8 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
     last_attempt_tracker: list = [None] # tracks the code generated before error is thrown
 
     def _record_error(msg: str):
-        """Append error to history, deduplicating consecutive identical messages."""
-        if not error_history or error_history[-1] != msg:
-            error_history.append(msg)
+        """Append error to history without deduplication to track consecutive failures."""
+        error_history.append(msg)
 
     for i in range(NORMAL_ATTEMPTS):
         try:

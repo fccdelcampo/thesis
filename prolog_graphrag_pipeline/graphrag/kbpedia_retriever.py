@@ -19,10 +19,12 @@ from typing import List, Dict, Any, Optional
 def _safe_parse_json(text: str, expect: type = None):
     """Robustly extract and parse the first complete JSON value from LLM output.
     - Strips markdown fences.
-    - Finds the first '{' or '[' and uses raw_decode to stop after the matching close.
-    - Returns None on empty input or parse failure — never raises."""
+    - Finds the first '{' (for dict) or '[' (for list) and stops after the matching close.
+    - Uses raw_decode so trailing text/extra objects never cause 'Extra data' errors.
+    - Returns None on empty input or parse failure instead of raising."""
     if not text or not text.strip():
         return None
+    # Strip markdown fences
     t = text.strip()
     if "```json" in t:
         t = t.split("```json", 1)[1].split("```", 1)[0].strip()
@@ -30,12 +32,20 @@ def _safe_parse_json(text: str, expect: type = None):
         t = t.split("```", 1)[1].split("```", 1)[0].strip()
     if not t:
         return None
+    # Find the first opening char based on expected type
     opener = '{' if expect is dict else ('[' if expect is list else None)
     if opener is None:
-        i_brace = t.find('{'); i_bracket = t.find('[')
+        # Auto-detect: whichever comes first
+        i_brace = t.find('{')
+        i_bracket = t.find('[')
         if i_brace == -1 and i_bracket == -1:
             return None
-        pos = min(x for x in (i_brace, i_bracket) if x != -1)
+        if i_brace == -1:
+            pos = i_bracket
+        elif i_bracket == -1:
+            pos = i_brace
+        else:
+            pos = min(i_brace, i_bracket)
     else:
         pos = t.find(opener)
         if pos == -1:
@@ -56,29 +66,41 @@ class KBPediaRetriever:
 
     _index_verified = False
 
-    def __init__(self, driver, llm=None, top_k: int = 4):
+    def __init__(self, driver, llm=None, top_k: int = 4, embedder=None):
         self.driver  = driver
-        self.llm     = llm
+        self.embedder = embedder
+        
+        try:
+            from graphrag_pipeline.graphrag.config import ENABLE_LLM_FILTERING
+        except ModuleNotFoundError:
+            try:
+                from graphrag.config import ENABLE_LLM_FILTERING
+            except ImportError:
+                ENABLE_LLM_FILTERING = True
+
+        # Nullify LLM if the global config toggle is disabled
+        self.llm = llm if ENABLE_LLM_FILTERING else None
+        
         self.top_k   = top_k
 
     def _verify_index(self):
-        """Check once whether the KBPedia fulltext index exists."""
+        """Check once whether the KBPedia vector index exists."""
         if KBPediaRetriever._index_verified:
             return True
         try:
             records, _, _ = self.driver.execute_query(
-                "SHOW FULLTEXT INDEXES YIELD name WHERE name = 'kbpediaConceptIndex' RETURN name",
+                "SHOW VECTOR INDEXES YIELD name WHERE name = 'kbpediaConceptVectorIndex' RETURN name",
                 database_="neo4j",
             )
             if records:
                 KBPediaRetriever._index_verified = True
                 return True
             else:
-                print("DEBUG: KBPedia fulltext index 'kbpediaConceptIndex' not found. "
-                      "Run kbpedia_loader.py first to load KBPedia into Neo4j.")
+                print("DEBUG: KBPedia vector index 'kbpediaConceptVectorIndex' not found. "
+                      "Run kbpedia_loader.py first to embed KBPedia concepts.")
                 return False
         except Exception as e:
-            print(f"DEBUG: Error verifying KBPedia index: {e}")
+            print(f"DEBUG: Error verifying KBPedia vector index: {e}")
             return False
 
     def extract_entities(self, query: str) -> List[str]:
@@ -150,6 +172,37 @@ Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
         # MCQ choices naturally stay at the top.
         
         return unique_entities[:10]
+
+    def _vector_search(self, query_vector: List[float], limit: int = 5) -> List[Dict[str, Any]]:
+        """Vector similarity search against KBPedia concepts."""
+        if not query_vector:
+            return []
+
+        try:
+            records, _, _ = self.driver.execute_query(
+                """
+                CALL db.index.vector.queryNodes('kbpediaConceptVectorIndex', $limit, $vector)
+                YIELD node, score
+                RETURN node.uri AS uri, node.name AS name, node.definition AS definition,
+                       node.altLabels AS altLabels, score
+                """,
+                vector=query_vector,
+                limit=limit,
+                database_="neo4j",
+            )
+            results = []
+            for r in records:
+                results.append({
+                    "uri": r["uri"],
+                    "name": r["name"],
+                    "definition": r["definition"] or "",
+                    "altLabels": r["altLabels"] or [],
+                    "score": r["score"],
+                })
+            return results
+        except Exception as e:
+            print(f"DEBUG: KBPedia concept vector search error: {e}")
+            return []
 
     def find_concepts(self, search_term: str, limit: int = 3) -> List[Dict[str, Any]]:
         """
@@ -242,9 +295,8 @@ Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
                 row = records[0]
                 for a in row.get("ancestors", []):
                     if a and a.get("name"):
-                        # Only keep the ancestor NAME (e.g. "subclass of: Physical Quantity").
-                        # Ancestor definition blurbs are long encyclopedia text that bloats
-                        # the Prolog generator context without helping code generation.
+                        # Only keep the ancestor NAME — ancestor definition blurbs are long
+                        # encyclopedia text that bloats context without aiding the LLM.
                         triples.append(f"subclass of: {a['name']}")
                 for c in row.get("children", []):
                     if c and c.get("name"):
@@ -302,10 +354,9 @@ If none are relevant, output an empty list [].
                 print(f"DEBUG: Triple filter got empty response for '{entity_label}'. Using all raw triples.", flush=True)
                 return triples
 
-            # raw_decode: consume only the first valid JSON value, ignore trailing text.
-            decoded = _safe_parse_json(res, expect=list)
-            if isinstance(decoded, list):
-                return decoded
+            filtered = json.loads(res)
+            if isinstance(filtered, list):
+                return filtered
         except Exception as e:
             print(f"DEBUG: Triple filtering failed for '{entity_label}': {e}. Using all raw triples.", flush=True)
 
@@ -383,7 +434,6 @@ Example:
                 print(f"DEBUG: Batch triple filter got empty response. Using all raw triples.", flush=True)
                 return result_map
 
-            # Use _safe_parse_json to handle empty responses, extra data, and trailing text.
             filtered = _safe_parse_json(res, expect=dict)
             if isinstance(filtered, dict):
                 for c in concepts_data:
@@ -464,238 +514,55 @@ Output ONLY the JSON list, nothing else.
             print(f"DEBUG: End-filter LLM call failed: {e}. Returning all candidates.", flush=True)
             return candidates
 
-    def search(self, query_text: str, top_k: int = 5, original_query: str = "") -> Any:
+    def search(self, query_text: str, top_k: int = 5, original_query: str = "", seeded_entities: List[str] = None) -> Any:
         from .retriever import RetrieverResult, RetrieverResultItem
 
         if not self._verify_index():
             return RetrieverResult(items=[], metadata={})
 
         # `original_query` = full user prompt (with MCQ choices) for LLM filtering.
-        # `query_text`     = extracted question stem, used for entity extraction.
-        # Fall back to query_text if original_query was not provided.
         filter_query = original_query if original_query else query_text
 
-        # ── Entity extraction ─────────────────────────────────────────────────
+        # ── Vector Search (on raw query) ──────────────────────────────
+        matches = []
+        try:
+            print(f"DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...", flush=True)
+            if self.embedder:
+                query_vector = self.embedder.embed_query("query: " + query_text)
+            else:
+                from sentence_transformers import SentenceTransformer
+                print("DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.", flush=True)
+                temp_embedder = SentenceTransformer("all-MiniLM-L6-v2")
+                query_vector = temp_embedder.encode(query_text).tolist()
+                
+            # Grab top_k matches via vector similarity
+            matches.extend(self._vector_search(query_vector, limit=top_k))
+        except Exception as e:
+            print(f"DEBUG: KBPedia embedding/search failed: {e}", flush=True)
+
+        # ── Entity extraction & Fulltext Search (on entities) ─────────
         print(f"DEBUG: [KBPedia] Querying for: '{query_text}'", flush=True)
         entities = self.extract_entities(query_text)
         print(f"DEBUG: Extracted entities for KBPedia: {entities}", flush=True)
+
+        for concept_name in entities:
+            entity_matches = self.find_concepts(concept_name, limit=2)
+            if entity_matches:
+                print(f"DEBUG: KBPedia fulltext matched for '{concept_name}': {[m['name'] for m in entity_matches]}", flush=True)
+                matches.extend(entity_matches)
+            else:
+                print(f"DEBUG: KBPedia has no fulltext matches for '{concept_name}'.", flush=True)
+
+        if not matches:
+            print(f"DEBUG: KBPedia found no matches via vector or fulltext search.", flush=True)
+        else:
+            print(f"DEBUG: KBPedia total combined matches: {[m['name'] for m in matches]}", flush=True)
 
         seen_uris = set()
         candidates = []  # list of {name, uri, definition, triples}
         items = []       # final result items
 
-        # ── Wikidata fallback setup ────────────────────────────────────────────
-        try:
-            from .config import ENABLE_WIKIDATA_FALLBACK
-        except ImportError:
-            ENABLE_WIKIDATA_FALLBACK = False
-
-        wikidata_fetcher = None
-        if ENABLE_WIKIDATA_FALLBACK:
-            try:
-                from .wikidata_retriever import WikidataRetriever
-                wikidata_fetcher = WikidataRetriever()
-            except ImportError:
-                print("DEBUG: WikidataRetriever not available. Skipping Wikidata fallback.", flush=True)
-
-        for concept_name in entities:
-            matches = self.find_concepts(concept_name, limit=2)
-
-            # ── Determine if Wikidata supplement is needed ─────────────────
-            # Case A: KBPedia returned nothing → full Wikidata fallback.
-            # Case B: KBPedia returned a low-confidence or lexically divergent
-            #         match (e.g. queried 'animal skeleton', got 'human skeleton'
-            #         with score 0.8) → supplement with Wikidata for the exact concept.
-            need_wikidata = False
-            wikidata_reason = ""
-            if not matches:
-                need_wikidata = True
-                wikidata_reason = "no KBPedia match"
-                print(f"DEBUG: KBPedia has no match for '{concept_name}'.", flush=True)
-            elif wikidata_fetcher:
-                best = matches[0]
-                best_score = best.get("score", 99)
-                best_name = (best.get("name") or "").lower()
-                query_words = set(w for w in concept_name.lower().split() if len(w) > 2)
-                matched_words = set(w for w in best_name.split() if len(w) > 2)
-                overlap = query_words & matched_words
-
-                # Score below 1.5 = weak Lucene match (many irrelevant tokens scored)
-                # Zero word overlap = the matched concept name shares no words with what was queried
-                if best_score < 1.5 or not overlap:
-                    need_wikidata = True
-                    wikidata_reason = f"partial match (score={best_score:.2f}, name='{best['name']}', overlap={overlap})"
-
-            if need_wikidata:
-                print(f"DEBUG: [Wikidata] Triggered for '{concept_name}' — reason: {wikidata_reason}", flush=True)
-
-                # ── Wikidata Fallback ──────────────────────────────────────
-                if wikidata_fetcher:
-                    print(f"DEBUG: [Wikidata Fallback] Searching Wikidata for '{concept_name}'...", flush=True)
-                    wd_candidates = wikidata_fetcher.search_entity(concept_name, limit=5)
-
-                    if not wd_candidates:
-                        print(f"DEBUG: [Wikidata Fallback] No Wikidata results for '{concept_name}'. Skipping.", flush=True)
-                        if not matches:
-                            continue  # nothing from either source — skip this concept
-                        # else: partial-match case, still process KBPedia below
-
-                    # Select the correct Q-ID + relevant property categories in ONE LLM call
-                    selected = None
-                    extra_props = []  # additional P-codes from LLM-selected categories
-
-                    if len(wd_candidates) == 1:
-                        selected = wd_candidates[0]
-                        print(f"DEBUG: [Wikidata Fallback] Single match: {selected['qid']} ({selected['label']})", flush=True)
-
-                    if self.llm:
-                        # Build candidate list
-                        options_text = "\n".join(
-                            [f"  [{i}] {c['qid']} - {c['label']}: {c['description']}" for i, c in enumerate(wd_candidates)]
-                        )
-
-                        # Build extended property category descriptions
-                        from .wikidata_retriever import WikidataRetriever as WDR
-                        categories_text = "\n".join(
-                            [f"  - {cat}: {', '.join(pids)}" for cat, pids in WDR.EXTENDED_PROPERTIES.items()]
-                        )
-
-                        select_prompt = f"""You are disambiguating a Wikidata entity AND selecting which relationship types to fetch.
-
-User question: "{filter_query}"
-Entity to find: "{concept_name}"
-
-TASK 1 — Entity Selection:
-{options_text}
-
-TASK 2 — Property Categories:
-The system always fetches: instance of, subclass of, part of, has part, has effect.
-Below are OPTIONAL extended categories. Pick ONLY those relevant to the user's question:
-  - causality: has cause, has effect
-  - sequence: follows, followed by
-  - differentiation: different from, said to be the same as
-  - academic: studied in, main subject
-  - composition: has part, facet of
-  - function: has use, product/material produced
-
-Reply with a JSON object. Example: {{"index": 0, "categories": ["causality", "composition"]}}
-If no extended categories are needed, use an empty list: {{"index": 2, "categories": []}}
-Output ONLY the JSON object, nothing else."""
-
-                        try:
-                            raw = self.llm.invoke(select_prompt)
-                            res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
-
-                            # Use safe parser to extract the JSON object robustly
-                            parsed = _safe_parse_json(res, expect=dict)
-                            if not parsed:
-                                raise ValueError("Failed to parse LLM selection JSON.")
-                                
-                            idx = parsed.get("index", 0)
-                            categories = parsed.get("categories", [])
-
-                            if isinstance(idx, int) and 0 <= idx < len(wd_candidates):
-                                selected = wd_candidates[idx]
-                                print(f"DEBUG: [Wikidata Fallback] LLM selected index {idx}: {selected['qid']} ({selected['label']})", flush=True)
-
-                            # Resolve category names to P-codes
-                            if isinstance(categories, list):
-                                for cat in categories:
-                                    if cat in WDR.EXTENDED_PROPERTIES:
-                                        extra_props.extend(WDR.EXTENDED_PROPERTIES[cat])
-                                if extra_props:
-                                    print(f"DEBUG: [Wikidata Fallback] LLM selected extended categories: {categories} → {extra_props}", flush=True)
-
-                        except Exception as e:
-                            print(f"DEBUG: [Wikidata Fallback] LLM selection failed: {e}. Using first candidate.", flush=True)
-
-                    if not selected:
-                        if wd_candidates:
-                            selected = wd_candidates[0]
-                            print(f"DEBUG: [Wikidata Fallback] Defaulting to first candidate: {selected['qid']} ({selected['label']})", flush=True)
-                        else:
-                            print(f"DEBUG: [Wikidata Fallback] No valid candidates found for '{concept_name}'", flush=True)
-                            continue
-
-                    # Fetch structural triples from Wikidata (core + LLM-selected extended)
-                    print(f"DEBUG: [Wikidata Fallback] Fetching structural facts for {selected['qid']}...", flush=True)
-                    wd_triples = wikidata_fetcher.retrieve_structural_facts(selected['qid'], extra_properties=extra_props if extra_props else None)
-
-                    if wd_triples:
-                        # Add definition from Wikidata description
-                        all_triples = []
-                        if selected.get('description'):
-                            all_triples.append(f"definition: {selected['description']}")
-                        all_triples.extend(wd_triples)
-
-                        # ── Query-alignment filter for Wikidata triples ────────────
-                        # Wikidata returns broad ontological properties (instance of,
-                        # subclass of, etc.). Filter to only those directly relevant
-                        # to the user's question so the Prolog generator isn't misled.
-                        if self.llm and len(all_triples) > 1:
-                            triples_text = "\n".join([f"  - {t}" for t in all_triples])
-                            wd_filter_prompt = f"""You are filtering Wikidata facts for a Prolog-based MCQ answering system.
-
-User's Question: "{filter_query}"
-Wikidata Entity: "{selected['label']}" (description: {selected.get('description', 'N/A')})
-
-Retrieved facts:
-{triples_text}
-
-KEEP a fact ONLY if it directly disambiguates this entity in the context of the question,
-or if it tells us what category/type/property the entity has that is relevant to the MCQ choices.
-DROP facts that are purely bibliographic, historical, or about unrelated domains.
-If unsure whether a fact helps, DROP it.
-
-Output: A JSON list of the kept fact strings (exactly as shown above).
-Example output: ["definition: a long, narrow, deep trench", "subclass of: oceanic trench"]
-Output ONLY the JSON list, nothing else."""
-                            try:
-                                raw = self.llm.invoke(wd_filter_prompt)
-                                res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
-                                if "```" in res:
-                                    res = res.split("```")[1].split("```")[0].strip()
-                                b_start = res.find('['); b_end = res.rfind(']')
-                                if b_start != -1:
-                                    filtered_wd = _safe_parse_json(res, expect=list)
-                                    if isinstance(filtered_wd, list) and filtered_wd:
-                                        print(f"DEBUG: [Wikidata Filter] Kept {len(filtered_wd)}/{len(all_triples)} triple(s) for '{selected['label']}'", flush=True)
-                                        all_triples = filtered_wd
-                                    else:
-                                        print(f"DEBUG: [Wikidata Filter] Filter returned empty — keeping definition only.", flush=True)
-                                        all_triples = [t for t in all_triples if t.startswith("definition:")]
-                            except Exception as wf_e:
-                                print(f"DEBUG: [Wikidata Filter] Failed ({wf_e}), using all fetched triples.", flush=True)
-                        # ── End query-alignment filter ─────────────────────────────
-
-                        print(f"DEBUG: [Wikidata Fallback] Retrieved {len(all_triples)} structural triple(s) for '{selected['label']}'", flush=True)
-                        for t in all_triples:
-                            print(f"  > {t}", flush=True)
-
-                        wd_uri = f"wikidata:{selected['qid']}"
-                        if wd_uri not in seen_uris:
-                            seen_uris.add(wd_uri)
-                            candidates.append({
-                                "name": selected['label'],
-                                "uri": wd_uri,
-                                "definition": selected.get('description', ''),
-                                "triples": all_triples,
-                            })
-                    else:
-                        print(f"DEBUG: [Wikidata Fallback] No structural facts returned for {selected['qid']}. Skipping.", flush=True)
-                # ── End Wikidata Fallback ──────────────────────────────────
-
-            # Case A (no KBPedia match at all): skip KBPedia processing.
-            # Case B (partial match supplemented by Wikidata): fall through to
-            # process the KBPedia match too — both go into candidates.
-            if not matches:
-                continue
-
-
-
-            print(f"DEBUG: KBPedia matched {len(matches)} concept(s) for '{concept_name}': {[m['name'] for m in matches]}", flush=True)
-
-            for match in matches:
+        for match in matches:
                 uri = match["uri"]
                 if uri in seen_uris:
                     continue

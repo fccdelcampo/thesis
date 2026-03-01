@@ -402,7 +402,7 @@ Output ONLY the JSON list, nothing else.
         print(f"DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...", flush=True)
         try:
             if self.embedder:
-                query_vector = self.embedder.embed_query(query_text)
+                query_vector = self.embedder.embed_query("query: " + query_text)
             else:
                 from sentence_transformers import SentenceTransformer
                 print("DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.", flush=True)
