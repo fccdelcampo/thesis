@@ -30468,3 +30468,385 @@ Extension 5 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>='
 Extension 6 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
 Extension 7 | Validation Error: The <query> tag contains a rule definition (with ':-'), but queries must be plain goals. Rule definitions (Head :- Body.) belong inside <database> tags. The <query> tag must contain ONLY a single callable goal, e.g.: `answer(X).` or `my_predicate(foo).` Move the rule bodies to <database> and call the predicate head in <query>.
 Extension 8 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 73 MMLU test cases (starting from index 27).
+
+================================================================================
+[MMLU #27] The model obtained by applying linear regression on the identified subset of features may differ from the model obtained...
+Correct Answer: [C]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'The model obtained by applying linear regression on the identified subset of features may differ from the model obtained at the end of the process of identifying the subset during
+
+A. Best-subset selection
+B. Forward stepwise selection
+C. Forward stage wise selection
+D. All of the above
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['regression variable selection', 'selection-generic', 'dimension reduction', 'sexual selection', 'selective barrier transport', 'least squares', 'purchase decision', 'regression analysis', 'step in a computer program', 'datasets in machine learning']
+DEBUG: Buffered 11 raw triple(s) for 'regression variable selection'
+DEBUG: Buffered 11 raw triple(s) for 'selection-generic'
+DEBUG: Buffered 11 raw triple(s) for 'dimension reduction'
+DEBUG: Buffered 12 raw triple(s) for 'sexual selection'
+DEBUG: Buffered 8 raw triple(s) for 'selective barrier transport'
+DEBUG: Buffered 11 raw triple(s) for 'least squares'
+DEBUG: Buffered 16 raw triple(s) for 'purchase decision'
+DEBUG: Buffered 23 raw triple(s) for 'regression analysis'
+DEBUG: Buffered 11 raw triple(s) for 'step in a computer program'
+DEBUG: Buffered 10 raw triple(s) for 'datasets in machine learning'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "regression variable selection": [\n    "definition: The selection of a variable upon which to conduct regression analysis.",\n    "subclass of: regression analysis"\n  ],\n  "selection-generic": [],\n'...
+DEBUG: Batch LLM filter kept 2/11 triple(s) for 'regression variable selection'
+DEBUG: Batch LLM filter kept 0/11 triple(s) for 'selection-generic'
+DEBUG: Batch LLM filter kept 3/11 triple(s) for 'dimension reduction'
+DEBUG: Batch LLM filter kept 0/12 triple(s) for 'sexual selection'
+DEBUG: Batch LLM filter kept 0/8 triple(s) for 'selective barrier transport'
+DEBUG: Removed 3 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 2 grounded concept contexts.
+DEBUG: KBPedia returned 2 items.
+DEBUG: Merged Result Count: 2
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Understanding the implications of different feature selection methods on the final model.",
+  "question": "The model obtained by applying linear regression on the identified subset of features may differ from the model obtained at the end of the process of identifying the subset during A) London B) Paris C) Berlin D) Madrid",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Understanding the implications of different feature selection methods on the final model.', 'question': 'The model obtained by applying linear regression on the identified subset of features may differ from the model obtained at the end of the process of identifying the subset during A) London B) Paris C) Berlin D) Madrid', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: The model obtained by applying linear regression on the identified subset of features may differ from the model obtained at the end of the process of identifying the subset during A) London B) Paris C) Berlin D) Madrid
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='The model obtained by applying linear regression on the identified subset of fea' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'The model obtained by applying linear regression on the identified subset of features may differ from the model obtained at the end of the process of identifying the subset during A) London B) Paris C) Berlin D) Madrid'
+DEBUG: Extracted entities for KBPedia: ['london', 'paris', 'berlin', 'madrid', 'model', 'linear regression', 'subset of features', 'process', 'identifying the subset']
+DEBUG: KBPedia fulltext matched for 'london': ['London Reef', 'the London Stock Exchange']
+DEBUG: KBPedia fulltext matched for 'paris': ['Wolves of Paris', 'Summer Olympics in Paris']
+DEBUG: KBPedia fulltext matched for 'berlin': ['East Berlin', 'Berlin Wall']
+DEBUG: KBPedia fulltext matched for 'madrid': ['Real Madrid C.F.']
+DEBUG: KBPedia fulltext matched for 'model': ['product model', 'model']
+DEBUG: KBPedia fulltext matched for 'linear regression': ['log-linear mode', 'generalized linear mode']
+DEBUG: KBPedia fulltext matched for 'subset of features': ['subset', 'genetic structure of nucleotides']
+DEBUG: KBPedia fulltext matched for 'process': ['manifestation process', 'stochastic process']
+DEBUG: KBPedia fulltext matched for 'identifying the subset': ['subset', 'identification']
+DEBUG: KBPedia total matches: ['London Reef', 'the London Stock Exchange', 'Wolves of Paris', 'Summer Olympics in Paris', 'East Berlin', 'Berlin Wall', 'Real Madrid C.F.', 'product model', 'model', 'log-linear mode', 'generalized linear mode', 'subset', 'genetic structure of nucleotides', 'manifestation process', 'stochastic process', 'subset', 'identification']
+DEBUG: Buffered 7 raw triple(s) for 'London Reef'
+DEBUG: Buffered 9 raw triple(s) for 'the London Stock Exchange'
+DEBUG: Buffered 8 raw triple(s) for 'Wolves of Paris'
+DEBUG: Buffered 7 raw triple(s) for 'Summer Olympics in Paris'
+DEBUG: Buffered 5 raw triple(s) for 'East Berlin'
+DEBUG: Buffered 10 raw triple(s) for 'Berlin Wall'
+DEBUG: Buffered 8 raw triple(s) for 'Real Madrid C.F.'
+DEBUG: Buffered 4 raw triple(s) for 'product model'
+DEBUG: Buffered 26 raw triple(s) for 'model'
+DEBUG: Buffered 11 raw triple(s) for 'log-linear mode'
+DEBUG: Buffered 14 raw triple(s) for 'generalized linear mode'
+DEBUG: Buffered 10 raw triple(s) for 'subset'
+DEBUG: Buffered 8 raw triple(s) for 'genetic structure of nucleotides'
+DEBUG: Buffered 15 raw triple(s) for 'manifestation process'
+DEBUG: Buffered 14 raw triple(s) for 'stochastic process'
+DEBUG: Buffered 11 raw triple(s) for 'identification'
+DEBUG: End-filter LLM kept indices: [0, 7, 8, 9, 10, 11, 13, 14] from 16 candidates.
+DEBUG: End-filter kept 8/16 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "linear regression": [\n    "definition: A mathematical model that takes the form of a function whose logarithm equals a linear combination of the parameters of the model, which makes it possible t'...
+DEBUG: Batch LLM filter kept 0/7 triple(s) for 'London Reef'
+DEBUG: Batch LLM filter kept 0/4 triple(s) for 'product model'
+DEBUG: Batch LLM filter kept 0/26 triple(s) for 'model'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'log-linear mode'
+DEBUG: Batch LLM filter kept 14/14 triple(s) for 'generalized linear mode'
+DEBUG: Removed 3 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 2 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+The model obtained by applying linear regression on the identified subset of features may differ from the model obtained at the end of the process of identifying the subset during
+
+A. Best-subset selection
+B. Forward stepwise selection
+C. Forward stage wise selection
+D. All of the above
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. A log-linear model is a mathematical model that takes the form of a function whose logarithm equals a linear combination of the parameters of the model.
+2. Log-linear models make it possible to apply linear regression.
+3. Linear regression is a method of modeling the relationship between a dependent variable and one or more independent variables.
+4. The process of identifying a subset of features involves selecting a subset of variables from a larger set.
+5. The model obtained by applying linear regression on the identified subset of features may differ from the model obtained at the end of the process of identifying the subset.
+6. The process of identifying a subset of features may involve multiple iterations and refinements.
+7. Each iteration of the process may result in a different model.
+8. The location of the process (e.g., London, Paris, Berlin, Madrid) does not affect the mathematical properties of the log-linear model.
+9. The location of the process does not affect the application of linear regression.
+10. The location of the process does not affect the relationship between the dependent variable and the independent variables.
+11. The location of the process does not affect the process of identifying a subset of features.
+12. The location of the process does not affect the model obtained at the end of the process.
+13. The location of the process does not affect the difference between the model obtained by applying linear regression on the identified subset of features and the model obtained at the end of the process.
+14. The difference between the model obtained by applying linear regression on the identified subset of features and the model obtained at the end of the process is due to the iterative nature of the process.
+15. The iterative nature of the process is independent of the location of the process.
+**Context from Prompt:**
+The model obtained by applying linear regression on the identified subset of features may differ from the model obtained at the end of the process of identifying the subset during
+
+A. Best-subset selection
+B. Forward stepwise selection
+C. Forward stage wise selection
+D. All of the above
+
+Answer with the letter only (A, B, C, or D).
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, best_subset).
+choice(b, forward_stepwise).
+choice(c, forward_stage_wise).
+choice(d, all).
+iterative_process_independent_of_location.
+difference_due_to_iterative_process.
+answer(L) :- choice(L, P), difference_due_to_iterative_process, iterative_process_independent_of_location.
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, best_subset).
+choice(b, forward_stepwise).
+choice(c, forward_stage_wise).
+choice(d, all).
+iterative_process_independent_of_location.
+difference_due_to_iterative_process.
+answer(L) :- choice(L, P), difference_due_to_iterative_process, iterative_process_independent_of_location.
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and best_subset, and\n      difference_due_to_iterative_process holds, and\n      iterative_process_independent_of_location holds\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and best_subset, and
+      difference_due_to_iterative_process holds, and
+      iterative_process_independent_of_location holds
+
+
+**Explainer Output:** 
+**Conclusion:** The answer is A, best_subset.
+
+**Logical Path:** The solver arrived at this conclusion by verifying the following conditions:
+
+- The choice of A (best_subset) is valid because it is indeed a choice (as defined in the database).
+- The difference between the model obtained by applying linear regression on the identified subset of features and the model obtained at the end of the process is due to the iterative nature of the process.
+- The iterative process is independent of the location of the process.
+
+In other words, the solver concluded that the answer is A (best_subset) because it is a valid choice, and the difference between the two models is due to the iterative process, which is independent of the location.
+
+**FINAL LLM OUTPUT:
+*A.* Best-subset selection.
+The model obtained by applying linear regression on the identified subset of features may differ from the model obtained at the end of the process of identifying the subset during best-subset selection, as this process involves multiple iterations and refinements that can result in different models.
+====The pipeline executed in 3.0894 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [D]   | WRONG   |   14.5s
+Prolog          | Predicted: [A]   | WRONG   |   11.1s
+Tuned LLM       | Predicted: [D]   | WRONG   |    0.7s
+================================================================================
+
+
+================================================================================
+[MMLU #28] Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tuto...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['barter', 'consumer theory', 'bargaining theory', 'bargaining', 'inventory buying agent', 'ratio quantity', 'commodities trader', 'bid for an item', 'shortage', 'supplier']
+DEBUG: Buffered 13 raw triple(s) for 'barter'
+DEBUG: Buffered 8 raw triple(s) for 'consumer theory'
+DEBUG: Buffered 9 raw triple(s) for 'bargaining theory'
+DEBUG: Buffered 7 raw triple(s) for 'bargaining'
+DEBUG: Buffered 8 raw triple(s) for 'inventory buying agent'
+DEBUG: Buffered 19 raw triple(s) for 'ratio quantity'
+DEBUG: Buffered 10 raw triple(s) for 'commodities trader'
+DEBUG: Buffered 6 raw triple(s) for 'bid for an item'
+DEBUG: Buffered 23 raw triple(s) for 'shortage'
+DEBUG: Buffered 5 raw triple(s) for 'supplier'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "barter": [],\n  "consumer theory": [],\n  "bargaining theory": [],\n  "bargaining": [],\n  "shortage": [\n    "definition: In economics, a shortage or excess demand is a situation in which the demand '...
+DEBUG: Batch LLM filter kept 0/13 triple(s) for 'barter'
+DEBUG: Batch LLM filter kept 0/8 triple(s) for 'consumer theory'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'bargaining theory'
+DEBUG: Batch LLM filter kept 0/7 triple(s) for 'bargaining'
+DEBUG: Batch LLM filter kept 1/23 triple(s) for 'shortage'
+DEBUG: Removed 4 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 1 grounded concept contexts.
+DEBUG: KBPedia returned 1 items.
+DEBUG: Merged Result Count: 1
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Analyzing the transaction to determine the correct statement about consumer and producer surplus.",
+  "question": "Which of the following statements is true about the transaction above: A) Consumer surplus is greater than producer surplus by between $50 and $75. B) Producer surplus is greater than consumer surplus by between $50 and $75. C) Consumer surplus is greater than producer surplus by more than $75. D) The difference between consumer and producer surplus is $25.",
+  "context": [
+    "Elsa values her time at $50 per hour, and tutors David for two hours.",
+    "David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Analyzing the transaction to determine the correct statement about consumer and producer surplus.', 'question': 'Which of the following statements is true about the transaction above: A) Consumer surplus is greater than producer surplus by between $50 and $75. B) Producer surplus is greater than consumer surplus by between $50 and $75. C) Consumer surplus is greater than producer surplus by more than $75. D) The difference between consumer and producer surplus is $25.', 'context': ['Elsa values her time at $50 per hour, and tutors David for two hours.', 'David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following statements is true about the transaction above: A) Consumer surplus is greater than producer surplus by between $50 and $75. B) Producer surplus is greater than consumer surplus by between $50 and $75. C) Consumer surplus is greater than producer surplus by more than $75. D) The difference between consumer and producer surplus is $25.
+DEBUG: EXTRACTED CONTEXT (Len: 2): ['Elsa values her time at $50 per hour, and tutors David for two hours.', 'David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following statements is true about the transaction above: A) Consum' | context items=2
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 2 text chunk(s)...
+Processing text context: Elsa values her time at $50 per hour, and tutors David for two hours.
+Text context processed: run_id='34d9b8ec-3520-4220-b8b1-596acc88c9e9' result={'resolver': {'number_of_nodes_to_resolve': 5, 'number_of_created_nodes': 5}}
+Processing text context: David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours.
+Text context processed: run_id='9abe0027-9417-4d3f-b5f3-8c03541d9471' result={'resolver': {'number_of_nodes_to_resolve': 10, 'number_of_created_nodes': 9}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which of the following statements is true about the transaction above: A) Consumer surplus is greater than producer surplus by between $50 and $75. B) Producer surplus is greater than consumer surplus by between $50 and $75. C) Consumer surplus is greater than producer surplus by more than $75. D) The difference between consumer and producer surplus is $25.'
+DEBUG: Extracted entities for KBPedia: ['consumer surplus is greater than producer surplus by between $50 and $75', 'producer surplus is greater than consumer surplus by between $50 and $75', 'consumer surplus is greater than producer surplus by more than $75', 'the difference between consumer and producer surplus is $25', 'transaction', 'consumer surplus', 'producer surplus', 'economic surplus', 'surplus']
+DEBUG: KBPedia fulltext matched for 'consumer surplus is greater than producer surplus by between $50 and $75': ['surplus', 'Aerozine 50']
+DEBUG: KBPedia fulltext matched for 'producer surplus is greater than consumer surplus by between $50 and $75': ['surplus', 'Aerozine 50']
+DEBUG: KBPedia fulltext matched for 'consumer surplus is greater than producer surplus by more than $75': ['surplus', 'real number greater than or equal to one']
+DEBUG: KBPedia fulltext matched for 'the difference between consumer and producer surplus is $25': ['surplus', 'consumer information']
+DEBUG: KBPedia fulltext matched for 'transaction': ['transaction', 'ATM transaction fee']
+DEBUG: KBPedia fulltext matched for 'consumer surplus': ['surplus', 'consumer good']
+DEBUG: KBPedia fulltext matched for 'producer surplus': ['surplus', 'producer']
+DEBUG: KBPedia fulltext matched for 'economic surplus': ['surplus', 'economic region']
+DEBUG: KBPedia fulltext matched for 'surplus': ['surplus', 'spillway']
+DEBUG: KBPedia total matches: ['surplus', 'Aerozine 50', 'surplus', 'Aerozine 50', 'surplus', 'real number greater than or equal to one', 'surplus', 'consumer information', 'transaction', 'ATM transaction fee', 'surplus', 'consumer good', 'surplus', 'producer', 'surplus', 'economic region', 'surplus', 'spillway']
+DEBUG: Buffered 15 raw triple(s) for 'surplus'
+DEBUG: Buffered 7 raw triple(s) for 'Aerozine 50'
+DEBUG: Buffered 7 raw triple(s) for 'real number greater than or equal to one'
+DEBUG: Buffered 11 raw triple(s) for 'consumer information'
+DEBUG: Buffered 18 raw triple(s) for 'transaction'
+DEBUG: Buffered 8 raw triple(s) for 'ATM transaction fee'
+DEBUG: Buffered 21 raw triple(s) for 'consumer good'
+DEBUG: Buffered 10 raw triple(s) for 'producer'
+DEBUG: Buffered 21 raw triple(s) for 'economic region'
+DEBUG: Buffered 14 raw triple(s) for 'spillway'
+DEBUG: End-filter LLM kept indices: [0, 4, 7] from 10 candidates.
+DEBUG: End-filter kept 3/10 concepts.
+DEBUG: Batch sending 3 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "surplus": [\n    "definition: The collection of all surpluses. A type of ScalarQuantity. Surplus is a QuantityType.",\n    "has subclass: runoff"\n  ],\n  "transaction": [\n    "definition: A speciali'...
+DEBUG: Batch LLM filter kept 2/15 triple(s) for 'surplus'
+DEBUG: Batch LLM filter kept 1/18 triple(s) for 'transaction'
+DEBUG: Batch LLM filter kept 2/10 triple(s) for 'producer'
+DEBUG: KBPedia found 3 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+**User Question:**
+Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Consumer surplus is the difference between what consumers are willing to pay and what they actually pay.
+2. Producer surplus is the difference between what producers receive and what they are willing to accept.
+3. David is willing to pay $175 for two hours of tutoring.
+4. The negotiated price for the two hours of tutoring is $125.
+5. Elsa values her time at $50 per hour.
+6. Elsa tutors David for two hours.
+7. Consumer surplus is the difference between $175 and $125.
+8. Consumer surplus equals $50.
+9. Producer surplus is the difference between $125 and Elsa's hourly wage.
+10. Producer surplus equals $75.
+11. If producer surplus is greater than consumer surplus, then the difference is positive.
+12. Producer surplus is greater than consumer surplus by $25.
+13. The difference between consumer and producer surplus is $25.
+14. If the difference is $25, then it is not between $50 and $75.
+15. If the difference is $25, then it is not more than $75.
+**Context from Prompt:**
+Elsa values her time at $50 per hour, and tutors David for two hours.
+David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours.
+Generating Prolog...
+[LLM TIMEOUT] LLM call exceeded 60s. Resetting model...
+Iteration 0 | General Error: LLM call timed out after 60s
+[LLM TIMEOUT] LLM call exceeded 60s. Resetting model...
+Iteration 1 | General Error: LLM call timed out after 60s
+[LLM TIMEOUT] LLM call exceeded 60s. Resetting model...
+Iteration 2 | General Error: LLM call timed out after 60s
+Iteration 3 | Validation Error: Multiple-Choice constraint violation: Your 'choice(letter, Description).' facts use UPPERCASE variables for the description (e.g., `choice(a, A).`). The description MUST be a grounded LOWERCASE atom based on the actual option text (e.g., `choice(a, lowercase_option_text).`). Uppercase variables will unify with anything and break the proof!
+Iteration 4 | Validation Error: Disjunction ';' is forbidden in s(CASP). Use multiple separate rules with the same head instead of ';'.
+[Prolog retry] Normal attempts exhausted. Asking LLM if error is close to fixable...
+[Prolog retry] Close-check answer: 'YES'
+[Prolog retry] LLM says YES — granting 5 extension attempts.
+[LLM TIMEOUT] LLM call exceeded 60s. Resetting model...
+Extension 5 | General Error: LLM call timed out after 60s
+[LLM TIMEOUT] LLM call exceeded 60s. Resetting model...
+Extension 6 | General Error: LLM call timed out after 60s
+[LLM TIMEOUT] LLM call exceeded 60s. Resetting model...
+Extension 7 | General Error: LLM call timed out after 60s
+[LLM TIMEOUT] LLM call exceeded 60s. Resetting model...
+Extension 8 | General Error: LLM call timed out after 60s

@@ -10,7 +10,7 @@ _project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
-from llm_config import MODEL_NAME, get_openai_client
+from llm_config import MODEL_NAME, get_openai_client, log_llm_event, retry_with_exponential_backoff
 
 import json
 import asyncio
@@ -28,12 +28,19 @@ from typing import Optional
 
 def generate_with_ollama(messages) -> Optional[str]: 
     try:
-        response = client.chat.completions.create(
+        start_time = time.perf_counter()
+        
+        # Wrap with exponential backoff
+        invoke_func = retry_with_exponential_backoff(client.chat.completions.create)
+        
+        response = invoke_func(
             model=MODEL_NAME,
             messages=messages,
             temperature=0.0,
             response_format={"type": "json_object"},
         )
+        duration = time.perf_counter() - start_time
+        log_llm_event("ENCODER_EXTRACT", duration=duration)
         return response.choices[0].message.content
     except Exception as e:
         print(f"Error during LLM interaction ({MODEL_NAME}): {e}")

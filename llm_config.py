@@ -12,14 +12,52 @@ from openai import OpenAI
 import httpx
 import logging
 
-# Suppress verbose httpx/openai INFO logs (which spam terminal on API retries)
-logging.getLogger("httpx").setLevel(logging.WARNING)
-logging.getLogger("openai").setLevel(logging.WARNING)
+import time
+import random
+import httpx
+from openai import OpenAI, APIConnectionError, APITimeoutError, InternalServerError, RateLimitError
 
 # ── Provider Toggle ──────────────────────────────────────────────────────────
 # True  → Together AI  (cloud)
 # False → Ollama       (local, http://localhost:11434)
 USE_TOGETHER_API = True
+
+def retry_with_exponential_backoff(
+    func,
+    max_retries=5,
+    initial_sleep=1,
+    backoff_factor=2,
+    jitter=True
+):
+    """Retries a function with exponential backoff for LLM API calls."""
+    def wrapper(*args, **kwargs):
+        sleep_time = initial_sleep
+        last_exception = None
+        
+        for attempt in range(max_retries + 1):
+            try:
+                return func(*args, **kwargs)
+            except (APITimeoutError, APIConnectionError, InternalServerError, RateLimitError) as e:
+                last_exception = e
+                if attempt == max_retries:
+                    break
+                
+                # Calculate sleep duration
+                actual_sleep = sleep_time
+                if jitter:
+                    actual_sleep += random.uniform(0, 1)
+                
+                log_llm_event(f"RETRY_BACKOFF_ATTEMPT_{attempt+1}", error=f"Waiting {actual_sleep:.2f}s after error: {type(e).__name__}")
+                print(f"  > [LLM BACKOFF] Attempt {attempt+1} failed ({type(e).__name__}). Retrying in {actual_sleep:.2f}s...", flush=True)
+                
+                time.sleep(actual_sleep)
+                sleep_time *= backoff_factor
+            except Exception as e:
+                # For non-retriable exceptions, raise immediately
+                raise e
+        
+        raise last_exception
+    return wrapper
 
 # ── Model / Endpoint Configuration ──────────────────────────────────────────
 if USE_TOGETHER_API:
@@ -41,8 +79,23 @@ else:
     EMBED_DIM = 4096
 
 
+def log_llm_event(event_type: str, duration: float = None, error: str = None):
+    """Log LLM events to debug.txt for performance tracking."""
+    log_msg = f"\n[LLM_EVENT] {event_type}"
+    if duration is not None:
+        log_msg += f" | LATENCY: {duration:.4f}s"
+    if error:
+        log_msg += f" | ERROR: {error}"
+    
+    try:
+        with open("debug.txt", "a", encoding="utf-8") as f:
+            f.write(log_msg + "\n")
+    except:
+        pass
+
 def get_openai_client() -> OpenAI:
     """Return a configured OpenAI client for the active provider."""
     # Use explicit httpx client with timeout to prevent silent hangs
-    http_client = httpx.Client(timeout=60.0)
+    # Increased to 120s for stability with Together AI Turbo models
+    http_client = httpx.Client(timeout=120.0)
     return OpenAI(base_url=BASE_URL, api_key=API_KEY, http_client=http_client, max_retries=0)

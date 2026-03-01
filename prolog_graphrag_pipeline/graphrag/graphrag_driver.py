@@ -36,7 +36,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 _project_root = str(Path(__file__).resolve().parents[2])
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
-from llm_config import MODEL_NAME as _LLM_MODEL, USE_TOGETHER_API, get_openai_client, BASE_URL, API_KEY
+from llm_config import MODEL_NAME as _LLM_MODEL, USE_TOGETHER_API, get_openai_client, BASE_URL, API_KEY, log_llm_event, retry_with_exponential_backoff
 
 if USE_TOGETHER_API:
     from neo4j_graphrag.embeddings.base import Embedder
@@ -46,10 +46,17 @@ if USE_TOGETHER_API:
         def embed_query(self, text: str):
             from llm_config import EMBED_MODEL
             _client = get_openai_client()
-            response = _client.embeddings.create(
+            start_time = time.perf_counter()
+            
+            # Wrap with exponential backoff
+            invoke_func = retry_with_exponential_backoff(_client.embeddings.create)
+            
+            response = invoke_func(
                 model=EMBED_MODEL,
                 input=text,
             )
+            duration = time.perf_counter() - start_time
+            log_llm_event("EMBED_QUERY", duration=duration)
             return response.data[0].embedding
 
         async def async_embed_chunks(self, texts: list[str]) -> list[list[float]]:
@@ -61,7 +68,14 @@ if USE_TOGETHER_API:
             
             def _do_batch():
                 # The openai client can take a list of strings
-                resp = _client.embeddings.create(model=EMBED_MODEL, input=texts)
+                start_time = time.perf_counter()
+                
+                # Wrap with exponential backoff
+                invoke_func = retry_with_exponential_backoff(_client.embeddings.create)
+                
+                resp = invoke_func(model=EMBED_MODEL, input=texts)
+                duration = time.perf_counter() - start_time
+                log_llm_event(f"EMBED_BATCH_{len(texts)}", duration=duration)
                 return [d.embedding for d in resp.data]
             
             return await loop.run_in_executor(None, _do_batch)
@@ -187,49 +201,51 @@ class DebugOllamaLLM(OllamaLLM):
         if len(log_input) > 100:
              self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Together AI) ---\n{log_input}\n----------------------------------")
 
-        max_retries = 3
+        max_retries = 5
         timeout_sec = 120.0
         
-        for attempt in range(max_retries):
-            result_holder = [None]
-            error_holder = [None]
+        result_holder = [None]
+        error_holder = [None]
 
-            def _target():
-                try:
-                    # Provide an internal timeout to the client as well
-                    resp = _client.chat.completions.create(
-                        model=ENCODER_MODEL,
-                        messages=messages,
-                        temperature=0.0,
-                        timeout=timeout_sec
-                    )
-                    result_holder[0] = resp
-                except Exception as e:
-                    error_holder[0] = e
+        def _do_invoke():
+            return _client.chat.completions.create(
+                model=ENCODER_MODEL,
+                messages=messages,
+                temperature=0.0,
+                timeout=timeout_sec
+            )
 
-            thread = threading.Thread(target=_target, daemon=True)
-            thread.start()
-            thread.join(timeout=timeout_sec + 5) # Slight buffer for thread overhead
+        def _target():
+            try:
+                start_time = time.perf_counter()
+                # Use centralized exponential backoff
+                backoff_invoke = retry_with_exponential_backoff(_do_invoke, max_retries=max_retries)
+                resp = backoff_invoke()
+                
+                duration = time.perf_counter() - start_time
+                log_llm_event(f"GRAG_INVOKE", duration=duration)
+                result_holder[0] = resp
+            except Exception as e:
+                log_llm_event(f"GRAG_INVOKE_FAIL", error=str(e))
+                error_holder[0] = e
 
-            if thread.is_alive():
-                print(f"  > [LLM TIMEOUT] Together AI attempt {attempt+1}/{max_retries} stalled. Retrying...", flush=True)
-                continue # Next attempt
-            
-            if error_holder[0]:
-                print(f"  > [LLM ERROR] Together AI attempt {attempt+1}/{max_retries} failed: {error_holder[0]}", flush=True)
-                if attempt < max_retries - 1:
-                    time.sleep(2)
-                    continue
-                else:
-                    return LLMResponse(content="Error: Together AI failed after multiple retries.")
+        thread = threading.Thread(target=_target, daemon=True)
+        thread.start()
+        thread.join(timeout=(timeout_sec * (max_retries + 1)) + 30) # Wait for all retries
 
-            response = result_holder[0]
-            if response:
-                content = response.choices[0].message.content or ""
-                self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Together AI) ===\n{content}\n===================================")
-                return LLMResponse(content=self._clean_response_text(content))
+        if thread.is_alive():
+            print(f"  > [LLM TIMEOUT] Together AI call timed out even after retries.", flush=True)
+            return LLMResponse(content="Error: Together AI call timed out.")
         
-        return LLMResponse(content="Error: Together AI call timed out.")
+        if error_holder[0]:
+            print(f"  > [LLM ERROR] Together AI failed: {error_holder[0]}", flush=True)
+            return LLMResponse(content=f"Error: Together AI failed: {error_holder[0]}")
+
+        response = result_holder[0]
+        if response:
+            content = response.choices[0].message.content or ""
+            self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Together AI) ===\n{content}\n===================================")
+            return LLMResponse(content=self._clean_response_text(content))
 
     def invoke(self, input, message_history=None, system_instruction=None, **kwargs):
         if USE_TOGETHER_API:
