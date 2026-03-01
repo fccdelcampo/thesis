@@ -1,9 +1,16 @@
 import csv
 import os
+import sys
 import time
 import math
 import requests
 import traceback
+
+# Ensure project root is on the path so llm_config can be imported
+_project_root = os.path.abspath(os.path.dirname(__file__))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+from llm_config import MODEL_NAME
 
 # Metrics
 try:
@@ -21,8 +28,6 @@ except ImportError:
         from langchain_community.embeddings import OllamaEmbeddings
     except ImportError as e:
         print(f"Warning: ragas not installed or import failed: {e}. Evaluation logic will simulate calls or fail.")
-
-MODEL_NAME = "llama3:instruct"
 
 def unload_ollama_model():
     """Force-unload the model from VRAM so RAGAS can use it without OOM."""

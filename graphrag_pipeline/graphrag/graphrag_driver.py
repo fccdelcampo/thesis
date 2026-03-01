@@ -13,7 +13,12 @@ import sys
 from pathlib import Path
 
 # sys.path.append(str(Path(__file__).resolve().parents[1]))
-MODEL = "llama3:instruct"
+
+# Ensure project root is on the path so llm_config can be imported
+_project_root = str(Path(__file__).resolve().parents[2])
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+from llm_config import MODEL_NAME as MODEL
 
 try:
     from graphrag_pipeline.llm import generate

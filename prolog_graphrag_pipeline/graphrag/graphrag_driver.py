@@ -30,10 +30,15 @@ def _run_async(coro):
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
-# Structured JSON extraction (KG builder) benefits from a code-tuned model
-ENCODER_MODEL = "llama3:instruct"
-# Natural language synthesis (retriever) + embeddings stay on llama3.2
-RETRIEVER_MODEL = "llama3:instruct"
+
+# Ensure project root is on the path so llm_config can be imported
+_project_root = str(Path(__file__).resolve().parents[2])
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+from llm_config import MODEL_NAME as _LLM_MODEL
+
+ENCODER_MODEL = _LLM_MODEL
+RETRIEVER_MODEL = _LLM_MODEL
 
 class DebugOllamaLLM(OllamaLLM):
     """Wrapper to clean input prompts and log raw LLM responses to debug.txt."""

@@ -1,12 +1,22 @@
 from copy import deepcopy
+import os
+import sys
 import signal
 import threading
 
-# Prolog code generation benefits from a code-tuned model
-PROLOG_MODEL = 'llama3:instruct'
-# Natural language tasks (explanation, close-check, final synthesis) stay on llama3.2
-NL_MODEL = 'llama3:instruct'
-OLLAMA_TIMEOUT = 600  # seconds per LLM call (10 minutes)
+# Ensure project root is on the path so llm_config can be imported
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+
+from llm_config import MODEL_NAME, USE_TOGETHER_API, get_openai_client
+
+# Prolog code generation and NL tasks both use the configured model
+PROLOG_MODEL = MODEL_NAME
+NL_MODEL = MODEL_NAME
+LLM_TIMEOUT = 600  # seconds per LLM call (10 minutes)
+
+client = get_openai_client()
 
 # ── KV-cache warmup ────────────────────────────────────────────────────────
 # Ollama reuses its KV cache when the prefix of a chat request matches a
@@ -14,12 +24,13 @@ OLLAMA_TIMEOUT = 600  # seconds per LLM call (10 minutes)
 # before Prolog generation, it evicts the Prolog prefix from the cache.
 # warmup_prolog_model() re-primes the cache (system prompt + few-shots) once
 # per question so that all retry attempts within that question are fast.
+# NOTE: Warmup is Ollama-specific and skipped when using Together AI.
 _kv_cache_warmed = False
 
 def warmup_prolog_model():
     """Prime Ollama's KV cache with the static few-shot prefix (once per question)."""
     global _kv_cache_warmed
-    if _kv_cache_warmed:
+    if _kv_cache_warmed or USE_TOGETHER_API:
         return
     import ollama
     try:
@@ -50,7 +61,12 @@ def reset_kv_cache_flag():
     _kv_cache_warmed = False
 
 def reset_ollama_model():
-    """Force-unload the model from Ollama, then verify it reloads successfully with strict timeouts."""
+    """Force-unload the model from Ollama, then verify it reloads successfully with strict timeouts.
+    Skipped when using Together AI (no local model to reset).
+    """
+    if USE_TOGETHER_API:
+        return
+
     import ollama
     
     def run_with_timeout(target_func, timeout=30):
@@ -75,7 +91,6 @@ def reset_ollama_model():
 
     try:
         print("[Ollama Reset] Unloading prolog model to recover from hang...", flush=True)
-        # Setting keep_alive to 0 with a dummy generate forces immediate unload
         run_with_timeout(lambda: ollama.generate(model=PROLOG_MODEL, prompt="", keep_alive=0))
         print("[Ollama Reset] Model unloaded.", flush=True)
     except Exception as e:
@@ -105,7 +120,6 @@ def generate(prompt: str, flag: str) -> dict:
     
 def generate_response(prompt: str, flag: str) -> dict:
     from .prolog_config import GENERATOR_LLM_MESSAGES, EXPLAINER_LLM_MESSAGES, USE_KV_CACHE
-    import ollama
     
     answer = dict()
     
@@ -125,14 +139,13 @@ def generate_response(prompt: str, flag: str) -> dict:
     else:
         raise ValueError(f"Flag {flag} is invalid. Only 'prolog', 'explanation', and 'q' are accepted.")
 
-    if USE_KV_CACHE:
+    if USE_KV_CACHE and not USE_TOGETHER_API:
         # Proper KV Caching: Send system instructions/few-shots as distinct message objects.
         # This builds a stable prefix that Ollama caches in memory, but has a large initial overhead.
         llm_messages = base_messages + [{'role': 'user', 'content': prompt}]
     else:
-        # Linear/No Cache (Default for fast Testing):
+        # Linear/No Cache (Default for fast Testing, and always for Together AI):
         # Flatten all system instructions and few-shots into a single raw text block.
-        # This completely bypasses the KV Cache prefix evaluation penalty, making it significantly faster for single queries.
         flattened_context = ""
         for msg in base_messages:
             role = msg.get('role', 'system').upper()
@@ -142,37 +155,33 @@ def generate_response(prompt: str, flag: str) -> dict:
         dynamic_prompt = f"{flattened_context}\nPlease answer the following query based on the above instructions and examples:\n{prompt}"
         llm_messages = [{'role': 'user', 'content': dynamic_prompt}]
 
-    # Use a thread to enforce a hard timeout on ollama.chat()
+    # Use a thread to enforce a hard timeout on the LLM call
     result_holder = [None]
     error_holder = [None]
 
-    def _call_ollama():
+    def _call_llm():
         try:
-            response = ollama.chat(
+            response = client.chat.completions.create(
                 model=model,
                 messages=llm_messages,
-                options={
-                    'temperature': temperature,
-                    'keep_alive': '20m',
-                    'num_ctx': 4096,
-                },
+                temperature=float(temperature),
             )
             result_holder[0] = response
         except Exception as e:
             error_holder[0] = e
 
-    thread = threading.Thread(target=_call_ollama, daemon=True)
+    thread = threading.Thread(target=_call_llm, daemon=True)
     thread.start()
-    thread.join(timeout=OLLAMA_TIMEOUT)
+    thread.join(timeout=LLM_TIMEOUT)
 
     if thread.is_alive():
-        # Ollama is hung — reset and raise
-        print(f"[Ollama TIMEOUT] LLM call exceeded {OLLAMA_TIMEOUT}s. Resetting model...", flush=True)
+        # LLM is hung — reset and raise
+        print(f"[LLM TIMEOUT] LLM call exceeded {LLM_TIMEOUT}s. Resetting model...", flush=True)
         reset_ollama_model()
-        raise TimeoutError(f"Ollama LLM call timed out after {OLLAMA_TIMEOUT}s")
+        raise TimeoutError(f"LLM call timed out after {LLM_TIMEOUT}s")
 
     if error_holder[0]:
-        print(f"Error during Ollama interaction: {error_holder[0]}")
+        print(f"Error during LLM interaction: {error_holder[0]}")
         return None
 
     response = result_holder[0]
@@ -180,11 +189,11 @@ def generate_response(prompt: str, flag: str) -> dict:
         return None
 
     try:
-        answer['text_answer'] = response['message']['content']
-        answer['logprobs'] = response.get('logprobs', None)
+        answer['text_answer'] = response.choices[0].message.content
+        answer['logprobs'] = None
         return answer
     except Exception as e:
-        print(f"Error during Ollama interaction: {e}")
+        print(f"Error during LLM interaction: {e}")
         return None
     
 # import ollama

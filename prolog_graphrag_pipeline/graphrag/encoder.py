@@ -1,12 +1,21 @@
 from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter import FixedSizeSplitter
 from neo4j_graphrag.experimental.pipeline.kg_builder import SimpleKGPipeline
 import os
+import sys
 import glob
 from .config import DOC_PATH, ENCODER_SYSTEM_PROMPT, ENCODER_FEW_SHOT_EXAMPLES
 
-import ollama
+# Ensure project root is on the path so llm_config can be imported
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+
+from llm_config import MODEL_NAME, get_openai_client
+
 import json
 import asyncio
+
+client = get_openai_client()
 
 # Stateless message template
 BASE_OLLAMA_MESSAGES = [
@@ -18,17 +27,15 @@ from typing import Optional
 
 def generate_with_ollama(messages) -> Optional[str]: 
     try:
-        response = ollama.chat(
-            model='llama3:instruct',
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
             messages=messages,
-            options={
-                'temperature': 0  
-            },
-            format='json'     
+            temperature=0.0,
+            response_format={"type": "json_object"},
         )
-        return response['message']['content']
+        return response.choices[0].message.content
     except Exception as e:
-        print(f"Error during Ollama interaction: {e}")
+        print(f"Error during LLM interaction ({MODEL_NAME}): {e}")
         return None
     
     
@@ -50,10 +57,10 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
             
             response = generate_with_ollama(current_messages)
             safe_response = str(response).encode('ascii', 'replace').decode('ascii')
-            print("Ollama Response:", safe_response) # verbose
+            print("LLM Response:", safe_response) # verbose
             
             if response is None:
-                raise ValueError("Failed to get a response from Ollama.")
+                raise ValueError("Failed to get a response from the LLM.")
             
             try:
                 extracted_data = json.loads(response)

@@ -1,14 +1,25 @@
-import ollama
+import sys
+import os
 
+# Ensure project root is on the path so llm_config can be imported
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+
+from llm_config import MODEL_NAME, get_openai_client
+
+client = get_openai_client()
+
+# ── System Prompt ────────────────────────────────────────────────────────────
 LLM_MESSAGES = [
-    # System Prompt
-    {"role": "system",
-     "content": """
+    {
+        "role": "system",
+        "content": """\
 ### ROLE:
 You are an expert Logical Analyst specialized in symbolic reasoning and Natural Language Inference (NLI).
 
 ### TASK:
-Determine if two LLM responses, generated from a Prolog-GraphRAG pipeline, are "Semantically Equivalent." 
+Determine if two LLM responses, generated from a Prolog-GraphRAG pipeline, are "Semantically Equivalent."
 
 ### DEFINITION OF EQUIVALENCE:
 Two responses are equivalent ONLY if:
@@ -26,24 +37,22 @@ You should reject equivalence (verdict: "no") if ANY of the following apply:
 {
   "rationale": "A concise explanation of why the two responses are semantically equivalent or not.",
   "verdict": "yes" | "no"
-}     
-     """}
+}
+""",
+    }
 ]
 
 
+# ── Unified Generation Function ─────────────────────────────────────────────
 def generate(prompt: str):
+    """Send a prompt to the configured LLM and return the response text."""
     try:
-        response = ollama.chat(
-                model='llama3:instruct',
-                messages=LLM_MESSAGES + [{"role": "user", "content": prompt}],
-                options={
-                    'temperature': 0.3,
-                },
-                logprobs=True     
-            )
-        answer = response['message']['content']
-        return answer
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=LLM_MESSAGES + [{"role": "user", "content": prompt}],
+            temperature=0.3,
+        )
+        return response.choices[0].message.content
     except Exception as e:
-        print(f"Error during Ollama interaction: {e}")
+        print(f"Error during LLM interaction ({MODEL_NAME}): {e}")
         return None
-        
