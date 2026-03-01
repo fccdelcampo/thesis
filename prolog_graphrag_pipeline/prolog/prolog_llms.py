@@ -183,6 +183,7 @@ def generate_response(prompt: str, flag: str) -> dict:
                 messages=llm_messages,
                 temperature=float(temperature),
                 timeout=LLM_TIMEOUT,
+                max_tokens=2048,
             )
             duration = time.perf_counter() - start_time
             log_llm_event(f"PROLOG_{flag.upper()}", duration=duration)

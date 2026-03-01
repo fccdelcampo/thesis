@@ -343,8 +343,8 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
 
     janus.query_once("unload_file(user)")
     janus.consult("user", database)
-    # Run query with a 10-second hard timeout to catch infinite recursive loops
-    safe_query = f"call_with_time_limit(20, ({query[:-1]}))"
+    # Run query with a 120-second hard timeout to catch infinite recursive loops
+    safe_query = f"call_with_time_limit(120, ({query[:-1]}))"
     janus.query_once(safe_query)
 
     print(f"Iteration {i} | Prolog code generation success")
@@ -384,8 +384,11 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             if "Disjunction" in err_str or "';'" in err_str:
                 hint = "Forbidden: ';'. Use separate rules. WRONG: answer(X) :- choice_a(X) ; choice_b(X). CORRECT: answer(X):-choice_a(X). answer(X) :- choice_b(X)."
                 _record_error(f"{err_str} {hint}")
+            if "Query not found" in err_str or "strictly inside <query>" in err_str:
+                hint = "!!! ERROR: Your response was truncated or missing tags. Ensure you output the full <database> AND <query> tags. Keep your Prolog code concise if necessary to fit the context."
             else:
-                _record_error(f"{err_str} Ensure the query is a valid Prolog predicate.")
+                hint = "Ensure the query is a valid Prolog predicate wrapped in <query> tags."
+            _record_error(f"{err_str} {hint}")
         except janus.PrologError as e:
             print(f"Iteration {i} | Prolog Error: {e}")
             error_str = str(e)
@@ -400,7 +403,7 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
             elif "(:-)/2" in error_str or "Rules must be loaded from a file" in error_str:
                 hint = "Rule (:-) in <query>. Move to <database>."
             elif "Unknown procedure" in error_str:
-                hint = "Undefined predicate. Every body predicate must be defined as a fact or rule head."
+                hint = "!!! CRITICAL: Undefined predicate. You used a predicate in a rule body that is NOT defined as a fact or rule head in your <database>. Every predicate in the body MUST exist as a definition."
             else:
                 hint = "Ensure strict Prolog syntax. No bullets/hyphens. Predicates must be lowercase."
             _record_error(f"Prolog Error: {e}\nHint: {hint}")

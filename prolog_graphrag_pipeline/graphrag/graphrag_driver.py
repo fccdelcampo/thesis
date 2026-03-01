@@ -212,7 +212,8 @@ class DebugOllamaLLM(OllamaLLM):
                 model=ENCODER_MODEL,
                 messages=messages,
                 temperature=0.0,
-                timeout=timeout_sec
+                timeout=timeout_sec,
+                max_tokens=2048
             )
 
         def _target():

@@ -15,7 +15,7 @@ import logging
 import time
 import random
 import httpx
-from openai import OpenAI, APIConnectionError, APITimeoutError, InternalServerError, RateLimitError
+from openai import OpenAI, APIConnectionError, APITimeoutError, InternalServerError, RateLimitError, APIError, APIStatusError
 
 # ── Provider Toggle ──────────────────────────────────────────────────────────
 # True  → Together AI  (cloud)
@@ -37,7 +37,12 @@ def retry_with_exponential_backoff(
         for attempt in range(max_retries + 1):
             try:
                 return func(*args, **kwargs)
-            except (APITimeoutError, APIConnectionError, InternalServerError, RateLimitError) as e:
+            except (APITimeoutError, APIConnectionError, InternalServerError, RateLimitError, APIError, APIStatusError) as e:
+                # Also check for specific status codes if it's an APIStatusError
+                if isinstance(e, APIStatusError) and e.status_code in [401, 403, 404]:
+                    # These are usually not retryable (Auth/Permission/NotFound)
+                    raise e
+
                 last_exception = e
                 if attempt == max_retries:
                     break
