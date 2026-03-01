@@ -54,6 +54,7 @@ if USE_TOGETHER_API:
         from neo4j_graphrag.experimental.components.types import TextChunks, TextChunk
         _original_embedder_run = TextChunkEmbedder.run
 
+        from typing import Union
         async def _patched_embedder_run(self, text_chunks: Union[TextChunks, dict]) -> TextChunks:
             if hasattr(self._embedder, "async_embed_chunks"):
                 # Handle dictionary input
