@@ -9,6 +9,7 @@ Both providers are accessed through the standard `openai` Python package.
 
 import os
 from openai import OpenAI
+import httpx
 import logging
 
 # Suppress verbose httpx/openai INFO logs (which spam terminal on API retries)
@@ -42,4 +43,6 @@ else:
 
 def get_openai_client() -> OpenAI:
     """Return a configured OpenAI client for the active provider."""
-    return OpenAI(base_url=BASE_URL, api_key=API_KEY)
+    # Use explicit httpx client with timeout to prevent silent hangs
+    http_client = httpx.Client(timeout=60.0)
+    return OpenAI(base_url=BASE_URL, api_key=API_KEY, http_client=http_client, max_retries=0)

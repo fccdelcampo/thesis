@@ -13,6 +13,7 @@ Two modes (controlled by `triple_filter` at construction time):
 
 import json
 import re
+import time
 from typing import List, Dict, Any, Optional
 
 
@@ -173,36 +174,7 @@ Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
         
         return unique_entities[:10]
 
-    def _vector_search(self, query_vector: List[float], limit: int = 5) -> List[Dict[str, Any]]:
-        """Vector similarity search against KBPedia concepts."""
-        if not query_vector:
-            return []
 
-        try:
-            records, _, _ = self.driver.execute_query(
-                """
-                CALL db.index.vector.queryNodes('kbpediaConceptVectorIndex', $limit, $vector)
-                YIELD node, score
-                RETURN node.uri AS uri, node.name AS name, node.definition AS definition,
-                       node.altLabels AS altLabels, score
-                """,
-                vector=query_vector,
-                limit=limit,
-                database_="neo4j",
-            )
-            results = []
-            for r in records:
-                results.append({
-                    "uri": r["uri"],
-                    "name": r["name"],
-                    "definition": r["definition"] or "",
-                    "altLabels": r["altLabels"] or [],
-                    "score": r["score"],
-                })
-            return results
-        except Exception as e:
-            print(f"DEBUG: KBPedia concept vector search error: {e}")
-            return []
 
     def find_concepts(self, search_term: str, limit: int = 3) -> List[Dict[str, Any]]:
         """
@@ -415,35 +387,42 @@ Example:
         # Default fallback
         result_map = {c["name"]: c["triples"] for c in concepts_data}
 
-        try:
-            raw = self.llm.invoke(prompt)
-            res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
-            safe_res = str(res[:200]).encode('ascii', 'replace').decode('ascii')
-            print(f"DEBUG: Batch triple filter raw response: {repr(safe_res)}...", flush=True)
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                raw = self.llm.invoke(prompt)
+                res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
+                safe_res = str(res[:200]).encode('ascii', 'replace').decode('ascii')
+                print(f"DEBUG: Batch triple filter raw response: {repr(safe_res)}...", flush=True)
 
-            if "```json" in res:
-                res = res.split("```json")[1].split("```")[0].strip()
-            elif "```" in res:
-                res = res.split("```")[1].split("```")[0].strip()
+                if "```json" in res:
+                    res = res.split("```json")[1].split("```")[0].strip()
+                elif "```" in res:
+                    res = res.split("```")[1].split("```")[0].strip()
 
-            bracket_start = res.find('{')
-            bracket_end = res.rfind('}')
-            if bracket_start != -1 and bracket_end != -1:
-                res = res[bracket_start:bracket_end + 1]
-            elif not res:
-                print(f"DEBUG: Batch triple filter got empty response. Using all raw triples.", flush=True)
-                return result_map
+                bracket_start = res.find('{')
+                bracket_end = res.rfind('}')
+                if bracket_start != -1 and bracket_end != -1:
+                    res = res[bracket_start:bracket_end + 1]
+                elif not res:
+                    print(f"DEBUG: Batch triple filter got empty response. Using all raw triples.", flush=True)
+                    return result_map
 
-            filtered = _safe_parse_json(res, expect=dict)
-            if isinstance(filtered, dict):
-                for c in concepts_data:
-                    name = c["name"]
-                    if name in filtered and isinstance(filtered[name], list):
-                        # Clean up formatting artifacts (like "- subclass of:" -> "subclass of:")
-                        cleaned_triples = [t[2:].strip() if t.startswith("- ") else t.strip() for t in filtered[name]]
-                        result_map[name] = cleaned_triples
-        except Exception as e:
-            print(f"DEBUG: Batch triple filtering failed: {e}. Using all raw triples.", flush=True)
+                filtered = _safe_parse_json(res, expect=dict)
+                if isinstance(filtered, dict):
+                    for c in concepts_data:
+                        name = c["name"]
+                        if name in filtered and isinstance(filtered[name], list):
+                            # Clean up formatting artifacts (like "- subclass of:" -> "subclass of:")
+                            cleaned_triples = [t[2:].strip() if t.startswith("- ") else t.strip() for t in filtered[name]]
+                            result_map[name] = cleaned_triples
+                    return result_map # Return immediately on success
+            except Exception as e:
+                print(f"DEBUG: Batch triple filtering attempt {attempt + 1}/{max_retries} failed: {e}", flush=True)
+                if attempt < max_retries - 1:
+                    time.sleep(3)
+                else:
+                    print(f"DEBUG: All {max_retries} batch filtering attempts failed. Using all raw triples.", flush=True)
 
         return result_map
 
@@ -496,23 +475,29 @@ When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
 Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
 Output ONLY the JSON list, nothing else.
 """
-        try:
-            raw = self.llm.invoke(prompt)
-            res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
-            if "```" in res:
-                res = res.split("```")[1].split("```")[0].strip()
-            bracket_start = res.find('[')
-            bracket_end = res.rfind(']')
-            if bracket_start != -1 and bracket_end != -1:
-                res = res[bracket_start:bracket_end + 1]
-            indices = _safe_parse_json(res, expect=list)
-            if not isinstance(indices, list):
-                raise ValueError(f"LLM did not return a list: {repr(res[:100])}")
-            print(f"DEBUG: End-filter LLM kept indices: {indices} from {len(candidates)} candidates.", flush=True)
-            return [candidates[i] for i in indices if isinstance(i, int) and 0 <= i < len(candidates)]
-        except Exception as e:
-            print(f"DEBUG: End-filter LLM call failed: {e}. Returning all candidates.", flush=True)
-            return candidates
+        max_retries = 3
+        for attempt in range(max_retries):
+            try:
+                raw = self.llm.invoke(prompt)
+                res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
+                if "```" in res:
+                    res = res.split("```")[1].split("```")[0].strip()
+                bracket_start = res.find('[')
+                bracket_end = res.rfind(']')
+                if bracket_start != -1 and bracket_end != -1:
+                    res = res[bracket_start:bracket_end + 1]
+                indices = _safe_parse_json(res, expect=list)
+                if not isinstance(indices, list):
+                    raise ValueError(f"LLM did not return a list: {repr(res[:100])}")
+                print(f"DEBUG: End-filter LLM kept indices: {indices} from {len(candidates)} candidates.", flush=True)
+                return [candidates[i] for i in indices if isinstance(i, int) and 0 <= i < len(candidates)]
+            except Exception as e:
+                print(f"DEBUG: End-filter LLM attempt {attempt + 1}/{max_retries} failed: {e}.", flush=True)
+                if attempt < max_retries - 1:
+                    time.sleep(3)
+                else:
+                    print(f"DEBUG: All {max_retries} end-filter attempts failed. Returning all candidates.", flush=True)
+        return candidates
 
     def search(self, query_text: str, top_k: int = 5, original_query: str = "", seeded_entities: List[str] = None) -> Any:
         from .retriever import RetrieverResult, RetrieverResultItem
@@ -523,28 +508,12 @@ Output ONLY the JSON list, nothing else.
         # `original_query` = full user prompt (with MCQ choices) for LLM filtering.
         filter_query = original_query if original_query else query_text
 
-        # ── Vector Search (on raw query) ──────────────────────────────
-        matches = []
-        try:
-            print(f"DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...", flush=True)
-            if self.embedder:
-                query_vector = self.embedder.embed_query("query: " + query_text)
-            else:
-                from sentence_transformers import SentenceTransformer
-                print("DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.", flush=True)
-                temp_embedder = SentenceTransformer("all-MiniLM-L6-v2")
-                query_vector = temp_embedder.encode(query_text).tolist()
-                
-            # Grab top_k matches via vector similarity
-            matches.extend(self._vector_search(query_vector, limit=top_k))
-        except Exception as e:
-            print(f"DEBUG: KBPedia embedding/search failed: {e}", flush=True)
-
         # ── Entity extraction & Fulltext Search (on entities) ─────────
         print(f"DEBUG: [KBPedia] Querying for: '{query_text}'", flush=True)
         entities = self.extract_entities(query_text)
         print(f"DEBUG: Extracted entities for KBPedia: {entities}", flush=True)
 
+        matches = []
         for concept_name in entities:
             entity_matches = self.find_concepts(concept_name, limit=2)
             if entity_matches:
@@ -554,9 +523,9 @@ Output ONLY the JSON list, nothing else.
                 print(f"DEBUG: KBPedia has no fulltext matches for '{concept_name}'.", flush=True)
 
         if not matches:
-            print(f"DEBUG: KBPedia found no matches via vector or fulltext search.", flush=True)
+            print(f"DEBUG: KBPedia found no matches via fulltext search.", flush=True)
         else:
-            print(f"DEBUG: KBPedia total combined matches: {[m['name'] for m in matches]}", flush=True)
+            print(f"DEBUG: KBPedia total matches: {[m['name'] for m in matches]}", flush=True)
 
         seen_uris = set()
         candidates = []  # list of {name, uri, definition, triples}

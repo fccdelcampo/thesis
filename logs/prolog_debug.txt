@@ -4643,3 +4643,75 @@ Traceback (most recent call last):
     return self._sslobj.read(len, buffer)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 KeyboardInterrupt
+MMLU:   0%|                                                           | 0/90 [00:00<?, ?it/s]MMLU:   0%|                                                           | 0/90 [00:00<?, ?it/s]MMLU:   1%|5                                                  | 1/90 [00:31<46:32, 31.37s/it]MMLU:   2%|#1                                                 | 2/90 [01:08<50:41, 34.57s/it]MMLU:   2%|#1                                                 | 2/90 [01:14<54:19, 37.04s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 110, in run_benchmarks
+    mmlu.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 307, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 286, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 169, in run_test_case
+    gr_result = run_pipeline_safe(run_graphrag, formatted_input)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 139, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 458, in run_pipeline
+    result = generate_answer(question, retriever, retriever_llm, original_query=question)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 374, in generate_answer
+    return generate(llm, retriever, query, original_query=original_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\llm.py", line 19, in generate
+    graph_rag_results = graph_rag.search(
+                        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\generation\graphrag.py", line 151, in search
+    retriever_result: RetrieverResult = self.retriever.search(
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\retriever.py", line 167, in search
+    kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query, seeded_entities=list(extracted_entities))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 470, in search
+    batch_results = self.filter_triples_batch(query_text, batch_data, original_query=filter_query)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 294, in filter_triples_batch
+    raw = self.llm.invoke(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 183, in invoke
+    return self._openai_invoke(input, message_history, system_instruction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 162, in _openai_invoke
+    _client = get_openai_client()
+              ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\llm_config.py", line 45, in get_openai_client
+    return OpenAI(base_url=BASE_URL, api_key=API_KEY)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\openai\_client.py", line 166, in __init__
+    super().__init__(
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\openai\_base_client.py", line 887, in __init__
+    self._client = http_client or SyncHttpxClientWrapper(
+                                  ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\openai\_base_client.py", line 817, in __init__
+    super().__init__(**kwargs)
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 688, in __init__
+    self._transport = self._init_transport(
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 731, in _init_transport
+    return HTTPTransport(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_transports\default.py", line 153, in __init__
+    ssl_context = create_ssl_context(verify=verify, cert=cert, trust_env=trust_env)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_config.py", line 40, in create_ssl_context
+    ctx = ssl.create_default_context(cafile=certifi.where())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 708, in create_default_context
+    context.load_verify_locations(cafile, capath, cadata)
+KeyboardInterrupt
+MMLU:   0%|                                                           | 0/90 [00:00<?, ?it/s]MMLU:   0%|                                                           | 0/90 [00:00<?, ?it/s]MMLU:   1%|5                                                  | 1/90 [00:27<41:24, 27.92s/it]MMLU:   2%|#1                                                 | 2/90 [01:00<44:46, 30.53s/it]MMLU:   3%|#5                                             | 3/90 [16:24<10:35:48, 438.49s/it]

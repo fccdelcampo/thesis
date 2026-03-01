@@ -24424,3 +24424,1334 @@ D. PCP (phencyclidine)
 Answer with the letter only (A, B, C, or D).' ---
 DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
 DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 90 MMLU test cases (starting from index 10).
+
+================================================================================
+[MMLU #10] Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph.
+
+A. True, True
+B. False, False
+C. True, False
+D. False, True
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['markov network', 'random graph', 'extremal graph theory', 'graph connectivity', 'bounded directed acyclic graph', 'directed multigraph', 'graph', 'directed graph', 'extensions and generalizations of graphs', 'Directed Acyclic Graph']
+DEBUG: Buffered 10 raw triple(s) for 'markov network'
+DEBUG: Buffered 8 raw triple(s) for 'random graph'
+DEBUG: Buffered 8 raw triple(s) for 'extremal graph theory'
+DEBUG: Buffered 8 raw triple(s) for 'graph connectivity'
+DEBUG: Buffered 10 raw triple(s) for 'bounded directed acyclic graph'
+DEBUG: Buffered 7 raw triple(s) for 'directed multigraph'
+DEBUG: Buffered 16 raw triple(s) for 'graph'
+DEBUG: Buffered 5 raw triple(s) for 'directed graph'
+DEBUG: Buffered 8 raw triple(s) for 'extensions and generalizations of graphs'
+DEBUG: Buffered 5 raw triple(s) for 'Directed Acyclic Graph'
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 90 MMLU test cases (starting from index 10).
+
+================================================================================
+[MMLU #10] Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph.
+
+A. True, True
+B. False, False
+C. True, False
+D. False, True
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['markov network', 'random graph', 'extremal graph theory', 'graph connectivity', 'bounded directed acyclic graph', 'directed multigraph', 'graph', 'directed graph', 'extensions and generalizations of graphs', 'Directed Acyclic Graph']
+DEBUG: Buffered 10 raw triple(s) for 'markov network'
+DEBUG: Buffered 8 raw triple(s) for 'random graph'
+DEBUG: Buffered 8 raw triple(s) for 'extremal graph theory'
+DEBUG: Buffered 8 raw triple(s) for 'graph connectivity'
+DEBUG: Buffered 10 raw triple(s) for 'bounded directed acyclic graph'
+DEBUG: Buffered 7 raw triple(s) for 'directed multigraph'
+DEBUG: Buffered 16 raw triple(s) for 'graph'
+DEBUG: Buffered 5 raw triple(s) for 'directed graph'
+DEBUG: Buffered 8 raw triple(s) for 'extensions and generalizations of graphs'
+DEBUG: Buffered 5 raw triple(s) for 'Directed Acyclic Graph'
+DEBUG: End-filter LLM kept indices: [0, 1, 3, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 8/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "markov network": [\n    "definition: A Markov network consists of an undirected graph and a set of potential functions--one for each clique in the graph. The nodes in the graph represent random va'...
+DEBUG: Batch LLM filter kept 2/10 triple(s) for 'markov network'
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'random graph'
+DEBUG: Batch LLM filter kept 0/8 triple(s) for 'graph connectivity'
+DEBUG: Batch LLM filter kept 1/7 triple(s) for 'directed multigraph'
+DEBUG: Batch LLM filter kept 0/16 triple(s) for 'graph'
+DEBUG: Removed 2 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 3 grounded concept contexts.
+DEBUG: KBPedia returned 3 items.
+DEBUG: Merged Result Count: 3
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Analyzing the statements about entropy and moralization in directed graphs.",
+  "question": "Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ? H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph. A) London B) Paris C) Berlin D) Madrid",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Analyzing the statements about entropy and moralization in directed graphs.', 'question': 'Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph. A) London B) Paris C) Berlin D) Madrid', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ? H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph. A) London B) Paris C) Berlin D) Madrid
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Statement 1| For any two variables x and y having joint distribution p(x, y), we' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: [KBPedia] Querying for: 'Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph. A) London B) Paris C) Berlin D) Madrid'
+DEBUG: Extracted entities for KBPedia: ['london', 'paris', 'berlin', 'madrid', 'variables', 'entropy function', 'directed graphs', 'moralization']
+DEBUG: KBPedia fulltext matched for 'london': ['London Reef', 'the London Stock Exchange']
+DEBUG: KBPedia fulltext matched for 'paris': ['Wolves of Paris', 'Summer Olympics in Paris']
+DEBUG: KBPedia fulltext matched for 'berlin': ['East Berlin', 'Berlin Wall']
+DEBUG: KBPedia fulltext matched for 'madrid': ['Real Madrid C.F.']
+DEBUG: KBPedia fulltext matched for 'variables': ['latent variable mode', 'simultaneous equation methods (econometrics)']
+DEBUG: KBPedia fulltext matched for 'entropy function': ['thermodynamic entropy', 'entropy and information']
+DEBUG: KBPedia fulltext matched for 'directed graphs': ['directed graph', 'extensions and generalizations of graphs']
+DEBUG: KBPedia has no fulltext matches for 'moralization'.
+DEBUG: KBPedia total combined matches: ['markov network', 'extremal graph theory', 'random graph', 'graph connectivity', 'bounded directed acyclic graph', 'London Reef', 'the London Stock Exchange', 'Wolves of Paris', 'Summer Olympics in Paris', 'East Berlin', 'Berlin Wall', 'Real Madrid C.F.', 'latent variable mode', 'simultaneous equation methods (econometrics)', 'thermodynamic entropy', 'entropy and information', 'directed graph', 'extensions and generalizations of graphs']
+DEBUG: Buffered 10 raw triple(s) for 'markov network'
+DEBUG: Buffered 8 raw triple(s) for 'extremal graph theory'
+DEBUG: Buffered 8 raw triple(s) for 'random graph'
+DEBUG: Buffered 8 raw triple(s) for 'graph connectivity'
+DEBUG: Buffered 10 raw triple(s) for 'bounded directed acyclic graph'
+DEBUG: Buffered 7 raw triple(s) for 'London Reef'
+DEBUG: Buffered 9 raw triple(s) for 'the London Stock Exchange'
+DEBUG: Buffered 8 raw triple(s) for 'Wolves of Paris'
+DEBUG: Buffered 7 raw triple(s) for 'Summer Olympics in Paris'
+DEBUG: Buffered 5 raw triple(s) for 'East Berlin'
+DEBUG: Buffered 10 raw triple(s) for 'Berlin Wall'
+DEBUG: Buffered 8 raw triple(s) for 'Real Madrid C.F.'
+DEBUG: Buffered 11 raw triple(s) for 'latent variable mode'
+DEBUG: Buffered 11 raw triple(s) for 'simultaneous equation methods (econometrics)'
+DEBUG: Buffered 8 raw triple(s) for 'thermodynamic entropy'
+DEBUG: Buffered 8 raw triple(s) for 'entropy and information'
+DEBUG: Buffered 5 raw triple(s) for 'directed graph'
+DEBUG: Buffered 8 raw triple(s) for 'extensions and generalizations of graphs'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16] from 18 candidates.
+DEBUG: End-filter kept 16/18 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "markov network": ["definition: A Markov network consists of an undirected graph and a set of potential functions--one for each clique in the graph.", "The nodes in the graph represent random vari'...
+DEBUG: Batch LLM filter kept 2/10 triple(s) for 'markov network'
+DEBUG: Batch LLM filter kept 2/8 triple(s) for 'extremal graph theory'
+DEBUG: Batch LLM filter kept 2/8 triple(s) for 'random graph'
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'graph connectivity'
+DEBUG: Batch LLM filter kept 0/7 triple(s) for 'London Reef'
+DEBUG: Removed 1 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 4 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph.
+
+A. True, True
+B. False, False
+C. True, False
+D. False, True
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. A Markov network consists of an undirected graph and a set of potential functions.
+2. The nodes in the graph represent random variables.
+3. The edges in the graph represent dependencies between random variables.
+4. Extremal graph theory studies extremal graphs which satisfy a certain property.
+5. Moralization is a process that converts a directed graph into an undirected graph.
+6. Moralization decreases the number of edges present in the graph for some directed graphs.
+7. Random graphs are probability distributions over graphs.
+8. A random graph may be described by a probability distribution or a random process.
+9. Graph connectivity is a concept in graph theory that asks for the minimum number of elements to disconnect nodes.
+10. The entropy function H is defined for joint distributions p(x, y) of two variables x and y.
+11. The entropy of a joint distribution p(x, y) is always greater than or equal to the sum of the entropies of the individual distributions p(x) and p(y).
+12. If a graph is disconnected, its connectivity is less than the number of its nodes.
+13. If a graph has a higher connectivity, it is more connected.
+14. A higher connectivity implies a higher number of edges in the graph.
+15. If a graph has a higher number of edges, its moralization will generally decrease the number of edges.
+**Context from Prompt:**
+Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph.
+
+A. True, True
+B. False, False
+C. True, False
+D. False, True
+
+Answer with the letter only (A, B, C, or D).
+Generating Prolog...
+Iteration 0 | Validation Error: Disjunction ';' is forbidden in s(CASP). Use multiple separate rules with the same head instead of ';'.
+Iteration 1 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+Iteration 2 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+Iteration 3 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+Iteration 4 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+[Prolog retry] Same error repeated 4x — skipping extension (model is stuck). Giving up.
+[Prolog FAILED] Failed to generate valid Prolog code after multiple attempts. — falling back to unverified GraphRAG answer.
+
+**FINAL LLM OUTPUT:
+*C.* True, False
+The statement about entropy is a fundamental property of joint distributions, where the entropy of two variables is always greater than or equal to the sum of their individual entropies. This is a well-established concept in information theory.
+
+However, the second statement about moralization is not universally true. Moralization can indeed decrease the number of edges in some directed graphs, but it's not a general rule. The effect of moralization on the number of edges depends on the specific structure of the graph.
+====The pipeline executed in 6.3040 seconds. Prolog verified: False===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [D]   | WRONG   |   13.6s
+Prolog          | Predicted: [C]   | WRONG   |   17.1s
+Tuned LLM       | Predicted: [A]   | WRONG   |    0.6s
+================================================================================
+
+
+================================================================================
+[MMLU #11] A 17-year-old boy is brought to the emergency department 30 minutes after being found with a "blank stare" and flat faci...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'A 17-year-old boy is brought to the emergency department 30 minutes after being found with a "blank stare" and flat facial expression at a party. His pulse is 72/min, and blood pressure is 104/68 mm Hg. He is sitting upright and appears catatonic. Physical examination shows rigidity. During the examination, he becomes hostile and attempts to assault the physician. This patient most likely ingested which of the following drugs?
+
+A. Diazepam
+B. Methamphetamine
+C. Oxycodone
+D. PCP (phencyclidine)
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['diazepam', 'intravenous medication', 'Ritalin', 'liquid medicine', 'chemical substances for emergency medicine', 'Bentazepam', 'inhalant drug', 'chlorphentermine', 'drugs acting on the nervous system', 'psychoactive drug']
+DEBUG: Buffered 10 raw triple(s) for 'diazepam'
+DEBUG: Buffered 11 raw triple(s) for 'intravenous medication'
+DEBUG: Buffered 9 raw triple(s) for 'Ritalin'
+DEBUG: Buffered 11 raw triple(s) for 'liquid medicine'
+DEBUG: Buffered 8 raw triple(s) for 'chemical substances for emergency medicine'
+DEBUG: Buffered 8 raw triple(s) for 'Bentazepam'
+DEBUG: Buffered 10 raw triple(s) for 'inhalant drug'
+DEBUG: Buffered 6 raw triple(s) for 'chlorphentermine'
+DEBUG: Buffered 4 raw triple(s) for 'drugs acting on the nervous system'
+DEBUG: Buffered 19 raw triple(s) for 'psychoactive drug'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "PCP (phencyclidine)": [\n    "definition: A dissociative anesthetic drug which is used for short-term treatment of anxiety.",\n    "subclass of: dissociative anesthetic"\n  ],\n  "Methamphetamine": ['...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'diazepam'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'intravenous medication'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'Ritalin'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'liquid medicine'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'chemical substances for emergency medicine'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Identifying the key symptoms and the likely cause based on the provided information.",
+  "question": "This patient most likely ingested which of the following drugs? A) Diazepam B) Methamphetamine C) Oxycodone D) PCP (phencyclidine)",
+  "context": [
+    "A 17-year-old boy is brought to the emergency department 30 minutes after being found with a 'blank stare' and flat facial expression at a party.",
+    "His pulse is 72/min, and blood pressure is 104/68 mm Hg.",
+    "He is sitting upright and appears catatonic.",
+    "Physical examination shows rigidity.",
+    "During the examination, he becomes hostile and attempts to assault the physician."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the key symptoms and the likely cause based on the provided information.', 'question': 'This patient most likely ingested which of the following drugs? A) Diazepam B) Methamphetamine C) Oxycodone D) PCP (phencyclidine)', 'context': ["A 17-year-old boy is brought to the emergency department 30 minutes after being found with a 'blank stare' and flat facial expression at a party.", 'His pulse is 72/min, and blood pressure is 104/68 mm Hg.', 'He is sitting upright and appears catatonic.', 'Physical examination shows rigidity.', 'During the examination, he becomes hostile and attempts to assault the physician.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: This patient most likely ingested which of the following drugs? A) Diazepam B) Methamphetamine C) Oxycodone D) PCP (phencyclidine)
+DEBUG: EXTRACTED CONTEXT (Len: 5): ["A 17-year-old boy is brought to the emergency department 30 minutes after being found with a 'blank stare' and flat facial expression at a party.", 'His pulse is 72/min, and blood pressure is 104/68 mm Hg.', 'He is sitting upright and appears catatonic.', 'Physical examination shows rigidity.', 'During the examination, he becomes hostile and attempts to assault the physician.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='This patient most likely ingested which of the following drugs? A) Diazepam B) M' | context items=5
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 5 text chunk(s)...
+Processing text context: A 17-year-old boy is brought to the emergency department 30 minutes after being found with a 'blank stare' and flat facial expression at a party.
+Text context processed: run_id='0fae7aee-ab18-4cb9-b159-72dac2adebe8' result={'resolver': {'number_of_nodes_to_resolve': 4, 'number_of_created_nodes': 4}}
+Processing text context: His pulse is 72/min, and blood pressure is 104/68 mm Hg.
+Text context processed: run_id='fd9e98b5-c59d-494b-9ecd-f1a1505963b6' result={'resolver': {'number_of_nodes_to_resolve': 7, 'number_of_created_nodes': 7}}
+Processing text context: He is sitting upright and appears catatonic.
+Text context processed: run_id='d1335331-b1b3-4e92-b57e-6bf35163d251' result={'resolver': {'number_of_nodes_to_resolve': 10, 'number_of_created_nodes': 10}}
+Processing text context: Physical examination shows rigidity.
+Text context processed: run_id='09ec5905-ddda-4471-b3fd-ff42eb7e4ce3' result={'resolver': {'number_of_nodes_to_resolve': 12, 'number_of_created_nodes': 12}}
+Processing text context: During the examination, he becomes hostile and attempts to assault the physician.
+Text context processed: run_id='43078a84-12fb-4a91-bcf4-4f4c583bde99' result={'resolver': {'number_of_nodes_to_resolve': 17, 'number_of_created_nodes': 16}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: [KBPedia] Querying for: 'This patient most likely ingested which of the following drugs? A) Diazepam B) Methamphetamine C) Oxycodone D) PCP (phencyclidine)'
+DEBUG: Extracted entities for KBPedia: ['diazepam', 'methamphetamine', 'oxycodone', 'pcp (phencyclidine)', 'patient', 'drugs', 'ingestion']
+DEBUG: KBPedia fulltext matched for 'diazepam': ['Avizafone', 'diazepam']
+DEBUG: KBPedia fulltext matched for 'methamphetamine': ['Methamphetamine', 'methamphetamine in the united states']
+DEBUG: KBPedia fulltext matched for 'oxycodone': ['oxycodone', 'thebaine']
+DEBUG: KBPedia fulltext matched for 'pcp (phencyclidine)': ['PCAA']
+DEBUG: KBPedia fulltext matched for 'patient': ['patient chair', 'patient clothing']
+DEBUG: KBPedia fulltext matched for 'drugs': ['poisoning by drugs', 'drugs acting on the nervous system']
+DEBUG: KBPedia fulltext matched for 'ingestion': ['illegal drug', 'food poisoning']
+DEBUG: KBPedia total combined matches: ['diazepam', 'drugs acting on the nervous system', 'inhalant drug', 'Methamphetamine', 'intravenous medication', 'Avizafone', 'diazepam', 'Methamphetamine', 'methamphetamine in the united states', 'oxycodone', 'thebaine', 'PCAA', 'patient chair', 'patient clothing', 'poisoning by drugs', 'drugs acting on the nervous system', 'illegal drug', 'food poisoning']
+DEBUG: Buffered 10 raw triple(s) for 'diazepam'
+DEBUG: Buffered 4 raw triple(s) for 'drugs acting on the nervous system'
+DEBUG: Buffered 10 raw triple(s) for 'inhalant drug'
+DEBUG: Buffered 9 raw triple(s) for 'Methamphetamine'
+DEBUG: Buffered 11 raw triple(s) for 'intravenous medication'
+DEBUG: Buffered 8 raw triple(s) for 'Avizafone'
+DEBUG: Buffered 3 raw triple(s) for 'methamphetamine in the united states'
+DEBUG: Buffered 3 raw triple(s) for 'oxycodone'
+DEBUG: Buffered 13 raw triple(s) for 'thebaine'
+DEBUG: Buffered 8 raw triple(s) for 'PCAA'
+DEBUG: Buffered 3 raw triple(s) for 'patient chair'
+DEBUG: Buffered 7 raw triple(s) for 'patient clothing'
+DEBUG: Buffered 10 raw triple(s) for 'poisoning by drugs'
+DEBUG: Buffered 17 raw triple(s) for 'illegal drug'
+DEBUG: Buffered 9 raw triple(s) for 'food poisoning'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 12, 13, 14] from 15 candidates.
+DEBUG: End-filter kept 13/15 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "PCP (phencyclidine)": [\n    "definition: Methamphetamine (contracted from N-methylamphetamine) is a strong central nervous system (CNS) stimulant that is mainly used as a recreational drug and le'...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'diazepam'
+DEBUG: Batch LLM filter kept 1/4 triple(s) for 'drugs acting on the nervous system'
+DEBUG: Batch LLM filter kept 0/10 triple(s) for 'inhalant drug'
+DEBUG: Batch LLM filter kept 2/9 triple(s) for 'Methamphetamine'
+DEBUG: Batch LLM filter kept 0/11 triple(s) for 'intravenous medication'
+DEBUG: Removed 2 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 3 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+**User Question:**
+A 17-year-old boy is brought to the emergency department 30 minutes after being found with a "blank stare" and flat facial expression at a party. His pulse is 72/min, and blood pressure is 104/68 mm Hg. He is sitting upright and appears catatonic. Physical examination shows rigidity. During the examination, he becomes hostile and attempts to assault the physician. This patient most likely ingested which of the following drugs?
+
+A. Diazepam
+B. Methamphetamine
+C. Oxycodone
+D. PCP (phencyclidine)
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. The patient exhibits a 'blank stare' and flat facial expression, which is indicative of a central nervous system (CNS) stimulant effect.
+2. The patient's hostility and attempt to assault the physician suggest a loss of impulse control.
+3. The patient's catatonic state and rigidity are characteristic of CNS stimulant overdose.
+4. CNS stimulants are known to cause increased heart rate and blood pressure.
+5. The patient's pulse is 72/min, which is within the normal range, but the blood pressure is 104/68 mm Hg, which is elevated.
+6. CNS stimulants are often used as recreational drugs.
+7. Methamphetamine is a strong CNS stimulant that is commonly used as a recreational drug.
+8. Methamphetamine is known to cause increased heart rate and blood pressure, as well as loss of impulse control.
+9. The patient's symptoms are consistent with methamphetamine overdose.
+10. Methamphetamine is a medicine that acts on the nervous system.
+11. The patient's symptoms are not consistent with diazepam, which is a sedative.
+12. Diazepam is a benzodiazepine that is used to treat anxiety and insomnia, not CNS stimulation.
+13. The patient's symptoms are not consistent with oxycodone, which is an opioid pain medication.
+14. Oxycodone is not a CNS stimulant and would not cause the patient's symptoms.
+15. The patient's symptoms are not consistent with PCP (phencyclidine), which is a dissociative anesthetic that can cause hallucinations and disorientation, but not typically catatonia or rigidity.
+**Context from Prompt:**
+A 17-year-old boy is brought to the emergency department 30 minutes after being found with a 'blank stare' and flat facial expression at a party.
+His pulse is 72/min, and blood pressure is 104/68 mm Hg.
+He is sitting upright and appears catatonic.
+Physical examination shows rigidity.
+During the examination, he becomes hostile and attempts to assault the physician.
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, diazepam).
+choice(b, methamphetamine).
+choice(c, oxycodone).
+choice(d, pcp).
+
+exhibits_blank_stare.
+exhibits_flat_facial_expression.
+is_hostile.
+is_catatonic.
+is_rigid.
+has_elevated_blood_pressure.
+has_normal_pulse.
+
+causes_cns_stimulation(methamphetamine).
+causes_loss_of_impulse_control(methamphetamine).
+causes_elevated_heart_rate(methamphetamine).
+causes_elevated_blood_pressure(methamphetamine).
+is_cns_stimulant(methamphetamine).
+is_recreational_drug(methamphetamine).
+is_not_sedative(diazepam).
+is_not_cns_stimulant(diazepam).
+is_not_recreational_drug(diazepam).
+is_not_cns_stimulant(oxycodone).
+is_not_recreational_drug(oxycodone).
+is_not_cns_stimulant(pcp).
+is_not_recreational_drug(pcp).
+
+answer(OptionLetter) :- choice(OptionLetter, Drug), methamphetamine_matches_symptoms(Drug).
+
+methamphetamine_matches_symptoms(Drug) :-
+causes_cns_stimulation(Drug),
+causes_loss_of_impulse_control(Drug),
+causes_elevated_heart_rate(Drug),
+causes_elevated_blood_pressure(Drug),
+is_cns_stimulant(Drug),
+is_recreational_drug(Drug),
+exhibits_blank_stare,
+exhibits_flat_facial_expression,
+is_hostile,
+is_catatonic,
+is_rigid,
+has_elevated_blood_pressure,
+has_normal_pulse.
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, diazepam).
+choice(b, methamphetamine).
+choice(c, oxycodone).
+choice(d, pcp).
+
+exhibits_blank_stare.
+exhibits_flat_facial_expression.
+is_hostile.
+is_catatonic.
+is_rigid.
+has_elevated_blood_pressure.
+has_normal_pulse.
+
+causes_cns_stimulation(methamphetamine).
+causes_loss_of_impulse_control(methamphetamine).
+causes_elevated_heart_rate(methamphetamine).
+causes_elevated_blood_pressure(methamphetamine).
+is_cns_stimulant(methamphetamine).
+is_recreational_drug(methamphetamine).
+is_not_sedative(diazepam).
+is_not_cns_stimulant(diazepam).
+is_not_recreational_drug(diazepam).
+is_not_cns_stimulant(oxycodone).
+is_not_recreational_drug(oxycodone).
+is_not_cns_stimulant(pcp).
+is_not_recreational_drug(pcp).
+
+answer(OptionLetter) :- choice(OptionLetter, Drug), methamphetamine_matches_symptoms(Drug).
+
+methamphetamine_matches_symptoms(Drug) :-
+causes_cns_stimulation(Drug),
+causes_loss_of_impulse_control(Drug),
+causes_elevated_heart_rate(Drug),
+causes_elevated_blood_pressure(Drug),
+is_cns_stimulant(Drug),
+is_recreational_drug(Drug),
+exhibits_blank_stare,
+exhibits_flat_facial_expression,
+is_hostile,
+is_catatonic,
+is_rigid,
+has_elevated_blood_pressure,
+has_normal_pulse.
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for b, because\n      choice holds for b, and methamphetamine, and\n      methamphetamine_matches_symptoms holds for methamphetamine, because\n         causes_cns_stimulation holds for methamphetamine, and\n         causes_loss_of_impulse_control holds for methamphetamine, and\n         causes_elevated_heart_rate holds for methamphetamine, and\n         causes_elevated_blood_pressure holds for methamphetamine, and\n         is_cns_stimulant holds for methamphetamine, and\n         is_recreational_drug holds for methamphetamine, and\n         exhibits_blank_stare holds, and\n         exhibits_flat_facial_expression holds, and\n         is_hostile holds, and\n         is_catatonic holds, and\n         is_rigid holds, and\n         has_elevated_blood_pressure holds, and\n         has_normal_pulse holds\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for b, because
+      choice holds for b, and methamphetamine, and
+      methamphetamine_matches_symptoms holds for methamphetamine, because
+         causes_cns_stimulation holds for methamphetamine, and
+         causes_loss_of_impulse_control holds for methamphetamine, and
+         causes_elevated_heart_rate holds for methamphetamine, and
+         causes_elevated_blood_pressure holds for methamphetamine, and
+         is_cns_stimulant holds for methamphetamine, and
+         is_recreational_drug holds for methamphetamine, and
+         exhibits_blank_stare holds, and
+         exhibits_flat_facial_expression holds, and
+         is_hostile holds, and
+         is_catatonic holds, and
+         is_rigid holds, and
+         has_elevated_blood_pressure holds, and
+         has_normal_pulse holds
+
+
+**Explainer Output:** 
+**Conclusion:** The patient most likely ingested methamphetamine.
+
+**Logical Path:** The solver reached this conclusion by verifying that the patient's symptoms are consistent with methamphetamine overdose:
+
+1. **Primary Rule:** The system defines a match between the patient's symptoms and methamphetamine's effects using the `methamphetamine_matches_symptoms` rule.
+2. **The First Link (Symptom 1):** The solver verifies that methamphetamine causes CNS stimulation, which is consistent with the patient's blank stare and flat facial expression.
+3. **The Second Link (Symptom 2):** The solver then verifies that methamphetamine causes loss of impulse control, which is consistent with the patient's hostility and attempt to assault the physician.
+4. **The Third Link (Symptom 3):** The solver verifies that methamphetamine causes elevated heart rate and blood pressure, which is consistent with the patient's normal pulse and elevated blood pressure.
+5. **The Fourth Link (Symptom 4):** The solver verifies that methamphetamine causes rigidity, which is consistent with the patient's catatonic state and rigidity.
+6. **Verification of the Chain:** By identifying all the symptoms as consistent with methamphetamine effects, the solver satisfies the requirement for the answer to be "b" (methamphetamine).
+
+The solver linked the patient's symptoms to methamphetamine by verifying each effect of methamphetamine and carrying the match up through every level of the patient's presentation.
+
+**FINAL LLM OUTPUT:
+*B.* Methamphetamine.
+The patient's symptoms, including a blank stare, flat facial expression, hostility, and rigidity, are all consistent with methamphetamine overdose.
+====The pipeline executed in 3.8460 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [D]   | CORRECT |    9.2s
+Prolog          | Predicted: [B]   | WRONG   |   27.0s
+Tuned LLM       | Predicted: [D]   | CORRECT |    0.5s
+================================================================================
+
+
+================================================================================
+[MMLU #12] Which of the following is true of mutation-based fuzzing?...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following is true of mutation-based fuzzing?
+
+A. It generates each different input by modifying a prior input
+B. It works by making small mutations to the target program to induce faults
+C. Each input is mutation that follows a given grammar
+D. It only makes sense for file-based fuzzing, not network-based fuzzing
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['mutation', 'mutant', 'mutagen', 'standard genetic code', 'bug (software)', 'fumigant', 'algorithms on strings', 'parser generator', 'search string program', 'vulnerability scanner program']
+DEBUG: Buffered 8 raw triple(s) for 'mutation'
+DEBUG: Buffered 4 raw triple(s) for 'mutant'
+DEBUG: Buffered 12 raw triple(s) for 'mutagen'
+DEBUG: Buffered 5 raw triple(s) for 'standard genetic code'
+DEBUG: Buffered 10 raw triple(s) for 'bug (software)'
+DEBUG: Buffered 6 raw triple(s) for 'fumigant'
+DEBUG: Buffered 8 raw triple(s) for 'algorithms on strings'
+DEBUG: Buffered 3 raw triple(s) for 'parser generator'
+DEBUG: Buffered 11 raw triple(s) for 'search string program'
+DEBUG: Buffered 8 raw triple(s) for 'vulnerability scanner program'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 4, 7] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 90 MMLU test cases (starting from index 10).
+
+================================================================================
+[MMLU #10] Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph.
+
+A. True, True
+B. False, False
+C. True, False
+D. False, True
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['markov network', 'random graph', 'extremal graph theory', 'graph connectivity', 'bounded directed acyclic graph', 'directed multigraph', 'graph', 'directed graph', 'extensions and generalizations of graphs', 'Directed Acyclic Graph']
+DEBUG: Buffered 10 raw triple(s) for 'markov network'
+DEBUG: Buffered 8 raw triple(s) for 'random graph'
+DEBUG: Buffered 8 raw triple(s) for 'extremal graph theory'
+DEBUG: Buffered 8 raw triple(s) for 'graph connectivity'
+DEBUG: Buffered 10 raw triple(s) for 'bounded directed acyclic graph'
+DEBUG: Buffered 7 raw triple(s) for 'directed multigraph'
+DEBUG: Buffered 16 raw triple(s) for 'graph'
+DEBUG: Buffered 5 raw triple(s) for 'directed graph'
+DEBUG: Buffered 8 raw triple(s) for 'extensions and generalizations of graphs'
+DEBUG: Buffered 5 raw triple(s) for 'Directed Acyclic Graph'
+DEBUG: End-filter LLM kept indices: [0, 1, 3, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 8/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "markov network": [\n    "definition: A Markov network consists of an undirected graph and a set of potential functions--one for each clique in the graph. The nodes in the graph represent random va'...
+DEBUG: Batch LLM filter kept 2/10 triple(s) for 'markov network'
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'random graph'
+DEBUG: Batch LLM filter kept 0/8 triple(s) for 'graph connectivity'
+DEBUG: Batch LLM filter kept 1/7 triple(s) for 'directed multigraph'
+DEBUG: Batch LLM filter kept 0/16 triple(s) for 'graph'
+DEBUG: Removed 2 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 3 grounded concept contexts.
+DEBUG: KBPedia returned 3 items.
+DEBUG: Merged Result Count: 3
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 90 MMLU test cases (starting from index 10).
+
+================================================================================
+[MMLU #10] Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph.
+
+A. True, True
+B. False, False
+C. True, False
+D. False, True
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['markov network', 'random graph', 'extremal graph theory', 'graph connectivity', 'bounded directed acyclic graph', 'directed multigraph', 'graph', 'directed graph', 'extensions and generalizations of graphs', 'Directed Acyclic Graph']
+DEBUG: Buffered 10 raw triple(s) for 'markov network'
+DEBUG: Buffered 8 raw triple(s) for 'random graph'
+DEBUG: Buffered 8 raw triple(s) for 'extremal graph theory'
+DEBUG: Buffered 8 raw triple(s) for 'graph connectivity'
+DEBUG: Buffered 10 raw triple(s) for 'bounded directed acyclic graph'
+DEBUG: Buffered 7 raw triple(s) for 'directed multigraph'
+DEBUG: Buffered 16 raw triple(s) for 'graph'
+DEBUG: Buffered 5 raw triple(s) for 'directed graph'
+DEBUG: Buffered 8 raw triple(s) for 'extensions and generalizations of graphs'
+DEBUG: Buffered 5 raw triple(s) for 'Directed Acyclic Graph'
+DEBUG: End-filter LLM kept indices: [0, 1, 3, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 8/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "markov network": [\n    "definition: A Markov network consists of an undirected graph and a set of potential functions--one for each clique in the graph. The nodes in the graph represent random va'...
+DEBUG: Batch LLM filter kept 2/10 triple(s) for 'markov network'
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'random graph'
+DEBUG: Batch LLM filter kept 0/8 triple(s) for 'graph connectivity'
+DEBUG: Batch LLM filter kept 1/7 triple(s) for 'directed multigraph'
+DEBUG: Batch LLM filter kept 0/16 triple(s) for 'graph'
+DEBUG: Removed 2 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 3 grounded concept contexts.
+DEBUG: KBPedia returned 3 items.
+DEBUG: Merged Result Count: 3
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Analyzing the statements about entropy and moralization in directed graphs.",
+  "question": "Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ? H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph. A) London B) Paris C) Berlin D) Madrid",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Analyzing the statements about entropy and moralization in directed graphs.', 'question': 'Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph. A) London B) Paris C) Berlin D) Madrid', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ? H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph. A) London B) Paris C) Berlin D) Madrid
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Statement 1| For any two variables x and y having joint distribution p(x, y), we' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph. A) London B) Paris C) Berlin D) Madrid'
+DEBUG: Extracted entities for KBPedia: ['london', 'paris', 'berlin', 'madrid', 'variables', 'entropy function', 'directed graphs', 'moralization']
+DEBUG: KBPedia fulltext matched for 'london': ['London Reef', 'the London Stock Exchange']
+DEBUG: KBPedia fulltext matched for 'paris': ['Wolves of Paris', 'Summer Olympics in Paris']
+DEBUG: KBPedia fulltext matched for 'berlin': ['East Berlin', 'Berlin Wall']
+DEBUG: KBPedia fulltext matched for 'madrid': ['Real Madrid C.F.']
+DEBUG: KBPedia fulltext matched for 'variables': ['latent variable mode', 'simultaneous equation methods (econometrics)']
+DEBUG: KBPedia fulltext matched for 'entropy function': ['thermodynamic entropy', 'entropy and information']
+DEBUG: KBPedia fulltext matched for 'directed graphs': ['directed graph', 'extensions and generalizations of graphs']
+DEBUG: KBPedia has no fulltext matches for 'moralization'.
+DEBUG: KBPedia total matches: ['London Reef', 'the London Stock Exchange', 'Wolves of Paris', 'Summer Olympics in Paris', 'East Berlin', 'Berlin Wall', 'Real Madrid C.F.', 'latent variable mode', 'simultaneous equation methods (econometrics)', 'thermodynamic entropy', 'entropy and information', 'directed graph', 'extensions and generalizations of graphs']
+DEBUG: Buffered 7 raw triple(s) for 'London Reef'
+DEBUG: Buffered 9 raw triple(s) for 'the London Stock Exchange'
+DEBUG: Buffered 8 raw triple(s) for 'Wolves of Paris'
+DEBUG: Buffered 7 raw triple(s) for 'Summer Olympics in Paris'
+DEBUG: Buffered 5 raw triple(s) for 'East Berlin'
+DEBUG: Buffered 10 raw triple(s) for 'Berlin Wall'
+DEBUG: Buffered 8 raw triple(s) for 'Real Madrid C.F.'
+DEBUG: Buffered 11 raw triple(s) for 'latent variable mode'
+DEBUG: Buffered 11 raw triple(s) for 'simultaneous equation methods (econometrics)'
+DEBUG: Buffered 8 raw triple(s) for 'thermodynamic entropy'
+DEBUG: Buffered 8 raw triple(s) for 'entropy and information'
+DEBUG: Buffered 5 raw triple(s) for 'directed graph'
+DEBUG: Buffered 8 raw triple(s) for 'extensions and generalizations of graphs'
+DEBUG: End-filter LLM kept indices: [7, 9, 10, 11] from 13 candidates.
+DEBUG: End-filter kept 4/13 concepts.
+DEBUG: Batch sending 4 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "latent variable mode": ["definition: A latent variable model is a statistical model that relates a set of variables (so-called manifest variables) to a set of latent variables."],\n  "thermodynami'...
+DEBUG: Batch LLM filter kept 1/11 triple(s) for 'latent variable mode'
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'thermodynamic entropy'
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'entropy and information'
+DEBUG: Batch LLM filter kept 1/5 triple(s) for 'directed graph'
+DEBUG: KBPedia found 4 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph.
+
+A. True, True
+B. False, False
+C. True, False
+D. False, True
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. A latent variable model relates manifest variables to latent variables.
+2. Entropy is a state function in thermodynamics.
+3. Information entropy is the average rate of information production by a stochastic source.
+4. Entropy H[x, y] of two variables x and y is always greater than or equal to H[x] + H[y].
+5. Directed graphs have nodes and links with one direction and no loops.
+6. Moralization is a process that transforms a directed graph into an undirected graph.
+7. Moralization can decrease the number of edges in a directed graph.
+8. A directed graph can be transformed into an undirected graph through moralization.
+9. The number of edges in a graph can be reduced through moralization.
+10. Entropy is related to the amount of unavailable energy in a thermodynamic system.
+11. Information entropy is related to the amount of uncertainty in a stochastic source.
+12. The entropy of two variables is always greater than or equal to the sum of their individual entropies.
+13. Directed graphs can be used to represent relationships between variables.
+14. Moralization can be used to simplify a directed graph.
+15. A directed graph can be transformed into an undirected graph through moralization, which can decrease the number of edges.
+**Context from Prompt:**
+Statement 1| For any two variables x and y having joint distribution p(x, y), we always have H[x, y] ≥ H[x] + H[y] where H is entropy function. Statement 2| For some directed graphs, moralization decreases the number of edges present in the graph.
+
+A. True, True
+B. False, False
+C. True, False
+D. False, True
+
+Answer with the letter only (A, B, C, or D).
+Generating Prolog...
+Iteration 0 | Validation Error: Disjunction ';' is forbidden in s(CASP). Use multiple separate rules with the same head instead of ';'.
+Iteration 1 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+Iteration 2 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+Iteration 3 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+Iteration 4 | Validation Error: Standard arithmetic '>=' is forbidden. Use '#>=' instead.
+[Prolog retry] Same error repeated 4x — skipping extension (model is stuck). Giving up.
+[Prolog FAILED] Failed to generate valid Prolog code after multiple attempts. — falling back to unverified GraphRAG answer.
+
+**FINAL LLM OUTPUT:
+*C.* True, False
+The statement about entropy is a fundamental principle in information theory, where the joint entropy of two variables is indeed greater than or equal to the sum of their individual entropies. However, the claim that moralization always decreases the number of edges in a graph is not universally true.
+====The pipeline executed in 7.3846 seconds. Prolog verified: False===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [D]   | WRONG   |   12.2s
+Prolog          | Predicted: [C]   | WRONG   |   14.8s
+Tuned LLM       | Predicted: [C]   | WRONG   |    0.9s
+================================================================================
+
+
+================================================================================
+[MMLU #11] A 17-year-old boy is brought to the emergency department 30 minutes after being found with a "blank stare" and flat faci...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'A 17-year-old boy is brought to the emergency department 30 minutes after being found with a "blank stare" and flat facial expression at a party. His pulse is 72/min, and blood pressure is 104/68 mm Hg. He is sitting upright and appears catatonic. Physical examination shows rigidity. During the examination, he becomes hostile and attempts to assault the physician. This patient most likely ingested which of the following drugs?
+
+A. Diazepam
+B. Methamphetamine
+C. Oxycodone
+D. PCP (phencyclidine)
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['diazepam', 'intravenous medication', 'Ritalin', 'liquid medicine', 'chemical substances for emergency medicine', 'Bentazepam', 'inhalant drug', 'chlorphentermine', 'drugs acting on the nervous system', 'psychoactive drug']
+DEBUG: Buffered 10 raw triple(s) for 'diazepam'
+DEBUG: Buffered 11 raw triple(s) for 'intravenous medication'
+DEBUG: Buffered 9 raw triple(s) for 'Ritalin'
+DEBUG: Buffered 11 raw triple(s) for 'liquid medicine'
+DEBUG: Buffered 8 raw triple(s) for 'chemical substances for emergency medicine'
+DEBUG: Buffered 8 raw triple(s) for 'Bentazepam'
+DEBUG: Buffered 10 raw triple(s) for 'inhalant drug'
+DEBUG: Buffered 6 raw triple(s) for 'chlorphentermine'
+DEBUG: Buffered 4 raw triple(s) for 'drugs acting on the nervous system'
+DEBUG: Buffered 19 raw triple(s) for 'psychoactive drug'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "PCP (phencyclidine)": [\n    "definition: A dissociative anesthetic drug which is used for short-term treatment of anxiety.",\n    "subclass of: dissociative anesthetic"\n  ],\n  "Methamphetamine": ['...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'diazepam'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'intravenous medication'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'Ritalin'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'liquid medicine'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'chemical substances for emergency medicine'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Identifying the key symptoms and the likely cause based on the provided information.",
+  "question": "This patient most likely ingested which of the following drugs? A) Diazepam B) Methamphetamine C) Oxycodone D) PCP (phencyclidine)",
+  "context": [
+    "A 17-year-old boy is brought to the emergency department 30 minutes after being found with a 'blank stare' and flat facial expression at a party.",
+    "His pulse is 72/min, and blood pressure is 104/68 mm Hg.",
+    "He is sitting upright and appears catatonic.",
+    "Physical examination shows rigidity.",
+    "During the examination, he becomes hostile and attempts to assault the physician."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the key symptoms and the likely cause based on the provided information.', 'question': 'This patient most likely ingested which of the following drugs? A) Diazepam B) Methamphetamine C) Oxycodone D) PCP (phencyclidine)', 'context': ["A 17-year-old boy is brought to the emergency department 30 minutes after being found with a 'blank stare' and flat facial expression at a party.", 'His pulse is 72/min, and blood pressure is 104/68 mm Hg.', 'He is sitting upright and appears catatonic.', 'Physical examination shows rigidity.', 'During the examination, he becomes hostile and attempts to assault the physician.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: This patient most likely ingested which of the following drugs? A) Diazepam B) Methamphetamine C) Oxycodone D) PCP (phencyclidine)
+DEBUG: EXTRACTED CONTEXT (Len: 5): ["A 17-year-old boy is brought to the emergency department 30 minutes after being found with a 'blank stare' and flat facial expression at a party.", 'His pulse is 72/min, and blood pressure is 104/68 mm Hg.', 'He is sitting upright and appears catatonic.', 'Physical examination shows rigidity.', 'During the examination, he becomes hostile and attempts to assault the physician.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='This patient most likely ingested which of the following drugs? A) Diazepam B) M' | context items=5
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 5 text chunk(s)...
+Processing text context: A 17-year-old boy is brought to the emergency department 30 minutes after being found with a 'blank stare' and flat facial expression at a party.
+Text context processed: run_id='6e16603f-b673-479a-b2e2-4e7fa0555c38' result={'resolver': {'number_of_nodes_to_resolve': 5, 'number_of_created_nodes': 5}}
+Processing text context: His pulse is 72/min, and blood pressure is 104/68 mm Hg.
+Text context processed: run_id='19973a40-ecb8-45ee-b1ea-ea02f66c6b2f' result={'resolver': {'number_of_nodes_to_resolve': 8, 'number_of_created_nodes': 8}}
+Processing text context: He is sitting upright and appears catatonic.
+Text context processed: run_id='51dd0d6b-d054-45d3-b654-6f8552a6a25d' result={'resolver': {'number_of_nodes_to_resolve': 11, 'number_of_created_nodes': 11}}
+Processing text context: Physical examination shows rigidity.
+Text context processed: run_id='9327ed47-f38b-40c2-be15-b819f01ea1d4' result={'resolver': {'number_of_nodes_to_resolve': 13, 'number_of_created_nodes': 13}}
+Processing text context: During the examination, he becomes hostile and attempts to assault the physician.
+Text context processed: run_id='7661114a-ff5a-47cc-ae83-e59065d5b504' result={'resolver': {'number_of_nodes_to_resolve': 18, 'number_of_created_nodes': 17}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'This patient most likely ingested which of the following drugs? A) Diazepam B) Methamphetamine C) Oxycodone D) PCP (phencyclidine)'
+DEBUG: Extracted entities for KBPedia: ['diazepam', 'methamphetamine', 'oxycodone', 'pcp (phencyclidine)', 'patient', 'drugs', 'ingestion', 'drug intake']
+DEBUG: KBPedia fulltext matched for 'diazepam': ['Avizafone', 'diazepam']
+DEBUG: KBPedia fulltext matched for 'methamphetamine': ['Methamphetamine', 'methamphetamine in the united states']
+DEBUG: KBPedia fulltext matched for 'oxycodone': ['oxycodone', 'thebaine']
+DEBUG: KBPedia fulltext matched for 'pcp (phencyclidine)': ['PCAA']
+DEBUG: KBPedia fulltext matched for 'patient': ['patient chair', 'patient clothing']
+DEBUG: KBPedia fulltext matched for 'drugs': ['poisoning by drugs', 'drugs acting on the nervous system']
+DEBUG: KBPedia fulltext matched for 'ingestion': ['illegal drug', 'food poisoning']
+DEBUG: KBPedia fulltext matched for 'drug intake': ['drug cost', 'drug resistance']
+DEBUG: KBPedia total matches: ['Avizafone', 'diazepam', 'Methamphetamine', 'methamphetamine in the united states', 'oxycodone', 'thebaine', 'PCAA', 'patient chair', 'patient clothing', 'poisoning by drugs', 'drugs acting on the nervous system', 'illegal drug', 'food poisoning', 'drug cost', 'drug resistance']
+DEBUG: Buffered 8 raw triple(s) for 'Avizafone'
+DEBUG: Buffered 10 raw triple(s) for 'diazepam'
+DEBUG: Buffered 9 raw triple(s) for 'Methamphetamine'
+DEBUG: Buffered 3 raw triple(s) for 'methamphetamine in the united states'
+DEBUG: Buffered 3 raw triple(s) for 'oxycodone'
+DEBUG: Buffered 13 raw triple(s) for 'thebaine'
+DEBUG: Buffered 8 raw triple(s) for 'PCAA'
+DEBUG: Buffered 3 raw triple(s) for 'patient chair'
+DEBUG: Buffered 7 raw triple(s) for 'patient clothing'
+DEBUG: Buffered 10 raw triple(s) for 'poisoning by drugs'
+DEBUG: Buffered 4 raw triple(s) for 'drugs acting on the nervous system'
+DEBUG: Buffered 17 raw triple(s) for 'illegal drug'
+DEBUG: Buffered 9 raw triple(s) for 'food poisoning'
+DEBUG: Buffered 3 raw triple(s) for 'drug cost'
+DEBUG: Buffered 9 raw triple(s) for 'drug resistance'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 9, 10, 11, 13, 14] from 15 candidates.
+DEBUG: End-filter kept 12/15 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "Avizafone": ["definition: Avizafone (Pro-Diazepam) is a water-soluble prodrug of diazepam.", "subclass of: Benzodiazepine"],\n  "diazepam": ["definition: The chemical compound which is used as a s'...
+DEBUG: Batch LLM filter kept 2/8 triple(s) for 'Avizafone'
+DEBUG: Batch LLM filter kept 2/10 triple(s) for 'diazepam'
+DEBUG: Batch LLM filter kept 1/9 triple(s) for 'Methamphetamine'
+DEBUG: Batch LLM filter kept 3/3 triple(s) for 'methamphetamine in the united states'
+DEBUG: Batch LLM filter kept 1/3 triple(s) for 'oxycodone'
+DEBUG: KBPedia found 5 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+**User Question:**
+A 17-year-old boy is brought to the emergency department 30 minutes after being found with a "blank stare" and flat facial expression at a party. His pulse is 72/min, and blood pressure is 104/68 mm Hg. He is sitting upright and appears catatonic. Physical examination shows rigidity. During the examination, he becomes hostile and attempts to assault the physician. This patient most likely ingested which of the following drugs?
+
+A. Diazepam
+B. Methamphetamine
+C. Oxycodone
+D. PCP (phencyclidine)
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Avizafone is a water-soluble prodrug of diazepam.
+2. Diazepam is a sedative.
+3. The patient exhibits a 'blank stare' and flat facial expression.
+4. The patient becomes hostile and attempts to assault the physician.
+5. The patient appears catatonic.
+6. The patient shows rigidity.
+7. The patient's pulse is 72/min, which is within a normal range.
+8. The patient's blood pressure is 104/68 mm Hg, which is within a normal range.
+9. The patient's symptoms suggest a sedative or tranquilizer effect.
+10. Sedatives and tranquilizers are typically benzodiazepines.
+11. Avizafone is a benzodiazepine prodrug.
+12. Diazepam is a benzodiazepine.
+13. The patient's symptoms are consistent with diazepam ingestion.
+14. Avizafone is a prodrug of diazepam, implying a similar effect.
+15. The patient's symptoms are more consistent with a sedative effect, which is typical of benzodiazepines like diazepam.
+**Context from Prompt:**
+A 17-year-old boy is brought to the emergency department 30 minutes after being found with a 'blank stare' and flat facial expression at a party.
+His pulse is 72/min, and blood pressure is 104/68 mm Hg.
+He is sitting upright and appears catatonic.
+Physical examination shows rigidity.
+During the examination, he becomes hostile and attempts to assault the physician.
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, diazepam).
+choice(b, methamphetamine).
+choice(c, oxycodone).
+choice(d, pcp).
+
+exhibits_blank_stare(Patient).
+exhibits_flat_facial_expression(Patient).
+becomes_hostile(Patient).
+attempts_to_assault_physician(Patient).
+appears_catatonic(Patient).
+shows_rigidity(Patient).
+has_normal_pulse(Patient).
+has_normal_blood_pressure(Patient).
+symptoms_suggest_sedative_effect(Patient).
+symptoms_consistent_with_diazepam_ingestion(Patient).
+
+is_sedative(diazepam).
+is_benzodiazepine(diazepam).
+is_prodrug_of_diazepam(avizafone).
+has_similar_effect(avizafone, diazepam).
+
+answer(OptionLetter) :- choice(OptionLetter, Drug), symptoms_match(Drug).
+symptoms_match(Drug) :- is_sedative(Drug), symptoms_suggest_sedative_effect(_).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, diazepam).
+choice(b, methamphetamine).
+choice(c, oxycodone).
+choice(d, pcp).
+
+exhibits_blank_stare(Patient).
+exhibits_flat_facial_expression(Patient).
+becomes_hostile(Patient).
+attempts_to_assault_physician(Patient).
+appears_catatonic(Patient).
+shows_rigidity(Patient).
+has_normal_pulse(Patient).
+has_normal_blood_pressure(Patient).
+symptoms_suggest_sedative_effect(Patient).
+symptoms_consistent_with_diazepam_ingestion(Patient).
+
+is_sedative(diazepam).
+is_benzodiazepine(diazepam).
+is_prodrug_of_diazepam(avizafone).
+has_similar_effect(avizafone, diazepam).
+
+answer(OptionLetter) :- choice(OptionLetter, Drug), symptoms_match(Drug).
+symptoms_match(Drug) :- is_sedative(Drug), symptoms_suggest_sedative_effect(_).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and diazepam, and\n      symptoms_match holds for diazepam, because\n         is_sedative holds for diazepam, and\n         symptoms_suggest_sedative_effect holds for anything\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and diazepam, and
+      symptoms_match holds for diazepam, because
+         is_sedative holds for diazepam, and
+         symptoms_suggest_sedative_effect holds for anything
+
+
+**Explainer Output:** 
+**Conclusion:** The patient most likely ingested Diazepam.
+
+**Logical Path:** The solver reached this conclusion by tracing the symptoms and logical connections:
+
+1. **Primary Evidence:** The patient exhibits a "blank stare" and flat facial expression, which suggests a sedative effect.
+2. **Sedative Effect:** The system verifies that the patient's symptoms are consistent with a sedative effect, which is typical of benzodiazepines like Diazepam.
+3. **Benzodiazepine Connection:** The solver identifies that Diazepam is a benzodiazepine, and the patient's symptoms are consistent with Diazepam ingestion.
+4. **Prodrug Connection:** The system also notes that Avizafone is a prodrug of Diazepam, implying a similar effect.
+5. **Logical Conclusion:** By combining these logical steps, the solver concludes that the patient most likely ingested Diazepam.
+
+**FINAL LLM OUTPUT:
+*D.* Diazepam.
+The patient's symptoms, such as the "blank stare" and flat facial expression, along with the hostile behavior and rigidity, are consistent with a sedative effect, which is typical of benzodiazepines like Diazepam.
+====The pipeline executed in 2.8601 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [D]   | CORRECT |    9.3s
+Prolog          | Predicted: [D]   | CORRECT |   22.6s
+Tuned LLM       | Predicted: [D]   | CORRECT |    0.5s
+================================================================================
+
+
+================================================================================
+[MMLU #12] Which of the following is true of mutation-based fuzzing?...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following is true of mutation-based fuzzing?
+
+A. It generates each different input by modifying a prior input
+B. It works by making small mutations to the target program to induce faults
+C. Each input is mutation that follows a given grammar
+D. It only makes sense for file-based fuzzing, not network-based fuzzing
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['mutation', 'mutant', 'mutagen', 'standard genetic code', 'bug (software)', 'fumigant', 'algorithms on strings', 'parser generator', 'search string program', 'vulnerability scanner program']
+DEBUG: Buffered 8 raw triple(s) for 'mutation'
+DEBUG: Buffered 4 raw triple(s) for 'mutant'
+DEBUG: Buffered 12 raw triple(s) for 'mutagen'
+DEBUG: Buffered 5 raw triple(s) for 'standard genetic code'
+DEBUG: Buffered 10 raw triple(s) for 'bug (software)'
+DEBUG: Buffered 6 raw triple(s) for 'fumigant'
+DEBUG: Buffered 8 raw triple(s) for 'algorithms on strings'
+DEBUG: Buffered 3 raw triple(s) for 'parser generator'
+DEBUG: Buffered 11 raw triple(s) for 'search string program'
+DEBUG: Buffered 8 raw triple(s) for 'vulnerability scanner program'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 4, 7] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "mutation-based fuzzing": [\n    "A. It generates each different input by modifying a prior input"\n  ],\n  "mutation": [\n    "definition: In biology, a mutation is a permanent change of the nucleoti'...
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'mutation'
+DEBUG: Batch LLM filter kept 4/4 triple(s) for 'mutant'
+DEBUG: Batch LLM filter kept 0/12 triple(s) for 'mutagen'
+DEBUG: Batch LLM filter kept 1/10 triple(s) for 'bug (software)'
+DEBUG: Batch LLM filter kept 0/3 triple(s) for 'parser generator'
+DEBUG: Removed 2 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 3 grounded concept contexts.
+DEBUG: KBPedia returned 3 items.
+DEBUG: Merged Result Count: 3
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Identifying the correct statement about mutation-based fuzzing.",
+  "question": "Which of the following is true of mutation-based fuzzing? A. It generates each different input by modifying a prior input B. It works by making small mutations to the target program to induce faults C. Each input is mutation that follows a given grammar D. It only makes sense for file-based fuzzing, not network-based fuzzing",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the correct statement about mutation-based fuzzing.', 'question': 'Which of the following is true of mutation-based fuzzing? A. It generates each different input by modifying a prior input B. It works by making small mutations to the target program to induce faults C. Each input is mutation that follows a given grammar D. It only makes sense for file-based fuzzing, not network-based fuzzing', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following is true of mutation-based fuzzing? A. It generates each different input by modifying a prior input B. It works by making small mutations to the target program to induce faults C. Each input is mutation that follows a given grammar D. It only makes sense for file-based fuzzing, not network-based fuzzing
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following is true of mutation-based fuzzing? A. It generates each d' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which of the following is true of mutation-based fuzzing? A. It generates each different input by modifying a prior input B. It works by making small mutations to the target program to induce faults C. Each input is mutation that follows a given grammar D. It only makes sense for file-based fuzzing, not network-based fuzzing'
+DEBUG: Extracted entities for KBPedia: ['it generates each different input by modifying a prior input', 'it works by making small mutations to the target program to induce faults', 'each input is mutation that follows a given grammar', 'it only makes sense for file-based fuzzing, not network-based fuzzing', 'mutation-based fuzzing', 'mutation', 'input', 'mutations', 'grammar', 'program']
+DEBUG: KBPedia fulltext matched for 'it generates each different input by modifying a prior input': ['image input device', 'position input device']
+DEBUG: KBPedia fulltext matched for 'it works by making small mutations to the target program to induce faults': ['Public Works of Art Project', 'target rifle']
+DEBUG: KBPedia fulltext matched for 'each input is mutation that follows a given grammar': ['formal grammar text', 'mutation']
+DEBUG: KBPedia fulltext matched for 'it only makes sense for file-based fuzzing, not network-based fuzzing': ['corn-based sweetener', 'bioelectromagnetic-based therapy']
+DEBUG: KBPedia fulltext matched for 'mutation-based fuzzing': ['mutation', 'bioelectromagnetic-based therapy']
+DEBUG: KBPedia fulltext matched for 'mutation': ['mutation', 'autosomal dominant disease']
+DEBUG: KBPedia fulltext matched for 'input': ['image input device', 'position input device']
+DEBUG: KBPedia fulltext matched for 'mutations': ['mutagen', 'plant reproduction']
+DEBUG: KBPedia fulltext matched for 'grammar': ['Hebrew grammar', 'Dutch grammar']
+DEBUG: KBPedia fulltext matched for 'program': ['PHP program', 'learning program']
+DEBUG: KBPedia total matches: ['image input device', 'position input device', 'Public Works of Art Project', 'target rifle', 'formal grammar text', 'mutation', 'corn-based sweetener', 'bioelectromagnetic-based therapy', 'mutation', 'bioelectromagnetic-based therapy', 'mutation', 'autosomal dominant disease', 'image input device', 'position input device', 'mutagen', 'plant reproduction', 'Hebrew grammar', 'Dutch grammar', 'PHP program', 'learning program']
+DEBUG: Buffered 10 raw triple(s) for 'image input device'
+DEBUG: Buffered 12 raw triple(s) for 'position input device'
+DEBUG: Buffered 8 raw triple(s) for 'Public Works of Art Project'
+DEBUG: Buffered 8 raw triple(s) for 'target rifle'
+DEBUG: Buffered 8 raw triple(s) for 'formal grammar text'
+DEBUG: Buffered 8 raw triple(s) for 'mutation'
+DEBUG: Buffered 6 raw triple(s) for 'corn-based sweetener'
+DEBUG: Buffered 4 raw triple(s) for 'bioelectromagnetic-based therapy'
+DEBUG: Buffered 8 raw triple(s) for 'autosomal dominant disease'
+DEBUG: Buffered 12 raw triple(s) for 'mutagen'
+DEBUG: Buffered 8 raw triple(s) for 'plant reproduction'
+DEBUG: Buffered 8 raw triple(s) for 'Hebrew grammar'
+DEBUG: Buffered 8 raw triple(s) for 'Dutch grammar'
+DEBUG: Buffered 8 raw triple(s) for 'PHP program'
+DEBUG: Buffered 9 raw triple(s) for 'learning program'
+DEBUG: End-filter LLM kept indices: [4, 5, 9, 10, 11, 12, 13] from 15 candidates.
+DEBUG: End-filter kept 7/15 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Request timed out.. Using all raw triples.
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'formal grammar text'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'mutation'
+DEBUG: Batch LLM filter kept 12/12 triple(s) for 'mutagen'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'plant reproduction'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'Hebrew grammar'
+DEBUG: KBPedia found 5 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+**User Question:**
+Which of the following is true of mutation-based fuzzing?
+
+A. It generates each different input by modifying a prior input
+B. It works by making small mutations to the target program to induce faults
+C. Each input is mutation that follows a given grammar
+D. It only makes sense for file-based fuzzing, not network-based fuzzing
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Mutation-based fuzzing is a type of testing that involves making small changes to the input of a program to induce faults.
+2. Fuzzing is a software testing technique that involves providing invalid, unexpected, or random inputs to a program to test its robustness.
+3. A mutation is a permanent change to the nucleotide sequence of an organism's genome.
+4. Mutations can result from damage to DNA, errors in replication, or the insertion or deletion of DNA segments.
+5. Mutagenic agents can increase the frequency of mutations above the natural background level.
+6. A mutagen is a physical or chemical agent that changes the genetic material of an organism.
+7. Mutation-based fuzzing generates each different input by modifying a prior input.
+8. The goal of fuzzing is to induce faults in a program by providing invalid or unexpected inputs.
+9. Faults in a program can result from a variety of causes, including errors in the code, incorrect assumptions about the input, or unexpected interactions between different components.
+10. Mutation-based fuzzing can be used to test the robustness of a program to a wide range of inputs, including those that are invalid or unexpected.
+11. Fuzzing is often used in conjunction with other testing techniques, such as unit testing and integration testing.
+12. The effectiveness of fuzzing depends on the quality of the input data and the ability of the program to handle unexpected inputs.
+13. Mutation-based fuzzing can be applied to a wide range of programs, including those that are file-based or network-based.
+14. The primary goal of mutation-based fuzzing is to induce faults in a program by making small changes to the input.
+15. Faults induced by mutation-based fuzzing can provide valuable information about the robustness and reliability of a program.
+**Context from Prompt:**
+Which of the following is true of mutation-based fuzzing?
+
+A. It generates each different input by modifying a prior input
+B. It works by making small mutations to the target program to induce faults
+C. Each input is mutation that follows a given grammar
+D. It only makes sense for file-based fuzzing, not network-based fuzzing
+
+Answer with the letter only (A, B, C, or D).
+Generating Prolog...
+Iteration 0 | Validation Error: Disjunction ';' is forbidden in s(CASP). Use multiple separate rules with the same head instead of ';'.
+Iteration 1 | Extracted Database:
+choice(a, generates_each_different_input_by_modifying_a_prior_input).
+choice(b, works_by_making_small_mutations_to_the_target_program_to_induce_faults).
+choice(c, each_input_is_mutation_that_follows_a_given_grammar).
+choice(d, only_makes_sense_for_file_based_fuzzing_not_network_based_fuzzing).
+
+mutation_based_fuzzing_generates_each_different_input_by_modifying_a_prior_input.
+mutation_based_fuzzing_induces_faults_by_making_small_changes_to_the_input.
+mutation_based_fuzzing_applies_to_file_based_and_network_based_programs.
+
+answer(OptionLetter) :- choice(OptionLetter, Description), mutation_based_fuzzing_generates_each_different_input_by_modifying_a_prior_input(Description).
+answer(OptionLetter) :- choice(OptionLetter, Description), mutation_based_fuzzing_induces_faults_by_making_small_changes_to_the_input(Description).
+answer(OptionLetter) :- choice(OptionLetter, Description), mutation_based_fuzzing_applies_to_file_based_and_network_based_programs(Description).
+
+Iteration 1 | Extracted Query:
+answer(X).
+
+Iteration 1 | Prolog Error: answer/1: Unknown procedure: mutation_based_fuzzing_generates_each_different_input_by_modifying_a_prior_input/1
+  However, there are definitions for:
+        mutation_based_fuzzing_generates_each_different_input_by_modifying_a_prior_input/0
+Iteration 2 | Extracted Database:
+choice(a, generates_each_different_input_by_modifying_a_prior_input).
+choice(b, works_by_making_small_mutations_to_the_target_program_to_induce_faults).
+choice(c, each_input_is_mutation_that_follows_a_given_grammar).
+choice(d, only_makes_sense_for_file_based_fuzzing_not_network_based_fuzzing).
+
+mutation_based_fuzzing_generates_each_different_input_by_modifying_a_prior_input.
+mutation_based_fuzzing_induces_faults_by_making_small_changes_to_the_input.
+mutation_based_fuzzing_applies_to_file_based_and_network_based_programs.
+
+answer(OptionLetter) :- choice(OptionLetter, Description), mutation_based_fuzzing_generates_each_different_input_by_modifying_a_prior_input.
+
+Iteration 2 | Extracted Query:
+answer(a).
+
+Iteration 2 | Prolog code generation success
+**Extracted database:**
+choice(a, generates_each_different_input_by_modifying_a_prior_input).
+choice(b, works_by_making_small_mutations_to_the_target_program_to_induce_faults).
+choice(c, each_input_is_mutation_that_follows_a_given_grammar).
+choice(d, only_makes_sense_for_file_based_fuzzing_not_network_based_fuzzing).
+
+mutation_based_fuzzing_generates_each_different_input_by_modifying_a_prior_input.
+mutation_based_fuzzing_induces_faults_by_making_small_changes_to_the_input.
+mutation_based_fuzzing_applies_to_file_based_and_network_based_programs.
+
+answer(OptionLetter) :- choice(OptionLetter, Description), mutation_based_fuzzing_generates_each_different_input_by_modifying_a_prior_input.
+**Extracted query:**
+answer(a).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(a)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and generates_each_different_input_by_modifying_a_prior_input, and\n      mutation_based_fuzzing_generates_each_different_input_by_modifying_a_prior_input holds\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and generates_each_different_input_by_modifying_a_prior_input, and
+      mutation_based_fuzzing_generates_each_different_input_by_modifying_a_prior_input holds
+
+
+**Explainer Output:** 
+**Conclusion:** Yes, mutation-based fuzzing generates each different input by modifying a prior input.
+
+**Logical Path:** The solver reached this conclusion by verifying the relationship between mutation-based fuzzing and the generation of different inputs:
+
+1. **Primary Rule:** The system states that mutation-based fuzzing generates each different input by modifying a prior input. This is explicitly mentioned in the database.
+2. **Verification:** The solver verifies that this rule is indeed true for mutation-based fuzzing, as indicated by the `mutation_based_fuzzing_generates_each_different_input_by_modifying_a_prior_input` fact.
+3. **Connection to Choice A:** The solver then connects this fact to the description of Choice A, which states that mutation-based fuzzing generates each different input by modifying a prior input.
+4. **Conclusion:** By verifying the relationship between mutation-based fuzzing and the generation of different inputs, the solver concludes that Choice A is the correct answer.
+
+Therefore, the solver's conclusion is that mutation-based fuzzing generates each different input by modifying a prior input, which is Choice A.
+
+**FINAL LLM OUTPUT:
+*A.* Mutation-based fuzzing generates each different input by modifying a prior input.
+This is how mutation-based fuzzing works: it takes an existing input and makes small changes to it, creating a new input. This process is repeated to generate a wide range of different inputs, which are then used to test the robustness of the program.
+====The pipeline executed in 5.2563 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | WRONG   |    7.8s
+Prolog          | Predicted: [A]   | CORRECT |  915.6s
+Tuned LLM       | Predicted: [A]   | CORRECT |    0.5s
+================================================================================
+
+
+================================================================================
+[MMLU #13] High entropy means that the partitions in classification are...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'High entropy means that the partitions in classification are
+
+A. pure
+B. not pure
+C. useful
+D. useless
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['biological subdivision', 'biological subclass', 'mixture', 'combination antineoplastic', 'classification', 'high level cloud', 'combination antiarrhythmic', 'high plasticity soil region', 'type of organism', 'antineoplastic']
+DEBUG: Buffered 8 raw triple(s) for 'biological subdivision'
+DEBUG: Buffered 8 raw triple(s) for 'biological subclass'
+DEBUG: Buffered 20 raw triple(s) for 'mixture'
+DEBUG: Buffered 9 raw triple(s) for 'combination antineoplastic'
+DEBUG: Buffered 7 raw triple(s) for 'classification'
+DEBUG: Buffered 14 raw triple(s) for 'high level cloud'
+DEBUG: Buffered 8 raw triple(s) for 'combination antiarrhythmic'
+DEBUG: Buffered 9 raw triple(s) for 'high plasticity soil region'
+DEBUG: Buffered 12 raw triple(s) for 'type of organism'
+DEBUG: Buffered 9 raw triple(s) for 'antineoplastic'
+DEBUG: End-filter LLM kept indices: [0, 4, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "classification": ["definition: Classification is a general process related to categorization, the process in which ideas and objects are recognized, differentiated, and understood."],\n  "high pla'...
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'biological subdivision'
+DEBUG: Batch LLM filter kept 1/7 triple(s) for 'classification'
+DEBUG: Batch LLM filter kept 1/9 triple(s) for 'high plasticity soil region'
+DEBUG: Batch LLM filter kept 1/12 triple(s) for 'type of organism'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'antineoplastic'
+DEBUG: Removed 1 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 4 grounded concept contexts.
+DEBUG: KBPedia returned 4 items.
+DEBUG: Merged Result Count: 4
