@@ -49,9 +49,14 @@ def generate_explanation_prompt(user_question: str, retrieved_context: str, data
 **s(CASP) HUMAN-READABLE EXPLANATION:**
 {human_readable_explanation}
 
----
 ### INSTRUCTION:
-Generate a coherent narrative of the proof above. Start with the conclusion, then detail the step-by-step logical path taken by the solver.
+Your ONLY job is to translate the "s(CASP) HUMAN-READABLE EXPLANATION" into a clear, natural-language narrative.
+
+STRICT RULES:
+1. **NO EXTERNAL KNOWLEDGE:** You must base your explanation *entirely* on the provided s(CASP) explanation and context. Do not inject outside facts.
+2. **DO NOT CONTRADICT THE PROOF:** The s(CASP) output is the absolute ground truth. Whatever answer it arrives at is correct, even if you disagree. DO NOT output a different answer than what the logic proved.
+3. **EXPLAIN THE "WHY":** Walk through the logical steps the solver took (e.g. "Because X holds, and Y also holds, the system concluded Z").
+4. **NO PROLOG JARGON:** Do not use words like "s(CASP)", "Prolog", "holds for", or "justification tree". Write naturally.
 """
     return prompt
 

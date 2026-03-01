@@ -236,7 +236,7 @@ def run_test_cases(test_cases: list[dict], start_idx: int = 0):
     total_tuned = 0.0
     count = 0
 
-    for i, t in enumerate(test_cases, start=start_idx):
+    for i, t in enumerate(tqdm(test_cases, desc="AI2 ARC"), start=start_idx):
         gr_t, pgr_t, tuned_t = run_test_case(t, i)
         total_gr += gr_t
         total_pgr += pgr_t
