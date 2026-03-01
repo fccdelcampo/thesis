@@ -1,5 +1,7 @@
 import janus_swi as janus
 import re
+import sys
+import os
 import time
 try:
     from .prolog_generator import generate_prolog_code, capture_db_and_query, capture_predicate_and_arguments
@@ -7,8 +9,6 @@ try:
     from .prolog_llms import warmup_prolog_model, reset_kv_cache_flag
     from .. import llm
 except ImportError:
-    import sys
-    import os
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
     if project_root not in sys.path:
         sys.path.insert(0, project_root)
@@ -19,7 +19,42 @@ except ImportError:
     import prolog_graphrag_pipeline.llm as llm
 
 SCASP_AVAILABLE = False
-ALLOW_LLM_FALLBACK = False
+ALLOW_LLM_FALLBACK = True   # Enables LLM synthesis fallback when Prolog generation fails
+
+# ── Dedicated Prolog debug log ────────────────────────────────────────────────
+class _TeeLogger:
+    """Writes to both the original stream and a log file simultaneously."""
+    def __init__(self, original_stream, log_path: str):
+        self._orig = original_stream
+        self._log = open(log_path, "a", encoding="utf-8", errors="replace", buffering=1)
+
+    def write(self, msg):
+        self._orig.write(msg)
+        self._log.write(msg)
+
+    def flush(self):
+        self._orig.flush()
+        self._log.flush()
+
+    def isatty(self):
+        return getattr(self._orig, "isatty", lambda: False)()
+
+    def fileno(self):
+        return self._orig.fileno()
+
+def _install_prolog_logger():
+    """Install the TeeLogger on stdout if not already installed for this process."""
+    if isinstance(sys.stdout, _TeeLogger):
+        return  # Already installed
+    _log_dir = os.path.join(os.path.dirname(__file__), "..", "..", "logs")
+    os.makedirs(_log_dir, exist_ok=True)
+    _log_path = os.path.join(_log_dir, "debug_prolog_output.txt")
+    sys.stdout = _TeeLogger(sys.stdout, _log_path)
+    sys.stderr = _TeeLogger(sys.stderr,
+                            os.path.join(_log_dir, "prolog_debug.txt"))
+
+_install_prolog_logger()
+# ─────────────────────────────────────────────────────────────────────────────
 
 def use_scasp():
     global SCASP_AVAILABLE
