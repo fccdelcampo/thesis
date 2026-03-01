@@ -2866,4 +2866,1896 @@ DEBUG: Buffered 13 raw triple(s) for 'edible legume seed'
 DEBUG: End-filter LLM kept indices: [1, 3, 5, 8, 9] from 10 candidates.
 DEBUG: End-filter kept 5/10 concepts.
 DEBUG: Batch sending 5 concepts to LLM triple filter...
-  > Sending chunk to LLM (3843 chars)...
+  > Sending chunk to LLM (3843 chars)...C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 100 AI2 ARC test cases (starting from index 0).
+
+================================================================================
+[AI2 ARC #0] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['plant cell wall', 'cytoplasmic part', 'anucleated cell', 'cell part', 'cell', 'membrane (biological)', 'plastid', 'plant physiology', 'protoplasm', 'cellulose']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+  > Sending chunk to LLM (3448 chars)... Done!
+DEBUG: End-filter LLM kept indices: [0, 3, 5, 6, 8] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4853 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**plant cell wall**\n[\n  "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cell'...
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 25/25 triple(s) for 'cell part'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'membrane (biological)'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'plastid'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'protoplasm'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (5066 chars)... Done!
+  > Sending chunk to LLM (4845 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Ollama loaded successfully.
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Comparing cellular structures across kingdoms for functional analogues.",
+  "question": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Comparing cellular structures across kingdoms for functional analogues.', 'question': 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following parts of a plant cell has a function that is most similar' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus'
+  > Sending chunk to LLM (825 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus', 'animal skeleton', 'plant cell']
+DEBUG: KBPedia matched 2 concept(s) for 'cell membrane': ['cell', 'membrane protein']
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 14 raw triple(s) for 'membrane protein'
+DEBUG: KBPedia matched 2 concept(s) for 'cell wall': ['cell wall', 'bacterial cell wall']
+DEBUG: Buffered 13 raw triple(s) for 'cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'bacterial cell wall'
+DEBUG: [Wikidata] Triggered for 'chloroplast' — reason: partial match (score=6.63, name='photosynthetic pigment', overlap=set())
+DEBUG: [Wikidata Fallback] Searching Wikidata for 'chloroplast'...
+  > Sending chunk to LLM (1629 chars)... Done!
+DEBUG: [Wikidata Fallback] LLM selected index 0: Q47263 (chloroplast)
+DEBUG: [Wikidata Fallback] LLM selected extended categories: ['function'] → ['P366', 'P1056']
+DEBUG: [Wikidata Fallback] Fetching structural facts for Q47263...
+  > Sending chunk to LLM (1178 chars)... Done!
+DEBUG: [Wikidata Fallback] Retrieved 3 structural triple(s) for 'chloroplast'
+  > definition: chlorophyll-containing plastid with thylakoids organized into grana and frets, or stroma thylakoids, and embedded in a stroma
+  > instance of: cellular component
+  > subclass of: plastid
+DEBUG: KBPedia matched 2 concept(s) for 'chloroplast': ['photosynthetic pigment', 'chloroplast']
+DEBUG: Buffered 15 raw triple(s) for 'photosynthetic pigment'
+DEBUG: Buffered 11 raw triple(s) for 'chloroplast'
+DEBUG: KBPedia matched 2 concept(s) for 'nucleus': ['nucleus', 'lentiform nucleus']
+DEBUG: Buffered 11 raw triple(s) for 'nucleus'
+DEBUG: Buffered 6 raw triple(s) for 'lentiform nucleus'
+DEBUG: KBPedia matched 2 concept(s) for 'animal skeleton': ['human skeleton', 'skeleton tarantula']
+DEBUG: Buffered 10 raw triple(s) for 'human skeleton'
+DEBUG: Buffered 9 raw triple(s) for 'skeleton tarantula'
+DEBUG: KBPedia matched 2 concept(s) for 'plant cell': ['plant cell wall', 'plant epidermis']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 11 raw triple(s) for 'plant epidermis'
+  > Sending chunk to LLM (4479 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9, 10, 12] from 13 candidates.
+DEBUG: End-filter kept 8/13 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4288 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**membrane protein**\n[\n  "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.",'...
+DEBUG: Batch LLM filter kept 14/14 triple(s) for 'membrane protein'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'bacterial cell wall'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'photosynthetic pigment'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'chloroplast'
+DEBUG: Batch LLM filter kept 6/6 triple(s) for 'lentiform nucleus'
+DEBUG: KBPedia found 5 grounded concept contexts.
+  > Sending chunk to LLM (4140 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a rigid outer layer called the cell wall.
+2. The primary function of an animal skeleton is to provide structural support and protection for the body's internal organs.
+3. Plant cells have organelles that are responsible for photosynthesis, such as chloroplasts.
+4. Chloroplasts contain pigments essential for photosynthesis, including chlorophyll.
+5. A cell wall provides a barrier against external factors, similar to how an animal skeleton protects its internal structures.
+6. The structure of the plant cell wall is composed of cellulose and other organic materials.
+7. Animal skeletons are made up of bones or cartilage that provide structural support for movement and protection.
+8. Chloroplasts have an internal membrane system essential for photosynthesis, similar to how animal cells require a supportive framework (the skeleton) for their functions.
+9. The cell wall is composed of rigid material that provides shape and structure to the plant cell.
+10. Animal skeletons are made up of organic materials such as collagen and minerals like calcium carbonate.
+
+Note: I added universally accepted truths about cellular biology, including the function of animal skeletons and the composition of plant cell walls, to provide a complete logical framework for answering the question.
+**Context from Prompt:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+has_function_similar_to_skeleton(cell_wall).
+does_not_have_function_similar_to_skeleton(cell_membrane).
+does_not_have_function_similar_to_skeleton(chloroplast).
+does_not_have_function_similar_to_skeleton(nucleus).
+
+answer(OptionLetter) :- choice(OptionLetter, Component), has_function_similar_to_skeleton(Component).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+has_function_similar_to_skeleton(cell_wall).
+does_not_have_function_similar_to_skeleton(cell_membrane).
+does_not_have_function_similar_to_skeleton(chloroplast).
+does_not_have_function_similar_to_skeleton(nucleus).
+
+answer(OptionLetter) :- choice(OptionLetter, Component), has_function_similar_to_skeleton(Component).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for b, because\n      choice holds for b, and cell_wall, and\n      has_function_similar_to_skeleton holds for cell_wall\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for b, because
+      choice holds for b, and cell_wall, and
+      has_function_similar_to_skeleton holds for cell_wall
+
+
+**Explainer Output:** 
+**Conclusion:** The part of a plant cell that has a function most similar to the function of an animal skeleton is the cell wall.
+
+**Logical Path:**
+
+The solver arrived at this conclusion by analyzing the relationships between different components of a plant cell and their functions. Here's how it worked:
+
+1. **Primary Rule:** The system identified that the cell wall has a function similar to that of an animal skeleton.
+2. **Verification of Similar Function:** By examining the database, the solver found that the cell wall is indeed the component with this specific function.
+3. **Elimination of Other Options:** The solver also checked the other components (cell membrane, chloroplast, and nucleus) but determined they do not have a similar function to an animal skeleton.
+
+**Why the Cell Wall?**
+
+The system concluded that the cell wall has a function most similar to that of an animal skeleton because it provides structural support and protection for the plant cell's internal structures. This is analogous to how an animal skeleton protects its internal organs and provides structural support for movement. The cell wall's composition, made up of rigid materials like cellulose, also supports this conclusion.
+
+**Conclusion Recap:**
+
+In summary, the solver determined that the cell wall has a function most similar to that of an animal skeleton because it provides structural support and protection, much like how an animal skeleton functions.
+
+**FINAL LLM OUTPUT:
+*B.* The cell wall.
+The cell wall provides structural support and protection for the plant cell's internal structures, similar to how an animal skeleton protects its internal organs and provides structural support for movement.
+
+Final Answer: B.
+====The pipeline executed in 29.4477 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | CORRECT |   37.8s
+Prolog          | Predicted: [B]   | CORRECT |   79.9s
+Tuned LLM       | Predicted: [B]   | CORRECT |    1.4s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #1] Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods e...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['sample', 'comparison', 'process', 'research method', 'observational study', 'long-term study', 'drive', 'statistical method', 'scientific observation', 'trouble']
+DEBUG: Buffered 10 raw triple(s) for 'sample'
+DEBUG: Buffered 3 raw triple(s) for 'comparison'
+DEBUG: Buffered 11 raw triple(s) for 'process'
+DEBUG: Buffered 23 raw triple(s) for 'research method'
+DEBUG: Buffered 13 raw triple(s) for 'observational study'
+DEBUG: Buffered 4 raw triple(s) for 'long-term study'
+DEBUG: Buffered 8 raw triple(s) for 'drive'
+DEBUG: Buffered 10 raw triple(s) for 'statistical method'
+DEBUG: Buffered 11 raw triple(s) for 'scientific observation'
+DEBUG: Buffered 11 raw triple(s) for 'trouble'
+  > Sending chunk to LLM (3740 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4075 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n  "comparison": [\n    "definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.",\n    "subclass of: examination investigation",\n    "s'...
+DEBUG: Batch LLM filter kept 3/3 triple(s) for 'comparison'
+DEBUG: Batch LLM filter kept 1/23 triple(s) for 'research method'
+DEBUG: Batch LLM filter kept 4/4 triple(s) for 'long-term study'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'drive'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'scientific observation'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (3223 chars)... Done!
+  > Sending chunk to LLM (3044 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Identifying the factor that makes replication challenging.",
+  "question": "Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature",
+  "context": [
+    "Janette conducts an investigation to see which foods make her feel more fatigued.",
+    "She eats one of four different foods each day at the same time for four days and then records how she feels.",
+    "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the factor that makes replication challenging.', 'question': 'Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature', 'context': ['Janette conducts an investigation to see which foods make her feel more fatigued.', 'She eats one of four different foods each day at the same time for four days and then records how she feels.', 'She asks her friend Carmen to do the same investigation to see if she gets similar results.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+DEBUG: EXTRACTED CONTEXT (Len: 3): ['Janette conducts an investigation to see which foods make her feel more fatigued.', 'She eats one of four different foods each day at the same time for four days and then records how she feels.', 'She asks her friend Carmen to do the same investigation to see if she gets similar results.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which would make the investigation most difficult to replicate? A) measuring the' | context items=3
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 3 text chunk(s)...
+Processing text context: Janette conducts an investigation to see which foods make her feel more fatigued.
+  > [Async] Sending chunk to LLM (2664 chars) and waiting for extraction... Done!
+Text context processed: run_id='fde138e7-a240-4e5c-80dc-52eaa315da78' result={'resolver': {'number_of_nodes_to_resolve': 1, 'number_of_created_nodes': 1}}
+Processing text context: She eats one of four different foods each day at the same time for four days and then records how she feels.
+  > [Async] Sending chunk to LLM (2691 chars) and waiting for extraction... Done!
+Text context processed: run_id='345f3bbb-4e47-4511-b7a8-8651c370d266' result={'resolver': {'number_of_nodes_to_resolve': 4, 'number_of_created_nodes': 4}}
+Processing text context: She asks her friend Carmen to do the same investigation to see if she gets similar results.
+  > [Async] Sending chunk to LLM (2674 chars) and waiting for extraction... Done!
+Text context processed: run_id='11d977b6-aa70-4779-8bb8-ec10c0fe5537' result={'resolver': {'number_of_nodes_to_resolve': 6, 'number_of_created_nodes': 6}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature'
+  > Sending chunk to LLM (885 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['measuring the amount of fatigue', 'making sure the same foods are eaten', 'recording observations in the same chart', 'making sure the foods are at the same temperature', 'investigation', 'fatigue', 'foods', 'temperature']
+DEBUG: KBPedia matched 2 concept(s) for 'measuring the amount of fatigue': ['fatigue', 'chronic fatigue syndrome']
+DEBUG: Buffered 10 raw triple(s) for 'fatigue'
+DEBUG: Buffered 8 raw triple(s) for 'chronic fatigue syndrome'
+DEBUG: KBPedia matched 2 concept(s) for 'making sure the same foods are eaten': ['foods featuring butter', 'breakfast food']
+DEBUG: Buffered 10 raw triple(s) for 'foods featuring butter'
+DEBUG: Buffered 20 raw triple(s) for 'breakfast food'
+DEBUG: KBPedia matched 2 concept(s) for 'recording observations in the same chart': ['chart pattern', 'financial chart']
+DEBUG: Buffered 8 raw triple(s) for 'chart pattern'
+DEBUG: Buffered 8 raw triple(s) for 'financial chart'
+DEBUG: KBPedia matched 2 concept(s) for 'making sure the foods are at the same temperature': ['temperature', 'foods featuring butter']
+DEBUG: Buffered 24 raw triple(s) for 'temperature'
+DEBUG: KBPedia matched 2 concept(s) for 'investigation': ['fire investigation', 'investigation']
+DEBUG: Buffered 8 raw triple(s) for 'fire investigation'
+DEBUG: Buffered 19 raw triple(s) for 'investigation'
+DEBUG: KBPedia matched 2 concept(s) for 'fatigue': ['fatigue', 'chronic fatigue syndrome']
+DEBUG: KBPedia matched 2 concept(s) for 'foods': ['foods featuring butter', "topics of 'consuming foods'"]
+DEBUG: Buffered 7 raw triple(s) for 'topics of 'consuming foods''
+DEBUG: KBPedia matched 2 concept(s) for 'temperature': ['temperature', 'room temperature']
+DEBUG: Buffered 11 raw triple(s) for 'room temperature'
+  > Sending chunk to LLM (4165 chars)... Done!
+DEBUG: End-filter LLM kept indices: [0, 1, 3, 5, 6, 8, 9, 10] from 11 candidates.
+DEBUG: End-filter kept 8/11 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4802 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**fatigue**\n[\n  "definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue.",\n  "has subclass: sleep depriva'...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'fatigue'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'chronic fatigue syndrome'
+DEBUG: Batch LLM filter kept 20/20 triple(s) for 'breakfast food'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'financial chart'
+DEBUG: Batch LLM filter kept 24/24 triple(s) for 'temperature'
+DEBUG: KBPedia found 5 grounded concept contexts.
+  > Sending chunk to LLM (4865 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+**User Question:**
+Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Fatigue is a physiological condition characterized by continuous exhaustion caused by an underlying ailment.
+2. Chronic fatigue syndrome is an illness characterized by fatigue, general pain, mental fogginess, and gastro-intestinal problems.
+3. Measuring the amount of fatigue can be subjective and difficult to quantify accurately in different individuals.
+4. Recording observations in a financial chart (technical analysis) may not directly relate to measuring or replicating fatigue levels.
+5. The same foods being eaten at the same temperature would likely produce similar results, making it easier to replicate an investigation on fatigue.
+6. Temperature is a measurable quantity that can be controlled and replicated with precision using standard laboratory equipment.
+7. Measuring the amount of fatigue requires subjective evaluation by individuals or instruments designed for this purpose.
+8. Recording observations in a financial chart (technical analysis) involves evaluating patterns, trends, and indicators unrelated to measuring fatigue levels directly.
+9. The same foods being eaten at different temperatures may produce varying results due to differences in digestion rates and metabolic responses.
+10. Measuring the amount of fatigue is inherently more difficult than controlling temperature or recording observations in a financial chart because it requires subjective evaluation and individual variability considerations.
+
+Note: These logical evidence items aim to bridge the premise (investigation difficulty) with possible answers by highlighting key aspects related to measuring, replicating, and evaluating fatigue levels.
+**Context from Prompt:**
+Janette conducts an investigation to see which foods make her feel more fatigued.
+She eats one of four different foods each day at the same time for four days and then records how she feels.
+She asks her friend Carmen to do the same investigation to see if she gets similar results.
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, measuring_the_amount_of_fatigue).
+choice(b, making_sure_the_same_foods_are_eaten).
+choice(c, recording_observations_in_the_same_chart).
+choice(d, making_sure_the_foods_are_at_the_same_temperature).
+
+is_subjective(measuring_the_amount_of_fatigue).
+varies_with_individuals(measuring_the_amount_of_fatigue).
+
+difficult_to_replicate(Measurement) :- is_subjective(Measurement), varies_with_individuals(Measurement).
+
+answer(OptionLetter) :- choice(OptionLetter, Measurement), difficult_to_replicate(Measurement).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, measuring_the_amount_of_fatigue).
+choice(b, making_sure_the_same_foods_are_eaten).
+choice(c, recording_observations_in_the_same_chart).
+choice(d, making_sure_the_foods_are_at_the_same_temperature).
+
+is_subjective(measuring_the_amount_of_fatigue).
+varies_with_individuals(measuring_the_amount_of_fatigue).
+
+difficult_to_replicate(Measurement) :- is_subjective(Measurement), varies_with_individuals(Measurement).
+
+answer(OptionLetter) :- choice(OptionLetter, Measurement), difficult_to_replicate(Measurement).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and measuring_the_amount_of_fatigue, and\n      difficult_to_replicate holds for measuring_the_amount_of_fatigue, because\n         is_subjective holds for measuring_the_amount_of_fatigue, and\n         varies_with_individuals holds for measuring_the_amount_of_fatigue\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and measuring_the_amount_of_fatigue, and
+      difficult_to_replicate holds for measuring_the_amount_of_fatigue, because
+         is_subjective holds for measuring_the_amount_of_fatigue, and
+         varies_with_individuals holds for measuring_the_amount_of_fatigue
+
+
+**Explainer Output:** 
+**Conclusion:** The investigation would be most difficult to replicate if Janette measures the amount of fatigue.
+
+**Logical Path:** The solver determined this by identifying that measuring the amount of fatigue is inherently subjective and varies with individuals. This led to the conclusion that it's difficult to replicate such a measurement:
+
+1. **Subjective Evaluation:** The system first noted that measuring the amount of fatigue is subjective, meaning its accuracy can vary based on individual perspectives.
+2. **Variability with Individuals:** Further, it was observed that this type of measurement varies with individuals, implying that results could differ significantly from one person to another.
+3. **Difficulty in Replication:** Given these characteristics, the solver concluded that measuring the amount of fatigue is difficult to replicate because its accuracy and reliability depend on individual evaluations.
+
+This logical path highlights why measuring fatigue levels would pose a challenge in replicating Janette's investigation, making it the most difficult aspect to reproduce accurately.
+
+**FINAL LLM OUTPUT:
+Final Answer: A.
+Measuring fatigue levels is inherently subjective and varies significantly between individuals, making it difficult to replicate accurately.
+====The pipeline executed in 26.8903 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | WRONG   |   34.7s
+Prolog          | Predicted: [A]   | CORRECT |  138.0s
+Tuned LLM       | Predicted: [A]   | CORRECT |    2.6s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #2] Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-oce...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['oceanic ridge', 'undersea valley', 'rift valley', 'oceanic plateau', 'seamount', 'geological basin', 'fracture zone', 'subduction zones', 'ocean trench', 'rifts or graben']
+DEBUG: Buffered 8 raw triple(s) for 'oceanic ridge'
+DEBUG: Buffered 9 raw triple(s) for 'undersea valley'
+DEBUG: Buffered 14 raw triple(s) for 'rift valley'
+DEBUG: Buffered 8 raw triple(s) for 'oceanic plateau'
+DEBUG: Buffered 12 raw triple(s) for 'seamount'
+DEBUG: Buffered 17 raw triple(s) for 'geological basin'
+DEBUG: Buffered 13 raw triple(s) for 'fracture zone'
+DEBUG: Buffered 8 raw triple(s) for 'subduction zones'
+DEBUG: Buffered 18 raw triple(s) for 'ocean trench'
+DEBUG: Buffered 13 raw triple(s) for 'rifts or graben'
+  > Sending chunk to LLM (4078 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4975 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**undersea valley**\n[\n  "definition: The axial depression of the mid-oceanic ridge system.",\n  "subclass of: underwater location"\n]\n**oceanic plateau**\n['...
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'undersea valley'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'oceanic plateau'
+DEBUG: Batch LLM filter kept 17/17 triple(s) for 'geological basin'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'fracture zone'
+DEBUG: Batch LLM filter kept 18/18 triple(s) for 'ocean trench'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (5002 chars)... Done!
+  > Sending chunk to LLM (4785 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Identifying the question and context, while preserving the multiple choice options.",
+  "question": "Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the question and context, while preserving the multiple choice options.', 'question': 'Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which feature does not form as a result of tectonic plates diverging? A. trench ' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge'
+  > Sending chunk to LLM (778 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['trench', 'rift valley', 'ocean basin', 'mid-ocean ridge', 'tectonic plates', 'diverging']
+DEBUG: KBPedia matched 2 concept(s) for 'trench': ['trench coat', 'trench']
+DEBUG: Buffered 4 raw triple(s) for 'trench coat'
+DEBUG: Buffered 10 raw triple(s) for 'trench'
+DEBUG: KBPedia matched 2 concept(s) for 'rift valley': ['rift valley', 'Lake Nyasa']
+DEBUG: Buffered 14 raw triple(s) for 'rift valley'
+DEBUG: Buffered 9 raw triple(s) for 'Lake Nyasa'
+DEBUG: KBPedia matched 2 concept(s) for 'ocean basin': ['geological basin', 'basin']
+DEBUG: Buffered 17 raw triple(s) for 'geological basin'
+DEBUG: Buffered 15 raw triple(s) for 'basin'
+DEBUG: KBPedia matched 2 concept(s) for 'mid-ocean ridge': ['oceanic ridge', 'beach ridge']
+DEBUG: Buffered 8 raw triple(s) for 'oceanic ridge'
+DEBUG: Buffered 9 raw triple(s) for 'beach ridge'
+DEBUG: [Wikidata] Triggered for 'tectonic plates' — reason: partial match (score=8.62, name='interplate earthquake', overlap=set())
+DEBUG: [Wikidata Fallback] Searching Wikidata for 'tectonic plates'...
+  > Sending chunk to LLM (1343 chars)... Done!
+DEBUG: [Wikidata Fallback] LLM selected index 1: Q96755721 (Tectonic plates in 3D mantle convection model with stress-history-dependent rheology)
+DEBUG: [Wikidata Fallback] LLM selected extended categories: ['sequence'] → ['P155', 'P156']
+DEBUG: [Wikidata Fallback] Fetching structural facts for Q96755721...
+DEBUG: [Wikidata Fallback] No structural facts returned for Q96755721. Skipping.
+DEBUG: KBPedia matched 2 concept(s) for 'tectonic plates': ['interplate earthquake', 'orogeny']
+DEBUG: Buffered 10 raw triple(s) for 'interplate earthquake'
+DEBUG: Buffered 8 raw triple(s) for 'orogeny'
+DEBUG: [Wikidata] Triggered for 'diverging' — reason: partial match (score=6.01, name='anabranch', overlap=set())
+DEBUG: [Wikidata Fallback] Searching Wikidata for 'diverging'...
+  > Sending chunk to LLM (1492 chars)... Done!
+DEBUG: [Wikidata Fallback] LLM selected index 1: Q1783529 (convex mirror)
+DEBUG: [Wikidata Fallback] LLM selected extended categories: ['sequence'] → ['P155', 'P156']
+DEBUG: [Wikidata Fallback] Fetching structural facts for Q1783529...
+  > Sending chunk to LLM (881 chars)... Done!
+DEBUG: [Wikidata Filter] Filter returned empty — keeping definition only.
+DEBUG: [Wikidata Fallback] Retrieved 1 structural triple(s) for 'convex mirror'
+  > definition: type of mirror
+DEBUG: KBPedia matched 2 concept(s) for 'diverging': ['anabranch', 'Brachyelytrum']
+DEBUG: Buffered 14 raw triple(s) for 'anabranch'
+DEBUG: Buffered 9 raw triple(s) for 'Brachyelytrum'
+  > Sending chunk to LLM (3933 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9, 12] from 13 candidates.
+DEBUG: End-filter kept 7/13 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4392 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n    "trench": [\n        "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compare'...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'trench'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'Lake Nyasa'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'basin'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'oceanic ridge'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'interplate earthquake'
+DEBUG: Removed 1 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 4 grounded concept contexts.
+  > Sending chunk to LLM (3781 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+**User Question:**
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Tectonic plates are large, rigid slabs of rock that fit together like a jigsaw puzzle.
+2. When tectonic plates diverge (move apart), they create new crust as magma rises from the mantle to fill the gap.
+3. A mid-ocean ridge is an underwater mountain system formed by plate tectonics where new oceanic crust is created through volcanic activity and seafloor spreading.
+4. Ocean basins are large depressions in the Earth's surface that can be found between continents or on either side of a mid-ocean ridge.
+5. Rift valleys form when two plates pull apart, creating a zone of extensional tectonic deformation where new crust is being created through volcanic activity and faulting.
+6. Trenches are deep depressions in the Earth's surface that can be found at subduction zones (where one plate is forced beneath another).
+7. Ocean basins do not form as a result of plates diverging, but rather they exist between or on either side of mid-ocean ridges and other tectonic features.
+8. Trenches are formed when two plates converge (move together), resulting in the subduction of one plate under the other.
+9. The process of seafloor spreading occurs at mid-ocean ridges, where new oceanic crust is created through volcanic activity and magma upwelling from the mantle.
+10. Plate tectonics involves the movement of large rigid slabs (plates) that interact with each other to create various geological features such as mountains, volcanoes, trenches, and rift valleys.
+**Context from Prompt:**
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, between_mid_ocean_ridge_and_other_tectonic_features).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, between_mid_ocean_ridge_and_other_tectonic_features).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and trench, and\n      there is no evidence that forms_from holds for trench, and plate_divergence\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and trench, and
+      there is no evidence that forms_from holds for trench, and plate_divergence
+
+
+**Explainer Output:** 
+**Conclusion:** The feature that does not form as a result of tectonic plates diverging is the ocean basin.
+
+**Logical Path:** The solver reached this conclusion by analyzing the relationships between geological features and plate movement:
+
+1. **Primary Rule:** The system defines how different geological features are formed based on plate movement.
+2. **Divergence Creates New Crust:** When plates diverge, new crust is created through volcanic activity and magma upwelling from the mantle.
+3. **Mid-Ocean Ridge Formation:** This process results in the formation of a mid-ocean ridge, an underwater mountain system where new oceanic crust is created.
+4. **Ocean Basin Existence:** However, the solver notes that ocean basins do not form as a result of plates diverging but exist between or on either side of mid-ocean ridges and other tectonic features.
+5. **Absence of Evidence for Plate Divergence:** The system concludes that there is no evidence to suggest that plate divergence directly forms an ocean basin, unlike the formation of trenches, rift valleys, and mid-ocean ridges.
+
+The solver's conclusion is based on the absence of a direct relationship between plate divergence and the formation of ocean basins.
+
+**FINAL LLM OUTPUT:
+*D.* Ocean basin.
+Ocean basins do not form directly due to tectonic plates diverging; instead, they exist between or on either side of mid-ocean ridges and other tectonic features.
+====The pipeline executed in 30.1855 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [A]   | CORRECT |   24.8s
+Prolog          | Predicted: [D]   | WRONG   |   76.1s
+Tuned LLM       | Predicted: [A]   | CORRECT |    2.9s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #3] A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet a...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['bean plant', 'millet plant', 'cocoa bean', 'bean (food)', 'coffee cherry', 'type of soil', 'ground coffee', 'grass seed', 'ratio quantity', 'edible legume seed']
+DEBUG: Buffered 16 raw triple(s) for 'bean plant'
+DEBUG: Buffered 10 raw triple(s) for 'millet plant'
+DEBUG: Buffered 10 raw triple(s) for 'cocoa bean'
+DEBUG: Buffered 13 raw triple(s) for 'bean (food)'
+DEBUG: Buffered 10 raw triple(s) for 'coffee cherry'
+DEBUG: Buffered 10 raw triple(s) for 'type of soil'
+DEBUG: Buffered 13 raw triple(s) for 'ground coffee'
+DEBUG: Buffered 10 raw triple(s) for 'grass seed'
+DEBUG: Buffered 19 raw triple(s) for 'ratio quantity'
+DEBUG: Buffered 13 raw triple(s) for 'edible legume seed'
+  > Sending chunk to LLM (1959 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (3843 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n    "millet plant": [],\n    "bean (food)": [\n        "definition: Food derived from the seed of a bean plant.",\n        "subclass of: edible rich in protein" // relevant because it\'s related to nutr'...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'millet plant'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'bean (food)'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'type of soil'
+DEBUG: Batch LLM filter kept 19/19 triple(s) for 'ratio quantity'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'edible legume seed'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (3779 chars)... Done!
+  > Sending chunk to LLM (3562 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Identifying the differing condition between the two identical setups.",
+  "question": "Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed",
+  "context": [
+    "A student planted two bean seeds in two identical pots containing the same type of soil.",
+    "He placed one pot in a closet and the other near a sunny window.",
+    "Each day, he poured 15 milliliters of water into each pot."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the differing condition between the two identical setups.', 'question': 'Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed', 'context': ['A student planted two bean seeds in two identical pots containing the same type of soil.', 'He placed one pot in a closet and the other near a sunny window.', 'Each day, he poured 15 milliliters of water into each pot.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed
+DEBUG: EXTRACTED CONTEXT (Len: 3): ['A student planted two bean seeds in two identical pots containing the same type of soil.', 'He placed one pot in a closet and the other near a sunny window.', 'Each day, he poured 15 milliliters of water into each pot.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which factor was different for the two pots? A) amount of water B) amount of lig' | context items=3
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 3 text chunk(s)...
+Processing text context: A student planted two bean seeds in two identical pots containing the same type of soil.
+  > [Async] Sending chunk to LLM (2671 chars) and waiting for extraction... Done!
+Text context processed: run_id='96a44353-6287-4dae-b56b-29cd453359ff' result={'resolver': {'number_of_nodes_to_resolve': 0, 'number_of_created_nodes': None}}
+Processing text context: He placed one pot in a closet and the other near a sunny window.
+  > [Async] Sending chunk to LLM (2647 chars) and waiting for extraction... Done!
+Text context processed: run_id='67985ff4-872c-40b2-95ea-3a9f04962bfc' result={'resolver': {'number_of_nodes_to_resolve': 0, 'number_of_created_nodes': None}}
+Processing text context: Each day, he poured 15 milliliters of water into each pot.
+  > [Async] Sending chunk to LLM (2641 chars) and waiting for extraction... Done!
+Text context processed: run_id='99f7b35d-c4f4-4615-987c-314712a277f6' result={'resolver': {'number_of_nodes_to_resolve': 0, 'number_of_created_nodes': None}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed'
+  > Sending chunk to LLM (764 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['amount of water', 'amount of light', 'type of soil', 'type of seed']
+DEBUG: KBPedia matched 2 concept(s) for 'amount of water': ['water clock', 'heavy water']
+DEBUG: Buffered 11 raw triple(s) for 'water clock'
+DEBUG: Buffered 13 raw triple(s) for 'heavy water'
+DEBUG: KBPedia matched 2 concept(s) for 'amount of light': ['light intensifier device', 'light forest']
+DEBUG: Buffered 13 raw triple(s) for 'light intensifier device'
+DEBUG: Buffered 10 raw triple(s) for 'light forest'
+DEBUG: KBPedia matched 2 concept(s) for 'type of soil': ['type of soil', 'region type by soil type USCS']
+DEBUG: Buffered 10 raw triple(s) for 'type of soil'
+DEBUG: Buffered 15 raw triple(s) for 'region type by soil type USCS'
+DEBUG: KBPedia matched 2 concept(s) for 'type of seed': ['bird seed', 'poppy seed']
+DEBUG: Buffered 5 raw triple(s) for 'bird seed'
+DEBUG: Buffered 8 raw triple(s) for 'poppy seed'
+  > Sending chunk to LLM (3481 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 7] from 8 candidates.
+DEBUG: End-filter kept 5/8 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4564 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n  "heavy water": ["Heavy water (deuterium oxide, 2H2O, D2O) is a form of water that contains a larger than normal amount of the hydrogen isotope deuterium (2H or D, also known as heavy hydrogen), ra'...
+DEBUG: Batch LLM filter kept 1/13 triple(s) for 'heavy water'
+DEBUG: Batch LLM filter kept 1/10 triple(s) for 'light forest'
+DEBUG: Batch LLM filter kept 0/15 triple(s) for 'region type by soil type USCS'
+DEBUG: Batch LLM filter kept 0/5 triple(s) for 'bird seed'
+DEBUG: Batch LLM filter kept 2/8 triple(s) for 'poppy seed'
+DEBUG: Removed 2 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 3 grounded concept contexts.
+  > Sending chunk to LLM (1952 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+**User Question:**
+A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. A student planted two bean seeds in two identical pots.
+2. Both pots contained the same type of soil.
+3. The concept "heavy water" refers to a form of water with an abnormal amount of deuterium, but this is irrelevant to the comparison between the two pots.
+4. There was no mention that either pot had heavy or light water in it; therefore, we can assume both pots contained normal (light) water.
+5. The concept "light forest" refers to a type of forest with more space between trees and has nothing to do with our scenario.
+6. Poppy seeds are irrelevant as the student planted bean seeds.
+7. If two objects have identical conditions except for one variable, that variable is likely responsible for any observed differences in outcome or behavior.
+8. The only difference mentioned was that both pots contained "the same type of soil," which contradicts our assumption from item 2; however, we can infer the student made an error and they actually did contain different types of water (light vs heavy).
+9. Heavy water is a form of water with more deuterium than normal.
+10. If one pot had light water and the other had heavy water, then there would be a difference in their behavior or outcome due to this variable alone.
+
+Note: The missing link added was that "heavy water" has an abnormal amount of deuterium compared to regular (light) water.
+**Context from Prompt:**
+A student planted two bean seeds in two identical pots containing the same type of soil.
+He placed one pot in a closet and the other near a sunny window.
+Each day, he poured 15 milliliters of water into each pot.
+Generating Prolog...
+Iteration 0 | Validation Error: Multiple-Choice constraint violation: You defined 'choice/2' facts but your <query> does not use 'answer/1'. For MCQs, you MUST define an `answer(OptionLetter) :- ...` rule in the <database> and your <query> MUST be exactly `answer(OptionLetter).` to unify with the correct choice.
+Iteration 1 | Extracted Database:
+choice(a, amount_of_water).
+choice(b, amount_of_light).
+choice(c, type_of_soil).
+choice(d, type_of_seed).
+
+pots_identical_pot1.
+pots_identical_pot2.
+
+same_type_of_soil(pot1, pot2).
+different_location(pot1, pot2).
+
+-different_variable(A, _) :- same_type_of_soil(A, _).
+-different_variable(_, B) :- same_type_of_soil(_, B).
+
+difficult_to_replicate(Task) :-
+choice(Task, amount_of_light),
+different_location(pot1, pot2).
+
+difficult_to_replicate(Task) :-
+choice(Task, type_of_seed),
+same_type_of_soil(pot1, pot2).
+
+Iteration 1 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 1 | Prolog Error: time:run_alarm_goal/2: Unknown procedure: answer/1
+Iteration 2 | Validation Error: Database not found in LLM's response. Ensure you wrap your facts and rules strictly inside `<database>` tags.
+Iteration 3 | Extracted Database:
+choice(a, amount_of_water).
+choice(b, amount_of_light).
+choice(c, type_of_soil).
+choice(d, type_of_seed).
+
+same_type_of_soil(pot1, pot2).
+different_location(pot1, pot2).
+
+different_variable(PotA, PotB) :-
+not same_type_of_soil(PotA, PotB),
+different_location(PotA, PotB).
+
+answer(OptionLetter) :- choice(OptionLetter, Variable), different_variable(_, _), different_variable(_, _), different_variable(_, _), different_variable(_, _).
+
+Iteration 3 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 3 | Prolog code generation success
+**Extracted database:**
+choice(a, amount_of_water).
+choice(b, amount_of_light).
+choice(c, type_of_soil).
+choice(d, type_of_seed).
+
+same_type_of_soil(pot1, pot2).
+different_location(pot1, pot2).
+
+different_variable(PotA, PotB) :-
+not same_type_of_soil(PotA, PotB),
+different_location(PotA, PotB).
+
+answer(OptionLetter) :- choice(OptionLetter, Variable), different_variable(_, _), different_variable(_, _), different_variable(_, _), different_variable(_, _).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': False, 'Explanation': None}
+truth Found: False
+**Human-Readable Explanation**
+None
+**Explainer Output:** 
+**Conclusion:** There is no conclusive evidence to determine which factor was different between the two pots.
+
+**Logical Path:** The solver failed to identify a clear difference in conditions between the two pots, leading to an inconclusive result:
+
+1. **Initial Conditions:** Both pots were identical in terms of soil type and location.
+2. **Lack of Evidence:** There was no mention of any differences in water type (light vs heavy), amount of light, or seed type that could have been used as a basis for comparison.
+3. **Inference Failure:** The solver attempted to infer differences based on the provided context but ultimately found no conclusive evidence to support any one option.
+
+**Note:** Since the s(CASP) output was "None" and the query returned False, it indicates that there is not enough information in the database or context to determine which factor was different.
+
+**FINAL LLM OUTPUT:
+Final Answer: B.
+The factor that was different for the two pots is the amount of light, since one pot was placed near a sunny window and the other in a closet.
+====The pipeline executed in 84.9621 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | CORRECT |   37.1s
+Prolog          | Predicted: [B]   | CORRECT |  229.7s
+Tuned LLM       | Predicted: [B]   | CORRECT |    2.1s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #4] Many endangered animals are captured, tagged, and then released back into their environment. The tag may be a piece of c...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Many endangered animals are captured, tagged, and then released back into their environment. The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body. Which is the most likely reason to tag an animal?
+A. to monitor their eating habits
+B. to monitor their roaming habits
+C. to monitor their sleeping habits
+D. to monitor their reproductive habits' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['hunting animal', 'U.S. Fish and Wildlife Service', 'wildlife conservation', 'animal type by danger', 'wildlife ecology', 'hunting', 'wildlife sanctuary', 'biological record', 'captive animal', 'zoo animal']
+DEBUG: Buffered 16 raw triple(s) for 'hunting animal'
+DEBUG: Buffered 12 raw triple(s) for 'U.S. Fish and Wildlife Service'
+DEBUG: Buffered 5 raw triple(s) for 'wildlife conservation'
+DEBUG: Buffered 11 raw triple(s) for 'animal type by danger'
+DEBUG: Buffered 12 raw triple(s) for 'wildlife ecology'
+DEBUG: Buffered 12 raw triple(s) for 'hunting'
+DEBUG: Buffered 13 raw triple(s) for 'wildlife sanctuary'
+DEBUG: Buffered 8 raw triple(s) for 'biological record'
+DEBUG: Buffered 5 raw triple(s) for 'captive animal'
+DEBUG: Buffered 3 raw triple(s) for 'zoo animal'
+  > Sending chunk to LLM (3731 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9, 7] from 10 candidates.
+DEBUG: End-filter kept 7/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (5065 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**U.S. Fish and Wildlife Service**\n[\n  "This is an agency within the Interior Department which, among many other things, decides which species are endang'...
+DEBUG: Batch LLM filter kept 12/12 triple(s) for 'U.S. Fish and Wildlife Service'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'animal type by danger'
+DEBUG: Batch LLM filter kept 12/12 triple(s) for 'hunting'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'wildlife sanctuary'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'captive animal'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (4725 chars)... Done!
+  > Sending chunk to LLM (4520 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "The provided text gives background information about a common practice in wildlife conservation, which is used as context for the question.",
+  "question": "Which is the most likely reason to tag an animal? A. to monitor their eating habits B. to monitor their roaming habits C. to monitor their sleeping habits D. to monitor their reproductive habits",
+  "context": [
+    "Many endangered animals are captured, tagged, and then released back into their environment.",
+    "The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'The provided text gives background information about a common practice in wildlife conservation, which is used as context for the question.', 'question': 'Which is the most likely reason to tag an animal? A. to monitor their eating habits B. to monitor their roaming habits C. to monitor their sleeping habits D. to monitor their reproductive habits', 'context': ['Many endangered animals are captured, tagged, and then released back into their environment.', 'The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which is the most likely reason to tag an animal? A. to monitor their eating habits B. to monitor their roaming habits C. to monitor their sleeping habits D. to monitor their reproductive habits
+DEBUG: EXTRACTED CONTEXT (Len: 2): ['Many endangered animals are captured, tagged, and then released back into their environment.', 'The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which is the most likely reason to tag an animal? A. to monitor their eating hab' | context items=2
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 2 text chunk(s)...
+Processing text context: Many endangered animals are captured, tagged, and then released back into their environment.
+  > [Async] Sending chunk to LLM (2675 chars) and waiting for extraction... Done!
+Text context processed: run_id='58bff030-9f37-4e11-bcb1-438d092fbe9b' result={'resolver': {'number_of_nodes_to_resolve': 2, 'number_of_created_nodes': 2}}
+Processing text context: The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.
+  > [Async] Sending chunk to LLM (2674 chars) and waiting for extraction... Done!
+Text context processed: run_id='8ee91c18-1a77-4de0-b23f-3c41e426548d' result={'resolver': {'number_of_nodes_to_resolve': 2, 'number_of_created_nodes': 2}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which is the most likely reason to tag an animal? A. to monitor their eating habits B. to monitor their roaming habits C. to monitor their sleeping habits D. to monitor their reproductive habits'
+  > Sending chunk to LLM (844 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['to monitor their eating habits', 'to monitor their roaming habits', 'to monitor their sleeping habits', 'to monitor their reproductive habits', 'animal', 'eating habits', 'roaming habits', 'sleeping habits', 'reproductive habits']
+DEBUG: KBPedia matched 2 concept(s) for 'to monitor their eating habits': ['Eating behavior', 'monitor manufacturer']
+DEBUG: Buffered 7 raw triple(s) for 'Eating behavior'
+DEBUG: Buffered 10 raw triple(s) for 'monitor manufacturer'
+DEBUG: KBPedia matched 2 concept(s) for 'to monitor their roaming habits': ['monitor manufacturer', 'monitor']
+DEBUG: Buffered 21 raw triple(s) for 'monitor'
+DEBUG: KBPedia matched 2 concept(s) for 'to monitor their sleeping habits': ['sleeping', 'sleeping pad']
+DEBUG: Buffered 18 raw triple(s) for 'sleeping'
+DEBUG: Buffered 12 raw triple(s) for 'sleeping pad'
+DEBUG: KBPedia matched 2 concept(s) for 'to monitor their reproductive habits': ['reproductive ecology', 'reproductive endocrinologist']
+DEBUG: Buffered 9 raw triple(s) for 'reproductive ecology'
+DEBUG: Buffered 5 raw triple(s) for 'reproductive endocrinologist'
+DEBUG: KBPedia matched 2 concept(s) for 'animal': ['cloned animal', 'animal killing']
+DEBUG: Buffered 6 raw triple(s) for 'cloned animal'
+DEBUG: Buffered 8 raw triple(s) for 'animal killing'
+DEBUG: KBPedia matched 2 concept(s) for 'eating habits': ['Eating behavior', 'medieval cuisine']
+DEBUG: Buffered 11 raw triple(s) for 'medieval cuisine'
+DEBUG: [Wikidata] Triggered for 'roaming habits' — reason: partial match (score=6.22, name='Brumby', overlap=set())
+DEBUG: [Wikidata Fallback] Searching Wikidata for 'roaming habits'...
+DEBUG: [Wikidata Fallback] No Wikidata results for 'roaming habits'. Skipping.
+  > Sending chunk to LLM (1233 chars)... Done!
+DEBUG: [Wikidata Fallback] LLM selection failed: Extra data: line 6 column 1 (char 61). Using first candidate.
+  Pipeline error: list index out of range
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | CORRECT |   27.5s
+Prolog          | Predicted: [?]   | WRONG   |   37.3s
+Tuned LLM       | Predicted: [B]   | CORRECT |    1.8s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #5] Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged a...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination. Which structural component of a cell is involved in such modification?
+A. endoplasmic reticulum
+B. lysosomes
+C. mitochondria
+D. Golgi apparatus' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['ribosome', 'ribosomal RNA molecule', 'prokaryotic ribosome', 'eukaryotic ribosome', 'cellular protein synthesis', 'endomembrane system', 'internal ribosome entry site', 'Golgi apparatus', 'synthesis of biological membrane stuff', 'post-translational modification']
+DEBUG: Buffered 11 raw triple(s) for 'ribosome'
+DEBUG: Buffered 14 raw triple(s) for 'ribosomal RNA molecule'
+DEBUG: Buffered 4 raw triple(s) for 'prokaryotic ribosome'
+DEBUG: Buffered 8 raw triple(s) for 'eukaryotic ribosome'
+DEBUG: Buffered 18 raw triple(s) for 'cellular protein synthesis'
+DEBUG: Buffered 7 raw triple(s) for 'endomembrane system'
+DEBUG: Buffered 10 raw triple(s) for 'internal ribosome entry site'
+DEBUG: Buffered 10 raw triple(s) for 'Golgi apparatus'
+DEBUG: Buffered 14 raw triple(s) for 'synthesis of biological membrane stuff'
+DEBUG: Buffered 11 raw triple(s) for 'post-translational modification'
+  > Sending chunk to LLM (4116 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9, 10] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4984 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**ribosomal RNA molecule**\n[\n  "definition: RibosomalRNA is the collection of RNAMolecules that form the core of a cell\'s Ribosome, the site of protein s'...
+DEBUG: Batch LLM filter kept 14/14 triple(s) for 'ribosomal RNA molecule'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'eukaryotic ribosome'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'endomembrane system'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'internal ribosome entry site'
+DEBUG: Batch LLM filter kept 14/14 triple(s) for 'synthesis of biological membrane stuff'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (4810 chars)... Done!
+  > Sending chunk to LLM (4602 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Identifying the specific question about post-translational modification and its relation to cellular components.",
+  "question": "Which structural component of a cell is involved in such modification? A. endoplasmic reticulum B. lysosomes C. mitochondria D. Golgi apparatus",
+  "context": [
+    "Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the specific question about post-translational modification and its relation to cellular components.', 'question': 'Which structural component of a cell is involved in such modification? A. endoplasmic reticulum B. lysosomes C. mitochondria D. Golgi apparatus', 'context': ['Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which structural component of a cell is involved in such modification? A. endoplasmic reticulum B. lysosomes C. mitochondria D. Golgi apparatus
+DEBUG: EXTRACTED CONTEXT (Len: 1): ['Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which structural component of a cell is involved in such modification? A. endopl' | context items=1
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 1 text chunk(s)...
+Processing text context: Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.
+  > [Async] Sending chunk to LLM (2746 chars) and waiting for extraction... Done!
+Text context processed: run_id='89067277-11f3-4281-8ae8-ce4a6340125c' result={'resolver': {'number_of_nodes_to_resolve': 5, 'number_of_created_nodes': 5}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which structural component of a cell is involved in such modification? A. endoplasmic reticulum B. lysosomes C. mitochondria D. Golgi apparatus'
+  > Sending chunk to LLM (793 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['endoplasmic reticulum', 'lysosomes', 'mitochondria', 'golgi apparatus']
+DEBUG: KBPedia matched 2 concept(s) for 'endoplasmic reticulum': ['Reticulum', 'endoplasmic reticulum']
+DEBUG: Buffered 9 raw triple(s) for 'Reticulum'
+DEBUG: Buffered 10 raw triple(s) for 'endoplasmic reticulum'
+DEBUG: [Wikidata] Triggered for 'lysosomes' — reason: partial match (score=4.06, name='organelle', overlap=set())
+DEBUG: [Wikidata Fallback] Searching Wikidata for 'lysosomes'...
+  > Sending chunk to LLM (1769 chars)... Done!
+DEBUG: [Wikidata Fallback] LLM selected index 1: Q57731500 (Lysosomes)
+DEBUG: [Wikidata Fallback] LLM selected extended categories: ['function'] → ['P366', 'P1056']
+DEBUG: [Wikidata Fallback] Fetching structural facts for Q57731500...
+DEBUG: [Wikidata Fallback] No structural facts returned for Q57731500. Skipping.
+DEBUG: KBPedia matched 1 concept(s) for 'lysosomes': ['organelle']
+DEBUG: Buffered 22 raw triple(s) for 'organelle'
+DEBUG: [Wikidata] Triggered for 'mitochondria' — reason: partial match (score=5.02, name='gentian order', overlap=set())
+DEBUG: [Wikidata Fallback] Searching Wikidata for 'mitochondria'...
+  > Sending chunk to LLM (1738 chars)... Done!
+DEBUG: [Wikidata Fallback] LLM selected index 4: Q3493378 (mitochondrial matrix)
+DEBUG: [Wikidata Fallback] LLM selected extended categories: ['function'] → ['P366', 'P1056']
+DEBUG: [Wikidata Fallback] Fetching structural facts for Q3493378...
+  > Sending chunk to LLM (1610 chars)... Done!
+DEBUG: [Wikidata Filter] Kept 2/4 triple(s) for 'mitochondrial matrix'
+DEBUG: [Wikidata Fallback] Retrieved 2 structural triple(s) for 'mitochondrial matrix'
+  > instance of: cellular component
+  > part of: mitochondrion
+DEBUG: KBPedia matched 2 concept(s) for 'mitochondria': ['gentian order', 'mitochondrial genetics']
+DEBUG: Buffered 10 raw triple(s) for 'gentian order'
+DEBUG: Buffered 8 raw triple(s) for 'mitochondrial genetics'
+DEBUG: KBPedia matched 2 concept(s) for 'golgi apparatus': ['Golgi apparatus', 'artistic gymnastics apparatus']
+DEBUG: Buffered 10 raw triple(s) for 'Golgi apparatus'
+DEBUG: Buffered 10 raw triple(s) for 'artistic gymnastics apparatus'
+  > Sending chunk to LLM (3089 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 2, 6, 3, 5] from 8 candidates.
+DEBUG: End-filter kept 5/8 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4380 chars)...C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 100 AI2 ARC test cases (starting from index 0).
+
+================================================================================
+[AI2 ARC #0] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 99 AI2 ARC test cases (starting from index 1).
+
+================================================================================
+[AI2 ARC #1] Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods e...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['sample', 'comparison', 'process', 'research method', 'observational study', 'long-term study', 'drive', 'statistical method', 'scientific observation', 'trouble']
+DEBUG: Buffered 10 raw triple(s) for 'sample'
+DEBUG: Buffered 3 raw triple(s) for 'comparison'
+DEBUG: Buffered 11 raw triple(s) for 'process'
+DEBUG: Buffered 23 raw triple(s) for 'research method'
+DEBUG: Buffered 13 raw triple(s) for 'observational study'
+DEBUG: Buffered 4 raw triple(s) for 'long-term study'
+DEBUG: Buffered 8 raw triple(s) for 'drive'
+DEBUG: Buffered 10 raw triple(s) for 'statistical method'
+DEBUG: Buffered 11 raw triple(s) for 'scientific observation'
+DEBUG: Buffered 11 raw triple(s) for 'trouble'
+  > Sending chunk to LLM (3740 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4075 chars)...C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 98 AI2 ARC test cases (starting from index 2).
+
+================================================================================
+[AI2 ARC #2] Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-oce...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['oceanic ridge', 'undersea valley', 'rift valley', 'oceanic plateau', 'seamount', 'geological basin', 'fracture zone', 'subduction zones', 'ocean trench', 'rifts or graben']
+DEBUG: Buffered 8 raw triple(s) for 'oceanic ridge'
+DEBUG: Buffered 9 raw triple(s) for 'undersea valley'
+DEBUG: Buffered 14 raw triple(s) for 'rift valley'
+DEBUG: Buffered 8 raw triple(s) for 'oceanic plateau'
+DEBUG: Buffered 12 raw triple(s) for 'seamount'
+DEBUG: Buffered 17 raw triple(s) for 'geological basin'
+DEBUG: Buffered 13 raw triple(s) for 'fracture zone'
+DEBUG: Buffered 8 raw triple(s) for 'subduction zones'
+DEBUG: Buffered 18 raw triple(s) for 'ocean trench'
+DEBUG: Buffered 13 raw triple(s) for 'rifts or graben'
+  > Sending chunk to LLM (4078 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4975 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**undersea valley**\n[\n  "definition: The axial depression of the mid-oceanic ridge system.",\n  "subclass of: underwater location"\n]\n**oceanic plateau**\n['...
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'undersea valley'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'oceanic plateau'
+DEBUG: Batch LLM filter kept 17/17 triple(s) for 'geological basin'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'fracture zone'
+DEBUG: Batch LLM filter kept 18/18 triple(s) for 'ocean trench'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (5002 chars)... Done!
+  > Sending chunk to LLM (4785 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Ollama loaded successfully.
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Identifying the question and context, while preserving the multiple choice options.",
+  "question": "Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the question and context, while preserving the multiple choice options.', 'question': 'Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which feature does not form as a result of tectonic plates diverging? A. trench ' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge'
+  > Sending chunk to LLM (778 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['trench', 'rift valley', 'ocean basin', 'mid-ocean ridge', 'tectonic plates', 'diverging']
+DEBUG: KBPedia matched 2 concept(s) for 'trench': ['trench coat', 'trench']
+DEBUG: Buffered 4 raw triple(s) for 'trench coat'
+DEBUG: Buffered 10 raw triple(s) for 'trench'
+DEBUG: KBPedia matched 2 concept(s) for 'rift valley': ['rift valley', 'Lake Nyasa']
+DEBUG: Buffered 14 raw triple(s) for 'rift valley'
+DEBUG: Buffered 9 raw triple(s) for 'Lake Nyasa'
+DEBUG: KBPedia matched 2 concept(s) for 'ocean basin': ['geological basin', 'basin']
+DEBUG: Buffered 17 raw triple(s) for 'geological basin'
+DEBUG: Buffered 15 raw triple(s) for 'basin'
+DEBUG: KBPedia matched 2 concept(s) for 'mid-ocean ridge': ['oceanic ridge', 'beach ridge']
+DEBUG: Buffered 8 raw triple(s) for 'oceanic ridge'
+DEBUG: Buffered 9 raw triple(s) for 'beach ridge'
+DEBUG: [Wikidata] Triggered for 'tectonic plates' — reason: partial match (score=8.62, name='interplate earthquake', overlap=set())
+DEBUG: [Wikidata Fallback] Searching Wikidata for 'tectonic plates'...
+  > Sending chunk to LLM (1343 chars)... Done!
+DEBUG: [Wikidata Fallback] LLM selected index 1: Q96755721 (Tectonic plates in 3D mantle convection model with stress-history-dependent rheology)
+DEBUG: [Wikidata Fallback] LLM selected extended categories: ['sequence'] → ['P155', 'P156']
+DEBUG: [Wikidata Fallback] Fetching structural facts for Q96755721...
+DEBUG: [Wikidata Fallback] No structural facts returned for Q96755721. Skipping.
+DEBUG: KBPedia matched 2 concept(s) for 'tectonic plates': ['interplate earthquake', 'orogeny']
+DEBUG: Buffered 10 raw triple(s) for 'interplate earthquake'
+DEBUG: Buffered 8 raw triple(s) for 'orogeny'
+DEBUG: [Wikidata] Triggered for 'diverging' — reason: partial match (score=6.01, name='anabranch', overlap=set())
+DEBUG: [Wikidata Fallback] Searching Wikidata for 'diverging'...
+  > Sending chunk to LLM (1492 chars)... Done!
+DEBUG: [Wikidata Fallback] LLM selected index 1: Q1783529 (convex mirror)
+DEBUG: [Wikidata Fallback] LLM selected extended categories: ['sequence'] → ['P155', 'P156']
+DEBUG: [Wikidata Fallback] Fetching structural facts for Q1783529...
+  > Sending chunk to LLM (881 chars)... Done!
+DEBUG: [Wikidata Filter] Filter returned empty — keeping definition only.
+DEBUG: [Wikidata Fallback] Retrieved 1 structural triple(s) for 'convex mirror'
+  > definition: type of mirror
+DEBUG: KBPedia matched 2 concept(s) for 'diverging': ['anabranch', 'Brachyelytrum']
+DEBUG: Buffered 14 raw triple(s) for 'anabranch'
+DEBUG: Buffered 9 raw triple(s) for 'Brachyelytrum'
+  > Sending chunk to LLM (3933 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9, 12] from 13 candidates.
+DEBUG: End-filter kept 7/13 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4392 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n    "trench": [\n        "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compare'...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'trench'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'Lake Nyasa'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'basin'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'oceanic ridge'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'interplate earthquake'
+DEBUG: Removed 1 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 4 grounded concept contexts.
+  > Sending chunk to LLM (3781 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Tectonic plates are large, rigid slabs of rock that fit together like a jigsaw puzzle.
+2. When tectonic plates diverge (move apart), they create new crust as magma rises from the mantle to fill the gap.
+3. A mid-ocean ridge is an underwater mountain system formed by plate tectonics where new oceanic crust is created through volcanic activity and seafloor spreading.
+4. Ocean basins are large depressions in the Earth's surface that can be found between continents or on either side of a mid-ocean ridge.
+5. Rift valleys form when two plates pull apart, creating a zone of extensional tectonic deformation where new crust is being created through volcanic activity and faulting.
+6. Trenches are deep depressions in the Earth's surface that can be found at subduction zones (where one plate is forced beneath another).
+7. Ocean basins do not form as a result of plates diverging, but rather they exist between or on either side of mid-ocean ridges and other tectonic features.
+8. Trenches are formed when two plates converge (move together), resulting in the subduction of one plate under the other.
+9. The process of seafloor spreading occurs at mid-ocean ridges, where new oceanic crust is created through volcanic activity and magma upwelling from the mantle.
+10. Plate tectonics involves the movement of large rigid slabs (plates) that interact with each other to create various geological features such as mountains, volcanoes, trenches, and rift valleys.
+**Context from Prompt:**
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, between_mid_ocean_ridge_and_other_tectonic_features).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, between_mid_ocean_ridge_and_other_tectonic_features).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and trench, and\n      there is no evidence that forms_from holds for trench, and plate_divergence\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and trench, and
+      there is no evidence that forms_from holds for trench, and plate_divergence
+
+
+**Explainer Output:** 
+**Conclusion:** The feature that does not form as a result of tectonic plates diverging is the ocean basin.
+
+**Logical Path:**
+
+The solver arrived at this conclusion by analyzing the relationships between geological features and plate movement. 
+
+1. **Primary Rule:** The system defines which features are formed through plate divergence, including rift valleys (formed when two plates pull apart) and mid-ocean ridges (where new oceanic crust is created).
+2. **Verification of Divergence Features:** The solver verifies that both rift valleys and mid-ocean ridges form as a result of plate divergence.
+3. **Analysis of Ocean Basins:** However, the system notes that ocean basins do not form directly due to plates diverging but exist between or on either side of mid-ocean ridges and other tectonic features.
+4. **Conclusion Based on Absence of Evidence:** Since there is no evidence in the database linking plate divergence to the formation of ocean basins, the solver concludes that ocean basins do not form as a result of plates diverging.
+
+The system's conclusion is based entirely on the absence of any direct link between plate divergence and the formation of ocean basins.
+
+**FINAL LLM OUTPUT:
+*D.* Ocean basin.
+Ocean basins do not form directly due to tectonic plates diverging; instead, they exist between or on either side of mid-ocean ridges and other tectonic features.
+====The pipeline executed in 29.4866 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [A]   | CORRECT |   26.6s
+Prolog          | Predicted: [D]   | WRONG   |   75.6s
+Tuned LLM       | Predicted: [D]   | WRONG   |    3.8s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #3] A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet a...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['bean plant', 'millet plant', 'cocoa bean', 'bean (food)', 'coffee cherry', 'type of soil', 'ground coffee', 'grass seed', 'ratio quantity', 'edible legume seed']
+DEBUG: Buffered 16 raw triple(s) for 'bean plant'
+DEBUG: Buffered 10 raw triple(s) for 'millet plant'
+DEBUG: Buffered 10 raw triple(s) for 'cocoa bean'
+DEBUG: Buffered 13 raw triple(s) for 'bean (food)'
+DEBUG: Buffered 10 raw triple(s) for 'coffee cherry'
+DEBUG: Buffered 10 raw triple(s) for 'type of soil'
+DEBUG: Buffered 13 raw triple(s) for 'ground coffee'
+DEBUG: Buffered 10 raw triple(s) for 'grass seed'
+DEBUG: Buffered 19 raw triple(s) for 'ratio quantity'
+DEBUG: Buffered 13 raw triple(s) for 'edible legume seed'
+  > Sending chunk to LLM (1959 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (3843 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n    "millet plant": [],\n    "bean (food)": [\n        "definition: Food derived from the seed of a bean plant.",\n        "subclass of: edible rich in protein" // relevant because it\'s related to nutr'...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'millet plant'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'bean (food)'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'type of soil'
+DEBUG: Batch LLM filter kept 19/19 triple(s) for 'ratio quantity'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'edible legume seed'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (3779 chars)... Done!
+  > Sending chunk to LLM (3562 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Identifying the differing condition between the two identical setups.",
+  "question": "Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed",
+  "context": [
+    "A student planted two bean seeds in two identical pots containing the same type of soil.",
+    "He placed one pot in a closet and the other near a sunny window.",
+    "Each day, he poured 15 milliliters of water into each pot."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the differing condition between the two identical setups.', 'question': 'Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed', 'context': ['A student planted two bean seeds in two identical pots containing the same type of soil.', 'He placed one pot in a closet and the other near a sunny window.', 'Each day, he poured 15 milliliters of water into each pot.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed
+DEBUG: EXTRACTED CONTEXT (Len: 3): ['A student planted two bean seeds in two identical pots containing the same type of soil.', 'He placed one pot in a closet and the other near a sunny window.', 'Each day, he poured 15 milliliters of water into each pot.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which factor was different for the two pots? A) amount of water B) amount of lig' | context items=3
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 3 text chunk(s)...
+Processing text context: A student planted two bean seeds in two identical pots containing the same type of soil.
+  > [Async] Sending chunk to LLM (2671 chars) and waiting for extraction... Done!
+Text context processed: run_id='a6854e37-99df-4d64-8e35-7add7703f0bb' result={'resolver': {'number_of_nodes_to_resolve': 4, 'number_of_created_nodes': 4}}
+Processing text context: He placed one pot in a closet and the other near a sunny window.
+  > [Async] Sending chunk to LLM (2647 chars) and waiting for extraction... Done!
+Text context processed: run_id='7f9fd7c1-f5b9-4d57-9983-267bd484b34d' result={'resolver': {'number_of_nodes_to_resolve': 4, 'number_of_created_nodes': 4}}
+Processing text context: Each day, he poured 15 milliliters of water into each pot.
+  > [Async] Sending chunk to LLM (2641 chars) and waiting for extraction...C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 98 AI2 ARC test cases (starting from index 2).
+
+================================================================================
+[AI2 ARC #2] Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-oce...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['oceanic ridge', 'undersea valley', 'rift valley', 'oceanic plateau', 'seamount', 'geological basin', 'fracture zone', 'subduction zones', 'ocean trench', 'rifts or graben']
+DEBUG: Buffered 8 raw triple(s) for 'oceanic ridge'
+DEBUG: Buffered 9 raw triple(s) for 'undersea valley'
+DEBUG: Buffered 14 raw triple(s) for 'rift valley'
+DEBUG: Buffered 8 raw triple(s) for 'oceanic plateau'
+DEBUG: Buffered 12 raw triple(s) for 'seamount'
+DEBUG: Buffered 17 raw triple(s) for 'geological basin'
+DEBUG: Buffered 13 raw triple(s) for 'fracture zone'
+DEBUG: Buffered 8 raw triple(s) for 'subduction zones'
+DEBUG: Buffered 18 raw triple(s) for 'ocean trench'
+DEBUG: Buffered 13 raw triple(s) for 'rifts or graben'
+  > Sending chunk to LLM (4078 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4975 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**undersea valley**\n[\n  "definition: The axial depression of the mid-oceanic ridge system.",\n  "subclass of: underwater location"\n]\n**oceanic plateau**\n['...
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'undersea valley'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'oceanic plateau'
+DEBUG: Batch LLM filter kept 17/17 triple(s) for 'geological basin'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'fracture zone'
+DEBUG: Batch LLM filter kept 18/18 triple(s) for 'ocean trench'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (5002 chars)... Done!
+  > Sending chunk to LLM (4785 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Ollama loaded successfully.
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Identifying the question and context, while preserving the multiple choice options.",
+  "question": "Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the question and context, while preserving the multiple choice options.', 'question': 'Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which feature does not form as a result of tectonic plates diverging? A. trench ' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge'
+  > Sending chunk to LLM (778 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['trench', 'rift valley', 'ocean basin', 'mid-ocean ridge', 'tectonic plates', 'diverging']
+DEBUG: KBPedia matched 2 concept(s) for 'trench': ['trench coat', 'trench']
+DEBUG: Buffered 4 raw triple(s) for 'trench coat'
+DEBUG: Buffered 10 raw triple(s) for 'trench'
+DEBUG: KBPedia matched 2 concept(s) for 'rift valley': ['rift valley', 'Lake Nyasa']
+DEBUG: Buffered 14 raw triple(s) for 'rift valley'
+DEBUG: Buffered 9 raw triple(s) for 'Lake Nyasa'
+DEBUG: KBPedia matched 2 concept(s) for 'ocean basin': ['geological basin', 'basin']
+DEBUG: Buffered 17 raw triple(s) for 'geological basin'
+DEBUG: Buffered 15 raw triple(s) for 'basin'
+DEBUG: KBPedia matched 2 concept(s) for 'mid-ocean ridge': ['oceanic ridge', 'beach ridge']
+DEBUG: Buffered 8 raw triple(s) for 'oceanic ridge'
+DEBUG: Buffered 9 raw triple(s) for 'beach ridge'
+DEBUG: KBPedia matched 2 concept(s) for 'tectonic plates': ['interplate earthquake', 'orogeny']
+DEBUG: Buffered 10 raw triple(s) for 'interplate earthquake'
+DEBUG: Buffered 8 raw triple(s) for 'orogeny'
+DEBUG: KBPedia matched 2 concept(s) for 'diverging': ['anabranch', 'Brachyelytrum']
+DEBUG: Buffered 14 raw triple(s) for 'anabranch'
+DEBUG: Buffered 9 raw triple(s) for 'Brachyelytrum'
+  > Sending chunk to LLM (3898 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 9, 10] from 12 candidates.
+DEBUG: End-filter kept 6/12 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4511 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n    "trench": [\n        "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compare'...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'trench'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'Lake Nyasa'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'basin'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'oceanic ridge'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'orogeny'
+DEBUG: Removed 1 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 4 grounded concept contexts.
+  > Sending chunk to LLM (4198 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Tectonic plates diverging results in the formation of new oceanic crust.
+2. Mid-ocean ridges are formed by plate tectonics and consist of underwater mountains linked in chains.
+3. Ocean basins can form as a result of tectonic plates moving apart, creating space for water to fill.
+4. Rift valleys are depressions that form when two tectonic plates move apart.
+5. Trenches are typically associated with subduction zones where one plate is being pushed beneath another.
+6. Orogeny refers to the process of mountain building due to forces and events leading to a large structural deformation of the Earth's lithosphere, which involves compression rather than divergence.
+7. Diverging tectonic plates do not push two continental plates together to form mountains.
+8. The formation of mid-ocean ridges is directly related to seafloor spreading caused by plate movement.
+9. Ocean basins can be formed as a result of the separation of continents, creating space for water to fill.
+10. Trenches are generally associated with subduction zones rather than divergence between plates.
+
+Note: The above list only includes evidence that bridges the premise (tectonic plates diverging) to each option and does not include background or tangential information.
+**Context from Prompt:**
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and trench, and\n      there is no evidence that forms_from holds for trench, and plate_divergence\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and trench, and
+      there is no evidence that forms_from holds for trench, and plate_divergence
+
+
+**Explainer Output:** 
+**Conclusion:** The feature that does not form as a result of tectonic plates diverging is the trench.
+
+**Logical Path:** The solver reached this conclusion by analyzing the relationships between geological features and plate movement:
+
+1. **Primary Rule:** The system defines which features are formed by plate divergence using the `forms_from` predicate.
+2. **Verification of Divergence Features:** The solver verifies that mid-ocean ridges, ocean basins, and rift valleys can all form as a result of tectonic plates diverging.
+3. **Absence of Evidence for Trenches:** However, there is no evidence in the database to suggest that trenches are formed by plate divergence. In fact, the `forms_from` predicate explicitly links trenches with subduction zones, which is a different process involving one plate being pushed beneath another.
+4. **Conclusion Based on Absence of Evidence:** Since there's no direct link between trench formation and plate divergence, but rather an association with subduction zones, the solver concludes that the feature not formed by tectonic plates diverging is indeed the trench.
+
+Note: The explanation focuses solely on the logical steps taken by the solver based on the provided database and context.
+
+**FINAL LLM OUTPUT:
+Final Answer: A.
+Trenches are typically associated with subduction zones, not plate divergence. They form when one tectonic plate is pushed beneath another, which is a different process than the plates moving apart.
+====The pipeline executed in 29.4690 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [A]   | CORRECT |   29.9s
+Prolog          | Predicted: [A]   | CORRECT |   68.1s
+Tuned LLM       | Predicted: [B]   | WRONG   |    2.1s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #3] A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet a...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['bean plant', 'millet plant', 'cocoa bean', 'bean (food)', 'coffee cherry', 'type of soil', 'ground coffee', 'grass seed', 'ratio quantity', 'edible legume seed']
+DEBUG: Buffered 16 raw triple(s) for 'bean plant'
+DEBUG: Buffered 10 raw triple(s) for 'millet plant'
+DEBUG: Buffered 10 raw triple(s) for 'cocoa bean'
+DEBUG: Buffered 13 raw triple(s) for 'bean (food)'
+DEBUG: Buffered 10 raw triple(s) for 'coffee cherry'
+DEBUG: Buffered 10 raw triple(s) for 'type of soil'
+DEBUG: Buffered 13 raw triple(s) for 'ground coffee'
+DEBUG: Buffered 10 raw triple(s) for 'grass seed'
+DEBUG: Buffered 19 raw triple(s) for 'ratio quantity'
+DEBUG: Buffered 13 raw triple(s) for 'edible legume seed'
+  > Sending chunk to LLM (1959 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (3843 chars)...C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 100 AI2 ARC test cases (starting from index 0).
+
+================================================================================
+[AI2 ARC #0] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['plant cell wall', 'cytoplasmic part', 'anucleated cell', 'cell part', 'cell', 'membrane (biological)', 'plastid', 'plant physiology', 'protoplasm', 'cellulose']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+  > Sending chunk to LLM (3448 chars)... Done!
+DEBUG: End-filter LLM kept indices: [0, 3, 5, 6, 8] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4853 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**plant cell wall**\n[\n  "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cell'...
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 25/25 triple(s) for 'cell part'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'membrane (biological)'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'plastid'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'protoplasm'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (5066 chars)... Done!
+  > Sending chunk to LLM (4845 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Ollama loaded successfully.
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+[0s] Waiting for indexes... Status: ['ONLINE', 'POPULATING']
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Comparing cellular structures across kingdoms for functional analogues.",
+  "question": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Comparing cellular structures across kingdoms for functional analogues.', 'question': 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following parts of a plant cell has a function that is most similar' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus'
+  > Sending chunk to LLM (825 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus', 'animal skeleton', 'plant cell']
+DEBUG: KBPedia matched 2 concept(s) for 'cell membrane': ['cell', 'membrane protein']
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 14 raw triple(s) for 'membrane protein'
+DEBUG: KBPedia matched 2 concept(s) for 'cell wall': ['cell wall', 'bacterial cell wall']
+DEBUG: Buffered 13 raw triple(s) for 'cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'bacterial cell wall'
+DEBUG: KBPedia matched 2 concept(s) for 'chloroplast': ['photosynthetic pigment', 'chloroplast']
+DEBUG: Buffered 15 raw triple(s) for 'photosynthetic pigment'
+DEBUG: Buffered 11 raw triple(s) for 'chloroplast'
+DEBUG: KBPedia matched 2 concept(s) for 'nucleus': ['nucleus', 'lentiform nucleus']
+DEBUG: Buffered 11 raw triple(s) for 'nucleus'
+DEBUG: Buffered 6 raw triple(s) for 'lentiform nucleus'
+DEBUG: KBPedia matched 2 concept(s) for 'animal skeleton': ['human skeleton', 'skeleton tarantula']
+DEBUG: Buffered 10 raw triple(s) for 'human skeleton'
+DEBUG: Buffered 9 raw triple(s) for 'skeleton tarantula'
+DEBUG: KBPedia matched 2 concept(s) for 'plant cell': ['plant cell wall', 'plant epidermis']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 11 raw triple(s) for 'plant epidermis'
+  > Sending chunk to LLM (4335 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 10, 11] from 12 candidates.
+DEBUG: End-filter kept 7/12 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4849 chars)...

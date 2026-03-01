@@ -63,7 +63,7 @@ def wait_for_indexes(driver, timeout=60):
 
 class CleanTextRetriever(HybridRetriever):
     # We override 'search' (Public API) instead of 'get_search_results' (Internal API)
-    def search(self, query_text, top_k=5, **kwargs):
+    def search(self, query_text, top_k=8, **kwargs):
         result = super().search(query_text=query_text, top_k=top_k, **kwargs)
         
         # Now it is safe to iterate over .items
@@ -101,7 +101,7 @@ class EnhancedRetriever(VectorCypherRetriever):
         self.driver = driver
         self.llm = llm
 
-    def search(self, query_text, top_k=5, **kwargs):
+    def search(self, query_text, top_k=8, **kwargs):
         # `original_query` carries the full MCQ prompt (with answer options) for LLM filtering.
         original_query = kwargs.pop("original_query", query_text)
 
@@ -111,7 +111,7 @@ class EnhancedRetriever(VectorCypherRetriever):
         
         try:
             print(f"DEBUG: --- Starting Local Vector Similarity Search for: '{query_text}' ---", flush=True)
-            local_result = super().search(query_text=query_text, top_k=5, **kwargs)
+            local_result = super().search(query_text=query_text, top_k=8, **kwargs)
             
             if local_result and local_result.items:
                 for idx, item in enumerate(local_result.items):

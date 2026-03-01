@@ -87,7 +87,7 @@ def _sanitize_lucene_query(query_text: str) -> str:
             sanitized.append(ch)
     return ''.join(sanitized)
 
-def patched_hybrid_search(self, query_text, top_k=5, **kwargs):
+def patched_hybrid_search(self, query_text, top_k=8, **kwargs):
     safe_query = _sanitize_lucene_query(query_text)
     result = self._original_search(query_text=safe_query, top_k=top_k, **kwargs)
     
@@ -141,7 +141,7 @@ def expand_query(self, query):
         print(f"DEBUG: Query expansion failed: {e}")
         return query
 
-def patched_vector_cypher_search(self, query_text, top_k=5, **kwargs):
+def patched_vector_cypher_search(self, query_text, top_k=8, **kwargs):
     # `original_query` carries the full user prompt (with MCQ choices) for LLM filtering.
     # `query_text` is the extracted question stem (used for embedding/entity extraction).
     original_query = kwargs.pop("original_query", query_text)

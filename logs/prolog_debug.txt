@@ -684,3 +684,687 @@ Traceback (most recent call last):
     return self._sock.recv(max_bytes)
            ^^^^^^^^^^^^^^^^^^^^^^^^^^
 KeyboardInterrupt
+AI2 ARC:   0%|                                                           | 0/100 [00:00<?, ?it/s]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   1%|4                                               | 1/100 [01:59<3:16:27, 119.07s/it]INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS FOR (e:Chunk) ON (e.embedding) OPTIONS {indexConfig: {`vector.dimensions`: 4096, `vector.similarity_function`: "cosine"}}` has no effect.} {description: `VECTOR INDEX documentsVectorIndex FOR (e:Chunk) ON (e.embedding)` already exists.} {position: None} for query: "\n        CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS\n        FOR (n:Chunk) ON (n.embedding)\n        OPTIONS {indexConfig: {\n          `vector.dimensions`: 4096,\n          `vector.similarity_function`: 'cosine'\n        }}\n    "
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS FOR (e:Chunk) ON EACH [e.text]` has no effect.} {description: `FULLTEXT INDEX documentsFulltextIndex FOR (e:Chunk) ON EACH [e.text]` already exists.} {position: None} for query: '\n        CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS \n        FOR (n:Chunk) ON EACH [n.text]\n    '
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                             | 0/1 [00:00<?, ?it/s][ABatches: 100%|#####################################################| 1/1 [00:00<00:00, 28.45it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000226B3EDA750> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Janette conducts an investigation to see which foods make her feel more fatigued.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` has no effect.} {description: `RANGE INDEX __entity__tmp_internal_id FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` already exists.} {position: None} for query: '\n        CREATE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (n:__KGBuilder__) ON (n.__tmp_internal_id)\n        '
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (end))} {position: line: 1, column: 21, offset: 20} for query: 'UNWIND $rows as row MATCH (start:__KGBuilder__ {__tmp_internal_id: row.start_node_id}),       (end:__KGBuilder__ {__tmp_internal_id: row.end_node_id}) WITH start, end, row CALL apoc.merge.relationship(start, row.type, {}, row.properties, end, row.properties) YIELD rel  WITH rel, row CALL (rel,row) {  WITH rel, row WHERE row.embedding_properties IS NOT NULL UNWIND keys(row.embedding_properties) as emb CALL db.create.setRelationshipVectorProperty(rel, emb, row.embedding_properties[emb]) } RETURN elementId(rel)'
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000226B3EDA750> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'She eats one of four different foods each day at the same time for four days and then records how she feels.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` has no effect.} {description: `RANGE INDEX __entity__tmp_internal_id FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` already exists.} {position: None} for query: '\n        CREATE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (n:__KGBuilder__) ON (n.__tmp_internal_id)\n        '
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (end))} {position: line: 1, column: 21, offset: 20} for query: 'UNWIND $rows as row MATCH (start:__KGBuilder__ {__tmp_internal_id: row.start_node_id}),       (end:__KGBuilder__ {__tmp_internal_id: row.end_node_id}) WITH start, end, row CALL apoc.merge.relationship(start, row.type, {}, row.properties, end, row.properties) YIELD rel  WITH rel, row CALL (rel,row) {  WITH rel, row WHERE row.embedding_properties IS NOT NULL UNWIND keys(row.embedding_properties) as emb CALL db.create.setRelationshipVectorProperty(rel, emb, row.embedding_properties[emb]) } RETURN elementId(rel)'
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000226B3EDA750> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'She asks her friend Carmen to do the same investigation to see if she gets similar results.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` has no effect.} {description: `RANGE INDEX __entity__tmp_internal_id FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` already exists.} {position: None} for query: '\n        CREATE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (n:__KGBuilder__) ON (n.__tmp_internal_id)\n        '
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (end))} {position: line: 1, column: 21, offset: 20} for query: 'UNWIND $rows as row MATCH (start:__KGBuilder__ {__tmp_internal_id: row.start_node_id}),       (end:__KGBuilder__ {__tmp_internal_id: row.end_node_id}) WITH start, end, row CALL apoc.merge.relationship(start, row.type, {}, row.properties, end, row.properties) YIELD rel  WITH rel, row CALL (rel,row) {  WITH rel, row WHERE row.embedding_properties IS NOT NULL UNWIND keys(row.embedding_properties) as emb CALL db.create.setRelationshipVectorProperty(rel, emb, row.embedding_properties[emb]) } RETURN elementId(rel)'
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   2%|9                                               | 2/100 [04:54<4:08:29, 152.14s/it]INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS FOR (e:Chunk) ON (e.embedding) OPTIONS {indexConfig: {`vector.dimensions`: 4096, `vector.similarity_function`: "cosine"}}` has no effect.} {description: `VECTOR INDEX documentsVectorIndex FOR (e:Chunk) ON (e.embedding)` already exists.} {position: None} for query: "\n        CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS\n        FOR (n:Chunk) ON (n.embedding)\n        OPTIONS {indexConfig: {\n          `vector.dimensions`: 4096,\n          `vector.similarity_function`: 'cosine'\n        }}\n    "
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS FOR (e:Chunk) ON EACH [e.text]` has no effect.} {description: `FULLTEXT INDEX documentsFulltextIndex FOR (e:Chunk) ON EACH [e.text]` already exists.} {position: None} for query: '\n        CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS \n        FOR (n:Chunk) ON EACH [n.text]\n    '
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                             | 0/1 [00:00<?, ?it/s][ABatches: 100%|#####################################################| 1/1 [00:00<00:00, 54.14it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   3%|#4                                              | 3/100 [06:38<3:30:15, 130.06s/it]INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS FOR (e:Chunk) ON (e.embedding) OPTIONS {indexConfig: {`vector.dimensions`: 4096, `vector.similarity_function`: "cosine"}}` has no effect.} {description: `VECTOR INDEX documentsVectorIndex FOR (e:Chunk) ON (e.embedding)` already exists.} {position: None} for query: "\n        CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS\n        FOR (n:Chunk) ON (n.embedding)\n        OPTIONS {indexConfig: {\n          `vector.dimensions`: 4096,\n          `vector.similarity_function`: 'cosine'\n        }}\n    "
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS FOR (e:Chunk) ON EACH [e.text]` has no effect.} {description: `FULLTEXT INDEX documentsFulltextIndex FOR (e:Chunk) ON EACH [e.text]` already exists.} {position: None} for query: '\n        CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS \n        FOR (n:Chunk) ON EACH [n.text]\n    '
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                           | 0/1 [00:00<?, ?it/s][ABatches: 100%|###################################################| 1/1 [00:00<00:00, 34.10it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000226B3EDA750> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'A student planted two bean seeds in two identical pots containing the same type of soil.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+ERROR:neo4j_graphrag.experimental.components.entity_relation_extractor:LLM response has improper format for chunk_index=0
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` has no effect.} {description: `RANGE INDEX __entity__tmp_internal_id FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` already exists.} {position: None} for query: '\n        CREATE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (n:__KGBuilder__) ON (n.__tmp_internal_id)\n        '
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (end))} {position: line: 1, column: 21, offset: 20} for query: 'UNWIND $rows as row MATCH (start:__KGBuilder__ {__tmp_internal_id: row.start_node_id}),       (end:__KGBuilder__ {__tmp_internal_id: row.end_node_id}) WITH start, end, row CALL apoc.merge.relationship(start, row.type, {}, row.properties, end, row.properties) YIELD rel  WITH rel, row CALL (rel,row) {  WITH rel, row WHERE row.embedding_properties IS NOT NULL UNWIND keys(row.embedding_properties) as emb CALL db.create.setRelationshipVectorProperty(rel, emb, row.embedding_properties[emb]) } RETURN elementId(rel)'
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000226B3EDA750> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'He placed one pot in a closet and the other near a sunny window.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+ERROR:neo4j_graphrag.experimental.components.entity_relation_extractor:LLM response has improper format for chunk_index=0
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` has no effect.} {description: `RANGE INDEX __entity__tmp_internal_id FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` already exists.} {position: None} for query: '\n        CREATE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (n:__KGBuilder__) ON (n.__tmp_internal_id)\n        '
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (end))} {position: line: 1, column: 21, offset: 20} for query: 'UNWIND $rows as row MATCH (start:__KGBuilder__ {__tmp_internal_id: row.start_node_id}),       (end:__KGBuilder__ {__tmp_internal_id: row.end_node_id}) WITH start, end, row CALL apoc.merge.relationship(start, row.type, {}, row.properties, end, row.properties) YIELD rel  WITH rel, row CALL (rel,row) {  WITH rel, row WHERE row.embedding_properties IS NOT NULL UNWIND keys(row.embedding_properties) as emb CALL db.create.setRelationshipVectorProperty(rel, emb, row.embedding_properties[emb]) } RETURN elementId(rel)'
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000226B3EDA750> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Each day, he poured 15 milliliters of water into each pot.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+ERROR:neo4j_graphrag.experimental.components.entity_relation_extractor:LLM response has improper format for chunk_index=0
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` has no effect.} {description: `RANGE INDEX __entity__tmp_internal_id FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` already exists.} {position: None} for query: '\n        CREATE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (n:__KGBuilder__) ON (n.__tmp_internal_id)\n        '
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (end))} {position: line: 1, column: 21, offset: 20} for query: 'UNWIND $rows as row MATCH (start:__KGBuilder__ {__tmp_internal_id: row.start_node_id}),       (end:__KGBuilder__ {__tmp_internal_id: row.end_node_id}) WITH start, end, row CALL apoc.merge.relationship(start, row.type, {}, row.properties, end, row.properties) YIELD rel  WITH rel, row CALL (rel,row) {  WITH rel, row WHERE row.embedding_properties IS NOT NULL UNWIND keys(row.embedding_properties) as emb CALL db.create.setRelationshipVectorProperty(rel, emb, row.embedding_properties[emb]) } RETURN elementId(rel)'
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   4%|#9                                              | 4/100 [11:07<4:55:47, 184.87s/it]INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS FOR (e:Chunk) ON (e.embedding) OPTIONS {indexConfig: {`vector.dimensions`: 4096, `vector.similarity_function`: "cosine"}}` has no effect.} {description: `VECTOR INDEX documentsVectorIndex FOR (e:Chunk) ON (e.embedding)` already exists.} {position: None} for query: "\n        CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS\n        FOR (n:Chunk) ON (n.embedding)\n        OPTIONS {indexConfig: {\n          `vector.dimensions`: 4096,\n          `vector.similarity_function`: 'cosine'\n        }}\n    "
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS FOR (e:Chunk) ON EACH [e.text]` has no effect.} {description: `FULLTEXT INDEX documentsFulltextIndex FOR (e:Chunk) ON EACH [e.text]` already exists.} {position: None} for query: '\n        CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS \n        FOR (n:Chunk) ON EACH [n.text]\n    '
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                           | 0/1 [00:00<?, ?it/s][ABatches: 100%|###################################################| 1/1 [00:00<00:00, 37.42it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000226B3EDA750> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Many endangered animals are captured, tagged, and then released back into their environment.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` has no effect.} {description: `RANGE INDEX __entity__tmp_internal_id FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` already exists.} {position: None} for query: '\n        CREATE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (n:__KGBuilder__) ON (n.__tmp_internal_id)\n        '
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (end))} {position: line: 1, column: 21, offset: 20} for query: 'UNWIND $rows as row MATCH (start:__KGBuilder__ {__tmp_internal_id: row.start_node_id}),       (end:__KGBuilder__ {__tmp_internal_id: row.end_node_id}) WITH start, end, row CALL apoc.merge.relationship(start, row.type, {}, row.properties, end, row.properties) YIELD rel  WITH rel, row CALL (rel,row) {  WITH rel, row WHERE row.embedding_properties IS NOT NULL UNWIND keys(row.embedding_properties) as emb CALL db.create.setRelationshipVectorProperty(rel, emb, row.embedding_properties[emb]) } RETURN elementId(rel)'
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000226B3EDA750> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+ERROR:neo4j_graphrag.experimental.components.entity_relation_extractor:LLM response has improper format for chunk_index=0
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` has no effect.} {description: `RANGE INDEX __entity__tmp_internal_id FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` already exists.} {position: None} for query: '\n        CREATE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (n:__KGBuilder__) ON (n.__tmp_internal_id)\n        '
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (end))} {position: line: 1, column: 21, offset: 20} for query: 'UNWIND $rows as row MATCH (start:__KGBuilder__ {__tmp_internal_id: row.start_node_id}),       (end:__KGBuilder__ {__tmp_internal_id: row.end_node_id}) WITH start, end, row CALL apoc.merge.relationship(start, row.type, {}, row.properties, end, row.properties) YIELD rel  WITH rel, row CALL (rel,row) {  WITH rel, row WHERE row.embedding_properties IS NOT NULL UNWIND keys(row.embedding_properties) as emb CALL db.create.setRelationshipVectorProperty(rel, emb, row.embedding_properties[emb]) } RETURN elementId(rel)'
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   5%|##4                                             | 5/100 [12:13<3:45:11, 142.22s/it]INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS FOR (e:Chunk) ON (e.embedding) OPTIONS {indexConfig: {`vector.dimensions`: 4096, `vector.similarity_function`: "cosine"}}` has no effect.} {description: `VECTOR INDEX documentsVectorIndex FOR (e:Chunk) ON (e.embedding)` already exists.} {position: None} for query: "\n        CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS\n        FOR (n:Chunk) ON (n.embedding)\n        OPTIONS {indexConfig: {\n          `vector.dimensions`: 4096,\n          `vector.similarity_function`: 'cosine'\n        }}\n    "
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS FOR (e:Chunk) ON EACH [e.text]` has no effect.} {description: `FULLTEXT INDEX documentsFulltextIndex FOR (e:Chunk) ON EACH [e.text]` already exists.} {position: None} for query: '\n        CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS \n        FOR (n:Chunk) ON EACH [n.text]\n    '
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                           | 0/1 [00:00<?, ?it/s][ABatches: 100%|###################################################| 1/1 [00:00<00:00, 40.11it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000226B3EDA750> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` has no effect.} {description: `RANGE INDEX __entity__tmp_internal_id FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` already exists.} {position: None} for query: '\n        CREATE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (n:__KGBuilder__) ON (n.__tmp_internal_id)\n        '
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (end))} {position: line: 1, column: 21, offset: 20} for query: 'UNWIND $rows as row MATCH (start:__KGBuilder__ {__tmp_internal_id: row.start_node_id}),       (end:__KGBuilder__ {__tmp_internal_id: row.end_node_id}) WITH start, end, row CALL apoc.merge.relationship(start, row.type, {}, row.properties, end, row.properties) YIELD rel  WITH rel, row CALL (rel,row) {  WITH rel, row WHERE row.embedding_properties IS NOT NULL UNWIND keys(row.embedding_properties) as emb CALL db.create.setRelationshipVectorProperty(rel, emb, row.embedding_properties[emb]) } RETURN elementId(rel)'
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   5%|##4                                             | 5/100 [13:58<4:25:40, 167.80s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 185, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 158, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 91, in run_benchmarks
+    ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 261, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 240, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 149, in run_test_case
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, question, flag="prolog")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 123, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 309, in run_pipeline
+    generation_result = generate(llm=retriever_llm, retriever=retriever, query=query, original_query=user_question)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\retriever.py", line 287, in generate
+    graph_rag_results = graph_rag.search(
+                        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\generation\graphrag.py", line 151, in search
+    retriever_result: RetrieverResult = self.retriever.search(
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\retriever.py", line 156, in patched_vector_cypher_search
+    kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\kbpedia_retriever.py", line 745, in search
+    batch_results = self.filter_triples_batch(query_text, batch_data, original_query=filter_query)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\kbpedia_retriever.py", line 368, in filter_triples_batch
+    raw = self.llm.invoke(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 104, in invoke
+    response = super().invoke(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 157, in invoke
+    return self.__invoke_v1(input, message_history, system_instruction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 216, in wrapper
+    return active_handler.handle_sync(inner_func)()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 210, in inner_func
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 201, in __invoke_v1
+    response = self.client.chat(
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 365, in chat
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 189, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 129, in _request_raw
+    r = self._client.request(*args, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 103, in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 136, in handle_request
+    raise exc
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 106, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 177, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 128, in read
+    return self._sock.recv(max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+AI2 ARC:   0%|                                                         | 0/100 [00:00<?, ?it/s]AI2 ARC:   0%|                                                          | 0/99 [00:00<?, ?it/s]AI2 ARC:   0%|                                                          | 0/99 [00:29<?, ?it/s]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 97, in run_benchmarks
+    ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 261, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 240, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 144, in run_test_case
+    gr_result = run_pipeline_safe(run_graphrag, question)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 123, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 354, in run_pipeline
+    result = generate_answer(question, retriever, retriever_llm, original_query=question)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 270, in generate_answer
+    return generate(llm, retriever, query, original_query=original_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\llm.py", line 19, in generate
+    graph_rag_results = graph_rag.search(
+                        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\generation\graphrag.py", line 151, in search
+    retriever_result: RetrieverResult = self.retriever.search(
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\retriever.py", line 162, in search
+    kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query, seeded_entities=list(extracted_entities))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 470, in search
+    batch_results = self.filter_triples_batch(query_text, batch_data, original_query=filter_query)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 294, in filter_triples_batch
+    raw = self.llm.invoke(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 94, in invoke
+    response = super().invoke(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 157, in invoke
+    return self.__invoke_v1(input, message_history, system_instruction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 216, in wrapper
+    return active_handler.handle_sync(inner_func)()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 210, in inner_func
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 201, in __invoke_v1
+    response = self.client.chat(
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 365, in chat
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 189, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 129, in _request_raw
+    r = self._client.request(*args, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 103, in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 136, in handle_request
+    raise exc
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 106, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 177, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 128, in read
+    return self._sock.recv(max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+AI2 ARC:   0%|                                                          | 0/98 [00:00<?, ?it/s]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   1%|4                                              | 1/98 [01:46<2:51:23, 106.02s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                           | 0/1 [00:00<?, ?it/s][ABatches: 100%|###################################################| 1/1 [00:00<00:00, 46.35it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000127EC6BA4B0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'A student planted two bean seeds in two identical pots containing the same type of soil.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000127EC6BA4B0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'He placed one pot in a closet and the other near a sunny window.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x00000127EC6BA4B0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Each day, he poured 15 milliliters of water into each pot.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+AI2 ARC:   1%|4                                              | 1/98 [03:14<5:14:53, 194.78s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 97, in run_benchmarks
+    ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 261, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 240, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 149, in run_test_case
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, question, flag="prolog")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 123, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 303, in run_pipeline
+    _run_async(process_context(kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 28, in _run_async
+    return _persistent_loop.run_until_complete(coro)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 651, in run_until_complete
+    self.run_forever()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 618, in run_forever
+    self._run_once()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 1913, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 444, in select
+    self._poll(timeout)
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 769, in _poll
+    status = _overlapped.GetQueuedCompletionStatus(self._iocp, ms)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+AI2 ARC:   0%|                                                          | 0/98 [00:00<?, ?it/s]AI2 ARC:   1%|4                                              | 1/98 [01:40<2:41:48, 100.09s/it]AI2 ARC:   1%|4                                              | 1/98 [02:09<3:29:51, 129.81s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 97, in run_benchmarks
+    ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 261, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 240, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 144, in run_test_case
+    gr_result = run_pipeline_safe(run_graphrag, question)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 123, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 354, in run_pipeline
+    result = generate_answer(question, retriever, retriever_llm, original_query=question)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 270, in generate_answer
+    return generate(llm, retriever, query, original_query=original_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\llm.py", line 19, in generate
+    graph_rag_results = graph_rag.search(
+                        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\generation\graphrag.py", line 151, in search
+    retriever_result: RetrieverResult = self.retriever.search(
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\retriever.py", line 162, in search
+    kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query, seeded_entities=list(extracted_entities))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 470, in search
+    batch_results = self.filter_triples_batch(query_text, batch_data, original_query=filter_query)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 294, in filter_triples_batch
+    raw = self.llm.invoke(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 94, in invoke
+    response = super().invoke(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 157, in invoke
+    return self.__invoke_v1(input, message_history, system_instruction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 216, in wrapper
+    return active_handler.handle_sync(inner_func)()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 210, in inner_func
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 201, in __invoke_v1
+    response = self.client.chat(
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 365, in chat
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 189, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 129, in _request_raw
+    r = self._client.request(*args, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 103, in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 136, in handle_request
+    raise exc
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 106, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 177, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 128, in read
+    return self._sock.recv(max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+AI2 ARC:   0%|                                                         | 0/100 [00:00<?, ?it/s]

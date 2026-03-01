@@ -586,19 +586,11 @@ Output ONLY the JSON object, nothing else."""
                             raw = self.llm.invoke(select_prompt)
                             res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
 
-                            # Strip markdown fences
-                            if "```json" in res:
-                                res = res.split("```json")[1].split("```")[0].strip()
-                            elif "```" in res:
-                                res = res.split("```")[1].split("```")[0].strip()
-
-                            # Find JSON object
-                            brace_start = res.find("{")
-                            brace_end = res.rfind("}")
-                            if brace_start != -1 and brace_end != -1:
-                                res = res[brace_start:brace_end + 1]
-
-                            parsed = json.loads(res)
+                            # Use safe parser to extract the JSON object robustly
+                            parsed = _safe_parse_json(res, expect=dict)
+                            if not parsed:
+                                raise ValueError("Failed to parse LLM selection JSON.")
+                                
                             idx = parsed.get("index", 0)
                             categories = parsed.get("categories", [])
 

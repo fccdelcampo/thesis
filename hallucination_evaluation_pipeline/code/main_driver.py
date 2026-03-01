@@ -1,4 +1,4 @@
-"""
+r"""
 Hallucination Evaluation Pipeline - Main Driver
 
 Orchestrates the full evaluation pipeline:
@@ -16,9 +16,15 @@ Usage:
     python hallucination_evaluation_pipeline\code\main_driver.py --test-size n      # Run with n test cases
     python hallucination_evaluation_pipeline\code\main_driver.py --benchmarks ai2_arc openbookqa mmlu      # Run specific benchmarks
 """
-import os
 import sys
+import os
 import argparse
+import logging
+
+# Suppress noisy external library logs as per user request
+logging.getLogger("neo4j.notifications").setLevel(logging.WARNING)
+logging.getLogger("neo4j_graphrag.experimental.components.entity_relation_extractor").setLevel(logging.CRITICAL)
+
 
 # Add project root and stats directory to sys.path
 current_dir = os.path.dirname(os.path.abspath(__file__))

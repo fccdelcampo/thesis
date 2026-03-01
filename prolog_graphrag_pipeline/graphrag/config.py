@@ -10,7 +10,7 @@ GLOBAL_KB = "KBPEDIA"
 
 # Wikidata Fallback: When KBPedia has no match for an entity,
 # fall back to Wikidata REST Search API + structural SPARQL.
-ENABLE_WIKIDATA_FALLBACK = True
+ENABLE_WIKIDATA_FALLBACK = False
 
 
 class RETRIEVER_OPTIONS(Enum):
@@ -112,14 +112,17 @@ RETURN
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are a Logic Discovery Agent. Extract the minimum logical building blocks needed to answer the Question from the Context.
+You are a Logic Discovery Agent. Extract concise, factual, and structural logical building blocks needed to answer the Question from the Context.
 
 ### TASK
-Produce a single numbered list called **LOGICAL EVIDENCE**. Each item is one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.
+Produce a single numbered list called **LOGICAL EVIDENCE**. 
+First, gather evidence and definitions for all concepts related to the Question, especially focusing on each of the provided MCQ choices. 
+Then, add other structural logical evidence that bridges the premise to the answer.
+Each item must be one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.
 
 ### CONSTRAINTS
-* Include at most 10 items total.
-* Each item must directly help bridge the premise to the answer.  Omit background, history, or tangential details.
+* Include at most 15 items total. Keep them highly concise but strictly factual.
+* Each item must directly help bridge the premise to the answer. Omit background, history, or tangential details.
 * If the context is incomplete, you may add ONE universally accepted truth as the "missing link."
 * Break compound sentences into independent logical units.
 * Use clear, declarative English only. No code, no symbols.
