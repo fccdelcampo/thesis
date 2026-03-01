@@ -35,7 +35,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 _project_root = str(Path(__file__).resolve().parents[2])
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
-from llm_config import MODEL_NAME as _LLM_MODEL
+from llm_config import MODEL_NAME as _LLM_MODEL, USE_TOGETHER_API, get_openai_client
 
 ENCODER_MODEL = _LLM_MODEL
 RETRIEVER_MODEL = _LLM_MODEL
@@ -95,7 +95,30 @@ class DebugOllamaLLM(OllamaLLM):
             return cleaned_list
         return input_data
 
+    def _openai_invoke(self, input, message_history=None, system_instruction=None):
+        """Route through the openai client when USE_TOGETHER_API=True."""
+        from neo4j_graphrag.llm.types import LLMResponse
+        _client = get_openai_client()
+        if isinstance(input, list):
+            messages = input
+        else:
+            messages = []
+            if system_instruction:
+                messages.append({"role": "system", "content": str(system_instruction)})
+            if message_history:
+                messages.extend([{"role": m.get("role", "user"), "content": m.get("content", "")} for m in message_history])
+            messages.append({"role": "user", "content": str(input)})
+        response = _client.chat.completions.create(
+            model=ENCODER_MODEL,
+            messages=messages,
+            temperature=0.0,
+        )
+        content = response.choices[0].message.content or ""
+        return LLMResponse(content=self._clean_response_text(content))
+
     def invoke(self, input, message_history=None, system_instruction=None, **kwargs):
+        if USE_TOGETHER_API:
+            return self._openai_invoke(input, message_history, system_instruction)
         kwargs.pop('response_format', None) # neo4j_graphrag OllamaLLM hates response_format
         clean_input = self._clean_input_data(input)
         
@@ -125,6 +148,10 @@ class DebugOllamaLLM(OllamaLLM):
             return LLMResponse(content=clean_content)
 
     async def ainvoke(self, input, message_history=None, system_instruction=None, **kwargs):
+        if USE_TOGETHER_API:
+            import asyncio
+            loop = asyncio.get_event_loop()
+            return await loop.run_in_executor(None, self._openai_invoke, input, message_history, system_instruction)
         kwargs.pop('response_format', None)
         clean_input = self._clean_input_data(input)
         

@@ -18695,3 +18695,41 @@ Iteration 3 | Prolog Error: Syntax error: End of file in quoted codes
 
 ** here **
 c
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 100 MMLU test cases (starting from index 0).
+
+================================================================================
+[MMLU #0] Which of the following describes the fallacy of appeal to common practice?...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+CRITICAL ERROR: Could not connect to Neo4j (attempt 1/10): Unable to retrieve routing information
+Retrying in 30s...
+DEBUG: Initializing new Neo4j driver...
+CRITICAL ERROR: Could not connect to Neo4j (attempt 2/10): Unable to retrieve routing information
+Retrying in 30s...
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following describes the fallacy of appeal to common practice?
+
+A. eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source
+B. reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences
+C. drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim
+D. arguing that something is the right thing to do based only on evidence that other people are already doing it.
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
