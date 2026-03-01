@@ -4428,3 +4428,15 @@ Traceback (most recent call last):
     if lock.acquire(block, timeout):
        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 KeyboardInterrupt
+MMLU:   0%|                                                          | 0/100 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\encoder.py", line 63, in extract_query_and_context
+    raise ValueError("Failed to get a response from the LLM.")
+ValueError: Failed to get a response from the LLM.
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
