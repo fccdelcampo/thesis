@@ -116,12 +116,16 @@ def score_answer(predicted: str, correct: str) -> float:
 
 
 def run_pipeline_safe(pipeline_fn, question: str, **kwargs) -> dict:
-    """Safely run a pipeline, returning empty dict on failure."""
+    """Safely run a pipeline, returning empty dict on failure. Injects 'elapsed' key."""
+    import time
+    t0 = time.perf_counter()
     try:
-        return pipeline_fn(question, **kwargs)
+        result = pipeline_fn(question, **kwargs)
     except Exception as e:
         print(f"  Pipeline error: {e}")
-        return {"answer": "", "contexts": [], "text_answer": ""}
+        result = {"answer": "", "contexts": [], "text_answer": ""}
+    result["elapsed"] = time.perf_counter() - t0
+    return result
     
 
 def run_test_case(test_case: dict, test_case_id: int):
@@ -151,28 +155,35 @@ def run_test_case(test_case: dict, test_case_id: int):
     tuned_letter = extract_answer_letter(tuned_result.get("answer", ""))
     tuned_score = score_answer(tuned_letter, correct_answer)
     
+    # Timing
+    gr_time   = gr_result.get("elapsed", 0.0)
+    pgr_time  = pgr_result.get("elapsed", 0.0)
+    tuned_time = tuned_result.get("elapsed", 0.0)
+
     print(f"\n--- PIPELINE COMPARISON ---")
-    def format_res(name, letter, score):
+    def format_res(name, letter, score, secs):
         status = "CORRECT" if score >= 1.0 else "WRONG"
         let_str = f"[{letter}]" if letter else "[?]"
-        return f"{name:<15} | Predicted: {let_str:<5} | {status}"
-        
-    print(format_res("GraphRAG", gr_letter, gr_score))
-    print(format_res("Prolog", pgr_letter, pgr_score))
-    print(format_res("Tuned LLM", tuned_letter, tuned_score))
+        return f"{name:<15} | Predicted: {let_str:<5} | {status:<7} | {secs:6.1f}s"
+
+    print(format_res("GraphRAG",  gr_letter,    gr_score,    gr_time))
+    print(format_res("Prolog",    pgr_letter,   pgr_score,   pgr_time))
+    print(format_res("Tuned LLM", tuned_letter, tuned_score, tuned_time))
     print("=" * 80 + "\n")
-    
+
     # Log scores
     log_results(test_case_id, tuned_score, gr_score, pgr_score)
-    
+
     # Log Q&A details per pipeline
-    gr_label = "0" if gr_score >= THRESHOLD else "1"
-    pgr_label = "0" if pgr_score >= THRESHOLD else "1"
+    gr_label    = "0" if gr_score    >= THRESHOLD else "1"
+    pgr_label   = "0" if pgr_score   >= THRESHOLD else "1"
     tuned_label = "0" if tuned_score >= THRESHOLD else "1"
-    
-    log_question_and_answer(test_case_id, "graphrag", question, gr_result.get("answer", ""), gr_score, gr_label)
-    log_question_and_answer(test_case_id, "prolog_graphrag", question, pgr_result.get("answer", ""), pgr_score, pgr_label)
-    log_question_and_answer(test_case_id, "tuned_pipeline", question, tuned_result.get("answer", ""), tuned_score, tuned_label)
+
+    log_question_and_answer(test_case_id, "graphrag",        question, gr_result.get("answer",    ""), gr_score,    gr_label)
+    log_question_and_answer(test_case_id, "prolog_graphrag", question, pgr_result.get("answer",   ""), pgr_score,   pgr_label)
+    log_question_and_answer(test_case_id, "tuned_pipeline",  question, tuned_result.get("answer", ""), tuned_score, tuned_label)
+
+    return gr_time, pgr_time, tuned_time
 
 
 def log_results(test_case_id: int, tuned_score: Union[float, int], 
@@ -220,8 +231,25 @@ def log_question_and_answer(test_case_id: int, pipeline: str, question: str,
 
 
 def run_test_cases(test_cases: list[dict], start_idx: int = 0):
-    for i, t in enumerate(tqdm(test_cases, desc="AI2 ARC"), start=start_idx):
-        run_test_case(t, i)
+    total_gr = 0.0
+    total_pgr = 0.0
+    total_tuned = 0.0
+    count = 0
+
+    for i, t in enumerate(test_cases, start=start_idx):
+        gr_t, pgr_t, tuned_t = run_test_case(t, i)
+        total_gr += gr_t
+        total_pgr += pgr_t
+        total_tuned += tuned_t
+        count += 1
+
+    if count > 0:
+        print("\n" + "="*80)
+        print(f"--- AVERAGE RUNTIME PER QUESTION (N={count}) ---")
+        print(f"GraphRAG:        {total_gr / count:6.2f}s")
+        print(f"Prolog GraphRAG: {total_pgr / count:6.2f}s")
+        print(f"Tuned LLM:       {total_tuned / count:6.2f}s")
+        print("="*80 + "\n")
 
 
 def main(test_size: int = 1000, start_idx: int = 0):
