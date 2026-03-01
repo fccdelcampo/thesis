@@ -33,7 +33,12 @@ def check_db_health(driver):
         return False
 
 def create_indexes(driver):
-    embedding_dimension = 4096
+    import sys, os as _os
+    _root = _os.path.abspath(_os.path.join(_os.path.dirname(__file__), "..", ".."))
+    if _root not in sys.path:
+        sys.path.insert(0, _root)
+    from llm_config import EMBED_DIM
+    embedding_dimension = EMBED_DIM
 
     print(f"Creating indexes with dimension: {embedding_dimension}...")
 

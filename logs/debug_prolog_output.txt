@@ -18730,6 +18730,1003 @@ C. drawing a conclusion after purposely leaving out evidence or ignoring known e
 D. arguing that something is the right thing to do based only on evidence that other people are already doing it.
 
 Answer with the letter only (A, B, C, or D).' ---
-DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
 DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
 DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 100 MMLU test cases (starting from index 0).
+
+================================================================================
+[MMLU #0] Which of the following describes the fallacy of appeal to common practice?...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following describes the fallacy of appeal to common practice?
+
+A. eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source
+B. reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences
+C. drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim
+D. arguing that something is the right thing to do based only on evidence that other people are already doing it.
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['type of scientific fallacy', 'inductive fallacy', 'vindication', 'logical fallacy', 'probability fallacy', 'syllogistic fallacy', 'causal fallacy', 'propositional fallacy', 'common law system', 'failing']
+DEBUG: Buffered 13 raw triple(s) for 'type of scientific fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'inductive fallacy'
+DEBUG: Buffered 5 raw triple(s) for 'vindication'
+DEBUG: Buffered 15 raw triple(s) for 'logical fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'probability fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'syllogistic fallacy'
+DEBUG: Buffered 13 raw triple(s) for 'causal fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'propositional fallacy'
+DEBUG: Buffered 20 raw triple(s) for 'common law system'
+DEBUG: Buffered 14 raw triple(s) for 'failing'
+DEBUG: End-filter LLM call failed: Error code: 401 - {'id': 'oZLTAeX-2kFHot-9d599e879a23fecf', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Returning all candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Error code: 401 - {'id': 'oZLTAor-2kFHot-9d599e8cd946fed9', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Using all raw triples.
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'type of scientific fallacy'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'inductive fallacy'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'vindication'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'logical fallacy'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'probability fallacy'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Error in run_pipeline: Error code: 401 - {'id': 'oZLTAxf-2kFHot-9d599e901e79fee0', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Ollama loaded successfully.
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+[0s] Waiting for indexes... Status: ['POPULATING', 'POPULATING']
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTCBT-2kFHot-9d599ea9e960febd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTCFT-2kFHot-9d599eab4bb9febd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTCKp-2kFHot-9d599eacce0afebd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTCQF-2kFHot-9d599eae6854febd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTCbv-2kFHot-9d599eb01b28febd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+  Pipeline error: Failed to extract query and context after 5 retries. Last error: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTCgv-2kFHot-9d599eb47b38febc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [?]   | WRONG   |   12.1s
+Prolog          | Predicted: [?]   | WRONG   |    5.5s
+Tuned LLM       | Predicted: [?]   | WRONG   |    0.3s
+================================================================================
+
+
+================================================================================
+[MMLU #1] Which of the following are most vulnerable to injection attacks?...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following are most vulnerable to injection attacks?
+
+A. Session IDs
+B. Registry keys
+C. Network communications
+D. SQL queries based on user input
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['computer security exploit', 'corruption of information attack', 'computer vulnerability database', 'armed attack', 'Web security exploit', 'type of attack', 'hacking (computer)', 'attack on information bearing things', 'computer vulnerability', 'intrusion']
+DEBUG: Buffered 4 raw triple(s) for 'computer security exploit'
+DEBUG: Buffered 12 raw triple(s) for 'corruption of information attack'
+DEBUG: Buffered 14 raw triple(s) for 'computer vulnerability database'
+DEBUG: Buffered 14 raw triple(s) for 'armed attack'
+DEBUG: Buffered 8 raw triple(s) for 'Web security exploit'
+DEBUG: Buffered 11 raw triple(s) for 'type of attack'
+DEBUG: Buffered 13 raw triple(s) for 'hacking (computer)'
+DEBUG: Buffered 10 raw triple(s) for 'attack on information bearing things'
+DEBUG: Buffered 12 raw triple(s) for 'computer vulnerability'
+DEBUG: Buffered 10 raw triple(s) for 'intrusion'
+DEBUG: End-filter LLM call failed: Error code: 401 - {'id': 'oZLTEMf-2kFHot-9d599ed72c0afebf', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Returning all candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Error code: 401 - {'id': 'oZLTEWn-2kFHot-9d599edacb0efecd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Using all raw triples.
+DEBUG: Batch LLM filter kept 4/4 triple(s) for 'computer security exploit'
+DEBUG: Batch LLM filter kept 12/12 triple(s) for 'corruption of information attack'
+DEBUG: Batch LLM filter kept 14/14 triple(s) for 'computer vulnerability database'
+DEBUG: Batch LLM filter kept 14/14 triple(s) for 'armed attack'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'Web security exploit'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Error in run_pipeline: Error code: 401 - {'id': 'oZLTEiD-2kFHot-9d599ede1e09fec0', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTEo9-2kFHot-9d599ee0b8a8fec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTEsH-2kFHot-9d599ee25b37fec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTEx7-2kFHot-9d599ee3dd72fec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTF1y-2kFHot-9d599ee58854fec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTF64-2kFHot-9d599ee6faf8fec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+  Pipeline error: Failed to extract query and context after 5 retries. Last error: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTFBr-2kFHot-9d599ee8aa38fee3', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [?]   | WRONG   |    6.8s
+Prolog          | Predicted: [?]   | WRONG   |    1.3s
+Tuned LLM       | Predicted: [?]   | WRONG   |    0.3s
+================================================================================
+
+
+================================================================================
+[MMLU #2] Formation of a solution can often be visualized as a three-step process. Step 1. Solvent molecules are separated from ea...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Formation of a solution can often be visualized as a three-step process. Step 1. Solvent molecules are separated from each other to make space for the solute. Step 2. Solute molecules are separated so they fit into spaces in the solvent. Step 3. Separated solute and solvent are brought together filling in the spaces.All of the fundamental principles below are important in understanding the formation of solutions except which one?
+
+A. Starting at equilibrium, moving particles apart while in the solid or equilibrium phases requires added energy proportional to the attractive forces.
+B. Bringing particles together releases energy in proportion to their attractive forces.
+C. The total of the energies in steps 1 to 3 indicates if a solution will form.
+D. Molecules with similar molecular masses are required to form solutions.
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['separation process', 'form of water', "topics of 'material solubility'", 'solution', 'aqueous solution', 'surface diffusion', 'solvent', 'chemical process', 'chemical synthesis', 'molecular dynamics']
+DEBUG: Buffered 15 raw triple(s) for 'separation process'
+DEBUG: Buffered 9 raw triple(s) for 'form of water'
+DEBUG: Buffered 5 raw triple(s) for 'topics of 'material solubility''
+DEBUG: Buffered 15 raw triple(s) for 'solution'
+DEBUG: Buffered 18 raw triple(s) for 'aqueous solution'
+DEBUG: Buffered 4 raw triple(s) for 'surface diffusion'
+DEBUG: Buffered 16 raw triple(s) for 'solvent'
+DEBUG: Buffered 13 raw triple(s) for 'chemical process'
+DEBUG: Buffered 25 raw triple(s) for 'chemical synthesis'
+DEBUG: Buffered 5 raw triple(s) for 'molecular dynamics'
+DEBUG: End-filter LLM call failed: Error code: 401 - {'id': 'oZLTGjf-2kFHot-9d599f097f2bfec0', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Returning all candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Error code: 401 - {'id': 'oZLTGt9-2kFHot-9d599f0cc94efec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Using all raw triples.
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'separation process'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'form of water'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'topics of 'material solubility''
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'solution'
+DEBUG: Batch LLM filter kept 18/18 triple(s) for 'aqueous solution'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Error in run_pipeline: Error code: 401 - {'id': 'oZLTH2z-2kFHot-9d599f0fcfe2febf', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTHFF-2kFHot-9d599f11d9cafec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTHKo-2kFHot-9d599f15f899fec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTHPk-2kFHot-9d599f177b49fec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTHUg-2kFHot-9d599f18ed71fec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTHYm-2kFHot-9d599f1ab841fec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+  Pipeline error: Failed to extract query and context after 5 retries. Last error: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTHf8-2kFHot-9d599f1c6cc2fedb', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [?]   | WRONG   |    6.2s
+Prolog          | Predicted: [?]   | WRONG   |    1.7s
+Tuned LLM       | Predicted: [?]   | WRONG   |    0.5s
+================================================================================
+
+
+================================================================================
+[MMLU #3] Prenatal programming:
+...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Prenatal programming:
+
+
+A. Explains the rise in obesity in the pre-school years
+B. May be effected through the epigenetic effects of intrauterine nutritional inadequacy
+C. Causes high blood pressure in young children
+D. Only affects low birth weight children
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['precocious puberty and pregnancy', 'epigenetics', 'congenital condition', 'hypertension', 'malnutrition', 'nutritional deficiency', 'Abortion–breast cancer hypothesis', 'drug pregnancy type', 'obesity', 'developmental delay']
+DEBUG: Buffered 3 raw triple(s) for 'precocious puberty and pregnancy'
+DEBUG: Buffered 8 raw triple(s) for 'epigenetics'
+DEBUG: Buffered 13 raw triple(s) for 'congenital condition'
+DEBUG: Buffered 9 raw triple(s) for 'hypertension'
+DEBUG: Buffered 9 raw triple(s) for 'malnutrition'
+DEBUG: Buffered 8 raw triple(s) for 'nutritional deficiency'
+DEBUG: Buffered 3 raw triple(s) for 'Abortion–breast cancer hypothesis'
+DEBUG: Buffered 5 raw triple(s) for 'drug pregnancy type'
+DEBUG: Buffered 13 raw triple(s) for 'obesity'
+DEBUG: Buffered 9 raw triple(s) for 'developmental delay'
+DEBUG: End-filter LLM call failed: Error code: 401 - {'id': 'oZLTKKh-2kFHot-9d599f400cd6fedb', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Returning all candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Error code: 401 - {'id': 'oZLTKUd-2kFHot-9d599f4348dffec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Using all raw triples.
+DEBUG: Batch LLM filter kept 3/3 triple(s) for 'precocious puberty and pregnancy'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'epigenetics'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'congenital condition'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'hypertension'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'malnutrition'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Error in run_pipeline: Error code: 401 - {'id': 'oZLTKfq-2kFHot-9d599f474c2dfee3', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTKnN-2kFHot-9d599f491c7d4045', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTKrY-2kFHot-9d599f4b1f0c4045', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTKwG-2kFHot-9d599f4cd9c44045', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTL1W-2kFHot-9d599f4e5b594045', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTL6C-2kFHot-9d599f502d464045', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+  Pipeline error: Failed to extract query and context after 5 retries. Last error: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTLBY-2kFHot-9d599f51f8cafebc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [?]   | WRONG   |    6.7s
+Prolog          | Predicted: [?]   | WRONG   |    1.4s
+Tuned LLM       | Predicted: [?]   | WRONG   |    0.3s
+================================================================================
+
+
+================================================================================
+[MMLU #4] A 65-year-old female is admitted to the hospital after experiencing aphasia and right-sided hemiparesis. She subsequentl...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'A 65-year-old female is admitted to the hospital after experiencing aphasia and right-sided hemiparesis. She subsequently develops urinary incontinence. There is no evidence of urinary tract infection and no prior history of urinary pathology. The most likely diagnosis is
+
+A. autonomic neurogenic bladderv
+B. motor paralytic bladder
+C. reflex neurogenic bladder
+D. uninhibited neurogenic bladder
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['urological condition', 'bladder infection', 'urinary disorder', 'urinary tract infection', 'pudic nerve', 'urinary incontinence', 'urological surgeon', 'bacterial vaginosis', 'Aphasia', 'urologic procedure']
+DEBUG: Buffered 5 raw triple(s) for 'urological condition'
+DEBUG: Buffered 3 raw triple(s) for 'bladder infection'
+DEBUG: Buffered 8 raw triple(s) for 'urinary disorder'
+DEBUG: Buffered 9 raw triple(s) for 'urinary tract infection'
+DEBUG: Buffered 11 raw triple(s) for 'pudic nerve'
+DEBUG: Buffered 12 raw triple(s) for 'urinary incontinence'
+DEBUG: Buffered 8 raw triple(s) for 'urological surgeon'
+DEBUG: Buffered 4 raw triple(s) for 'bacterial vaginosis'
+DEBUG: Buffered 9 raw triple(s) for 'Aphasia'
+DEBUG: Buffered 5 raw triple(s) for 'urologic procedure'
+DEBUG: End-filter LLM call failed: Error code: 401 - {'id': 'oZLTMnd-2kFHot-9d599f73dbcbfed9', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Returning all candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Error code: 401 - {'id': 'oZLTMyG-2kFHot-9d599f777d2efec1', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Using all raw triples.
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'urological condition'
+DEBUG: Batch LLM filter kept 3/3 triple(s) for 'bladder infection'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'urinary disorder'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'urinary tract infection'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'pudic nerve'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Error in run_pipeline: Error code: 401 - {'id': 'oZLTN8U-2kFHot-9d599f7aedbffee1', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTNDy-2kFHot-9d599f7ce977fee0', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTNJ4-2kFHot-9d599f7e8bcbfee0', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTNNJ-2kFHot-9d599f800e7afee0', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTNSN-2kFHot-9d599f819904fee0', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTNWM-2kFHot-9d599f82fb3afee0', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+  Pipeline error: Failed to extract query and context after 5 retries. Last error: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTNc1-2kFHot-9d599f84cc1efee9', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [?]   | WRONG   |    6.6s
+Prolog          | Predicted: [?]   | WRONG   |    1.3s
+Tuned LLM       | Predicted: [?]   | WRONG   |    0.3s
+================================================================================
+
+
+================================================================================
+[MMLU #5] A 2.35-gram sample was dissolved in water, and the chloride ions were precipitated by adding silver nitrate (Ag+ + Cl- →...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'A 2.35-gram sample was dissolved in water, and the chloride ions were precipitated by adding silver nitrate (Ag+ + Cl- → AgCl). If 0.435 g of precipitate was obtained, what is the percentage of chlorine in the sample?
+
+A. 10.80%
+B. 4.60%
+C. 43.50%
+D. 18%
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['isotope of silver', 'silver chloride', 'chloride ion', 'chlorine compound', 'thionyl chloride', 'CuClO4', 'calcium chloride', 'phenyl chloride', 'barium chloride', 'silver nitrate']
+DEBUG: Buffered 12 raw triple(s) for 'isotope of silver'
+DEBUG: Buffered 14 raw triple(s) for 'silver chloride'
+DEBUG: Buffered 11 raw triple(s) for 'chloride ion'
+DEBUG: Buffered 13 raw triple(s) for 'chlorine compound'
+DEBUG: Buffered 10 raw triple(s) for 'thionyl chloride'
+DEBUG: Buffered 9 raw triple(s) for 'CuClO4'
+DEBUG: Buffered 13 raw triple(s) for 'calcium chloride'
+DEBUG: Buffered 9 raw triple(s) for 'phenyl chloride'
+DEBUG: Buffered 14 raw triple(s) for 'barium chloride'
+DEBUG: Buffered 14 raw triple(s) for 'silver nitrate'
+DEBUG: End-filter LLM call failed: Error code: 401 - {'id': 'oZLTQ77-2kFHot-9d599fa48a69fedf', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Returning all candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Error code: 401 - {'id': 'oZLTQFh-2kFHot-9d599fa7bf27febf', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Using all raw triples.
+DEBUG: Batch LLM filter kept 12/12 triple(s) for 'isotope of silver'
+DEBUG: Batch LLM filter kept 14/14 triple(s) for 'silver chloride'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'chloride ion'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'chlorine compound'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'thionyl chloride'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Error in run_pipeline: Error code: 401 - {'id': 'oZLTQZy-2kFHot-9d599fab0f0afec8', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTQi5-2kFHot-9d599fb04d59fecc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTQnL-2kFHot-9d599fb2b943fecc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTQrN-2kFHot-9d599fb44b90fecc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTQvn-2kFHot-9d599fb5cd7bfecc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTQzk-2kFHot-9d599fb75feffecc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+  Pipeline error: Failed to extract query and context after 5 retries. Last error: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTR5n-2kFHot-9d599fb8f80f4046', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [?]   | WRONG   |    6.6s
+Prolog          | Predicted: [?]   | WRONG   |    1.4s
+Tuned LLM       | Predicted: [?]   | WRONG   |    0.3s
+================================================================================
+
+
+================================================================================
+[MMLU #6] A radioactive sample has a half-life of 1 hour. If we start with 1.000 gram of it at noon, how much remains at 3:00 pm?...
+Correct Answer: [C]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'A radioactive sample has a half-life of 1 hour. If we start with 1.000 gram of it at noon, how much remains at 3:00 pm?
+
+A. 0.50 g
+B. 0.25 g
+C. 0.125 g
+D. 0.0625 g
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['isotope of thulium', 'isotope of manganese', 'isotope of carbon', 'isotope of holmium', 'isotope of rhodium', 'isotope of chlorine', 'isotope of scandium', 'isotope of boron', 'isotope of cobalt', 'isotope of mercury']
+DEBUG: Buffered 5 raw triple(s) for 'isotope of thulium'
+DEBUG: Buffered 5 raw triple(s) for 'isotope of manganese'
+DEBUG: Buffered 9 raw triple(s) for 'isotope of carbon'
+DEBUG: Buffered 5 raw triple(s) for 'isotope of holmium'
+DEBUG: Buffered 5 raw triple(s) for 'isotope of rhodium'
+DEBUG: Buffered 7 raw triple(s) for 'isotope of chlorine'
+DEBUG: Buffered 5 raw triple(s) for 'isotope of scandium'
+DEBUG: Buffered 7 raw triple(s) for 'isotope of boron'
+DEBUG: Buffered 5 raw triple(s) for 'isotope of cobalt'
+DEBUG: Buffered 13 raw triple(s) for 'isotope of mercury'
+DEBUG: End-filter LLM call failed: Error code: 401 - {'id': 'oZLTSd7-2kFHot-9d599fd92f13fedb', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Returning all candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Error code: 401 - {'id': 'oZLTSne-2kFHot-9d599fdccde3fec5', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Using all raw triples.
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'isotope of thulium'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'isotope of manganese'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'isotope of carbon'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'isotope of holmium'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'isotope of rhodium'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Error in run_pipeline: Error code: 401 - {'id': 'oZLTSzH-2kFHot-9d599fe02c614039', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTT63-2kFHot-9d599fe2f9d4fedc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTTAB-2kFHot-9d599fe4cc73fedc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTTEA-2kFHot-9d599fe64ea0fedc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTTHu-2kFHot-9d599fe7a899fedc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTTMt-2kFHot-9d599fe91a92fedc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+  Pipeline error: Failed to extract query and context after 5 retries. Last error: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTTSb-2kFHot-9d599feaa9dcfed4', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [?]   | WRONG   |    6.4s
+Prolog          | Predicted: [?]   | WRONG   |    1.2s
+Tuned LLM       | Predicted: [?]   | WRONG   |    0.3s
+================================================================================
+
+
+================================================================================
+[MMLU #7] The law of increasing costs is useful in describing...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'The law of increasing costs is useful in describing
+
+A. a demand curve.
+B. a marginal benefit curve.
+C. a linear production possibility frontier.
+D. a concave production possibility frontier.
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['economics terminology', 'economics curve', 'consumer theory', 'monetary gain', 'economics effect', 'competition (economics)', 'economics theorem', 'law and economics', 'investment goods', 'production–possibility frontier']
+DEBUG: Buffered 9 raw triple(s) for 'economics terminology'
+DEBUG: Buffered 10 raw triple(s) for 'economics curve'
+DEBUG: Buffered 8 raw triple(s) for 'consumer theory'
+DEBUG: Buffered 14 raw triple(s) for 'monetary gain'
+DEBUG: Buffered 3 raw triple(s) for 'economics effect'
+DEBUG: Buffered 14 raw triple(s) for 'competition (economics)'
+DEBUG: Buffered 9 raw triple(s) for 'economics theorem'
+DEBUG: Buffered 10 raw triple(s) for 'law and economics'
+DEBUG: Buffered 7 raw triple(s) for 'investment goods'
+DEBUG: Buffered 3 raw triple(s) for 'production–possibility frontier'
+DEBUG: End-filter LLM call failed: Error code: 401 - {'id': 'oZLTUvv-2kFHot-9d59a009cef7fedc', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Returning all candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Error code: 401 - {'id': 'oZLTV5y-2kFHot-9d59a00cf94b4039', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}. Using all raw triples.
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'economics terminology'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'economics curve'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'consumer theory'
+DEBUG: Batch LLM filter kept 14/14 triple(s) for 'monetary gain'
+DEBUG: Batch LLM filter kept 3/3 triple(s) for 'economics effect'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Error in run_pipeline: Error code: 401 - {'id': 'oZLTVEL-2kFHot-9d59a0100ea3febd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTVLX-2kFHot-9d59a012083cfecd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTVR7-2kFHot-9d59a0141b86fecd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTVV4-2kFHot-9d59a015adedfecd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTVa3-2kFHot-9d59a0173875fecd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTVe8-2kFHot-9d59a018fb8efecd', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+  Pipeline error: Failed to extract query and context after 5 retries. Last error: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 401 - {'id': 'oZLTVj7-2kFHot-9d59a01a8f2bfed0', 'error': {'message': 'Invalid API key provided. You can find your API key at https://api.together.ai/settings/api-keys.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_api_key'}}
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [?]   | WRONG   |    6.0s
+Prolog          | Predicted: [?]   | WRONG   |    1.4s
+Tuned LLM       | Predicted: [?]   | WRONG   |    0.3s
+================================================================================
+
+
+================================================================================
+[MMLU #8] The rate law may be written using stoichiometric coefficients for which of the following?...
+Correct Answer: [C]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'The rate law may be written using stoichiometric coefficients for which of the following?
+
+A. Precipitation reactions
+B. Acid-base reactions
+C. Elementary processes
+D. Solubility reactions
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 100 MMLU test cases (starting from index 0).
+
+================================================================================
+[MMLU #0] Which of the following describes the fallacy of appeal to common practice?...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following describes the fallacy of appeal to common practice?
+
+A. eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source
+B. reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences
+C. drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim
+D. arguing that something is the right thing to do based only on evidence that other people are already doing it.
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['type of scientific fallacy', 'inductive fallacy', 'vindication', 'logical fallacy', 'probability fallacy', 'syllogistic fallacy', 'causal fallacy', 'propositional fallacy', 'common law system', 'failing']
+DEBUG: Buffered 13 raw triple(s) for 'type of scientific fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'inductive fallacy'
+DEBUG: Buffered 5 raw triple(s) for 'vindication'
+DEBUG: Buffered 15 raw triple(s) for 'logical fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'probability fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'syllogistic fallacy'
+DEBUG: Buffered 13 raw triple(s) for 'causal fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'propositional fallacy'
+DEBUG: Buffered 20 raw triple(s) for 'common law system'
+DEBUG: Buffered 14 raw triple(s) for 'failing'
+DEBUG: End-filter LLM call failed: Error code: 404 - {'id': 'oZLUcbr-2kFHot-9d59a56d08dcfebc', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}. Returning all candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Error code: 404 - {'id': 'oZLUdaj-2kFHot-9d59a5831ac5fecc', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}. Using all raw triples.
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'type of scientific fallacy'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'inductive fallacy'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'vindication'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'logical fallacy'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'probability fallacy'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Error in run_pipeline: Error code: 404 - {'id': 'oZLUeNi-2kFHot-9d59a593de04fedf', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Ollama loaded successfully.
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 404 - {'id': 'oZLUfhP-2kFHot-9d59a5afc840febc', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 404 - {'id': 'oZLUgi7-2kFHot-9d59a5c518b9febc', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 404 - {'id': 'oZLUhv2-2kFHot-9d59a5de785efebc', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 404 - {'id': 'oZLUiUt-2kFHot-9d59a5ea3b7cfebc', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 404 - {'id': 'oZLUjDt-2kFHot-9d59a5f9dcdffebc', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+  Pipeline error: Failed to extract query and context after 5 retries. Last error: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 404 - {'id': 'oZLUkAP-2kFHot-9d59a60daa7e4039', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [?]   | WRONG   |   16.3s
+Prolog          | Predicted: [?]   | WRONG   |   16.4s
+Tuned LLM       | Predicted: [?]   | WRONG   |    1.8s
+================================================================================
+
+
+================================================================================
+[MMLU #1] Which of the following are most vulnerable to injection attacks?...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following are most vulnerable to injection attacks?
+
+A. Session IDs
+B. Registry keys
+C. Network communications
+D. SQL queries based on user input
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 100 MMLU test cases (starting from index 0).
+
+================================================================================
+[MMLU #0] Which of the following describes the fallacy of appeal to common practice?...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following describes the fallacy of appeal to common practice?
+
+A. eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source
+B. reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences
+C. drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim
+D. arguing that something is the right thing to do based only on evidence that other people are already doing it.
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['type of scientific fallacy', 'inductive fallacy', 'vindication', 'logical fallacy', 'probability fallacy', 'syllogistic fallacy', 'causal fallacy', 'propositional fallacy', 'common law system', 'failing']
+DEBUG: Buffered 13 raw triple(s) for 'type of scientific fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'inductive fallacy'
+DEBUG: Buffered 5 raw triple(s) for 'vindication'
+DEBUG: Buffered 15 raw triple(s) for 'logical fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'probability fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'syllogistic fallacy'
+DEBUG: Buffered 13 raw triple(s) for 'causal fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'propositional fallacy'
+DEBUG: Buffered 20 raw triple(s) for 'common law system'
+DEBUG: Buffered 14 raw triple(s) for 'failing'
+DEBUG: End-filter LLM kept indices: [0, 3] from 10 candidates.
+DEBUG: End-filter kept 2/10 concepts.
+DEBUG: Batch sending 2 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "type of scientific fallacy": ["A fallacy is the use of invalid or otherwise faulty reasoning, or wrong moves in the construction of an argument."],\n  "logical fallacy": ["A fallacy is the use of '...
+DEBUG: Batch LLM filter kept 1/13 triple(s) for 'type of scientific fallacy'
+DEBUG: Batch LLM filter kept 2/15 triple(s) for 'logical fallacy'
+DEBUG: KBPedia found 2 grounded concept contexts.
+DEBUG: KBPedia returned 2 items.
+DEBUG: Merged Result Count: 2
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Ollama loaded successfully.
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "This is a multiple choice question. The options must be preserved in the question field.",
+  "question": "Which of the following describes the fallacy of appeal to common practice? A) ... B) ... C) ... D) ...",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'This is a multiple choice question. The options must be preserved in the question field.', 'question': 'Which of the following describes the fallacy of appeal to common practice? A) ... B) ... C) ... D) ...', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following describes the fallacy of appeal to common practice? A) ... B) ... C) ... D) ...
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following describes the fallacy of appeal to common practice? A) ..' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which of the following describes the fallacy of appeal to common practice? A) ... B) ... C) ... D) ...'
+DEBUG: Extracted entities for KBPedia: ['appeal to common practice', 'fallacy', 'practice']
+DEBUG: KBPedia matched 2 concept(s) for 'appeal to common practice': ['legal appeal', 'Halloween practice']
+DEBUG: Buffered 6 raw triple(s) for 'legal appeal'
+DEBUG: Buffered 3 raw triple(s) for 'Halloween practice'
+DEBUG: KBPedia matched 2 concept(s) for 'fallacy': ['probability fallacy', 'logical fallacy']
+DEBUG: Buffered 10 raw triple(s) for 'probability fallacy'
+DEBUG: Buffered 15 raw triple(s) for 'logical fallacy'
+DEBUG: KBPedia matched 2 concept(s) for 'practice': ['Halloween practice', 'Sikh practice']
+DEBUG: Buffered 8 raw triple(s) for 'Sikh practice'
+DEBUG: End-filter LLM kept indices: [0, 2, 3, 4] from 5 candidates.
+DEBUG: End-filter kept 4/5 concepts.
+DEBUG: Batch sending 4 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "probability fallacy": ["definition: A fallacy in probabilitistic interpretation or assessment.", "subclass of: logical fallacy"],\n  "logical fallacy": ["definition: A fallacy is the use of invali'...
+DEBUG: Batch LLM filter kept 6/6 triple(s) for 'legal appeal'
+DEBUG: Batch LLM filter kept 2/10 triple(s) for 'probability fallacy'
+DEBUG: Batch LLM filter kept 1/15 triple(s) for 'logical fallacy'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'Sikh practice'
+DEBUG: KBPedia found 4 grounded concept contexts.
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Which of the following describes the fallacy of appeal to common practice?
+
+A. eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source
+B. reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences
+C. drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim
+D. arguing that something is the right thing to do based only on evidence that other people are already doing it.
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. An appeal to common practice is a type of logical fallacy.
+2. A logical fallacy is the use of invalid or otherwise faulty reasoning.
+3. An appeal to common practice is a fallacy in probabilitistic interpretation or assessment.
+4. An appeal to common practice is a subclass of logical fallacy.
+5. A logical fallacy is a type of error in reasoning.
+6. An appeal to common practice is a type of error in reasoning.
+7. An appeal to common practice is a fallacy in probabilitistic interpretation or assessment.
+8. An appeal to common practice is a subclass of logical fallacy.
+9. A logical fallacy is a type of error in reasoning.
+10. An appeal to common practice is a type of error in reasoning.
+11. An appeal to common practice is a fallacy in probabilitistic interpretation or assessment.
+12. An appeal to common practice is a subclass of logical fallacy.
+13. A logical fallacy is a type of error in reasoning.
+14. An appeal to common practice is a type of error in reasoning.
+15. An appeal to common practice is a fallacy in probabilitistic interpretation or assessment.
+**Context from Prompt:**
+Which of the following describes the fallacy of appeal to common practice?
+
+A. eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source
+B. reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences
+C. drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim
+D. arguing that something is the right thing to do based only on evidence that other people are already doing it.
+
+Answer with the letter only (A, B, C, or D).
+Generating Prolog...
+Iteration 0 | Validation Error: Database not found in LLM's response. Ensure you wrap your facts and rules strictly inside `<database>` tags.
+Iteration 1 | Validation Error: Standard arithmetic less-than '<' is forbidden. Use '#<' instead.
+Iteration 2 | Validation Error: Disjunction ';' is forbidden in s(CASP). Use multiple separate rules with the same head instead of ';'.
+Iteration 3 | Validation Error: The <query> tag contains a rule definition (with ':-'), but queries must be plain goals. Rule definitions (Head :- Body.) belong inside <database> tags. The <query> tag must contain ONLY a single callable goal, e.g.: `answer(X).` or `my_predicate(foo).` Move the rule bodies to <database> and call the predicate head in <query>.
+Iteration 4 | Validation Error: The <query> tag contains a rule definition (with ':-'), but queries must be plain goals. Rule definitions (Head :- Body.) belong inside <database> tags. The <query> tag must contain ONLY a single callable goal, e.g.: `answer(X).` or `my_predicate(foo).` Move the rule bodies to <database> and call the predicate head in <query>.
+[Prolog retry] Normal attempts exhausted. Asking LLM if error is close to fixable...
+[Prolog retry] Close-check answer: 'YES'
+[Prolog retry] LLM says YES — granting 5 extension attempts.
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 100 MMLU test cases (starting from index 0).
+
+================================================================================
+[MMLU #0] Which of the following describes the fallacy of appeal to common practice?...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following describes the fallacy of appeal to common practice?
+
+A. eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source
+B. reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences
+C. drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim
+D. arguing that something is the right thing to do based only on evidence that other people are already doing it.
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['type of scientific fallacy', 'inductive fallacy', 'vindication', 'logical fallacy', 'probability fallacy', 'syllogistic fallacy', 'causal fallacy', 'propositional fallacy', 'common law system', 'failing']
+DEBUG: Buffered 13 raw triple(s) for 'type of scientific fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'inductive fallacy'
+DEBUG: Buffered 5 raw triple(s) for 'vindication'
+DEBUG: Buffered 15 raw triple(s) for 'logical fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'probability fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'syllogistic fallacy'
+DEBUG: Buffered 13 raw triple(s) for 'causal fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'propositional fallacy'
+DEBUG: Buffered 20 raw triple(s) for 'common law system'
+DEBUG: Buffered 14 raw triple(s) for 'failing'
+DEBUG: End-filter LLM call failed: Error code: 404 - {'id': 'oZLYpwv-2kFHot-9d59b97b0af7fedf', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}. Returning all candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filtering failed: Error code: 404 - {'id': 'oZLYqQ3-2kFHot-9d59b9890c7afecc', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}. Using all raw triples.
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'type of scientific fallacy'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'inductive fallacy'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'vindication'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'logical fallacy'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'probability fallacy'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Error in run_pipeline: Error code: 404 - {'id': 'oZLYqrr-2kFHot-9d59b992cb2bfed0', 'error': {'message': 'Unable to access model meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo. Please visit https://api.together.ai/models to view the list of supported models.', 'type': 'invalid_request_error', 'param': None, 'code': 'model_not_available'}}
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 100 MMLU test cases (starting from index 0).
+
+================================================================================
+[MMLU #0] Which of the following describes the fallacy of appeal to common practice?...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following describes the fallacy of appeal to common practice?
+
+A. eliminating a source of evidence from consideration by claiming the source is flawed, when there is no true relationship between the alleged flaw and the reliability of the source
+B. reasoning that an act or series of acts should be carried out because they will have no significant consequences, when there is no evidence there will be no consequences
+C. drawing a conclusion after purposely leaving out evidence or ignoring known evidence that might contradict a claim
+D. arguing that something is the right thing to do based only on evidence that other people are already doing it.
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: Main retriever failed: model "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" not found, try pulling it first (status code: 404)
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['type of scientific fallacy', 'inductive fallacy', 'vindication', 'logical fallacy', 'probability fallacy', 'syllogistic fallacy', 'causal fallacy', 'propositional fallacy', 'common law system', 'failing']
+DEBUG: Buffered 13 raw triple(s) for 'type of scientific fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'inductive fallacy'
+DEBUG: Buffered 5 raw triple(s) for 'vindication'
+DEBUG: Buffered 15 raw triple(s) for 'logical fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'probability fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'syllogistic fallacy'
+DEBUG: Buffered 13 raw triple(s) for 'causal fallacy'
+DEBUG: Buffered 10 raw triple(s) for 'propositional fallacy'
+DEBUG: Buffered 20 raw triple(s) for 'common law system'
+DEBUG: Buffered 14 raw triple(s) for 'failing'

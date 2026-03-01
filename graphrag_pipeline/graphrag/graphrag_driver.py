@@ -18,7 +18,21 @@ from pathlib import Path
 _project_root = str(Path(__file__).resolve().parents[2])
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
-from llm_config import MODEL_NAME as MODEL, USE_TOGETHER_API, get_openai_client
+from llm_config import MODEL_NAME as MODEL, USE_TOGETHER_API, get_openai_client, BASE_URL, API_KEY
+
+if USE_TOGETHER_API:
+    from neo4j_graphrag.embeddings.base import Embedder
+
+    class TogetherAIEmbeddings(Embedder):
+        """Embedder that calls the Together AI OpenAI-compatible embeddings endpoint."""
+        def embed_query(self, text: str):
+            from llm_config import EMBED_MODEL
+            _client = get_openai_client()
+            response = _client.embeddings.create(
+                model=EMBED_MODEL,
+                input=text,
+            )
+            return response.data[0].embedding
 
 try:
     from graphrag_pipeline.llm import generate
@@ -225,23 +239,21 @@ def ensure_driver_connected():
             else:
                 raise ConnectionError(f"Failed to connect to Neo4j after {MAX_RETRIES} attempts: {e}") from e
 
-def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
+def initialize_models():
     encoder_llm = DebugOllamaLLM(
         model_name=MODEL,
         model_params={
             "keep_alive": "20m",
-            "options": { # in case parameters need to be nested
+            "options": {
                 "temperature": 0,
                 "num_ctx": 4096,
                 "format": "json",
                 "repeat_penalty": 1.2,
-                "seed": 42 # for reproducibility
+                "seed": 42
             }
         }
     )
 
-    # 2. The Retriever LLM: used for QA synthesis (NOT entity extraction)
-    # Do NOT use "format": "json" here — this LLM answers natural language questions.
     retriever_llm = DebugOllamaLLM(
         model_name=MODEL,
         model_params={
@@ -255,13 +267,15 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
         }
     )
 
-    # 2. Initialize Embedder
-    embedder = OllamaEmbeddings(
-        model=MODEL
-    )
+    if USE_TOGETHER_API:
+        from llm_config import EMBED_MODEL
+        embedder = TogetherAIEmbeddings()
+        print(f"Together AI embedder loaded ({EMBED_MODEL}).")
+    else:
+        from llm_config import EMBED_MODEL
+        embedder = OllamaEmbeddings(model=EMBED_MODEL)
+        print("Ollama embedder loaded.")
 
-    print("Ollama loaded successfully.")
-    
     return encoder_llm, retriever_llm, embedder
 
 def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :

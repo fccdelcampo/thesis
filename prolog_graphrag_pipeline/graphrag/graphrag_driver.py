@@ -35,7 +35,21 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 _project_root = str(Path(__file__).resolve().parents[2])
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
-from llm_config import MODEL_NAME as _LLM_MODEL, USE_TOGETHER_API, get_openai_client
+from llm_config import MODEL_NAME as _LLM_MODEL, USE_TOGETHER_API, get_openai_client, BASE_URL, API_KEY
+
+if USE_TOGETHER_API:
+    from neo4j_graphrag.embeddings.base import Embedder
+
+    class TogetherAIEmbeddings(Embedder):
+        """Embedder that calls the Together AI OpenAI-compatible embeddings endpoint."""
+        def embed_query(self, text: str):
+            from llm_config import EMBED_MODEL
+            _client = get_openai_client()
+            response = _client.embeddings.create(
+                model=EMBED_MODEL,
+                input=text,
+            )
+            return response.data[0].embedding
 
 ENCODER_MODEL = _LLM_MODEL
 RETRIEVER_MODEL = _LLM_MODEL
@@ -196,18 +210,17 @@ class DebugOllamaLLM(OllamaLLM):
 neo4j_driver = None
 
 
-def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
-    # keep_alive=0 unloads VRAM after each document processing
+def initialize_models():
     encoder_llm = DebugOllamaLLM(
         model_name=ENCODER_MODEL,
         model_params={
             "keep_alive": "20m",
-            "options": { # in case parameters need to be nested
+            "options": {
                 "temperature": 0,
                 "num_ctx": 4096,
                 "format": "json",
                 "repeat_penalty": 1.2,
-                "seed": 42 # for reproducibility
+                "seed": 42
             }
         }
     )
@@ -215,27 +228,28 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
     retriever_llm = DebugOllamaLLM(
         model_name=RETRIEVER_MODEL,
         model_params={
-            "keep_alive": "20m", # Keep it loaded during an active chat session
+            "keep_alive": "20m",
             "options": {
                 "temperature": 0.1,
                 "num_ctx": 4096,
                 "format": "json",
                 "repeat_penalty": 1.2,
-                "seed": 42 # for reproducibility
+                "seed": 42
             }
-        
         }
     )
 
-    # 2. Initialize Embedder
-    # Set the model explicitly so Neo4j uses the correct dimensionality (3072 for llama3.2:3b, 4096 for llama3.1:8b).
-    embedder = OllamaEmbeddings(
-        model=RETRIEVER_MODEL
-    )
+    if USE_TOGETHER_API:
+        from llm_config import EMBED_MODEL
+        embedder = TogetherAIEmbeddings()
+        print(f"Together AI embedder loaded ({EMBED_MODEL}).")
+    else:
+        from llm_config import EMBED_MODEL
+        embedder = OllamaEmbeddings(model=EMBED_MODEL)
+        print("Ollama embedder loaded.")
 
-    print("Ollama loaded successfully.")
-    
     return encoder_llm, retriever_llm, embedder
+
 
 def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
     STATIC_SCHEMA = { # NOTE: Due to how 'EXTRACTED' works, the prompt used by SimpleKGPipeline is bad and does not constrain the output to only JSON format. We can create a custom KG Pipeline but for now we use this to skip it entirely.

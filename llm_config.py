@@ -19,7 +19,9 @@ USE_TOGETHER_API = True
 if USE_TOGETHER_API:
     BASE_URL = "https://api.together.xyz/v1"
     API_KEY = os.environ.get("TOGETHER_API_KEY", "")
-    MODEL_NAME = "meta-llama/Meta-Llama-3-8B-Instruct-Turbo"
+    MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
+    EMBED_MODEL = "togethercomputer/m2-bert-80M-8k-retrieval"
+    EMBED_DIM = 768
     if not API_KEY:
         raise EnvironmentError(
             "TOGETHER_API_KEY environment variable is not set. "
@@ -29,6 +31,8 @@ else:
     BASE_URL = "http://localhost:11434/v1"
     API_KEY = "ollama"          # dummy key required by the openai library
     MODEL_NAME = "llama3:instruct"
+    EMBED_MODEL = "llama3:instruct"
+    EMBED_DIM = 4096
 
 
 def get_openai_client() -> OpenAI:
