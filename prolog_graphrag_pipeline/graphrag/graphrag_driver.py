@@ -71,9 +71,22 @@ if USE_TOGETHER_API:
         from neo4j_graphrag.experimental.components.types import TextChunks, TextChunk
         _original_embedder_run = TextChunkEmbedder.run
 
-        async def _patched_embedder_run(self, text_chunks: TextChunks) -> TextChunks:
+        async def _patched_embedder_run(self, text_chunks: Union[TextChunks, dict]) -> TextChunks:
             if hasattr(self._embedder, "async_embed_chunks"):
-                texts = [c.text for c in text_chunks.chunks]
+                # Handle dictionary input
+                if isinstance(text_chunks, dict):
+                    raw_chunks = text_chunks.get("chunks", [])
+                    # convert dict to TextChunk objects if needed
+                    chunk_objs = []
+                    for c in raw_chunks:
+                        if isinstance(c, dict):
+                            chunk_objs.append(TextChunk(**c))
+                        else:
+                            chunk_objs.append(c)
+                else:
+                    chunk_objs = text_chunks.chunks
+
+                texts = [c.text for c in chunk_objs]
                 embeddings = []
                 batch_size = 100
                 for i in range(0, len(texts), batch_size):
@@ -82,7 +95,7 @@ if USE_TOGETHER_API:
                     embeddings.extend(batch_emb)
                     
                 chunks = []
-                for i, c in enumerate(text_chunks.chunks):
+                for i, c in enumerate(chunk_objs):
                     metadata = c.metadata if c.metadata else {}
                     metadata["embedding"] = embeddings[i]
                     chunks.append(TextChunk(text=c.text, index=c.index, metadata=metadata, uid=c.uid))
@@ -169,6 +182,7 @@ class DebugOllamaLLM(OllamaLLM):
             model=ENCODER_MODEL,
             messages=messages,
             temperature=0.0,
+            timeout=300.0,
         )
         content = response.choices[0].message.content or ""
         return LLMResponse(content=self._clean_response_text(content))

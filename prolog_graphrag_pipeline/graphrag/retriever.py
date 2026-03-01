@@ -57,7 +57,7 @@ def create_indexes(driver):
     """, database_="neo4j")
     print("Index creation commands sent.")
 
-def wait_for_indexes(driver, timeout=60):
+def wait_for_indexes(driver, timeout=300):
     target_indexes = ['documentsVectorIndex', 'documentsFulltextIndex']
     start_time = time.time()
     
@@ -227,7 +227,7 @@ def create_retriever(driver, embedder):
     
     # 5. Guarded Wait Phase
     try:
-        wait_for_indexes(driver, timeout=120) 
+        wait_for_indexes(driver, timeout=300) 
     except TimeoutError as e:
         print(f"Critical Error: {e}")
         return None

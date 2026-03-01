@@ -4245,3 +4245,186 @@ Traceback (most recent call last):
     if lock.acquire(block, timeout):
        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 KeyboardInterrupt
+MMLU:   0%|                                                          | 0/100 [00:00<?, ?it/s]INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+MMLU:   1%|4                                             | 1/100 [10:41<17:39:00, 641.82s/it]INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                         | 0/1 [00:00<?, ?it/s][ABatches: 100%|#################################################| 1/1 [00:00<00:00, 41.28it/s]
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+MMLU:   2%|9                                              | 2/100 [11:08<7:37:10, 279.91s/it]INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                         | 0/1 [00:00<?, ?it/s][ABatches: 100%|#################################################| 1/1 [00:00<00:00, 20.46it/s]
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001F603259E80> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Formation of a solution can often be visualized as a three-step process. Step 1. Solvent molecules are separated from each other to make space for the solute. Step 2. Solute molecules are separated so... (118 chars)'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+MMLU:   3%|#4                                             | 3/100 [11:22<4:16:39, 158.76s/it]INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                         | 0/1 [00:00<?, ?it/s][ABatches: 100%|#################################################| 1/1 [00:00<00:00, 42.09it/s]
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+MMLU:   4%|#8                                             | 4/100 [11:54<2:53:25, 108.40s/it]INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                         | 0/1 [00:00<?, ?it/s][ABatches: 100%|#################################################| 1/1 [00:00<00:00, 29.89it/s]
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001F603259E80> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'A 65-year-old female is admitted to the hospital after experiencing aphasia and right-sided hemiparesis.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+MMLU:   5%|##4                                             | 5/100 [12:08<1:58:04, 74.57s/it]INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                         | 0/1 [00:00<?, ?it/s][ABatches: 100%|#################################################| 1/1 [00:00<00:00, 34.19it/s]
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:openai._base_client:Retrying request to /embeddings in 2.000000 seconds
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/embeddings "HTTP/1.1 503 Service Unavailable"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST https://api.together.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+MMLU:   5%|##3                                            | 5/100 [12:40<4:00:44, 152.05s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 110, in run_benchmarks
+    mmlu.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 307, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 286, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 174, in run_test_case
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, formatted_input, flag="prolog")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 139, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 63, in run_pipeline
+    explainer_output = prolog_driver.run_pipeline(user_question=user_prompt, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt) if flag != "q" else None
+                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\prolog\prolog_driver.py", line 165, in run_pipeline
+    explainer_output = generate_explanation(
+                       ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\prolog\explainer.py", line 73, in generate_explanation
+    explanation = generate(prompt=generate_explanation_prompt(user_question=user_question, retrieved_context=retrieved_context, database=database, query=query, retrieved_values=retrieved_values, human_readable_explanation=human_readable_explanation), flag="explanation")
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\prolog\prolog_llms.py", line 118, in generate
+    return generate_response(prompt=prompt, flag=flag)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\prolog\prolog_llms.py", line 176, in generate_response
+    thread.join(timeout=LLM_TIMEOUT)
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1130, in join
+    self._wait_for_tstate_lock(timeout=max(timeout, 0))
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1146, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
