@@ -4722,3 +4722,57 @@ Traceback (most recent call last):
   File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\encoder.py", line 63, in extract_query_and_context
     raise ValueError("Failed to get a response from the LLM.")
 ValueError: Failed to get a response from the LLM.
+MMLU:   0%|                                                           | 0/87 [00:00<?, ?it/s]MMLU:   1%|5                                               | 1/87 [02:31<3:37:48, 151.96s/it]MMLU:   2%|#1                                               | 2/87 [02:50<1:43:59, 73.41s/it]MMLU:   3%|#6                                               | 3/87 [04:06<1:44:42, 74.79s/it]MMLU:   5%|##2                                              | 4/87 [04:27<1:13:59, 53.49s/it]MMLU:   6%|##8                                              | 5/87 [05:45<1:24:55, 62.13s/it]MMLU:   7%|###3                                             | 6/87 [07:02<1:30:41, 67.18s/it]MMLU:   0%|                                                           | 0/81 [00:00<?, ?it/s]MMLU:   1%|5                                               | 1/81 [01:41<2:15:51, 101.90s/it]MMLU:   2%|#2                                               | 2/81 [03:06<2:00:28, 91.51s/it]MMLU:   4%|#8                                               | 3/81 [04:29<1:54:00, 87.69s/it]MMLU:   5%|##4                                              | 4/81 [05:04<1:25:51, 66.90s/it]MMLU:   6%|###                                              | 5/81 [05:21<1:02:12, 49.11s/it]MMLU:   7%|###7                                               | 6/81 [05:40<48:21, 38.69s/it]MMLU:   9%|####4                                              | 7/81 [06:05<42:12, 34.23s/it]MMLU:  10%|#####                                              | 8/81 [06:25<36:18, 29.84s/it]MMLU:  11%|#####6                                             | 9/81 [06:42<30:50, 25.71s/it]MMLU:  12%|#####8                                         | 10/81 [13:56<2:59:39, 151.83s/it]MMLU:  12%|#####9                                          | 10/81 [14:39<1:44:05, 87.96s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 110, in run_benchmarks
+    mmlu.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 307, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 286, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 174, in run_test_case
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, formatted_input, flag="prolog")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 139, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 450, in run_pipeline
+    _run_async(process_context(kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 29, in _run_async
+    return _persistent_loop.run_until_complete(coro)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 651, in run_until_complete
+    self.run_forever()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 321, in run_forever
+    super().run_forever()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 618, in run_forever
+    self._run_once()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\base_events.py", line 1913, in _run_once
+    event_list = self._selector.select(timeout)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 444, in select
+    self._poll(timeout)
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\asyncio\windows_events.py", line 769, in _poll
+    status = _overlapped.GetQueuedCompletionStatus(self._iocp, ms)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+Exception ignored in: <module 'threading' from 'C:\\Users\\John Reniel\\AppData\\Local\\Programs\\Python\\Python312\\Lib\\threading.py'>
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1572, in _shutdown
+    atexit_call()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\thread.py", line 31, in _python_exit
+    t.join()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1126, in join
+    self._wait_for_tstate_lock()
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1146, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt: 

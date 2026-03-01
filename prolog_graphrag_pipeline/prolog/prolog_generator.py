@@ -55,12 +55,16 @@ def _inject_inline_errors(code: str, last_error: str) -> str:
     unknown_match = re.search(r"Unknown procedure: ([a-zA-Z0-9_]+)/(\d+)", last_error)
     missing_pred = unknown_match.group(1) if unknown_match else None
     
-    # Extract forbidden pattern
+    # Extract forbidden pattern (e.g. Disjunction ';' is forbidden)
     forbidden_match = None
     if "is forbidden" in last_error:
-        m = re.search(r"'(.+?)'\s+is forbidden", last_error)
-        if m:
-            forbidden_match = m.group(1)
+        # Check for ';' specifically as it's the most common repeat offender
+        if "';'" in last_error or "Disjunction" in last_error:
+            forbidden_match = ';'
+        else:
+            m = re.search(r"'(.+?)'\s+is forbidden", last_error)
+            if m:
+                forbidden_match = m.group(1)
 
     # Extract Singleton variables: [Var1, Var2]
     singleton_vars = []
@@ -73,22 +77,30 @@ def _inject_inline_errors(code: str, last_error: str) -> str:
         needs_comment = False
         comment_text = ""
         
-        if missing_pred and re.search(rf"\b{missing_pred}\(", line):
+        # Strip comments for the search to avoid double-commenting
+        content_only = re.sub(r"%.*$", "", line).strip()
+        if not content_only:
+            new_lines.append(line)
+            continue
+
+        if missing_pred and re.search(rf"\b{missing_pred}\(", content_only):
             needs_comment = True
             comment_text = f"% ERROR TRIGGERED HERE: You called '{missing_pred}' but it is NEVER defined as a fact or rule."
             
-        elif forbidden_match and forbidden_match in line:
+        elif forbidden_match and forbidden_match in content_only:
             needs_comment = True
-            comment_text = f"% ERROR TRIGGERED HERE: You used the forbidden operator '{forbidden_match}'."
+            comment_text = f"% ERROR TRIGGERED HERE: REMOVE THIS FORBIDDEN OPERATOR '{forbidden_match}'."
+            if forbidden_match == ';':
+                comment_text += " Disjunction is forbidden. Use multiple separate rules instead."
             
-        elif singleton_vars and ":-" in line:
+        elif singleton_vars and ":-" in content_only:
             for v in singleton_vars:
-                if re.search(rf"\b{v}\b", line):
+                if re.search(rf"\b{v}\b", content_only):
                     needs_comment = True
                     comment_text = f"% ERROR TRIGGERED HERE: Variable '{v}' is a singleton (only used once). Replace with '_' or use it again."
                     break
 
-        if needs_comment and not line.strip().startswith("%"):
+        if needs_comment:
             new_lines.append(comment_text)
         new_lines.append(line)
         
@@ -123,7 +135,16 @@ User Question:
                 
         penalty_prompt = ""
         if same_error_count >= 2:
-            penalty_prompt = f"### CRITICAL WARNING\nYou have failed to fix this exact error for    {same_error_count} consecutive times. You must change your approach or start completely from scratch. Do not generate the same broken code again.\n\n"
+            penalty_prompt = f"""
+################################################################################
+### CRITICAL WARNING: PERSISTENT ERROR DETECTED
+### 
+### You have failed to fix the EXACT SAME error {same_error_count} times in a row.
+### The previous code provided below is BLOCKED. You MUST find the lines 
+### marked with '% ERROR TRIGGERED HERE' and rewrite them fundamentally. 
+### DO NOT repeat the same mistake again.
+################################################################################
+"""
 
 
         # ── Targeted example-driven guidance keyed to the last error ──────
@@ -234,13 +255,16 @@ Ensure your `<database>` contains all facts and rules (using `:-`), and your `<q
         if previous_code:
             annotated_code = _inject_inline_errors(previous_code, last_error)
             prompt += f"""
-{penalty_prompt}### YOUR PREVIOUS DATABASE ATTEMPT (Contains Errors - Copy ALL correct facts and rules forward):
+{penalty_prompt}
+### YOUR PREVIOUS DATABASE ATTEMPT (Contains Errors):
 ```prolog
 <database>
 {annotated_code}
 </database>
 ```
-CRITICAL: You MUST carry forward every correct fact and rule clause from the above database into your new <database> block. Only fix the clauses that caused the error. Group clauses with the same predicate name together consecutively.
+CRITICAL: Locate every `% ERROR TRIGGERED HERE` line in the block above. These lines MUST be fixed or removed.
+If you see a semicolon (`;`), REMOVE IT and split the logic into separate rules.
+Carry forward all other correct facts and group rules for the same predicate together.
 """
 
     return prompt

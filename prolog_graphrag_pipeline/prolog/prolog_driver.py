@@ -202,6 +202,7 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
     result_dict = final_answer if final_answer else {"text_answer": "Error: Final LLM failed to generate answer."}
     if isinstance(result_dict, dict):
         result_dict["prolog_error"] = prolog_error  # None = verified; str = fallback reason
+        result_dict["prolog_explanation"] = human_readable_explanation if 'human_readable_explanation' in locals() else ""
     return result_dict
 
 

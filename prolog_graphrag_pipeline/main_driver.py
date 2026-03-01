@@ -60,23 +60,14 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
     else:
         retrieved_context_str = str(retrieved_context) if retrieved_context else ""
 
-    explainer_output = prolog_driver.run_pipeline(user_question=user_prompt, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt) if flag != "q" else None
-
+    pgr_results = prolog_driver.run_pipeline(user_question=user_prompt, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt) if flag != "q" else None
  
-    llm_result = generate(
-        user_question=user_prompt, 
-        retrieved_context=retrieved_context_str, 
-        explainer_output=explainer_output["text_answer"] if explainer_output else "", 
-        flag=flag,
-        include_conclusion=include_conclusion,
-        context_from_prompt=context_from_prompt
-    )
-    
     return {
-        "answer": llm_result['text_answer'] if llm_result else "Error generating answer",
+        "answer": pgr_results['text_answer'] if pgr_results else "Error generating answer",
         "contexts": retrieved_context if isinstance(retrieved_context, list) else [retrieved_context] if retrieved_context else [],
         "context_from_prompt": context_from_prompt,
-        "prolog_explanation": explainer_output.get("text_answer", "") if explainer_output else ""
+        "prolog_explanation": pgr_results.get("prolog_explanation", "") if pgr_results else "",
+        "prolog_error": pgr_results.get("prolog_error") if pgr_results else "Prolog skipped"
     }
     
 def run_graphrag_pipeline(user_prompt: str) -> dict:
