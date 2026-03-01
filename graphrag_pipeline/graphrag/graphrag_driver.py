@@ -43,11 +43,14 @@ class DebugOllamaLLM(OllamaLLM):
         """
         if not text:
             return ""
+        # Strip markdown code fences first (```json ... ``` or ``` ... ```)
+        import re
+        text = re.sub(r'```(?:json)?\s*', '', text).strip()
         obj_start = text.find('{')
         obj_end   = text.rfind('}')
         if obj_start != -1 and obj_end != -1 and obj_start < obj_end:
             return text[obj_start : obj_end + 1]
-        return text   # nothing to strip — return as-is
+        return text  # Not JSON — return as-is (e.g. plain QA answer)
 
     def _clean_prompt(self, text: str) -> str:
         """Removes newlines only from PDF-extracted prose.
@@ -205,7 +208,8 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
         }
     )
 
-    # 2. The Retriever: Logical synthesis for Prolog
+    # 2. The Retriever LLM: used for QA synthesis (NOT entity extraction)
+    # Do NOT use "format": "json" here — this LLM answers natural language questions.
     retriever_llm = DebugOllamaLLM(
         model_name=MODEL,
         model_params={
@@ -213,11 +217,9 @@ def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
             "options": {
                 "temperature": 0.1,
                 "num_ctx": 4096,
-                "format": "json",
                 "repeat_penalty": 1.2,
-                "seed": 42 # for reproducibility
+                "seed": 42
             }
-        
         }
     )
 

@@ -283,7 +283,7 @@ You are a Logical Translator. Take the formal output of a Prolog s(CASP) solver 
 Narrate the Proof: Walk through the s(CASP) justification tree. Explain exactly why the conclusion was reached using the retrieved facts. If s(CASP) returns False or uses `not`, explain it as an "absence of evidence."
 
 ### Syntactic Rules
-- No Prolog Syntax: Do not use `:-`, `\+`, or `parent(X, Y)`. Use natural language.
+- No Prolog Syntax: Do not use `:-`, `\\+`, or `parent(X, Y)`. Use natural language.
 - Traceability: Keep the sequential logic. Do not jump straight to the conclusion.
 """
 

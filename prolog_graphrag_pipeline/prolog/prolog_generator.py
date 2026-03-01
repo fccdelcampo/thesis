@@ -55,14 +55,111 @@ User Question:
 
     if error_history:
         numbered = "\n".join(f"  [{i+1}] {e}" for i, e in enumerate(error_history))
+
+        # ── Targeted example-driven guidance keyed to the last error ──────
+        last_error = error_history[-1]
+        targeted_fix = ""
+
+        if "query" in last_error.lower() and ":-" in last_error:
+            targeted_fix = """
+###  WHAT YOU KEEP DOING WRONG (rule definition inside <query>):
+```prolog
+<query>
+answer(OptionLetter) :- choice(OptionLetter, Task), difficult_to_replicate(Task).
+</query>
+```
+
+### CORRECT — rule goes in <database>, only the plain goal in <query>:
+```prolog
+<database>
+...
+answer(OptionLetter) :- choice(OptionLetter, Task), difficult_to_replicate(Task).
+</database>
+
+<query>
+answer(OptionLetter).
+</query>
+```
+The `<query>` tag MUST contain ONLY a single atom like `answer(X).` with NO `:-` anywhere.
+"""
+        elif "Unknown procedure" in last_error:
+            targeted_fix = """
+###  WHAT YOU KEEP DOING WRONG (calling an undefined predicate):
+```prolog
+<database>
+answer(X) :- choice(X, Y), undefined_predicate(Y).
+</database>
+```
+
+### CORRECT — every predicate called in a body MUST be defined as a fact:
+```prolog
+<database>
+choice(a, opt_a).
+choice(b, opt_b).
+has_property(opt_a).          % <- define it!
+answer(X) :- choice(X, Y), has_property(Y).
+</database>
+```
+"""
+        elif "choice" in last_error.lower() and "UPPERCASE" in last_error:
+            targeted_fix = """
+###  WHAT YOU KEEP DOING WRONG (uppercase variable as atom):
+```prolog
+choice(a, A).   % A is an unbound variable — WRONG
+```
+
+### CORRECT — use a lowercase atom:
+```prolog
+choice(a, cell_wall).   % lowercase atom — CORRECT
+```
+"""
+        elif "Disjunction" in last_error or "';'" in last_error:
+            targeted_fix = """
+###  WHAT YOU KEEP DOING WRONG (using semicolon disjunction):
+```prolog
+answer(X) :- choice_a(X) ; choice_b(X).
+```
+
+### CORRECT — split into two separate rules:
+```prolog
+answer(X) :- choice_a(X).
+answer(X) :- choice_b(X).
+```
+"""
+        elif "Singleton variables" in last_error:
+            targeted_fix = """
+###  WHAT YOU KEEP DOING WRONG (variable appears only once):
+```prolog
+answer(X) :- choice(X, Desc), has_property(X).   % Desc is singleton!
+```
+
+### CORRECT — replace unused variables with underscore:
+```prolog
+answer(X) :- choice(X, _), has_property(X).
+```
+"""
+        elif "time_limit_exceeded" in last_error or "infinite loop" in last_error.lower():
+            targeted_fix = """
+### WHAT YOU KEEP DOING WRONG (circular rule with no base case):
+```prolog
+is_valid(X) :- is_valid(Y), related(X, Y).   % infinite recursion!
+```
+
+### CORRECT — every recursive rule MUST bottom out at a ground fact:
+```prolog
+is_valid(cat).              % ground fact terminates recursion
+is_valid(X) :- related(X, Y), is_valid(Y).
+```
+"""
+
         prompt += f"""
 ### FIX REQUIRED
 The following errors occurred across prior attempts. Fix ALL of them before responding.
 
 {numbered}
-
+{targeted_fix}
 Analyze the errors carefully. Then, rewrite the ENTIRE `<database>` and `<query>` blocks incorporating your fixes. DO NOT output partial code.
-Ensure your `<database>` contains all facts and rules (using `:-`), and your `<query>` contains exactly one simple callable goal.
+Ensure your `<database>` contains all facts and rules (using `:-`), and your `<query>` contains exactly one simple callable goal with NO `:-`.
 """
         if previous_code:
             prompt += f"""
@@ -342,6 +439,14 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
 
     # ── Phase 2: Close-check — should we try 5 more times? ───────────────────
     most_recent_error = error_history[-1] if error_history else None
+
+    # If the same error repeated 3+ times consecutively, the LLM is stuck and
+    # extension retries will be wasted. Bail out early.
+    same_error_count = sum(1 for e in error_history if e == most_recent_error)
+    if same_error_count >= 3:
+        print(f"[Prolog retry] Same error repeated {same_error_count}x — skipping extension (model is stuck). Giving up.")
+        raise Exception("Failed to generate valid Prolog code after multiple attempts.")
+
     print(f"[Prolog retry] Normal attempts exhausted. Asking LLM if error is close to fixable...")
     if most_recent_error and _ask_if_close_to_fixing(generate_fn, most_recent_error):
         print(f"[Prolog retry] LLM says YES — granting {EXTENSION_ATTEMPTS} extension attempts.")

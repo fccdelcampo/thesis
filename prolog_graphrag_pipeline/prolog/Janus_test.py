@@ -67,12 +67,12 @@ try:
     result = janus.query_once(query)
     
     if result:
-        print(f"✅ Success! Uncle: {result['Uncle']}")
+        print(f"Success! Uncle: {result['Uncle']}")
         print("\n--- Justification Tree (Text) ---")
         # Python can read 'TreeStr' because it's just a string!
         print(result['TreeStr'])
     else:
-        print("❌ No solution found.")
+        print(" No solution found.")
         
 except Exception as e:
     print(f"🔥 Error: {e}")

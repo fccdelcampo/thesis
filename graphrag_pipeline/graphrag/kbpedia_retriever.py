@@ -103,7 +103,7 @@ class KBPediaRetriever:
                 MATCH (n:KBPediaConcept {uri: $uri})
                 
                 CALL (n) {
-                    OPTIONAL MATCH (n)-[:SUBCLASS_OF*1..3]->(ancestor:KBPediaConcept)
+                    OPTIONAL MATCH (n)-[:SUBCLASS_OF*1..2]->(ancestor:KBPediaConcept)
                     RETURN collect(DISTINCT {name: ancestor.name, def: ancestor.definition})[0..8] AS ancestors
                 }
                 
@@ -129,9 +129,9 @@ class KBPediaRetriever:
                 row = records[0]
                 for a in row.get("ancestors", []):
                     if a and a.get("name"):
+                        # Only keep the ancestor NAME — ancestor definition blurbs are long
+                        # encyclopedia text that bloats context without aiding the LLM.
                         triples.append(f"subclass of: {a['name']}")
-                        if a.get("def"):
-                            triples.append(f"ancestor definition: {a['def'][:400]}")
                 for c in row.get("children", []):
                     if c and c.get("name"):
                         triples.append(f"has subclass: {c['name']}")
@@ -218,24 +218,32 @@ If none are relevant, output an empty list [].
             triples_text = "\n".join([f"  - {t}" for t in capped_triples])
             concepts_text += f"Concept: '{c['name']}'\nFacts:\n{triples_text}\n\n"
 
-        prompt = f"""Task: You are deeply integrated into a Prolog GraphRAG pipeline.
-Below are lists of known facts (triples) for MULTIPLE entities.
-Your job is to strictly filter these facts and select ONLY the ones that are logically relevant or useful to answer the user's query.
+        prompt = f"""Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
 
 User Query: "{filter_query}"
 
 {concepts_text}
 
-CRITICAL INSTRUCTIONS:
-1. Irrelevant facts will poison the logic engine, so drop useless trivia (e.g. Wikipedia links, "translates to", word lengths).
-2. However, DO NOT OVER-FILTER! If a concept perfectly matches one of the multiple-choice options in the User Query, you MUST keep its core definition, what it is a subclass of, and what it does. The logic engine needs these basic structural facts to evaluate if that option is the correct answer.
-3. If you filter out 100% of the facts for a given concept, the engine evaluates it as an empty void. Try to retain at least 1-3 definitional facts for every concept presented unless it is completely coincidental word-match garbage.
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
 
-Output format: A JSON dictionary where keys are the Concept names, and values are a JSON list of strings containing exactly the original facts you deemed relevant for that concept.
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
 Example:
 {{
-  "Concept A": ["definition: provides support", "subclass of: Structural Component"],
-  "Concept B": ["definition: a long narrow ditch"]
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
 }}
 """
         # Default fallback
