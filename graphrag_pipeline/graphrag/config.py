@@ -177,9 +177,6 @@ Then follow with a short 1-2 sentence explanation.
 2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
 3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
 
-Example correct format (if D is the answer):
-*D.* ocean basin.
-Ocean basins form at divergent boundaries where plates pull apart, creating a depression that fills with water.
 
 ### Question:
 {query_text}

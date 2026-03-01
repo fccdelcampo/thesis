@@ -28,14 +28,15 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 - Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
 - Atoms: Must be lowercase. Quote special characters (e.g., `'(A ∨ B)'`).
 - Variables: CamelCase. Use `_` for singletons.
+- Concise Atoms: Keep snake_case atoms as short as possible to save tokens. Condense long phrases into 1-3 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
 - Closed-World: EVERY predicate in a body MUST be defined as a fact or rule head somewhere in the database.
 - Discontiguous: Group all clauses for the same predicate together.
 - Predicate Naming: ALWAYS invent meaningful predicate names that accurately describe the relationships in the specific question. NEVER blindly copy predicate names (like `forms_from`) or structures from the few-shot examples unless they are directly relevant.
 
 ### Query Formatting by Question Type
 1. **Multiple-Choice Questions (MCQ):**
-   - Encode EXACTLY FOUR choices as facts. The description MUST be a grounded lowercase atom, NEVER an uppercase variable!
-   - Example CORRECT: `choice(a, cell_wall).`
+   - Encode EXACTLY FOUR choices as facts. The description MUST be a grounded lowercase snake_case atom derived from the ACTUAL option text, NEVER an uppercase variable!
+   - Example CORRECT: `choice(a, eliminating_a_source).`
    - Example WRONG: `choice(a, A).` (This will trivially unify with anything and fail the proof!)
    - Encode retrieved domain knowledge as facts and rules.
    - You MUST define an `answer/1` rule that unifies with the correct option letter.

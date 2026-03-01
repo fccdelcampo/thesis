@@ -1409,3 +1409,1087 @@ Traceback (most recent call last):
     status = _overlapped.GetQueuedCompletionStatus(self._iocp, ms)
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 KeyboardInterrupt
+AI2 ARC:   0%|                                                                | 0/100 [00:00<?, ?it/s]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   1%|5                                                    | 1/100 [01:56<3:11:48, 116.24s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                  | 0/1 [00:00<?, ?it/s][ABatches: 100%|##########################################################| 1/1 [00:00<00:00, 29.71it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001C4831CE540> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Janette conducts an investigation to see which foods make her feel more fatigued.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001C4831CE540> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'She eats one of four different foods each day at the same time for four days and then records how she feels.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001C4831CE540> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'She asks her friend Carmen to do the same investigation to see if she gets similar results.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   2%|#                                                    | 2/100 [04:37<3:52:40, 142.46s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                  | 0/1 [00:00<?, ?it/s][ABatches: 100%|##########################################################| 1/1 [00:00<00:00, 54.99it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   3%|#5                                                   | 3/100 [06:17<3:19:01, 123.11s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                  | 0/1 [00:00<?, ?it/s][ABatches: 100%|##########################################################| 1/1 [00:00<00:00, 44.73it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001C4831CE540> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'A student planted two bean seeds in two identical pots containing the same type of soil.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001C4831CE540> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'He placed one pot in a closet and the other near a sunny window.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001C4831CE540> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Each day, he poured 15 milliliters of water into each pot.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   4%|##1                                                  | 4/100 [10:08<4:25:39, 166.04s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                  | 0/1 [00:00<?, ?it/s][ABatches: 100%|##########################################################| 1/1 [00:00<00:00, 37.49it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001C4831CE540> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Many endangered animals are captured, tagged, and then released back into their environment.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001C4831CE540> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'The tag may be a piece of coded plastic or metal that is placed somewhere safe on the body.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   5%|##6                                                  | 5/100 [11:18<3:27:33, 131.09s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                  | 0/1 [00:00<?, ?it/s][ABatches: 100%|##########################################################| 1/1 [00:00<00:00, 40.25it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001C4831CE540> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Proteins that are synthesized in ribosomal subunits undergo extensive post-translational modification and are packaged and directed to the appropriate destination.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   6%|###1                                                 | 6/100 [13:42<3:32:22, 135.56s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                  | 0/1 [00:00<?, ?it/s][ABatches: 100%|##########################################################| 1/1 [00:00<00:00, 35.44it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   7%|###7                                                 | 7/100 [15:35<3:18:54, 128.32s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                  | 0/1 [00:00<?, ?it/s][ABatches: 100%|##########################################################| 1/1 [00:00<00:00, 54.53it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   8%|####2                                                | 8/100 [16:35<2:43:18, 106.51s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                  | 0/1 [00:00<?, ?it/s][ABatches: 100%|##########################################################| 1/1 [00:00<00:00, 35.22it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001C4831CE540> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Different species of herbivorous rodents lived in the same ecosystem.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   9%|####7                                                | 9/100 [19:24<3:11:21, 126.17s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                  | 0/1 [00:00<?, ?it/s][ABatches: 100%|##########################################################| 1/1 [00:00<00:00, 55.06it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+AI2 ARC:   9%|####7                                                | 9/100 [19:46<3:19:56, 131.83s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 97, in run_benchmarks
+    ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 261, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 240, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 144, in run_test_case
+    gr_result = run_pipeline_safe(run_graphrag, question)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 123, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 354, in run_pipeline
+    result = generate_answer(question, retriever, retriever_llm, original_query=question)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 270, in generate_answer
+    return generate(llm, retriever, query, original_query=original_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\llm.py", line 19, in generate
+    graph_rag_results = graph_rag.search(
+                        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\generation\graphrag.py", line 151, in search
+    retriever_result: RetrieverResult = self.retriever.search(
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\retriever.py", line 162, in search
+    kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query, seeded_entities=list(extracted_entities))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 470, in search
+    batch_results = self.filter_triples_batch(query_text, batch_data, original_query=filter_query)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 294, in filter_triples_batch
+    raw = self.llm.invoke(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 94, in invoke
+    response = super().invoke(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 157, in invoke
+    return self.__invoke_v1(input, message_history, system_instruction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 216, in wrapper
+    return active_handler.handle_sync(inner_func)()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 210, in inner_func
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 201, in __invoke_v1
+    response = self.client.chat(
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 365, in chat
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 189, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 129, in _request_raw
+    r = self._client.request(*args, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 103, in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 136, in handle_request
+    raise exc
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 106, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 177, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 128, in read
+    return self._sock.recv(max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+Traceback (most recent call last):
+  File "<string>", line 6, in <module>
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 309, in run_pipeline
+    generation_result = generate(llm=retriever_llm, retriever=retriever, query=query, original_query=user_question)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\retriever.py", line 287, in generate
+    graph_rag_results = graph_rag.search(
+                        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\site-packages\neo4j_graphrag\generation\graphrag.py", line 138, in search
+    retriever_result: RetrieverResult = self.retriever.search(
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\retriever.py", line 156, in patched_vector_cypher_search
+    kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\kbpedia_retriever.py", line 613, in search
+    selected = wd_candidates[0]
+               ~~~~~~~~~~~~~^^^
+IndexError: list index out of range
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000002B84F0C9490> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Different species of herbivorous rodents lived in the same ecosystem.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+ERROR:neo4j_graphrag.experimental.components.entity_relation_extractor:LLM response has improper format for chunk_index=0
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Schema.IndexOrConstraintAlreadyExists} {category: SCHEMA} {title: `CREATE RANGE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` has no effect.} {description: `RANGE INDEX __entity__tmp_internal_id FOR (e:__KGBuilder__) ON (e.__tmp_internal_id)` already exists.} {position: None} for query: '\n        CREATE INDEX __entity__tmp_internal_id IF NOT EXISTS FOR (n:__KGBuilder__) ON (n.__tmp_internal_id)\n        '
+INFO:neo4j.notifications:Received notification from DBMS server: {severity: INFORMATION} {code: Neo.ClientNotification.Statement.CartesianProduct} {category: PERFORMANCE} {title: This query builds a cartesian product between disconnected patterns.} {description: If a part of a query contains multiple disconnected patterns, this will build a cartesian product between all those parts. This may produce a large amount of data and slow down query processing. While occasionally intended, it may often be possible to reformulate the query that avoids the use of this cross product, perhaps by adding a relationship between the different parts or by using OPTIONAL MATCH (identifier is: (end))} {position: line: 1, column: 21, offset: 20} for query: 'UNWIND $rows as row MATCH (start:__KGBuilder__ {__tmp_internal_id: row.start_node_id}),       (end:__KGBuilder__ {__tmp_internal_id: row.end_node_id}) WITH start, end, row CALL apoc.merge.relationship(start, row.type, {}, row.properties, end, row.properties) YIELD rel  WITH rel, row CALL (rel,row) {  WITH rel, row WHERE row.embedding_properties IS NOT NULL UNWIND keys(row.embedding_properties) as emb CALL db.create.setRelationshipVectorProperty(rel, emb, row.embedding_properties[emb]) } RETURN elementId(rel)'
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   0%|                                                          | 0/100 [00:00<?, ?it/s]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   1%|4                                               | 1/100 [00:59<1:38:24, 59.64s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                         | 0/1 [00:00<?, ?it/s][ABatches: 100%|#################################################| 1/1 [00:00<00:00, 36.38it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   2%|9                                               | 2/100 [02:37<2:13:45, 81.90s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                         | 0/1 [00:00<?, ?it/s][ABatches: 100%|#################################################| 1/1 [00:00<00:00, 17.83it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001B0FA02D040> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Formation of a solution can often be visualized as a three-step process. Step 1. Solvent molecules are separated from each other to make space for the solute. Step 2. Solute molecules are separated so... (118 chars)'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+MMLU:   0%|                                                          | 0/100 [00:00<?, ?it/s]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   1%|4                                              | 1/100 [02:08<3:31:42, 128.30s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                         | 0/1 [00:00<?, ?it/s][ABatches: 100%|#################################################| 1/1 [00:00<00:00, 46.69it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   1%|4                                              | 1/100 [02:53<4:45:38, 173.12s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 110, in run_benchmarks
+    mmlu.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 307, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 286, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 174, in run_test_case
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, formatted_input, flag="prolog")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\mmlu.py", line 139, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 22, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 309, in run_pipeline
+    generation_result = generate(llm=retriever_llm, retriever=retriever, query=query, original_query=user_question)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\retriever.py", line 287, in generate
+    graph_rag_results = graph_rag.search(
+                        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\generation\graphrag.py", line 151, in search
+    retriever_result: RetrieverResult = self.retriever.search(
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\retriever.py", line 156, in patched_vector_cypher_search
+    kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\kbpedia_retriever.py", line 480, in search
+    entities = self.extract_entities(query_text)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\kbpedia_retriever.py", line 114, in extract_entities
+    response = self.llm.invoke(prompt)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 104, in invoke
+    response = super().invoke(
+               ^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 157, in invoke
+    return self.__invoke_v1(input, message_history, system_instruction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 216, in wrapper
+    return active_handler.handle_sync(inner_func)()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 338, in wrapped_f
+    return copy(f, *args, **kw)
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 477, in __call__
+    do = self.iter(retry_state=retry_state)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 378, in iter
+    result = action(retry_state)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 400, in <lambda>
+    self._add_action_func(lambda rs: rs.outcome.result())
+                                     ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\tenacity\__init__.py", line 480, in __call__
+    result = fn(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\utils\rate_limit.py", line 210, in inner_func
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 201, in __invoke_v1
+    response = self.client.chat(
+               ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 365, in chat
+    return self._request(
+           ^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 189, in _request
+    return cls(**self._request_raw(*args, **kwargs).json())
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 129, in _request_raw
+    r = self._client.request(*args, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 914, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 979, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 1014, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_transports\default.py", line 250, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 256, in handle_request
+    raise exc from None
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection_pool.py", line 236, in handle_request
+    response = connection.handle_request(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\connection.py", line 103, in handle_request
+    return self._connection.handle_request(request)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 136, in handle_request
+    raise exc
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 106, in handle_request
+    ) = self._receive_response_headers(**kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 177, in _receive_response_headers
+    event = self._receive_event(timeout=timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_sync\http11.py", line 217, in _receive_event
+    data = self._network_stream.read(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpcore\_backends\sync.py", line 128, in read
+    return self._sock.recv(max_bytes)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+MMLU:   0%|                                                    | 0/100 [00:00<?, ?it/s]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   1%|4                                        | 1/100 [01:58<3:15:49, 118.68s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                   | 0/1 [00:00<?, ?it/s][ABatches: 100%|###########################################| 1/1 [00:00<00:00, 34.28it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   0%|                                                    | 0/100 [00:00<?, ?it/s]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   1%|4                                        | 1/100 [02:06<3:28:45, 126.52s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                   | 0/1 [00:00<?, ?it/s][ABatches: 100%|###########################################| 1/1 [00:00<00:00, 43.88it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   2%|8                                        | 2/100 [03:40<2:55:50, 107.66s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                   | 0/1 [00:00<?, ?it/s][ABatches: 100%|###########################################| 1/1 [00:00<00:00, 24.04it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001A9204C8C20> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Formation of a solution can often be visualized as a three-step process. Step 1. Solvent molecules are separated from each other to make space for the solute. Step 2. Solute molecules are separated so... (118 chars)'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   3%|#2                                       | 3/100 [06:18<3:30:56, 130.48s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                   | 0/1 [00:00<?, ?it/s][ABatches: 100%|###########################################| 1/1 [00:00<00:00, 32.35it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001A9204C8C20> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Prenatal programming:'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001A9204C8C20> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'A. Explains the rise in obesity in the pre-school years'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001A9204C8C20> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'B. May be effected through the epigenetic effects of intrauterine nutritional inadequacy'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001A9204C8C20> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'C. Causes high blood pressure in young children'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001A9204C8C20> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'D. Only affects low birth weight children'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   4%|#6                                       | 4/100 [09:34<4:10:05, 156.31s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                   | 0/1 [00:00<?, ?it/s][ABatches: 100%|###########################################| 1/1 [00:00<00:00, 31.28it/s]
+MMLU:   0%|                                                    | 0/100 [00:00<?, ?it/s]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   1%|4                                       | 1/100 [07:12<11:53:10, 432.23s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                   | 0/1 [00:00<?, ?it/s][ABatches: 100%|###########################################| 1/1 [00:00<00:00, 39.20it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   2%|8                                        | 2/100 [12:13<9:40:17, 355.28s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                   | 0/1 [00:00<?, ?it/s][ABatches: 100%|###########################################| 1/1 [00:00<00:00, 26.43it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   0%|                                                                                                              | 0/100 [00:00<?, ?it/s]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   1%|9                                                                                                  | 1/100 [02:27<4:03:20, 147.48s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                                                             | 0/1 [00:00<?, ?it/s][ABatches: 100%|#####################################################################################################| 1/1 [00:00<00:00, 35.89it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   2%|#9                                                                                                 | 2/100 [04:04<3:12:51, 118.07s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                                                             | 0/1 [00:00<?, ?it/s][ABatches: 100%|#####################################################################################################| 1/1 [00:00<00:00, 24.72it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001ACC21F11C0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Formation of a solution can often be visualized as a three-step process. Step 1. Solvent molecules are separated from each other to make space for the solute. Step 2. Solute molecules are separated so... (118 chars)'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   3%|##9                                                                                                | 3/100 [06:39<3:37:44, 134.68s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                                                             | 0/1 [00:00<?, ?it/s][ABatches: 100%|#####################################################################################################| 1/1 [00:00<00:00, 41.76it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001ACC21F11C0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'Prenatal programming:'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001ACC21F11C0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'A. Explains the rise in obesity in the pre-school years'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001ACC21F11C0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'B. May be effected through the epigenetic effects of intrauterine nutritional inadequacy'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001ACC21F11C0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'C. Causes high blood pressure in young children'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001ACC21F11C0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'D. Only affects low birth weight children'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   4%|###9                                                                                               | 4/100 [09:54<4:13:44, 158.59s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                                                             | 0/1 [00:00<?, ?it/s][ABatches: 100%|#####################################################################################################| 1/1 [00:00<00:00, 34.83it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001ACC21F11C0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'A 65-year-old female is admitted to the hospital after experiencing aphasia and right-sided hemiparesis.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001ACC21F11C0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'She subsequently develops urinary incontinence.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:neo4j_graphrag.experimental.pipeline.config.runner:PIPELINE_RUNNER: starting pipeline <neo4j_graphrag.experimental.pipeline.pipeline.Pipeline object at 0x000001ACC21F11C0> with run_params={'schema': {'node_types': ['Concept', 'Person', 'Event', 'Definition', 'Example', '... (1 items)'], 'relationship_types': ['RELATED_TO', 'IS_A', 'PART_OF', 'CAUSES', 'DEFINES', '... (1 items)'], 'patterns': None}, 'splitter': {'text': 'There is no evidence of urinary tract infection and no prior history of urinary pathology.'}, 'extractor': {'document_info': {'path': 'document.txt', 'metadata': None, 'document_type': 'inline_text'}}}
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Concept' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Person' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Event' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Definition' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Example' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:neo4j_graphrag.experimental.components.schema:Converting string 'Topic' to NodeType with default 'name' property and additional_properties=True to allow flexible property extraction.
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   5%|####9                                                                                              | 5/100 [18:30<7:34:49, 287.26s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                                                                             | 0/1 [00:00<?, ?it/s][ABatches: 100%|#####################################################################################################| 1/1 [00:00<00:00, 30.73it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+MMLU:   6%|#####9                                                                                             | 6/100 [21:21<6:28:33, 248.02s/it]INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/embed "HTTP/1.1 200 OK"
+INFO:sentence_transformers.SentenceTransformer:Use pytorch device_name: cpu
+INFO:sentence_transformers.SentenceTransformer:Load pretrained SentenceTransformer: all-MiniLM-L6-v2
+
+Batches:   0%|                                                   | 0/1 [00:00<?, ?it/s][ABatches: 100%|###########################################| 1/1 [00:00<00:00, 42.35it/s]
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"
+INFO:httpx:HTTP Request: POST http://127.0.0.1:11434/api/chat "HTTP/1.1 200 OK"

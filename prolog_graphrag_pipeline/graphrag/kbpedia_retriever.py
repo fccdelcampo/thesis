@@ -610,8 +610,12 @@ Output ONLY the JSON object, nothing else."""
                             print(f"DEBUG: [Wikidata Fallback] LLM selection failed: {e}. Using first candidate.", flush=True)
 
                     if not selected:
-                        selected = wd_candidates[0]
-                        print(f"DEBUG: [Wikidata Fallback] Defaulting to first candidate: {selected['qid']} ({selected['label']})", flush=True)
+                        if wd_candidates:
+                            selected = wd_candidates[0]
+                            print(f"DEBUG: [Wikidata Fallback] Defaulting to first candidate: {selected['qid']} ({selected['label']})", flush=True)
+                        else:
+                            print(f"DEBUG: [Wikidata Fallback] No valid candidates found for '{concept_name}'", flush=True)
+                            continue
 
                     # Fetch structural triples from Wikidata (core + LLM-selected extended)
                     print(f"DEBUG: [Wikidata Fallback] Fetching structural facts for {selected['qid']}...", flush=True)

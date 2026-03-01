@@ -26,6 +26,7 @@ Translate the provided Context into a formal Prolog database to answer the User 
 - Classical Negation: Use the - prefix (e.g., -mortal(X).) for explicit falsehood.
 - Atoms & Predicates: All Prolog atoms and predicates must be entirely lowercase. If you must refer to a mathematical formula, logical symbol, or option choice with special characters (like ⊃, ∨, ∧, ~, +, -, (, )), you MUST completely enclose it in single quotes to make it a valid Prolog atom (e.g., `'(G ∨ H) ⊃ ~I'`). NEVER use them unquoted.
 - Variables: Use CamelCase for Variables (e.g., PersonName). No single-letter variables.
+- Concise Atoms: Keep snake_case atoms as short as possible to save tokens. Condense long phrases into 1-3 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
 - Singleton Variables: Every named variable in a rule must appear at least twice. If a variable is only used once, use the anonymous variable `_` instead.
 - Punctuation: Every Prolog line must end with a period (.). No standalone bullets or hyphens at the start of a line.
 - Closed-World / No Undefined Predicates (CRITICAL): Every predicate name that appears in a rule body MUST be defined somewhere in the same database — either as a ground fact or as the head of another rule. NEVER call a predicate that you did not define. If you find yourself writing `receives_more_light(X)` in a body, you MUST also have `receives_more_light(pot1).` (or equivalent) as a fact. Calling an undefined predicate will always cause an 'Unknown procedure' error.
@@ -48,9 +49,9 @@ WRONG — undefined predicate in body (causes 'Unknown procedure' error):
   `answer(X) :- choice_a(X).`  ← CRASH because `choice_a/1` is never defined
 
 CORRECT — derived through grounded facts:
-  `choice_a, cell_membrane). choice_b, cell_wall).`
-  `provides_structural_support(cell_wall).`   ← ground fact from context
-  `answer(Option) :- choice_Option, Part), provides_structural_support(Part).`
+  `choice(a, option_text_one). choice(b, option_text_two).`
+  `has_desired_property(option_text_two).`   ← ground fact from context
+  `answer(Option) :- choice(Option, Value), has_desired_property(Value).`
 
 ### MCQ Strategy Selector — Pick the pattern that matches the question type:
 

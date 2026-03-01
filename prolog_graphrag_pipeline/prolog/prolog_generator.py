@@ -108,9 +108,9 @@ answer(X) :- choice(X, Y), has_property(Y).
 choice(a, A).   % A is an unbound variable — WRONG
 ```
 
-### CORRECT — use a lowercase atom:
+### CORRECT — use a lowercase atom derived from the ACTUAL prompt choices:
 ```prolog
-choice(a, cell_wall).   % lowercase atom — CORRECT
+choice(a, actual_option_text).   % lowercase atom — CORRECT
 ```
 """
         elif "Disjunction" in last_error or "';'" in last_error:
@@ -292,7 +292,7 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
         # We look for choice( followed by anything, where either argument starts with an Uppercase letter.
         if re.search(r"choice\([a-z]+,\s*[A-Z_][a-zA-Z0-9_]*\)\.", unquoted_code):
             raise ValueError("Multiple-Choice constraint violation: Your 'choice(letter, Description).' facts use UPPERCASE variables for the description (e.g., `choice(a, A).`). "
-                             "The description MUST be a grounded LOWERCASE atom (e.g., `choice(a, cell_wall).`). "
+                             "The description MUST be a grounded LOWERCASE atom based on the actual option text (e.g., `choice(a, lowercase_option_text).`). "
                              "Uppercase variables will unify with anything and break the proof!")
 
 
@@ -383,8 +383,8 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                         "Every recursive rule MUST bottom out at a plain ground fact (e.g., `animal(cat).` not `animal(Animal).`). "
                         "Also: bare facts like `claw.` do NOT give any predicate a value — use `is_choice_claw).` instead.")
             elif "not sufficiently instantiated" in error_str:
-                hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `choice_A, cell_wall).` where A is unbound). "
-                        "Use LOWERCASE atoms for constants in facts (e.g., `choice_a, cell_wall).`). "
+                hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `choice(A, option_text).` where A is unbound). "
+                        "Use LOWERCASE atoms for constants in facts (e.g., `choice(a, option_text).`). "
                         "Variables (uppercase) should only appear in rule heads/bodies where they are instantiated by matching facts.")
             elif "(:-)/2" in error_str or "Rules must be loaded from a file" in error_str:
                 hint = ("You put a rule definition (Head :- Body.) inside the <query> tag. "
@@ -447,8 +447,8 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                     hint = ("The query timed out — your rules form an infinite loop with no ground base case. "
                             "Break the cycle: ensure every recursive rule bottoms out at a grounded fact.")
                 elif "not sufficiently instantiated" in error_str:
-                    hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `choice_A, cell_wall).`). "
-                            "Use LOWERCASE atoms instead (e.g., `choice_a, cell_wall).`).")
+                    hint = ("You used an UPPERCASE variable as a constant in a database fact (e.g., `choice(A, option_text).`). "
+                            "Use LOWERCASE atoms instead (e.g., `choice(a, option_text).`).")
                 elif "Unknown procedure" in error_str:
                     hint = ("Arity mismatch: ensure the predicate in the query uses the same number of arguments as its definition in the database. "
                             "Also ensure the predicate is actually defined.")

@@ -55,12 +55,10 @@ USER QUESTION: {user_question}
 ---
 ### INSTRUCTION:
 Provide a direct, confident answer to the User Question.
-1. Answer Naturally: Respond as if you already know the answer. Do NOT mention "the context", "the provided information", or "based on the evidence".
-2. Be Direct: Lead with the Final Answer letter (for MCQ), then elaborate briefly.
-3. Multiple Choice/Categorical: If options are provided (like A, B, C, D), you MUST begin your answer with:
-Final Answer: [Letter]
-4. Never Cite Sources: Do NOT reference where you got the information from.
-5. Smooth Tone: Write as a knowledgeable person would naturally explain something in conversation.
+1. Answer Naturally: Respond as if you already know the answer. Do NOT mention "the context" or "the evidence".
+2. Answer First, Explain After: For multiple-choice questions (MCQs), you MUST begin your answer using this EXACT format on the very first line, then explain on the next line:
+*[Letter].* [Choice text]
+3. Smooth Tone: Write as a knowledgeable person would naturally explain something in conversation.
     """
      
 
