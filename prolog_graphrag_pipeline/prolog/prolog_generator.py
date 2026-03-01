@@ -366,7 +366,7 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                 hint = ("Forbidden: ';' (disjunction) is not allowed in s(CASP). "
                         "Replace it with multiple rules that share the same head. "
                         "Example — WRONG: `answer(X) :- choice_a(X) ; choice_b(X).` "
-                        "RIGHT: `answer(X) :- choice_a(X).` and `answer(X) :- choice_b(X).`")
+                        "CORRECT: `answer(X) :- choice_a(X).` and `answer(X) :- choice_b(X).`")
                 _record_error(f"{err_str} {hint}")
             else:
                 _record_error(f"{err_str} Ensure the query is a valid Prolog predicate.")
@@ -432,7 +432,7 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                     hint = ("Forbidden: ';' (disjunction) is not allowed in s(CASP). "
                             "Replace it with multiple rules that share the same head. "
                             "Example — WRONG: `answer(X) :- choice_a(X) ; choice_b(X).` "
-                            "RIGHT: `answer(X) :- choice_a(X).` and `answer(X) :- choice_b(X).`")
+                            "CORRECT: `answer(X) :- choice_a(X).` and `answer(X) :- choice_b(X).`")
                     _record_error(f"{err_str} {hint}")
                 else:
                     _record_error(f"{err_str} Ensure the query is a valid Prolog predicate.")

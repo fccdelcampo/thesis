@@ -271,9 +271,10 @@ If none are relevant, output an empty list [].
                 print(f"DEBUG: Triple filter got empty response for '{entity_label}'. Using all raw triples.", flush=True)
                 return triples
 
-            filtered = json.loads(res)
-            if isinstance(filtered, list):
-                return filtered
+            # raw_decode: consume only the first valid JSON value, ignore trailing text.
+            decoded, _ = json.JSONDecoder().raw_decode(res, bracket_start if bracket_start != -1 else 0)
+            if isinstance(decoded, list):
+                return decoded
         except Exception as e:
             print(f"DEBUG: Triple filtering failed for '{entity_label}': {e}. Using all raw triples.", flush=True)
 
@@ -351,7 +352,10 @@ Example:
                 print(f"DEBUG: Batch triple filter got empty response. Using all raw triples.", flush=True)
                 return result_map
 
-            filtered = json.loads(res)
+            # Use raw_decode to consume only the FIRST valid JSON object.
+            # json.loads() raises "Extra data" when the LLM appends a second
+            # object or commentary after the closing }.
+            filtered, _ = json.JSONDecoder().raw_decode(res, bracket_start if bracket_start != -1 else 0)
             if isinstance(filtered, dict):
                 for c in concepts_data:
                     name = c["name"]
@@ -466,8 +470,33 @@ Output ONLY the JSON list, nothing else.
         for concept_name in entities:
             matches = self.find_concepts(concept_name, limit=2)
 
+            # ── Determine if Wikidata supplement is needed ─────────────────
+            # Case A: KBPedia returned nothing → full Wikidata fallback.
+            # Case B: KBPedia returned a low-confidence or lexically divergent
+            #         match (e.g. queried 'animal skeleton', got 'human skeleton'
+            #         with score 0.8) → supplement with Wikidata for the exact concept.
+            need_wikidata = False
+            wikidata_reason = ""
             if not matches:
+                need_wikidata = True
+                wikidata_reason = "no KBPedia match"
                 print(f"DEBUG: KBPedia has no match for '{concept_name}'.", flush=True)
+            elif wikidata_fetcher:
+                best = matches[0]
+                best_score = best.get("score", 99)
+                best_name = (best.get("name") or "").lower()
+                query_words = set(w for w in concept_name.lower().split() if len(w) > 2)
+                matched_words = set(w for w in best_name.split() if len(w) > 2)
+                overlap = query_words & matched_words
+
+                # Score below 1.5 = weak Lucene match (many irrelevant tokens scored)
+                # Zero word overlap = the matched concept name shares no words with what was queried
+                if best_score < 1.5 or not overlap:
+                    need_wikidata = True
+                    wikidata_reason = f"partial match (score={best_score:.2f}, name='{best['name']}', overlap={overlap})"
+
+            if need_wikidata:
+                print(f"DEBUG: [Wikidata] Triggered for '{concept_name}' — reason: {wikidata_reason}", flush=True)
 
                 # ── Wikidata Fallback ──────────────────────────────────────
                 if wikidata_fetcher:
@@ -476,7 +505,9 @@ Output ONLY the JSON list, nothing else.
 
                     if not wd_candidates:
                         print(f"DEBUG: [Wikidata Fallback] No Wikidata results for '{concept_name}'. Skipping.", flush=True)
-                        continue
+                        if not matches:
+                            continue  # nothing from either source — skip this concept
+                        # else: partial-match case, still process KBPedia below
 
                     # Select the correct Q-ID + relevant property categories in ONE LLM call
                     selected = None
@@ -626,7 +657,13 @@ Output ONLY the JSON list, nothing else."""
                     else:
                         print(f"DEBUG: [Wikidata Fallback] No structural facts returned for {selected['qid']}. Skipping.", flush=True)
                 # ── End Wikidata Fallback ──────────────────────────────────
+
+            # Case A (no KBPedia match at all): skip KBPedia processing.
+            # Case B (partial match supplemented by Wikidata): fall through to
+            # process the KBPedia match too — both go into candidates.
+            if not matches:
                 continue
+
 
 
             print(f"DEBUG: KBPedia matched {len(matches)} concept(s) for '{concept_name}': {[m['name'] for m in matches]}", flush=True)

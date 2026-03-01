@@ -35,7 +35,7 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 ### Query Formatting by Question Type
 1. **Multiple-Choice Questions (MCQ):**
    - Encode EXACTLY FOUR choices as facts. The description MUST be a grounded lowercase atom, NEVER an uppercase variable!
-   - Example RIGHT: `choice(a, cell_wall).`
+   - Example CORRECT: `choice(a, cell_wall).`
    - Example WRONG: `choice(a, A).` (This will trivially unify with anything and fail the proof!)
    - Encode retrieved domain knowledge as facts and rules.
    - You MUST define an `answer/1` rule that unifies with the correct option letter.

@@ -142,7 +142,7 @@ def run_test_case(test_case: dict, test_case_id: int):
     
     print(f"\n--- PIPELINE COMPARISON ---")
     def format_res(name, letter, score):
-        status = "RIGHT" if score >= 1.0 else ""
+        status = "CORRECT" if score >= 1.0 else ""
         let_str = f"[{letter}]" if letter else "[?]"
         return f"{name:<15} | Predicted: {let_str:<5} | {status}"
         

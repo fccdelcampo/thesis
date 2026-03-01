@@ -20,7 +20,7 @@ Translate the provided Context into a formal Prolog database to answer the User 
 ### Syntactic Requirements (s(CASP) Specific)
 - Disjunction / Logical OR: NEVER use the semicolon `;` anywhere — not inside rule bodies, not inside queries. s(CASP) will immediately crash with a permission error. This is the single most common mistake — AVOID IT ENTIRELY.
   WRONG: `answer(X) :- choice_a(X) ; choice_b(X).`
-  RIGHT:  `answer(X) :- choice_a(X).`  AND as a SEPARATE RULE:  `answer(X) :- choice_b(X).`
+  CORRECT:  `answer(X) :- choice_a(X).`  AND as a SEPARATE RULE:  `answer(X) :- choice_b(X).`
 - Arithmetic & Equality: NEVER use the native evaluation operators like `=:=`, `=\=`, `is`, `>`, `<`. s(CASP) strictly prohibits them. For numerical constraints or arithmetic equality, you MUST use constraint logic programming syntax like `#=`, `#<`, `#>`, `#=\=`. If just unifying two terms, use standard `=`.
 - Negation: You MUST use the keyword not for Negation as Failure. NEVER use \+.
 - Classical Negation: Use the - prefix (e.g., -mortal(X).) for explicit falsehood.
@@ -30,7 +30,7 @@ Translate the provided Context into a formal Prolog database to answer the User 
 - Punctuation: Every Prolog line must end with a period (.). No standalone bullets or hyphens at the start of a line.
 - Closed-World / No Undefined Predicates (CRITICAL): Every predicate name that appears in a rule body MUST be defined somewhere in the same database — either as a ground fact or as the head of another rule. NEVER call a predicate that you did not define. If you find yourself writing `receives_more_light(X)` in a body, you MUST also have `receives_more_light(pot1).` (or equivalent) as a fact. Calling an undefined predicate will always cause an 'Unknown procedure' error.
   WRONG: `answer(X) :- choice_X, Factor), causes_difference(Factor).`  ← if `causes_difference/1` is never defined as a fact
-  RIGHT:  `causes_difference(amount_of_light).`  (ground fact)  THEN  `answer(X) :- choice_X, Factor), causes_difference(Factor).`
+  CORRECT:  `causes_difference(amount_of_light).`  (ground fact)  THEN  `answer(X) :- choice_X, Factor), causes_difference(Factor).`
 - Discontiguous Clauses: Group ALL clauses for the same predicate together. Never interleave clauses for different predicates. If `answer/1` has two clauses, write them one after the other, not separated by other predicate definitions.
 
 ### Multiple-Choice Questions (MCQ) — Critical
@@ -47,7 +47,7 @@ WRONG — undefined predicate in body (causes 'Unknown procedure' error):
   `answer(X) :- choice_X, Factor), causes_difference(Factor).`  ← CRASH if `causes_difference/1` has no facts
   `answer(X) :- choice_a(X).`  ← CRASH because `choice_a/1` is never defined
 
-RIGHT — derived through grounded facts:
+CORRECT — derived through grounded facts:
   `choice_a, cell_membrane). choice_b, cell_wall).`
   `provides_structural_support(cell_wall).`   ← ground fact from context
   `answer(Option) :- choice_Option, Part), provides_structural_support(Part).`

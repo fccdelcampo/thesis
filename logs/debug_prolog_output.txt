@@ -1,0 +1,264 @@
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 100 AI2 ARC test cases (starting from index 0).
+
+================================================================================
+[AI2 ARC #0] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['plant cell wall', 'cytoplasmic part', 'anucleated cell', 'cell part', 'cell', 'membrane (biological)', 'plastid', 'plant physiology', 'protoplasm', 'cellulose']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+  > Sending chunk to LLM (3448 chars)... Done!
+DEBUG: End-filter LLM kept indices: [0, 3, 5, 6, 8] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4853 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**plant cell wall**\n[\n  "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cell'...
+DEBUG: Batch triple filtering failed: Expecting value: line 1 column 1 (char 0). Using all raw triples.
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 25/25 triple(s) for 'cell part'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'membrane (biological)'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'plastid'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'protoplasm'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (5153 chars)... Done!
+  > Sending chunk to LLM (4934 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Ollama loaded successfully.
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Comparing cellular structures across kingdoms for functional analogues.",
+  "question": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Comparing cellular structures across kingdoms for functional analogues.', 'question': 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following parts of a plant cell has a function that is most similar' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus'
+  > Sending chunk to LLM (825 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus', 'animal skeleton', 'plant cell']
+DEBUG: KBPedia matched 2 concept(s) for 'cell membrane': ['cell', 'membrane protein']
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 14 raw triple(s) for 'membrane protein'
+DEBUG: KBPedia matched 2 concept(s) for 'cell wall': ['cell wall', 'bacterial cell wall']
+DEBUG: Buffered 13 raw triple(s) for 'cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'bacterial cell wall'
+DEBUG: KBPedia matched 2 concept(s) for 'chloroplast': ['photosynthetic pigment', 'chloroplast']
+DEBUG: Buffered 15 raw triple(s) for 'photosynthetic pigment'
+DEBUG: Buffered 11 raw triple(s) for 'chloroplast'
+DEBUG: KBPedia matched 2 concept(s) for 'nucleus': ['nucleus', 'lentiform nucleus']
+DEBUG: Buffered 11 raw triple(s) for 'nucleus'
+DEBUG: Buffered 6 raw triple(s) for 'lentiform nucleus'
+DEBUG: KBPedia matched 2 concept(s) for 'animal skeleton': ['human skeleton', 'skeleton tarantula']
+DEBUG: Buffered 10 raw triple(s) for 'human skeleton'
+DEBUG: Buffered 9 raw triple(s) for 'skeleton tarantula'
+DEBUG: KBPedia matched 2 concept(s) for 'plant cell': ['plant cell wall', 'plant epidermis']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 11 raw triple(s) for 'plant epidermis'
+  > Sending chunk to LLM (4335 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 10, 11] from 12 candidates.
+DEBUG: End-filter kept 7/12 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4849 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n  "membrane protein": ["definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.", "has subclass: peripheral protein"],\n  "bacter'...
+DEBUG: Batch triple filtering failed: Extra data: line 8 column 1 (char 396). Using all raw triples.
+DEBUG: Batch LLM filter kept 14/14 triple(s) for 'membrane protein'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'bacterial cell wall'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'chloroplast'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'nucleus'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'human skeleton'
+DEBUG: KBPedia found 5 grounded concept contexts.
+  > Sending chunk to LLM (4590 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a rigid structure that provides support and protection.
+2. The human skeleton is the internal framework of the body, providing structural support and protection to vital organs.
+3. Plant cells have an outer layer called the cell wall, which gives them shape and rigidity.
+4. Animal skeletons are composed of bones that provide structural support and protection to various parts of the body.
+5. A plant's cell wall is made up of cellulose, a rigid polysaccharide molecule.
+6. The human skeleton can be divided into two main categories: axial (vertebral column) and appendicular (limbs).
+7. Plant cells have an internal structure called chloroplasts that are responsible for photosynthesis.
+8. Animal skeletons provide attachment points for muscles to move the body's limbs.
+9. A plant cell wall provides a barrier against external factors, such as pathogens or physical damage.
+10. The nucleus of a eukaryotic cell contains most of its genetic material and is surrounded by a double membrane called the nuclear envelope.
+
+Note: I've added one universally accepted truth (item 5) to help bridge the premise to the answer since some relevant information was missing in the context.
+**Context from Prompt:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+has_rigid_structure(cell_wall).
+provides_structural_support_and_protection(human_skeleton).
+
+answer(OptionLetter) :- choice(OptionLetter, Component), has_rigid_structure(Component).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+has_rigid_structure(cell_wall).
+provides_structural_support_and_protection(human_skeleton).
+
+answer(OptionLetter) :- choice(OptionLetter, Component), has_rigid_structure(Component).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for b, because\n      choice holds for b, and cell_wall, and\n      has_rigid_structure holds for cell_wall\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for b, because
+      choice holds for b, and cell_wall, and
+      has_rigid_structure holds for cell_wall
+
+
+**Explainer Output:** 
+**Conclusion:** The part of a plant cell that has a function most similar to the function of an animal skeleton is the cell wall.
+
+**Logical Path:**
+
+1. **Primary Observation:** The system identifies that both plant cells and animal skeletons provide structural support and protection, which are key functions of an internal framework.
+2. **Definition of Similarity:** To find the part of a plant cell similar to an animal skeleton, the solver looks for components with rigid structures that offer support and protection.
+3. **Verification of Rigid Structure:** The system verifies that the cell wall has a rigid structure (item 5), which is crucial for providing shape and rigidity to the plant cell.
+4. **Connection to Animal Skeletons:** By linking the function of the cell wall to the functions of an animal skeleton, the solver establishes a direct analogy between the two structures.
+5. **Conclusion Based on Similarity:** Since the cell wall provides structural support and protection similar to those provided by an animal skeleton, it is identified as the part of a plant cell with the most similar function.
+
+**Step-by-Step Logical Path:**
+
+1. The solver starts with the premise that there's a need to find a component in a plant cell similar to an animal skeleton.
+2. It identifies that both have rigid structures and provide support and protection (items 1, 4).
+3. The solver then looks for components within the plant cell that match these criteria.
+4. Upon finding the cell wall with its rigid structure (item 5), it verifies this component's ability to provide structural support and protection.
+5. Finally, by linking the function of the cell wall to the functions of an animal skeleton, the solver concludes that the cell wall is the part of a plant cell most similar in function.
+
+**Answer:** The correct answer is B (cell_wall).
+
+**FINAL LLM OUTPUT:
+The correct choice is clear because both plant cells and animal skeletons have rigid structures that provide support and protection.
+
+Final Answer: B
+====The pipeline executed in 30.2509 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | CORRECT
+Prolog          | Predicted: [B]   | CORRECT
+Tuned LLM       | Predicted: [B]   | CORRECT
+================================================================================
+
+
+================================================================================
+[AI2 ARC #1] Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods e...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['sample', 'comparison', 'process', 'research method', 'observational study', 'long-term study', 'drive', 'statistical method', 'scientific observation', 'trouble']
+DEBUG: Buffered 10 raw triple(s) for 'sample'
+DEBUG: Buffered 3 raw triple(s) for 'comparison'
+DEBUG: Buffered 11 raw triple(s) for 'process'
+DEBUG: Buffered 23 raw triple(s) for 'research method'
+DEBUG: Buffered 13 raw triple(s) for 'observational study'
+DEBUG: Buffered 4 raw triple(s) for 'long-term study'
+DEBUG: Buffered 8 raw triple(s) for 'drive'
+DEBUG: Buffered 10 raw triple(s) for 'statistical method'
+DEBUG: Buffered 11 raw triple(s) for 'scientific observation'
+DEBUG: Buffered 11 raw triple(s) for 'trouble'
+  > Sending chunk to LLM (3740 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4075 chars)...

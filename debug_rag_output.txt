@@ -23438,3 +23438,305 @@ Final Answer: D
 9. A passenger train and commercial airplane cabin are both types of public transportation devices designed for human occupancy.
 10. The ancestor definition of "force" in physics includes interactions that change the state or motion of objects.
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: botanical cell",
+    "subclass of: cell wall",
+    "subclass of: eukaryotic cell",
+    "subclass of: plant or part of a plant",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part",
+    "sibling concept: bacterial cell wall",
+    "sibling concept: prokaryotic cell wall"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: plant cell wall. Relevant Logical Facts:   - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.   - subclass of: botanical cell   - subclass of: cell wall   - subclass of: eukaryotic cell   - subclass of: plant or part of a plant   - subclass of: structural cell part   - subclass of: external anatomical part   - sibling concept: bacterial cell wall   - sibling concept: prokaryotic cell wall
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.",
+    "subclass of: microscopic object",
+    "subclass of: organic matter",
+    "subclass of: parts",
+    "subclass of: object types",
+    "subclass of: shaped thing",
+    "subclass of: three dimensional thing",
+    "subclass of: material",
+    "has subclass: aster (cell part)",
+    "has subclass: axon",
+    "has subclass: biological membrane stuff",
+    "has subclass: bacterial capsule",
+    "has subclass: structural cell part",
+    "has subclass: cell plate",
+    "has subclass: chromatin",
+    "has subclass: chromosome",
+    "has subclass: cytoplasm",
+    "has subclass: intracellular part",
+    "has subclass: membrane",
+    "has subclass: microtubule",
+    "sibling concept: atomic nucleus",
+    "sibling concept: chemical object",
+    "sibling concept: microorganism",
+    "sibling concept: nanotube",
+    "sibling concept: polymer molecule"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: cell part. Relevant Logical Facts:   - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.   - subclass of: microscopic object   - subclass of: organic matter   - subclass of: parts   - subclass of: object types   - subclass of: shaped thing   - subclass of: three dimensional thing   - subclass of: material   - has subclass: aster (cell part)   - has subclass: axon   - has subclass: biological membrane stuff   - has subclass: bacterial capsule   - has subclass: structural cell part   - has subclass: cell plate   - has subclass: chromatin   - has subclass: chromosome   - has subclass: cytoplasm   - has subclass: intracellular part   - has subclass: membrane   - has subclass: microtubule   - sibling concept: atomic nucleus   - sibling concept: chemical object   - sibling concept: microorganism   - sibling concept: nanotube   - sibling concept: polymer molecule
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane (biological)",
+  "uri": "http://kbpedia.org/kko/rc/BiologicalMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use",
+    "subclass of: biological membrane stuff",
+    "subclass of: cell part",
+    "subclass of: fluid substance",
+    "subclass of: lipid bilayer",
+    "subclass of: membrane",
+    "has subclass: cell membrane"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: membrane (biological). Relevant Logical Facts:   - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use   - subclass of: biological membrane stuff   - subclass of: cell part   - subclass of: fluid substance   - subclass of: lipid bilayer   - subclass of: membrane   - has subclass: cell membrane
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plastid",
+  "uri": "http://kbpedia.org/kko/rc/Plastid",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.",
+    "subclass of: aura: membrane bounded organelle",
+    "subclass of: organelle",
+    "subclass of: cell part",
+    "subclass of: internal body part",
+    "has subclass: chloroplast",
+    "has subclass: chromoplast",
+    "has subclass: leucoplast",
+    "sibling concept: endoplasmic reticulum",
+    "sibling concept: Golgi apparatus",
+    "sibling concept: mitochondrion",
+    "sibling concept: centrosome",
+    "sibling concept: chloroplast"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: plastid. Relevant Logical Facts:   - definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.   - subclass of: aura: membrane bounded organelle   - subclass of: organelle   - subclass of: cell part   - subclass of: internal body part   - has subclass: chloroplast   - has subclass: chromoplast   - has subclass: leucoplast   - sibling concept: endoplasmic reticulum   - sibling concept: Golgi apparatus   - sibling concept: mitochondrion   - sibling concept: centrosome   - sibling concept: chloroplast
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "protoplasm",
+  "uri": "http://kbpedia.org/kko/rc/Protoplasm",
+  "score": 1.0,
+  "triples": [
+    "definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.",
+    "subclass of: cell part",
+    "subclass of: internal body part",
+    "subclass of: microscopic object",
+    "subclass of: organic matter",
+    "subclass of: parts",
+    "subclass of: organism part",
+    "has subclass: cytoplasm",
+    "has subclass: cytoplasm layer",
+    "has subclass: nucleoplasm",
+    "sibling concept: aster (cell part)",
+    "sibling concept: axon",
+    "sibling concept: biological membrane stuff",
+    "sibling concept: bacterial capsule",
+    "sibling concept: structural cell part"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: protoplasm. Relevant Logical Facts:   - definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.   - subclass of: cell part   - subclass of: internal body part   - subclass of: microscopic object   - subclass of: organic matter   - subclass of: parts   - subclass of: organism part   - has subclass: cytoplasm   - has subclass: cytoplasm layer   - has subclass: nucleoplasm   - sibling concept: aster (cell part)   - sibling concept: axon   - sibling concept: biological membrane stuff   - sibling concept: bacterial capsule   - sibling concept: structural cell part
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Final Answer: B.
+The function of a plant cell wall is to provide mechanical support, which is similar to the function of an animal skeleton. The characteristics of the cell wall, such as being somewhat rigid but elastic due to its hydrated nature, also contribute to this similarity in function.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane protein",
+  "uri": "http://kbpedia.org/kko/rc/MembraneProtein",
+  "score": 1.0,
+  "triples": [
+    "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.",
+    "subclass of: protein molecule",
+    "subclass of: biopolymer",
+    "subclass of: heteropolymer",
+    "subclass of: organic molecule",
+    "subclass of: polymer molecule",
+    "subclass of: polypeptide",
+    "subclass of: protein molecule or protein complex",
+    "has subclass: peripheral protein",
+    "sibling concept: aquaporin",
+    "sibling concept: plasma protein molecule",
+    "sibling concept: enzyme",
+    "sibling concept: hemoprotein molecule",
+    "sibling concept: kinetochore"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: membrane protein. Relevant Logical Facts:  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.  - subclass of: protein molecule  - subclass of: biopolymer  - subclass of: heteropolymer  - subclass of: organic molecule  - subclass of: polymer molecule  - subclass of: polypeptide  - subclass of: protein molecule or protein complex  - has subclass: peripheral protein  - sibling concept: aquaporin  - sibling concept: plasma protein molecule  - sibling concept: enzyme  - sibling concept: hemoprotein molecule  - sibling concept: kinetochore
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "bacterial cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BacterialCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.",
+    "subclass of: cell wall",
+    "subclass of: prokaryotic cell wall",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part",
+    "sibling concept: plant cell wall",
+    "sibling concept: prokaryotic cell wall"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: bacterial cell wall. Relevant Logical Facts:  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.  - subclass of: cell wall  - subclass of: prokaryotic cell wall  - subclass of: structural cell part  - subclass of: external anatomical part  - sibling concept: plant cell wall  - sibling concept: prokaryotic cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chloroplast",
+  "uri": "http://kbpedia.org/kko/rc/Chloroplast",
+  "score": 1.0,
+  "triples": [
+    "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.",
+    "subclass of: organelle",
+    "subclass of: plastid",
+    "subclass of: cell part",
+    "subclass of: internal body part",
+    "subclass of: aura: membrane bounded organelle",
+    "sibling concept: centrosome",
+    "sibling concept: endoplasmic reticulum",
+    "sibling concept: Golgi apparatus",
+    "sibling concept: golgi cisterna",
+    "sibling concept: aura: membrane bounded organelle"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: chloroplast. Relevant Logical Facts:  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.  - subclass of: organelle  - subclass of: plastid  - subclass of: cell part  - subclass of: internal body part  - subclass of: aura: membrane bounded organelle  - sibling concept: centrosome  - sibling concept: endoplasmic reticulum  - sibling concept: Golgi apparatus  - sibling concept: golgi cisterna  - sibling concept: aura: membrane bounded organelle
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "nucleus",
+  "uri": "http://kbpedia.org/kko/rc/Nucleus",
+  "score": 1.0,
+  "triples": [
+    "definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, but a few cell types, such as mammalian red blood cells, have , and a few others have many.",
+    "subclass of: organelle",
+    "subclass of: cell part",
+    "subclass of: internal body part",
+    "has subclass: nuclear substructure",
+    "has subclass: nucleolus",
+    "sibling concept: centrosome",
+    "sibling concept: chloroplast",
+    "sibling concept: endoplasmic reticulum",
+    "sibling concept: Golgi apparatus",
+    "sibling concept: golgi cisterna"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: nucleus. Relevant Logical Facts:  - definition: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, but a few cell types, such as mammalian red blood cells, have , and a few others have many.  - subclass of: organelle  - subclass of: cell part  - subclass of: internal body part  - has subclass: nuclear substructure  - has subclass: nucleolus  - sibling concept: centrosome  - sibling concept: chloroplast  - sibling concept: endoplasmic reticulum  - sibling concept: Golgi apparatus  - sibling concept: golgi cisterna
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "human skeleton",
+  "uri": "http://kbpedia.org/kko/rc/Human-Skeleton",
+  "score": 1.0,
+  "triples": [
+    "definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth \u2013 this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,",
+    "subclass of: body part",
+    "subclass of: skeleton",
+    "subclass of: region on an animal's body",
+    "subclass of: organ system",
+    "sibling concept: abdomen",
+    "sibling concept: abdominal cavity",
+    "sibling concept: adrenal cortex",
+    "sibling concept: adrenal medulla",
+    "sibling concept: alimentary canal"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: human skeleton. Relevant Logical Facts:  - definition: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,  - subclass of: body part  - subclass of: skeleton  - subclass of: region on an animal's body  - subclass of: organ system  - sibling concept: abdomen  - sibling concept: abdominal cavity  - sibling concept: adrenal cortex  - sibling concept: adrenal medulla  - sibling concept: alimentary canal
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a rigid structure that provides support and protection.
+2. The human skeleton is the internal framework of the body, providing structural support and protection to vital organs.
+3. Plant cells have an outer layer called the cell wall, which gives them shape and rigidity.
+4. Animal skeletons are composed of bones that provide structural support and protection to various parts of the body.
+5. A plant's cell wall is made up of cellulose, a rigid polysaccharide molecule.
+6. The human skeleton can be divided into two main categories: axial (vertebral column) and appendicular (limbs).
+7. Plant cells have an internal structure called chloroplasts that are responsible for photosynthesis.
+8. Animal skeletons provide attachment points for muscles to move the body's limbs.
+9. A plant cell wall provides a barrier against external factors, such as pathogens or physical damage.
+10. The nucleus of a eukaryotic cell contains most of its genetic material and is surrounded by a double membrane called the nuclear envelope.
+
+Note: I've added one universally accepted truth (item 5) to help bridge the premise to the answer since some relevant information was missing in the context.
+==================================================
