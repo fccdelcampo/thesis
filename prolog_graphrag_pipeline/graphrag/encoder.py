@@ -14,6 +14,7 @@ from llm_config import MODEL_NAME, get_openai_client
 
 import json
 import asyncio
+import time
 
 client = get_openai_client()
 
@@ -96,6 +97,8 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
             import traceback
             traceback.print_exc()
             most_recent_error = str(e)
+            if i < 4:
+                time.sleep(2)  # Wait before retry
             
     raise ValueError(f"Failed to extract query and context after 5 retries. Last error: {most_recent_error}")
 

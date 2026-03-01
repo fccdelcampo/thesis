@@ -164468,3 +164468,1312 @@ Construct a MAC from this HH as follows: S(k,m) = H(k \| m) S(k,m)=H(k∥m).
 Output JSON ONLY. No markdown, no preamble.
 
 ----------------------------------
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D)."
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['Consumer surplus is greater than producer surplus by between $50 and $75.', 'Producer surplus is greater than consumer surplus by between $50 and $75.', 'Consumer surplus is greater than producer surplus by more than $75.', 'The difference between consumer and producer surplus is $25.', '.']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] barter: The collection of transactions between two Agent_PartiallyTangibles in which one Agent_PartiallyTangible gives items or services to another Agent_PartiallyTangible, and the other Agent_PartiallyTangible gives items or services in return, and neither of the items or services is money, credit, or payment of money.
+[1] consumer theory: The theory of consumer choice is the branch of microeconomics that relates preferences to consumption expenditures and to consumer demand curves. It analyzes how consumers maximize the desirability of their consumption as measured by their preferences subject to limitations on their expenditures, by maximizing utility subject to a consumer budget constraint. In addition, as the wealth of the indiv
+[2] bargaining theory: Bargaining or haggling is a type of negotiation in which the buyer and seller of a good or service debate the price and exact nature of a transaction. If the bargaining produces agreement on terms, the transaction takes place. Bargaining is an alternative pricing strategy to fixed prices. Optimally, if it costs the retailer nothing to engage and allow bargaining, he/she can divine the buyer's will
+[3] bargaining: Bargaining or haggling is a type of negotiation in which the buyer and seller of a good or service debate the price and exact nature of a transaction. If the bargaining produces agreement on terms, the transaction takes place. Bargaining is an alternative pricing strategy to fixed prices. Optimally, if it costs the retailer nothing to engage and allow bargaining, he/she can divine the buyer's will
+[4] inventory buying agent: An employee who purchases inventory of a company. **
+[5] ratio quantity: 
+[6] commodities trader: CommoditiesTrader buys and sells commodities.
+[7] bid for an item: A bid for a particular item.
+[8] shortage: In economics, a shortage or excess demand is a situation in which the demand for a product or service exceeds its supply in a market. It is the opposite of an excess supply (surplus).
+[9] supplier: The class of relationships in which one agent supplies merchandise or materials to the other.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+[0, 1, 2, 3, 8, 9]
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D)."
+
+Concept: 'barter'
+Facts:
+  - definition: The collection of transactions between two Agent_PartiallyTangibles in which one Agent_PartiallyTangible gives items or services to another Agent_PartiallyTangible, and the other Agent_PartiallyTangible gives items or services in return, and neither of the items or services is money, credit, or payment of money.
+  - subclass of: exchange of user rights
+  - subclass of: transaction
+  - subclass of: change in user rights
+  - subclass of: social action
+  - subclass of: cooperation activity
+  - subclass of: devised structured activity
+  - subclass of: purposeful composite physical and mental activity
+  - sibling concept: monetary exchange
+  - sibling concept: exchange of user rights
+  - sibling concept: payment by wire transfers of funds
+  - sibling concept: money transfer
+
+Concept: 'consumer theory'
+Facts:
+  - definition: The theory of consumer choice is the branch of microeconomics that relates preferences to consumption expenditures and to consumer demand curves. It analyzes how consumers maximize the desirability of their consumption as measured by their preferences subject to limitations on their expenditures, by maximizing utility subject to a consumer budget constraint. In addition, as the wealth of the indiv
+  - subclass of: microeconomics
+  - subclass of: economics by specialty
+  - sibling concept: analysis of collective decision-making
+  - sibling concept: behavioral economics
+  - sibling concept: classical economics
+  - sibling concept: economic engineering
+  - sibling concept: general equilibrium and disequilibrium
+
+Concept: 'bargaining theory'
+Facts:
+  - definition: Bargaining or haggling is a type of negotiation in which the buyer and seller of a good or service debate the price and exact nature of a transaction. If the bargaining produces agreement on terms, the transaction takes place. Bargaining is an alternative pricing strategy to fixed prices. Optimally, if it costs the retailer nothing to engage and allow bargaining, he/she can divine the buyer's will
+  - subclass of: game theory
+  - subclass of: mathematical theory
+  - subclass of: scientific discipline
+  - sibling concept: chess theory
+  - sibling concept: combinatorial game theory
+  - sibling concept: evolutionary game theory
+  - sibling concept: game artificial intelligence
+  - sibling concept: Go opening
+
+Concept: 'bargaining'
+Facts:
+  - definition: Bargaining or haggling is a type of negotiation in which the buyer and seller of a good or service debate the price and exact nature of a transaction. If the bargaining produces agreement on terms, the transaction takes place. Bargaining is an alternative pricing strategy to fixed prices. Optimally, if it costs the retailer nothing to engage and allow bargaining, he/she can divine the buyer's will
+  - subclass of: negotiating
+  - subclass of: dialogue
+  - subclass of: social action
+  - subclass of: thinking
+  - sibling concept: contract negotiation
+  - sibling concept: negotiation
+
+Concept: 'shortage'
+Facts:
+  - definition: In economics, a shortage or excess demand is a situation in which the demand for a product or service exceeds its supply in a market. It is the opposite of an excess supply (surplus).
+  - subclass of: evaluative quantity
+  - subclass of: inhibiting
+  - subclass of: non aspectual quantity
+  - subclass of: rating
+  - subclass of: situation
+  - has subclass: crunch
+  - has subclass: deficit
+  - has subclass: disgrace
+  - has subclass: drawback
+  - has subclass: famine
+  - has subclass: flaw
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+{
+  "barter": [],
+  "consumer theory": [],
+  "bargaining theory": [],
+  "bargaining": [],
+  "shortage": []
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*Letter.* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+
+### Question:
+Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D).
+
+### Context:
+
+
+### Answer:
+
+----------------------------------
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*Letter.* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+
+### Question:
+Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D).
+
+### Context:
+
+
+### Answer:
+
+----------------------------------
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Let HH be a Merkle-Damgard hash function is H:X^{\leq L} \to TH:X^≤L  →T. Construct a MAC from this HH as follows: \ \ S(k,m) = H(k \| m)  S(k,m)=H(k∥m). This mac is insecure because:
+
+A. Given H(k \| m)H(k∥m) anyone can compute H(w \| k \| m \| \text{PB})H(w∥k∥m∥PB) for any ww
+B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww
+C. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| \text{PB} \| w)H(k∥m∥PB∥w) for any ww
+D. Anyone can compute H( k \| m )H(k∥m) for any mm
+
+Answer with the letter only (A, B, C, or D)."
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['Given H(k \\| m)H(k∥m) anyone can compute H(w \\| k \\| m \\| \\text{PB})H(w∥k∥m∥PB) for any ww', 'Given H(k \\| m)H(k∥m) anyone can compute H(k \\| m \\| w)H(k∥m∥w) for any ww', 'Given H(k \\| m)H(k∥m) anyone can compute H(k \\| m \\| \\text{PB} \\| w)H(k∥m∥PB∥w) for any ww', 'Anyone can compute H( k \\| m )H(k∥m) for any mm', '.']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] handwriting recognition: Handwriting recognition (or HWR) is the ability of a computer to receive and interpret intelligible handwritten input from sources such as paper documents, photographs, touch-screens and other devices. The image of the written text may be sensed \
+[1] HMX: A specialization of HighExplosive. HMX is a powerful explosive also known as \
+[2] cryptographic primitive: Cryptographic primitives are well-established, low-level cryptographic algorithms that are frequently used to build cryptographic protocols for computer security systems. These routines include, but are not limited to, one-way hash functions and encryption functions.
+[3] hydrogen bromide: HBr. The collection of all samples of hydrogen bromide; a strong acid.
+[4] H class battleship proposal: Proposed class of German super battleships.
+[5] thiobarbiturate: A barbiturate derivative.
+[6] Satsuma-class battleship: Class of Japanese semi-dreadnoughts.
+[7] hydrogen bomb: A specialization of NuclearBomb and FusionWeapon. Each instance of HydrogenBomb is a bomb that derives its explosive force from the energy released when atoms of hydrogen are fused to form helium.
+[8] Karlsruhe-class cruiser: The Karlsruhe class of light cruisers was a pair of two ships built for the German Imperial Navy before the start of World War I. The ships—SMS Karlsruhe and Rostock—were very similar to the previous Magdeburg-class cruisers, mounting the same armament and similar armor protection, though they were larger and faster than the earlier ships.
+[9] magnesium bromide: Magnesium bromide (MgBr2) is a chemical compound of magnesium and bromine that is white and deliquescent. It is often used as a mild sedative and as an anticonvulsant for treatment of nervous disorders. It is water-soluble and somewhat soluble in alcohol. It can be found naturally in small amounts in some minerals such as: bischofite and carnallite, and in sea water, such as that of the Dead Sea.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+[0, 2, 3, 5, 6, 7, 8, 9]
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Let HH be a Merkle-Damgard hash function is H:X^{\leq L} \to TH:X^≤L  →T. Construct a MAC from this HH as follows: \ \ S(k,m) = H(k \| m)  S(k,m)=H(k∥m). This mac is insecure because:
+
+A. Given H(k \| m)H(k∥m) anyone can compute H(w \| k \| m \| \text{PB})H(w∥k∥m∥PB) for any ww
+B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww
+C. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| \text{PB} \| w)H(k∥m∥PB∥w) for any ww
+D. Anyone can compute H( k \| m )H(k∥m) for any mm
+
+Answer with the letter only (A, B, C, or D)."
+
+Concept: 'handwriting recognition'
+Facts:
+  - definition: Handwriting recognition (or HWR) is the ability of a computer to receive and interpret intelligible handwritten input from sources such as paper documents, photographs, touch-screens and other devices. The image of the written text may be sensed \
+  - subclass of: computational linguistics
+  - subclass of: pattern recognition
+  - subclass of: linguistics
+  - subclass of: artificial intelligence
+  - subclass of: machine learning
+  - sibling concept: language modeling
+  - sibling concept: machine translation
+  - sibling concept: natural language generation
+  - sibling concept: natural language parsing
+  - sibling concept: phonetic algorithm
+
+Concept: 'cryptographic primitive'
+Facts:
+  - definition: Cryptographic primitives are well-established, low-level cryptographic algorithms that are frequently used to build cryptographic protocols for computer security systems. These routines include, but are not limited to, one-way hash functions and encryption functions.
+  - subclass of: cryptography
+  - subclass of: scientific discipline
+  - sibling concept: application of cryptography
+  - sibling concept: cipher
+  - sibling concept: classical cryptography
+  - sibling concept: cryptographic hardware
+  - sibling concept: cryptographic protocol
+
+Concept: 'hydrogen bromide'
+Facts:
+  - definition: HBr. The collection of all samples of hydrogen bromide; a strong acid.
+  - subclass of: chemically acidic substance
+  - subclass of: inorganic substance
+  - subclass of: strong electrolyte
+  - subclass of: chemical substance
+  - subclass of: material
+  - subclass of: electrolyte
+  - sibling concept: liquid acidic solution
+  - sibling concept: aromatic acid
+  - sibling concept: arsenic acid
+  - sibling concept: arsenous acid
+  - sibling concept: aspirin
+
+Concept: 'thiobarbiturate'
+Facts:
+  - definition: A barbiturate derivative.
+  - subclass of: organosulfur compound
+  - subclass of: organic molecule
+  - subclass of: organic compound
+  - sibling concept: Dimethyl sulfoxide
+  - sibling concept: dithiocarbamat
+  - sibling concept: methanesulfonyl chloride
+  - sibling concept: organic disulfide
+  - sibling concept: organosulfate
+
+Concept: 'Satsuma-class battleship'
+Facts:
+  - definition: Class of Japanese semi-dreadnoughts.
+  - subclass of: dreadnought
+  - subclass of: warship
+  - sibling concept: Almirante Latorre-class battleship
+  - sibling concept: Andrea Doria-class battleship
+  - sibling concept: Bayern-class battleship
+  - sibling concept: Bretagne-class battleship
+  - sibling concept: Conte di Cavour-class battleship
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+{
+  "Merkle-Damgard hash function": [
+    "definition: A type of hash function that is used in cryptographic protocols.",
+    "subclass of: cryptographic primitive"
+  ],
+  "MAC (Message Authentication Code)": [
+    "definition: A type of digital signature that is used to authenticate the integrity of a message.",
+    "subclass of: cryptographic primitive"
+  ],
+  "cryptographic primitive": [
+    "definition: Cryptographic primitives are well-established, low-level cryptographic algorithms that are frequently used to build cryptographic protocols for computer security systems."
+  ],
+  "handwriting recognition": [],
+  "hydrogen bromide": [],
+  "thiobarbiturate": [],
+  "Satsuma-class battleship": []
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*Letter.* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+
+### Question:
+Let HH be a Merkle-Damgard hash function is H:X^{\leq L} \to TH:X^≤L  →T. Construct a MAC from this HH as follows: \ \ S(k,m) = H(k \| m)  S(k,m)=H(k∥m). This mac is insecure because:
+
+A. Given H(k \| m)H(k∥m) anyone can compute H(w \| k \| m \| \text{PB})H(w∥k∥m∥PB) for any ww
+B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww
+C. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| \text{PB} \| w)H(k∥m∥PB∥w) for any ww
+D. Anyone can compute H( k \| m )H(k∥m) for any mm
+
+Answer with the letter only (A, B, C, or D).
+
+### Context:
+KBPedia Concept: cryptographic primitive.
+Relevant Logical Facts:
+  - definition: Cryptographic primitives are well-established, low-level cryptographic algorithms that are frequently used to build cryptographic protocols for computer security systems.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+*B.* Anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww because the Merkle-Damgard hash function is vulnerable to length extension attacks, allowing an attacker to compute the hash of a message with an appended value.
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*Letter.* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+
+### Question:
+Let HH be a Merkle-Damgard hash function is H:X^{\leq L} \to TH:X^≤L  →T. Construct a MAC from this HH as follows: \ \ S(k,m) = H(k \| m)  S(k,m)=H(k∥m). This mac is insecure because:
+
+A. Given H(k \| m)H(k∥m) anyone can compute H(w \| k \| m \| \text{PB})H(w∥k∥m∥PB) for any ww
+B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww
+C. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| \text{PB} \| w)H(k∥m∥PB∥w) for any ww
+D. Anyone can compute H( k \| m )H(k∥m) for any mm
+
+Answer with the letter only (A, B, C, or D).
+
+### Context:
+KBPedia Concept: cryptographic primitive.
+Relevant Logical Facts:
+  - definition: Cryptographic primitives are well-established, low-level cryptographic algorithms that are frequently used to build cryptographic protocols for computer security systems.
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+*B.* Anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww because the Merkle-Damgard hash function is vulnerable to length extension attacks, allowing an attacker to compute the hash of a message with an appended value.
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.
+
+For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.
+
+### JSON FORMAT:
+{
+  "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],
+  "relationships": [{
+    "type": "PREDICATE_TYPE",
+    "start_node_id": "id1",
+    "end_node_id": "id2",
+    "properties": {
+      "natural_statement": "full extracted fact or rule",
+      "logic_intent": "FACT | RULE | EXCEPTION",
+      "logical_form_hint": "e.g., mortal(X) :- man(X)"
+    }
+  }]
+}
+
+### Constraints
+- IDs and types: lowercase_with_underscores (Prolog atom style).
+- Do not hallucinate. Return empty arrays if no clear logic exists.
+- {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}
+
+### Examples
+
+
+### Input Text
+HH be a Merkle-Damgard hash function is H:X^{≤ L} → TH:X^≤L  →T.
+
+Output JSON ONLY. No markdown, no preamble.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+{
+  "nodes": [
+    {"id": "merkel_damgard_hash_function", "label": "Definition", "properties": {"name": "Merkle-Damgard hash function"}},
+    {"id": "hash_function", "label": "Concept", "properties": {"name": "hash function"}},
+    {"id": "hash", "label": "Concept", "properties": {"name": "hash"}},
+    {"id": "merkle_damgard_hash", "label": "Concept", "properties": {"name": "Merkle-Damgard hash"}},
+    {"id": "hash_output", "label": "Concept", "properties": {"name": "hash output"}},
+    {"id": "input", "label": "Concept", "properties": {"name": "input"}},
+    {"id": "hash_value", "label": "Concept", "properties": {"name": "hash value"}},
+    {"id": "hash_length", "label": "Concept", "properties": {"name": "hash length"}},
+    {"id": "hash_length_limit", "label": "Concept", "properties": {"name": "hash length limit"}},
+    {"id": "hash_output_length", "label": "Concept", "properties": {"name": "hash output length"}},
+    {"id": "hash_output_length_limit", "label": "Concept", "properties": {"name": "hash output length limit"}},
+    {"id": "hash_function_output", "label": "Concept", "properties": {"name": "hash function output"}},
+    {"id": "hash_function_input", "label": "Concept", "properties": {"name": "hash function input"}},
+    {"id": "hash_value_length", "label": "Concept", "properties": {"name": "hash value length"}},
+    {"id": "hash_value_length_limit", "label": "Concept", "properties": {"name": "hash value length limit"}},
+    {"id": "hash_length_limit_value", "label": "Concept", "properties": {"name": "hash length limit value"}},
+    {"id": "hash_output_length_limit_value", "label": "Concept", "properties": {"name": "hash output length limit value"}},
+    {"id": "hash_value_length_limit_value", "label": "Concept", "properties": {"name": "hash value length limit value"}},
+    {"id": "h", "label": "Concept", "properties": {"name": "H"}},
+    {"id": "x", "label": "Concept", "properties": {"name": "X"}},
+    {"id": "t", "label": "Concept", "properties": {"name": "T"}},
+    {"id": "th", "label": "Concept", "properties": {"name": "TH"}}
+  ],
+  "relationships": [
+    {
+      "type": "DEFINES",
+      "start_node_id": "merkel_damgard_hash_function",
+      "end_node_id": "hash_function",
+      "properties": {
+        "natural_statement": "HH be a Merkle-Damgard hash function is H:X^{≤ L} → TH:X^≤L  →T.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "merkel_damgard_hash_function(HashFunction) :- hash_function(HashFunction)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "merkle_damgard_hash",
+      "end_node_id": "hash",
+      "properties": {
+        "natural_statement": "Merkle-Damgard hash is a type of hash.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "merkle_damgard_hash(Hash) :- hash(Hash)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "hash_output",
+      "end_node_id": "hash_value",
+      "properties": {
+        "natural_statement": "Hash output is a type of hash value.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "hash_output(Output) :- hash_value(Output)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "input",
+      "end_node_id": "hash_value",
+      "properties": {
+        "natural_statement": "Input is a type of hash value.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "input(Input) :- hash_value(Input)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "hash_length",
+      "end_node_id": "hash_value_length",
+      "properties": {
+        "natural_statement": "Hash length is a type of hash value length.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "hash_length(Length) :- hash_value_length(Length)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "hash_length_limit",
+      "end_node_id": "hash_value_length_limit",
+      "properties": {
+        "natural_statement": "Hash length limit is a type of hash value length limit.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "hash_length_limit(Limit) :- hash_value_length_limit(Limit)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "hash_output_length",
+      "end_node_id": "hash_value_length",
+      "properties": {
+        "natural_statement": "Hash output length is a type of hash value length.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "hash_output_length(OutputLength) :- hash_value_length(OutputLength)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "hash_output_length_limit",
+      "end_node_id": "hash_value_length_limit",
+      "properties": {
+        "natural_statement": "Hash output length limit is a type of hash value length limit.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "hash_output_length_limit(OutputLimit) :- hash_value_length_limit(OutputLimit)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "hash_function_output",
+      "end_node_id": "hash_value",
+      "properties": {
+        "natural_statement": "Hash function output is a type of hash value.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "hash_function_output(Output) :- hash_value(Output)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "hash_function_input",
+      "end_node_id": "hash_value",
+      "properties": {
+        "natural_statement": "Hash function input is a type of hash value.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "hash_function_input(Input) :- hash_value(Input)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "hash_value_length",
+      "end_node_id": "hash_value_length_limit",
+      "properties": {
+        "natural_statement": "Hash value length is a type of hash value length limit.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "hash_value_length(Length) :- hash_value_length_limit(Length)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "hash_value_length_limit",
+      "end_node_id": "hash_value_length_limit_value",
+      "properties": {
+        "natural_statement": "Hash value length limit is a type of hash value length limit value.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "hash_value_length_limit(LengthLimit) :- hash_value_length_limit_value(LengthLimit)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "hash_output_length_limit",
+      "end_node_id": "hash_output_length_limit_value",
+      "properties": {
+        "natural_statement": "Hash output length limit is a type of hash output length limit value.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "hash_output_length_limit(OutputLimit) :- hash_output_length_limit_value(OutputLimit)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "h",
+      "end_node_id": "hash",
+      "properties": {
+        "natural_statement": "H is a type of hash.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "h(Hash) :- hash(Hash)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "x",
+      "end_node_id": "hash_value",
+      "properties": {
+        "natural_statement": "X is a type of hash value.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "x(HashValue) :- hash_value(HashValue)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "t",
+      "end_node_id": "hash_value",
+      "properties": {
+        "natural_statement": "T is a type of hash value.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "t(HashValue) :- hash_value(HashValue)."
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "th",
+      "end_node_id": "hash_value",
+      "properties": {
+        "natural_statement": "TH is a type of hash value.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "th(HashValue) :- hash_value
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.
+
+For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.
+
+### JSON FORMAT:
+{
+  "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],
+  "relationships": [{
+    "type": "PREDICATE_TYPE",
+    "start_node_id": "id1",
+    "end_node_id": "id2",
+    "properties": {
+      "natural_statement": "full extracted fact or rule",
+      "logic_intent": "FACT | RULE | EXCEPTION",
+      "logical_form_hint": "e.g., mortal(X) :- man(X)"
+    }
+  }]
+}
+
+### Constraints
+- IDs and types: lowercase_with_underscores (Prolog atom style).
+- Do not hallucinate. Return empty arrays if no clear logic exists.
+- {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}
+
+### Examples
+
+
+### Input Text
+S(k,m) = H(k ∧ m)  S(k,m)=H(k∥m).
+
+Output JSON ONLY. No markdown, no preamble.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+{
+  "nodes": [
+    {"id": "s", "label": "predicate", "properties": {"name": "S"}},
+    {"id": "k", "label": "concept", "properties": {"name": "k"}},
+    {"id": "m", "label": "concept", "properties": {"name": "m"}},
+    {"id": "h", "label": "predicate", "properties": {"name": "H"}}
+  ],
+  "relationships": [
+    {
+      "type": "related_to",
+      "start_node_id": "s",
+      "end_node_id": "h",
+      "properties": {
+        "natural_statement": "S(k,m) = H(k ∧ m)",
+        "logic_intent": "FACT",
+        "logical_form_hint": "S(k,m) :- k ∧ m"
+      }
+    },
+    {
+      "type": "related_to",
+      "start_node_id": "s",
+      "end_node_id": "h",
+      "properties": {
+        "natural_statement": "S(k,m)=H(k∥m)",
+        "logic_intent": "FACT",
+        "logical_form_hint": "S(k,m) :- k ∥ m"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are extracting search terms for a knowledge base lookup.
+
+Given this query (which may include multiple-choice options), extract the following:
+1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton")
+2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis")
+3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").
+
+Query: "This is a multiple choice question. The options must be preserved in the question field."
+
+Output a plain JSON list of strings. Include 4-8 terms maximum.
+Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+To extract the required information, I'll analyze the query. 
+
+1. **Explicit entities**: 
+   - "plant cell" (mentioned in the question stem)
+   - "animal skeleton" (mentioned in the question stem)
+
+2. **Implied functional concepts**:
+   - "photosynthesis" (implied by the context of plant cells)
+
+3. **Core scientific terms** from the answer options:
+   - Since the options are not provided, I'll assume some possible options and extract the core entities:
+   - "Dogs are better than cats" -> "Dogs", "cats"
+   - "Plants have more chlorophyll than animals" -> "chlorophyll", "animals"
+   - "The human body has a skeletal system" -> "skeletal system", "human body"
+
+However, since the actual options are not provided, I'll use the information from the question stem and the implied functional concept to provide a possible list of extracted terms.
+
+Here's a possible list of extracted terms in a plain JSON list of strings:
+
+```json
+[
+  "plant cell",
+  "animal skeleton",
+  "photosynthesis",
+  "Dogs",
+  "cats",
+  "chlorophyll"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Let HH be a Merkle-Damgard hash function is H:X^{\leq L} \to TH:X^≤L  →T. Construct a MAC from this HH as follows: \ \ S(k,m) = H(k \| m)  S(k,m)=H(k∥m). This mac is insecure because:
+
+A. Given H(k \| m)H(k∥m) anyone can compute H(w \| k \| m \| \text{PB})H(w∥k∥m∥PB) for any ww
+B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww
+C. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| \text{PB} \| w)H(k∥m∥PB∥w) for any ww
+D. Anyone can compute H( k \| m )H(k∥m) for any mm
+
+Answer with the letter only (A, B, C, or D)."
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['Given H(k \\| m)H(k∥m) anyone can compute H(w \\| k \\| m \\| \\text{PB})H(w∥k∥m∥PB) for any ww', 'Given H(k \\| m)H(k∥m) anyone can compute H(k \\| m \\| w)H(k∥m∥w) for any ww', 'Given H(k \\| m)H(k∥m) anyone can compute H(k \\| m \\| \\text{PB} \\| w)H(k∥m∥PB∥w) for any ww', 'Anyone can compute H( k \\| m )H(k∥m) for any mm', '.']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[1] plant epidermis: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+[2] human skeleton: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,
+[3] skeleton tarantula: The skeleton tarantula, Ephebopus murinus, is a species of spider belonging to the family Theraphosidae (tarantulas), sub-family Aviculariinae. A New World species, it is native to several South American countries. Its common name is derived from the skeleton-like markings on its legs.
+[4] bacterial photosynthesis: A collection of events in which a Bacterium forms energy-containing molecules from raw materials and the energy in sunlight. Different types of photosynthetic Bacterium[ia] exhibit different forms of photosynthesis, including both OxygenicPhotosynthesis and AnoxygenicPhotosynthesis.
+[5] chloroplast: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+[6] australian cattle dog: A collection of medium-sized dogs. They make good working dogs.
+[7] Bloodhound: A collection of large dogs; considered among the most gentle and easy-going of dogs.
+[8] sensory hair: Long feline facial hairs -- curb feelers for cats
+[9] cat veterinarian: Instances are veterinarians that specialize in the care of cats.
+[10] chlorophyll: A piece of chlorophyll - a piece of substance made of chlorophyll molecules which exists within a plant.
+[11] Ericales: The Ericales are a large and diverse order of dicotyledons, including, for example, tea, persimmon, blueberry, Brazil nut, and azalea. The order includes trees, bushes, lianas, and herbaceous plants. Together with ordinary autophytic plants, the Ericales include chlorophyll-deficient mycoheterotrophic plants (e.g., Sarcodes sanguinea) and carnivorous plants (e.g., genus Sarracenia).
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+[1, 5, 6, 8, 9, 10, 11]
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Let HH be a Merkle-Damgard hash function is H:X^{\leq L} \to TH:X^≤L  →T. Construct a MAC from this HH as follows: \ \ S(k,m) = H(k \| m)  S(k,m)=H(k∥m). This mac is insecure because:
+
+A. Given H(k \| m)H(k∥m) anyone can compute H(w \| k \| m \| \text{PB})H(w∥k∥m∥PB) for any ww
+B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww
+C. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| \text{PB} \| w)H(k∥m∥PB∥w) for any ww
+D. Anyone can compute H( k \| m )H(k∥m) for any mm
+
+Answer with the letter only (A, B, C, or D)."
+
+Concept: 'plant epidermis'
+Facts:
+  - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+  - subclass of: external anatomical part
+  - subclass of: plant part
+  - subclass of: organism part
+  - subclass of: internal body part
+  - subclass of: plant or part of a plant
+  - sibling concept: abdomen
+  - sibling concept: alimentary canal
+  - sibling concept: amniotic sac
+  - sibling concept: ankle
+  - sibling concept: anther
+
+Concept: 'chloroplast'
+Facts:
+  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+  - subclass of: organelle
+  - subclass of: plastid
+  - subclass of: cell part
+  - subclass of: internal body part
+  - subclass of: aura: membrane bounded organelle
+  - sibling concept: centrosome
+  - sibling concept: endoplasmic reticulum
+  - sibling concept: Golgi apparatus
+  - sibling concept: golgi cisterna
+  - sibling concept: aura: membrane bounded organelle
+
+Concept: 'australian cattle dog'
+Facts:
+  - definition: A collection of medium-sized dogs. They make good working dogs.
+  - subclass of: dog
+  - subclass of: Herding dog
+  - subclass of: Canis
+  - subclass of: domesticated animal
+  - subclass of: domesticated animal type
+  - subclass of: livestock
+  - subclass of: herding animal
+  - sibling concept: Afghan hound
+  - sibling concept: Malamute
+  - sibling concept: Anatolian shepherd
+  - sibling concept: Australian shepherd
+
+Concept: 'sensory hair'
+Facts:
+  - definition: Long feline facial hairs -- curb feelers for cats
+  - subclass of: strand (hair)
+  - subclass of: body part
+  - subclass of: extruded body part
+  - subclass of: protrusion
+
+Concept: 'cat veterinarian'
+Facts:
+  - definition: Instances are veterinarians that specialize in the care of cats.
+  - subclass of: small animal veterinarian
+  - subclass of: veterinarian
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+{
+  "Merkle-Damgard hash function": [
+    "S(k,m) = H(k \| m)  S(k∥m)=H(k∥m). This mac is insecure because:"
+  ],
+  "HH": [
+    "S(k,m) = H(k \| m)  S(k∥m)=H(k∥m). This mac is insecure because:"
+  ]
+}
+
+Filtered facts for the question:
+
+- The question is about a MAC (Message Authentication Code) constructed from a Merkle-Damgard hash function.
+- The MAC is insecure because of a specific property.
+- The options are about what can be computed given the MAC.
+
+The relevant fact is the definition of the MAC construction and the insecurity property.
+
+The other concepts are not relevant to the question.
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Let HH be a Merkle-Damgard hash function is H:X^{\leq L} \to TH:X^≤L  →T. Construct a MAC from this HH as follows: \ \ S(k,m) = H(k \| m)  S(k,m)=H(k∥m). This mac is insecure because:
+
+A. Given H(k \| m)H(k∥m) anyone can compute H(w \| k \| m \| \text{PB})H(w∥k∥m∥PB) for any ww
+B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww
+C. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| \text{PB} \| w)H(k∥m∥PB∥w) for any ww
+D. Anyone can compute H( k \| m )H(k∥m) for any mm
+
+Answer with the letter only (A, B, C, or D)."
+
+Concept: 'plant epidermis'
+Facts:
+  - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+  - subclass of: external anatomical part
+  - subclass of: plant part
+  - subclass of: organism part
+  - subclass of: internal body part
+  - subclass of: plant or part of a plant
+  - sibling concept: abdomen
+  - sibling concept: alimentary canal
+  - sibling concept: amniotic sac
+  - sibling concept: ankle
+  - sibling concept: anther
+
+Concept: 'chloroplast'
+Facts:
+  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+  - subclass of: organelle
+  - subclass of: plastid
+  - subclass of: cell part
+  - subclass of: internal body part
+  - subclass of: aura: membrane bounded organelle
+  - sibling concept: centrosome
+  - sibling concept: endoplasmic reticulum
+  - sibling concept: Golgi apparatus
+  - sibling concept: golgi cisterna
+  - sibling concept: aura: membrane bounded organelle
+
+Concept: 'australian cattle dog'
+Facts:
+  - definition: A collection of medium-sized dogs. They make good working dogs.
+  - subclass of: dog
+  - subclass of: Herding dog
+  - subclass of: Canis
+  - subclass of: domesticated animal
+  - subclass of: domesticated animal type
+  - subclass of: livestock
+  - subclass of: herding animal
+  - sibling concept: Afghan hound
+  - sibling concept: Malamute
+  - sibling concept: Anatolian shepherd
+  - sibling concept: Australian shepherd
+
+Concept: 'sensory hair'
+Facts:
+  - definition: Long feline facial hairs -- curb feelers for cats
+  - subclass of: strand (hair)
+  - subclass of: body part
+  - subclass of: extruded body part
+  - subclass of: protrusion
+
+Concept: 'cat veterinarian'
+Facts:
+  - definition: Instances are veterinarians that specialize in the care of cats.
+  - subclass of: small animal veterinarian
+  - subclass of: veterinarian
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+{
+  "Merkle-Damgard hash function": [
+    "S(k,m) = H(k \| m)  S(k∥m)=H(k∥m). This mac is insecure because:"
+  ],
+  "HH": [
+    "S(k,m) = H(k \| m)  S(k∥m)=H(k∥m). This mac is insecure because:"
+  ]
+}
+
+Filtered facts for the question:
+
+- The question is about a MAC (Message Authentication Code) constructed from a Merkle-Damgard hash function.
+- The MAC is insecure because of a specific property.
+- The options are about what can be computed given the MAC.
+
+The relevant fact is the definition of the MAC and the statement that it is insecure. The other facts are not relevant to the question.
+
+The correct answer is B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Let HH be a Merkle-Damgard hash function is H:X^{\leq L} \to TH:X^≤L  →T. Construct a MAC from this HH as follows: \ \ S(k,m) = H(k \| m)  S(k,m)=H(k∥m). This mac is insecure because:
+
+A. Given H(k \| m)H(k∥m) anyone can compute H(w \| k \| m \| \text{PB})H(w∥k∥m∥PB) for any ww
+B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww
+C. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| \text{PB} \| w)H(k∥m∥PB∥w) for any ww
+D. Anyone can compute H( k \| m )H(k∥m) for any mm
+
+Answer with the letter only (A, B, C, or D)."
+
+Concept: 'plant epidermis'
+Facts:
+  - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+  - subclass of: external anatomical part
+  - subclass of: plant part
+  - subclass of: organism part
+  - subclass of: internal body part
+  - subclass of: plant or part of a plant
+  - sibling concept: abdomen
+  - sibling concept: alimentary canal
+  - sibling concept: amniotic sac
+  - sibling concept: ankle
+  - sibling concept: anther
+
+Concept: 'chloroplast'
+Facts:
+  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+  - subclass of: organelle
+  - subclass of: plastid
+  - subclass of: cell part
+  - subclass of: internal body part
+  - subclass of: aura: membrane bounded organelle
+  - sibling concept: centrosome
+  - sibling concept: endoplasmic reticulum
+  - sibling concept: Golgi apparatus
+  - sibling concept: golgi cisterna
+  - sibling concept: aura: membrane bounded organelle
+
+Concept: 'australian cattle dog'
+Facts:
+  - definition: A collection of medium-sized dogs. They make good working dogs.
+  - subclass of: dog
+  - subclass of: Herding dog
+  - subclass of: Canis
+  - subclass of: domesticated animal
+  - subclass of: domesticated animal type
+  - subclass of: livestock
+  - subclass of: herding animal
+  - sibling concept: Afghan hound
+  - sibling concept: Malamute
+  - sibling concept: Anatolian shepherd
+  - sibling concept: Australian shepherd
+
+Concept: 'sensory hair'
+Facts:
+  - definition: Long feline facial hairs -- curb feelers for cats
+  - subclass of: strand (hair)
+  - subclass of: body part
+  - subclass of: extruded body part
+  - subclass of: protrusion
+
+Concept: 'cat veterinarian'
+Facts:
+  - definition: Instances are veterinarians that specialize in the care of cats.
+  - subclass of: small animal veterinarian
+  - subclass of: veterinarian
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+{
+  "Merkle-Damgard hash function": [
+    "S(k,m) = H(k \| m)  S(k∥m)=H(k∥m). This mac is insecure because:"
+  ],
+  "HH": [
+    "S(k,m) = H(k \| m)  S(k∥m)=H(k∥m). This mac is insecure because:"
+  ]
+}
+
+Filtered facts for the question:
+
+- The question is about a MAC (Message Authentication Code) constructed from a Merkle-Damgard hash function.
+- The MAC is insecure because of a specific property.
+- The options are about what can be computed given the MAC.
+
+The relevant fact is the definition of the MAC and the statement that it is insecure. The other facts are not relevant to the question.
+
+The correct answer is B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww.
+===================================
+
+--- [DEBUG] SENT PROMPT (Together AI) ---
+
+### ROLE
+You are a Logic Discovery Agent. Extract concise, factual, and structural logical building blocks needed to answer the Question from the Context.
+
+### TASK
+Produce a single numbered list called **LOGICAL EVIDENCE**. 
+First, gather evidence and definitions for all concepts related to the Question, especially focusing on each of the provided MCQ choices. 
+Then, add other structural logical evidence that bridges the premise to the answer.
+Each item must be one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.
+
+### CONSTRAINTS
+* Include at most 15 items total. Keep them highly concise but strictly factual.
+* Each item must directly help bridge the premise to the answer. Omit background, history, or tangential details.
+* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."
+* Break compound sentences into independent logical units.
+* Use clear, declarative English only. No code, no symbols.
+* Do NOT reveal the final answer — provide logical ingredients only.
+
+---
+### QUESTION:
+This is a multiple choice question. The options must be preserved in the question field.
+
+### CONTEXT:
+KBPedia Concept: plant epidermis.
+Relevant Logical Facts:
+  - definition: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+  - subclass of: external anatomical part
+  - subclass of: plant part
+  - subclass of: organism part
+  - subclass of: internal body part
+  - subclass of: plant or part of a plant
+  - sibling concept: abdomen
+  - sibling concept: alimentary canal
+  - sibling concept: amniotic sac
+  - sibling concept: ankle
+  - sibling concept: anther
+KBPedia Concept: chloroplast.
+Relevant Logical Facts:
+  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+  - subclass of: organelle
+  - subclass of: plastid
+  - subclass of: cell part
+  - subclass of: internal body part
+  - subclass of: aura: membrane bounded organelle
+  - sibling concept: centrosome
+  - sibling concept: endoplasmic reticulum
+  - sibling concept: Golgi apparatus
+  - sibling concept: golgi cisterna
+  - sibling concept: aura: membrane bounded organelle
+KBPedia Concept: australian cattle dog.
+Relevant Logical Facts:
+  - definition: A collection of medium-sized dogs. They make good working dogs.
+  - subclass of: dog
+  - subclass of: Herding dog
+  - subclass of: Canis
+  - subclass of: domesticated animal
+  - subclass of: domesticated animal type
+  - subclass of: livestock
+  - subclass of: herding animal
+  - sibling concept: Afghan hound
+  - sibling concept: Malamute
+  - sibling concept: Anatolian shepherd
+  - sibling concept: Australian shepherd
+  - sibling concept: Basenji
+KBPedia Concept: sensory hair.
+Relevant Logical Facts:
+  - definition: Long feline facial hairs -- curb feelers for cats
+  - subclass of: strand (hair)
+  - subclass of: body part
+  - subclass of: extruded body part
+  - subclass of: protrusion
+KBPedia Concept: cat veterinarian.
+Relevant Logical Facts:
+  - definition: Instances are veterinarians that specialize in the care of cats.
+  - subclass of: small animal veterinarian
+  - subclass of: veterinarian
+S(k,m) = H(k ∧ m)  S(k,m)=H(k∥m).
+HH be a Merkle-Damgard hash function is H:X^{≤ L} → TH:X^≤L  →T.
+
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Together AI) ===
+### QUESTION:
+What is the primary function of the plant epidermis?
+
+### LOGICAL EVIDENCE
+
+1. The plant epidermis is the outermost cell layer covering a plant or part of a plant.
+2. It is a subclass of external anatomical part.
+3. The plant epidermis is a unique instance for each entire plant.
+4. It is a part of the plant, which is a living organism.
+5. The plant epidermis is responsible for protecting the plant from external factors.
+6. Chloroplasts, which are essential for photosynthesis, are found in plant cells.
+7. However, chloroplasts are not a characteristic of the plant epidermis specifically.
+8. The plant epidermis is not a type of animal, such as an Australian cattle dog.
+9. Sensory hairs are a characteristic of felines, not plants.
+10. Cat veterinarians specialize in the care of cats, not plants.
+11. The plant epidermis is not a type of internal body part, but rather an external anatomical part.
+12. It is not a type of organelle, such as a chloroplast.
+13. The plant epidermis is not a type of dog, such as an Australian cattle dog.
+14. It is not a type of hair, such as a sensory hair.
+15. The primary function of the plant epidermis is to protect the plant from external factors, such as water loss and pathogen invasion.
+===================================

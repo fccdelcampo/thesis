@@ -29811,3 +29811,488 @@ DEBUG [run_pipeline]: extract_query_and_context done. query='This is a multiple 
 DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 3 text chunk(s)...
 Processing text context: Construct a MAC from this HH as follows: S(k,m) = H(k \| m) S(k,m)=H(k∥m).
   > [LLM ERROR] Together AI attempt 1/3 failed: Request timed out.
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['mmlu']
+============================================================
+
+--- MMLU ---
+Loaded 72 MMLU test cases (starting from index 28).
+
+================================================================================
+[MMLU #28] Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tuto...
+Correct Answer: [D]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Elsa values her time at $50 per hour, and tutors David for two hours. David is willing to pay $175 for two hours of tutoring, but they negotiate a price of $125 for the entire two hours. Which of the following statements is true about the transaction above:
+
+A. Consumer surplus is greater than producer surplus by between $50 and $75.
+B. Producer surplus is greater than consumer surplus by between $50 and $75.
+C. Consumer surplus is greater than producer surplus by more than $75.
+D. The difference between consumer and producer surplus is $25.
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['barter', 'consumer theory', 'bargaining theory', 'bargaining', 'inventory buying agent', 'ratio quantity', 'commodities trader', 'bid for an item', 'shortage', 'supplier']
+DEBUG: Buffered 13 raw triple(s) for 'barter'
+DEBUG: Buffered 8 raw triple(s) for 'consumer theory'
+DEBUG: Buffered 9 raw triple(s) for 'bargaining theory'
+DEBUG: Buffered 7 raw triple(s) for 'bargaining'
+DEBUG: Buffered 8 raw triple(s) for 'inventory buying agent'
+DEBUG: Buffered 19 raw triple(s) for 'ratio quantity'
+DEBUG: Buffered 10 raw triple(s) for 'commodities trader'
+DEBUG: Buffered 6 raw triple(s) for 'bid for an item'
+DEBUG: Buffered 23 raw triple(s) for 'shortage'
+DEBUG: Buffered 5 raw triple(s) for 'supplier'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "barter": [],\n  "consumer theory": [],\n  "bargaining theory": [],\n  "bargaining": [],\n  "shortage": []\n}'...
+DEBUG: Batch LLM filter kept 0/13 triple(s) for 'barter'
+DEBUG: Batch LLM filter kept 0/8 triple(s) for 'consumer theory'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'bargaining theory'
+DEBUG: Batch LLM filter kept 0/7 triple(s) for 'bargaining'
+DEBUG: Batch LLM filter kept 0/23 triple(s) for 'shortage'
+DEBUG: Removed 5 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 0 grounded concept contexts.
+DEBUG: Merged Result Count: 0
+  > [LLM ERROR] Together AI attempt 1/3 failed: Error code: 503 - {'id': 'oZMssgx-4YNCb4-9d5b28832d0b402e', 'error': {'message': 'Service unavailable', 'type': 'service_unavailable', 'param': None, 'code': None}}
+  > [LLM ERROR] Together AI attempt 2/3 failed: Error code: 503 - {'id': 'oZMstWD-4YNCb4-9d5b28930d2b402e', 'error': {'message': 'Service unavailable', 'type': 'service_unavailable', 'param': None, 'code': None}}
+  > [LLM ERROR] Together AI attempt 3/3 failed: Error code: 503 - {'id': 'oZMsuGx-4YNCb4-9d5b28a4aecf402e', 'error': {'message': 'Service unavailable', 'type': 'service_unavailable', 'param': None, 'code': None}}
+  > [LLM ERROR] Together AI attempt 1/3 failed: Error code: 503 - {'id': 'oZMsxXy-4YNCb4-9d5b28e93ac6fedd', 'error': {'message': 'Service unavailable', 'type': 'service_unavailable', 'param': None, 'code': None}}
+  > [LLM ERROR] Together AI attempt 2/3 failed: <!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en-US"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en-US"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en-US"> <!--<![endif]-->
+<head>
+
+<title> | 502: Bad gateway</title>
+<meta charset="UTF-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="stylesheet" id="cf_styles-css" href="/cdn-cgi/styles/main.css" />
+</head>
+<body>
+<div id="cf-wrapper">
+    <div id="cf-error-details" class="p-0">
+        <header class="mx-auto pt-10 lg:pt-6 lg:px-8 w-240 lg:w-full mb-8">
+            <h1 class="inline-block sm:block sm:mb-2 font-light text-60 lg:text-4xl text-black-dark leading-tight mr-2">
+                <span class="inline-block">Bad gateway</span>
+                <span class="code-label">Error code 502</span>
+            </h1>
+            <div>
+                Visit <a href="https://www.cloudflare.com/5xx-error-landing?utm_source=errorcode_502&utm_campaign=api.together.xyz" target="_blank" rel="noopener noreferrer">cloudflare.com</a> for more information.
+            </div>
+            <div class="mt-3">2026-03-01 21:13:02 UTC</div>
+        </header>
+        <div class="my-8 bg-gradient-gray">
+            <div class="w-240 lg:w-full mx-auto">
+                <div class="clearfix md:px-8">
+                    <div id="cf-browser-status" class=" relative w-1/3 md:w-full py-15 md:p-0 md:py-8 md:text-left md:border-solid md:border-0 md:border-b md:border-gray-400 overflow-hidden float-left md:float-none text-center">
+  <div class="relative mb-10 md:m-0">
+    
+    <span class="cf-icon-browser block md:hidden h-20 bg-center bg-no-repeat"></span>
+    <span class="cf-icon-ok w-12 h-12 absolute left-1/2 md:left-auto md:right-0 md:top-0 -ml-6 -bottom-4"></span>
+    
+  </div>
+  <span class="md:block w-full truncate">You</span>
+  <h3 class="md:inline-block mt-3 md:mt-0 text-2xl text-gray-600 font-light leading-1.3">
+  
+    Browser
+  
+  </h3>
+  
+  <span class="leading-1.3 text-2xl text-green-success">Working</span>
+  
+</div>
+                    <div id="cf-cloudflare-status" class=" relative w-1/3 md:w-full py-15 md:p-0 md:py-8 md:text-left md:border-solid md:border-0 md:border-b md:border-gray-400 overflow-hidden float-left md:float-none text-center">
+  <div class="relative mb-10 md:m-0">
+    <a href="https://www.cloudflare.com/5xx-error-landing?utm_source=errorcode_502&#38;utm_campaign=api.together.xyz" target="_blank" rel="noopener noreferrer">
+    <span class="cf-icon-cloud block md:hidden h-20 bg-center bg-no-repeat"></span>
+    <span class="cf-icon-ok w-12 h-12 absolute left-1/2 md:left-auto md:right-0 md:top-0 -ml-6 -bottom-4"></span>
+    </a>
+  </div>
+  <span class="md:block w-full truncate">Manila</span>
+  <h3 class="md:inline-block mt-3 md:mt-0 text-2xl text-gray-600 font-light leading-1.3">
+  <a href="https://www.cloudflare.com/5xx-error-landing?utm_source=errorcode_502&utm_campaign=api.together.xyz" target="_blank" rel="noopener noreferrer">
+    Cloudflare
+  </a>
+  </h3>
+  
+  <span class="leading-1.3 text-2xl text-green-success">Working</span>
+  
+</div>
+                    <div id="cf-host-status" class="cf-error-source relative w-1/3 md:w-full py-15 md:p-0 md:py-8 md:text-left md:border-solid md:border-0 md:border-b md:border-gray-400 overflow-hidden float-left md:float-none text-center">
+  <div class="relative mb-10 md:m-0">
+    
+    <span class="cf-icon-server block md:hidden h-20 bg-center bg-no-repeat"></span>
+    <span class="cf-icon-error w-12 h-12 absolute left-1/2 md:left-auto md:right-0 md:top-0 -ml-6 -bottom-4"></span>
+    
+  </div>
+  <span class="md:block w-full truncate">api.together.xyz</span>
+  <h3 class="md:inline-block mt-3 md:mt-0 text-2xl text-gray-600 font-light leading-1.3">
+  
+    Host
+  
+  </h3>
+  
+  <span class="leading-1.3 text-2xl text-red-error">Error</span>
+  
+</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="w-240 lg:w-full mx-auto mb-8 lg:px-8">
+            <div class="clearfix">
+                <div class="w-1/2 md:w-full float-left pr-6 md:pb-10 md:pr-0 leading-relaxed">
+                    <h2 class="text-3xl font-normal leading-1.3 mb-4">What happened?</h2>
+                    <p>The web server reported a bad gateway error.</p>
+                </div>
+                <div class="w-1/2 md:w-full float-left leading-relaxed">
+                    <h2 class="text-3xl font-normal leading-1.3 mb-4">What can I do?</h2>
+                    <p class="mb-6">Please try again in a few minutes.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cf-error-footer cf-wrapper w-240 lg:w-full py-10 sm:py-4 sm:px-8 mx-auto text-center sm:text-left border-solid border-0 border-t border-gray-300">
+    <p class="text-13">
+      <span class="cf-footer-item sm:block sm:mb-1">Cloudflare Ray ID: <strong class="font-semibold">9d5b293aef0efedd</strong></span>
+      <span class="cf-footer-separator sm:hidden">&bull;</span>
+      <span id="cf-footer-item-ip" class="cf-footer-item hidden sm:block sm:mb-1">
+        Your IP:
+        <button type="button" id="cf-footer-ip-reveal" class="cf-footer-ip-reveal-btn">Click to reveal</button>
+        <span class="hidden" id="cf-footer-ip">49.151.18.105</span>
+        <span class="cf-footer-separator sm:hidden">&bull;</span>
+      </span>
+      <span class="cf-footer-item sm:block sm:mb-1"><span>Performance &amp; security by</span> <a rel="noopener noreferrer" href="https://www.cloudflare.com/5xx-error-landing?utm_source=errorcode_502&#38;utm_campaign=api.together.xyz" id="brand_link" target="_blank">Cloudflare</a></span>
+      
+    </p>
+    <script>(function(){function d(){var b=a.getElementById("cf-footer-item-ip"),c=a.getElementById("cf-footer-ip-reveal");b&&"classList"in b&&(b.classList.remove("hidden"),c.addEventListener("click",function(){c.classList.add("hidden");a.getElementById("cf-footer-ip").classList.remove("hidden")}))}var a=document;document.addEventListener&&a.addEventListener("DOMContentLoaded",d)})();</script>
+  </div><!-- /.error-footer -->
+
+    </div>
+</div>
+</body>
+</html>
+  > [LLM ERROR] Together AI attempt 3/3 failed: Error code: 503 - {'id': 'oZMtAA2-4YNCb4-9d5b29dbf944fedd', 'error': {'message': 'Service unavailable', 'type': 'service_unavailable', 'param': None, 'code': None}}
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Request timed out.
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 503 - {'id': 'oZMtNWw-4YNCb4-9d5b2ae14bdefed3', 'error': {'message': 'Service unavailable', 'type': 'service_unavailable', 'param': None, 'code': None}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 503 - {'id': 'oZMtRk8-4YNCb4-9d5b2b253b53fed3', 'error': {'message': 'Service unavailable', 'type': 'service_unavailable', 'param': None, 'code': None}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 503 - {'id': 'oZMtUxU-4YNCb4-9d5b2b68cb72fed3', 'error': {'message': 'Service unavailable', 'type': 'service_unavailable', 'param': None, 'code': None}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+Error during LLM interaction (meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo): Error code: 503 - {'id': 'oZMtY66-4YNCb4-9d5b2baa9de8fed3', 'error': {'message': 'Service unavailable', 'type': 'service_unavailable', 'param': None, 'code': None}}
+LLM Response: None
+DEBUG: Exception in loop: ValueError: Failed to get a response from the LLM.
+  Pipeline error: Failed to extract query and context after 5 retries. Last error: Failed to get a response from the LLM.
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [?]   | WRONG   |   76.1s
+Prolog          | Predicted: [?]   | WRONG   |   74.4s
+Tuned LLM       | Predicted: [B]   | WRONG   |    0.9s
+================================================================================
+
+
+================================================================================
+[MMLU #29] Let HH be a Merkle-Damgard hash function is H:X^{\leq L} \to TH:X^≤L  →T. Construct a MAC from this HH as follows: \ \ S...
+Correct Answer: [C]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Let HH be a Merkle-Damgard hash function is H:X^{\leq L} \to TH:X^≤L  →T. Construct a MAC from this HH as follows: \ \ S(k,m) = H(k \| m)  S(k,m)=H(k∥m). This mac is insecure because:
+
+A. Given H(k \| m)H(k∥m) anyone can compute H(w \| k \| m \| \text{PB})H(w∥k∥m∥PB) for any ww
+B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww
+C. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| \text{PB} \| w)H(k∥m∥PB∥w) for any ww
+D. Anyone can compute H( k \| m )H(k∥m) for any mm
+
+Answer with the letter only (A, B, C, or D).' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['handwriting recognition', 'HMX', 'cryptographic primitive', 'hydrogen bromide', 'H class battleship proposal', 'thiobarbiturate', 'Satsuma-class battleship', 'hydrogen bomb', 'Karlsruhe-class cruiser', 'magnesium bromide']
+DEBUG: Buffered 11 raw triple(s) for 'handwriting recognition'
+DEBUG: Buffered 12 raw triple(s) for 'HMX'
+DEBUG: Buffered 8 raw triple(s) for 'cryptographic primitive'
+DEBUG: Buffered 12 raw triple(s) for 'hydrogen bromide'
+DEBUG: Buffered 8 raw triple(s) for 'H class battleship proposal'
+DEBUG: Buffered 9 raw triple(s) for 'thiobarbiturate'
+DEBUG: Buffered 8 raw triple(s) for 'Satsuma-class battleship'
+DEBUG: Buffered 14 raw triple(s) for 'hydrogen bomb'
+DEBUG: Buffered 9 raw triple(s) for 'Karlsruhe-class cruiser'
+DEBUG: Buffered 14 raw triple(s) for 'magnesium bromide'
+DEBUG: End-filter LLM kept indices: [0, 2, 3, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 8/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "Merkle-Damgard hash function": [\n    "definition: A type of hash function that is used in cryptographic protocols.",\n    "subclass of: cryptographic primitive"\n  ],\n  "MAC (Message Authentication'...
+DEBUG: Batch LLM filter kept 0/11 triple(s) for 'handwriting recognition'
+DEBUG: Batch LLM filter kept 1/8 triple(s) for 'cryptographic primitive'
+DEBUG: Batch LLM filter kept 0/12 triple(s) for 'hydrogen bromide'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'thiobarbiturate'
+DEBUG: Batch LLM filter kept 0/8 triple(s) for 'Satsuma-class battleship'
+DEBUG: Removed 4 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 1 grounded concept contexts.
+DEBUG: KBPedia returned 1 items.
+DEBUG: Merged Result Count: 1
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "The MAC is insecure because an attacker can compute the hash of the message with a padding block (PB) appended to the end, which is a common attack on Merkle-Damgard hash functions.",
+  "question": "This is a multiple choice question. The options must be preserved in the question field.",
+  "context": [
+    "HH be a Merkle-Damgard hash function is H:X^{\u2264 L} \u2192 TH:X^?L  ?T.",
+    "S(k,m) = H(k \u2227 m)  S(k,m)=H(k?m)."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'The MAC is insecure because an attacker can compute the hash of the message with a padding block (PB) appended to the end, which is a common attack on Merkle-Damgard hash functions.', 'question': 'This is a multiple choice question. The options must be preserved in the question field.', 'context': ['HH be a Merkle-Damgard hash function is H:X^{≤ L} → TH:X^≤L  →T.', 'S(k,m) = H(k ∧ m)  S(k,m)=H(k∥m).']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: This is a multiple choice question. The options must be preserved in the question field.
+DEBUG: EXTRACTED CONTEXT (Len: 2): ['HH be a Merkle-Damgard hash function is H:X^{≤ L} → TH:X^≤L  →T.', 'S(k,m) = H(k ∧ m)  S(k,m)=H(k∥m).']
+DEBUG [run_pipeline]: extract_query_and_context done. query='This is a multiple choice question. The options must be preserved in the questio' | context items=2
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 2 text chunk(s)...
+Processing text context: HH be a Merkle-Damgard hash function is H:X^{≤ L} → TH:X^≤L  →T.
+Text context processed: run_id='ac52a4ff-8b31-4510-8eb1-ff3a4dec6556' result={'resolver': {'number_of_nodes_to_resolve': 22, 'number_of_created_nodes': 22}}
+Processing text context: S(k,m) = H(k ∧ m)  S(k,m)=H(k∥m).
+Text context processed: run_id='0fe08c01-fe42-4ac2-99d5-35275ee32c02' result={'resolver': {'number_of_nodes_to_resolve': 22, 'number_of_created_nodes': 22}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'This is a multiple choice question. The options must be preserved in the question field.'
+DEBUG: Extracted entities for KBPedia: ['plant cell', 'animal skeleton', 'photosynthesis', 'dogs', 'cats', 'chlorophyll']
+DEBUG: KBPedia fulltext matched for 'plant cell': ['plant cell wall', 'plant epidermis']
+DEBUG: KBPedia fulltext matched for 'animal skeleton': ['human skeleton', 'skeleton tarantula']
+DEBUG: KBPedia fulltext matched for 'photosynthesis': ['bacterial photosynthesis', 'chloroplast']
+DEBUG: KBPedia fulltext matched for 'dogs': ['australian cattle dog', 'Bloodhound']
+DEBUG: KBPedia fulltext matched for 'cats': ['sensory hair', 'cat veterinarian']
+DEBUG: KBPedia fulltext matched for 'chlorophyll': ['chlorophyll', 'Ericales']
+DEBUG: KBPedia total matches: ['plant cell wall', 'plant epidermis', 'human skeleton', 'skeleton tarantula', 'bacterial photosynthesis', 'chloroplast', 'australian cattle dog', 'Bloodhound', 'sensory hair', 'cat veterinarian', 'chlorophyll', 'Ericales']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 11 raw triple(s) for 'plant epidermis'
+DEBUG: Buffered 10 raw triple(s) for 'human skeleton'
+DEBUG: Buffered 9 raw triple(s) for 'skeleton tarantula'
+DEBUG: Buffered 8 raw triple(s) for 'bacterial photosynthesis'
+DEBUG: Buffered 11 raw triple(s) for 'chloroplast'
+DEBUG: Buffered 13 raw triple(s) for 'australian cattle dog'
+DEBUG: Buffered 13 raw triple(s) for 'Bloodhound'
+DEBUG: Buffered 5 raw triple(s) for 'sensory hair'
+DEBUG: Buffered 3 raw triple(s) for 'cat veterinarian'
+DEBUG: Buffered 14 raw triple(s) for 'chlorophyll'
+DEBUG: Buffered 9 raw triple(s) for 'Ericales'
+DEBUG: End-filter LLM kept indices: [1, 5, 6, 8, 9, 10, 11] from 12 candidates.
+DEBUG: End-filter kept 7/12 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "Merkle-Damgard hash function": [\n    "S(k,m) = H(k \\| m)  S(k?m)=H(k?m). This mac is insecure because:"\n  ],\n  "HH": [\n    "S(k,m) = H(k \\| m)  S(k?m)=H(k?m). This mac is insecure because:"\n  ]\n}'...
+DEBUG: Batch triple filter raw response: '{\n  "Merkle-Damgard hash function": [\n    "S(k,m) = H(k \\| m)  S(k?m)=H(k?m). This mac is insecure because:"\n  ],\n  "HH": [\n    "S(k,m) = H(k \\| m)  S(k?m)=H(k?m). This mac is insecure because:"\n  ]\n}'...
+DEBUG: Batch triple filter raw response: '{\n  "Merkle-Damgard hash function": [\n    "S(k,m) = H(k \\| m)  S(k?m)=H(k?m). This mac is insecure because:"\n  ],\n  "HH": [\n    "S(k,m) = H(k \\| m)  S(k?m)=H(k?m). This mac is insecure because:"\n  ]\n}'...
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'plant epidermis'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'chloroplast'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'australian cattle dog'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'sensory hair'
+DEBUG: Batch LLM filter kept 3/3 triple(s) for 'cat veterinarian'
+DEBUG: KBPedia found 5 grounded concept contexts.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Let HH be a Merkle-Damgard hash function is H:X^{\leq L} \to TH:X^≤L  →T. Construct a MAC from this HH as follows: \ \ S(k,m) = H(k \| m)  S(k,m)=H(k∥m). This mac is insecure because:
+
+A. Given H(k \| m)H(k∥m) anyone can compute H(w \| k \| m \| \text{PB})H(w∥k∥m∥PB) for any ww
+B. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| w)H(k∥m∥w) for any ww
+C. Given H(k \| m)H(k∥m) anyone can compute H(k \| m \| \text{PB} \| w)H(k∥m∥PB∥w) for any ww
+D. Anyone can compute H( k \| m )H(k∥m) for any mm
+
+Answer with the letter only (A, B, C, or D).
+**Retrieved Context:**
+### QUESTION:
+What is the primary function of the plant epidermis?
+
+### LOGICAL EVIDENCE
+
+1. The plant epidermis is the outermost cell layer covering a plant or part of a plant.
+2. It is a subclass of external anatomical part.
+3. The plant epidermis is a unique instance for each entire plant.
+4. It is a part of the plant, which is a living organism.
+5. The plant epidermis is responsible for protecting the plant from external factors.
+6. Chloroplasts, which are essential for photosynthesis, are found in plant cells.
+7. However, chloroplasts are not a characteristic of the plant epidermis specifically.
+8. The plant epidermis is not a type of animal, such as an Australian cattle dog.
+9. Sensory hairs are a characteristic of felines, not plants.
+10. Cat veterinarians specialize in the care of cats, not plants.
+11. The plant epidermis is not a type of internal body part, but rather an external anatomical part.
+12. It is not a type of organelle, such as a chloroplast.
+13. The plant epidermis is not a type of dog, such as an Australian cattle dog.
+14. It is not a type of hair, such as a sensory hair.
+15. The primary function of the plant epidermis is to protect the plant from external factors, such as water loss and pathogen invasion.
+**Context from Prompt:**
+HH be a Merkle-Damgard hash function is H:X^{≤ L} → TH:X^≤L  →T.
+S(k,m) = H(k ∧ m)  S(k,m)=H(k∥m).
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, Given H(k \| m) anyone can compute H(w \| k \| m \| \text{PB})).
+choice(b, Given H(k \| m) anyone can compute H(k \| m \| w)).
+choice(c, Given H(k \| m) anyone can compute H(k \| m \| \text{PB} \| w)).
+choice(d, Anyone can compute H( k \| m ) for any m).
+
+mac_insecure(H(k \| m), H(k∥m)) :-
+H(k \| m \| w) #= H(k∥m∥w),
+H(k \| m \| \text{PB} \| w) #= H(k∥m∥PB∥w).
+
+answer(OptionLetter) :- choice(OptionLetter, InsecureMAC), mac_insecure(InsecureMAC, _).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog Error: answer/1: Unknown procedure: choice/2
+Iteration 1 | Validation Error: Disjunction ';' is forbidden in s(CASP). Use multiple separate rules with the same head instead of ';'.
+Iteration 2 | Extracted Database:
+choice(a, chloroplasts).
+choice(b, sensory_hairs).
+choice(c, type_of_animal).
+choice(d, type_of_internal_body_part).
+choice(e, type_of_organelle).
+choice(f, type_of_dog).
+choice(g, type_of_hair).
+
+is_external_anatomical_part(plant_epidermis).
+is_part_of(plant, plant_epidermis).
+protects_from_external_factors(plant_epidermis).
+
+-not_characteristic_of_epidermis(chloroplasts).
+-not_characteristic_of_epidermis(sensory_hairs).
+-not_characteristic_of_epidermis(type_of_animal).
+-not_characteristic_of_epidermis(type_of_internal_body_part).
+-not_characteristic_of_epidermis(type_of_organelle).
+-not_characteristic_of_epidermis(type_of_dog).
+-not_characteristic_of_epidermis(type_of_hair).
+
+answer(OptionLetter) :-
+choice(OptionLetter, Option),
+not_characteristic_of_epidermis(Option).
+answer(OptionLetter) :-
+choice(OptionLetter, Option),
+protects_from_external_factors(plant_epidermis).
+
+Iteration 2 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 2 | Prolog Error: answer/1: Unknown procedure: not_characteristic_of_epidermis/1
+  However, there are definitions for:
+        '-not_characteristic_of_epidermis'/1
+Iteration 3 | Extracted Database:
+choice(a, chloroplasts).
+choice(b, sensory_hairs).
+choice(c, type_of_animal).
+choice(d, type_of_internal_body_part).
+choice(e, type_of_organelle).
+choice(f, type_of_dog).
+choice(g, type_of_hair).
+
+is_external_anatomical_part(plant_epidermis).
+is_part_of(plant, plant_epidermis).
+protects_from_external_factors(plant_epidermis).
+
+not_characteristic_of_epidermis(chloroplasts).
+not_characteristic_of_epidermis(sensory_hairs).
+not_characteristic_of_epidermis(type_of_animal).
+not_characteristic_of_epidermis(type_of_internal_body_part).
+not_characteristic_of_epidermis(type_of_organelle).
+not_characteristic_of_epidermis(type_of_dog).
+not_characteristic_of_epidermis(type_of_hair).
+
+answer(OptionLetter) :-
+choice(OptionLetter, Option),
+not_characteristic_of_epidermis(Option).
+
+Iteration 3 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 3 | Prolog code generation success
+**Extracted database:**
+choice(a, chloroplasts).
+choice(b, sensory_hairs).
+choice(c, type_of_animal).
+choice(d, type_of_internal_body_part).
+choice(e, type_of_organelle).
+choice(f, type_of_dog).
+choice(g, type_of_hair).
+
+is_external_anatomical_part(plant_epidermis).
+is_part_of(plant, plant_epidermis).
+protects_from_external_factors(plant_epidermis).
+
+not_characteristic_of_epidermis(chloroplasts).
+not_characteristic_of_epidermis(sensory_hairs).
+not_characteristic_of_epidermis(type_of_animal).
+not_characteristic_of_epidermis(type_of_internal_body_part).
+not_characteristic_of_epidermis(type_of_organelle).
+not_characteristic_of_epidermis(type_of_dog).
+not_characteristic_of_epidermis(type_of_hair).
+
+answer(OptionLetter) :-
+choice(OptionLetter, Option),
+not_characteristic_of_epidermis(Option).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and chloroplasts, and\n      not_characteristic_of_epidermis holds for chloroplasts\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and chloroplasts, and
+      not_characteristic_of_epidermis holds for chloroplasts
+
+
