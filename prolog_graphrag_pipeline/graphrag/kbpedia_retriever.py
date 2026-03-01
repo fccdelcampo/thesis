@@ -16,6 +16,37 @@ import re
 from typing import List, Dict, Any, Optional
 
 
+def _safe_parse_json(text: str, expect: type = None):
+    """Robustly extract and parse the first complete JSON value from LLM output.
+    - Strips markdown fences.
+    - Finds the first '{' or '[' and uses raw_decode to stop after the matching close.
+    - Returns None on empty input or parse failure — never raises."""
+    if not text or not text.strip():
+        return None
+    t = text.strip()
+    if "```json" in t:
+        t = t.split("```json", 1)[1].split("```", 1)[0].strip()
+    elif "```" in t:
+        t = t.split("```", 1)[1].split("```", 1)[0].strip()
+    if not t:
+        return None
+    opener = '{' if expect is dict else ('[' if expect is list else None)
+    if opener is None:
+        i_brace = t.find('{'); i_bracket = t.find('[')
+        if i_brace == -1 and i_bracket == -1:
+            return None
+        pos = min(x for x in (i_brace, i_bracket) if x != -1)
+    else:
+        pos = t.find(opener)
+        if pos == -1:
+            return None
+    try:
+        obj, _ = json.JSONDecoder().raw_decode(t, pos)
+        return obj
+    except (json.JSONDecodeError, ValueError):
+        return None
+
+
 class KBPediaRetriever:
     """
     Retrieves grounded knowledge from KBPedia concepts stored in Neo4j.
@@ -272,7 +303,7 @@ If none are relevant, output an empty list [].
                 return triples
 
             # raw_decode: consume only the first valid JSON value, ignore trailing text.
-            decoded, _ = json.JSONDecoder().raw_decode(res, bracket_start if bracket_start != -1 else 0)
+            decoded = _safe_parse_json(res, expect=list)
             if isinstance(decoded, list):
                 return decoded
         except Exception as e:
@@ -352,10 +383,8 @@ Example:
                 print(f"DEBUG: Batch triple filter got empty response. Using all raw triples.", flush=True)
                 return result_map
 
-            # Use raw_decode to consume only the FIRST valid JSON object.
-            # json.loads() raises "Extra data" when the LLM appends a second
-            # object or commentary after the closing }.
-            filtered, _ = json.JSONDecoder().raw_decode(res, bracket_start if bracket_start != -1 else 0)
+            # Use _safe_parse_json to handle empty responses, extra data, and trailing text.
+            filtered = _safe_parse_json(res, expect=dict)
             if isinstance(filtered, dict):
                 for c in concepts_data:
                     name = c["name"]
@@ -426,7 +455,9 @@ Output ONLY the JSON list, nothing else.
             bracket_end = res.rfind(']')
             if bracket_start != -1 and bracket_end != -1:
                 res = res[bracket_start:bracket_end + 1]
-            indices = json.loads(res)
+            indices = _safe_parse_json(res, expect=list)
+            if not isinstance(indices, list):
+                raise ValueError(f"LLM did not return a list: {repr(res[:100])}")
             print(f"DEBUG: End-filter LLM kept indices: {indices} from {len(candidates)} candidates.", flush=True)
             return [candidates[i] for i in indices if isinstance(i, int) and 0 <= i < len(candidates)]
         except Exception as e:
@@ -629,8 +660,8 @@ Output ONLY the JSON list, nothing else."""
                                 if "```" in res:
                                     res = res.split("```")[1].split("```")[0].strip()
                                 b_start = res.find('['); b_end = res.rfind(']')
-                                if b_start != -1 and b_end != -1:
-                                    filtered_wd = json.loads(res[b_start:b_end+1])
+                                if b_start != -1:
+                                    filtered_wd = _safe_parse_json(res, expect=list)
                                     if isinstance(filtered_wd, list) and filtered_wd:
                                         print(f"DEBUG: [Wikidata Filter] Kept {len(filtered_wd)}/{len(all_triples)} triple(s) for '{selected['label']}'", flush=True)
                                         all_triples = filtered_wd

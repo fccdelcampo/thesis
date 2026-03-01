@@ -16,6 +16,47 @@ import re
 from typing import List, Dict, Any, Optional
 
 
+def _safe_parse_json(text: str, expect: type = None):
+    """Robustly extract and parse the first complete JSON value from LLM output.
+    - Strips markdown fences.
+    - Finds the first '{' (for dict) or '[' (for list) and stops after the matching close.
+    - Uses raw_decode so trailing text/extra objects never cause 'Extra data' errors.
+    - Returns None on empty input or parse failure instead of raising."""
+    if not text or not text.strip():
+        return None
+    # Strip markdown fences
+    t = text.strip()
+    if "```json" in t:
+        t = t.split("```json", 1)[1].split("```", 1)[0].strip()
+    elif "```" in t:
+        t = t.split("```", 1)[1].split("```", 1)[0].strip()
+    if not t:
+        return None
+    # Find the first opening char based on expected type
+    opener = '{' if expect is dict else ('[' if expect is list else None)
+    if opener is None:
+        # Auto-detect: whichever comes first
+        i_brace = t.find('{')
+        i_bracket = t.find('[')
+        if i_brace == -1 and i_bracket == -1:
+            return None
+        if i_brace == -1:
+            pos = i_bracket
+        elif i_bracket == -1:
+            pos = i_brace
+        else:
+            pos = min(i_brace, i_bracket)
+    else:
+        pos = t.find(opener)
+        if pos == -1:
+            return None
+    try:
+        obj, _ = json.JSONDecoder().raw_decode(t, pos)
+        return obj
+    except (json.JSONDecodeError, ValueError):
+        return None
+
+
 class KBPediaRetriever:
     """
     Retrieves grounded knowledge from KBPedia concepts stored in Neo4j.
@@ -268,7 +309,7 @@ Example:
                 print(f"DEBUG: Batch triple filter got empty response. Using all raw triples.", flush=True)
                 return result_map
 
-            filtered = json.loads(res)
+            filtered = _safe_parse_json(res, expect=dict)
             if isinstance(filtered, dict):
                 for c in concepts_data:
                     name = c["name"]
@@ -339,7 +380,9 @@ Output ONLY the JSON list, nothing else.
             bracket_end = res.rfind(']')
             if bracket_start != -1 and bracket_end != -1:
                 res = res[bracket_start:bracket_end + 1]
-            indices = json.loads(res)
+            indices = _safe_parse_json(res, expect=list)
+            if not isinstance(indices, list):
+                raise ValueError(f"LLM did not return a list: {repr(res[:100])}")
             print(f"DEBUG: End-filter LLM kept indices: {indices} from {len(candidates)} candidates.", flush=True)
             return [candidates[i] for i in indices if isinstance(i, int) and 0 <= i < len(candidates)]
         except Exception as e:

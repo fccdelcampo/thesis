@@ -23740,3 +23740,583 @@ The function of a plant cell wall is to provide mechanical support, which is sim
 
 Note: I've added one universally accepted truth (item 5) to help bridge the premise to the answer since some relevant information was missing in the context.
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: botanical cell",
+    "subclass of: cell wall",
+    "subclass of: eukaryotic cell",
+    "subclass of: plant or part of a plant",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part",
+    "sibling concept: bacterial cell wall",
+    "sibling concept: prokaryotic cell wall"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: plant cell wall. Relevant Logical Facts:   - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.   - subclass of: botanical cell   - subclass of: cell wall   - subclass of: eukaryotic cell   - subclass of: plant or part of a plant   - subclass of: structural cell part   - subclass of: external anatomical part   - sibling concept: bacterial cell wall   - sibling concept: prokaryotic cell wall
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.",
+    "subclass of: microscopic object",
+    "subclass of: organic matter",
+    "subclass of: parts",
+    "subclass of: object types",
+    "subclass of: shaped thing",
+    "subclass of: three dimensional thing",
+    "subclass of: material",
+    "has subclass: aster (cell part)",
+    "has subclass: axon",
+    "has subclass: biological membrane stuff",
+    "has subclass: bacterial capsule",
+    "has subclass: structural cell part",
+    "has subclass: cell plate",
+    "has subclass: chromatin",
+    "has subclass: chromosome",
+    "has subclass: cytoplasm",
+    "has subclass: intracellular part",
+    "has subclass: membrane",
+    "has subclass: microtubule",
+    "sibling concept: atomic nucleus",
+    "sibling concept: chemical object",
+    "sibling concept: microorganism",
+    "sibling concept: nanotube",
+    "sibling concept: polymer molecule"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: cell part. Relevant Logical Facts:   - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.   - subclass of: microscopic object   - subclass of: organic matter   - subclass of: parts   - subclass of: object types   - subclass of: shaped thing   - subclass of: three dimensional thing   - subclass of: material   - has subclass: aster (cell part)   - has subclass: axon   - has subclass: biological membrane stuff   - has subclass: bacterial capsule   - has subclass: structural cell part   - has subclass: cell plate   - has subclass: chromatin   - has subclass: chromosome   - has subclass: cytoplasm   - has subclass: intracellular part   - has subclass: membrane   - has subclass: microtubule   - sibling concept: atomic nucleus   - sibling concept: chemical object   - sibling concept: microorganism   - sibling concept: nanotube   - sibling concept: polymer molecule
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane (biological)",
+  "uri": "http://kbpedia.org/kko/rc/BiologicalMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use",
+    "subclass of: biological membrane stuff",
+    "subclass of: cell part",
+    "subclass of: fluid substance",
+    "subclass of: lipid bilayer",
+    "subclass of: membrane",
+    "has subclass: cell membrane"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: membrane (biological). Relevant Logical Facts:   - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use   - subclass of: biological membrane stuff   - subclass of: cell part   - subclass of: fluid substance   - subclass of: lipid bilayer   - subclass of: membrane   - has subclass: cell membrane
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plastid",
+  "uri": "http://kbpedia.org/kko/rc/Plastid",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.",
+    "subclass of: aura: membrane bounded organelle",
+    "subclass of: organelle",
+    "subclass of: cell part",
+    "subclass of: internal body part",
+    "has subclass: chloroplast",
+    "has subclass: chromoplast",
+    "has subclass: leucoplast",
+    "sibling concept: endoplasmic reticulum",
+    "sibling concept: Golgi apparatus",
+    "sibling concept: mitochondrion",
+    "sibling concept: centrosome",
+    "sibling concept: chloroplast"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: plastid. Relevant Logical Facts:   - definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.   - subclass of: aura: membrane bounded organelle   - subclass of: organelle   - subclass of: cell part   - subclass of: internal body part   - has subclass: chloroplast   - has subclass: chromoplast   - has subclass: leucoplast   - sibling concept: endoplasmic reticulum   - sibling concept: Golgi apparatus   - sibling concept: mitochondrion   - sibling concept: centrosome   - sibling concept: chloroplast
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "protoplasm",
+  "uri": "http://kbpedia.org/kko/rc/Protoplasm",
+  "score": 1.0,
+  "triples": [
+    "definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.",
+    "subclass of: cell part",
+    "subclass of: internal body part",
+    "subclass of: microscopic object",
+    "subclass of: organic matter",
+    "subclass of: parts",
+    "subclass of: organism part",
+    "has subclass: cytoplasm",
+    "has subclass: cytoplasm layer",
+    "has subclass: nucleoplasm",
+    "sibling concept: aster (cell part)",
+    "sibling concept: axon",
+    "sibling concept: biological membrane stuff",
+    "sibling concept: bacterial capsule",
+    "sibling concept: structural cell part"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: protoplasm. Relevant Logical Facts:   - definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.   - subclass of: cell part   - subclass of: internal body part   - subclass of: microscopic object   - subclass of: organic matter   - subclass of: parts   - subclass of: organism part   - has subclass: cytoplasm   - has subclass: cytoplasm layer   - has subclass: nucleoplasm   - sibling concept: aster (cell part)   - sibling concept: axon   - sibling concept: biological membrane stuff   - sibling concept: bacterial capsule   - sibling concept: structural cell part
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Final Answer: B.
+The function of a plant cell wall is to provide mechanical support, which is similar to the function of an animal skeleton. The characteristics of the cell wall, such as being somewhat rigid but elastic due to its hydrated nature, also contribute to this similarity in function.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane protein",
+  "uri": "http://kbpedia.org/kko/rc/MembraneProtein",
+  "score": 1.0,
+  "triples": [
+    "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.",
+    "subclass of: protein molecule",
+    "subclass of: biopolymer",
+    "subclass of: heteropolymer",
+    "subclass of: organic molecule",
+    "subclass of: polymer molecule",
+    "subclass of: polypeptide",
+    "subclass of: protein molecule or protein complex",
+    "has subclass: peripheral protein",
+    "sibling concept: aquaporin",
+    "sibling concept: plasma protein molecule",
+    "sibling concept: enzyme",
+    "sibling concept: hemoprotein molecule",
+    "sibling concept: kinetochore"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: membrane protein. Relevant Logical Facts:  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.  - subclass of: protein molecule  - subclass of: biopolymer  - subclass of: heteropolymer  - subclass of: organic molecule  - subclass of: polymer molecule  - subclass of: polypeptide  - subclass of: protein molecule or protein complex  - has subclass: peripheral protein  - sibling concept: aquaporin  - sibling concept: plasma protein molecule  - sibling concept: enzyme  - sibling concept: hemoprotein molecule  - sibling concept: kinetochore
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "bacterial cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BacterialCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.",
+    "subclass of: cell wall",
+    "subclass of: prokaryotic cell wall",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part",
+    "sibling concept: plant cell wall",
+    "sibling concept: prokaryotic cell wall"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: bacterial cell wall. Relevant Logical Facts:  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.  - subclass of: cell wall  - subclass of: prokaryotic cell wall  - subclass of: structural cell part  - subclass of: external anatomical part  - sibling concept: plant cell wall  - sibling concept: prokaryotic cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "photosynthetic pigment",
+  "uri": "http://kbpedia.org/kko/rc/PhotosyntheticPigment",
+  "score": 1.0,
+  "triples": [
+    "definition: A photosynthetic pigment (accessory pigment; chloroplast pigment).",
+    "subclass of: organic compound",
+    "subclass of: pigment",
+    "subclass of: chemical and gas product",
+    "subclass of: molecular material",
+    "subclass of: organic matter",
+    "subclass of: colorant",
+    "has subclass: bacteriochlorophyll",
+    "has subclass: chlorophyll",
+    "has subclass: photosynthetic accessory pigment",
+    "sibling concept: acetate",
+    "sibling concept: alcohol",
+    "sibling concept: aldehyde",
+    "sibling concept: Alicyclic compound",
+    "sibling concept: Aliphatic compound"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: photosynthetic pigment. Relevant Logical Facts:  - definition: A photosynthetic pigment (accessory pigment; chloroplast pigment).  - subclass of: organic compound  - subclass of: pigment  - subclass of: chemical and gas product  - subclass of: molecular material  - subclass of: organic matter  - subclass of: colorant  - has subclass: bacteriochlorophyll  - has subclass: chlorophyll  - has subclass: photosynthetic accessory pigment  - sibling concept: acetate  - sibling concept: alcohol  - sibling concept: aldehyde  - sibling concept: Alicyclic compound  - sibling concept: Aliphatic compound
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chloroplast",
+  "uri": "http://kbpedia.org/kko/rc/Chloroplast",
+  "score": 1.0,
+  "triples": [
+    "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.",
+    "subclass of: organelle",
+    "subclass of: plastid",
+    "subclass of: cell part",
+    "subclass of: internal body part",
+    "subclass of: aura: membrane bounded organelle",
+    "sibling concept: centrosome",
+    "sibling concept: endoplasmic reticulum",
+    "sibling concept: Golgi apparatus",
+    "sibling concept: golgi cisterna",
+    "sibling concept: aura: membrane bounded organelle"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: chloroplast. Relevant Logical Facts:  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.  - subclass of: organelle  - subclass of: plastid  - subclass of: cell part  - subclass of: internal body part  - subclass of: aura: membrane bounded organelle  - sibling concept: centrosome  - sibling concept: endoplasmic reticulum  - sibling concept: Golgi apparatus  - sibling concept: golgi cisterna  - sibling concept: aura: membrane bounded organelle
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "lentiform nucleus",
+  "uri": "http://kbpedia.org/kko/rc/LentiformNucleus",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all lentiform nuclei. An individual LentiformNucleus (or 'lenticular nucleus') is a BasalNucleus which is a unique part of a CerebralHemisphere.",
+    "subclass of: basal ganglion",
+    "subclass of: body part",
+    "subclass of: grey matter",
+    "sibling concept: amygdala",
+    "sibling concept: caudate nucleus"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: lentiform nucleus. Relevant Logical Facts:  - definition: The collection of all lentiform nuclei. An individual LentiformNucleus (or 'lenticular nucleus') is a BasalNucleus which is a unique part of a CerebralHemisphere.  - subclass of: basal ganglion  - subclass of: body part  - subclass of: grey matter  - sibling concept: amygdala  - sibling concept: caudate nucleus
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a rigid outer layer called the cell wall.
+2. The primary function of an animal skeleton is to provide structural support and protection for the body's internal organs.
+3. Plant cells have organelles that are responsible for photosynthesis, such as chloroplasts.
+4. Chloroplasts contain pigments essential for photosynthesis, including chlorophyll.
+5. A cell wall provides a barrier against external factors, similar to how an animal skeleton protects its internal structures.
+6. The structure of the plant cell wall is composed of cellulose and other organic materials.
+7. Animal skeletons are made up of bones or cartilage that provide structural support for movement and protection.
+8. Chloroplasts have an internal membrane system essential for photosynthesis, similar to how animal cells require a supportive framework (the skeleton) for their functions.
+9. The cell wall is composed of rigid material that provides shape and structure to the plant cell.
+10. Animal skeletons are made up of organic materials such as collagen and minerals like calcium carbonate.
+
+Note: I added universally accepted truths about cellular biology, including the function of animal skeletons and the composition of plant cell walls, to provide a complete logical framework for answering the question.
+==================================================
+==================================================
+ QUERY: Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "comparison",
+  "uri": "http://kbpedia.org/kko/rc/Comparison-Examination",
+  "score": 1.0,
+  "triples": [
+    "definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.",
+    "subclass of: examination investigation",
+    "subclass of: investigation"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: comparison. Relevant Logical Facts:   - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.   - subclass of: examination investigation   - subclass of: investigation
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "research method",
+  "uri": "http://kbpedia.org/kko/rc/ResearchMethod",
+  "score": 1.0,
+  "triples": [
+    "definition: Instances of research methods."
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: research method. Relevant Logical Facts:   - definition: Instances of research methods.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "long-term study",
+  "uri": "http://kbpedia.org/kko/rc/LongTermStudy",
+  "score": 1.0,
+  "triples": [
+    "definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.",
+    "subclass of: detailed study",
+    "subclass of: report (document)",
+    "sibling concept: dissertation"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: long-term study. Relevant Logical Facts:   - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.   - subclass of: detailed study   - subclass of: report (document)   - sibling concept: dissertation
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "drive",
+  "uri": "http://kbpedia.org/kko/rc/Drive-PhysiologicalCondition",
+  "score": 1.0,
+  "triples": [
+    "definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.",
+    "subclass of: mental health problem",
+    "subclass of: illness",
+    "sibling concept: aids dementia complex",
+    "sibling concept: catatonia",
+    "sibling concept: cognitive disorder",
+    "sibling concept: clinical depression",
+    "sibling concept: infantilism (appearaance)"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: drive. Relevant Logical Facts:   - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.   - subclass of: mental health problem   - subclass of: illness   - sibling concept: aids dementia complex   - sibling concept: catatonia   - sibling concept: cognitive disorder   - sibling concept: clinical depression   - sibling concept: infantilism (appearaance)
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "scientific observation",
+  "uri": "http://kbpedia.org/kko/rc/ScientificObservation",
+  "score": 1.0,
+  "triples": [
+    "definition: A means or facility to generate scientific observations.",
+    "subclass of: observation",
+    "subclass of: scientific method",
+    "subclass of: cognition",
+    "subclass of: method",
+    "subclass of: philosophical beliefs",
+    "sibling concept: biochemistry method",
+    "sibling concept: geochronological dating method",
+    "sibling concept: hypothesis",
+    "sibling concept: scientific technique",
+    "sibling concept: semiempirical quantum chemistry method"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: scientific observation. Relevant Logical Facts:   - definition: A means or facility to generate scientific observations.   - subclass of: observation   - subclass of: scientific method   - subclass of: cognition   - subclass of: method   - subclass of: philosophical beliefs   - sibling concept: biochemistry method   - sibling concept: geochronological dating method   - sibling concept: hypothesis   - sibling concept: scientific technique   - sibling concept: semiempirical quantum chemistry method
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Final Answer: B.
+
+The investigation would be most difficult to replicate if the same foods are not eaten, as this is a crucial variable that could affect Janette's fatigue levels. If Carmen eats different foods than Janette, it would make it challenging for them to compare their results accurately and determine which food causes fatigue.
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fatigue",
+  "uri": "http://kbpedia.org/kko/rc/FatigueCondition",
+  "score": 1.0,
+  "triples": [
+    "definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe ",
+    "subclass of: illness",
+    "subclass of: medical condition",
+    "has subclass: exhausting",
+    "has subclass: sleep deprivation",
+    "sibling concept: ache ailment condition",
+    "sibling concept: acid indigestion",
+    "sibling concept: acquired disorder",
+    "sibling concept: Addison's disease",
+    "sibling concept: Adenomyosis"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: fatigue. Relevant Logical Facts:  - definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe  - subclass of: illness  - subclass of: medical condition  - has subclass: exhausting  - has subclass: sleep deprivation  - sibling concept: ache ailment condition  - sibling concept: acid indigestion  - sibling concept: acquired disorder  - sibling concept: Addison's disease  - sibling concept: Adenomyosis
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "chronic fatigue syndrome",
+  "uri": "http://kbpedia.org/kko/rc/ChronicFatigueSyndrome",
+  "score": 1.0,
+  "triples": [
+    "definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.",
+    "subclass of: chronic condition",
+    "subclass of: medical condition",
+    "sibling concept: Amyotrophic lateral sclerosis",
+    "sibling concept: Marie Strumpell arthritis",
+    "sibling concept: arthritis",
+    "sibling concept: case of autism",
+    "sibling concept: chronic lung disease"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: chronic fatigue syndrome. Relevant Logical Facts:  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.  - subclass of: chronic condition  - subclass of: medical condition  - sibling concept: Amyotrophic lateral sclerosis  - sibling concept: Marie Strumpell arthritis  - sibling concept: arthritis  - sibling concept: case of autism  - sibling concept: chronic lung disease
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "breakfast food",
+  "uri": "http://kbpedia.org/kko/rc/BreakfastFood",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.",
+    "subclass of: food item",
+    "subclass of: food beverage or tobacco product",
+    "subclass of: food or drink",
+    "subclass of: grocery",
+    "subclass of: opaque thing",
+    "subclass of: organic matter",
+    "has subclass: breakfast",
+    "has subclass: cereal (breakfast food)",
+    "has subclass: doughnut",
+    "has subclass: chicken's egg",
+    "has subclass: flapjack",
+    "has subclass: omelette",
+    "has subclass: pancake",
+    "has subclass: waffle",
+    "sibling concept: cereal (food)",
+    "sibling concept: cheesy food",
+    "sibling concept: children's food",
+    "sibling concept: convenience food",
+    "sibling concept: crumb"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: breakfast food. Relevant Logical Facts:  - definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.  - subclass of: food item  - subclass of: food beverage or tobacco product  - subclass of: food or drink  - subclass of: grocery  - subclass of: opaque thing  - subclass of: organic matter  - has subclass: breakfast  - has subclass: cereal (breakfast food)  - has subclass: doughnut  - has subclass: chicken's egg  - has subclass: flapjack  - has subclass: omelette  - has subclass: pancake  - has subclass: waffle  - sibling concept: cereal (food)  - sibling concept: cheesy food  - sibling concept: children's food  - sibling concept: convenience food  - sibling concept: crumb
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "financial chart",
+  "uri": "http://kbpedia.org/kko/rc/FinancialChart",
+  "score": 1.0,
+  "triples": [
+    "definition: A chart of finance or stock performance.",
+    "subclass of: technical analysis",
+    "subclass of: evaluating",
+    "subclass of: following standard procedures",
+    "sibling concept: candlestick patter",
+    "sibling concept: chart overlay",
+    "sibling concept: chart pattern",
+    "sibling concept: technical indicator"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: financial chart. Relevant Logical Facts:  - definition: A chart of finance or stock performance.  - subclass of: technical analysis  - subclass of: evaluating  - subclass of: following standard procedures  - sibling concept: candlestick patter  - sibling concept: chart overlay  - sibling concept: chart pattern  - sibling concept: technical indicator
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "temperature",
+  "uri": "http://kbpedia.org/kko/rc/Temperature",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \\",
+    "subclass of: non aspectual quantity",
+    "subclass of: one dimensional quantity",
+    "subclass of: scalar or vector interval",
+    "subclass of: tangible physical quantity",
+    "subclass of: quality",
+    "subclass of: scalar quantity",
+    "subclass of: measurable quantity",
+    "subclass of: n-tuple interval",
+    "has subclass: absolute zero",
+    "has subclass: cold",
+    "has subclass: moderately cold",
+    "has subclass: room temperature",
+    "has subclass: sea surface temperature",
+    "has subclass: temperature control",
+    "has subclass: thermal protection",
+    "has subclass: thermoregulation",
+    "has subclass: threshold temperature",
+    "has subclass: warmth",
+    "sibling concept: area",
+    "sibling concept: beauty",
+    "sibling concept: biodiversity",
+    "sibling concept: cask strength",
+    "sibling concept: chemical purity"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: temperature. Relevant Logical Facts:  - definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \  - subclass of: non aspectual quantity  - subclass of: one dimensional quantity  - subclass of: scalar or vector interval  - subclass of: tangible physical quantity  - subclass of: quality  - subclass of: scalar quantity  - subclass of: measurable quantity  - subclass of: n-tuple interval  - has subclass: absolute zero  - has subclass: cold  - has subclass: moderately cold  - has subclass: room temperature  - has subclass: sea surface temperature  - has subclass: temperature control  - has subclass: thermal protection  - has subclass: thermoregulation  - has subclass: threshold temperature  - has subclass: warmth  - sibling concept: area  - sibling concept: beauty  - sibling concept: biodiversity  - sibling concept: cask strength  - sibling concept: chemical purity
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+**LOGICAL EVIDENCE**
+
+1. Fatigue is a physiological condition characterized by continuous exhaustion caused by an underlying ailment.
+2. Chronic fatigue syndrome is an illness characterized by fatigue, general pain, mental fogginess, and gastro-intestinal problems.
+3. Measuring the amount of fatigue can be subjective and difficult to quantify accurately in different individuals.
+4. Recording observations in a financial chart (technical analysis) may not directly relate to measuring or replicating fatigue levels.
+5. The same foods being eaten at the same temperature would likely produce similar results, making it easier to replicate an investigation on fatigue.
+6. Temperature is a measurable quantity that can be controlled and replicated with precision using standard laboratory equipment.
+7. Measuring the amount of fatigue requires subjective evaluation by individuals or instruments designed for this purpose.
+8. Recording observations in a financial chart (technical analysis) involves evaluating patterns, trends, and indicators unrelated to measuring fatigue levels directly.
+9. The same foods being eaten at different temperatures may produce varying results due to differences in digestion rates and metabolic responses.
+10. Measuring the amount of fatigue is inherently more difficult than controlling temperature or recording observations in a financial chart because it requires subjective evaluation and individual variability considerations.
+
+Note: These logical evidence items aim to bridge the premise (investigation difficulty) with possible answers by highlighting key aspects related to measuring, replicating, and evaluating fatigue levels.
+==================================================

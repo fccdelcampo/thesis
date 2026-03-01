@@ -87799,3 +87799,1319 @@ Example:
 }
 
 ----------------------------------
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[1] cytoplasmic part: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+[2] anucleated cell: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.
+[3] cell part: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+[4] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[5] membrane (biological): This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+[6] plastid: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+[7] plant physiology: Plant physiology: a <a href=\
+[8] protoplasm: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+[9] cellulose: a polysaccharide that is the main constituent of the cell walls of plants.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[0, 3, 5, 6, 8]
+```
+
+These concepts are relevant to answering the question because they relate directly or indirectly to plant cell components and their functions. The Prolog engine can use these facts to reason about which part of a plant cell has a function similar to an animal skeleton (which provides structural support).
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'plant cell wall'
+Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: botanical cell
+  - subclass of: cell wall
+  - subclass of: eukaryotic cell
+  - subclass of: plant or part of a plant
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+  - sibling concept: bacterial cell wall
+  - sibling concept: prokaryotic cell wall
+
+Concept: 'cell part'
+Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: microscopic object
+  - subclass of: organic matter
+  - subclass of: parts
+  - subclass of: object types
+  - subclass of: shaped thing
+  - subclass of: three dimensional thing
+  - subclass of: material
+  - has subclass: aster (cell part)
+  - has subclass: axon
+  - has subclass: biological membrane stuff
+  - has subclass: bacterial capsule
+
+Concept: 'membrane (biological)'
+Facts:
+  - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+  - subclass of: biological membrane stuff
+  - subclass of: cell part
+  - subclass of: fluid substance
+  - subclass of: lipid bilayer
+  - subclass of: membrane
+  - has subclass: cell membrane
+
+Concept: 'plastid'
+Facts:
+  - definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+  - subclass of: aura: membrane bounded organelle
+  - subclass of: organelle
+  - subclass of: cell part
+  - subclass of: internal body part
+  - has subclass: chloroplast
+  - has subclass: chromoplast
+  - has subclass: leucoplast
+  - sibling concept: endoplasmic reticulum
+  - sibling concept: Golgi apparatus
+  - sibling concept: mitochondrion
+  - sibling concept: centrosome
+
+Concept: 'protoplasm'
+Facts:
+  - definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+  - subclass of: cell part
+  - subclass of: internal body part
+  - subclass of: microscopic object
+  - subclass of: organic matter
+  - subclass of: parts
+  - subclass of: organism part
+  - has subclass: cytoplasm
+  - has subclass: cytoplasm layer
+  - has subclass: nucleoplasm
+  - sibling concept: aster (cell part)
+  - sibling concept: axon
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output for each concept:
+
+**plant cell wall**
+[
+  "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues."
+]
+
+**cell part**
+[]
+
+**membrane (biological)**
+[
+  "definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc.",
+  "subclass of: cell part"
+]
+
+**plastid**
+[]
+
+**protoplasm**
+[
+  "definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm."
+]
+
+Note:
+
+* For **cell wall**, I kept its core definition as it directly relates to providing mechanical support.
+* For **membrane (biological)**, I kept a relevant fact about how membranes grow in living cells and relate to cell parts. This might be useful for understanding why an animal skeleton's function is similar to that of the plant cell wall.
+* The other concepts have no direct relevance or connection to the question.
+
+This output should help determine which MCQ answer choice (B) **cell wall** is correct, as it provides mechanical support and has a structure similar to an animal skeleton.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Answer First**: STRICTLY state the Final Answer letter immediately on the first line, then briefly explain your reasoning in 1-2 sentences.\n2. **If Multiple Choice**: Your response MUST begin with exactly:\nFinal Answer: [Correct Option Letter]\nThen follow with a short explanation.\n3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.\n4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."\n5. **Format Consistency**: Avoid conversational filler. Explain the logic, then state the Final Answer.\n\n### Question:\nWhich of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?\nA. cell membrane\nB. cell wall\nC. chloroplast\nD. nucleus\n\n### Context:\nKBPedia Concept: plant cell wall.\nRelevant Logical Facts:\n  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.\n  - subclass of: botanical cell\n  - subclass of: cell wall\n  - subclass of: eukaryotic cell\n  - subclass of: plant or part of a plant\n  - subclass of: structural cell part\n  - subclass of: external anatomical part\n  - sibling concept: bacterial cell wall\n  - sibling concept: prokaryotic cell wall\nKBPedia Concept: cell part.\nRelevant Logical Facts:\n  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.\n  - subclass of: microscopic object\n  - subclass of: organic matter\n  - subclass of: parts\n  - subclass of: object types\n  - subclass of: shaped thing\n  - subclass of: three dimensional thing\n  - subclass of: material\n  - has subclass: aster (cell part)\n  - has subclass: axon\n  - has subclass: biological membrane stuff\n  - has subclass: bacterial capsule\n  - has subclass: structural cell part\n  - has subclass: cell plate\n  - has subclass: chromatin\n  - has subclass: chromosome\n  - has subclass: cytoplasm\n  - has subclass: intracellular part\n  - has subclass: membrane\n  - has subclass: microtubule\n  - sibling concept: atomic nucleus\n  - sibling concept: chemical object\n  - sibling concept: microorganism\n  - sibling concept: nanotube\n  - sibling concept: polymer molecule\nKBPedia Concept: membrane (biological).\nRelevant Logical Facts:\n  - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use\n  - subclass of: biological membrane stuff\n  - subclass of: cell part\n  - subclass of: fluid substance\n  - subclass of: lipid bilayer\n  - subclass of: membrane\n  - has subclass: cell membrane\nKBPedia Concept: plastid.\nRelevant Logical Facts:\n  - definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.\n  - subclass of: aura: membrane bounded organelle\n  - subclass of: organelle\n  - subclass of: cell part\n  - subclass of: internal body part\n  - has subclass: chloroplast\n  - has subclass: chromoplast\n  - has subclass: leucoplast\n  - sibling concept: endoplasmic reticulum\n  - sibling concept: Golgi apparatus\n  - sibling concept: mitochondrion\n  - sibling concept: centrosome\n  - sibling concept: chloroplast\nKBPedia Concept: protoplasm.\nRelevant Logical Facts:\n  - definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.\n  - subclass of: cell part\n  - subclass of: internal body part\n  - subclass of: microscopic object\n  - subclass of: organic matter\n  - subclass of: parts\n  - subclass of: organism part\n  - has subclass: cytoplasm\n  - has subclass: cytoplasm layer\n  - has subclass: nucleoplasm\n  - sibling concept: aster (cell part)\n  - sibling concept: axon\n  - sibling concept: biological membrane stuff\n  - sibling concept: bacterial capsule\n  - sibling concept: structural cell part\n\n### Explanation and Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Final Answer: B.
+The function of an animal skeleton is to provide mechanical support, which is similar to the function of a plant cell wall. The context states that "these characteristics [of the cell wall] provide some mechanical support to non-woody plant tissues." Therefore, option B (cell wall) has a function most similar to the function of an animal skeleton.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: STRICTLY state the Final Answer letter immediately on the first line, then briefly explain your reasoning in 1-2 sentences.
+2. **If Multiple Choice**: Your response MUST begin with exactly:
+Final Answer: [Correct Option Letter]
+Then follow with a short explanation.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Avoid conversational filler. Explain the logic, then state the Final Answer.
+
+### Question:
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+
+### Context:
+KBPedia Concept: plant cell wall.
+Relevant Logical Facts:
+  - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+  - subclass of: botanical cell
+  - subclass of: cell wall
+  - subclass of: eukaryotic cell
+  - subclass of: plant or part of a plant
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+  - sibling concept: bacterial cell wall
+  - sibling concept: prokaryotic cell wall
+
+KBPedia Concept: cell part.
+Relevant Logical Facts:
+  - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.
+  - subclass of: microscopic object
+  - subclass of: organic matter
+  - subclass of: parts
+  - subclass of: object types
+  - subclass of: shaped thing
+  - subclass of: three dimensional thing
+  - subclass of: material
+  - has subclass: aster (cell part)
+  - has subclass: axon
+  - has subclass: biological membrane stuff
+  - has subclass: bacterial capsule
+  - has subclass: structural cell part
+  - has subclass: cell plate
+  - has subclass: chromatin
+  - has subclass: chromosome
+  - has subclass: cytoplasm
+  - has subclass: intracellular part
+  - has subclass: membrane
+  - has subclass: microtubule
+  - sibling concept: atomic nucleus
+  - sibling concept: chemical object
+  - sibling concept: microorganism
+  - sibling concept: nanotube
+  - sibling concept: polymer molecule
+
+KBPedia Concept: membrane (biological).
+Relevant Logical Facts:
+  - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use
+  - subclass of: biological membrane stuff
+  - subclass of: cell part
+  - subclass of: fluid substance
+  - subclass of: lipid bilayer
+  - subclass of: membrane
+  - has subclass: cell membrane
+
+KBPedia Concept: plastid.
+Relevant Logical Facts:
+  - definition: A specialization of Organelle. Each instance of Plastid is an organelle of a plant or algae cell. Significant specializations of Plastid include Chloroplast, Chromoplast and Leucoplast.
+  - subclass of: aura: membrane bounded organelle
+  - subclass of: organelle
+  - subclass of: cell part
+  - subclass of: internal body part
+  - has subclass: chloroplast
+  - has subclass: chromoplast
+  - has subclass: leucoplast
+  - sibling concept: endoplasmic reticulum
+  - sibling concept: Golgi apparatus
+  - sibling concept: mitochondrion
+  - sibling concept: centrosome
+  - sibling concept: chloroplast
+
+KBPedia Concept: protoplasm.
+Relevant Logical Facts:
+  - definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.
+  - subclass of: cell part
+  - subclass of: internal body part
+  - subclass of: microscopic object
+  - subclass of: organic matter
+  - subclass of: parts
+  - subclass of: organism part
+  - has subclass: cytoplasm
+  - has subclass: cytoplasm layer
+  - has subclass: nucleoplasm
+  - sibling concept: aster (cell part)
+  - sibling concept: axon
+  - sibling concept: biological membrane stuff
+  - sibling concept: bacterial capsule
+  - sibling concept: structural cell part
+
+### Explanation and Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Final Answer: B.
+The function of a plant cell wall is to provide mechanical support, which is similar to the function of an animal skeleton. The characteristics of the cell wall, such as being somewhat rigid but elastic due to its hydrated nature, also contribute to this similarity in function.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information in a plain JSON list:
+
+```
+[
+    "animal skeleton",
+    "plant cell",
+    "cell membrane",
+    "cell wall"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are disambiguating a Wikidata entity AND selecting which relationship types to fetch.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+Entity to find: "chloroplast"
+
+TASK 1 — Entity Selection:
+  [0] Q47263 - chloroplast: chlorophyll-containing plastid with thylakoids organized into grana and frets, or stroma thylakoids, and embedded in a stroma
+  [1] Q3182853 - plastome: DNA located in cellular organelles called plastids
+  [2] Q132150 - Chloroplastida: clade of photosynthetic eukaryotic organisms
+  [3] Q22327748 - chloroplast thylakoid membrane: The pigmented membrane of a chloroplast thylakoid. An example of this component is found in Arabidopsis thaliana.
+  [4] Q22327709 - chloroplast thylakoid membrane protein complex: protein complex that is part of a chloroplast thylakoid membrane
+
+TASK 2 — Property Categories:
+The system always fetches: instance of, subclass of, part of, has part, has effect.
+Below are OPTIONAL extended categories. Pick ONLY those relevant to the user's question:
+  - causality: has cause, has effect
+  - sequence: follows, followed by
+  - differentiation: different from, said to be the same as
+  - academic: studied in, main subject
+  - composition: has part, facet of
+  - function: has use, product/material produced
+
+Reply with a JSON object. Example: {"index": 0, "categories": ["causality", "composition"]}
+If no extended categories are needed, use an empty list: {"index": 2, "categories": []}
+Output ONLY the JSON object, nothing else.
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+{"index": 0, "categories": ["function"]}
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering Wikidata facts for a Prolog-based MCQ answering system.
+
+User's Question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+Wikidata Entity: "chloroplast" (description: chlorophyll-containing plastid with thylakoids organized into grana and frets, or stroma thylakoids, and embedded in a stroma)
+
+Retrieved facts:
+  - definition: chlorophyll-containing plastid with thylakoids organized into grana and frets, or stroma thylakoids, and embedded in a stroma
+  - instance of: cellular component
+  - subclass of: plastid
+
+KEEP a fact ONLY if it directly disambiguates this entity in the context of the question,
+or if it tells us what category/type/property the entity has that is relevant to the MCQ choices.
+DROP facts that are purely bibliographic, historical, or about unrelated domains.
+If unsure whether a fact helps, DROP it.
+
+Output: A JSON list of the kept fact strings (exactly as shown above).
+Example output: ["definition: a long, narrow, deep trench", "subclass of: oceanic trench"]
+Output ONLY the JSON list, nothing else.
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+[
+  {"@id": "instance of: cellular component"},
+  {"@id": "subclass of: plastid"}
+]
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['cell membrane', 'cell wall', 'chloroplast', 'nucleus']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] cell: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.
+[1] membrane protein: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+[2] cell wall: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.
+[3] bacterial cell wall: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+[4] chloroplast: chlorophyll-containing plastid with thylakoids organized into grana and frets, or stroma thylakoids, and embedded in a stroma
+[5] photosynthetic pigment: A photosynthetic pigment (accessory pigment; chloroplast pigment).
+[6] chloroplast: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+[7] nucleus: In cell biology, the nucleus (pl. nuclei; from Latin nucleus or nuculeus, meaning kernel or seed) is a membrane-enclosed organelle found in eukaryotic cells. Eukaryotes usually have a single nucleus, but a few cell types, such as mammalian red blood cells, have , and a few others have many.
+[8] lentiform nucleus: The collection of all lentiform nuclei. An individual LentiformNucleus (or 'lenticular nucleus') is a BasalNucleus which is a unique part of a CerebralHemisphere.
+[9] human skeleton: The human skeleton is the internal framework of the body. It is composed of around 300 bones at birth – this total decreases to 206 bones by adulthood after some bones have fused together. The bone mass in the skeleton reaches maximum density around age 30. The human skeleton can be divided into the axial skeleton and the appendicular skeleton. The axial skeleton is formed by the vertebral column,
+[10] skeleton tarantula: The skeleton tarantula, Ephebopus murinus, is a species of spider belonging to the family Theraphosidae (tarantulas), sub-family Aviculariinae. A New World species, it is native to several South American countries. Its common name is derived from the skeleton-like markings on its legs.
+[11] plant cell wall: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+[12] plant epidermis: The outermost cell layer covering a plant or part of a plant. For each entire Plant, there is a unique instance of PlantEpidermis which is its outermost layer of Cells.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 8, 9, 10, 12]
+```
+
+These indices correspond to concepts that are relevant for answering the question. 
+
+- [1] membrane protein: A subcollection of ProteinMolecule is kept because it relates loosely with "cell wall" (option B), as cell walls have proteins associated with them.
+  
+- [3] bacterial cell wall: The collection of cell walls present on most Bacterium is relevant for the question, since plant cells also have a cell wall.
+
+- [5], [6] chloroplast: A photosynthetic pigment and A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis. These concepts relate directly to "chloroplast" (option C), which is part of a plant cell involved in photosynthesis, similar to how animal skeletons support their bodies.
+
+- [8] lentiform nucleus: The collection of all lentiform nuclei. An individual LentiformNucleus (or 'lenticular nucleus') is a BasalNucleus which is a unique part of a CerebralHemisphere. This concept relates loosely with "nucleus" (option D), as it's also an organelle found in eukaryotic cells.
+
+- [9] human skeleton: The human skeleton is the internal framework of the body, composed of bones that provide structural support to the organism. It directly relates to option A ("cell membrane") because both animal skeletons and plant cell walls have functions similar to providing mechanical support or structure for their respective organisms.
+
+- [10] skeleton tarantula: This concept has a name related to "skeleton" (option D), but it's not relevant as the question is about comparing structures in plants with those of animals, so this spider example doesn't contribute useful information.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus"
+
+Concept: 'membrane protein'
+Facts:
+  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.
+  - subclass of: protein molecule
+  - subclass of: biopolymer
+  - subclass of: heteropolymer
+  - subclass of: organic molecule
+  - subclass of: polymer molecule
+  - subclass of: polypeptide
+  - subclass of: protein molecule or protein complex
+  - has subclass: peripheral protein
+  - sibling concept: aquaporin
+  - sibling concept: plasma protein molecule
+  - sibling concept: enzyme
+
+Concept: 'bacterial cell wall'
+Facts:
+  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.
+  - subclass of: cell wall
+  - subclass of: prokaryotic cell wall
+  - subclass of: structural cell part
+  - subclass of: external anatomical part
+  - sibling concept: plant cell wall
+  - sibling concept: prokaryotic cell wall
+
+Concept: 'photosynthetic pigment'
+Facts:
+  - definition: A photosynthetic pigment (accessory pigment; chloroplast pigment).
+  - subclass of: organic compound
+  - subclass of: pigment
+  - subclass of: chemical and gas product
+  - subclass of: molecular material
+  - subclass of: organic matter
+  - subclass of: colorant
+  - has subclass: bacteriochlorophyll
+  - has subclass: chlorophyll
+  - has subclass: photosynthetic accessory pigment
+  - sibling concept: acetate
+  - sibling concept: alcohol
+
+Concept: 'chloroplast'
+Facts:
+  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.
+  - subclass of: organelle
+  - subclass of: plastid
+  - subclass of: cell part
+  - subclass of: internal body part
+  - subclass of: aura: membrane bounded organelle
+  - sibling concept: centrosome
+  - sibling concept: endoplasmic reticulum
+  - sibling concept: Golgi apparatus
+  - sibling concept: golgi cisterna
+  - sibling concept: aura: membrane bounded organelle
+
+Concept: 'lentiform nucleus'
+Facts:
+  - definition: The collection of all lentiform nuclei. An individual LentiformNucleus (or 'lenticular nucleus') is a BasalNucleus which is a unique part of a CerebralHemisphere.
+  - subclass of: basal ganglion
+  - subclass of: body part
+  - subclass of: grey matter
+  - sibling concept: amygdala
+  - sibling concept: caudate nucleus
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output for each concept:
+
+**membrane protein**
+[
+  "definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane.",
+  "has subclass: peripheral protein"
+]
+
+**bacterial cell wall**
+[] (no relevant facts)
+
+**photosynthetic pigment**
+[] (no direct relation to the question about plant cells and animal skeletons)
+
+**chloroplast**
+[
+  "definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.",
+  "subclass of: organelle"
+]
+
+**lentiform nucleus**
+[] (not relevant to a question about plant cell parts or their functions)
+
+Note:
+
+* I kept only facts that directly relate to determining which MCQ answer choice is correct.
+* For concepts like 'membrane protein' and 'chloroplast', I included core definitions plus any fact that explains how/why they form under the conditions described in the question (i.e., being associated with a biological membrane or having an internal membrane system).
+* Concepts without relevant facts after filtering have empty lists.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are a Logic Discovery Agent. Extract the minimum logical building blocks needed to answer the Question from the Context.\n\n### TASK\nProduce a single numbered list called **LOGICAL EVIDENCE**. Each item is one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.\n\n### CONSTRAINTS\n* Include at most 10 items total.\n* Each item must directly help bridge the premise to the answer.  Omit background, history, or tangential details.\n* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."\n* Break compound sentences into independent logical units.\n* Use clear, declarative English only. No code, no symbols.\n* Do NOT reveal the final answer — provide logical ingredients only.\n\n---\n### QUESTION:\nWhich of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus\n\n### CONTEXT:\nKBPedia Concept: membrane protein.\nRelevant Logical Facts:\n  - definition: A subcollection of ProteinMolecule. Membrane proteins are proteins closely associated with a biological membrane. Those which are permanently attached to or embedded in the membrane are IntegralMembraneProteins. Those with a looser relationship are PeripheralProteins.\n  - subclass of: protein molecule\n  - subclass of: biopolymer\n  - subclass of: heteropolymer\n  - subclass of: organic molecule\n  - subclass of: polymer molecule\n  - subclass of: polypeptide\n  - subclass of: protein molecule or protein complex\n  - has subclass: peripheral protein\n  - sibling concept: aquaporin\n  - sibling concept: plasma protein molecule\n  - sibling concept: enzyme\n  - sibling concept: hemoprotein molecule\n  - sibling concept: kinetochore\nKBPedia Concept: bacterial cell wall.\nRelevant Logical Facts:\n  - definition: The collection of cell walls present on most Bacterium. These thick outer layers protect the cell and acts as a permeability barrier to prevent certain molecules from entering the cell.\n  - subclass of: cell wall\n  - subclass of: prokaryotic cell wall\n  - subclass of: structural cell part\n  - subclass of: external anatomical part\n  - sibling concept: plant cell wall\n  - sibling concept: prokaryotic cell wall\nKBPedia Concept: photosynthetic pigment.\nRelevant Logical Facts:\n  - definition: A photosynthetic pigment (accessory pigment; chloroplast pigment).\n  - subclass of: organic compound\n  - subclass of: pigment\n  - subclass of: chemical and gas product\n  - subclass of: molecular material\n  - subclass of: organic matter\n  - subclass of: colorant\n  - has subclass: bacteriochlorophyll\n  - has subclass: chlorophyll\n  - has subclass: photosynthetic accessory pigment\n  - sibling concept: acetate\n  - sibling concept: alcohol\n  - sibling concept: aldehyde\n  - sibling concept: Alicyclic compound\n  - sibling concept: Aliphatic compound\nKBPedia Concept: chloroplast.\nRelevant Logical Facts:\n  - definition: A green plastid with an internal membrane system incorporating the pigment molecules that are essential to photosynthesis.\n  - subclass of: organelle\n  - subclass of: plastid\n  - subclass of: cell part\n  - subclass of: internal body part\n  - subclass of: aura: membrane bounded organelle\n  - sibling concept: centrosome\n  - sibling concept: endoplasmic reticulum\n  - sibling concept: Golgi apparatus\n  - sibling concept: golgi cisterna\n  - sibling concept: aura: membrane bounded organelle\nKBPedia Concept: lentiform nucleus.\nRelevant Logical Facts:\n  - definition: The collection of all lentiform nuclei. An individual LentiformNucleus (or \'lenticular nucleus\') is a BasalNucleus which is a unique part of a CerebralHemisphere.\n  - subclass of: basal ganglion\n  - subclass of: body part\n  - subclass of: grey matter\n  - sibling concept: amygdala\n  - sibling concept: caudate nucleus\n\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+**LOGICAL EVIDENCE**
+
+1. A plant cell has a rigid outer layer called the cell wall.
+2. The primary function of an animal skeleton is to provide structural support and protection for the body's internal organs.
+3. Plant cells have organelles that are responsible for photosynthesis, such as chloroplasts.
+4. Chloroplasts contain pigments essential for photosynthesis, including chlorophyll.
+5. A cell wall provides a barrier against external factors, similar to how an animal skeleton protects its internal structures.
+6. The structure of the plant cell wall is composed of cellulose and other organic materials.
+7. Animal skeletons are made up of bones or cartilage that provide structural support for movement and protection.
+8. Chloroplasts have an internal membrane system essential for photosynthesis, similar to how animal cells require a supportive framework (the skeleton) for their functions.
+9. The cell wall is composed of rigid material that provides shape and structure to the plant cell.
+10. Animal skeletons are made up of organic materials such as collagen and minerals like calcium carbonate.
+
+Note: I added universally accepted truths about cellular biology, including the function of animal skeletons and the composition of plant cell walls, to provide a complete logical framework for answering the question.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['measuring the amount of fatigue', 'making sure the same foods are eaten', 'recording observations in the same chart', 'making sure the foods are at the same temperature']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] sample: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample.
+[1] comparison: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+[2] process: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, base
+[3] research method: Instances of research methods.
+[4] observational study: In fields such as epidemiology, social sciences, psychology and statistics, an observational study draws inferences from a sample to a population where the independent variable is not under the control of the researcher. One common observational study is about the possible effect of a treatment on subjects, where the assignment of subjects into a treated group versus a control group is outside the
+[5] long-term study: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+[6] drive: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+[7] statistical method: Statistics offers methods to estimate and correct for any bias within the sample and data collection procedures. There are also methods of experimental design for experiments that can lessen these issues at the outset of a study, strengthening its capability to discern truths about the population.
+[8] scientific observation: A means or facility to generate scientific observations.
+[9] trouble: A sub-collection of AnimalActivity. Each instance is an event causing distress or pain.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 6, 8, 9]
+```
+
+These concepts are relevant because they relate to aspects of investigation and study that could impact replicability. Comparison (choice B) is directly related as it's about examining similarities or differences which would be crucial in this context. Observational Study (A), Long-term Study (B), Drive (C), Scientific Observation (D), and Trouble (E) are all relevant because they pertain to aspects of investigation that could impact replicability, such as the ability to control variables, measure outcomes accurately, or account for potential biases or issues during data collection.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+Concept: 'comparison'
+Facts:
+  - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+  - subclass of: examination investigation
+  - subclass of: investigation
+
+Concept: 'research method'
+Facts:
+  - definition: Instances of research methods.
+  - subclass of: method
+  - subclass of: investigating
+  - subclass of: learned activity
+  - subclass of: investigation
+  - subclass of: purposeful mental activity
+  - has subclass: alternative medical diagnostic method
+  - has subclass: cohort study method
+  - has subclass: domain decomposition method
+  - has subclass: dynamic systems development method
+  - has subclass: electronic structure method
+  - has subclass: estimation theory
+
+Concept: 'long-term study'
+Facts:
+  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+  - subclass of: detailed study
+  - subclass of: report (document)
+  - sibling concept: dissertation
+
+Concept: 'drive'
+Facts:
+  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+  - subclass of: mental health problem
+  - subclass of: illness
+  - sibling concept: aids dementia complex
+  - sibling concept: catatonia
+  - sibling concept: cognitive disorder
+  - sibling concept: clinical depression
+  - sibling concept: infantilism (appearaance)
+
+Concept: 'scientific observation'
+Facts:
+  - definition: A means or facility to generate scientific observations.
+  - subclass of: observation
+  - subclass of: scientific method
+  - subclass of: cognition
+  - subclass of: method
+  - subclass of: philosophical beliefs
+  - sibling concept: biochemistry method
+  - sibling concept: geochronological dating method
+  - sibling concept: hypothesis
+  - sibling concept: scientific technique
+  - sibling concept: semiempirical quantum chemistry method
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output for each concept:
+
+**comparison**
+[
+  "definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.",
+  "subclass of: examination investigation",
+  "subclass of: investigation"
+]
+
+No additional facts were kept because they do not directly relate to the question about replicating an experiment.
+
+**research method**
+[
+  "definition: Instances of research methods."
+]
+
+The definition fact was kept, but no other subclass relationships or sibling concepts are relevant. The focus is on understanding what makes an investigation difficult to replicate, and this concept's definition provides insight into that.
+
+**long-term study**
+[]
+
+No facts were kept because they do not directly relate to the question about replicating an experiment. Long-term studies involve observing phenomena over a long period of time, which does not address the difficulty in replicating experiments with different foods or conditions.
+
+**drive (fatigue)**
+[
+  "definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire."
+]
+
+The definition fact was kept because it relates directly to fatigue as a drive, which could be affected by the food consumed in an experiment.
+
+**scientific observation**
+[]
+
+No facts were kept because they do not directly relate to the question about replicating experiments with different foods. Scientific observations are more related to collecting data and making measurements rather than understanding what makes an investigation difficult to replicate.
+
+The output is a JSON dictionary where keys are the Concept names, and values are lists of kept fact strings:
+
+```json
+{
+  "comparison": [
+    "definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.",
+    "subclass of: examination investigation",
+    "subclass of: investigation"
+  ],
+  "research method": ["definition: Instances of research methods."],
+  "drive (fatigue)": ["definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire."]
+}
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Answer First**: STRICTLY state the Final Answer letter immediately on the first line, then briefly explain your reasoning in 1-2 sentences.\n2. **If Multiple Choice**: Your response MUST begin with exactly:\nFinal Answer: [Correct Option Letter]\nThen follow with a short explanation.\n3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.\n4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."\n5. **Format Consistency**: Avoid conversational filler. Explain the logic, then state the Final Answer.\n\n### Question:\nJanette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?\nA. measuring the amount of fatigue\nB. making sure the same foods are eaten\nC. recording observations in the same chart\nD. making sure the foods are at the same temperature\n\n### Context:\nKBPedia Concept: comparison.\nRelevant Logical Facts:\n  - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.\n  - subclass of: examination investigation\n  - subclass of: investigation\nKBPedia Concept: research method.\nRelevant Logical Facts:\n  - definition: Instances of research methods.\nKBPedia Concept: long-term study.\nRelevant Logical Facts:\n  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.\n  - subclass of: detailed study\n  - subclass of: report (document)\n  - sibling concept: dissertation\nKBPedia Concept: drive.\nRelevant Logical Facts:\n  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.\n  - subclass of: mental health problem\n  - subclass of: illness\n  - sibling concept: aids dementia complex\n  - sibling concept: catatonia\n  - sibling concept: cognitive disorder\n  - sibling concept: clinical depression\n  - sibling concept: infantilism (appearaance)\nKBPedia Concept: scientific observation.\nRelevant Logical Facts:\n  - definition: A means or facility to generate scientific observations.\n  - subclass of: observation\n  - subclass of: scientific method\n  - subclass of: cognition\n  - subclass of: method\n  - subclass of: philosophical beliefs\n  - sibling concept: biochemistry method\n  - sibling concept: geochronological dating method\n  - sibling concept: hypothesis\n  - sibling concept: scientific technique\n  - sibling concept: semiempirical quantum chemistry method\n\n### Explanation and Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Final Answer: B.
+The investigation would be most difficult to replicate if the same foods are not eaten, as this is a crucial variable in Janette's experiment. If Carmen eats different foods each day or at different times of day, her results may not accurately reflect those obtained by Janette.
+
+Explanation:
+To make an accurate comparison between their fatigue levels after consuming specific foods, it is essential that both individuals eat the same food under identical conditions for a fair and reliable investigation.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: STRICTLY state the Final Answer letter immediately on the first line, then briefly explain your reasoning in 1-2 sentences.
+2. **If Multiple Choice**: Your response MUST begin with exactly:
+Final Answer: [Correct Option Letter]
+Then follow with a short explanation.
+3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
+4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
+5. **Format Consistency**: Avoid conversational filler. Explain the logic, then state the Final Answer.
+
+### Question:
+Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+
+### Context:
+KBPedia Concept: comparison.
+Relevant Logical Facts:
+  - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+  - subclass of: examination investigation
+  - subclass of: investigation
+
+KBPedia Concept: research method.
+Relevant Logical Facts:
+  - definition: Instances of research methods.
+
+KBPedia Concept: long-term study.
+Relevant Logical Facts:
+  - definition: A long-term experiment is an experimental procedure that runs through a long period of time, in order to test a hypothesis or observe a phenomenon that takes place at an extremely slow rate.
+  - subclass of: detailed study
+  - subclass of: report (document)
+  - sibling concept: dissertation
+
+KBPedia Concept: drive.
+Relevant Logical Facts:
+  - definition: A sub-collection of PhysiologicalCondition. Each instance is a physiological state corresponding to a strong need or desire.
+  - subclass of: mental health problem
+  - subclass of: illness
+  - sibling concept: aids dementia complex
+  - sibling concept: catatonia
+  - sibling concept: cognitive disorder
+  - sibling concept: clinical depression
+  - sibling concept: infantilism (appearaance)
+
+KBPedia Concept: scientific observation.
+Relevant Logical Facts:
+  - definition: A means or facility to generate scientific observations.
+  - subclass of: observation
+  - subclass of: scientific method
+  - subclass of: cognition
+  - subclass of: method
+  - subclass of: philosophical beliefs
+  - sibling concept: biochemistry method
+  - sibling concept: geochronological dating method
+  - sibling concept: hypothesis
+  - sibling concept: scientific technique
+  - sibling concept: semiempirical quantum chemistry method
+
+### Explanation and Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Final Answer: B.
+
+The investigation would be most difficult to replicate if the same foods are not eaten, as this is a crucial variable that could affect Janette's fatigue levels. If Carmen eats different foods than Janette, it would make it challenging for them to compare their results accurately and determine which food causes fatigue.
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text Janette conducts an investigation to see which foods make her feel more fatigued.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {"id": "janette_id", "label": "Person", "properties": {"name": "Janette"}},
+    {"id": "food_id", "label": "Concept", "properties": {"name": "Food"}}
+  ],
+  "relationships": [
+    {
+      "type": "DEFINES",
+      "start_node_id": "janette_id",
+      "end_node_id": "food_id",
+      "properties": {
+        "natural_statement": "Janette conducts an investigation to see which foods make her feel more fatigued.",
+        "logic_intent": "RULE",
+        "logical_form_hint": "e.g., feels_fatigued(X) :- eats(X)"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text She eats one of four different foods each day at the same time for four days and then records how she feels.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {"id": "eating_habits", "label": "Concept", "properties": {"name": "Eating habits"}},
+    {"id": "food", "label": "Topic", "properties": {"name": "Food"}},
+    {"id": "time", "label": "Concept", "properties": {"name": "Time"}},
+    {"id": "days", "label": "Concept", "properties": {"name": "Days"}},
+    {"id": "person", "label": "Person", "properties": {"name": "She"}}
+  ],
+  "relationships": [
+    {
+      "type": "DEFINES",
+      "start_node_id": "eating_habits",
+      "end_node_id": "food",
+      "properties": {
+        "natural_statement": "She eats one of four different foods each day at the same time for four days.",
+        "logic_intent": "RULE",
+        "logical_form_hint": "eats_one_of_four_different_foods_each_day_at_the_same_time_for_four_days(P)"
+      }
+    },
+    {
+      "type": "PART_OF",
+      "start_node_id": "days",
+      "end_node_id": "eating_habits",
+      "properties": {
+        "natural_statement": "She eats one of four different foods each day at the same time for four days.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "part_of_eating_habits(D)"
+      }
+    },
+    {
+      "type": "PART_OF",
+      "start_node_id": "time",
+      "end_node_id": "eating_habits",
+      "properties": {
+        "natural_statement": "She eats one of four different foods each day at the same time for four days.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "part_of_eating_habits(T)"
+      }
+    },
+    {
+      "type": "IS_A",
+      "start_node_id": "person",
+      "end_node_id": "eating_habits",
+      "properties": {
+        "natural_statement": "She eats one of four different foods each day at the same time for four days and then records how she feels.",
+        "logic_intent": "FACT",
+        "logical_form_hint": "is_a_person(P)"
+      }
+    },
+    {
+      "type": "CAUSES",
+      "start_node_id": "eating_habits",
+      "end_node_id": "person",
+      "properties": {
+        "natural_statement": "She eats one of four different foods each day at the same time for four days and then records how she feels.",
+        "logic_intent": "RULE",
+        "logical_form_hint": "causes_person_to_record_feeling(P)"
+      }
+    },
+    {
+      "type": "ILLUSTRATES",
+      "start_node_id": "eating_habits",
+      "end_node_id": "example",
+      "properties": {
+        "natural_statement": "She eats one of four different foods each day at the same time for four days and then records how she feels.",
+        "logic_intent": "RULE",
+        "logical_form_hint": "illustrates_eating_habits(E)"
+      }
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "food",
+      "end_node_id": "topic",
+      "properties": {
+        "natural_statement": "She eats one of four different foods each day at the same time for four days.",
+        "logic_intent": "RULE",
+        "logical_form_hint": "defines_food(T)"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text She asks her friend Carmen to do the same investigation to see if she gets similar results.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Async) ===
+{
+  "nodes": [
+    {
+      "id": "she",
+      "label": "Person",
+      "properties": {"name": "She"}
+    },
+    {
+      "id": "her_friend_carmen",
+      "label": "Person",
+      "properties": {"name": "Carmen"}
+    }
+  ],
+  "relationships": [
+    {
+      "type": "CAUSES",
+      "start_node_id": "she",
+      "end_node_id": "her_friend_carmen",
+      "properties": {
+        "natural_statement": "She asks her friend Carmen to do the same investigation to see if she gets similar results.",
+        "logic_intent": "RULE"
+      }
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "she",
+      "end_node_id": "investigation",
+      "properties": {
+        "natural_statement": "She asks her friend Carmen to do the same investigation to see if she gets similar results.",
+        "logic_intent": "RULE"
+      }
+    },
+    {
+      "type": "DEFINES",
+      "start_node_id": "her_friend_carmen",
+      "end_node_id": "investigation",
+      "properties": {
+        "natural_statement": "She asks her friend Carmen to do the same investigation to see if she gets similar results.",
+        "logic_intent": "RULE"
+      }
+    },
+    {
+      "type": "PART_OF",
+      "start_node_id": "investigation",
+      "end_node_id": "results",
+      "properties": {
+        "natural_statement": "She asks her friend Carmen to do the same investigation to see if she gets similar results.",
+        "logic_intent": "RULE"
+      }
+    },
+    {
+      "type": "ILLUSTRATES",
+      "start_node_id": "investigation",
+      "end_node_id": "results",
+      "properties": {
+        "natural_statement": "She asks her friend Carmen to do the same investigation to see if she gets similar results.",
+        "logic_intent": "RULE"
+      }
+    }
+  ]
+}
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are extracting search terms for a knowledge base lookup.  Given this query (which may include multiple-choice options), extract the following: 1. **Explicit entities** mentioned in the question stem (e.g., "plant cell", "animal skeleton") 2. **Implied functional concepts** the question is asking about (e.g., "photosynthesis") 3. **Core scientific terms** from the answer options. If an option is a long sentence like "Dogs are better than cats", extract only the core entities ("Dogs", "cats").  Query: "Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature"  Output a plain JSON list of strings. Include 4-8 terms maximum. Example: ["plant cell", "structural support", "cell wall", "chloroplast"]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the extracted information:
+
+```
+[
+    "investigation",
+    "fatigue",
+    "foods",
+    "temperature"
+]
+```
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['measuring the amount of fatigue', 'making sure the same foods are eaten', 'recording observations in the same chart', 'making sure the foods are at the same temperature']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] fatigue: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe 
+[1] chronic fatigue syndrome: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.
+[2] foods featuring butter: This category covers foods that feature butter.
+[3] breakfast food: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.
+[4] chart pattern: A chart pattern or price pattern is a pattern within a chart when prices are graphed. In stock and commodity markets trading, chart pattern studies play a large role during technical analysis. When data is plotted there is usually a pattern which naturally occurs and repeats over a period. Chart patterns are used as either reversal or continuation signals.
+[5] financial chart: A chart of finance or stock performance.
+[6] temperature: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \
+[7] fire investigation: Fire investigation, sometimes referred to as origin and cause investigation, is the analysis of fire-related incidents. After firefighters extinguish a fire, an investigation is launched to determine the origin and cause of the fire or explosion. Investigations of such incidents require a systematic approach and knowledge of basic fire science.
+[8] investigation: Collection of all instances of human inquiry where what is being sought is a deeper understanding of the nature of some Thing. The subject of investigation could in principle be any one of a wide variety of entities: a philosophical problem, a criminal act, a natural phenomenon, etc.. The phenomenon under investigation may be actual or merely putative within the context of the representation. Also
+[9] topics of 'consuming foods': This conceptual systems category is a focal point for aggregating topics of 'consuming foods'.
+[10] room temperature: Room temperature, 20-25 degrees celsius.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[0, 1, 3, 5, 6, 8, 9, 10]
+```
+
+These indices correspond to concepts that are relevant for answering the question. 
+
+*   Index [0] is "fatigue" which directly relates to one of the answer choices.
+*   Index [1] is "chronic fatigue syndrome", another concept related to fatigue and an answer choice.
+*   Index [3] is "breakfast food", a type of food that could be part of Janette's or Carmen's investigation, making it relevant for understanding how they conducted their experiment.
+*   Indices [5], [6], and [10] are all about charts/financial charts and temperature which relate to the answer choices directly.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature"
+
+Concept: 'fatigue'
+Facts:
+  - definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe 
+  - subclass of: illness
+  - subclass of: medical condition
+  - has subclass: exhausting
+  - has subclass: sleep deprivation
+  - sibling concept: ache ailment condition
+  - sibling concept: acid indigestion
+  - sibling concept: acquired disorder
+  - sibling concept: Addison's disease
+  - sibling concept: Adenomyosis
+
+Concept: 'chronic fatigue syndrome'
+Facts:
+  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.
+  - subclass of: chronic condition
+  - subclass of: medical condition
+  - sibling concept: Amyotrophic lateral sclerosis
+  - sibling concept: Marie Strumpell arthritis
+  - sibling concept: arthritis
+  - sibling concept: case of autism
+  - sibling concept: chronic lung disease
+
+Concept: 'breakfast food'
+Facts:
+  - definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.
+  - subclass of: food item
+  - subclass of: food beverage or tobacco product
+  - subclass of: food or drink
+  - subclass of: grocery
+  - subclass of: opaque thing
+  - subclass of: organic matter
+  - has subclass: breakfast
+  - has subclass: cereal (breakfast food)
+  - has subclass: doughnut
+  - has subclass: chicken's egg
+  - has subclass: flapjack
+
+Concept: 'financial chart'
+Facts:
+  - definition: A chart of finance or stock performance.
+  - subclass of: technical analysis
+  - subclass of: evaluating
+  - subclass of: following standard procedures
+  - sibling concept: candlestick patter
+  - sibling concept: chart overlay
+  - sibling concept: chart pattern
+  - sibling concept: technical indicator
+
+Concept: 'temperature'
+Facts:
+  - definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \
+  - subclass of: non aspectual quantity
+  - subclass of: one dimensional quantity
+  - subclass of: scalar or vector interval
+  - subclass of: tangible physical quantity
+  - subclass of: quality
+  - subclass of: scalar quantity
+  - subclass of: measurable quantity
+  - subclass of: n-tuple interval
+  - has subclass: absolute zero
+  - has subclass: cold
+  - has subclass: moderately cold
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output for each concept:
+
+**fatigue**
+[
+  "definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue.",
+  "has subclass: sleep deprivation"
+]
+
+**chronic fatigue syndrome**
+[] (no relevant facts)
+
+**breakfast food**
+[] (not directly related to the question about replicating investigations)
+
+**financial chart**
+[
+  "definition: A chart of finance or stock performance."
+] 
+
+**temperature**
+[]
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are a Logic Discovery Agent. Extract the minimum logical building blocks needed to answer the Question from the Context.\n\n### TASK\nProduce a single numbered list called **LOGICAL EVIDENCE**. Each item is one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.\n\n### CONSTRAINTS\n* Include at most 10 items total.\n* Each item must directly help bridge the premise to the answer.  Omit background, history, or tangential details.\n* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."\n* Break compound sentences into independent logical units.\n* Use clear, declarative English only. No code, no symbols.\n* Do NOT reveal the final answer — provide logical ingredients only.\n\n---\n### QUESTION:\nWhich would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature\n\n### CONTEXT:\nKBPedia Concept: fatigue.\nRelevant Logical Facts:\n  - definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. This is to be characterized by a continuous, sustended LevelOfExhaustion caused by some other AilmentCondition. Do not confuse with either the collection of Events during which somebody is tired following an effort or at the other extreme the ChronicFatigueSyndrome. FatigueCondition is intended to describe \n  - subclass of: illness\n  - subclass of: medical condition\n  - has subclass: exhausting\n  - has subclass: sleep deprivation\n  - sibling concept: ache ailment condition\n  - sibling concept: acid indigestion\n  - sibling concept: acquired disorder\n  - sibling concept: Addison\'s disease\n  - sibling concept: Adenomyosis\nKBPedia Concept: chronic fatigue syndrome.\nRelevant Logical Facts:\n  - definition: ChronicFatigueSyndrome is an AilmentCondition characterized by fatigue, general pain, mental fogginess, and often gastro-intestinal problems. The cause of the disease is unknown. The clinical community is not fully convinced that it constitutes a genuine illness.\n  - subclass of: chronic condition\n  - subclass of: medical condition\n  - sibling concept: Amyotrophic lateral sclerosis\n  - sibling concept: Marie Strumpell arthritis\n  - sibling concept: arthritis\n  - sibling concept: case of autism\n  - sibling concept: chronic lung disease\nKBPedia Concept: breakfast food.\nRelevant Logical Facts:\n  - definition: The collection of foods and beverages normally eaten by instances of Person as part of HavingBreakfast.\n  - subclass of: food item\n  - subclass of: food beverage or tobacco product\n  - subclass of: food or drink\n  - subclass of: grocery\n  - subclass of: opaque thing\n  - subclass of: organic matter\n  - has subclass: breakfast\n  - has subclass: cereal (breakfast food)\n  - has subclass: doughnut\n  - has subclass: chicken\'s egg\n  - has subclass: flapjack\n  - has subclass: omelette\n  - has subclass: pancake\n  - has subclass: waffle\n  - sibling concept: cereal (food)\n  - sibling concept: cheesy food\n  - sibling concept: children\'s food\n  - sibling concept: convenience food\n  - sibling concept: crumb\nKBPedia Concept: financial chart.\nRelevant Logical Facts:\n  - definition: A chart of finance or stock performance.\n  - subclass of: technical analysis\n  - subclass of: evaluating\n  - subclass of: following standard procedures\n  - sibling concept: candlestick patter\n  - sibling concept: chart overlay\n  - sibling concept: chart pattern\n  - sibling concept: technical indicator\nKBPedia Concept: temperature.\nRelevant Logical Facts:\n  - definition: A specialization of TangiblePhysicalQuantity. Each instance of Temperature is a degree of \\\n  - subclass of: non aspectual quantity\n  - subclass of: one dimensional quantity\n  - subclass of: scalar or vector interval\n  - subclass of: tangible physical quantity\n  - subclass of: quality\n  - subclass of: scalar quantity\n  - subclass of: measurable quantity\n  - subclass of: n-tuple interval\n  - has subclass: absolute zero\n  - has subclass: cold\n  - has subclass: moderately cold\n  - has subclass: room temperature\n  - has subclass: sea surface temperature\n  - has subclass: temperature control\n  - has subclass: thermal protection\n  - has subclass: thermoregulation\n  - has subclass: threshold temperature\n  - has subclass: warmth\n  - sibling concept: area\n  - sibling concept: beauty\n  - sibling concept: biodiversity\n  - sibling concept: cask strength\n  - sibling concept: chemical purity\n\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+**LOGICAL EVIDENCE**
+
+1. Fatigue is a physiological condition characterized by continuous exhaustion caused by an underlying ailment.
+2. Chronic fatigue syndrome is an illness characterized by fatigue, general pain, mental fogginess, and gastro-intestinal problems.
+3. Measuring the amount of fatigue can be subjective and difficult to quantify accurately in different individuals.
+4. Recording observations in a financial chart (technical analysis) may not directly relate to measuring or replicating fatigue levels.
+5. The same foods being eaten at the same temperature would likely produce similar results, making it easier to replicate an investigation on fatigue.
+6. Temperature is a measurable quantity that can be controlled and replicated with precision using standard laboratory equipment.
+7. Measuring the amount of fatigue requires subjective evaluation by individuals or instruments designed for this purpose.
+8. Recording observations in a financial chart (technical analysis) involves evaluating patterns, trends, and indicators unrelated to measuring fatigue levels directly.
+9. The same foods being eaten at different temperatures may produce varying results due to differences in digestion rates and metabolic responses.
+10. Measuring the amount of fatigue is inherently more difficult than controlling temperature or recording observations in a financial chart because it requires subjective evaluation and individual variability considerations.
+
+Note: These logical evidence items aim to bridge the premise (investigation difficulty) with possible answers by highlighting key aspects related to measuring, replicating, and evaluating fatigue levels.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['trench', 'rift valley', 'ocean basin', 'mid-ocean ridge']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] oceanic ridge: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. This type of oceanic mountain ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. The production of new seafloor results from mantle upwel
+[1] undersea valley: The axial depression of the mid-oceanic ridge system.
+[2] rift valley: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults. Rift valleys are found both on continents and under oceans.
+[3] oceanic plateau: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed. While many oceanic plateaus are composed of continental crust, and often form a step interrupting the continental slope, some plateaus are undersea remnants of large igneous provinces.
+[4] seamount: A Seamount is an underwater Mountain rising from the seafloor that does not reach to the surface of the EarthsOceanSea.
+[5] geological basin: A specialization of Depression_Topographical and Basin. Each instance of Basin_Topographical is a bowl-shaped depression in the surface of the land or the ocean floor.
+[6] fracture zone: A fracture zone is a linear oceanic feature—often hundreds, even thousands of kilometers long—resulting from the action of offset mid-ocean ridge axis segments. They are a consequence of plate tectonics. Lithospheric plates on either side of an active transform fault move in opposite directions; here, strike-slip activity occurs.
+[7] subduction zones: Subduction is a geological process that takes place at convergent boundaries of tectonic plates where one plate moves under another and is forced down into the mantle. Regions where this process occurs are known as subduction zones. Rates of subduction are typically in centimetres per year, with the average rate of convergence being approximately two to eight centimetres per year along most plate 
+[8] ocean trench: The oceanic trenches are hemispheric-scale long but narrow topographic depressions of the sea floor. They are also the deepest parts of the ocean floor. Oceanic trenches are a distinctive morphological feature of convergent plate boundaries, along which lithospheric plates move towards each other at rates that vary from a few mm to over ten cm per year. A trench marks the position at which the fle
+[9] rifts or graben: In geology, a rift is a linear zone where the lithosphere is being pulled apart and is an example of extensional tectonics; a graben is a depressed block of the crust of a planet bordered by parallel faults.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
