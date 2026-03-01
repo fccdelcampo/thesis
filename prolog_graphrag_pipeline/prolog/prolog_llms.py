@@ -165,6 +165,7 @@ def generate_response(prompt: str, flag: str) -> dict:
                 model=model,
                 messages=llm_messages,
                 temperature=float(temperature),
+                timeout=LLM_TIMEOUT,
             )
             result_holder[0] = response
         except Exception as e:

@@ -20,8 +20,8 @@ if USE_TOGETHER_API:
     BASE_URL = "https://api.together.xyz/v1"
     API_KEY = os.environ.get("TOGETHER_API_KEY", "")
     MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
-    EMBED_MODEL = "togethercomputer/m2-bert-80M-8k-retrieval"
-    EMBED_DIM = 768
+    EMBED_MODEL = "BAAI/bge-large-en-v1.5"
+    EMBED_DIM = 1024
     if not API_KEY:
         raise EnvironmentError(
             "TOGETHER_API_KEY environment variable is not set. "

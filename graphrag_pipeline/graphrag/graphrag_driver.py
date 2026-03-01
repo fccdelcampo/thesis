@@ -34,6 +34,49 @@ if USE_TOGETHER_API:
             )
             return response.data[0].embedding
 
+        async def async_embed_chunks(self, texts: list[str]) -> list[list[float]]:
+            """Batch embed a list of texts using the Together AI API."""
+            from llm_config import EMBED_MODEL
+            import asyncio
+            _client = get_openai_client()
+            loop = asyncio.get_event_loop()
+            
+            def _do_batch():
+                # The openai client can take a list of strings!
+                resp = _client.embeddings.create(model=EMBED_MODEL, input=texts)
+                return [d.embedding for d in resp.data]
+            
+            return await loop.run_in_executor(None, _do_batch)
+
+    # Monkeypatch neo4j_graphrag's TextChunkEmbedder to use batching if available
+    try:
+        from neo4j_graphrag.experimental.components.embedder import TextChunkEmbedder
+        from neo4j_graphrag.experimental.components.types import TextChunks, TextChunk
+        _original_embedder_run = TextChunkEmbedder.run
+
+        async def _patched_embedder_run(self, text_chunks: TextChunks) -> TextChunks:
+            if hasattr(self._embedder, "async_embed_chunks"):
+                texts = [c.text for c in text_chunks.chunks]
+                embeddings = []
+                batch_size = 100
+                for i in range(0, len(texts), batch_size):
+                    batch = texts[i:i+batch_size]
+                    batch_emb = await self._embedder.async_embed_chunks(batch)
+                    embeddings.extend(batch_emb)
+                    
+                chunks = []
+                for i, c in enumerate(text_chunks.chunks):
+                    metadata = c.metadata if c.metadata else {}
+                    metadata["embedding"] = embeddings[i]
+                    chunks.append(TextChunk(text=c.text, index=c.index, metadata=metadata, uid=c.uid))
+                return TextChunks(chunks=chunks)
+            else:
+                return await _original_embedder_run(self, text_chunks)
+
+        TextChunkEmbedder.run = _patched_embedder_run
+    except ImportError:
+        pass
+
 try:
     from graphrag_pipeline.llm import generate
 except ModuleNotFoundError:
@@ -280,7 +323,7 @@ def initialize_models():
 
 def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
     
-    chunk_splitter = FixedSizeSplitter(chunk_size=1200, chunk_overlap=150) # changed from 2000 and 200 to smaller sizes for better context handling
+    chunk_splitter = FixedSizeSplitter(chunk_size=450, chunk_overlap=50) # changed from 2000 and 200 to smaller sizes for better context handling
     
     schema = STATIC_SCHEMA if SCHEMA_CONFIG.name == "STATIC" else "EXTRACTED"
 
