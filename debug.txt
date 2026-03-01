@@ -103568,3 +103568,319 @@ Note that I have applied the filtering rules to each concept, keeping only the m
 
 Note: Items 7-8 provide evidence that trenches are not formed by plate divergence but rather through subduction, which is related to item 9 (seafloor spreading).
 ===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+
+User question: "A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed"
+
+### MCQ Answer Choices Detected
+The question has these answer options: ['amount of water', 'amount of light', 'type of soil', 'type of seed']
+You MUST keep any concept whose name or definition relates to ANY of these choices, even loosely. These are exactly the concepts the Prolog engine needs to reason about.
+
+
+Candidates (index: concept name: short definition):
+[0] bean plant: Individual bean plants.
+[1] millet plant: Individual millet plants.
+[2] cocoa bean: The seed of a cacao tree.
+[3] bean (food): Food derived from the seed of a bean plant.
+[4] coffee cherry: The fruit of a coffee bush; contains two seeds which are coffee beans.
+[5] type of soil: Types of soil.
+[6] ground coffee: Quantities of coffee grinds.
+[7] grass seed: The collection of all grass seeds. A type of Seed and ExternalAnatomicalPart. \
+[8] ratio quantity: 
+[9] edible legume seed: The seed of a legume plant.
+
+### Decision Criteria
+Keep a concept if ANY of the following is true:
+1. Its name or definition directly relates to the question topic.
+2. Its name or definition relates to ANY of the MCQ answer choices listed above.
+3. It provides a fact or rule that could help the Prolog engine derive an answer.
+
+Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
+When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
+
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Output ONLY the JSON list, nothing else.
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+```json
+[1, 3, 5, 8, 9]
+```
+
+Explanation:
+
+* Concept at index 1 is "millet plant", which can be related to a type of seed (answer choice D), so it's kept for now. However, since the question specifically mentions bean seeds and not millet plants, this concept might actually be off-topic.
+* Concept at index 3 is "bean (food)", which relates directly to answer choice D ("type of seed") because beans are a type of edible legume seed. This one stays.
+* Concept at index 5 is "type of soil", which matches an exact MCQ answer choice and thus must be kept for the Prolog engine's reasoning about factors that could affect plant growth in different pots with identical conditions (except, possibly, this factor).
+* Concept at index 8 is "ratio quantity". This concept might not seem directly related to any specific aspect of plants or soil. However, it can help the Prolog engine reason about quantities and ratios involved in watering each pot.
+* Concept at index 9 is "edible legume seed", which matches answer choice D ("type of seed") because beans are a type of edible legume seed.
+
+The other concepts (0, 2, 4, 6, 7) do not directly relate to any MCQ choices or the question topic.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+Below are ontology facts for multiple concepts retrieved from KBPedia.
+The user is answering a specific question — possibly a multiple-choice question (MCQ).
+
+User Query: "A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed"
+
+Concept: 'millet plant'
+Facts:
+  - definition: Individual millet plants.
+  - subclass of: cereal plant
+  - subclass of: crop plant
+  - subclass of: edible plant
+  - subclass of: grass family
+  - sibling concept: barley
+  - sibling concept: corn plant
+  - sibling concept: oat plant
+  - sibling concept: rice plant
+  - sibling concept: rye plant
+
+Concept: 'bean (food)'
+Facts:
+  - definition: Food derived from the seed of a bean plant.
+  - subclass of: edible rich in protein
+  - subclass of: vegetable
+  - subclass of: food item
+  - subclass of: fruit and vegetable food group
+  - subclass of: grocery
+  - subclass of: produce
+  - has subclass: chickpea
+  - sibling concept: dairy product
+  - sibling concept: milk
+  - sibling concept: powdered milk
+  - sibling concept: soybean (food)
+
+Concept: 'type of soil'
+Facts:
+  - definition: Types of soil.
+  - subclass of: dirt or soil
+  - subclass of: earth or stone
+  - subclass of: earthen substance
+  - subclass of: opaque thing
+  - sibling concept: dirt or soil
+  - sibling concept: clay soil
+  - sibling concept: dirt
+  - sibling concept: fill dirt
+  - sibling concept: ground freezing
+
+Concept: 'ratio quantity'
+Facts:
+  - subclass of: multi dimensional quantity
+  - subclass of: quantity
+  - subclass of: measurable quantity
+  - subclass of: scalar or vector interval
+  - has subclass: elastic modulus
+  - has subclass: concentration strength
+  - has subclass: density
+  - has subclass: money rate
+  - has subclass: per capita frequency
+  - has subclass: population density
+  - has subclass: pressure
+  - has subclass: proportion
+
+Concept: 'edible legume seed'
+Facts:
+  - definition: The seed of a legume plant.
+  - subclass of: edible seed
+  - subclass of: meat or legume food
+  - subclass of: seed
+  - subclass of: food item
+  - subclass of: plant part
+  - subclass of: plant organ
+  - has subclass: lentil
+  - sibling concept: sesame seed
+  - sibling concept: edible seed
+  - sibling concept: meat
+  - sibling concept: aril
+
+
+
+STRICT FILTERING RULES:
+1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
+   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
+     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
+     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
+   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
+2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
+   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
+3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
+   how/why it forms or doesn't form under the conditions described in the question.
+4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
+   DO NOT force-keep facts just to have something.
+
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Example:
+{
+  "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
+  "temperature": []
+}
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+Here is the filtered output for each concept:
+
+```json
+{
+    "millet plant": [],
+    "bean (food)": [
+        "definition: Food derived from the seed of a bean plant.",
+        "subclass of: edible rich in protein" // relevant because it's related to nutrition, which might be affected by light or water.
+    ],
+    "type of soil": ["definition: Types of soil."],
+    "ratio quantity": [],
+    "edible legume seed": [
+        "definition: The seed of a legume plant.",
+        "subclass of: edible seed" // relevant because it's related to nutrition, which might be affected by light or water.
+    ]
+}
+```
+
+Explanation:
+
+* For 'millet plant', there are no facts that directly relate to the question. Millet plants don't have any special properties mentioned in the question (e.g., they're not known for being sensitive to light).
+* For 'bean (food)', we keep its definition and a subclass fact because it's related to nutrition, which might be affected by light or water.
+* For 'type of soil', we only keep its definition. The other facts are irrelevant to the question about factors affecting plant growth in two pots with different conditions.
+* For 'ratio quantity', there is no relevant information for this concept as none of the subclasses relate directly to the mechanism described in the question (e.g., amount of water, light).
+* For 'edible legume seed', we keep its definition and a subclass fact because it's related to nutrition, which might be affected by light or water.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+[{'role': 'system', 'content': 'Answer the user question using the provided context.'}, {'role': 'user', 'content': '\n### ROLE\nYou are an expert Educational AI Assistant answering a student\'s question based ONLY on the provided Context.\n\n### STRICT INSTRUCTIONS\n1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:\n*[Letter].* [Choice text]\nThen follow with a short 1-2 sentence explanation.\n2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.\n3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."\n\nExample correct format (if D is the answer):\n*D.* ocean basin.\nOcean basins form at divergent boundaries where plates pull apart, creating a depression that fills with water.\n\n### Question:\nA student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?\nA. amount of water\nB. amount of light\nC. type of soil\nD. type of seed\n\n### Context:\nKBPedia Concept: millet plant.\nRelevant Logical Facts:\n  - definition: Individual millet plants.\n  - subclass of: cereal plant\n  - subclass of: crop plant\n  - subclass of: edible plant\n  - subclass of: grass family\n  - sibling concept: barley\n  - sibling concept: corn plant\n  - sibling concept: oat plant\n  - sibling concept: rice plant\n  - sibling concept: rye plant\nKBPedia Concept: bean (food).\nRelevant Logical Facts:\n  - definition: Food derived from the seed of a bean plant.\n  - subclass of: edible rich in protein\n  - subclass of: vegetable\n  - subclass of: food item\n  - subclass of: fruit and vegetable food group\n  - subclass of: grocery\n  - subclass of: produce\n  - has subclass: chickpea\n  - sibling concept: dairy product\n  - sibling concept: milk\n  - sibling concept: powdered milk\n  - sibling concept: soybean (food)\n  - sibling concept: artichoke\nKBPedia Concept: type of soil.\nRelevant Logical Facts:\n  - definition: Types of soil.\n  - subclass of: dirt or soil\n  - subclass of: earth or stone\n  - subclass of: earthen substance\n  - subclass of: opaque thing\n  - sibling concept: dirt or soil\n  - sibling concept: clay soil\n  - sibling concept: dirt\n  - sibling concept: fill dirt\n  - sibling concept: ground freezing\nKBPedia Concept: ratio quantity.\nRelevant Logical Facts:\n  - subclass of: multi dimensional quantity\n  - subclass of: quantity\n  - subclass of: measurable quantity\n  - subclass of: scalar or vector interval\n  - has subclass: elastic modulus\n  - has subclass: concentration strength\n  - has subclass: density\n  - has subclass: money rate\n  - has subclass: per capita frequency\n  - has subclass: population density\n  - has subclass: pressure\n  - has subclass: proportion\n  - has subclass: rate\n  - has subclass: ratio of primitive quantities\n  - sibling concept: bit rate\n  - sibling concept: chemical purity\n  - sibling concept: computer memory capacity\n  - sibling concept: density\n  - sibling concept: dipole moment\nKBPedia Concept: edible legume seed.\nRelevant Logical Facts:\n  - definition: The seed of a legume plant.\n  - subclass of: edible seed\n  - subclass of: meat or legume food\n  - subclass of: seed\n  - subclass of: food item\n  - subclass of: plant part\n  - subclass of: plant organ\n  - has subclass: lentil\n  - sibling concept: sesame seed\n  - sibling concept: edible seed\n  - sibling concept: meat\n  - sibling concept: aril\n  - sibling concept: cashew nut\n\n### Answer:\n'}]
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+*B.* amount of light.
+The factor that was different for the two pots is the amount of light, as one pot near a sunny window would receive more sunlight than the other in a closet. The context does not provide information about differences in soil type or seed variety between the two pots.
+===================================
+
+--- [DEBUG] SENT PROMPT (Sync) ---
+
+### ROLE
+You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+
+### STRICT INSTRUCTIONS
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*[Letter].* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
+Example correct format (if D is the answer):
+*D.* ocean basin.
+Ocean basins form at divergent boundaries where plates pull apart, creating a depression that fills with water.
+
+### Question:
+A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed
+
+### Context:
+KBPedia Concept: millet plant.
+Relevant Logical Facts:
+  - definition: Individual millet plants.
+  - subclass of: cereal plant
+  - subclass of: crop plant
+  - subclass of: edible plant
+  - subclass of: grass family
+  - sibling concept: barley
+  - sibling concept: corn plant
+  - sibling concept: oat plant
+  - sibling concept: rice plant
+  - sibling concept: rye plant
+
+KBPedia Concept: bean (food).
+Relevant Logical Facts:
+  - definition: Food derived from the seed of a bean plant.
+  - subclass of: edible rich in protein
+  - subclass of: vegetable
+  - subclass of: food item
+  - subclass of: fruit and vegetable food group
+  - subclass of: grocery
+  - subclass of: produce
+  - has subclass: chickpea
+  - sibling concept: dairy product
+  - sibling concept: milk
+  - sibling concept: powdered milk
+  - sibling concept: soybean (food)
+  - sibling concept: artichoke
+
+KBPedia Concept: type of soil.
+Relevant Logical Facts:
+  - definition: Types of soil.
+  - subclass of: dirt or soil
+  - subclass of: earth or stone
+  - subclass of: earthen substance
+  - subclass of: opaque thing
+  - sibling concept: dirt or soil
+  - sibling concept: clay soil
+  - sibling concept: dirt
+  - sibling concept: fill dirt
+  - sibling concept: ground freezing
+
+KBPedia Concept: ratio quantity.
+Relevant Logical Facts:
+  - subclass of: multi dimensional quantity
+  - subclass of: quantity
+  - subclass of: measurable quantity
+  - subclass of: scalar or vector interval
+  - has subclass: elastic modulus
+  - has subclass: concentration strength
+  - has subclass: density
+  - has subclass: money rate
+  - has subclass: per capita frequency
+  - has subclass: population density
+  - has subclass: pressure
+  - has subclass: proportion
+  - has subclass: rate
+  - has subclass: ratio of primitive quantities
+  - sibling concept: bit rate
+  - sibling concept: chemical purity
+  - sibling concept: computer memory capacity
+  - sibling concept: density
+  - sibling concept: dipole moment
+
+KBPedia Concept: edible legume seed.
+Relevant Logical Facts:
+  - definition: The seed of a legume plant.
+  - subclass of: edible seed
+  - subclass of: meat or legume food
+  - subclass of: seed
+  - subclass of: food item
+  - subclass of: plant part
+  - subclass of: plant organ
+  - has subclass: lentil
+  - sibling concept: sesame seed
+  - sibling concept: edible seed
+  - sibling concept: meat
+  - sibling concept: aril
+  - sibling concept: cashew nut
+
+### Answer:
+
+----------------------------------
+
+=== [DEBUG] RAW RESPONSE (Sync) ===
+*B.* amount of light.
+The factor that was different for the two pots is the amount of light, as one pot near a sunny window would receive more sunlight than the other in a closet. This difference could affect plant growth and development.
+===================================
+
+--- [DEBUG] SENT PROMPT (Async) ---
+ You are a Knowledge Engineer. Extract entities and relationships from the text to build a Prolog-compatible Knowledge Graph.  For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natural_statement preserving the original phrasing.  ### JSON FORMAT: {   "nodes": [{"id": "atom_id", "label": "PrologLabel", "properties": {"name": "Name"}}],   "relationships": [{     "type": "PREDICATE_TYPE",     "start_node_id": "id1",     "end_node_id": "id2",     "properties": {       "natural_statement": "full extracted fact or rule",       "logic_intent": "FACT | RULE | EXCEPTION",       "logical_form_hint": "e.g., mortal(X) :- man(X)"     }   }] }  ### Constraints - IDs and types: lowercase_with_underscores (Prolog atom style). - Do not hallucinate. Return empty arrays if no clear logic exists. - {'node_types': ({'label': 'Concept', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Person', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Event', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Definition', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Example', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}, {'label': 'Topic', 'description': '', 'properties': [{'name': 'name', 'type': 'STRING', 'description': '', 'required': False}], 'additional_properties': True}), 'relationship_types': ({'label': 'RELATED_TO', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'IS_A', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'PART_OF', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'CAUSES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'DEFINES', 'description': '', 'properties': [], 'additional_properties': True}, {'label': 'ILLUSTRATES', 'description': '', 'properties': [], 'additional_properties': True}), 'patterns': (), 'constraints': (), 'additional_node_types': False, 'additional_relationship_types': False, 'additional_patterns': True}  ### Examples   ### Input Text A student planted two bean seeds in two identical pots containing the same type of soil.  Output JSON ONLY. No markdown, no preamble. 
+----------------------------------

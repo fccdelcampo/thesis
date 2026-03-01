@@ -5155,4 +5155,248 @@ DEBUG: Buffered 13 raw triple(s) for 'rifts or graben'
 DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 8, 9] from 10 candidates.
 DEBUG: End-filter kept 6/10 concepts.
 DEBUG: Batch sending 5 concepts to LLM triple filter...
-  > Sending chunk to LLM (4975 chars)...
+  > Sending chunk to LLM (4975 chars)... Done!
+DEBUG: Batch triple filter raw response: 'Here is the filtered output for each concept:\n\n**undersea valley**\n[\n  "definition: The axial depression of the mid-oceanic ridge system.",\n  "subclass of: underwater location"\n]\n**oceanic plateau**\n['...
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'undersea valley'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'oceanic plateau'
+DEBUG: Batch LLM filter kept 17/17 triple(s) for 'geological basin'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'fracture zone'
+DEBUG: Batch LLM filter kept 18/18 triple(s) for 'ocean trench'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (5002 chars)... Done!
+  > Sending chunk to LLM (4785 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Identifying the question and context, while preserving the multiple choice options.",
+  "question": "Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the question and context, while preserving the multiple choice options.', 'question': 'Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which feature does not form as a result of tectonic plates diverging? A. trench ' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Querying for: 'Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge'
+  > Sending chunk to LLM (778 chars)... Done!
+DEBUG: Extracted entities for KBPedia: ['trench', 'rift valley', 'ocean basin', 'mid-ocean ridge', 'tectonic plates', 'diverging']
+DEBUG: KBPedia matched 2 concept(s) for 'trench': ['trench coat', 'trench']
+DEBUG: Buffered 4 raw triple(s) for 'trench coat'
+DEBUG: Buffered 10 raw triple(s) for 'trench'
+DEBUG: KBPedia matched 2 concept(s) for 'rift valley': ['rift valley', 'Lake Nyasa']
+DEBUG: Buffered 14 raw triple(s) for 'rift valley'
+DEBUG: Buffered 9 raw triple(s) for 'Lake Nyasa'
+DEBUG: KBPedia matched 2 concept(s) for 'ocean basin': ['geological basin', 'basin']
+DEBUG: Buffered 17 raw triple(s) for 'geological basin'
+DEBUG: Buffered 15 raw triple(s) for 'basin'
+DEBUG: KBPedia matched 2 concept(s) for 'mid-ocean ridge': ['oceanic ridge', 'beach ridge']
+DEBUG: Buffered 8 raw triple(s) for 'oceanic ridge'
+DEBUG: Buffered 9 raw triple(s) for 'beach ridge'
+DEBUG: KBPedia matched 2 concept(s) for 'tectonic plates': ['interplate earthquake', 'orogeny']
+DEBUG: Buffered 10 raw triple(s) for 'interplate earthquake'
+DEBUG: Buffered 8 raw triple(s) for 'orogeny'
+DEBUG: KBPedia matched 2 concept(s) for 'diverging': ['anabranch', 'Brachyelytrum']
+DEBUG: Buffered 14 raw triple(s) for 'anabranch'
+DEBUG: Buffered 9 raw triple(s) for 'Brachyelytrum'
+  > Sending chunk to LLM (3898 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 6, 9, 10] from 12 candidates.
+DEBUG: End-filter kept 6/12 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (4511 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n    "trench": [\n        "definition: A trench is a type of excavation or depression in the ground that is generally deeper than it is wide (as opposed to a wider gully, or ditch), and narrow compare'...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'trench'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'Lake Nyasa'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'basin'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'oceanic ridge'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'orogeny'
+DEBUG: Removed 1 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 4 grounded concept contexts.
+  > Sending chunk to LLM (4198 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+**User Question:**
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Tectonic plates are large, rigid slabs of the Earth's lithosphere that fit together like a jigsaw puzzle.
+2. When tectonic plates diverge (move apart), they create new crust as magma rises from the mantle to fill the gap.
+3. A mid-ocean ridge is an underwater mountain system formed by plate tectonics, where new oceanic crust is created through seafloor spreading.
+4. Seafloor spreading occurs at a rate of about 2-10 cm/yr (0.8-4 in./yr), resulting in the creation of new ocean floor and the movement of older ocean floor away from the ridge.
+5. Ocean basins are formed as a result of tectonic plates diverging, creating large depressions or troughs between them.
+6. Rift valleys form when two tectonic plates pull apart, causing the Earth's crust to stretch and thin.
+7. Trenches are not directly created by plate divergence; they can be formed through subduction (one plate being pushed beneath another).
+8. Subduction occurs at a rate of about 2-10 cm/yr (0.8-4 in./yr), resulting in the creation of deep-sea trenches.
+9. The process of seafloor spreading is responsible for creating new oceanic crust, which can eventually be subducted back into the mantle.
+10. Orogeny refers to forces and events leading to a large structural deformation of the Earth's lithosphere due to plate tectonics interactions.
+
+Note: Items 7-8 provide evidence that trenches are not formed by plate divergence but rather through subduction, which is related to item 9 (seafloor spreading).
+**Context from Prompt:**
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and trench, and\n      there is no evidence that forms_from holds for trench, and plate_divergence\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and trench, and
+      there is no evidence that forms_from holds for trench, and plate_divergence
+
+
+**Explainer Output:** 
+**Conclusion:** The feature that does not form as a result of tectonic plates diverging is the trench.
+
+**Logical Path:**
+
+The solver arrived at this conclusion by analyzing the relationships between geological features and their formation processes. It identified that:
+
+1. **Plate Divergence Creates Certain Features:** The system noted that plate divergence leads to the creation of certain features, such as rift valleys (where two plates pull apart) and ocean basins (large depressions or troughs formed between diverging plates).
+2. **Mid-Ocean Ridge Formation:** It also recognized that mid-ocean ridges are formed through seafloor spreading, which occurs at a rate of about 2-10 cm/yr, resulting in the creation of new ocean floor and the movement of older ocean floor away from the ridge.
+3. **Trenches Formed Through Subduction:** However, the solver found that trenches are not directly created by plate divergence but rather through subduction (one plate being pushed beneath another), which is a distinct process related to seafloor spreading.
+
+**The Key Reasoning Step:**
+
+The system concluded that the trench does not form as a result of tectonic plates diverging because there was no evidence linking trenches to plate divergence. Instead, it found that trenches are associated with subduction zones, indicating a different formation mechanism. This absence of direct connection between plate divergence and trench formation led the solver to identify the trench as the feature that does not form through this process.
+
+**Final Conclusion:**
+
+Given the logical steps outlined above, the solver correctly determined that the feature which does not form as a result of tectonic plates diverging is indeed the trench.
+
+**FINAL LLM OUTPUT:
+*D.* Trench.
+Trenches are not formed by tectonic plates diverging; they form through subduction, which is a different process related to seafloor spreading.
+====The pipeline executed in 32.7980 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [A]   | CORRECT |   24.7s
+Prolog          | Predicted: [D]   | WRONG   |   76.0s
+Tuned LLM       | Predicted: [B]   | WRONG   |    1.6s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #3] A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet a...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Ollama loaded successfully.
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 4096...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['bean plant', 'millet plant', 'cocoa bean', 'bean (food)', 'coffee cherry', 'type of soil', 'ground coffee', 'grass seed', 'ratio quantity', 'edible legume seed']
+DEBUG: Buffered 16 raw triple(s) for 'bean plant'
+DEBUG: Buffered 10 raw triple(s) for 'millet plant'
+DEBUG: Buffered 10 raw triple(s) for 'cocoa bean'
+DEBUG: Buffered 13 raw triple(s) for 'bean (food)'
+DEBUG: Buffered 10 raw triple(s) for 'coffee cherry'
+DEBUG: Buffered 10 raw triple(s) for 'type of soil'
+DEBUG: Buffered 13 raw triple(s) for 'ground coffee'
+DEBUG: Buffered 10 raw triple(s) for 'grass seed'
+DEBUG: Buffered 19 raw triple(s) for 'ratio quantity'
+DEBUG: Buffered 13 raw triple(s) for 'edible legume seed'
+  > Sending chunk to LLM (1959 chars)... Done!
+DEBUG: End-filter LLM kept indices: [1, 3, 5, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 5/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+  > Sending chunk to LLM (3843 chars)... Done!
+DEBUG: Batch triple filter raw response: '{\n    "millet plant": [],\n    "bean (food)": [\n        "definition: Food derived from the seed of a bean plant.",\n        "subclass of: edible rich in protein" // relevant because it\'s related to nutr'...
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'millet plant'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'bean (food)'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'type of soil'
+DEBUG: Batch LLM filter kept 19/19 triple(s) for 'ratio quantity'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'edible legume seed'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+  > Sending chunk to LLM (3779 chars)... Done!
+  > Sending chunk to LLM (3562 chars)... Done!
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+Ollama Response: {
+  "rationale": "Identifying the differing condition between the two identical setups.",
+  "question": "Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed",
+  "context": [
+    "A student planted two bean seeds in two identical pots containing the same type of soil.",
+    "He placed one pot in a closet and the other near a sunny window.",
+    "Each day, he poured 15 milliliters of water into each pot."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the differing condition between the two identical setups.', 'question': 'Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed', 'context': ['A student planted two bean seeds in two identical pots containing the same type of soil.', 'He placed one pot in a closet and the other near a sunny window.', 'Each day, he poured 15 milliliters of water into each pot.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which factor was different for the two pots? A) amount of water B) amount of light C) type of soil D) type of seed
+DEBUG: EXTRACTED CONTEXT (Len: 3): ['A student planted two bean seeds in two identical pots containing the same type of soil.', 'He placed one pot in a closet and the other near a sunny window.', 'Each day, he poured 15 milliliters of water into each pot.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which factor was different for the two pots? A) amount of water B) amount of lig' | context items=3
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 3 text chunk(s)...
+Processing text context: A student planted two bean seeds in two identical pots containing the same type of soil.
+  > [Async] Sending chunk to LLM (2671 chars) and waiting for extraction...

@@ -187,7 +187,7 @@ class KBPediaRetriever:
     def filter_triples_for_query(self, query: str, entity_label: str, triples: List[str], original_query: str = "") -> List[str]:
         """Use LLM to keep only logically relevant triples."""
         if not self.llm or not triples:
-            return triples[:10]
+            return triples[:15]
 
         # Use the full original prompt (with MCQ choices) when available for better filtering
         filter_query = original_query if original_query else query
@@ -244,7 +244,7 @@ If none are relevant, output an empty list [].
         Returns a dictionary mapping concept_name to a list of filtered triples.
         """
         if not self.llm or not concepts_data:
-            return {c["name"]: c["triples"][:10] for c in concepts_data}
+            return {c["name"]: c["triples"][:15] for c in concepts_data}
 
         filter_query = original_query if original_query else query
 
