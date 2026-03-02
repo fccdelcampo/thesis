@@ -164,8 +164,8 @@ def patched_vector_cypher_search(self, query_text, top_k=8, **kwargs):
 
     # 2. Local Vector Search
     local_items = []
-    MIN_SCORE = 0.7
-    MIN_CONTENT_LENGTH = 20
+    MIN_SCORE = 0.4
+    MIN_CONTENT_LENGTH = 5
     try:
         local_result = self._original_search(query_text=query_text, top_k=top_k, **kwargs)
         if local_result and local_result.items:

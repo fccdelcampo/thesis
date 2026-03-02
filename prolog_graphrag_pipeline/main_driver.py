@@ -22,6 +22,13 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
     graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
     
     if flag != "q" and graphrag_output:
+        # Print the intermediate GraphRAG logical evidence to the terminal for transparency
+        print("\n" + "="*80)
+        print("GRAPHRAG LOGICAL EVIDENCE")
+        print("="*80)
+        print(graphrag_output.get("answer", "No evidence found."))
+        print("="*80 + "\n")
+        print("DEBUG: Transferring evidence to Prolog engine...\n")
         # 'query' is not returned by graphrag_driver, so we use the user_prompt
         query = graphrag_output.get("query", user_prompt) 
         context_from_prompt = graphrag_output.get("text_context", "") 

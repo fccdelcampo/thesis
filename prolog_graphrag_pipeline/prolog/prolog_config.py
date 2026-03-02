@@ -26,11 +26,12 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 - Negation: Use `not`. NEVER use `\\+`.
 - Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
 - Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
-- Atoms: Must be lowercase. Quote special characters (e.g., `'(A ∨ B)'`).
-- Variables: CamelCase. Use `_` for singletons.
-- Concise Atoms: Keep snake_case atoms as short as possible to save tokens. Condense long phrases into 1-3 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
+- Atoms: MUST be lowercase snake_case (e.g., `cell_wall`).
+- Grounding: EVERY fact argument must be a lowercase atom. NEVER start a fact argument with an Uppercase letter unless you explicitly intend it to be a variable. CamelCase names (e.g., `PlantCell`) are treated as Variables and will trigger "Singleton variable" warnings.
+- Variables: MUST start with an Uppercase letter (e.g., `X`, `Animal`). Use `_` for singletons.
+- Meaningful Atoms: Use snake_case atoms that accurately reflect the phrasing in the text. Condense long phrases into 3-5 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
 - Closed-World: EVERY predicate in a body MUST be defined as a fact or rule head somewhere in the database.
-- Discontiguous: Group all clauses for the same predicate together.
+- Contiguous: Group ALL clauses for the same predicate together. Do NOT alternate between predicates (e.g., `p(a). q(b). p(c).` is forbidden; write `p(a). p(c). q(b).` instead).
 - Predicate Naming: ALWAYS invent meaningful predicate names that accurately describe the relationships in the specific question. NEVER blindly copy predicate names (like `forms_from`) or structures from the few-shot examples unless they are directly relevant.
 
 ### Query Formatting by Question Type
@@ -50,6 +51,13 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 3. **Freeform / Open Logic:**
    - Define relationships and rules governing propagation or constraints.
    - The <query> queries the primary target entity state.
+
+### Warning Avoidance (CRITICAL)
+- **NO SINGLETONS**: If you start a concept name with an Uppercase letter in a fact (e.g., `can_be_controlled(RecordingObservations).`), Prolog treats it as a variable. This triggers "Singleton variable" warnings and usually makes the logic fail. **ALWAYS use lowercase snake_case for facts.**
+- **STRICT CONTIGUITY (Prolog Linter)**: You MUST group all clauses of the same predicate together sequentially. Do NOT alternate between different predicates. 
+  - WRONG: `p(a). q(b). p(c).`
+  - CORRECT: `p(a). p(c). q(b).`
+- **SORTING**: In your `<database>` block, it is recommended to sort your predicates alphabetically or by logical group to ensure all clauses for the same predicate are together. This prevents "Discontiguous" warnings which can cause SWI-Prolog to ignore parts of the database.
 
 ### Output Format (Strict)
 <reasoning_step>
@@ -282,9 +290,10 @@ You are a Logical Translator. Take the formal output of a Prolog s(CASP) solver 
 
 ### Core Objectives
 Narrate the Proof: Walk through the s(CASP) justification tree. Explain exactly why the conclusion was reached using the retrieved facts. If s(CASP) returns False or uses `not`, explain it as an "absence of evidence."
+Keep your explanations dense and easy to synthesize and understand.
 
 ### Syntactic Rules
-- No Prolog Syntax: Do not use `:-`, `\\+`, or `parent(X, Y)`. Use natural language.
+- No Prolog Syntax: Use natural language only.
 - Traceability: Keep the sequential logic. Do not jump straight to the conclusion.
 """
 

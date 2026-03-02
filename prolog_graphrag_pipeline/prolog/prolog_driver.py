@@ -3,6 +3,7 @@ import re
 import sys
 import os
 import time
+from typing import Optional
 try:
     from .prolog_generator import generate_prolog_code, capture_db_and_query, capture_predicate_and_arguments
     from .explainer import generate_safe_scasp_wrapper, generate_explanation
@@ -117,6 +118,7 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
     final_context = retrieved_context + "\n" + context_from_prompt
 
     prolog_error: str | None = None  # None = success; str = error message on failure
+    verified_choice: Optional[str] = None
 
     # ── Attempt Prolog-verified path ───────────────────────────────────
     try:
@@ -150,8 +152,12 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
             if result:
                 for arg in result.keys():  
                     if arg not in ["Explanation", "Tree", "Model"] and (arg.isupper() or arg == "truth"):  
-                        print(f"{arg} Found: {result[arg]}")    
-                        retrieved_values += f"{arg}: {result[arg]} "
+                        val = result[arg]
+                        print(f"{arg} Found: {val}")    
+                        retrieved_values += f"{arg}: {val} "
+                        # Capture specifically which multiple-choice letter was proven
+                        if isinstance(val, str) and len(val) == 1 and val.lower() in "abcd":
+                            verified_choice = val.lower()
                 
                 if SCASP_AVAILABLE and 'Explanation' in result:
                     print("**Human-Readable Explanation**")
@@ -189,7 +195,7 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
         final_answer = {"text_answer": "Error: Prolog generation failed and LLM fallback is disabled."}
     else:
         print("\n**FINAL LLM OUTPUT:")
-        final_answer = llm.generate(user_question, retrieved_context, explainer_output, flag="synthesis")
+        final_answer = llm.generate(user_question, retrieved_context, explainer_output, flag="synthesis", verified_choice=verified_choice)
         
         if final_answer:
             print(final_answer["text_answer"])

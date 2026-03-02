@@ -23,8 +23,8 @@ from typing import Optional, Union, List
 client = get_openai_client()
 
 
-def generate(user_question: str, retrieved_context: Optional[str], explainer_output: Optional[str], flag: str, sample_mode: bool = False, include_conclusion: bool = True, context_from_prompt: str = "") -> Union[dict, List[dict]]:
-    final_prompt = reconstruct_prompt(user_question=user_question, retrieved_context=retrieved_context, explainer_output=explainer_output, flag=flag, context_from_prompt=context_from_prompt)
+def generate(user_question: str, retrieved_context: Optional[str], explainer_output: Optional[str], flag: str, sample_mode: bool = False, include_conclusion: bool = True, context_from_prompt: str = "", verified_choice: Optional[str] = None) -> Union[dict, List[dict]]:
+    final_prompt = reconstruct_prompt(user_question=user_question, retrieved_context=retrieved_context, explainer_output=explainer_output, flag=flag, context_from_prompt=context_from_prompt, verified_choice=verified_choice)
 
     def _call_llm():
         response = client.chat.completions.create(

@@ -4,30 +4,27 @@ import numpy as np
 import csv
 import pandas as pd
 from pathlib import Path
-from visualizer_generator import generate_qq_grids
+
+# Project root and stats directory setup
+_current_dir = os.path.dirname(os.path.abspath(__file__))
+if _current_dir not in sys.path:
+    sys.path.insert(0, _current_dir)
+ROOT = Path(_current_dir).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
+
+try:
+    from config import ALPHA, Metric, Benchmark, Pipeline
+    import visualizer_generator
+    from visualizer_generator import generate_qq_grids
+except ImportError:
+    from .config import ALPHA, Metric, Benchmark, Pipeline
+    from . import visualizer_generator
+    from .visualizer_generator import generate_qq_grids
 
 # Scipy imports FIRST (before wildcard import)
 from scipy.stats import gmean, shapiro
 
-# Define top-level directory (one level up from current script)
-TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-
-# Append top-level directory to sys.path BEFORE importing
-sys.path.append(TOP_LEVEL_DIR)
-ROOT = Path(__file__).resolve().parents[2]
-# RESULTS_DIR = ROOT / "hallucination_evaluation_results"
-sys.path.append(str(ROOT))
-
-try:
-    from .config import *
-    from . import visualizer_generator
-except ImportError:
-    try:
-        from config import *
-        import visualizer_generator
-    except ImportError:
-        from stats.config import *
-        from stats import visualizer_generator
 # Define target folder inside top-level directory
 DATA_DIR = ROOT / "hallucination_evaluation_results/data"
 

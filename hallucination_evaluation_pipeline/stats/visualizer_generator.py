@@ -1,6 +1,13 @@
 import os
+import sys
 import math
 from pathlib import Path
+
+# Project root and results/visualizations paths
+_current_dir = os.path.dirname(os.path.abspath(__file__))
+ROOT = Path(_current_dir).resolve().parents[1]
+if str(_current_dir) not in sys.path:
+    sys.path.insert(0, str(_current_dir))
 
 import matplotlib.pyplot as plt
 from matplotlib.colors import ListedColormap, BoundaryNorm
@@ -11,8 +18,6 @@ import pandas as pd
 
 from config import ALPHA, CONTINUOUS_EVALS, DISCRETE_EVALS, Pipeline
 
-# Project root and results/visualizations paths
-ROOT = Path(__file__).resolve().parents[2]
 RESULTS_DIR = ROOT / "hallucination_evaluation_results/data"
 OUTPUT_DIR = ROOT / "hallucination_evaluation_results/visualizations"
 

@@ -83,6 +83,13 @@ def _inject_inline_errors(code: str, last_error: str) -> str:
         if m:
             singleton_vars = [v.strip() for v in m.group(1).split(',')]
 
+    # Extract Discontiguous predicate: "Clauses of x/1 are not together"
+    discontiguous_pred = None
+    if "are not together" in last_error or "discontiguous" in last_error.lower():
+        m = re.search(r"Clauses of ([a-zA-Z0-9_]+)/(\d+) are not together", last_error)
+        if m:
+            discontiguous_pred = m.group(1)
+
     for line in lines:
         needs_comment = False
         comment_text = ""
@@ -97,6 +104,10 @@ def _inject_inline_errors(code: str, last_error: str) -> str:
             needs_comment = True
             comment_text = f"% ERROR TRIGGERED HERE: You called '{missing_pred}' but it is NEVER defined as a fact or rule."
             
+        elif discontiguous_pred and (content_only.startswith(f"{discontiguous_pred}(") or discontiguous_pred in content_only):
+            needs_comment = True
+            comment_text = f"% ERROR TRIGGERED HERE: Predicate '{discontiguous_pred}' is scattered. MOVE all clauses of '{discontiguous_pred}' together in one block."
+
         elif forbidden_match and forbidden_match in content_only:
             needs_comment = True
             comment_text = f"% ERROR TRIGGERED HERE: REMOVE THIS FORBIDDEN OPERATOR '{forbidden_match}'."
@@ -404,6 +415,8 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                 hint = "Rule (:-) in <query>. Move to <database>."
             elif "Unknown procedure" in error_str:
                 hint = "!!! CRITICAL: Undefined predicate. You used a predicate in a rule body that is NOT defined as a fact or rule head in your <database>. Every predicate in the body MUST exist as a definition."
+            elif "not together" in error_str or "discontiguous" in error_str.lower():
+                hint = "!!! ERROR: Scattered clauses. You defined facts or rules for the same predicate in different parts of the file. Group ALL clauses for the same predicate together in one block."
             else:
                 hint = "Ensure strict Prolog syntax. No bullets/hyphens. Predicates must be lowercase."
             _record_error(f"Prolog Error: {e}\nHint: {hint}")
@@ -453,6 +466,8 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
                     hint = "Use lowercase atoms for facts, not Uppercase variables."
                 elif "Unknown procedure" in error_str:
                     hint = "Undefined predicate. Every body predicate must be defined."
+                elif "not together" in error_str or "discontiguous" in error_str.lower():
+                    hint = "Group clauses for the same predicate together."
                 else:
                     hint = "Use strict Prolog syntax. Lowercase predicates."
                 _record_error(f"Prolog Error: {e}\nHint: {hint}")

@@ -1,4 +1,5 @@
 import re
+from typing import Optional
 
 def capture_conclusion_and_logical_path(explainer_output):
     pattern = r"\*\*(?:Conclusion|CONCLUSION):\*\*\s*(.*)"
@@ -13,7 +14,7 @@ def capture_conclusion_and_logical_path(explainer_output):
         logical_evidence = explainer_output
     return conclusion, logical_evidence
 
-def reconstruct_prompt(user_question: str, retrieved_context: str, explainer_output: str, flag: str, context_from_prompt: str = ""):
+def reconstruct_prompt(user_question: str, retrieved_context: str, explainer_output: str, flag: str, context_from_prompt: str = "", verified_choice: Optional[str] = None):
     conclusion = "See Logical Evidence"
     
     # Determine if Prolog generated verified evidence or if we are falling back
@@ -40,8 +41,11 @@ def reconstruct_prompt(user_question: str, retrieved_context: str, explainer_out
     
     authority_instruction = ""
     if prolog_verified:
-        authority_instruction = """
-CRITICAL: The PROLOG-VERIFIED LOGICAL EVIDENCE above is the output of a formal logic engine that has already proven the correct answer. You MUST state a Final Answer that matches this evidence. Do NOT override it with your own intuition or background knowledge."""
+        choice_clause = ""
+        if verified_choice:
+            choice_clause = f" specifically that the correct option is [{verified_choice.upper()}],"
+        authority_instruction = f"""
+CRITICAL: The PROLOG-VERIFIED LOGICAL EVIDENCE above is the output of a formal logic engine that has already proven the correct answer,{choice_clause} You MUST state a Final Answer that matches this evidence. Do NOT override it with your own intuition or background knowledge."""
     
     return f"""
 ### FINAL SYNTHESIS TASK
@@ -64,5 +68,5 @@ Provide a direct, confident answer to the User Question.
 
 if __name__ == "__main__":
     print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag="q"), "\n")
-    print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag="x\c"), "\n")
+    print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag=r"x\c"), "\n")
     print(reconstruct_prompt(user_question="QUESTION", retrieved_context="CONTEXT", explainer_output="", flag="x"), "\n")

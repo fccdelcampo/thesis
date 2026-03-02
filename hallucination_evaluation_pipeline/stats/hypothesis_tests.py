@@ -3,7 +3,35 @@ import os
 import numpy as np
 import pandas as pd
 import csv
-from visualizer_generator import *
+from pathlib import Path
+
+# Project root and stats directory setup
+_current_dir = os.path.dirname(os.path.abspath(__file__))
+if _current_dir not in sys.path:
+    sys.path.insert(0, _current_dir)
+# Determine the project root. Assuming this file is in 'project_root/stats/'
+# parents[0] is 'stats', parents[1] is 'project_root'
+ROOT = Path(_current_dir).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
+
+try:
+    from config import ALPHA, Metric, Benchmark, CONTINUOUS_EVALS, DISCRETE_EVALS
+    import visualizer_generator
+    from visualizer_generator import generate_box_plot_grids, generate_bar_graph_grid
+except ImportError:
+    # Fallback for relative imports if the script is run as a module
+    try:
+        from .config import ALPHA, Metric, Benchmark, CONTINUOUS_EVALS, DISCRETE_EVALS
+        from . import visualizer_generator
+        from .visualizer_generator import generate_box_plot_grids, generate_bar_graph_grid
+    except ImportError:
+        # Fallback for when 'stats' is a package and config/visualizer_generator are siblings
+        from stats.config import ALPHA, Metric, Benchmark, CONTINUOUS_EVALS, DISCRETE_EVALS
+        from stats import visualizer_generator
+        from stats.visualizer_generator import generate_box_plot_grids, generate_bar_graph_grid
+
+
 STATS_AVAILABLE = True
 try:
     from scipy.stats import kruskal, mannwhitneyu
@@ -11,21 +39,7 @@ try:
 except ImportError:
     STATS_AVAILABLE = False
     print("Warning: scipy or statsmodels not found. Hypothesis tests will be skipped.")
-try:
-    from .config import *
-    from . import visualizer_generator
-except ImportError:
-    try:
-        from config import *
-        import visualizer_generator
-    except ImportError:
-        from stats.config import *
-        from stats import visualizer_generator
-from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-# RESULTS_DIR = ROOT / "hallucination_evaluation_results"
-sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
 DATA_DIR = ROOT / "hallucination_evaluation_results/data"
 

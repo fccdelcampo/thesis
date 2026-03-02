@@ -3,43 +3,29 @@ import sys
 import pandas as pd
 import numpy as np
 import random
-from config import CLEAR_DATA_PASSWORD
-
-# Define top-level directory (one level up from current script)
-TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
-print(TOP_LEVEL_DIR)
-# CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
-
-# Append top-level directory to sys.path BEFORE importing
-# sys.path.append(TOP_LEVEL_DIR)
-
-import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-# RESULTS_DIR = ROOT / "hallucination_evaluation_results"
-sys.path.append(str(ROOT))
-# Define target folder inside top-level directory
-DATA_DIR = ROOT / "hallucination_evaluation_results/data"
+# Project root and stats directory setup
+_current_dir = os.path.dirname(os.path.abspath(__file__))
+if _current_dir not in sys.path:
+    sys.path.insert(0, _current_dir)
+ROOT = Path(_current_dir).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
 
 try:
-    from .config import *
+    from config import CLEAR_DATA_PASSWORD, Metric, Benchmark, CONTINUOUS_EVALS, DISCRETE_EVALS, NUM_TEST_CASES
+    from normality_tests import perform_normality_tests
+    from hypothesis_tests import perform_hypothesis_tests
+    from posthoc_tests import perform_posthoc_tests
+except ImportError:
+    from .config import CLEAR_DATA_PASSWORD, Metric, Benchmark, CONTINUOUS_EVALS, DISCRETE_EVALS, NUM_TEST_CASES
     from .normality_tests import perform_normality_tests
     from .hypothesis_tests import perform_hypothesis_tests
     from .posthoc_tests import perform_posthoc_tests
-except ImportError as e:
-    print(f"Relative import failed: {e}")
-    try:
-        from config import *
-        from normality_tests import perform_normality_tests
-        from hypothesis_tests import perform_hypothesis_tests
-        from posthoc_tests import perform_posthoc_tests
-    except ImportError as e2:
-        print(f"Absolute import failed: {e2}")
-        from stats.config import *
-        from stats.normality_tests import perform_normality_tests
-        from stats.hypothesis_tests import perform_hypothesis_tests
-        from stats.posthoc_tests import perform_posthoc_tests
+
+# Define target folder inside top-level directory
+DATA_DIR = ROOT / "hallucination_evaluation_results/data"
 
     
 

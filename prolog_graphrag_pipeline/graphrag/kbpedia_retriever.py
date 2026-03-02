@@ -15,6 +15,7 @@ import json
 import re
 import time
 from typing import List, Dict, Any, Optional
+from llm_config import log_llm_event, retry_with_exponential_backoff
 
 
 def _safe_parse_json(text: str, expect: type = None):
@@ -72,8 +73,8 @@ class KBPediaRetriever:
         self.embedder = embedder
         
         try:
-            from graphrag_pipeline.graphrag.config import ENABLE_LLM_FILTERING
-        except ModuleNotFoundError:
+            from .config import ENABLE_LLM_FILTERING
+        except (ModuleNotFoundError, ImportError):
             try:
                 from graphrag.config import ENABLE_LLM_FILTERING
             except ImportError:
@@ -103,6 +104,37 @@ class KBPediaRetriever:
         except Exception as e:
             print(f"DEBUG: Error verifying KBPedia vector index: {e}")
             return False
+
+    def _vector_search(self, query_vector: List[float], limit: int = 5) -> List[Dict[str, Any]]:
+        """Vector similarity search against KBPedia concepts."""
+        if not query_vector:
+            return []
+
+        try:
+            records, _, _ = self.driver.execute_query(
+                """
+                CALL db.index.vector.queryNodes('kbpediaConceptVectorIndex', $limit, $vector)
+                YIELD node, score
+                RETURN node.uri AS uri, node.name AS name, node.definition AS definition,
+                       node.altLabels AS altLabels, score
+                """,
+                vector=query_vector,
+                limit=limit,
+                database_="neo4j",
+            )
+            results = []
+            for r in records:
+                results.append({
+                    "uri": r["uri"],
+                    "name": r["name"],
+                    "definition": r["definition"] or "",
+                    "altLabels": r["altLabels"] or [],
+                    "score": r["score"],
+                })
+            return results
+        except Exception as e:
+            print(f"DEBUG: KBPedia concept vector search error: {e}")
+            return []
 
     def extract_entities(self, query: str) -> List[str]:
         """
@@ -346,9 +378,6 @@ If none are relevant, output an empty list [].
         filter_query = original_query if original_query else query
 
         # Build the payload for the prompt
-        # Cap triples per concept to 12 to prevent the prompt from exceeding num_ctx.
-        # With 5 concepts * ~25 triples, the prompt alone can blow past 2048 tokens
-        # causing Ollama to truncate context and hang indefinitely on malformed JSON.
         MAX_TRIPLES_PER_CONCEPT = 12
         concepts_text = ""
         for c in concepts_data:
@@ -356,28 +385,20 @@ If none are relevant, output an empty list [].
             triples_text = "\n".join([f"  - {t}" for t in capped_triples])
             concepts_text += f"Concept: '{c['name']}'\nFacts:\n{triples_text}\n\n"
 
-        prompt = f"""Task: You are a strict knowledge filter for a Prolog GraphRAG pipeline.
+        prompt = f"""Task: Select the most relevant ontology facts for the user's question.
 Below are ontology facts for multiple concepts retrieved from KBPedia.
-The user is answering a specific question — possibly a multiple-choice question (MCQ).
 
 User Query: "{filter_query}"
 
 {concepts_text}
 
-STRICT FILTERING RULES:
-1. Keep a fact ONLY if it directly helps determine which MCQ answer choice is correct or incorrect.
-   - A 'subclass of' or 'has subclass' fact is useful ONLY if the parent/child class name directly
-     relates to the mechanism described in the question (e.g. 'subclass of: plate_convergence' for a
-     tectonic question, NOT 'subclass of: scalar quantity' for a geography question).
-   - Sibling concepts are almost never useful — keep one ONLY if it is literally one of the MCQ choices.
-2. DROP all of: unrelated subclasses, unrelated siblings, unrelated parent classes, etymology,
-   Wikipedia metadata, and any fact whose connection to the question you cannot explain in one sentence.
-3. For concepts that ARE an MCQ answer choice, keep its core definition PLUS any fact that explains
-   how/why it forms or doesn't form under the conditions described in the question.
-4. If a concept has NO relevant facts after filtering, output an empty list [] for it.
-   DO NOT force-keep facts just to have something.
+FILTERING RULES:
+1. Keep a fact if it directly or indirectly helps answer the question or define a core term.
+2. For multiple-choice questions (MCQ), prioritize any fact that clarifies the mechanisms or definitions mentioned in the choices.
+3. Keep the core definition of each concept.
+4. Drop redundant or clearly unrelated facts to keep the context focused.
 
-Output format: A JSON dictionary where keys are the Concept names, and values are lists of kept fact strings.
+Output format: A JSON dictionary where keys are the Concept names, and values are lists of fact strings.
 Example:
 {{
   "trench": ["definition: a long narrow excavation in the ground", "subclass of: topographical feature"],
@@ -390,7 +411,11 @@ Example:
         max_retries = 3
         for attempt in range(max_retries):
             try:
+                start_time = time.perf_counter()
                 raw = self.llm.invoke(prompt)
+                duration = time.perf_counter() - start_time
+                log_llm_event(f"KBPEDIA_TRIPLE_FILTER_BATCH_{len(concepts_data)}", duration=duration)
+                
                 res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
                 safe_res = str(res[:200]).encode('ascii', 'replace').decode('ascii')
                 print(f"DEBUG: Batch triple filter raw response: {repr(safe_res)}...", flush=True)
@@ -425,6 +450,8 @@ Example:
                     print(f"DEBUG: All {max_retries} batch filtering attempts failed. Using all raw triples.", flush=True)
 
         return result_map
+
+
 
     def _filter_concepts_once(self, query_text: str, candidates: list, original_query: str = "") -> list:
         """
@@ -478,7 +505,11 @@ Output ONLY the JSON list, nothing else.
         max_retries = 3
         for attempt in range(max_retries):
             try:
+                start_time = time.perf_counter()
                 raw = self.llm.invoke(prompt)
+                duration = time.perf_counter() - start_time
+                log_llm_event("KBPEDIA_CONCEPT_FILTER", duration=duration)
+                
                 res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
                 if "```" in res:
                     res = res.split("```")[1].split("```")[0].strip()
@@ -508,64 +539,66 @@ Output ONLY the JSON list, nothing else.
         # `original_query` = full user prompt (with MCQ choices) for LLM filtering.
         filter_query = original_query if original_query else query_text
 
-        # ── Entity extraction & Fulltext Search (on entities) ─────────
-        print(f"DEBUG: [KBPedia] Querying for: '{query_text}'", flush=True)
-        entities = self.extract_entities(query_text)
-        print(f"DEBUG: Extracted entities for KBPedia: {entities}", flush=True)
-
-        matches = []
-        for concept_name in entities:
-            entity_matches = self.find_concepts(concept_name, limit=2)
-            if entity_matches:
-                print(f"DEBUG: KBPedia fulltext matched for '{concept_name}': {[m['name'] for m in entity_matches]}", flush=True)
-                matches.extend(entity_matches)
+        # ── Vector Search ───────────────────────────────────────────────────
+        print(f"DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...", flush=True)
+        try:
+            if self.embedder:
+                query_vector = self.embedder.embed_query("query: " + query_text)
             else:
-                print(f"DEBUG: KBPedia has no fulltext matches for '{concept_name}'.", flush=True)
-
-        if not matches:
-            print(f"DEBUG: KBPedia found no matches via fulltext search.", flush=True)
-        else:
-            print(f"DEBUG: KBPedia total matches: {[m['name'] for m in matches]}", flush=True)
+                from sentence_transformers import SentenceTransformer
+                print("DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.", flush=True)
+                temp_embedder = SentenceTransformer("all-MiniLM-L6-v2")
+                query_vector = temp_embedder.encode(query_text).tolist()
+                
+            # Grab top_k * 2 candidates
+            matches = self._vector_search(query_vector, limit=top_k * 2)
+        except Exception as e:
+            print(f"DEBUG: KBPedia embedding/search failed: {e}", flush=True)
+            matches = []
 
         seen_uris = set()
         candidates = []  # list of {name, uri, definition, triples}
         items = []       # final result items
 
+        if not matches:
+            print(f"DEBUG: KBPedia has no vector matches for '{query_text}'.", flush=True)
+        else:
+            print(f"DEBUG: KBPedia matched {len(matches)} concept(s) via vector similarity: {[m['name'] for m in matches]}", flush=True)
+
         for match in matches:
-                uri = match["uri"]
-                if uri in seen_uris:
-                    continue
-                seen_uris.add(uri)
+            uri = match["uri"]
+            if uri in seen_uris:
+                continue
+            seen_uris.add(uri)
 
-                # Build raw triples
-                raw_triples = []
-                if match["definition"]:
-                    raw_triples.append(f"definition: {match['definition'][:400]}")
-                raw_triples.extend(self.get_neighborhood(uri))
+            # Build raw triples
+            raw_triples = []
+            if match["definition"]:
+                raw_triples.append(f"definition: {match['definition'][:400]}")
+            raw_triples.extend(self.get_neighborhood(uri))
 
-                # Defensive filter: remove any triple that looks like an MCQ option
-                mcq_pattern = re.compile(r'^[A-D][.):] ', re.IGNORECASE)
-                raw_triples = [t for t in raw_triples if not mcq_pattern.match(t)]
+            # Defensive filter: remove any triple that looks like an MCQ option
+            mcq_pattern = re.compile(r'^[A-D][.):] ', re.IGNORECASE)
+            raw_triples = [t for t in raw_triples if not mcq_pattern.match(t)]
 
-                if not raw_triples:
-                    print(f"DEBUG: No raw triples for '{match['name']}' ({uri}), skipping.", flush=True)
-                    continue
+            if not raw_triples:
+                print(f"DEBUG: No raw triples for '{match['name']}' ({uri}), skipping.", flush=True)
+                continue
 
-                # Buffer raw candidates for a single end-of-loop LLM pass
-                print(f"DEBUG: Buffered {len(raw_triples)} raw triple(s) for '{match['name']}'", flush=True)
-                candidates.append({
-                    "name": match["name"],
-                    "uri": uri,
-                    "definition": match.get("definition", ""),
-                    "triples": raw_triples,
-                })
+            # Buffer raw candidates for a single end-of-loop LLM pass
+            print(f"DEBUG: Buffered {len(raw_triples)} raw triple(s) for '{match['name']}'", flush=True)
+            candidates.append({
+                "name": match["name"],
+                "uri": uri,
+                "definition": match.get("definition", ""),
+                "triples": raw_triples,
+            })
 
-        # ── Single LLM relevance filter over all candidates ─────────────
-        if candidates:
+        # ── LLM filtering logic ─────────────
+        if candidates and self.llm:
+            # Enforce coarse filter similar to pure GraphRAG's standard behavior
             filtered_candidates = self._filter_concepts_once(query_text, candidates, original_query=filter_query)
             print(f"DEBUG: End-filter kept {len(filtered_candidates)}/{len(candidates)} concepts.", flush=True)
-            
-            # Batch Triple filtering on the validated concepts
             filtered_concepts_to_use = filtered_candidates[:top_k]
             
             if filtered_concepts_to_use:
@@ -573,7 +606,7 @@ Output ONLY the JSON list, nothing else.
                 batch_data = [{"name": c["name"], "triples": c["triples"]} for c in filtered_concepts_to_use]
                 print(f"DEBUG: Batch sending {len(batch_data)} concepts to LLM triple filter...", flush=True)
                 
-                # We can process all top_k (usually <= 5) in one LLM call
+                # Use unified batch filter
                 batch_results = self.filter_triples_batch(query_text, batch_data, original_query=filter_query)
                 
                 # Reassign filtered triples back to the candidates
@@ -582,24 +615,21 @@ Output ONLY the JSON list, nothing else.
                     print(f"DEBUG: Batch LLM filter kept {len(selected)}/{len(c['triples'])} triple(s) for '{c['name']}'", flush=True)
                     c["triples"] = selected
 
-                # Remove concepts where LLM filter kept 0 triples (completely irrelevant)
-                before_count = len(filtered_concepts_to_use)
+                # Remove concepts where LLM filter kept 0 triples
                 filtered_concepts_to_use = [c for c in filtered_concepts_to_use if c["triples"]]
-                removed = before_count - len(filtered_concepts_to_use)
-                if removed:
-                    print(f"DEBUG: Removed {removed} concept(s) with 0 surviving triples.", flush=True)
+        else:
+            # Fallback if LLM is disabled: just use raw candidates
+            filtered_concepts_to_use = candidates[:top_k]
 
-            for c in filtered_concepts_to_use:
-                selected_triples = c["triples"]
-
-                triples_text = "\n".join([f"  - {t}" for t in selected_triples])
-                content = f"KBPedia Concept: {c['name']}.\nRelevant Logical Facts:\n{triples_text}"
-                items.append(RetrieverResultItem(
-                    content=content,
-                    metadata={"source": "KBPedia", "entity": c["name"],
-                              "uri": c["uri"], "score": 1.0, "triples": selected_triples},
-                ))
+        for c in filtered_concepts_to_use:
+            selected_triples = c["triples"]
+            triples_text = "\n".join([f"  - {t}" for t in selected_triples])
+            content = f"KBPedia Concept: {c['name']}.\nRelevant Logical Facts:\n{triples_text}"
+            items.append(RetrieverResultItem(
+                content=content,
+                metadata={"source": "KBPedia", "entity": c["name"],
+                          "uri": c["uri"], "score": 1.0, "triples": selected_triples},
+            ))
 
         print(f"DEBUG: KBPedia found {len(items)} grounded concept contexts.", flush=True)
         return RetrieverResult(items=items, metadata={})
-

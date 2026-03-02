@@ -19,20 +19,16 @@ from scipy.stats import rankdata
 # except ImportError:
 #     try:
 #         from config import *
-#         import visualizer_generator
-#     except ImportError:
-#         from stats.config import *
-#         from stats import visualizer_generator
-
-# Define top-level directory (one level up from current script)
-TOP_LEVEL_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 
 import sys
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[2]
-# RESULTS_DIR = ROOT / "hallucination_evaluation_results"
-sys.path.append(str(ROOT))
+_current_dir = os.path.dirname(os.path.abspath(__file__))
+# Determine the project root. Assuming this file is in 'project_root/hallucination_evaluation_pipeline/stats/'
+# parents[0] is 'hallucination_evaluation_pipeline', parents[1] is 'project_root'
+ROOT = Path(_current_dir).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.append(str(ROOT))
 # Define target folder inside top-level directory
 DATA_DIR = ROOT / "hallucination_evaluation_results/data"
 

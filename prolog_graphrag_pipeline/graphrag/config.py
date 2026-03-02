@@ -12,6 +12,11 @@ GLOBAL_KB = "KBPEDIA"
 # fall back to Wikidata REST Search API + structural SPARQL.
 ENABLE_WIKIDATA_FALLBACK = True
 
+# Coarse concept-level filtering before triple filtering.
+# Default: False (faster, collapses redundant LLM turn).
+ENABLE_KBPEDIA_CONCEPT_FILTER = True
+ENABLE_LLM_FILTERING = False
+
 
 class RETRIEVER_OPTIONS(Enum):
   HybridCypherRetriever = "HybridCypherRetriever"
@@ -112,13 +117,13 @@ RETURN
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are a Logic Discovery Agent. Extract concise, factual, and structural logical building blocks needed to answer the Question from the Context.
+You are a Logic Discovery Agent. Extract the factual and structural logical building blocks needed to answer the Question from the Context.
 
 ### TASK
 Produce a single numbered list called **LOGICAL EVIDENCE**. 
 First, gather evidence and definitions for all concepts related to the Question, especially focusing on each of the provided MCQ choices. 
 Then, add other structural logical evidence that bridges the premise to the answer.
-Each item must be one concise sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.
+Each item must be a factual sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.
 
 ### CONSTRAINTS
 * Include at most 15 items total. Keep them highly concise but strictly factual.
@@ -127,6 +132,8 @@ Each item must be one concise sentence — either a direct fact or a conditional
 * Break compound sentences into independent logical units.
 * Use clear, declarative English only. No code, no symbols.
 * Do NOT reveal the final answer — provide logical ingredients only.
+
+
 
 ---
 ### QUESTION:
