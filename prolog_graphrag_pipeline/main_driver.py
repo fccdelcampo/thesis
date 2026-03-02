@@ -3,21 +3,18 @@ try:
     from .prolog import prolog_driver
     from .llm import generate
     from .prompt_reconstructor import reconstruct_prompt
+    from .graphrag.config import SKIP_LOGICAL_EVIDENCE_LLM
 except ImportError:
     # Fallback for direct script execution
     from graphrag import graphrag_driver
     from prolog import prolog_driver
     from llm import generate
     from prompt_reconstructor import reconstruct_prompt
+    from graphrag.config import SKIP_LOGICAL_EVIDENCE_LLM
 
 def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include_conclusion: bool = True) -> dict:
     if flag != "q":
         pass
-        # try:
-            # print("Auto-clearing stale data...")
-            # graphrag_driver.clear_local_data()
-        # except Exception as e:
-        #     print(f"Warning: Failed to auto-clear data: {e}")
 
     graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
     
@@ -29,36 +26,40 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
         print(graphrag_output.get("answer", "No evidence found."))
         print("="*80 + "\n")
         print("DEBUG: Transferring evidence to Prolog engine...\n")
-        # 'query' is not returned by graphrag_driver, so we use the user_prompt
-        query = graphrag_output.get("query", user_prompt) 
-        context_from_prompt = graphrag_output.get("text_context", "") 
-        retrieved_context = graphrag_output.get("answer", [])
+        query = graphrag_output.get("query", user_prompt)
+        context_from_prompt = graphrag_output.get("text_context", "")
+        retrieved_context = graphrag_output.get("contexts", [])  # raw RetrieverResultItem list
     else:
-        query = user_prompt 
+        query = user_prompt
         context_from_prompt = ""
         retrieved_context = []
         
     # ── Split KBPedia vs Wikidata retrieved items ────────────────────────────
-    # Wikidata plain-text triples (definition:, instance of:, subclass of:, ...)
-    # are not structured Prolog-ready facts. Sending them to the Prolog generator
-    # causes the LLM to awkwardly transliterate them into predicates, often poorly.
-    # Instead: KBPedia items → Prolog generator; Wikidata items → synthesis LLM only.
     if isinstance(retrieved_context, list):
         kbpedia_items = []
         wikidata_items = []
+        raw_context_strings = []
         for item in retrieved_context:
-            # RetrieverResultItem objects have a .metadata dict; plain strings have no source
             src = ""
             if hasattr(item, "metadata"):
                 src = (item.metadata or {}).get("source", "")
             elif isinstance(item, dict):
                 src = item.get("metadata", {}).get("source", "")
+            item_str = str(item)
+            raw_context_strings.append(item_str)
             if src == "Wikidata":
-                wikidata_items.append(str(item))
+                wikidata_items.append(item_str)
             else:
-                kbpedia_items.append(str(item))
+                kbpedia_items.append(item_str)
 
-        retrieved_context_str = "\n".join(kbpedia_items)
+        if SKIP_LOGICAL_EVIDENCE_LLM:
+            # Bypass the GRAPHRAG_TEMPLATE LLM step — pass raw triples directly to Prolog.
+            # This is richer and avoids the intermediate LLM bottleneck.
+            retrieved_context_str = "\n".join(raw_context_strings)
+            print("DEBUG: SKIP_LOGICAL_EVIDENCE_LLM=True — passing raw triples to Prolog.")
+        else:
+            # Default: use the LLM-distilled logical evidence text as context
+            retrieved_context_str = graphrag_output.get("answer", "") if graphrag_output else ""
 
         # Append Wikidata facts to context_from_prompt so they reach the synthesis LLM
         if wikidata_items:
@@ -67,6 +68,7 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
     else:
         retrieved_context_str = str(retrieved_context) if retrieved_context else ""
 
+    # graphrag_answer is always the LLM-generated answer (for the synthesis LLM fallback)
     graphrag_answer = graphrag_output.get("answer", "") if graphrag_output else ""
     pgr_results = prolog_driver.run_pipeline(user_question=user_prompt, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt, graphrag_answer=graphrag_answer) if flag != "q" else None
  
@@ -77,6 +79,7 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
         "prolog_explanation": pgr_results.get("prolog_explanation", "") if pgr_results else "",
         "prolog_error": pgr_results.get("prolog_error") if pgr_results else "Prolog skipped"
     }
+
     
 def run_graphrag_pipeline(user_prompt: str) -> dict:
     """Wrapper function to run the entire pipeline with a given prompt and flag."""

@@ -17,6 +17,11 @@ ENABLE_WIKIDATA_FALLBACK = True
 ENABLE_KBPEDIA_CONCEPT_FILTER = True
 ENABLE_LLM_FILTERING = True
 
+# When True, skip the GRAPHRAG_TEMPLATE LLM distillation step and pass raw retrieved
+# triples/chunks directly to the Prolog generator instead of LLM-summarized evidence.
+# This avoids an intermediate LLM bottleneck but gives Prolog more raw noise to parse.
+SKIP_LOGICAL_EVIDENCE_LLM = True
+
 
 class RETRIEVER_OPTIONS(Enum):
   HybridCypherRetriever = "HybridCypherRetriever"

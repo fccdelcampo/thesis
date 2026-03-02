@@ -140,6 +140,12 @@ Context:
 
 User Question:
 {user_question}
+
+CRITICAL REMINDER — LETTER ASSIGNMENT:
+Re-read the User Question above carefully. The choices are labeled exactly as they appear (A, B, C, D).
+Your `choice/2` facts MUST encode each letter to EXACTLY the choice text it corresponds to in the question.
+Your `answer(OptionLetter)` rule MUST unify with the letter whose choice text satisfies the criteria — NOT any other letter.
+Before writing <database>, double-check: does `answer(X)` fire for the correct letter?
 """
 
     if error_history:
