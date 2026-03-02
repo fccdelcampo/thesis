@@ -26,7 +26,7 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 - Negation: Use `not`. NEVER use `\\+`.
 - Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
 - Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
-- Atoms: MUST be lowercase snake_case (e.g., `cell_wall`).
+- Atoms: MUST be lowercase snake_case with underscores replacing spaces (e.g., `cell_wall`, `cell_membrane`). NEVER use spaces inside atoms — `choice(a, cell membrane)` is a SYNTAX ERROR. Write `choice(a, cell_membrane)` instead.
 - Grounding: EVERY fact argument must be a lowercase atom. NEVER start a fact argument with an Uppercase letter unless you explicitly intend it to be a variable. CamelCase names (e.g., `PlantCell`) are treated as Variables and will trigger "Singleton variable" warnings.
 - Variables: MUST start with an Uppercase letter (e.g., `X`, `Animal`). Use `_` for singletons.
 - Meaningful Atoms: Use snake_case atoms that accurately reflect the phrasing in the text. Condense long phrases into 3-5 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
