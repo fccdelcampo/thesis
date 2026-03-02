@@ -385,18 +385,19 @@ If none are relevant, output an empty list [].
             triples_text = "\n".join([f"  - {t}" for t in capped_triples])
             concepts_text += f"Concept: '{c['name']}'\nFacts:\n{triples_text}\n\n"
 
-        prompt = f"""Task: Select the most relevant ontology facts for the user's question.
-Below are ontology facts for multiple concepts retrieved from KBPedia.
+        prompt = f"""Task: Select ONLY the ontology facts that are directly useful for answering the user's question.
 
 User Query: "{filter_query}"
 
 {concepts_text}
 
 FILTERING RULES:
-1. Keep a fact if it directly or indirectly helps answer the question or define a core term.
-2. For multiple-choice questions (MCQ), prioritize any fact that clarifies the mechanisms or definitions mentioned in the choices.
-3. Keep the core definition of each concept.
-4. Drop redundant or clearly unrelated facts to keep the context focused.
+1. KEEP a fact if it directly defines, characterises, or establishes a property/relationship that helps answer the question or distinguish between MCQ choices.
+2. KEEP the core definition of a concept if it is relevant to the question's topic.
+3. DROP any fact that is taxonomic boilerplate or structural metadata: counts of elements/properties ("has X elements"), abstract classifications ("subclass of: abstract object"), unrelated superclasses, or ontological hierarchy noise.
+4. DROP facts about number of components, cardinality, or list sizes (e.g. "has 4 subclasses", "number of elements: 3") — these NEVER help answer factual questions.
+5. DROP facts whose concept is clearly unrelated to the query topic or any MCQ choice.
+6. Merge/group similar facts into a single entry where possible (e.g. "no air" and "no atmosphere" → keep just the more informative one).
 
 Output format: A JSON dictionary where keys are the Concept names, and values are lists of fact strings.
 Example:
