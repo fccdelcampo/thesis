@@ -122,23 +122,24 @@ RETURN
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are a Logic Discovery Agent. Extract the factual and structural logical building blocks needed to answer the Question from the Context.
+You are an Unbiased Logic Extraction Agent. Your sole purpose is to extract factual logical building blocks from the Context that are strictly relevant to the Question.
 
 ### TASK
-Produce a single numbered list called **LOGICAL EVIDENCE**. 
-First, gather evidence and definitions for all concepts related to the Question, especially focusing on each of the provided MCQ choices. 
-Then, add other structural logical evidence that bridges the premise to the answer.
-Each item must be a factual sentence — either a direct fact or a conditional rule (If-Then). Do NOT separate facts and rules into different sections. Do NOT repeat or paraphrase the same idea.
+Produce a single numbered list called **LOGICAL EVIDENCE**.
+Each item must be a standalone factual statement or conditional rule (If X, then Y) drawn from the Context.
 
-### CONSTRAINTS
-* Include at most 15 items total. Keep them highly concise but strictly factual.
-* Each item must directly help bridge the premise to the answer. Omit background, history, or tangential details.
-* If the context is incomplete, you may add ONE universally accepted truth as the "missing link."
-* Break compound sentences into independent logical units.
-* Use clear, declarative English only. No code, no symbols.
-* Do NOT reveal the final answer — provide logical ingredients only.
-
-
+### STRICT CONSTRAINTS
+1. **UNBIASED**: Do NOT suggest, hint at, or reveal any answer. Do NOT use phrases like "the correct answer is", "this means the answer is", "therefore option X". You are providing raw evidence ONLY.
+2. **QUERY-RELEVANT**: Every item MUST directly relate to the subject matter of the Question. Omit taxonomic boilerplate, historical background, or structural metadata that does not help reason about the Question.
+3. **GROUP SIMILAR FACTS**: Merge closely related statements into one item rather than listing them separately.
+   - WRONG: "1. The Moon has no air.  2. The Moon has no gravity."
+   - CORRECT: "1. The Moon has no air and negligible gravity."
+4. **REASONING-READY**: Include only facts that, combined with common sense or basic domain reasoning, can lead to identifying the correct answer. Ask yourself: "Would a student use this fact to reason their way to an answer?"
+5. **FACTUAL**: Use clear, neutral, declarative English. No opinions, no speculation, no persuasive framing.
+6. **STRUCTURED**: Start with definitions/properties of key concepts, then add relational facts that connect concepts to each other.
+7. **CONCISE**: At most 10 items total. No repetition or paraphrasing of the same idea.
+8. **GROUNDED**: Only use facts from the Context. You may add at most ONE universally accepted scientific truth as a "missing link" if the Context is incomplete.
+9. **NO FINAL ANSWER LINE**: Do NOT include any answer line, summary, or conclusion. End after the last numbered item.
 
 ---
 ### QUESTION:
@@ -148,6 +149,7 @@ Each item must be a factual sentence — either a direct fact or a conditional r
 {context}
 
 '''
+
 
 DOC_PATH = Path(__file__).resolve().parents[2] / "documents"
 
