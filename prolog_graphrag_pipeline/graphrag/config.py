@@ -138,18 +138,16 @@ Each item must be a standalone factual statement or conditional rule (If X, then
 5. **FACTUAL**: Use clear, neutral, declarative English. No opinions, no speculation, no persuasive framing.
 6. **EVIDENCE QUOTAS & FORMATTING (CRITICAL)**:
    - **IF MULTIPLE CHOICE (has A, B, C, D options)**:
-     - You MUST use Markdown subheaders to separate your evidence:
-       `## Global Context` (2 to 5 unstructured facts setting up the overarching premise)
-       `## Choice A` (1 to 4 logical facts explicitly investigating/defining Choice A)
-       `## Choice B` (1 to 4 logical facts explicitly investigating/defining Choice B)
-       `## Choice C` (1 to 4 logical facts explicitly investigating/defining Choice C)
-       `## Choice D` (1 to 4 logical facts explicitly investigating/defining Choice D)
-     - Continue your numbered bullet points sequentially across all subheaders.
-     - Maximum total items allowed: 21.
+     - Provide **2 to 5 unstructured facts** setting up the overarching premise. End each with `(Global)`.
+     - Provide **1 to 4 logical facts** explicitly investigating/defining EACH specific choice. End each with the choice it refers to, e.g., `(Choice A)`.
+     - Example format: `1. Plant cells have a cell wall. (Global)`
+     - Example format: `4. Chloroplasts are organelles that conduct photosynthesis. (Choice B)`
+     - Maximum total items allowed: 21. Continue your numbered bullet points sequentially.
    - **IF OPEN-ENDED**:
-     - Do not use subheaders. Simply list all facts and rules relevant to the query to a maximum of 15 facts.
-7. **GROUNDED**: Only use facts from the Context. You may add at most ONE universally accepted scientific truth as a "missing link" if the Context is incomplete.
-8. **NO FINAL ANSWER LINE**: End immediately after the last numbered item.
+     - Do not use tags. Simply list all facts and rules relevant to the query to a maximum of 15 facts.
+7. **NO REFERENCING THE PROMPT OR CHOICES**: Never write "Option B is incorrect because..." or "Chloroplasts are not related to the function of...". Simply define what the thing IS in isolation based on the triples. The Prolog engine will decide if it's correct.
+8. **GROUNDED**: Only use facts from the Context. You may add at most ONE universally accepted scientific truth as a "missing link" if the Context is incomplete.
+9. **NO FINAL ANSWER LINE**: End immediately after the last numbered item.
 
 ---
 ### QUESTION:

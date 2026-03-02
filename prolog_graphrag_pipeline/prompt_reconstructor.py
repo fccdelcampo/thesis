@@ -79,10 +79,10 @@ USER QUESTION:
 
 ---
 ### STRICT ANSWERING RULES:
-1. You MUST derive your answer EXCLUSIVELY from the LOGICAL EVIDENCE and CONTEXT provided above.
-2. DO NOT use your own training knowledge to override or contradict the evidence.
-3. If the evidence clearly supports one choice, select that choice.
-4. If the evidence is ambiguous, select the choice MOST supported by the retrieved facts.
+1. Act as a natural, knowledgeable question-answering AI.
+2. You MUST derive your answer EXCLUSIVELY from the underlying facts established in the LOGICAL EVIDENCE and CONTEXT.
+3. DO NOT use your own training knowledge to override or contradict the evidence.
+4. If the evidence clearly supports one choice, select that choice based on the facts.
 
 ### OUTPUT FORMAT — MANDATORY:
 
@@ -94,10 +94,13 @@ Where [Exact choice text] is the VERBATIM text of that choice from the question.
 
 LETTER-TEXT ALIGNMENT: The letter and text MUST match the same choice in the question. If you write "B.", the text after it MUST be what choice B says — not choice A or C.
 NEVER write "None", "None of the above", or invent a choice not listed in the question.
-After the first line, add 1-2 sentences citing which evidence items support your answer.
+
+After the first line, provide a natural, cohesive 2-3 sentence explanation of the facts that led you to this conclusion.
+CRITICAL: DO NOT explicitly cite item numbers (e.g., NEVER write "As stated in item 4" or "According to fact 10"). Just weave the facts naturally into your explanation.
 
 Example of correct format:
-Based on my synthesis of knowledge, the answer is B. soda can.
+Based on my synthesis of knowledge, the answer is B. cell wall.
+The cell wall is a rigid covering composed of cellulose microfibrils that sits external to the plasma membrane. It provides mechanical support to non-woody plant tissues, performing a structural function analogous to an animal skeleton.
     """
 
 

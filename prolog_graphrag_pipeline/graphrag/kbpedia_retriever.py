@@ -619,7 +619,7 @@ Output ONLY the JSON list, nothing else.
             # Enforce coarse filter similar to pure GraphRAG's standard behavior
             filtered_candidates = self._filter_concepts_once(query_text, candidates, original_query=filter_query)
             print(f"DEBUG: End-filter kept {len(filtered_candidates)}/{len(candidates)} concepts.", flush=True)
-            filtered_concepts_to_use = filtered_candidates[:top_k]
+            filtered_concepts_to_use = filtered_candidates
             
             if filtered_concepts_to_use:
                 # Prepare batch payload
