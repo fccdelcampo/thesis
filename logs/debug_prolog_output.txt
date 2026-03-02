@@ -129070,3 +129070,874 @@ DEBUG: Batch LLM filter kept 12/12 triple(s) for 'level of substance in system'
 DEBUG: Batch LLM filter kept 1/16 triple(s) for 'sampling'
 DEBUG: KBPedia found 5 grounded concept contexts.
 DEBUG: [LocalDocs VectorCypher] Extracted 4 MCQ choices for independent search.
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 100 AI2 ARC test cases (starting from index 0).
+
+================================================================================
+[AI2 ARC #0] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['plant cell wall', 'cytoplasmic part', 'anucleated cell', 'cell part', 'cell', 'membrane (biological)', 'plastid', 'plant physiology', 'protoplasm', 'cellulose']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "plant cell wall": [\n    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (bu'...
+DEBUG: Batch LLM filter kept 3/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 0/5 triple(s) for 'cytoplasmic part'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'anucleated cell'
+DEBUG: Batch LLM filter kept 0/25 triple(s) for 'cell part'
+DEBUG: Batch LLM filter kept 0/23 triple(s) for 'cell'
+DEBUG: Removed 4 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 1 grounded concept contexts.
+DEBUG: KBPedia returned 1 items.
+DEBUG: Merged Result Count: 1
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "This is a multiple choice question. The options must be preserved in the question field.",
+  "question": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'This is a multiple choice question. The options must be preserved in the question field.', 'question': 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following parts of a plant cell has a function that is most similar' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Computing query embeddings to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: [KBPedia] Extracted 4 MCQ choices for independent vector search.
+DEBUG: KBPedia matched 30 total concept(s) across 5 search(es).
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+DEBUG: Buffered 16 raw triple(s) for 'cell membrane'
+DEBUG: Buffered 15 raw triple(s) for 'membrane'
+DEBUG: Buffered 15 raw triple(s) for 'biological membrane stuff'
+DEBUG: Buffered 10 raw triple(s) for 'membrane protein complex'
+DEBUG: Buffered 13 raw triple(s) for 'cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'prokaryotic cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'bacterial cell wall'
+DEBUG: Buffered 13 raw triple(s) for 'back wall'
+DEBUG: Buffered 11 raw triple(s) for 'chloroplast'
+DEBUG: Buffered 6 raw triple(s) for 'chromoplast'
+DEBUG: Buffered 8 raw triple(s) for 'leucoplast'
+DEBUG: Buffered 15 raw triple(s) for 'photosynthetic pigment'
+DEBUG: Buffered 14 raw triple(s) for 'chlorophyll'
+DEBUG: Buffered 11 raw triple(s) for 'nucleus'
+DEBUG: Buffered 10 raw triple(s) for 'nuclear part'
+DEBUG: Buffered 9 raw triple(s) for 'nuclear substructure'
+DEBUG: Buffered 10 raw triple(s) for 'nuclear envelope'
+DEBUG: Buffered 11 raw triple(s) for 'atomic nucleus'
+DEBUG: End-filter LLM kept indices: [0, 1, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 21, 23, 24, 25, 26, 27] from 28 candidates.
+DEBUG: End-filter kept 21/28 concepts.
+DEBUG: Batch sending 21 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "cell wall": [\n    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elas'...
+DEBUG: Batch LLM filter kept 17/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'cytoplasmic part'
+DEBUG: Batch LLM filter kept 23/23 triple(s) for 'cell'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'membrane (biological)'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'protoplasm'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'cellulose'
+DEBUG: Batch LLM filter kept 12/16 triple(s) for 'cell membrane'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'membrane'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'biological membrane stuff'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'membrane protein complex'
+DEBUG: Batch LLM filter kept 9/13 triple(s) for 'cell wall'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'prokaryotic cell wall'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'bacterial cell wall'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'chloroplast'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'leucoplast'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'photosynthetic pigment'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'nucleus'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'nuclear part'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'nuclear substructure'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'nuclear envelope'
+DEBUG: Batch LLM filter kept 11/11 triple(s) for 'atomic nucleus'
+DEBUG: KBPedia found 21 grounded concept contexts.
+DEBUG: [LocalDocs VectorCypher] Extracted 4 MCQ choices for independent search.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+
+================================================================================
+GRAPHRAG LOGICAL EVIDENCE
+================================================================================
+1. Cell walls are the covering of botanical cells, external to the plasma membrane. (Global)
+2. Cell walls are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. (Global)
+3. These characteristics provide some mechanical support to non-woody plant tissues. (Global)
+4. The cell wall provides mechanical support to the plant cell. (Global)
+5. The cell wall is a structural component of the plant cell. (Global)
+6. The cell wall is external to the plasma membrane. (Global)
+7. The cell wall is composed of cellulose microfibrils. (Global)
+8. The cell wall provides protection to the plant cell. (Global)
+9. The cell wall is a characteristic feature of plant cells. (Global)
+10. The cell wall is a component of the plant cell that provides mechanical support. (Global)
+11. The cell wall is a structural component of the plant cell that provides mechanical support. (Global)
+12. The cell wall is a component of the plant cell that provides protection. (Global)
+13. The cell wall is a characteristic feature of plant cells that provides mechanical support. (Global)
+14. The cell wall is a structural component of the plant cell that provides protection. (Global)
+15. The cell wall is a component of the plant cell that provides mechanical support and protection. (Global)
+16. If a component of a plant cell provides mechanical support, then it is similar to the function of an animal skeleton. (Choice B)
+17. The cell wall provides mechanical support to the plant cell. (Choice B)
+18. The cell wall is a structural component of the plant cell that provides mechanical support. (Choice B)
+19. The cell wall is a component of the plant cell that provides mechanical support and protection. (Choice B)
+20. The cell wall is a characteristic feature of plant cells that provides mechanical support. (Choice B)
+21. The cell wall is a structural component of the plant cell that provides mechanical support and protection. (Choice B)
+================================================================================
+
+DEBUG: Transferring evidence to Prolog engine...
+
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+**Retrieved Context:**
+1. Cell walls are the covering of botanical cells, external to the plasma membrane. (Global)
+2. Cell walls are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. (Global)
+3. These characteristics provide some mechanical support to non-woody plant tissues. (Global)
+4. The cell wall provides mechanical support to the plant cell. (Global)
+5. The cell wall is a structural component of the plant cell. (Global)
+6. The cell wall is external to the plasma membrane. (Global)
+7. The cell wall is composed of cellulose microfibrils. (Global)
+8. The cell wall provides protection to the plant cell. (Global)
+9. The cell wall is a characteristic feature of plant cells. (Global)
+10. The cell wall is a component of the plant cell that provides mechanical support. (Global)
+11. The cell wall is a structural component of the plant cell that provides mechanical support. (Global)
+12. The cell wall is a component of the plant cell that provides protection. (Global)
+13. The cell wall is a characteristic feature of plant cells that provides mechanical support. (Global)
+14. The cell wall is a structural component of the plant cell that provides protection. (Global)
+15. The cell wall is a component of the plant cell that provides mechanical support and protection. (Global)
+16. If a component of a plant cell provides mechanical support, then it is similar to the function of an animal skeleton. (Choice B)
+17. The cell wall provides mechanical support to the plant cell. (Choice B)
+18. The cell wall is a structural component of the plant cell that provides mechanical support. (Choice B)
+19. The cell wall is a component of the plant cell that provides mechanical support and protection. (Choice B)
+20. The cell wall is a characteristic feature of plant cells that provides mechanical support. (Choice B)
+21. The cell wall is a structural component of the plant cell that provides mechanical support and protection. (Choice B)
+**Context from Prompt:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+provides_mechanical_support(cell_wall).
+
+similar_to_animal_skeleton(Component) :- provides_mechanical_support(Component).
+
+answer(OptionLetter) :- choice(OptionLetter, Component), similar_to_animal_skeleton(Component).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+provides_mechanical_support(cell_wall).
+
+similar_to_animal_skeleton(Component) :- provides_mechanical_support(Component).
+
+answer(OptionLetter) :- choice(OptionLetter, Component), similar_to_animal_skeleton(Component).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for b, because\n      choice holds for b, and cell_wall, and\n      similar_to_animal_skeleton holds for cell_wall, because\n         provides_mechanical_support holds for cell_wall\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for b, because
+      choice holds for b, and cell_wall, and
+      similar_to_animal_skeleton holds for cell_wall, because
+         provides_mechanical_support holds for cell_wall
+
+
+**Explainer Output:** 
+**Conclusion:** The answer is B, the cell wall.
+
+**Logical Path:** The solver reached this conclusion by identifying the component of the plant cell that provides mechanical support, which is similar to the function of an animal skeleton.
+
+The system arrived at this answer because:
+
+- **Choice Verification:** The solver verified that the cell wall is indeed the component associated with option B.
+- **Mechanical Support:** The solver then checked if the cell wall provides mechanical support, which is the key characteristic that makes it similar to an animal skeleton.
+- **Conclusion:** Since the cell wall does provide mechanical support, the system concluded that option B is the correct answer.
+
+**FINAL LLM OUTPUT:
+Based on my synthesis of knowledge, the answer is B. cell wall.
+The cell wall is a rigid covering composed of cellulose microfibrils that sits external to the plasma membrane. It provides mechanical support to non-woody plant tissues, performing a structural function analogous to an animal skeleton. This characteristic makes it the component of the plant cell that is most similar to the function of an animal skeleton.
+====The pipeline executed in 3.0234 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | CORRECT |   13.2s
+Prolog          | Predicted: [B]   | CORRECT |   16.9s
+Tuned LLM       | Predicted: [B]   | CORRECT |    0.7s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #1] Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods e...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['sample', 'comparison', 'process', 'research method', 'observational study', 'long-term study', 'drive', 'statistical method', 'scientific observation', 'trouble']
+DEBUG: Buffered 10 raw triple(s) for 'sample'
+DEBUG: Buffered 3 raw triple(s) for 'comparison'
+DEBUG: Buffered 11 raw triple(s) for 'process'
+DEBUG: Buffered 23 raw triple(s) for 'research method'
+DEBUG: Buffered 13 raw triple(s) for 'observational study'
+DEBUG: Buffered 4 raw triple(s) for 'long-term study'
+DEBUG: Buffered 8 raw triple(s) for 'drive'
+DEBUG: Buffered 10 raw triple(s) for 'statistical method'
+DEBUG: Buffered 11 raw triple(s) for 'scientific observation'
+DEBUG: Buffered 11 raw triple(s) for 'trouble'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 7, 8] from 10 candidates.
+DEBUG: End-filter kept 8/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "sample": ["definition: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample."],\n  "comparison": ["definition: A sub-coll'...
+DEBUG: Batch LLM filter kept 1/10 triple(s) for 'sample'
+DEBUG: Batch LLM filter kept 1/3 triple(s) for 'comparison'
+DEBUG: Batch LLM filter kept 1/11 triple(s) for 'process'
+DEBUG: Batch LLM filter kept 1/23 triple(s) for 'research method'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'observational study'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Identifying the factor that would make the investigation most difficult to replicate.",
+  "question": "Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature",
+  "context": [
+    "Janette conducts an investigation to see which foods make her feel more fatigued.",
+    "She eats one of four different foods each day at the same time for four days and then records how she feels.",
+    "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the factor that would make the investigation most difficult to replicate.', 'question': 'Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature', 'context': ['Janette conducts an investigation to see which foods make her feel more fatigued.', 'She eats one of four different foods each day at the same time for four days and then records how she feels.', 'She asks her friend Carmen to do the same investigation to see if she gets similar results.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+DEBUG: EXTRACTED CONTEXT (Len: 3): ['Janette conducts an investigation to see which foods make her feel more fatigued.', 'She eats one of four different foods each day at the same time for four days and then records how she feels.', 'She asks her friend Carmen to do the same investigation to see if she gets similar results.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which would make the investigation most difficult to replicate? A) measuring the' | context items=3
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 3 text chunk(s)...
+Processing text context: Janette conducts an investigation to see which foods make her feel more fatigued.
+Text context processed: run_id='2f00be87-b9fd-4c14-9266-7b2cc8aa101a' result={'resolver': {'number_of_nodes_to_resolve': 4, 'number_of_created_nodes': 4}}
+Processing text context: She eats one of four different foods each day at the same time for four days and then records how she feels.
+Text context processed: run_id='6a9f4b92-72d0-4aea-9c3d-e742b666e4b0' result={'resolver': {'number_of_nodes_to_resolve': 9, 'number_of_created_nodes': 9}}
+Processing text context: She asks her friend Carmen to do the same investigation to see if she gets similar results.
+Text context processed: run_id='233985e2-08f7-48cb-bf28-0ea4f894c908' result={'resolver': {'number_of_nodes_to_resolve': 14, 'number_of_created_nodes': 13}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Computing query embeddings to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: [KBPedia] Extracted 4 MCQ choices for independent vector search.
+DEBUG: KBPedia matched 30 total concept(s) across 5 search(es).
+DEBUG: Buffered 10 raw triple(s) for 'statistical method'
+DEBUG: Buffered 10 raw triple(s) for 'sample'
+DEBUG: Buffered 11 raw triple(s) for 'process'
+DEBUG: Buffered 11 raw triple(s) for 'scientific observation'
+DEBUG: Buffered 12 raw triple(s) for 'level of substance in system'
+DEBUG: Buffered 16 raw triple(s) for 'sampling'
+DEBUG: Buffered 3 raw triple(s) for 'comparison'
+DEBUG: Buffered 14 raw triple(s) for 'testing'
+DEBUG: Buffered 4 raw triple(s) for 'long-term study'
+DEBUG: Buffered 23 raw triple(s) for 'sensor'
+DEBUG: Buffered 10 raw triple(s) for 'fatigue'
+DEBUG: Buffered 4 raw triple(s) for 'exhausting'
+DEBUG: Buffered 10 raw triple(s) for 'aircraft weight measurement'
+DEBUG: Buffered 9 raw triple(s) for 'mechanical test'
+DEBUG: Buffered 14 raw triple(s) for 'strength'
+DEBUG: Buffered 9 raw triple(s) for 'food event'
+DEBUG: Buffered 8 raw triple(s) for 'feed'
+DEBUG: Buffered 24 raw triple(s) for 'food ingredient'
+DEBUG: Buffered 26 raw triple(s) for 'cuisine'
+DEBUG: Buffered 7 raw triple(s) for 'topics of 'consuming foods''
+DEBUG: Buffered 8 raw triple(s) for 'chart'
+DEBUG: Buffered 8 raw triple(s) for 'chart pattern'
+DEBUG: Buffered 6 raw triple(s) for 'record'
+DEBUG: Buffered 10 raw triple(s) for 'organizational chart'
+DEBUG: Buffered 8 raw triple(s) for 'statistical charts and diagrams'
+DEBUG: Buffered 12 raw triple(s) for 'heating food'
+DEBUG: Buffered 19 raw triple(s) for 'cooking'
+DEBUG: Buffered 16 raw triple(s) for 'temperature change'
+DEBUG: Buffered 14 raw triple(s) for 'temperature gauge'
+DEBUG: Buffered 10 raw triple(s) for 'boiling food'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 4, 5, 7, 10, 15, 16, 17, 20, 22, 25, 27, 28] from 30 candidates.
+DEBUG: End-filter kept 15/30 concepts.
+DEBUG: Batch sending 15 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "fatigue": [\n    "definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue.",\n    "subclass of: illness",\n    "subclass of: medical condition"\n  ],\n  '...
+DEBUG: Batch LLM filter kept 1/10 triple(s) for 'statistical method'
+DEBUG: Batch LLM filter kept 1/10 triple(s) for 'sample'
+DEBUG: Batch LLM filter kept 1/11 triple(s) for 'process'
+DEBUG: Batch LLM filter kept 12/12 triple(s) for 'level of substance in system'
+DEBUG: Batch LLM filter kept 16/16 triple(s) for 'sampling'
+DEBUG: Batch LLM filter kept 1/14 triple(s) for 'testing'
+DEBUG: Batch LLM filter kept 3/10 triple(s) for 'fatigue'
+DEBUG: Batch LLM filter kept 1/9 triple(s) for 'food event'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'feed'
+DEBUG: Batch LLM filter kept 24/24 triple(s) for 'food ingredient'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'chart'
+DEBUG: Batch LLM filter kept 1/6 triple(s) for 'record'
+DEBUG: Batch LLM filter kept 1/12 triple(s) for 'heating food'
+DEBUG: Batch LLM filter kept 1/16 triple(s) for 'temperature change'
+DEBUG: Batch LLM filter kept 14/14 triple(s) for 'temperature gauge'
+DEBUG: KBPedia found 15 grounded concept contexts.
+DEBUG: [LocalDocs VectorCypher] Extracted 4 MCQ choices for independent search.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+
+================================================================================
+GRAPHRAG LOGICAL EVIDENCE
+================================================================================
+1. The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. (Global)
+2. Statistics offers methods to estimate and correct for any bias within the sample and data collection procedures. (Global)
+3. The collection of all samples of some PartiallyTangible stuff, to be used for study, is called a sample. (Global)
+4. A specialization of PhysicalQuantity, each instance of LevelOfSubstanceInSystem is a qualitative or quantitative subclass of tangible physical quantity. (Global)
+5. The collection of events in which a portion of some substance which is to be tested is separated out from the larger mass of it is called sampling. (Global)
+6. Sampling is a subclass of physical creation event, purposeful composite physical and mental activity, removal by moving, complete separation, creation event, event in which something is created or destroyed or both, action (purposeful), and moving. (Global)
+7. If the same foods are eaten, then the investigation would be easier to replicate. (Choice B)
+8. If the same foods are eaten, then the same foods are at the same temperature. (Choice B)
+9. If the same foods are eaten, then the same foods are at the same level of substance in the system. (Choice B)
+10. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a qualitative or quantitative subclass of tangible physical quantity. (Choice B)
+11. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a specialization of PhysicalQuantity. (Choice B)
+12. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity. (Choice B)
+13. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature. (Choice B)
+14. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a specialization of PhysicalQuantity. (Choice B)
+15. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity. (Choice B)
+16. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system. (Choice B)
+17. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a specialization of PhysicalQuantity. (Choice B)
+18. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity. (Choice B)
+19. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system. (Choice B)
+20. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a specialization of PhysicalQuantity. (Choice B)
+21. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system. (Choice B)
+================================================================================
+
+DEBUG: Transferring evidence to Prolog engine...
+
+**User Question:**
+Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+**Retrieved Context:**
+1. The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. (Global)
+2. Statistics offers methods to estimate and correct for any bias within the sample and data collection procedures. (Global)
+3. The collection of all samples of some PartiallyTangible stuff, to be used for study, is called a sample. (Global)
+4. A specialization of PhysicalQuantity, each instance of LevelOfSubstanceInSystem is a qualitative or quantitative subclass of tangible physical quantity. (Global)
+5. The collection of events in which a portion of some substance which is to be tested is separated out from the larger mass of it is called sampling. (Global)
+6. Sampling is a subclass of physical creation event, purposeful composite physical and mental activity, removal by moving, complete separation, creation event, event in which something is created or destroyed or both, action (purposeful), and moving. (Global)
+7. If the same foods are eaten, then the investigation would be easier to replicate. (Choice B)
+8. If the same foods are eaten, then the same foods are at the same temperature. (Choice B)
+9. If the same foods are eaten, then the same foods are at the same level of substance in the system. (Choice B)
+10. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a qualitative or quantitative subclass of tangible physical quantity. (Choice B)
+11. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a specialization of PhysicalQuantity. (Choice B)
+12. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity. (Choice B)
+13. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature. (Choice B)
+14. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a specialization of PhysicalQuantity. (Choice B)
+15. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity. (Choice B)
+16. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system. (Choice B)
+17. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a specialization of PhysicalQuantity. (Choice B)
+18. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity. (Choice B)
+19. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system. (Choice B)
+20. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a specialization of PhysicalQuantity. (Choice B)
+21. If the same foods are eaten, then the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same temperature, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system, which is a subclass of tangible physical quantity, and the same foods are at the same level of substance in the system. (Choice B)
+**Context from Prompt:**
+Janette conducts an investigation to see which foods make her feel more fatigued.
+She eats one of four different foods each day at the same time for four days and then records how she feels.
+She asks her friend Carmen to do the same investigation to see if she gets similar results.
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, measuring_the_amount_of_fatigue).
+choice(b, making_sure_the_same_foods_are_eaten).
+choice(c, recording_observations_in_the_same_chart).
+choice(d, making_sure_the_foods_are_at_the_same_temperature).
+
+same_foods_eaten(Janette, Carmen) :- same_time(Janette, Carmen), same_food(Janette, Carmen).
+
+difficult_to_replicate :- same_foods_eaten(_, _).
+
+answer(OptionLetter) :- choice(OptionLetter, Choice), difficult_to_replicate, same_foods_eaten(_, _), Choice = making_sure_the_same_foods_are_eaten.
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog Error: same_foods_eaten/2: Unknown procedure: same_time/2
+Iteration 1 | Extracted Database:
+choice(a, measuring_the_amount_of_fatigue).
+choice(b, making_sure_the_same_foods_are_eaten).
+choice(c, recording_observations_in_the_same_chart).
+choice(d, making_sure_the_foods_are_at_the_same_temperature).
+
+same_time(Janette, Carmen) :- same_day(Janette, Carmen).
+same_food(Janette, Carmen) :- same_food_eaten(Janette, Carmen).
+same_foods_eaten(Janette, Carmen) :- same_time(Janette, Carmen), same_food(Janette, Carmen).
+difficult_to_replicate :- same_foods_eaten(_, _).
+
+answer(OptionLetter) :- choice(OptionLetter, Choice), not difficult_to_replicate, Choice = making_sure_the_same_foods_are_eaten.
+
+Iteration 1 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 1 | Prolog code generation success
+**Extracted database:**
+choice(a, measuring_the_amount_of_fatigue).
+choice(b, making_sure_the_same_foods_are_eaten).
+choice(c, recording_observations_in_the_same_chart).
+choice(d, making_sure_the_foods_are_at_the_same_temperature).
+
+same_time(Janette, Carmen) :- same_day(Janette, Carmen).
+same_food(Janette, Carmen) :- same_food_eaten(Janette, Carmen).
+same_foods_eaten(Janette, Carmen) :- same_time(Janette, Carmen), same_food(Janette, Carmen).
+difficult_to_replicate :- same_foods_eaten(_, _).
+
+answer(OptionLetter) :- choice(OptionLetter, Choice), not difficult_to_replicate, Choice = making_sure_the_same_foods_are_eaten.
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for b, because\n      choice holds for b, and making_sure_the_same_foods_are_eaten, and\n      there is no evidence that difficult_to_replicate holds, because\n         there is no evidence that same_foods_eaten holds for anything, and anything, because\n            there is no evidence that same_time holds for anything, and anything, because\n               there is no evidence that same_day holds for anything, and anything\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for b, because
+      choice holds for b, and making_sure_the_same_foods_are_eaten, and
+      there is no evidence that difficult_to_replicate holds, because
+         there is no evidence that same_foods_eaten holds for anything, and anything, because
+            there is no evidence that same_time holds for anything, and anything, because
+               there is no evidence that same_day holds for anything, and anything
+
+
+**Explainer Output:** 
+**Conclusion:** The investigation would be most difficult to replicate if Janette and Carmen make sure the same foods are eaten.
+
+**Logical Path:** The solver reached this conclusion by analyzing the conditions under which the investigation would be difficult to replicate. Here's the step-by-step explanation:
+
+1. **Definition of Difficulty:** The system defines "difficult to replicate" as a situation where the same foods are eaten by both Janette and Carmen.
+2. **Verification of Conditions:** The solver verifies that there is no evidence that the same foods are eaten by both Janette and Carmen. This is because the solver cannot find any evidence that the same time is shared by both Janette and Carmen, which is a prerequisite for eating the same foods.
+3. **Lack of Shared Time:** The solver concludes that there is no evidence that the same day is shared by both Janette and Carmen, which is necessary for the same time to be shared.
+4. **Conclusion:** Since the conditions for eating the same foods are not met, the system concludes that making sure the same foods are eaten would make the investigation most difficult to replicate.
+
+In summary, the solver's conclusion is based on the absence of evidence that Janette and Carmen share the same time, which is necessary for them to eat the same foods.
+
+**FINAL LLM OUTPUT:
+Based on my synthesis of knowledge, the answer is A. measuring the amount of fatigue.
+Measuring the amount of fatigue is a subjective task that can be influenced by various factors, such as individual tolerance and personal experiences. This makes it challenging to replicate the investigation accurately, as the same level of fatigue may not be perceived by Janette and Carmen.
+====The pipeline executed in 8.1498 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | WRONG   |    9.1s
+Prolog          | Predicted: [A]   | CORRECT |   30.7s
+Tuned LLM       | Predicted: [B]   | WRONG   |    1.1s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #2] Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-oce...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['oceanic ridge', 'undersea valley', 'rift valley', 'oceanic plateau', 'seamount', 'geological basin', 'fracture zone', 'subduction zones', 'ocean trench', 'rifts or graben']
+DEBUG: Buffered 8 raw triple(s) for 'oceanic ridge'
+DEBUG: Buffered 9 raw triple(s) for 'undersea valley'
+DEBUG: Buffered 14 raw triple(s) for 'rift valley'
+DEBUG: Buffered 8 raw triple(s) for 'oceanic plateau'
+DEBUG: Buffered 12 raw triple(s) for 'seamount'
+DEBUG: Buffered 17 raw triple(s) for 'geological basin'
+DEBUG: Buffered 13 raw triple(s) for 'fracture zone'
+DEBUG: Buffered 8 raw triple(s) for 'subduction zones'
+DEBUG: Buffered 18 raw triple(s) for 'ocean trench'
+DEBUG: Buffered 13 raw triple(s) for 'rifts or graben'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "oceanic ridge": ["definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics.", "subclass of: plate tectonics"],\n  "undersea valley": ["definition: The axial depress'...
+DEBUG: Batch LLM filter kept 2/8 triple(s) for 'oceanic ridge'
+DEBUG: Batch LLM filter kept 1/9 triple(s) for 'undersea valley'
+DEBUG: Batch LLM filter kept 2/14 triple(s) for 'rift valley'
+DEBUG: Batch LLM filter kept 0/8 triple(s) for 'oceanic plateau'
+DEBUG: Batch LLM filter kept 0/12 triple(s) for 'seamount'
+DEBUG: Removed 2 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 3 grounded concept contexts.
+DEBUG: KBPedia returned 3 items.
+DEBUG: Merged Result Count: 3
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Identifying the feature that does not form as a result of tectonic plates diverging.",
+  "question": "Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the feature that does not form as a result of tectonic plates diverging.', 'question': 'Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which feature does not form as a result of tectonic plates diverging? A. trench ' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Computing query embeddings to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: [KBPedia] Extracted 4 MCQ choices for independent vector search.
+DEBUG: KBPedia matched 30 total concept(s) across 5 search(es).
+DEBUG: Buffered 8 raw triple(s) for 'oceanic ridge'
+DEBUG: Buffered 9 raw triple(s) for 'undersea valley'
+DEBUG: Buffered 14 raw triple(s) for 'rift valley'
+DEBUG: Buffered 8 raw triple(s) for 'oceanic plateau'
+DEBUG: Buffered 12 raw triple(s) for 'seamount'
+DEBUG: Buffered 17 raw triple(s) for 'geological basin'
+DEBUG: Buffered 13 raw triple(s) for 'fracture zone'
+DEBUG: Buffered 8 raw triple(s) for 'subduction zones'
+DEBUG: Buffered 18 raw triple(s) for 'ocean trench'
+DEBUG: Buffered 13 raw triple(s) for 'rifts or graben'
+DEBUG: Buffered 10 raw triple(s) for 'trench'
+DEBUG: Buffered 10 raw triple(s) for 'oceanic trench of the South China Sea'
+DEBUG: Buffered 10 raw triple(s) for 'oceanic trenches of the Caribbean Sea'
+DEBUG: Buffered 10 raw triple(s) for 'Marianas Trench'
+DEBUG: Buffered 13 raw triple(s) for 'the Great Rift Valley'
+DEBUG: Buffered 10 raw triple(s) for 'Lake Tanganyika'
+DEBUG: Buffered 9 raw triple(s) for 'Lake Nyasa'
+DEBUG: Buffered 9 raw triple(s) for 'undersea shelf valley'
+DEBUG: Buffered 11 raw triple(s) for 'drainage basin'
+DEBUG: Buffered 13 raw triple(s) for 'ocean'
+DEBUG: Buffered 4 raw triple(s) for 'the Pacific Rim'
+DEBUG: Buffered 9 raw triple(s) for 'undersea ridge'
+DEBUG: Buffered 9 raw triple(s) for 'beach ridge'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11, 12, 13, 15, 16, 17, 20, 21] from 23 candidates.
+DEBUG: End-filter kept 18/23 concepts.
+DEBUG: Batch sending 18 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "rift valley": [\n    "definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth\'s crust, bounded on bot'...
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'oceanic ridge'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'undersea valley'
+DEBUG: Batch LLM filter kept 1/14 triple(s) for 'rift valley'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'oceanic plateau'
+DEBUG: Batch LLM filter kept 12/12 triple(s) for 'seamount'
+DEBUG: Batch LLM filter kept 17/17 triple(s) for 'geological basin'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'fracture zone'
+DEBUG: Batch LLM filter kept 8/8 triple(s) for 'subduction zones'
+DEBUG: Batch LLM filter kept 18/18 triple(s) for 'ocean trench'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'rifts or graben'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'oceanic trench of the South China Sea'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'oceanic trenches of the Caribbean Sea'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'Marianas Trench'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'Lake Tanganyika'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'Lake Nyasa'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'undersea shelf valley'
+DEBUG: Batch LLM filter kept 4/4 triple(s) for 'the Pacific Rim'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'undersea ridge'
+DEBUG: KBPedia found 18 grounded concept contexts.
+DEBUG: [LocalDocs VectorCypher] Extracted 4 MCQ choices for independent search.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+
+================================================================================
+GRAPHRAG LOGICAL EVIDENCE
+================================================================================
+1. Tectonic plates diverging results in the formation of new seafloor. (Global)
+2. A mid-ocean ridge is an underwater mountain system formed by plate tectonics. (Global)
+3. A mid-ocean ridge consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. (Global)
+4. The production of new seafloor results from mantle upwelling. (Global)
+5. A rift valley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults. (Global)
+6. A rift valley is found both on continents and under oceans. (Global)
+7. A mid-ocean ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. (Global)
+8. A mid-ocean ridge is responsible for the formation of a trench. (Choice A)
+9. A mid-ocean ridge is responsible for the formation of a rift valley. (Choice B)
+10. A mid-ocean ridge is responsible for the formation of an ocean basin. (Choice C)
+11. A mid-ocean ridge is responsible for the formation of a mid-ocean ridge itself. (Choice D)
+================================================================================
+
+DEBUG: Transferring evidence to Prolog engine...
+
+**User Question:**
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+**Retrieved Context:**
+1. Tectonic plates diverging results in the formation of new seafloor. (Global)
+2. A mid-ocean ridge is an underwater mountain system formed by plate tectonics. (Global)
+3. A mid-ocean ridge consists of various mountains linked in chains, typically having a valley known as a rift running along its spine. (Global)
+4. The production of new seafloor results from mantle upwelling. (Global)
+5. A rift valley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults. (Global)
+6. A rift valley is found both on continents and under oceans. (Global)
+7. A mid-ocean ridge is characteristic of what is known as an oceanic spreading center, which is responsible for seafloor spreading. (Global)
+8. A mid-ocean ridge is responsible for the formation of a trench. (Choice A)
+9. A mid-ocean ridge is responsible for the formation of a rift valley. (Choice B)
+10. A mid-ocean ridge is responsible for the formation of an ocean basin. (Choice C)
+11. A mid-ocean ridge is responsible for the formation of a mid-ocean ridge itself. (Choice D)
+**Context from Prompt:**
+Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(trench, plate_convergence).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, trench).
+choice(b, rift_valley).
+choice(c, ocean_basin).
+choice(d, mid_ocean_ridge).
+
+forms_from(trench, subduction_zone).
+forms_from(trench, plate_convergence).
+forms_from(rift_valley, plate_divergence).
+forms_from(ocean_basin, plate_divergence).
+forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and trench, and\n      there is no evidence that forms_from holds for trench, and plate_divergence\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and trench, and
+      there is no evidence that forms_from holds for trench, and plate_divergence
+
+
+**Explainer Output:** 
+**Conclusion:** The feature that does not form as a result of tectonic plates diverging is a trench.
+
+**Logical Explanation:** The solver determined this by examining the relationships between geological features and the processes that create them. The key step in the reasoning is:
+
+* The system verified that a trench is formed as a result of subduction zones and plate convergence (forms_from(trench, subduction_zone) and forms_from(trench, plate_convergence)).
+* However, the solver found no evidence that a trench is formed as a result of plate divergence (there is no evidence that forms_from holds for trench and plate_divergence).
+* Since the system was looking for a feature that does not form as a result of plate divergence, it concluded that a trench is the correct answer.
+
+In other words, the solver ruled out the other options because they are all formed as a result of plate divergence (forms_from(rift_valley, plate_divergence), forms_from(ocean_basin, plate_divergence), and forms_from(mid_ocean_ridge, plate_divergence)). The only feature that does not fit this pattern is a trench.
+
+**FINAL LLM OUTPUT:
+Based on my synthesis of knowledge, the answer is A. trench.
+A trench is formed as a result of subduction zones and plate convergence, not plate divergence. The solver found no evidence that a trench is formed as a result of plate divergence, making it the correct answer.
+====The pipeline executed in 3.6024 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [A]   | CORRECT |    9.3s
+Prolog          | Predicted: [A]   | CORRECT |   15.4s
+Tuned LLM       | Predicted: [A]   | CORRECT |    1.3s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #3] A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet a...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['bean plant', 'millet plant', 'cocoa bean', 'bean (food)', 'coffee cherry', 'type of soil', 'ground coffee', 'grass seed', 'ratio quantity', 'edible legume seed']
+DEBUG: Buffered 16 raw triple(s) for 'bean plant'
+DEBUG: Buffered 10 raw triple(s) for 'millet plant'
+DEBUG: Buffered 10 raw triple(s) for 'cocoa bean'
+DEBUG: Buffered 13 raw triple(s) for 'bean (food)'
+DEBUG: Buffered 10 raw triple(s) for 'coffee cherry'
+DEBUG: Buffered 10 raw triple(s) for 'type of soil'
+DEBUG: Buffered 13 raw triple(s) for 'ground coffee'
+DEBUG: Buffered 10 raw triple(s) for 'grass seed'
+DEBUG: Buffered 19 raw triple(s) for 'ratio quantity'
+DEBUG: Buffered 13 raw triple(s) for 'edible legume seed'
+DEBUG: End-filter LLM kept indices: [0, 3, 5, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 6/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "bean plant": ["definition: Individual bean plants.", "subclass of: leguminous plant", "has subclass: Black-eyed pea"],\n  "type of soil": ["definition: Types of soil."],\n  "amount of water": ["def'...
+DEBUG: Batch LLM filter kept 3/16 triple(s) for 'bean plant'
+DEBUG: Batch LLM filter kept 13/13 triple(s) for 'bean (food)'
+DEBUG: Batch LLM filter kept 1/10 triple(s) for 'type of soil'
+DEBUG: Batch LLM filter kept 10/10 triple(s) for 'grass seed'
+DEBUG: Batch LLM filter kept 19/19 triple(s) for 'ratio quantity'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Identifying the differing factor between the two pots as the context, and the multiple choice question as the question.",
+  "question": "Which factor was different for the two pots? A. amount of water B. amount of light C. type of soil D. type of seed",
+  "context": [
+    "A student planted two bean seeds in two identical pots containing the same type of soil.",
+    "He placed one pot in a closet and the other near a sunny window.",
+    "Each day, he poured 15 milliliters of water into each pot."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the differing factor between the two pots as the context, and the multiple choice question as the question.', 'question': 'Which factor was different for the two pots? A. amount of water B. amount of light C. type of soil D. type of seed', 'context': ['A student planted two bean seeds in two identical pots containing the same type of soil.', 'He placed one pot in a closet and the other near a sunny window.', 'Each day, he poured 15 milliliters of water into each pot.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which factor was different for the two pots? A. amount of water B. amount of light C. type of soil D. type of seed
+DEBUG: EXTRACTED CONTEXT (Len: 3): ['A student planted two bean seeds in two identical pots containing the same type of soil.', 'He placed one pot in a closet and the other near a sunny window.', 'Each day, he poured 15 milliliters of water into each pot.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which factor was different for the two pots? A. amount of water B. amount of lig' | context items=3
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 3 text chunk(s)...
+Processing text context: A student planted two bean seeds in two identical pots containing the same type of soil.
+Text context processed: run_id='1102c208-c3f7-4305-a1d1-5c07c58b144f' result={'resolver': {'number_of_nodes_to_resolve': 5, 'number_of_created_nodes': 5}}
+Processing text context: He placed one pot in a closet and the other near a sunny window.
+Text context processed: run_id='33a2779f-27d2-48b9-a64e-cdba2edbaeaf' result={'resolver': {'number_of_nodes_to_resolve': 8, 'number_of_created_nodes': 8}}
+Processing text context: Each day, he poured 15 milliliters of water into each pot.
+Text context processed: run_id='ad7f1dec-7601-481b-9d6b-2da4c5edced1' result={'resolver': {'number_of_nodes_to_resolve': 13, 'number_of_created_nodes': 12}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
