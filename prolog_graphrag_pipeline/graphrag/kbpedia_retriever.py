@@ -266,29 +266,13 @@ Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
             return []
 
     def get_neighborhood(self, uri: str) -> List[str]:
-        """Get the ontology neighborhood of a concept (ancestors, children, siblings)."""
+        """Get the ontology neighborhood of a concept. Reduced strictly to immediate parent to minimize noise."""
         try:
             records, _, _ = self.driver.execute_query(
                 """
                 MATCH (n:KBPediaConcept {uri: $uri})
-                
-                CALL (n) {
-                    OPTIONAL MATCH (n)-[:SUBCLASS_OF*1..2]->(ancestor:KBPediaConcept)
-                    RETURN collect(DISTINCT {name: ancestor.name, def: ancestor.definition})[0..8] AS ancestors
-                }
-                
-                CALL (n) {
-                    OPTIONAL MATCH (child:KBPediaConcept)-[:SUBCLASS_OF]->(n)
-                    RETURN collect(DISTINCT {name: child.name, def: child.definition})[0..12] AS children
-                }
-                
-                CALL (n) {
-                    OPTIONAL MATCH (n)-[:SUBCLASS_OF]->(:KBPediaConcept)<-[:SUBCLASS_OF]-(sibling:KBPediaConcept)
-                    WHERE sibling.uri <> n.uri
-                    RETURN collect(DISTINCT {name: sibling.name, def: sibling.definition})[0..5] AS siblings
-                }
-                
-                RETURN ancestors, children, siblings
+                OPTIONAL MATCH (n)-[:SUBCLASS_OF]->(ancestor:KBPediaConcept)
+                RETURN collect(DISTINCT {name: ancestor.name})[0..2] AS ancestors
                 """,
                 uri=uri,
                 database_="neo4j",
@@ -299,15 +283,7 @@ Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
                 row = records[0]
                 for a in row.get("ancestors", []):
                     if a and a.get("name"):
-                        # Only keep the ancestor NAME — ancestor definition blurbs are long
-                        # encyclopedia text that bloats context without aiding the LLM.
                         triples.append(f"subclass of: {a['name']}")
-                for c in row.get("children", []):
-                    if c and c.get("name"):
-                        triples.append(f"has subclass: {c['name']}")
-                for s in row.get("siblings", []):
-                    if s and s.get("name"):
-                        triples.append(f"sibling concept: {s['name']}")
             return triples
         except Exception as e:
             print(f"DEBUG: KBPedia neighborhood error: {e}")
@@ -558,14 +534,16 @@ Output ONLY the JSON list, nothing else.
                 temp_embedder = SentenceTransformer("all-MiniLM-L6-v2")
                 embedder_fn = lambda text: temp_embedder.encode(text).tolist()
 
-            # Schedule searches: Main query + up to 4 MCQ choices
+            # Schedule searches: Main query + individually extracted concepts
             search_strings = [(query_text, top_k * 2)]
-            mcq_choices = re.findall(r'\b[A-D][.)]\s*(.+)', filter_query)
-            if mcq_choices:
-                print(f"DEBUG: [KBPedia] Extracted {len(mcq_choices)} MCQ choices for independent vector search.", flush=True)
-                choice_limit = max(2, top_k)
-                for choice in mcq_choices:
-                    search_strings.append((choice.strip(), choice_limit))
+            extracted_concepts = self.extract_entities(filter_query)
+            if extracted_concepts:
+                print(f"DEBUG: [KBPedia] Extracted {len(extracted_concepts)} concepts for independent vector search: {extracted_concepts}", flush=True)
+                concept_limit = max(2, top_k)
+                for concept in extracted_concepts:
+                    # Don't re-search the whole query if it somehow got returned
+                    if concept.strip().lower() != query_text.strip().lower():
+                        search_strings.append((concept.strip(), concept_limit))
 
             # Execute searches
             for text_to_embed, limit in search_strings:
