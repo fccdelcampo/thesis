@@ -6934,3 +6934,97 @@ Traceback (most recent call last):
     def __exit__(self, typ, value, traceback):
 
 KeyboardInterrupt
+AI2 ARC:   0%|                                                                                             | 0/100 [00:00<?, ?it/s]AI2 ARC:   0%|                              | 0/100 [00:00<?, ?it/s]AI2 ARC:   1%|2                     | 1/100 [00:29<48:45, 29.55s/it]AI2 ARC:   2%|4                     | 2/100 [01:05<54:13, 33.19s/it]AI2 ARC:   3%|6                     | 3/100 [01:25<44:06, 27.29s/it]AI2 ARC:   4%|8                     | 4/100 [01:59<47:47, 29.87s/it]AI2 ARC:   5%|#1                    | 5/100 [02:31<48:18, 30.51s/it]AI2 ARC:   6%|#1                 | 6/100 [07:12<3:01:20, 115.75s/it]AI2 ARC:   7%|#3                 | 7/100 [09:38<3:15:03, 125.85s/it]AI2 ARC:   8%|#6                  | 8/100 [10:08<2:26:12, 95.35s/it]AI2 ARC:   9%|#7                 | 9/100 [16:43<4:46:15, 188.74s/it]AI2 ARC:  10%|#8                | 10/100 [17:04<3:25:35, 137.07s/it]AI2 ARC:  11%|#9                | 11/100 [17:28<2:32:05, 102.53s/it]AI2 ARC:  12%|##2                | 12/100 [17:58<1:57:50, 80.35s/it]AI2 ARC:  13%|##4                | 13/100 [18:20<1:31:12, 62.91s/it]AI2 ARC:  14%|##6                | 14/100 [18:49<1:15:05, 52.39s/it]AI2 ARC:  15%|##8                | 15/100 [19:17<1:04:07, 45.26s/it]AI2 ARC:  16%|###3                 | 16/100 [19:41<54:13, 38.73s/it]AI2 ARC:  17%|###5                 | 17/100 [20:04<47:08, 34.08s/it]AI2 ARC:  18%|###7                 | 18/100 [20:26<41:26, 30.32s/it]AI2 ARC:  19%|###9                 | 19/100 [20:45<36:23, 26.96s/it]AI2 ARC:  20%|####2                | 20/100 [21:07<33:57, 25.47s/it]AI2 ARC:  21%|####4                | 21/100 [21:30<32:26, 24.64s/it]AI2 ARC:  22%|####6                | 22/100 [21:58<33:19, 25.64s/it]AI2 ARC:  22%|####1              | 22/100 [22:07<1:18:25, 60.32s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 97, in run_benchmarks
+    ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 261, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 240, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 144, in run_test_case
+    gr_result = run_pipeline_safe(run_graphrag, question)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 123, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 502, in run_pipeline
+    result = generate_answer(question, retriever, retriever_llm, original_query=question)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 418, in generate_answer
+    return generate(llm, retriever, query, original_query=original_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\llm.py", line 19, in generate
+    graph_rag_results = graph_rag.search(
+                        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\generation\graphrag.py", line 151, in search
+    retriever_result: RetrieverResult = self.retriever.search(
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\retriever.py", line 167, in search
+    kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query, seeded_entities=list(extracted_entities))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 470, in search
+    batch_results = self.filter_triples_batch(query_text, batch_data, original_query=filter_query)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 294, in filter_triples_batch
+    raw = self.llm.invoke(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 227, in invoke
+    return self._openai_invoke(input, message_history, system_instruction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 203, in _openai_invoke
+    thread.join(timeout=timeout_sec + 5) # Slight buffer for thread overhead
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1130, in join
+    self._wait_for_tstate_lock(timeout=max(timeout, 0))
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1146, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+AI2 ARC:   0%|                                                                 | 0/100 [00:00<?, ?it/s]AI2 ARC:   1%|5                                                        | 1/100 [00:25<41:53, 25.39s/it]AI2 ARC:   2%|#1                                                       | 2/100 [00:58<48:37, 29.77s/it]AI2 ARC:   3%|#7                                                       | 3/100 [01:20<42:16, 26.15s/it]AI2 ARC:   4%|##2                                                      | 4/100 [01:50<44:26, 27.78s/it]AI2 ARC:   5%|##8                                                      | 5/100 [02:17<43:37, 27.56s/it]AI2 ARC:   6%|###4                                                     | 6/100 [02:44<42:40, 27.24s/it]AI2 ARC:   7%|###8                                                   | 7/100 [05:08<1:41:22, 65.40s/it]AI2 ARC:   8%|####4                                                  | 8/100 [05:41<1:24:46, 55.29s/it]AI2 ARC:   9%|####9                                                  | 9/100 [06:06<1:09:26, 45.78s/it]AI2 ARC:  10%|#####6                                                  | 10/100 [06:28<57:26, 38.30s/it]AI2 ARC:  11%|#####9                                                | 11/100 [08:50<1:43:52, 70.03s/it]AI2 ARC:  12%|######4                                               | 12/100 [09:21<1:25:23, 58.23s/it]AI2 ARC:  13%|#######                                               | 13/100 [09:43<1:08:25, 47.19s/it]AI2 ARC:  14%|#######5                                              | 14/100 [12:10<1:50:52, 77.35s/it]AI2 ARC:  15%|########1                                             | 15/100 [12:50<1:33:56, 66.31s/it]AI2 ARC:  16%|########6                                             | 16/100 [13:13<1:14:31, 53.23s/it]AI2 ARC:  17%|#########1                                            | 17/100 [13:34<1:00:17, 43.59s/it]AI2 ARC:  17%|#########1                                            | 17/100 [13:55<1:07:57, 49.13s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 97, in run_benchmarks
+    ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 261, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 240, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 149, in run_test_case
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, question, flag="prolog")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 123, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 73, in run_pipeline
+    pgr_results = prolog_driver.run_pipeline(user_question=user_prompt, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt, graphrag_answer=graphrag_answer) if flag != "q" else None
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\prolog\prolog_driver.py", line 125, in run_pipeline
+    database, query = generate_prolog_code(
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\prolog\prolog_generator.py", line 437, in generate_prolog_code
+    print(f"Iteration {i} | Extracted Query:\n{query}\n")
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\prolog\prolog_generator.py", line 288, in _run_prolog_attempt
+    ### PREVIOUS CODE (FIX MARKED LINES):
+                     ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\prolog\prolog_llms.py", line 128, in generate
+    return generate_response(prompt=prompt, flag=flag)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\prolog\prolog_llms.py", line 201, in generate_response
+    thread.join(timeout=LLM_TIMEOUT)
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1130, in join
+    self._wait_for_tstate_lock(timeout=max(timeout, 0))
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1146, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

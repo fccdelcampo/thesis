@@ -1,0 +1,24 @@
+﻿IN:  choice(a, Measure liquids accurately into a beaker).
+OUT: choice(a, measure_liquids_accurately_beaker).
+
+IN:  choice(b, Never cut objects while holding them in your hands).
+OUT: choice(b, never_cut_objects_hands).
+
+IN:  choice(c, Wear safety goggles when handling dangerous substances).
+OUT: choice(c, wear_safety_goggles_dangerous_substances).
+
+IN:  choice(d, when_noting_odors_wave_fumes_toward_your_nose_instead_of_putting_your_face_over_the_source).
+OUT: choice(d, odors_wave_fumes_toward_nose).
+
+IN:  choice(a, cell membrane).
+OUT: choice(a, cell_membrane).
+
+IN:  is_composed_of_cellulose(cell wall).
+OUT: is_composed_of_cellulose(cell_wall).
+
+IN:  answer(OptionLetter) :- choice(OptionLetter, CellPart), has_similar_function(CellPart).
+OUT: answer(OptionLetter) :- choice(OptionLetter, CellPart), has_similar_function(CellPart).
+
+IN:  provides_mechanical_support(CellWall) :- is_composed_of_cellulose(CellWall).
+OUT: provides_mechanical_support(CellWall) :- is_composed_of_cellulose(CellWall).
+
