@@ -584,7 +584,6 @@ Output ONLY the JSON list, nothing else.
                 continue
 
             # Buffer raw candidates for a single end-of-loop LLM pass
-            print(f"DEBUG: Buffered {len(raw_triples)} raw triple(s) for '{match['name']}'", flush=True)
             candidates.append({
                 "name": match["name"],
                 "uri": uri,
