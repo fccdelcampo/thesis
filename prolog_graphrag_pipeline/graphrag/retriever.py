@@ -93,14 +93,42 @@ def _sanitize_lucene_query(query_text: str) -> str:
     return ''.join(sanitized)
 
 def patched_hybrid_search(self, query_text, top_k=8, **kwargs):
+    import re
     safe_query = _sanitize_lucene_query(query_text)
-    result = self._original_search(query_text=safe_query, top_k=top_k, **kwargs)
+    original_query = kwargs.get("original_query", "")
+    all_items = []
     
-    for item in result.items:
+    # 1. Main query search
+    res_main = self._original_search(query_text=safe_query, top_k=top_k, **kwargs)
+    if res_main and res_main.items:
+        all_items.extend(res_main.items)
+        
+    # 2. MCQ choices search
+    mcq_choices = re.findall(r'\b[A-D][.)]\s*(.+)', original_query)
+    if mcq_choices:
+        print(f"DEBUG: [LocalDocs Hybrid] Extracted {len(mcq_choices)} MCQ choices for independent search.", flush=True)
+        choice_k = max(2, top_k // 2)
+        for choice in mcq_choices:
+            safe_choice = _sanitize_lucene_query(choice.strip())
+            res_choice = self._original_search(query_text=safe_choice, top_k=choice_k, **kwargs)
+            if res_choice and res_choice.items:
+                all_items.extend(res_choice.items)
+                
+    # 3. Deduplicate and clean
+    seen_content = set()
+    unique_items = []
+    for item in all_items:
         if item.content:
             item.content = item.content.replace('\n', ' ').replace('  ', ' ')
+        sig = item.content[:100] if item.content else ""
+        if sig and sig not in seen_content:
+            seen_content.add(sig)
+            unique_items.append(item)
+            
+    unique_items.sort(key=lambda x: x.metadata.get('score', 0.0) if x.metadata else 0.0, reverse=True)
     
-    return result
+    from neo4j_graphrag.retrievers.base import RetrieverResult
+    return RetrieverResult(items=unique_items[:top_k * 2], metadata={})
 
 def expand_query(self, query):
     if not hasattr(self, 'llm') or not self.llm:
@@ -147,6 +175,8 @@ def expand_query(self, query):
         return query
 
 def patched_vector_cypher_search(self, query_text, top_k=8, **kwargs):
+    import re
+    from neo4j_graphrag.retrievers.base import RetrieverResult
     # `original_query` carries the full user prompt (with MCQ choices) for LLM filtering.
     # `query_text` is the extracted question stem (used for embedding/entity extraction).
     original_query = kwargs.pop("original_query", query_text)
@@ -167,27 +197,43 @@ def patched_vector_cypher_search(self, query_text, top_k=8, **kwargs):
     MIN_SCORE = 0.4
     MIN_CONTENT_LENGTH = 5
     try:
-        local_result = self._original_search(query_text=query_text, top_k=top_k, **kwargs)
-        if local_result and local_result.items:
-            filtered_items = []
-            for item in local_result.items:
-                # Cleaning
-                if item.metadata and 'local_context' in item.metadata:
-                    local_ctx = item.metadata['local_context']
-                    if local_ctx and isinstance(local_ctx, list) and len(local_ctx) > 0:
-                        clean_text = local_ctx[0].get('text')
-                        if clean_text:
-                            item.content = clean_text
-                elif item.content and "<Record" in str(item.content):
-                    match = re.search(r"text='(.*?)'", str(item.content))
-                    if match:
-                        item.content = match.group(1)
+        raw_local_items = []
+        
+        # Search main query
+        res_main = self._original_search(query_text=query_text, top_k=top_k, **kwargs)
+        if res_main and res_main.items:
+            raw_local_items.extend(res_main.items)
+            
+        # Search MCQ choices
+        mcq_choices = re.findall(r'\b[A-D][.)]\s*(.+)', original_query)
+        if mcq_choices:
+            print(f"DEBUG: [LocalDocs VectorCypher] Extracted {len(mcq_choices)} MCQ choices for independent search.", flush=True)
+            choice_k = max(2, top_k // 2)
+            for choice in mcq_choices:
+                res_choice = self._original_search(query_text=choice.strip(), top_k=choice_k, **kwargs)
+                if res_choice and res_choice.items:
+                    raw_local_items.extend(res_choice.items)
 
-                score = item.metadata.get('score', 0.0) if item.metadata else 0.0
-                content = (item.content or "").strip()
-                if score >= MIN_SCORE and len(content) >= MIN_CONTENT_LENGTH:
-                    filtered_items.append(item)
-            local_items = filtered_items
+        # Filtering/Cleaning raw items
+        filtered_items = []
+        for item in raw_local_items:
+            # Cleaning
+            if item.metadata and 'local_context' in item.metadata:
+                local_ctx = item.metadata['local_context']
+                if local_ctx and isinstance(local_ctx, list) and len(local_ctx) > 0:
+                    clean_text = local_ctx[0].get('text')
+                    if clean_text:
+                        item.content = clean_text
+            elif item.content and "<Record" in str(item.content):
+                match = re.search(r"text='(.*?)'", str(item.content))
+                if match:
+                    item.content = match.group(1)
+
+            score = item.metadata.get('score', 0.0) if item.metadata else 0.0
+            content = (item.content or "").strip()
+            if score >= MIN_SCORE and len(content) >= MIN_CONTENT_LENGTH:
+                filtered_items.append(item)
+        local_items = filtered_items
     except Exception as e:
         print(f"DEBUG: Main retriever failed: {e}")
         
@@ -201,7 +247,9 @@ def patched_vector_cypher_search(self, query_text, top_k=8, **kwargs):
     seen_content = set()
     unique_items = []
     for item in all_items:
-        sig = item.content[:50]
+        if item.content:
+            item.content = item.content.replace('\n', ' ').replace('  ', ' ')
+        sig = item.content[:50] if item.content else ""
         if sig not in seen_content:
             seen_content.add(sig)
             unique_items.append(item)

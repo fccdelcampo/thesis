@@ -541,21 +541,36 @@ Output ONLY the JSON list, nothing else.
         filter_query = original_query if original_query else query_text
 
         # ── Vector Search ───────────────────────────────────────────────────
-        print(f"DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...", flush=True)
+        print(f"DEBUG: [KBPedia] Computing query embeddings to search KBPedia concepts...", flush=True)
+        matches = []
         try:
+            # Prepare the embedder function once
+            embedder_fn = None
             if self.embedder:
-                query_vector = self.embedder.embed_query("query: " + query_text)
+                embedder_fn = lambda text: self.embedder.embed_query("query: " + text)
             else:
                 from sentence_transformers import SentenceTransformer
                 print("DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.", flush=True)
                 temp_embedder = SentenceTransformer("all-MiniLM-L6-v2")
-                query_vector = temp_embedder.encode(query_text).tolist()
-                
-            # Grab top_k * 2 candidates
-            matches = self._vector_search(query_vector, limit=top_k * 2)
+                embedder_fn = lambda text: temp_embedder.encode(text).tolist()
+
+            # Schedule searches: Main query + up to 4 MCQ choices
+            search_strings = [(query_text, top_k * 2)]
+            mcq_choices = re.findall(r'\b[A-D][.)]\s*(.+)', filter_query)
+            if mcq_choices:
+                print(f"DEBUG: [KBPedia] Extracted {len(mcq_choices)} MCQ choices for independent vector search.", flush=True)
+                choice_limit = max(2, top_k)
+                for choice in mcq_choices:
+                    search_strings.append((choice.strip(), choice_limit))
+
+            # Execute searches
+            for text_to_embed, limit in search_strings:
+                query_vector = embedder_fn(text_to_embed)
+                sub_matches = self._vector_search(query_vector, limit=limit)
+                matches.extend(sub_matches)
+
         except Exception as e:
             print(f"DEBUG: KBPedia embedding/search failed: {e}", flush=True)
-            matches = []
 
         seen_uris = set()
         candidates = []  # list of {name, uri, definition, triples}
@@ -564,7 +579,7 @@ Output ONLY the JSON list, nothing else.
         if not matches:
             print(f"DEBUG: KBPedia has no vector matches for '{query_text}'.", flush=True)
         else:
-            print(f"DEBUG: KBPedia matched {len(matches)} concept(s) via vector similarity: {[m['name'] for m in matches]}", flush=True)
+            print(f"DEBUG: KBPedia matched {len(matches)} total concept(s) across {len(search_strings)} search(es).", flush=True)
 
         for match in matches:
             uri = match["uri"]
