@@ -1,5 +1,15 @@
-import ollama
+import sys
+import os
 import json
+
+# Ensure project root is on the path so llm_config can be imported
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+
+from llm_config import MODEL_NAME, get_openai_client
+
+client = get_openai_client()
 
 LLM_MESSAGES = [
     # System Prompt
@@ -60,13 +70,15 @@ Output a single, valid JSON object only. No conversational filler.
 ]
 
 def approve(question: str) -> bool:
-    response = ollama.chat(
-            model='llama3.1:8b-instruct-q4_K_M',
+    try:
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
             messages=LLM_MESSAGES + [{"role": "user", "content": question}],
-            options={
-                'temperature': 0.7,
-            },
-            logprobs=True     
+            temperature=0.7,
         )
-    answer = json.loads(response['message']['content'])
-    return answer['verdict'] == answer.lower()   
+        content = response.choices[0].message.content
+        answer = json.loads(content)
+        return answer.get('verdict', '').lower() == 'yes'
+    except Exception as e:
+        print(f"Error during LLM interaction ({MODEL_NAME}): {e}")
+        return False

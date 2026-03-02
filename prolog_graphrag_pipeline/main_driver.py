@@ -31,28 +31,43 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
         context_from_prompt = ""
         retrieved_context = []
         
-    # Convert list to string for Prolog and LLM (they expect string input)
-    retrieved_context_str = "\n".join(retrieved_context) if retrieved_context and isinstance(retrieved_context, list) else (str(retrieved_context) if retrieved_context is not None else "")
+    # ── Split KBPedia vs Wikidata retrieved items ────────────────────────────
+    # Wikidata plain-text triples (definition:, instance of:, subclass of:, ...)
+    # are not structured Prolog-ready facts. Sending them to the Prolog generator
+    # causes the LLM to awkwardly transliterate them into predicates, often poorly.
+    # Instead: KBPedia items → Prolog generator; Wikidata items → synthesis LLM only.
+    if isinstance(retrieved_context, list):
+        kbpedia_items = []
+        wikidata_items = []
+        for item in retrieved_context:
+            # RetrieverResultItem objects have a .metadata dict; plain strings have no source
+            src = ""
+            if hasattr(item, "metadata"):
+                src = (item.metadata or {}).get("source", "")
+            elif isinstance(item, dict):
+                src = item.get("metadata", {}).get("source", "")
+            if src == "Wikidata":
+                wikidata_items.append(str(item))
+            else:
+                kbpedia_items.append(str(item))
 
-    print(f"DEBUG: retrieved_context_str type: {type(retrieved_context_str)}")
-    print(f"DEBUG: query: {query}")
+        retrieved_context_str = "\n".join(kbpedia_items)
 
-    explainer_output = prolog_driver.run_pipeline(user_question=query, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt) if flag != "q" else None
+        # Append Wikidata facts to context_from_prompt so they reach the synthesis LLM
+        if wikidata_items:
+            wikidata_block = "\n\nWikidata Background Facts (for context, not Prolog logic):\n" + "\n".join(wikidata_items)
+            context_from_prompt = (context_from_prompt or "") + wikidata_block
+    else:
+        retrieved_context_str = str(retrieved_context) if retrieved_context else ""
+
+    pgr_results = prolog_driver.run_pipeline(user_question=user_prompt, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt) if flag != "q" else None
  
-    llm_result = generate(
-        user_question=query, 
-        retrieved_context=retrieved_context_str, 
-        explainer_output=explainer_output["text_answer"] if explainer_output else "", 
-        flag=flag,
-        include_conclusion=include_conclusion,
-        context_from_prompt=context_from_prompt
-    )
-    
     return {
-        "answer": llm_result['text_answer'] if llm_result else "Error generating answer",
+        "answer": pgr_results['text_answer'] if pgr_results else "Error generating answer",
         "contexts": retrieved_context if isinstance(retrieved_context, list) else [retrieved_context] if retrieved_context else [],
         "context_from_prompt": context_from_prompt,
-        "prolog_explanation": explainer_output.get("text_answer", "") if explainer_output else ""
+        "prolog_explanation": pgr_results.get("prolog_explanation", "") if pgr_results else "",
+        "prolog_error": pgr_results.get("prolog_error") if pgr_results else "Prolog skipped"
     }
     
 def run_graphrag_pipeline(user_prompt: str) -> dict:

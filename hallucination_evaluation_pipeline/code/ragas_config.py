@@ -1,4 +1,5 @@
 import os
+import sys
 
 from langchain_community.chat_models import ChatOllama
 from langchain_community.embeddings import OllamaEmbeddings
@@ -8,9 +9,11 @@ from langchain_community.embeddings import OllamaEmbeddings
 from ragas.llms import LangchainLLMWrapper
 from ragas.embeddings import LangchainEmbeddingsWrapper
 
-# Define the model to use for both generation (evaluation) and embeddings
-# Using the one verified to be available: llama3.1:8b-instruct-q4_K_M
-MODEL_NAME = "llama3.1:8b-instruct-q4_K_M"
+# Model name imported from the central config
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+from llm_config import MODEL_NAME
 EMBED_MODEL_NAME = "nomic-embed-text"
 
 # Add aliases for RAGAS

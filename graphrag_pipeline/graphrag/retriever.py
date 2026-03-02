@@ -19,7 +19,12 @@ def check_db_health(driver):
         return False
 
 def create_indexes(driver):
-    embedding_dimension = 4096
+    import sys, os as _os
+    _root = _os.path.abspath(_os.path.join(_os.path.dirname(__file__), "..", ".."))
+    if _root not in sys.path:
+        sys.path.insert(0, _root)
+    from llm_config import EMBED_DIM
+    embedding_dimension = EMBED_DIM
 
     print(f"Creating indexes with dimension: {embedding_dimension}...")
 
@@ -38,7 +43,7 @@ def create_indexes(driver):
     """, database_="neo4j")
     print("Index creation commands sent.")
 
-def wait_for_indexes(driver, timeout=60):
+def wait_for_indexes(driver, timeout=30):
     target_indexes = ['documentsVectorIndex', 'documentsFulltextIndex']
     start_time = time.time()
     
@@ -63,7 +68,7 @@ def wait_for_indexes(driver, timeout=60):
 
 class CleanTextRetriever(HybridRetriever):
     # We override 'search' (Public API) instead of 'get_search_results' (Internal API)
-    def search(self, query_text, top_k=5, **kwargs):
+    def search(self, query_text, top_k=8, **kwargs):
         result = super().search(query_text=query_text, top_k=top_k, **kwargs)
         
         # Now it is safe to iterate over .items
@@ -101,35 +106,21 @@ class EnhancedRetriever(VectorCypherRetriever):
         self.driver = driver
         self.llm = llm
 
-    def search(self, query_text, top_k=5, **kwargs):
+    def search(self, query_text, top_k=8, **kwargs):
         # `original_query` carries the full MCQ prompt (with answer options) for LLM filtering.
         original_query = kwargs.pop("original_query", query_text)
 
-        # 1. KBPedia Search (Global Knowledge via Neo4j)
-        kb_items = []
-        if self.llm:
-            if not hasattr(self, 'kbpedia_retriever'):
-                from prolog_graphrag_pipeline.graphrag.kbpedia_retriever import KBPediaRetriever
-                self.kbpedia_retriever = KBPediaRetriever(driver=self.driver, llm=self.llm, top_k=top_k)
-
-            kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query)
-            if kb_result and kb_result.items:
-                for item in kb_result.items:
-                    kb_items.append(RetrieverResultItem(
-                        content=item.content,
-                        metadata=item.metadata
-                    ))
-                print(f"DEBUG: KBPedia returned {len(kb_items)} items.")
-
-        # 2. Local Vector Search (Local Documents)
+        # 1. Local Vector Search (Local Documents)
         local_items = []
-        MIN_SCORE = 0.4  # Minimum relevance threshold to filter noise
-        MIN_CONTENT_LENGTH = 20  # Reject chunks with very short content
+        extracted_entities = set()
+        
         try:
-            local_result = super().search(query_text=query_text, top_k=top_k, **kwargs)
+            print(f"DEBUG: --- Starting Local Vector Similarity Search for: '{query_text}' ---", flush=True)
+            local_result = super().search(query_text=query_text, top_k=8, **kwargs)
             
             if local_result and local_result.items:
-                for item in local_result.items:
+                for idx, item in enumerate(local_result.items):
+                    clean_text = ""
                     # Fix Content: Unwrap if it is a Neo4j Record string representation
                     if item.metadata and 'local_context' in item.metadata:
                         local_ctx = item.metadata['local_context']
@@ -138,36 +129,49 @@ class EnhancedRetriever(VectorCypherRetriever):
                             if clean_text:
                                 item.content = clean_text
                                 
+                            # Extract entities for KBPedia
+                            for ctx in local_ctx:
+                                if ctx.get('entity'): extracted_entities.add(ctx['entity'])
+                                if ctx.get('target'): extracted_entities.add(ctx['target'])
+                                
                     elif item.content and "<Record" in str(item.content):
                         try:
                            import re
                            match = re.search(r"text='(.*?)'", item.content)
                            if match:
-                               item.content = match.group(1)
+                               clean_text = match.group(1)
+                               item.content = clean_text
                         except:
                             pass
+                            
+                    # Clean newlines from content
+                    if item.content:
+                        item.content = item.content.replace('\n', ' ').replace('  ', ' ')
+                        
+                    local_items.append(item)
+                    print(f"DEBUG: Vector Match #{idx+1} (Score: {item.metadata.get('score', 0):.3f}): {item.content[:100]}...", flush=True)
                 
-                # Filter out low-quality chunks
-                filtered_items = []
-                for item in local_result.items:
-                    score = item.metadata.get('score', 0.0) if item.metadata else 0.0
-                    content = (item.content or "").strip()
-                    
-                    if score < MIN_SCORE:
-                        print(f"DEBUG: Filtered out low-score chunk ({score:.4f}): '{content[:50]}...'")
-                        continue
-                    
-                    if len(content) < MIN_CONTENT_LENGTH:
-                        print(f"DEBUG: Filtered out short chunk ({len(content)} chars): '{content}'")
-                        continue
-                    
-                    filtered_items.append(item)
-                
-                local_items = filtered_items
-                print(f"DEBUG: Local Vector Search returned {len(local_items)} chunks (after filtering).")
+                print(f"DEBUG: Local Vector Search finished. Returned {len(local_items)} chunks.", flush=True)
+                print(f"DEBUG: Entities seeded from Vector Search: {list(extracted_entities)}", flush=True)
 
         except Exception as e:
             print(f"DEBUG: Main retriever failed: {e}")
+
+        # 2. KBPedia Search (Global Knowledge via Neo4j)
+        kb_items = []
+        if self.llm:
+            if not hasattr(self, 'kbpedia_retriever'):
+                from graphrag_pipeline.graphrag.kbpedia_retriever import KBPediaRetriever
+                self.kbpedia_retriever = KBPediaRetriever(driver=self.driver, llm=self.llm, top_k=top_k)
+
+            kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query, seeded_entities=list(extracted_entities))
+            if kb_result and kb_result.items:
+                for item in kb_result.items:
+                    kb_items.append(RetrieverResultItem(
+                        content=item.content,
+                        metadata=item.metadata
+                    ))
+                print(f"DEBUG: KBPedia returned {len(kb_items)} items.")
             
         # 3. Merge and Rerank
         all_items = kb_items + local_items
@@ -182,16 +186,15 @@ class EnhancedRetriever(VectorCypherRetriever):
         seen_content = set()
         unique_items = []
         for item in all_items:
-            sig = item.content[:50]
+            content = item.content or ""
+            sig = content[:50]
             if sig not in seen_content:
                 seen_content.add(sig)
                 unique_items.append(item)
         
         print(f"DEBUG: Merged Result Count: {len(unique_items)}")
         
-        final_top_k = top_k * 2 if (kb_items and local_items) else top_k
-        
-        return RetrieverResult(items=unique_items[:final_top_k], metadata={})
+        return RetrieverResult(items=unique_items[:8], metadata={})
 
 
 def create_retriever(driver, embedder):
@@ -207,7 +210,7 @@ def create_retriever(driver, embedder):
     
     # 4. Guarded Wait Phase
     try:
-        wait_for_indexes(driver, timeout=120) 
+        wait_for_indexes(driver, timeout=30) 
     except TimeoutError as e:
         print(f"Critical Error: {e}")
         return None

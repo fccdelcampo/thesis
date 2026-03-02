@@ -12,6 +12,9 @@ class RETRIEVER_OPTIONS(Enum):
   
 RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
 
+ENABLE_WIKIDATA_FETCHING = True
+ENABLE_LLM_FILTERING = True
+
 class SCHEMA_TYPE(Enum):
   STATIC = "Static Schema"
   EXTRACTED = "Extracted Schema"
@@ -145,26 +148,15 @@ FINAL INSTRUCTION: Output the extracted data as a JSON object ONLY. No markdown,
 '''
 
 # Retrieval query for HybridCypherRetriever/VectorCypherRetriever:
-# Takes the vector-matched local node and finds its local connections.
+# Takes the vector-matched local node and returns it as a standard chunk.
 RETRIEVAL_QUERY = '''
-// Part A: Local Document Retrieval (Vector/Keyword matches passed as `node`)
-WITH node, score
-OPTIONAL MATCH (node)-[:EXTRACTS]->(e)
-OPTIONAL MATCH (e)-[r]->(target)
-WITH node, score, collect(distinct {
-    source: "Local Document",
-    entity: e.name,
-    relationship: type(r),
-    target: target.name,
-    text: node.text
-}) as local_context
-
+// Part A: Local Document Retrieval (Vector matches passed as `node`)
 RETURN 
     node.text as text,
     score,
     {
-        local_context: local_context,
-        score: score
+        score: score,
+        source: "Local Document"
     } as metadata
 '''
 
@@ -179,11 +171,12 @@ GRAPHRAG_TEMPLATE = '''
 You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
 
 ### STRICT INSTRUCTIONS
-1. **Be Direct**: Output your final answer immediately, concisely, and clearly. Do NOT start with "Based on the context" or "The answer is...". 
-2. **If Multiple Choice**: Select the correct option letter and give a brief 1-2 sentence justification combining the facts from the Context.
-3. **Ignore Irrelevant Facts**: The context might contain extra noisy concepts. Only use the facts that logically connect to solve the query.
-4. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, strictly write: "I do not have enough information to answer this question."
-5. **Format Consistency**: Do NOT provide conversational filler (e.g., "The final answer is not provided..."). Answer the prompt directly.
+1. **Answer First**: For multiple-choice questions, your response MUST begin with exactly this format on the VERY FIRST LINE:
+*Letter.* [Choice text]
+Then follow with a short 1-2 sentence explanation.
+2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
+3. **No Hallucinations**: If the context completely fails to provide a logical bridge to the answer, write: "I do not have enough information to answer this question."
+
 
 ### Question:
 {query_text}

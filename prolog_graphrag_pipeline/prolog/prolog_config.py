@@ -2,6 +2,9 @@
 # False = Fast linear flattening for benchmarks. True = Stable prefix caching for Chat UIs.
 USE_KV_CACHE = False
 
+# Global configuration toggle for dynamic Wikidata fetching
+ENABLE_WIKIDATA_FETCHING = True
+
 GENERATOR_SYSTEM_PROMPT = r"""
 ### Role
 You are an expert Prolog programmer specializing in Knowledge Representation for the s(CASP) solver.
@@ -16,21 +19,30 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 4. Output the <query>.
 
 ### Syntactic Requirements (s(CASP) Specific)
-- Disjunction: NEVER use `;`. Use separate rules.
-- Arithmetic: Use CLP operators `#=`, `#<`. NEVER use `=`, `is`, `>`.
-- Negation: Use `not`. NEVER use `\+`.
+- Disjunction: NEVER use `;`. Use multiple separate rules with the same head instead.
+- Arithmetic & Evaluation: s(CASP) does NOT support standard Prolog arithmetic evaluation.
+   - NEVER use `is`, , `>=`, `=:=`, `=\\=`, `<`, `>`, `<=`.
+   - USE CLP(Q) constraints instead: `#=`, `#<>`, `#<`, `#>`, `#=<`, `#>=`. Example: `X #= Y + 1`.
+- Negation: Use `not`. NEVER use `\\+`.
 - Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
+- Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
 - Atoms: Must be lowercase. Quote special characters (e.g., `'(A ∨ B)'`).
 - Variables: CamelCase. Use `_` for singletons.
+- Concise Atoms: Keep snake_case atoms as short as possible to save tokens. Condense long phrases into 1-3 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
 - Closed-World: EVERY predicate in a body MUST be defined as a fact or rule head somewhere in the database.
 - Discontiguous: Group all clauses for the same predicate together.
+- Predicate Naming: ALWAYS invent meaningful predicate names that accurately describe the relationships in the specific question. NEVER blindly copy predicate names (like `forms_from`) or structures from the few-shot examples unless they are directly relevant.
 
 ### Query Formatting by Question Type
 1. **Multiple-Choice Questions (MCQ):**
-   - Encode EACH option: `option(a, description).`
-   - Encode domain knowledge as GROUND FACTS.
-   - Write an `answer/1` rule unifying with the correct option based on facts.
-   - The <query> MUST be `answer(Option).`
+   - Encode EXACTLY FOUR choices as facts. The description MUST be a grounded lowercase snake_case atom derived from the ACTUAL option text, NEVER an uppercase variable!
+   - Example CORRECT: `choice(a, eliminating_a_source).`
+   - Example WRONG: `choice(a, A).` (This will trivially unify with anything and fail the proof!)
+   - Encode retrieved domain knowledge as facts and rules.
+   - You MUST define an `answer/1` rule that unifies with the correct option letter.
+   - **CRITICAL:** Your logic MUST uniquely identify EXACTLY ONE correct choice. Do not write generic rules that might accidentally evaluate to true for multiple incorrect options. You must explicitly differentiate the correct target from the distractors based on the domain rules.
+   - Example DB Rule: `answer(OptionLetter) :- choice(OptionLetter, Target), matches_criteria(Target).`
+   - The <query> MUST ALWAYS BE EXACTLY: `answer(OptionLetter).`
 2. **Binary (True/False) Questions:**
    - Define specific instances from the question (e.g., `rock_one`, `rock_two`).
    - Write rules defining the condition context (e.g., `pulled_together(A, B) :- ...`).
@@ -52,6 +64,10 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 <query>
 [The query only]
 </query>
+
+### CRITICAL FINAL REMINDERS (DO NOT IGNORE):
+1. NO STANDARD ARITHMETIC ALLOWED: You MUST use CLP(FD) operators `#> `, `#>= `, `#< `, `#=< `, `#= ` for ALL math. `>` and `<` will instantly crash the parser!
+2. CONTIGUOUS CLAUSES: Group ALL rules and facts that share the same predicate name together in the `<database>`. Do NOT scatter them.
 ---
 """
 
@@ -180,8 +196,8 @@ forms_from(mid_ocean_ridge, plate_divergence).
 </reasoning_step>
 
 <reasoning_step>
-Query for the choice NOT associated with plate_divergence.
-choice(OptionLetter, GeologicFeature), not(forms_from(GeologicFeature, plate_divergence)).
+Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with plate_divergence.
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
 </reasoning_step>
 
 <database>
@@ -195,10 +211,67 @@ forms_from(trench, plate_convergence).
 forms_from(rift_valley, plate_divergence).
 forms_from(ocean_basin, plate_divergence).
 forms_from(mid_ocean_ridge, plate_divergence).
+
+answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
 </database>
 
 <query>
-choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+answer(OptionLetter).
+</query>
+---
+"""},
+
+    # Example 4: Multiple-Choice Logic (Different Domain)
+    {
+        "role": "user", 
+        "content": """
+Context: Mammals are warm-blooded vertebrates that have hair. Dogs, cats, and humans are mammals. Frogs are amphibians, which are cold-blooded.
+
+Question: Which of the following animals is NOT a mammal?
+A. dog
+B. cat
+C. human
+D. frog
+        """
+        },
+    {"role": "assistant", "content": r"""
+<reasoning_step>
+Encode options.
+choice(a, dog).
+choice(b, cat).
+choice(c, human).
+choice(d, frog).
+</reasoning_step>
+
+<reasoning_step>
+Encode biological classifications explicitly from context.
+is_mammal(dog).
+is_mammal(cat).
+is_mammal(human).
+is_amphibian(frog).
+</reasoning_step>
+
+<reasoning_step>
+Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with being a mammal.
+answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+</reasoning_step>
+
+<database>
+choice(a, dog).
+choice(b, cat).
+choice(c, human).
+choice(d, frog).
+
+is_mammal(dog).
+is_mammal(cat).
+is_mammal(human).
+is_amphibian(frog).
+
+answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+</database>
+
+<query>
+answer(OptionLetter).
 </query>
 ---
 """},
@@ -211,7 +284,7 @@ You are a Logical Translator. Take the formal output of a Prolog s(CASP) solver 
 Narrate the Proof: Walk through the s(CASP) justification tree. Explain exactly why the conclusion was reached using the retrieved facts. If s(CASP) returns False or uses `not`, explain it as an "absence of evidence."
 
 ### Syntactic Rules
-- No Prolog Syntax: Do not use `:-`, `\+`, or `parent(X, Y)`. Use natural language.
+- No Prolog Syntax: Do not use `:-`, `\\+`, or `parent(X, Y)`. Use natural language.
 - Traceability: Keep the sequential logic. Do not jump straight to the conclusion.
 """
 

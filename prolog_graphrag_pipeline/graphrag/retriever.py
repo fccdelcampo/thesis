@@ -33,7 +33,12 @@ def check_db_health(driver):
         return False
 
 def create_indexes(driver):
-    embedding_dimension = 4096
+    import sys, os as _os
+    _root = _os.path.abspath(_os.path.join(_os.path.dirname(__file__), "..", ".."))
+    if _root not in sys.path:
+        sys.path.insert(0, _root)
+    from llm_config import EMBED_DIM
+    embedding_dimension = EMBED_DIM
 
     print(f"Creating indexes with dimension: {embedding_dimension}...")
 
@@ -52,7 +57,7 @@ def create_indexes(driver):
     """, database_="neo4j")
     print("Index creation commands sent.")
 
-def wait_for_indexes(driver, timeout=60):
+def wait_for_indexes(driver, timeout=30):
     target_indexes = ['documentsVectorIndex', 'documentsFulltextIndex']
     start_time = time.time()
     
@@ -87,7 +92,7 @@ def _sanitize_lucene_query(query_text: str) -> str:
             sanitized.append(ch)
     return ''.join(sanitized)
 
-def patched_hybrid_search(self, query_text, top_k=5, **kwargs):
+def patched_hybrid_search(self, query_text, top_k=8, **kwargs):
     safe_query = _sanitize_lucene_query(query_text)
     result = self._original_search(query_text=safe_query, top_k=top_k, **kwargs)
     
@@ -141,7 +146,7 @@ def expand_query(self, query):
         print(f"DEBUG: Query expansion failed: {e}")
         return query
 
-def patched_vector_cypher_search(self, query_text, top_k=5, **kwargs):
+def patched_vector_cypher_search(self, query_text, top_k=8, **kwargs):
     # `original_query` carries the full user prompt (with MCQ choices) for LLM filtering.
     # `query_text` is the extracted question stem (used for embedding/entity extraction).
     original_query = kwargs.pop("original_query", query_text)
@@ -159,7 +164,7 @@ def patched_vector_cypher_search(self, query_text, top_k=5, **kwargs):
 
     # 2. Local Vector Search
     local_items = []
-    MIN_SCORE = 0.4
+    MIN_SCORE = 0.7
     MIN_CONTENT_LENGTH = 20
     try:
         local_result = self._original_search(query_text=query_text, top_k=top_k, **kwargs)
@@ -222,7 +227,7 @@ def create_retriever(driver, embedder):
     
     # 5. Guarded Wait Phase
     try:
-        wait_for_indexes(driver, timeout=120) 
+        wait_for_indexes(driver, timeout=30) 
     except TimeoutError as e:
         print(f"Critical Error: {e}")
         return None

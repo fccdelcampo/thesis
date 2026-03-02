@@ -1,12 +1,22 @@
 from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter import FixedSizeSplitter
 from neo4j_graphrag.experimental.pipeline.kg_builder import SimpleKGPipeline
 import os
+import sys
 import glob
 from .config import DOC_PATH, ENCODER_SYSTEM_PROMPT, ENCODER_FEW_SHOT_EXAMPLES
 
-import ollama
+# Ensure project root is on the path so llm_config can be imported
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+
+from llm_config import MODEL_NAME, get_openai_client, log_llm_event, retry_with_exponential_backoff
+
 import json
 import asyncio
+import time
+
+client = get_openai_client()
 
 # Stateless message template
 BASE_OLLAMA_MESSAGES = [
@@ -18,17 +28,22 @@ from typing import Optional
 
 def generate_with_ollama(messages) -> Optional[str]: 
     try:
-        response = ollama.chat(
-            model='llama3.1:8b-instruct-q4_K_M',
+        start_time = time.perf_counter()
+        
+        # Wrap with exponential backoff
+        invoke_func = retry_with_exponential_backoff(client.chat.completions.create)
+        
+        response = invoke_func(
+            model=MODEL_NAME,
             messages=messages,
-            options={
-                'temperature': 0  
-            },
-            format='json'     
+            temperature=0.0,
+            response_format={"type": "json_object"},
         )
-        return response['message']['content']
+        duration = time.perf_counter() - start_time
+        log_llm_event("ENCODER_EXTRACT", duration=duration)
+        return response.choices[0].message.content
     except Exception as e:
-        print(f"Error during Ollama interaction: {e}")
+        print(f"Error during LLM interaction ({MODEL_NAME}): {e}")
         return None
     
     
@@ -49,10 +64,11 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
             current_messages.append(turn_message)
             
             response = generate_with_ollama(current_messages)
-            print("Ollama Response:", response) # verbose
+            safe_response = str(response).encode('ascii', 'replace').decode('ascii')
+            print("LLM Response:", safe_response) # verbose
             
             if response is None:
-                raise ValueError("Failed to get a response from Ollama.")
+                raise ValueError("Failed to get a response from the LLM.")
             
             try:
                 extracted_data = json.loads(response)
@@ -74,7 +90,8 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
                 if "question" not in data or "context" not in data:
                      raise ValueError(f"Missing required keys 'question' or 'context' in JSON response. Keys found: {list(data.keys())}")
                 
-                print(f"DEBUG: EXTRACTED QUERY: {data.get('question', 'N/A')}")
+                safe_query = str(data.get('question', 'N/A')).encode('ascii', 'replace').decode('ascii')
+                print(f"DEBUG: EXTRACTED QUERY: {safe_query}")
                 print(f"DEBUG: EXTRACTED CONTEXT (Len: {len(data.get('context', []))}): {data.get('context', [])}")
                 return data["question"], data["context"]
             except json.JSONDecodeError as e:
@@ -87,6 +104,8 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
             import traceback
             traceback.print_exc()
             most_recent_error = str(e)
+            if i < 4:
+                time.sleep(2)  # Wait before retry
             
     raise ValueError(f"Failed to extract query and context after 5 retries. Last error: {most_recent_error}")
 

@@ -1,5 +1,7 @@
 LLM_SYSTEM_PROMPT = """
-Answer the user's question to the best of your ability.
+Answer the user's question without hesitation. If it is a multiple choice question, answer with exactly this format:
+*Letter.* [Choice text]
+Then briefly explain your reasoning.
 """
 
 LLM_MESSAGES = [

@@ -41,12 +41,13 @@ LOGS_DIR = os.path.join(project_root, "logs")
 THRESHOLD = 0.7
 
 
-def load_test_cases(limit: int = 1000) -> list[dict]:
+def load_test_cases(limit: int = 1000, start_idx: int = 0) -> list[dict]:
     """
     Reads .jsonl files in test_cases/ and turns each JSON line into a dict.
 
     Args:
         limit (int): Max number of test cases.
+        start_idx (int): Global offset to skip initial test cases.
 
     Returns:
         list[dict]: A list of dict objects where each dict is a test case.
@@ -56,7 +57,9 @@ def load_test_cases(limit: int = 1000) -> list[dict]:
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as f:
             for i, line in enumerate(f):
-                if i >= limit:
+                if i < start_idx:
+                    continue
+                if i >= start_idx + limit:
                     break
                 if line.strip():
                     test_cases.append(json.loads(line))
@@ -83,28 +86,43 @@ def format_mmlu_question(test_case: dict) -> str:
 def extract_answer_letter(response: str) -> str:
     """
     Extracts the answer letter (A, B, C, or D) from the pipeline's response.
-    Tries multiple patterns: standalone letter, "Answer: X", "The answer is X", etc.
+    Priority order (highest first):
+      1. Bold format: *D.* or **D.** — the canonical output format
+      2. 'Final Answer: D' / 'The correct answer is D'
+      3. 'Answer: D' or 'choice D'
+      4. Standalone letter at the end
+      5. Standalone letter at the start (last resort)
     """
     if not response:
         return ""
-    
+
     response = response.strip()
-    
-    # Pattern 1: Standalone letter at the start (ignoring markdown *, spaces, etc.)
+
+    # Pattern 0: Bold/italic format *D.* or **D.** at the start of a line
+    match = re.search(r'(?:^|\n)\s*\*{1,2}([A-D])\.?\*{1,2}', response, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
+
+    # Pattern 1: Explicit "Final Answer: X"
+    match = re.search(r'(?:final\s+answer|correct\s+answer\s+is|answer\s+is)[\s\*:\-]*([A-D])\b', response, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
+
+    # Pattern 2: "Answer: X" or "Choice: X"
+    match = re.search(r'(?:answer|choice)[\s\*:\-]*([A-D])\b', response, re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
+
+    # Pattern 3: Standalone letter at the VERY END
+    match = re.search(r'(?:\*\*|\*|\s|^)([A-D])(?:\*\*|\*|\s|\.|\)|$)', response[-10:], re.IGNORECASE)
+    if match:
+        return match.group(1).upper()
+
+    # Pattern 4: Standalone letter at the VERY START
     match = re.match(r'^[\*\s]*([A-D])(?:[\.\)]|\b)', response, re.IGNORECASE)
     if match:
         return match.group(1).upper()
-    
-    # Pattern 2: "Answer: X" or "The answer is X"
-    match = re.search(r'(?:answer|choice)[^A-Za-z]*([A-D])\b', response, re.IGNORECASE)
-    if match:
-        return match.group(1).upper()
-    
-    # Pattern 3: Any standalone A-D bounded by markdown or punctuation
-    match = re.search(r'(?:\*\*|\*|\s|^)([A-D])(?:\*\*|\*|\s|\.|\)|$)', response, re.IGNORECASE)
-    if match:
-        return match.group(1).upper()
-    
+
     return ""
 
 
@@ -114,12 +132,16 @@ def score_answer(predicted: str, correct: str) -> float:
 
 
 def run_pipeline_safe(pipeline_fn, question: str, **kwargs) -> dict:
-    """Safely run a pipeline, returning empty dict on failure."""
+    """Safely run a pipeline, returning empty dict on failure. Injects 'elapsed' key."""
+    import time
+    t0 = time.perf_counter()
     try:
-        return pipeline_fn(question, **kwargs)
+        result = pipeline_fn(question, **kwargs)
     except Exception as e:
         print(f"  Pipeline error: {e}")
-        return {"answer": "", "contexts": []}
+        result = {"answer": "", "contexts": []}
+    result["elapsed"] = time.perf_counter() - t0
+    return result
     
 
 
@@ -135,7 +157,7 @@ def run_test_case(test_case: dict, test_case_id: int):
         test_case_id (int): The ID of the test case
     """
     formatted_input = format_mmlu_question(test_case)
-    correct_answer = test_case.get("answer", "")
+    correct_answer = test_case.get("correct_answer", "")
     raw_question = test_case.get("question", "")
     
     print(f"\n" + "="*80)
@@ -158,28 +180,35 @@ def run_test_case(test_case: dict, test_case_id: int):
     tuned_letter = extract_answer_letter(tuned_result.get("answer", ""))
     tuned_score = score_answer(tuned_letter, correct_answer)
     
+    # Timing
+    gr_time   = gr_result.get("elapsed", 0.0)
+    pgr_time  = pgr_result.get("elapsed", 0.0)
+    tuned_time = tuned_result.get("elapsed", 0.0)
+
     print(f"\n--- PIPELINE COMPARISON ---")
-    def format_res(name, letter, score):
-        status = "✅ RIGHT" if score >= 1.0 else "❌ WRONG"
+    def format_res(name, letter, score, secs):
+        status = "CORRECT" if score >= 1.0 else "WRONG"
         let_str = f"[{letter}]" if letter else "[?]"
-        return f"{name:<15} | Predicted: {let_str:<5} | {status}"
-        
-    print(format_res("GraphRAG", gr_letter, gr_score))
-    print(format_res("Prolog", pgr_letter, pgr_score))
-    print(format_res("Tuned LLM", tuned_letter, tuned_score))
+        return f"{name:<15} | Predicted: {let_str:<5} | {status:<7} | {secs:6.1f}s"
+
+    print(format_res("GraphRAG",  gr_letter,    gr_score,    gr_time))
+    print(format_res("Prolog",    pgr_letter,   pgr_score,   pgr_time))
+    print(format_res("Tuned LLM", tuned_letter, tuned_score, tuned_time))
     print("=" * 80 + "\n")
-    
+
     # Log scores
     log_results(test_case_id, tuned_score, gr_score, pgr_score)
-    
+
     # Log Q&A details per pipeline
-    gr_label = "0" if gr_score >= THRESHOLD else "1"
-    pgr_label = "0" if pgr_score >= THRESHOLD else "1"
+    gr_label    = "0" if gr_score    >= THRESHOLD else "1"
+    pgr_label   = "0" if pgr_score   >= THRESHOLD else "1"
     tuned_label = "0" if tuned_score >= THRESHOLD else "1"
-    
-    log_question_and_answer(test_case_id, "graphrag", raw_question, gr_result.get("answer", ""), gr_score, gr_label)
-    log_question_and_answer(test_case_id, "prolog_graphrag", raw_question, pgr_result.get("answer", ""), pgr_score, pgr_label)
-    log_question_and_answer(test_case_id, "tuned_pipeline", raw_question, tuned_result.get("answer", ""), tuned_score, tuned_label)
+
+    log_question_and_answer(test_case_id, "graphrag",        raw_question, gr_result.get("answer",    ""), gr_score,    gr_label)
+    log_question_and_answer(test_case_id, "prolog_graphrag", raw_question, pgr_result.get("answer",   ""), pgr_score,   pgr_label)
+    log_question_and_answer(test_case_id, "tuned_pipeline",  raw_question, tuned_result.get("answer", ""), tuned_score, tuned_label)
+
+    return gr_time, pgr_time, tuned_time
 
 
 def log_results(test_case_id: int, tuned_score: Union[float, int], 
@@ -244,24 +273,38 @@ def log_question_and_answer(test_case_id: int, pipeline: str, question: str,
         f.write(json.dumps(entry) + "\n")
 
 
-def run_test_cases(test_cases: list[dict]):
+def run_test_cases(test_cases: list[dict], start_idx: int = 0):
     """
     Runs test cases for the present metric / benchmark.
-
-    Args:
-        test_cases (list[dict]): The list of dicts returned by load_test_cases()
     """
-    for i, t in enumerate(tqdm(test_cases, desc="MMLU")):
-        run_test_case(t, i)
+    total_gr = 0.0
+    total_pgr = 0.0
+    total_tuned = 0.0
+    count = 0
+
+    for i, t in enumerate(tqdm(test_cases, desc="MMLU"), start=start_idx):
+        gr_t, pgr_t, tuned_t = run_test_case(t, i)
+        total_gr += gr_t
+        total_pgr += pgr_t
+        total_tuned += tuned_t
+        count += 1
+
+    if count > 0:
+        print("\n" + "="*80)
+        print(f"--- AVERAGE RUNTIME PER QUESTION (N={count}) ---")
+        print(f"GraphRAG:        {total_gr / count:6.2f}s")
+        print(f"Prolog GraphRAG: {total_pgr / count:6.2f}s")
+        print(f"Tuned LLM:       {total_tuned / count:6.2f}s")
+        print("="*80 + "\n")
 
 
-def main(test_size: int = 1000):
-    test_cases = load_test_cases(limit=test_size)
-    print(f"Loaded {len(test_cases)} MMLU test cases.")
+def main(test_size: int = 1000, start_idx: int = 0):
+    test_cases = load_test_cases(limit=test_size, start_idx=start_idx)
+    print(f"Loaded {len(test_cases)} MMLU test cases (starting from index {start_idx}).")
     if not test_cases:
         print("No MMLU test cases found. Skipping.")
         return
-    run_test_cases(test_cases)
+    run_test_cases(test_cases, start_idx=start_idx)
     print(f"MMLU evaluation complete. Results saved to {RESULTS_DIR}/mmlu_scores.csv")
 
 
@@ -269,5 +312,6 @@ if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser()
     parser.add_argument("--test-size", type=int, default=1000, help="Number of test cases to run")
+    parser.add_argument("--start-idx", type=int, default=0, help="Starting index")
     args = parser.parse_args()
-    main(test_size=args.test_size)
+    main(test_size=args.test_size, start_idx=args.start_idx)

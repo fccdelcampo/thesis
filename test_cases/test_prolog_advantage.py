@@ -11,15 +11,21 @@ if project_root not in sys.path:
     sys.path.insert(0, project_root)
 
 from prolog_graphrag_pipeline.main_driver import run_pipeline as run_prolog_graphrag
+from llm_config import MODEL_NAME, get_openai_client
+
 try:
     from tuned_pipeline.main_driver import run_pipeline as run_tuned_pipeline
 except ImportError:
-    print("Warning: Could not import tuned_pipeline. Using naive ollama call.")
-    import ollama
+    print("Warning: Could not import tuned_pipeline. Using naive LLM call.")
+    _fallback_client = get_openai_client()
     def run_tuned_pipeline(q):
         try:
-            res = ollama.chat(model='llama3.1:8b-instruct-q4_K_M', messages=[{'role': 'user', 'content': q}])
-            return {"answer": res['message']['content'], "contexts": []}
+            res = _fallback_client.chat.completions.create(
+                model=MODEL_NAME,
+                messages=[{'role': 'user', 'content': q}],
+                temperature=0.0,
+            )
+            return {"answer": res.choices[0].message.content, "contexts": []}
         except:
             return {"answer": "Error", "contexts": []}
 

@@ -26,60 +26,71 @@ from graphrag.encoder import (
 class TestGenerateWithOllama:
     """Test the generate_with_ollama function."""
     
-    @patch('graphrag.encoder.ollama.chat')
-    def test_generate_with_ollama_success(self, mock_chat):
+    @patch('graphrag.encoder.client')
+    def test_generate_with_ollama_success(self, mock_client):
         """generate_with_ollama should return a string on successful response."""
-        mock_response = {
-            'message': {'content': '{"cleaned_query": "test", "extracted_context": "context"}'}
-        }
+        mock_chat = mock_client.chat.completions.create
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock()]
+        mock_response.choices[0].message.content = '{"cleaned_query": "test", "extracted_context": "context"}'
         mock_chat.return_value = mock_response
         
-        result = generate_with_ollama("test prompt")
+        result = generate_with_ollama([{"role": "user", "content": "test prompt"}])
         
         assert result is not None
         assert isinstance(result, str)
     
-    @patch('graphrag.encoder.ollama.chat')
-    def test_generate_with_ollama_exception_returns_none(self, mock_chat):
-        """generate_with_ollama should return None when Ollama raises an exception."""
-        mock_chat.side_effect = Exception("Connection error")
+    @patch('graphrag.encoder.client')
+    def test_generate_with_ollama_exception_returns_none(self, mock_client):
+        """generate_with_ollama should return None when the LLM raises an exception."""
+        mock_client.chat.completions.create.side_effect = Exception("Connection error")
         
-        result = generate_with_ollama("test prompt")
+        result = generate_with_ollama([{"role": "user", "content": "test prompt"}])
         
         assert result is None
     
-    @patch('graphrag.encoder.ollama.chat')
-    def test_generate_with_ollama_uses_correct_model(self, mock_chat):
-        """generate_with_ollama should use the correct Ollama model."""
-        mock_response = {'message': {'content': '{"test": "data"}'}}
+    @patch('graphrag.encoder.client')
+    def test_generate_with_ollama_uses_correct_model(self, mock_client):
+        """generate_with_ollama should use the correct model from llm_config."""
+        mock_chat = mock_client.chat.completions.create
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock()]
+        mock_response.choices[0].message.content = '{"test": "data"}'
         mock_chat.return_value = mock_response
         
-        generate_with_ollama("test prompt")
+        from graphrag.encoder import MODEL_NAME as encoder_model
+        generate_with_ollama([{"role": "user", "content": "test prompt"}])
         
         call_kwargs = mock_chat.call_args[1]
-        assert call_kwargs['model'] == 'llama3.1:8b-instruct-q4_K_M'
+        assert call_kwargs['model'] == encoder_model
     
-    @patch('graphrag.encoder.ollama.chat')
-    def test_generate_with_ollama_json_format_requested(self, mock_chat):
+    @patch('graphrag.encoder.client')
+    def test_generate_with_ollama_json_format_requested(self, mock_client):
         """generate_with_ollama should request JSON format."""
-        mock_response = {'message': {'content': '{"test": "data"}'}}
+        mock_chat = mock_client.chat.completions.create
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock()]
+        mock_response.choices[0].message.content = '{"test": "data"}'
         mock_chat.return_value = mock_response
         
-        generate_with_ollama("test prompt")
+        generate_with_ollama([{"role": "user", "content": "test prompt"}])
         
         call_kwargs = mock_chat.call_args[1]
-        assert call_kwargs['format'] == 'json'
+        assert call_kwargs['response_format'] == {"type": "json_object"}
     
-    @patch('graphrag.encoder.ollama.chat')
-    def test_generate_with_ollama_zero_temperature(self, mock_chat):
+    @patch('graphrag.encoder.client')
+    def test_generate_with_ollama_zero_temperature(self, mock_client):
         """generate_with_ollama should use zero temperature."""
-        mock_response = {'message': {'content': '{"test": "data"}'}}
+        mock_chat = mock_client.chat.completions.create
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock()]
+        mock_response.choices[0].message.content = '{"test": "data"}'
         mock_chat.return_value = mock_response
         
-        generate_with_ollama("test prompt")
+        generate_with_ollama([{"role": "user", "content": "test prompt"}])
         
         call_kwargs = mock_chat.call_args[1]
-        assert call_kwargs['options']['temperature'] == 0
+        assert call_kwargs['temperature'] == 0.0
 
 
 class TestExtractQueryAndContext:
@@ -236,11 +247,15 @@ class TestProcessContext:
 class TestExtractQueryAndContextIntegration:
     """Integration tests for extract_query_and_context with generate_with_ollama."""
     
-    @patch('graphrag.encoder.ollama.chat')
-    def test_extract_calls_generate_successfully(self, mock_chat):
+    @patch('graphrag.encoder.client')
+    def test_extract_calls_generate_successfully(self, mock_client):
         """Test extract_query_and_context successfully calls generate_with_ollama."""
-        mock_response = '{"cleaned_query": "What courses?", "extracted_context": "CS student"}'
-        mock_chat.return_value = {'message': {'content': mock_response}}
+        mock_chat = mock_client.chat.completions.create
+        mock_response_content = '{"cleaned_query": "What courses?", "extracted_context": "CS student"}'
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock()]
+        mock_response.choices[0].message.content = mock_response_content
+        mock_chat.return_value = mock_response
         
         query, context = extract_query_and_context("test prompt")
         
@@ -248,12 +263,16 @@ class TestExtractQueryAndContextIntegration:
         assert context == "CS student"
         mock_chat.assert_called_once()
     
-    @patch('graphrag.encoder.ollama.chat')
-    def test_extract_with_complex_json(self, mock_chat):
+    @patch('graphrag.encoder.client')
+    def test_extract_with_complex_json(self, mock_client):
         """Test extract_query_and_context with more complex context."""
+        mock_chat = mock_client.chat.completions.create
         complex_context = "Complex context with special characters: #$%"
-        mock_response = f'{{"cleaned_query": "test query", "extracted_context": "{complex_context}"}}'
-        mock_chat.return_value = {'message': {'content': mock_response}}
+        mock_response_content = f'{{"cleaned_query": "test query", "extracted_context": "{complex_context}"}}'
+        mock_response = MagicMock()
+        mock_response.choices = [MagicMock()]
+        mock_response.choices[0].message.content = mock_response_content
+        mock_chat.return_value = mock_response
         
         query, context = extract_query_and_context("test prompt")
         

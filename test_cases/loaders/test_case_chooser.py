@@ -1,5 +1,16 @@
-import ollama
+import sys
+import os
 import json
+import re
+
+# Ensure project root is on the path so llm_config can be imported
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+
+from llm_config import MODEL_NAME, get_openai_client
+
+client = get_openai_client()
 
 LLM_MESSAGES = [
     # System Prompt
@@ -130,21 +141,17 @@ All cephalopods have tentacles. An octopus is a type of cephalopod. Blue-ringed 
         },
 ]
 
-import re
 
 def approve(question: str) -> bool:
     max_retries = 3
     for attempt in range(max_retries):
         try:
-            response = ollama.chat(
-                model='llama3.1:8b-instruct-q4_K_M',
+            response = client.chat.completions.create(
+                model=MODEL_NAME,
                 messages=LLM_MESSAGES + [{"role": "user", "content": question}],
-                options={
-                    'temperature': 0.7,
-                },
-                logprobs=True     
+                temperature=0.7,
             )
-            content = response['message']['content']
+            content = response.choices[0].message.content
             
             # Try parsing directly
             try:
@@ -170,8 +177,7 @@ def approve(question: str) -> bool:
             return verdict
             
         except Exception as e:
-            # On final retry, log error and fail open or closed?
-            # It's better to fail closed (False) so we don't pollute data
+            # On final retry, log error and fail closed (False) so we don't pollute data
             if attempt == max_retries - 1:
                 print(f"[test_case_chooser] Error parsing LLM response for '{question[:30]}...': {e}")
                 print(f"[test_case_chooser] Raw Content: {content if 'content' in locals() else 'N/A'}")

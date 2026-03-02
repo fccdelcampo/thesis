@@ -1,7 +1,11 @@
+import sys, os
 import requests
 from langchain_community.chat_models import ChatOllama
 
-MODEL_NAME = "llama3.1:8b-instruct-q4_K_M"
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+from llm_config import MODEL_NAME
 
 def unload_ollama_model():
     """Force-unload the model from VRAM so RAGAS can use it without OOM."""

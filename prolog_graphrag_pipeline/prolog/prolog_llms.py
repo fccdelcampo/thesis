@@ -1,12 +1,32 @@
 from copy import deepcopy
+import os
+import sys
 import signal
 import threading
+import time
 
-# Prolog code generation benefits from a code-tuned model
-PROLOG_MODEL = 'llama3.1:8b-instruct-q4_K_M'
-# Natural language tasks (explanation, close-check, final synthesis) stay on llama3.2
-NL_MODEL = 'llama3.1:8b-instruct-q4_K_M'
-OLLAMA_TIMEOUT = 600  # seconds per LLM call (10 minutes)
+# Ensure project root is on the path so llm_config can be imported
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+
+from llm_config import MODEL_NAME, USE_TOGETHER_API, get_openai_client, log_llm_event, retry_with_exponential_backoff
+
+# Prolog code generation and NL tasks both use the configured model
+PROLOG_MODEL = MODEL_NAME
+NL_MODEL = MODEL_NAME
+LLM_TIMEOUT = 120  # seconds per LLM call (2 minutes)
+DEBUG_FILE = "debug.txt"
+
+def _log_to_file(message: str):
+    """Appends a message to debug.txt with UTF-8 encoding."""
+    try:
+        with open(DEBUG_FILE, "a", encoding="utf-8") as f:
+            f.write(message + "\n")
+    except Exception as e:
+        print(f"[Prolog LLM Error] Could not write to {DEBUG_FILE}: {e}")
+
+client = get_openai_client()
 
 # ── KV-cache warmup ────────────────────────────────────────────────────────
 # Ollama reuses its KV cache when the prefix of a chat request matches a
@@ -14,12 +34,13 @@ OLLAMA_TIMEOUT = 600  # seconds per LLM call (10 minutes)
 # before Prolog generation, it evicts the Prolog prefix from the cache.
 # warmup_prolog_model() re-primes the cache (system prompt + few-shots) once
 # per question so that all retry attempts within that question are fast.
+# NOTE: Warmup is Ollama-specific and skipped when using Together AI.
 _kv_cache_warmed = False
 
 def warmup_prolog_model():
     """Prime Ollama's KV cache with the static few-shot prefix (once per question)."""
     global _kv_cache_warmed
-    if _kv_cache_warmed:
+    if _kv_cache_warmed or USE_TOGETHER_API:
         return
     import ollama
     try:
@@ -50,12 +71,37 @@ def reset_kv_cache_flag():
     _kv_cache_warmed = False
 
 def reset_ollama_model():
-    """Force-unload the model from Ollama, then verify it reloads successfully."""
+    """Force-unload the model from Ollama, then verify it reloads successfully with strict timeouts.
+    Skipped when using Together AI (no local model to reset).
+    """
+    if USE_TOGETHER_API:
+        return
+
     import ollama
+    
+    def run_with_timeout(target_func, timeout=30):
+        error_holder = [None]
+        result_holder = [None]
+        
+        def wrapper():
+            try:
+                result_holder[0] = target_func()
+            except Exception as e:
+                error_holder[0] = e
+                
+        thread = threading.Thread(target=wrapper, daemon=True)
+        thread.start()
+        thread.join(timeout=timeout)
+        
+        if thread.is_alive():
+            raise TimeoutError(f"Operation timed out after {timeout} seconds")
+        if error_holder[0]:
+            raise error_holder[0]
+        return result_holder[0]
+
     try:
         print("[Ollama Reset] Unloading prolog model to recover from hang...", flush=True)
-        # Setting keep_alive to 0 with a dummy generate forces immediate unload
-        ollama.generate(model=PROLOG_MODEL, prompt="", keep_alive=0)
+        run_with_timeout(lambda: ollama.generate(model=PROLOG_MODEL, prompt="", keep_alive=0))
         print("[Ollama Reset] Model unloaded.", flush=True)
     except Exception as e:
         print(f"[Ollama Reset] Warning during unload: {e}", flush=True)
@@ -63,10 +109,12 @@ def reset_ollama_model():
     # Verify the model reloads successfully with a simple ping
     try:
         print("[Ollama Reset] Verifying model reloads...", flush=True)
-        test_response = ollama.chat(
-            model=PROLOG_MODEL,
-            messages=[{'role': 'user', 'content': 'Say OK'}],
-            options={'temperature': 0, 'keep_alive': '20m'},
+        test_response = run_with_timeout(
+            lambda: ollama.chat(
+                model=PROLOG_MODEL,
+                messages=[{'role': 'user', 'content': 'Say OK'}],
+                options={'temperature': 0, 'keep_alive': '20m'},
+            )
         )
         reply = test_response.get('message', {}).get('content', '').strip()
         print(f"[Ollama Reset] Model reloaded successfully. Ping reply: {reply[:50]}", flush=True)
@@ -82,7 +130,6 @@ def generate(prompt: str, flag: str) -> dict:
     
 def generate_response(prompt: str, flag: str) -> dict:
     from .prolog_config import GENERATOR_LLM_MESSAGES, EXPLAINER_LLM_MESSAGES, USE_KV_CACHE
-    import ollama
     
     answer = dict()
     
@@ -102,54 +149,65 @@ def generate_response(prompt: str, flag: str) -> dict:
     else:
         raise ValueError(f"Flag {flag} is invalid. Only 'prolog', 'explanation', and 'q' are accepted.")
 
-    if USE_KV_CACHE:
-        # Proper KV Caching: Send system instructions/few-shots as distinct message objects.
-        # This builds a stable prefix that Ollama caches in memory, but has a large initial overhead.
-        llm_messages = base_messages + [{'role': 'user', 'content': prompt}]
-    else:
-        # Linear/No Cache (Default for fast Testing):
-        # Flatten all system instructions and few-shots into a single raw text block.
-        # This completely bypasses the KV Cache prefix evaluation penalty, making it significantly faster for single queries.
+    if USE_TOGETHER_API or not USE_KV_CACHE:
+        # Reverted: Flatten all system instructions and few-shots into a single raw text block.
+        # This is requested by the user for Together AI stability.
         flattened_context = ""
         for msg in base_messages:
             role = msg.get('role', 'system').upper()
             content = msg.get('content', '')
             flattened_context += f"<{role}>\n{content}\n</{role}>\n\n"
         
-        dynamic_prompt = f"{flattened_context}\nPlease answer the following query based on the above instructions and examples:\n{prompt}"
+        dynamic_prompt = f"{flattened_context}\nPlease answer the following query based on past instructions:\n{prompt}"
         llm_messages = [{'role': 'user', 'content': dynamic_prompt}]
+    else:
+        # Ollama KV Caching: Send as distinct objects for stable prefix caching
+        llm_messages = base_messages + [{'role': 'user', 'content': prompt}]
 
-    # Use a thread to enforce a hard timeout on ollama.chat()
+    # Use a thread to enforce a hard timeout on the LLM call
     result_holder = [None]
     error_holder = [None]
 
-    def _call_ollama():
+    def _call_llm():
         try:
-            response = ollama.chat(
+            # Log the outgoing prompt
+            _log_to_file(f"\n--- [DEBUG] PROLOG PROMPT ({flag.upper()}) ---\n{dynamic_prompt if 'dynamic_prompt' in locals() else str(llm_messages)}\n----------------------------------")
+            
+            start_time = time.perf_counter()
+            
+            # Wrap with exponential backoff to shield evaluation from server hiccups
+            invoke_func = retry_with_exponential_backoff(client.chat.completions.create)
+            
+            response = invoke_func(
                 model=model,
                 messages=llm_messages,
-                options={
-                    'temperature': temperature,
-                    'keep_alive': '20m',
-                    'num_ctx': 4096,
-                },
+                temperature=float(temperature),
+                timeout=LLM_TIMEOUT,
+                max_tokens=2048,
             )
+            duration = time.perf_counter() - start_time
+            log_llm_event(f"PROLOG_{flag.upper()}", duration=duration)
             result_holder[0] = response
+            
+            # Log the response content
+            if response and response.choices:
+                content = response.choices[0].message.content
+                _log_to_file(f"\n=== [DEBUG] PROLOG RESPONSE ({flag.upper()}) ===\n{content}\n===================================")
         except Exception as e:
             error_holder[0] = e
 
-    thread = threading.Thread(target=_call_ollama, daemon=True)
+    thread = threading.Thread(target=_call_llm, daemon=True)
     thread.start()
-    thread.join(timeout=OLLAMA_TIMEOUT)
+    thread.join(timeout=LLM_TIMEOUT)
 
     if thread.is_alive():
-        # Ollama is hung — reset and raise
-        print(f"[Ollama TIMEOUT] LLM call exceeded {OLLAMA_TIMEOUT}s. Resetting model...", flush=True)
+        # LLM is hung — reset and raise
+        print(f"[LLM TIMEOUT] LLM call exceeded {LLM_TIMEOUT}s. Resetting model...", flush=True)
         reset_ollama_model()
-        raise TimeoutError(f"Ollama LLM call timed out after {OLLAMA_TIMEOUT}s")
+        raise TimeoutError(f"LLM call timed out after {LLM_TIMEOUT}s")
 
     if error_holder[0]:
-        print(f"Error during Ollama interaction: {error_holder[0]}")
+        print(f"Error during LLM interaction: {error_holder[0]}")
         return None
 
     response = result_holder[0]
@@ -157,16 +215,16 @@ def generate_response(prompt: str, flag: str) -> dict:
         return None
 
     try:
-        answer['text_answer'] = response['message']['content']
-        answer['logprobs'] = response.get('logprobs', None)
+        answer['text_answer'] = response.choices[0].message.content
+        answer['logprobs'] = None
         return answer
     except Exception as e:
-        print(f"Error during Ollama interaction: {e}")
+        print(f"Error during LLM interaction: {e}")
         return None
     
 # import ollama
 # response = ollama.chat(
-#             model='llama3.1:8b-instruct-q4_K_M',
+#             model='llama3:instruct',
 #             messages=[{'role': 'user', 'content': "What is the Riemann sum definition of the definite integral?"}],
 #             options={
 #                 'temperature': 0  

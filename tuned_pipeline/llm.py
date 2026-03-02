@@ -1,45 +1,38 @@
 import sys
+import os
 
-# from pathlib import Path
+# Ensure project root is on the path so llm_config can be imported
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
 
-# ROOT = Path(__file__).resolve().parent
-# print(ROOT)
+from llm_config import MODEL_NAME, get_openai_client
 
-# RESULTS_DIR = ROOT / "hallucination_evaluation_results"
-# sys.path.append(str(ROOT))
-# Define target folder inside top-level directory
-# IO_DIR = ROOT / "hallucination_evaluation_results"
 try:
     from .config import LLM_MESSAGES
 except ImportError:
     try:
         from config import LLM_MESSAGES
     except ImportError:
-        # Fallback if config is in the same directory but not found (e.g. shadowed)
-        import sys
         from pathlib import Path
         sys.path.append(str(Path(__file__).parent))
         from config import LLM_MESSAGES
-import ollama
+
+client = get_openai_client()
+
 
 def generate(user_question: str):
     try:
         answer = dict()
-        response = ollama.chat(
-                model='llama3.1:8b-instruct-q4_K_M',
-                messages=LLM_MESSAGES + [{"role": "user", "content": user_question}],
-                options={
-                    'temperature': 0.4,
-                    'keep_alive': 0,
-                    'top_k': 50,
-                    'top_p': 0.9
-                },
-                logprobs=True     
-            )
-        answer['text_answer'] = response['message']['content']
-        answer['logprobs'] = response.get('logprobs', None)
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=LLM_MESSAGES + [{"role": "user", "content": user_question}],
+            temperature=1.0,
+        )
+        answer['text_answer'] = response.choices[0].message.content
+        # logprobs not universally supported across providers
+        answer['logprobs'] = None
         return answer
     except Exception as e:
-        print(f"Error during Ollama interaction: {e}")
+        print(f"Error during LLM interaction ({MODEL_NAME}): {e}")
         return None
-        

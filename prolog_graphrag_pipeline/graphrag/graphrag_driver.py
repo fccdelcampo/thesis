@@ -11,6 +11,7 @@ from .config import PROMPT_TEMPLATE, NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD, 
 # However, this will fail when you run this file directly. For debugging purposes, you can run 'python -m graphrag-pipeline.graphrag.graphrag_driver' in the terminal.
 import asyncio
 import time
+import threading
 import sys
 
 # Persistent event loop to avoid "RuntimeError: Event loop is closed" on Windows.
@@ -30,10 +31,100 @@ def _run_async(coro):
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parents[1]))
-# Structured JSON extraction (KG builder) benefits from a code-tuned model
-ENCODER_MODEL = "llama3.1:8b-instruct-q4_K_M"
-# Natural language synthesis (retriever) + embeddings stay on llama3.2
-RETRIEVER_MODEL = "llama3.1:8b-instruct-q4_K_M"
+
+# Ensure project root is on the path so llm_config can be imported
+_project_root = str(Path(__file__).resolve().parents[2])
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+from llm_config import MODEL_NAME as _LLM_MODEL, USE_TOGETHER_API, get_openai_client, BASE_URL, API_KEY, log_llm_event, retry_with_exponential_backoff
+
+if USE_TOGETHER_API:
+    from neo4j_graphrag.embeddings.base import Embedder
+
+    class TogetherAIEmbeddings(Embedder):
+        """Embedder that calls the Together AI OpenAI-compatible embeddings endpoint."""
+        def embed_query(self, text: str):
+            from llm_config import EMBED_MODEL
+            _client = get_openai_client()
+            start_time = time.perf_counter()
+            
+            # Wrap with exponential backoff
+            invoke_func = retry_with_exponential_backoff(_client.embeddings.create)
+            
+            response = invoke_func(
+                model=EMBED_MODEL,
+                input=text,
+            )
+            duration = time.perf_counter() - start_time
+            log_llm_event("EMBED_QUERY", duration=duration)
+            return response.data[0].embedding
+
+        async def async_embed_chunks(self, texts: list[str]) -> list[list[float]]:
+            """Batch embed a list of texts using the Together AI API."""
+            from llm_config import EMBED_MODEL
+            import asyncio
+            _client = get_openai_client()
+            loop = asyncio.get_event_loop()
+            
+            def _do_batch():
+                # The openai client can take a list of strings
+                start_time = time.perf_counter()
+                
+                # Wrap with exponential backoff
+                invoke_func = retry_with_exponential_backoff(_client.embeddings.create)
+                
+                resp = invoke_func(model=EMBED_MODEL, input=texts)
+                duration = time.perf_counter() - start_time
+                log_llm_event(f"EMBED_BATCH_{len(texts)}", duration=duration)
+                return [d.embedding for d in resp.data]
+            
+            return await loop.run_in_executor(None, _do_batch)
+
+    # Monkeypatch neo4j_graphrag's TextChunkEmbedder to use batching if available
+    try:
+        from neo4j_graphrag.experimental.components.embedder import TextChunkEmbedder
+        from neo4j_graphrag.experimental.components.types import TextChunks, TextChunk
+        _original_embedder_run = TextChunkEmbedder.run
+
+        from typing import Union
+        async def _patched_embedder_run(self, text_chunks: Union[TextChunks, dict]) -> TextChunks:
+            if hasattr(self._embedder, "async_embed_chunks"):
+                # Handle dictionary input
+                if isinstance(text_chunks, dict):
+                    raw_chunks = text_chunks.get("chunks", [])
+                    # convert dict to TextChunk objects if needed
+                    chunk_objs = []
+                    for c in raw_chunks:
+                        if isinstance(c, dict):
+                            chunk_objs.append(TextChunk(**c))
+                        else:
+                            chunk_objs.append(c)
+                else:
+                    chunk_objs = text_chunks.chunks
+
+                texts = [c.text for c in chunk_objs]
+                embeddings = []
+                batch_size = 100
+                for i in range(0, len(texts), batch_size):
+                    batch = texts[i:i+batch_size]
+                    batch_emb = await self._embedder.async_embed_chunks(batch)
+                    embeddings.extend(batch_emb)
+                    
+                chunks = []
+                for i, c in enumerate(chunk_objs):
+                    metadata = c.metadata if c.metadata else {}
+                    metadata["embedding"] = embeddings[i]
+                    chunks.append(TextChunk(text=c.text, index=c.index, metadata=metadata, uid=c.uid))
+                return TextChunks(chunks=chunks)
+            else:
+                return await _original_embedder_run(self, text_chunks)
+
+        TextChunkEmbedder.run = _patched_embedder_run
+    except ImportError:
+        pass
+
+ENCODER_MODEL = _LLM_MODEL
+RETRIEVER_MODEL = _LLM_MODEL
 
 class DebugOllamaLLM(OllamaLLM):
     """Wrapper to clean input prompts and log raw LLM responses to debug.txt."""
@@ -62,106 +153,221 @@ class DebugOllamaLLM(OllamaLLM):
             return text[obj_start : obj_end + 1]
         return text   # nothing to strip — return as-is
 
-
     def _clean_prompt(self, text: str) -> str:
-        """Removes all newlines from the input prompt to fix PDF formatting."""
+        """Removes newlines only from PDF-extracted prose.
+
+        Structured filter prompts (KBPedia batch filter, concept filter) use
+        intentional newlines to separate concept blocks. Stripping them collapses
+        all structure into one line, which confuses the model and causes hangs.
+        We detect structured prompts by the presence of known marker strings.
+        """
+        STRUCTURED_MARKERS = ("Concept: '", "  - ", "Facts:\n", "Candidates (")
+        if any(m in text for m in STRUCTURED_MARKERS):
+            return text   # preserve structured prompt formatting
         return text.replace('\n', ' ')
 
-    def invoke(self, input: str, **kwargs) -> str:
-        # 1. Clean the input
-        clean_input = self._clean_prompt(input)
-        
-        # 2. LOG to file instead of print
-        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{clean_input}\n----------------------------------")
+    def _clean_input_data(self, input_data):
+        """Applies _clean_prompt either to a string or to the 'content' of a list of message dicts."""
+        if isinstance(input_data, str):
+            return self._clean_prompt(input_data)
+        elif isinstance(input_data, list):
+            # Neo4j GraphRAG passes List[LLMMessage] which are dicts with 'role' and 'content'
+            cleaned_list = []
+            for msg in input_data:
+                cleaned_msg = msg.copy() if isinstance(msg, dict) else msg
+                if isinstance(cleaned_msg, dict) and 'content' in cleaned_msg:
+                    cleaned_msg['content'] = self._clean_prompt(str(cleaned_msg['content']))
+                cleaned_list.append(cleaned_msg)
+            return cleaned_list
+        return input_data
 
-        print(f"  > Sending chunk to LLM ({len(input)} chars)...", end="", flush=True)
+    def _openai_invoke(self, input, message_history=None, system_instruction=None):
+        """Route through the openai client when USE_TOGETHER_API=True with retries and hard timeouts."""
+        from neo4j_graphrag.llm.types import LLMResponse
+        _client = get_openai_client()
         
-        # 3. Send to LLM
-        response = super().invoke(clean_input, **kwargs)
+        if isinstance(input, list):
+            messages = input
+        else:
+            messages = []
+            if system_instruction:
+                messages.append({"role": "system", "content": str(system_instruction)})
+            if message_history:
+                messages.extend([{"role": m.get("role", "user"), "content": m.get("content", "")} for m in message_history])
+            messages.append({"role": "user", "content": str(input)})
 
+        # Log prompt if it's an answer generation (not just a tiny fragment)
+        log_input = str(messages[-1]['content']) if messages else ""
+        if len(log_input) > 100:
+             self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Together AI) ---\n{log_input}\n----------------------------------")
+
+        max_retries = 5
+        timeout_sec = 120.0
+        
+        result_holder = [None]
+        error_holder = [None]
+
+        def _do_invoke():
+            return _client.chat.completions.create(
+                model=ENCODER_MODEL,
+                messages=messages,
+                temperature=0.0,
+                timeout=timeout_sec,
+                max_tokens=2048
+            )
+
+        def _target():
+            try:
+                start_time = time.perf_counter()
+                # Use centralized exponential backoff
+                backoff_invoke = retry_with_exponential_backoff(_do_invoke, max_retries=max_retries)
+                resp = backoff_invoke()
+                
+                duration = time.perf_counter() - start_time
+                log_llm_event(f"GRAG_INVOKE", duration=duration)
+                result_holder[0] = resp
+            except Exception as e:
+                log_llm_event(f"GRAG_INVOKE_FAIL", error=str(e))
+                error_holder[0] = e
+
+        thread = threading.Thread(target=_target, daemon=True)
+        thread.start()
+        thread.join(timeout=(timeout_sec * (max_retries + 1)) + 30) # Wait for all retries
+
+        if thread.is_alive():
+            print(f"  > [LLM TIMEOUT] Together AI call timed out even after retries.", flush=True)
+            return LLMResponse(content="Error: Together AI call timed out.")
+        
+        if error_holder[0]:
+            print(f"  > [LLM ERROR] Together AI failed: {error_holder[0]}", flush=True)
+            return LLMResponse(content=f"Error: Together AI failed: {error_holder[0]}")
+
+        response = result_holder[0]
+        if response:
+            content = response.choices[0].message.content or ""
+            self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Together AI) ===\n{content}\n===================================")
+            return LLMResponse(content=self._clean_response_text(content))
+
+    def invoke(self, input, message_history=None, system_instruction=None, **kwargs):
+        if USE_TOGETHER_API:
+            return self._openai_invoke(input, message_history, system_instruction)
+        kwargs.pop('response_format', None) # neo4j_graphrag OllamaLLM hates response_format
+        clean_input = self._clean_input_data(input)
+        
+        # Format for logging
+        log_input = clean_input if isinstance(clean_input, str) else str(clean_input)
+        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Sync) ---\n{log_input}\n----------------------------------")
+        
+        input_len = len(input) if isinstance(input, str) else len(str(input))
+        print(f"  > Sending chunk to LLM ({input_len} chars)...", end="", flush=True)
+        
+        response = super().invoke(
+            input=clean_input,
+            message_history=message_history,
+            system_instruction=system_instruction
+        )
         print(" Done!")
         
-        # 4. Handle response
         raw_content = response.content if hasattr(response, 'content') else str(response)
-        
-        # 5. LOG to file
         self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Sync) ===\n{raw_content}\n===================================")
         
-        return self._clean_response_text(raw_content)
+        clean_content = self._clean_response_text(raw_content)
+        if hasattr(response, 'content'):
+            response.content = clean_content
+            return response
+        else:
+            from neo4j_graphrag.llm.types import LLMResponse
+            return LLMResponse(content=clean_content)
 
-    async def ainvoke(self, input: str, **kwargs):
-        # 1. Clean the input
-        clean_input = self._clean_prompt(input)
+    async def ainvoke(self, input, message_history=None, system_instruction=None, **kwargs):
+        if USE_TOGETHER_API:
+            import asyncio
+            loop = asyncio.get_event_loop()
+            return await loop.run_in_executor(None, self._openai_invoke, input, message_history, system_instruction)
+        kwargs.pop('response_format', None)
+        clean_input = self._clean_input_data(input)
         
-        # 2. LOG to file
-        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{clean_input}\n----------------------------------")
+        log_input = clean_input if isinstance(clean_input, str) else str(clean_input)
+        self._log_to_file(f"\n--- [DEBUG] SENT PROMPT (Async) ---\n{log_input}\n----------------------------------")
         
-        print(f"  > [Async] Sending chunk to LLM ({len(input)} chars) and waiting for extraction...", end="", flush=True)
+        input_len = len(input) if isinstance(input, str) else len(str(input))
+        print(f"  > [Async] Sending chunk to LLM ({input_len} chars) and waiting for extraction...", end="", flush=True)
         
-        # 3. Send to LLM
-        response = await super().ainvoke(clean_input, **kwargs)
+        # Bypass neo4j-graphrag's ainvoke and its broken rate limit decorator
+        # Call the native async_client from ollama directly
+        from neo4j_graphrag.llm.types import LLMResponse
+        try:
+            if isinstance(clean_input, str):
+                messages = self.get_messages(clean_input, message_history=message_history, system_instruction=system_instruction)
+            else:
+                messages = self.get_messages_v2(clean_input)
+                
+            response_obj = await self.async_client.chat(
+                model=self.model_name,
+                messages=messages,
+                options={**self.model_params, **kwargs},
+            )
+            raw_content = response_obj.message.content or ""
+            response = LLMResponse(content=raw_content)
+        except Exception as e:
+            print(f"\n[DebugOllamaLLM Error] Async call failed: {e}")
+            raise
         
         print(" Done!")
         
-        # 4. Extract content
-        raw_content = response.content if hasattr(response, 'content') else str(response)
-        
-        # 5. LOG to file
         self._log_to_file(f"\n=== [DEBUG] RAW RESPONSE (Async) ===\n{raw_content}\n===================================")
         
         clean_content = self._clean_response_text(raw_content)
-        
-        # 6. Return Object or String
         if hasattr(response, 'content'):
             response.content = clean_content
             return response
         else:
             return clean_content
-        
+
 
 neo4j_driver = None
 
 
-def initialize_models() -> tuple[OllamaLLM, OllamaLLM, OllamaEmbeddings]:
-    # keep_alive=0 unloads VRAM after each document processing
+def initialize_models():
     encoder_llm = DebugOllamaLLM(
         model_name=ENCODER_MODEL,
         model_params={
             "keep_alive": "20m",
-            "options": { # in case parameters need to be nested
+            "options": {
                 "temperature": 0,
-                "num_ctx": 2048,
+                "num_ctx": 4096,
                 "format": "json",
                 "repeat_penalty": 1.2,
-                "seed": 42 # for reproducibility
+                "seed": 42
             }
         }
     )
 
-    retriever_llm = OllamaLLM(
+    retriever_llm = DebugOllamaLLM(
         model_name=RETRIEVER_MODEL,
         model_params={
-            "keep_alive": "20m", # Keep it loaded during an active chat session
+            "keep_alive": "20m",
             "options": {
                 "temperature": 0.1,
-                "num_ctx": 2048,
+                "num_ctx": 4096,
                 "format": "json",
                 "repeat_penalty": 1.2,
-                "seed": 42 # for reproducibility
+                "seed": 42
             }
-        
         }
     )
 
-    # 2. Initialize Embedder
-    # Set the model explicitly so Neo4j uses the correct dimensionality (3072 for llama3.2:3b, 4096 for llama3.1:8b).
-    embedder = OllamaEmbeddings(
-        model=RETRIEVER_MODEL
-    )
+    if USE_TOGETHER_API:
+        from llm_config import EMBED_MODEL
+        embedder = TogetherAIEmbeddings()
+        print(f"Together AI embedder loaded ({EMBED_MODEL}).")
+    else:
+        from llm_config import EMBED_MODEL
+        embedder = OllamaEmbeddings(model=EMBED_MODEL)
+        print("Ollama embedder loaded.")
 
-    print("Ollama loaded successfully.")
-    
     return encoder_llm, retriever_llm, embedder
+
 
 def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
     STATIC_SCHEMA = { # NOTE: Due to how 'EXTRACTED' works, the prompt used by SimpleKGPipeline is bad and does not constrain the output to only JSON format. We can create a custom KG Pipeline but for now we use this to skip it entirely.
@@ -182,7 +388,7 @@ def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
             "ILLUSTRATES"   # Example -> Concept ("Pingu ILLUSTRATES Non-flying bird")
         ]
     }
-    chunk_splitter = FixedSizeSplitter(chunk_size=800, chunk_overlap=100) # OPT2: reduced from 1200/150 → fewer tokens per extraction call
+    chunk_splitter = FixedSizeSplitter(chunk_size=450, chunk_overlap=50) # OPT2: reduced from 1200/150 → fewer tokens per extraction call
     
     schema = STATIC_SCHEMA if SCHEMA_CONFIG.name == "STATIC" else "EXTRACTED"
 

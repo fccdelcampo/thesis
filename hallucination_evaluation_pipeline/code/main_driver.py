@@ -1,4 +1,4 @@
-"""
+r"""
 Hallucination Evaluation Pipeline - Main Driver
 
 Orchestrates the full evaluation pipeline:
@@ -11,13 +11,20 @@ Usage:
     python hallucination_evaluation_pipeline\code\main_driver.py                    # Run full pipeline
     python hallucination_evaluation_pipeline\code\main_driver.py --generate-testset # Generate testset first, then run
     python hallucination_evaluation_pipeline\code\main_driver.py --metrics-only     # Run only hallucination metrics
-    python hallucination_evaluation_pipeline\code\main_driver.py --benchmarks-only  # Run only benchmarks
+    
+	  # Run only benchmarks
     python hallucination_evaluation_pipeline\code\main_driver.py --test-size n      # Run with n test cases
     python hallucination_evaluation_pipeline\code\main_driver.py --benchmarks ai2_arc openbookqa mmlu      # Run specific benchmarks
 """
-import os
 import sys
+import os
 import argparse
+import logging
+
+# Suppress noisy external library logs as per user request
+logging.getLogger("neo4j.notifications").setLevel(logging.WARNING)
+logging.getLogger("neo4j_graphrag.experimental.components.entity_relation_extractor").setLevel(logging.CRITICAL)
+
 
 # Add project root and stats directory to sys.path
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -68,8 +75,8 @@ def run_hallucination_metrics(test_size: int = 100):
     except Exception as e:
         print(f"Context Recall failed: {e}")
 
-def run_benchmarks(test_size: int = 100, benchmarks: list[str] = None):
-    """Run benchmark evaluators."""
+def run_benchmarks(test_size: int = 100, start_at: int = 0, benchmarks: list[str] = None):
+    """Run benchmark evaluators with unified global start offset."""
     if benchmarks is None:
         benchmarks = ["ai2_arc", "openbookqa", "mmlu"]
         
@@ -77,29 +84,48 @@ def run_benchmarks(test_size: int = 100, benchmarks: list[str] = None):
     print(f"STEP 2: Running Benchmark Evaluators: {benchmarks}")
     print("=" * 60)
     
-    if "ai2_arc" in benchmarks:
-        try:
-            import ai2_arc
-            print("\n--- AI2 ARC ---")
-            ai2_arc.main(test_size=test_size)
-        except Exception as e:
-            print(f"AI2 ARC failed: {e}")
+    current_start_at = start_at
     
+    if "ai2_arc" in benchmarks:
+        if current_start_at >= test_size:
+            print(f"\n--- AI2 ARC --- (Skipping entirely, start_at {current_start_at} >= test_size {test_size})")
+            current_start_at -= test_size
+        else:
+            try:
+                import ai2_arc
+                print("\n--- AI2 ARC ---")
+                ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+                current_start_at = 0
+            except Exception as e:
+                print(f"AI2 ARC failed: {e}")
+                
     if "mmlu" in benchmarks:
-        try:
-            import mmlu
-            print("\n--- MMLU ---")
-            mmlu.main(test_size=test_size)
-        except Exception as e:
-            print(f"MMLU failed: {e}")
+        if current_start_at >= test_size:
+            print(f"\n--- MMLU --- (Skipping entirely, start_at {current_start_at} >= test_size {test_size})")
+            current_start_at -= test_size
+        else:
+            try:
+                import mmlu
+                print("\n--- MMLU ---")
+                mmlu.main(test_size=test_size, start_idx=current_start_at)
+                current_start_at = 0
+            except Exception as e:
+                print(f"MMLU failed: {e}")
 
     if "openbookqa" in benchmarks:
-        try:
-            import openbookqa
-            print("\n--- OpenBookQA ---")
-            openbookqa.main(test_size=test_size)
-        except Exception as e:
-            print(f"OpenBookQA failed: {e}")
+        if current_start_at >= test_size:
+            print(f"\n--- OpenBookQA --- (Skipping entirely, start_at {current_start_at} >= test_size {test_size})")
+            current_start_at -= test_size
+        else:
+            try:
+                import openbookqa
+                print("\n--- OpenBookQA ---")
+                openbookqa.main(test_size=test_size, start_idx=current_start_at)
+                current_start_at = 0
+            except Exception as e:
+                print(f"OpenBookQA failed: {e}")
+        
+    # The duplicate block of code below is removed as per the instruction's implied scope.
 
 def run_statistical_analysis():
     """Run statistical tests on collected results."""
@@ -118,6 +144,7 @@ def run_hallucination_evaluation_pipeline(generate_testset: bool = False,
                                            metrics_only: bool = False,
                                            benchmarks_only: bool = False,
                                            test_size: int = 100,
+                                           start_at: int = 0,
                                            benchmarks: list[str] = None):
     """
     Run the complete hallucination evaluation pipeline.
@@ -134,7 +161,7 @@ def run_hallucination_evaluation_pipeline(generate_testset: bool = False,
         run_hallucination_metrics(test_size=test_size)
     
     if not metrics_only:
-        run_benchmarks(test_size=test_size, benchmarks=benchmarks)
+        run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
     
     run_statistical_analysis()
     
@@ -151,7 +178,9 @@ if __name__ == "__main__":
     parser.add_argument("--benchmarks-only", action="store_true",
                        help="Run only benchmarks (skip hallucination metrics)")
     parser.add_argument("--test-size", type=int, default=100,
-                       help="Number of test cases to run/generate")
+                       help="Number of test cases to run per benchmark")
+    parser.add_argument("--start-at", type=int, default=0,
+                       help="Global offset to skip a number of test cases across the active benchmarks")
     parser.add_argument("--benchmarks", nargs='+', default=["ai2_arc", "openbookqa", "mmlu"],
                        help="List of benchmarks to run (e.g. ai2_arc openbookqa mmlu)")
     args = parser.parse_args()
@@ -164,5 +193,6 @@ if __name__ == "__main__":
         metrics_only=args.metrics_only,
         benchmarks_only=args.benchmarks_only,
         test_size=args.test_size,
+        start_at=args.start_at,
         benchmarks=benchmarks_lower
     )

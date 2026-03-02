@@ -1,4 +1,9 @@
 from enum import Enum
+import sys, os
+_project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
+if _project_root not in sys.path:
+    sys.path.insert(0, _project_root)
+from llm_config import MODEL_NAME as _LLM_MODEL
 
 ALPHA = 0.05
 NUM_TEST_CASES = 100
@@ -6,7 +11,7 @@ NUM_TEST_CASES = 100
 class Pipeline(Enum):
     PROLOG_GRAPHRAG = ("Prolog-GraphRAG Pipeline", "prolog_graphrag")
     GRAPHRAG = ("GraphRAG Pipeline", "graphrag")
-    TUNED = ("llama3.1:8b-instruct-q4_K_M", "tuned")
+    TUNED = (_LLM_MODEL, "tuned")
 
 class Metric(Enum):
     FAITHFULNESS = ("Faithfulness", "faithfulness")
