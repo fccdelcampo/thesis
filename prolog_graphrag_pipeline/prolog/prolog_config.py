@@ -464,7 +464,10 @@ Generate a coherent narrative of the proof above. Start with the conclusion, the
 
 GENERATOR_LLM_MESSAGES = [
             {'role': 'system', 'content': GENERATOR_SYSTEM_PROMPT},
-        ] + GENERATOR_FEW_SHOT_EXAMPLES
+        ] + GENERATOR_FEW_SHOT_EXAMPLES + [
+            {'role': 'user', 'content': 'Acknowledge these strict Prolog generation instructions. You must extract a formal Prolog <database> and <query> strictly adhering to the s(CASP) syntactical constraints, with no standard arithmetic, no singletons, and contiguous clauses.'},
+            {'role': 'assistant', 'content': 'I understand and will follow all instructions strictly. I will generate a syntactically valid s(CASP) Prolog program with a <reasoning_step>, <database>, and <query>. I will strictly avoid forbidden operators like `is`, `=\\=`, or `;`, and I will never use uppercase names for facts.'}
+        ]
 
 EXPLAINER_LLM_MESSAGES = [
             {'role': 'system', 'content': EXPLAINER_SYSTEM_PROMPT},

@@ -120,4 +120,7 @@ Paris is officially recognized as both the capital and the most populous city of
 
 LLM_MESSAGES = [
     {'role': 'system', 'content': LLM_SYSTEM_PROMPT},
-] + LLM_FEW_SHOT_EXAMPLES
+] + LLM_FEW_SHOT_EXAMPLES + [
+    {'role': 'user', 'content': 'Acknowledge these synthesis instructions. You must rely purely on the LOGICAL EVIDENCE to answer the question, align your final answer with its conclusion, and never mention the underlying architecture (Prolog, GraphRAG, etc). For MCQs, use the exact "*Letter.* [Choice text]" format on the first line.'},
+    {'role': 'assistant', 'content': 'I understand. I will synthesize the LOGICAL EVIDENCE into a natural, conversational response without mentioning any technical architecture. For MCQs, my first line will exclusively be the "*Letter.* [Choice text]" format. Please provide the Question, Context, and Evidence.'}
+]
