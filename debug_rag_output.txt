@@ -147194,3 +147194,2615 @@ KBPedia Concept: ratio quantity. Relevant Logical Facts:   - subclass of: multi 
 Based on my synthesis of knowledge, the answer is B. amount of light.
 The two pots differ in the amount of light they receive, with one being placed near a sunny window and the other in a closet.
 ==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: plant cell wall. Relevant Logical Facts:   - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.   - subclass of: structural cell part   - subclass of: external anatomical part
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cytoplasmic part",
+  "uri": "http://kbpedia.org/kko/rc/CytoplasmicPart",
+  "score": 1.0,
+  "triples": [
+    "definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.",
+    "subclass of: cytoplasm",
+    "subclass of: cell part",
+    "subclass of: protoplasm",
+    "sibling concept: cytosol"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: cytoplasmic part. Relevant Logical Facts:   - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.   - subclass of: cytoplasm   - subclass of: cell part   - subclass of: protoplasm   - sibling concept: cytosol
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "anucleated cell",
+  "uri": "http://kbpedia.org/kko/rc/AnucleatedCell",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.",
+    "subclass of: cell",
+    "subclass of: living thing",
+    "has subclass: prokaryotic organism",
+    "sibling concept: cell capable of further differentiation",
+    "sibling concept: cell line",
+    "sibling concept: diploid cell",
+    "sibling concept: eukaryotic cell",
+    "sibling concept: haploid cell"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: anucleated cell. Relevant Logical Facts:   - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.   - subclass of: cell   - subclass of: living thing   - has subclass: prokaryotic organism   - sibling concept: cell capable of further differentiation   - sibling concept: cell line   - sibling concept: diploid cell   - sibling concept: eukaryotic cell   - sibling concept: haploid cell
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.",
+    "subclass of: microscopic object",
+    "subclass of: organic matter",
+    "subclass of: parts",
+    "subclass of: object types",
+    "subclass of: shaped thing",
+    "subclass of: three dimensional thing",
+    "subclass of: material",
+    "has subclass: aster (cell part)",
+    "has subclass: axon",
+    "has subclass: biological membrane stuff",
+    "has subclass: bacterial capsule",
+    "has subclass: structural cell part",
+    "has subclass: cell plate",
+    "has subclass: chromatin",
+    "has subclass: chromosome",
+    "has subclass: cytoplasm",
+    "has subclass: intracellular part",
+    "has subclass: membrane",
+    "has subclass: microtubule",
+    "sibling concept: atomic nucleus",
+    "sibling concept: chemical object",
+    "sibling concept: microorganism",
+    "sibling concept: nanotube",
+    "sibling concept: polymer molecule"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: cell part. Relevant Logical Facts:   - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.   - subclass of: microscopic object   - subclass of: organic matter   - subclass of: parts   - subclass of: object types   - subclass of: shaped thing   - subclass of: three dimensional thing   - subclass of: material   - has subclass: aster (cell part)   - has subclass: axon   - has subclass: biological membrane stuff   - has subclass: bacterial capsule   - has subclass: structural cell part   - has subclass: cell plate   - has subclass: chromatin   - has subclass: chromosome   - has subclass: cytoplasm   - has subclass: intracellular part   - has subclass: membrane   - has subclass: microtubule   - sibling concept: atomic nucleus   - sibling concept: chemical object   - sibling concept: microorganism   - sibling concept: nanotube   - sibling concept: polymer molecule
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell",
+  "uri": "http://kbpedia.org/kko/rc/Cell",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.",
+    "subclass of: living thing",
+    "subclass of: biological matter",
+    "subclass of: finite spatial thing",
+    "subclass of: naturally-occurring tangible substance",
+    "subclass of: organic matter",
+    "subclass of: temporally continuous thing",
+    "has subclass: anucleated cell",
+    "has subclass: cell capable of further differentiation",
+    "has subclass: cell line",
+    "has subclass: diploid cell",
+    "has subclass: eukaryotic cell",
+    "has subclass: haploid cell",
+    "has subclass: aura: heterotrophic cell",
+    "has subclass: prokaryotic organism",
+    "has subclass: single-cell organism",
+    "has subclass: somatic cell",
+    "has subclass: stem cell",
+    "sibling concept: aerobic thing",
+    "sibling concept: anaerobic thing",
+    "sibling concept: animal or body part",
+    "sibling concept: asexual organism",
+    "sibling concept: tissue"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: cell. Relevant Logical Facts:   - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.   - subclass of: living thing   - subclass of: biological matter   - subclass of: finite spatial thing   - subclass of: naturally-occurring tangible substance   - subclass of: organic matter   - subclass of: temporally continuous thing   - has subclass: anucleated cell   - has subclass: cell capable of further differentiation   - has subclass: cell line   - has subclass: diploid cell   - has subclass: eukaryotic cell   - has subclass: haploid cell   - has subclass: aura: heterotrophic cell   - has subclass: prokaryotic organism   - has subclass: single-cell organism   - has subclass: somatic cell   - has subclass: stem cell   - sibling concept: aerobic thing   - sibling concept: anaerobic thing   - sibling concept: animal or body part   - sibling concept: asexual organism   - sibling concept: tissue
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Based on my synthesis of knowledge, the answer is B. cell wall.
+The cell wall of a plant cell provides mechanical support, similar to the function of an animal skeleton, which also provides structural support and protection for the organism.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: botanical cell",
+    "subclass of: cell wall",
+    "subclass of: eukaryotic cell",
+    "subclass of: plant or part of a plant",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part",
+    "subclass of: cell part",
+    "subclass of: organism part",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part",
+    "subclass of: cell part",
+    "subclass of: organism part",
+    "has subclass: bacterial cell wall",
+    "has subclass: prokaryotic cell wall",
+    "sibling concept: bacterial cell wall",
+    "sibling concept: prokaryotic cell wall"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts: - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues. - subclass of: botanical cell - subclass of: cell wall - subclass of: eukaryotic cell - subclass of: plant or part of a plant - subclass of: structural cell part - subclass of: external anatomical part - subclass of: cell part - subclass of: organism part - subclass of: structural cell part - subclass of: external anatomical part - subclass of: cell part - subclass of: organism part - has subclass: bacterial cell wall - has subclass: prokaryotic cell wall - sibling concept: bacterial cell wall - sibling concept: prokaryotic cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cytoplasmic part",
+  "uri": "http://kbpedia.org/kko/rc/CytoplasmicPart",
+  "score": 1.0,
+  "triples": [
+    "definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.",
+    "subclass of: cytoplasm",
+    "subclass of: cell part",
+    "subclass of: protoplasm",
+    "sibling concept: cytosol"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: cytoplasmic part. Relevant Logical Facts: - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures. - subclass of: cytoplasm - subclass of: cell part - subclass of: protoplasm - sibling concept: cytosol
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell",
+  "uri": "http://kbpedia.org/kko/rc/Cell",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.",
+    "subclass of: living thing",
+    "subclass of: biological matter",
+    "subclass of: finite spatial thing",
+    "subclass of: naturally-occurring tangible substance",
+    "subclass of: organic matter",
+    "subclass of: temporally continuous thing",
+    "has subclass: anucleated cell",
+    "has subclass: cell capable of further differentiation",
+    "has subclass: cell line",
+    "has subclass: diploid cell",
+    "has subclass: eukaryotic cell",
+    "has subclass: haploid cell",
+    "has subclass: aura: heterotrophic cell",
+    "has subclass: prokaryotic organism",
+    "has subclass: single-cell organism",
+    "has subclass: somatic cell",
+    "has subclass: stem cell",
+    "sibling concept: aerobic thing",
+    "sibling concept: anaerobic thing",
+    "sibling concept: animal or body part",
+    "sibling concept: asexual organism",
+    "sibling concept: tissue"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: cell. Relevant Logical Facts: - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells. - subclass of: living thing - subclass of: biological matter - subclass of: finite spatial thing - subclass of: naturally-occurring tangible substance - subclass of: organic matter - subclass of: temporally continuous thing - has subclass: anucleated cell - has subclass: cell capable of further differentiation - has subclass: cell line - has subclass: diploid cell - has subclass: eukaryotic cell - has subclass: haploid cell - has subclass: aura: heterotrophic cell - has subclass: prokaryotic organism - has subclass: single-cell organism - has subclass: somatic cell - has subclass: stem cell - sibling concept: aerobic thing - sibling concept: anaerobic thing - sibling concept: animal or body part - sibling concept: asexual organism - sibling concept: tissue
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane (biological)",
+  "uri": "http://kbpedia.org/kko/rc/BiologicalMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use",
+    "subclass of: biological membrane stuff",
+    "subclass of: cell part",
+    "subclass of: fluid substance",
+    "subclass of: lipid bilayer",
+    "subclass of: membrane",
+    "has subclass: cell membrane"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: membrane (biological). Relevant Logical Facts: - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use - subclass of: biological membrane stuff - subclass of: cell part - subclass of: fluid substance - subclass of: lipid bilayer - subclass of: membrane - has subclass: cell membrane
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "protoplasm",
+  "uri": "http://kbpedia.org/kko/rc/Protoplasm",
+  "score": 1.0,
+  "triples": [
+    "definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.",
+    "subclass of: cell part",
+    "subclass of: internal body part",
+    "subclass of: microscopic object",
+    "subclass of: organic matter",
+    "subclass of: parts",
+    "subclass of: organism part",
+    "has subclass: cytoplasm",
+    "has subclass: cytoplasm layer",
+    "has subclass: nucleoplasm",
+    "sibling concept: aster (cell part)",
+    "sibling concept: axon",
+    "sibling concept: biological membrane stuff",
+    "sibling concept: bacterial capsule",
+    "sibling concept: structural cell part"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: protoplasm. Relevant Logical Facts: - definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm. - subclass of: cell part - subclass of: internal body part - subclass of: microscopic object - subclass of: organic matter - subclass of: parts - subclass of: organism part - has subclass: cytoplasm - has subclass: cytoplasm layer - has subclass: nucleoplasm - sibling concept: aster (cell part) - sibling concept: axon - sibling concept: biological membrane stuff - sibling concept: bacterial capsule - sibling concept: structural cell part
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+1. The cell wall provides mechanical support to non-woody plant tissues (Global).
+2. The cell wall is composed primarily of cellulose microfibrils (Global).
+3. The cell wall is somewhat rigid but elastic due to its hydrated nature (Global).
+4. The cell wall experiences pressure from the cell contents (Global).
+5. The cell wall is external to the plasma membrane (Global).
+6. The cell wall is a structural cell part (Global).
+7. The cell wall is an external anatomical part (Global).
+8. The cell wall is a constituent part of a plant or part of a plant (Global).
+9. The cell wall provides some mechanical support (Global).
+10. The cell wall is a subclass of a botanical cell (Global).
+11. The cell wall is a subclass of a cell wall (Global).
+12. The cell wall is a subclass of a eukaryotic cell (Global).
+13. The cell wall is a subclass of a structural cell part (Global).
+14. The cell wall is a subclass of an external anatomical part (Global).
+15. The cell wall is a subclass of a cell part (Global).
+16. The cell wall is a subclass of an organism part (Global).
+17. The cell wall has a subclass of a bacterial cell wall (Global).
+18. The cell wall has a subclass of a prokaryotic cell wall (Global).
+19. The cell wall is a sibling concept of a bacterial cell wall (Global).
+20. The cell wall is a sibling concept of a prokaryotic cell wall (Global).
+21. The cell wall is a constituent part of a plant cell (Global).
+
+**CHOICE-SPECIFIC EVIDENCE**
+
+22. The cell wall provides mechanical support to non-woody plant tissues (Choice B).
+23. The cell wall is composed primarily of cellulose microfibrils (Choice B).
+24. The cell wall is somewhat rigid but elastic due to its hydrated nature (Choice B).
+25. The cell wall experiences pressure from the cell contents (Choice B).
+26. The cell wall is external to the plasma membrane (Choice B).
+27. The cell wall is a structural cell part (Choice B).
+28. The cell wall is an external anatomical part (Choice B).
+29. The cell wall is a constituent part of a plant or part of a plant (Choice B).
+30. The cell wall provides some mechanical support (Choice B).
+
+31. The cell wall is a subclass of a botanical cell (Choice B).
+32. The cell wall is a subclass of a cell wall (Choice B).
+33. The cell wall is a subclass of a eukaryotic cell (Choice B).
+34. The cell wall is a subclass of a structural cell part (Choice B).
+35. The cell wall is a subclass of an external anatomical part (Choice B).
+
+36. The cell wall is a subclass of a cell part (Choice B).
+37. The cell wall is a subclass of an organism part (Choice B).
+38. The cell wall has a subclass of a bacterial cell wall (Choice B).
+39. The cell wall has a subclass of a prokaryotic cell wall (Choice B).
+40. The cell wall is a sibling concept of a bacterial cell wall (Choice B).
+41. The cell wall is a sibling concept of a prokaryotic cell wall (Choice B).
+
+42. The cell wall is a constituent part of a plant cell (Choice B).
+43. The cell wall provides mechanical support (Choice B).
+44. The cell wall is somewhat rigid (Choice B).
+45. The cell wall is elastic due to its hydrated nature (Choice B).
+==================================================
+==================================================
+ QUERY: Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "sample",
+  "uri": "http://kbpedia.org/kko/rc/ExtractedSample",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: sample. Relevant Logical Facts:   - definition: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "comparison",
+  "uri": "http://kbpedia.org/kko/rc/Comparison-Examination",
+  "score": 1.0,
+  "triples": [
+    "definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences."
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: comparison. Relevant Logical Facts:   - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "process",
+  "uri": "http://kbpedia.org/kko/rc/Process",
+  "score": 1.0,
+  "triples": [
+    "definition: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, based on the observation of phenomena."
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: process. Relevant Logical Facts:   - definition: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, based on the observation of phenomena.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "research method",
+  "uri": "http://kbpedia.org/kko/rc/ResearchMethod",
+  "score": 1.0,
+  "triples": [
+    "definition: Instances of research methods."
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: research method. Relevant Logical Facts:   - definition: Instances of research methods.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "observational study",
+  "uri": "http://kbpedia.org/kko/rc/ObservationalStudy",
+  "score": 1.0,
+  "triples": [
+    "definition: In fields such as epidemiology, social sciences, psychology and statistics, an observational study draws inferences from a sample to a population where the independent variable is not under the control of the researcher."
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: observational study. Relevant Logical Facts:   - definition: In fields such as epidemiology, social sciences, psychology and statistics, an observational study draws inferences from a sample to a population where the independent variable is not under the control of the researcher.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Based on my synthesis of knowledge, the answer is B. making sure the same foods are eaten.
+
+This is because the investigation's results would be difficult to replicate if the same foods are not eaten by both Janette and Carmen, as the type of food consumed can significantly affect fatigue levels. This would introduce a variable that is not controlled for in the experiment, making it challenging to obtain consistent results.
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 10 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "statistical method",
+  "uri": "http://kbpedia.org/kko/rc/StatisticalMethod",
+  "score": 1.0,
+  "triples": [
+    "definition: Statistics offers methods to estimate and correct for any bias within the sample and data collection procedures."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: statistical method. Relevant Logical Facts: - definition: Statistics offers methods to estimate and correct for any bias within the sample and data collection procedures.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "sample",
+  "uri": "http://kbpedia.org/kko/rc/ExtractedSample",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all samples of some PartiallyTangible stuff, to be used for study."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: sample. Relevant Logical Facts: - definition: The collection of all samples of some PartiallyTangible stuff, to be used for study.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "process",
+  "uri": "http://kbpedia.org/kko/rc/Process",
+  "score": 1.0,
+  "triples": [
+    "definition: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: process. Relevant Logical Facts: - definition: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "level of substance in system",
+  "uri": "http://kbpedia.org/kko/rc/LevelOfSubstanceInSystem",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of PhysicalQuantity, each instance of LevelOfSubstanceInSystem is a qualitative or quantitative \\",
+    "subclass of: biological quantity",
+    "subclass of: tangible physical quantity",
+    "subclass of: linear order attribute type",
+    "subclass of: physical measurable quantity",
+    "subclass of: type of quantity",
+    "subclass of: rating",
+    "sibling concept: Blood lead level",
+    "sibling concept: blood pressure reading",
+    "sibling concept: blood type",
+    "sibling concept: type of life stage",
+    "sibling concept: mutagenicity"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: level of substance in system. Relevant Logical Facts: - definition: A specialization of PhysicalQuantity, each instance of LevelOfSubstanceInSystem is a qualitative or quantitative \ - subclass of: biological quantity - subclass of: tangible physical quantity - subclass of: linear order attribute type - subclass of: physical measurable quantity - subclass of: type of quantity - subclass of: rating - sibling concept: Blood lead level - sibling concept: blood pressure reading - sibling concept: blood type - sibling concept: type of life stage - sibling concept: mutagenicity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "sampling",
+  "uri": "http://kbpedia.org/kko/rc/TakingASample",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of events in which a portion of some substance which is to be tested is separated out from the larger mass of it.",
+    "subclass of: physical creation event",
+    "subclass of: purposeful composite physical and mental activity",
+    "subclass of: removal by moving",
+    "subclass of: complete separation",
+    "subclass of: creation event",
+    "subclass of: event in which something is created or destroyed or both",
+    "subclass of: action (purposeful)",
+    "subclass of: moving",
+    "has subclass: sample (material)",
+    "has subclass: venesecting",
+    "sibling concept: arranging",
+    "sibling concept: biological growth",
+    "sibling concept: biological production",
+    "sibling concept: cloning",
+    "sibling concept: composting"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: sampling. Relevant Logical Facts: - definition: The collection of events in which a portion of some substance which is to be tested is separated out from the larger mass of it. - subclass of: physical creation event - subclass of: purposeful composite physical and mental activity - subclass of: removal by moving - subclass of: complete separation - subclass of: creation event - subclass of: event in which something is created or destroyed or both - subclass of: action (purposeful) - subclass of: moving - has subclass: sample (material) - has subclass: venesecting - sibling concept: arranging - sibling concept: biological growth - sibling concept: biological production - sibling concept: cloning - sibling concept: composting
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "testing",
+  "uri": "http://kbpedia.org/kko/rc/Experimenting",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of CheckingWhetherConditionObtains. Each instance of Experimenting is an event in which one performs tests to determine whether an hypothesis is true."
+  ]
+}
+[Item 6]
+[Chunk Score: 1.0000] KBPedia Concept: testing. Relevant Logical Facts: - definition: A specialization of CheckingWhetherConditionObtains. Each instance of Experimenting is an event in which one performs tests to determine whether an hypothesis is true.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fatigue",
+  "uri": "http://kbpedia.org/kko/rc/FatigueCondition",
+  "score": 1.0,
+  "triples": [
+    "definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue.",
+    "subclass of: illness",
+    "subclass of: medical condition"
+  ]
+}
+[Item 7]
+[Chunk Score: 1.0000] KBPedia Concept: fatigue. Relevant Logical Facts: - definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue. - subclass of: illness - subclass of: medical condition
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "food event",
+  "uri": "http://kbpedia.org/kko/rc/FoodEvent",
+  "score": 1.0,
+  "triples": [
+    "definition: An event related to food or eating."
+  ]
+}
+[Item 8]
+[Chunk Score: 1.0000] KBPedia Concept: food event. Relevant Logical Facts: - definition: An event related to food or eating.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "feed",
+  "uri": "http://kbpedia.org/kko/rc/Feed",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all feed. A type of FoodOrDrink.",
+    "subclass of: animal feed",
+    "subclass of: animal supply",
+    "sibling concept: bird food",
+    "sibling concept: dog or cat food",
+    "sibling concept: domesticated animal food",
+    "sibling concept: exotic pet food",
+    "sibling concept: fish food"
+  ]
+}
+[Item 9]
+[Chunk Score: 1.0000] KBPedia Concept: feed. Relevant Logical Facts: - definition: The collection of all feed. A type of FoodOrDrink. - subclass of: animal feed - subclass of: animal supply - sibling concept: bird food - sibling concept: dog or cat food - sibling concept: domesticated animal food - sibling concept: exotic pet food - sibling concept: fish food
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "food ingredient",
+  "uri": "http://kbpedia.org/kko/rc/FoodIngredientOnly",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of EdibleStuff. Each instance of FoodIngredientOnly is an edible substance that is used in making other food but isn't eaten by itself. Instances of FoodIngredientOnly may or may not require some preparation. For example, TableSalt, VegetableOil, and Ketchup are specializations of FoodIngredientOnly, since all of their instances are used only as ingredients or condiments. In contr",
+    "subclass of: food item",
+    "subclass of: food beverage or tobacco product",
+    "subclass of: food or drink",
+    "subclass of: grocery",
+    "subclass of: opaque thing",
+    "subclass of: organic matter",
+    "has subclass: artificial food coloring",
+    "has subclass: unsweetened baking chocolate",
+    "has subclass: baking powder",
+    "has subclass: dried chile pepper",
+    "has subclass: cocoa powder",
+    "has subclass: ground coffee",
+    "has subclass: instant coffee",
+    "has subclass: condiment",
+    "has subclass: edible fat",
+    "has subclass: yolk",
+    "has subclass: flavoring compound",
+    "has subclass: flour",
+    "sibling concept: breakfast food",
+    "sibling concept: cereal (food)",
+    "sibling concept: cheesy food",
+    "sibling concept: children's food",
+    "sibling concept: convenience food"
+  ]
+}
+[Item 10]
+[Chunk Score: 1.0000] KBPedia Concept: food ingredient. Relevant Logical Facts: - definition: A specialization of EdibleStuff. Each instance of FoodIngredientOnly is an edible substance that is used in making other food but isn't eaten by itself. Instances of FoodIngredientOnly may or may not require some preparation. For example, TableSalt, VegetableOil, and Ketchup are specializations of FoodIngredientOnly, since all of their instances are used only as ingredients or condiments. In contr - subclass of: food item - subclass of: food beverage or tobacco product - subclass of: food or drink - subclass of: grocery - subclass of: opaque thing - subclass of: organic matter - has subclass: artificial food coloring - has subclass: unsweetened baking chocolate - has subclass: baking powder - has subclass: dried chile pepper - has subclass: cocoa powder - has subclass: ground coffee - has subclass: instant coffee - has subclass: condiment - has subclass: edible fat - has subclass: yolk - has subclass: flavoring compound - has subclass: flour - sibling concept: breakfast food - sibling concept: cereal (food) - sibling concept: cheesy food - sibling concept: children's food - sibling concept: convenience food
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+1. Janette and Carmen's investigation involves eating one of four different foods each day at the same time for four days (Global).
+2. The investigation aims to record how they feel after eating each food (Global).
+3. Measuring the amount of fatigue is a crucial aspect of the investigation (Global).
+4. The same foods must be eaten by both Janette and Carmen to ensure comparable results (Choice B).
+5. The foods must be at the same temperature to avoid any potential effects on fatigue (Choice D).
+6. Recording observations in the same chart is essential for consistency (Choice C).
+7. Fatigue is a physiological condition characterized by pathologic fatigue in an organism (Global).
+8. The investigation involves testing the effect of different foods on fatigue (Global).
+9. Food ingredients are substances used in making other food but aren't eaten by themselves (Global).
+10. Food events are related to food or eating (Global).
+11. The investigation requires a controlled environment to minimize variables affecting fatigue (Global).
+12. Sampling involves collecting a portion of a substance to be tested, which is a crucial step in the investigation (Global).
+13. The scientific method is an empirical method of knowledge acquisition used in the investigation (Global).
+14. A sample is a collection of all samples of some partially tangible stuff, used for study (Global).
+15. The investigation aims to determine whether an hypothesis is true through experimentation (Global).
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging?
+A. trench
+B. rift valley
+C. ocean basin
+D. mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 3 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "oceanic ridge",
+  "uri": "http://kbpedia.org/kko/rc/OceanicRidge",
+  "score": 1.0,
+  "triples": [
+    "definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics.",
+    "subclass of: plate tectonics"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: oceanic ridge. Relevant Logical Facts:   - definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics.   - subclass of: plate tectonics
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "undersea valley",
+  "uri": "http://kbpedia.org/kko/rc/Valley-Undersea",
+  "score": 1.0,
+  "triples": [
+    "definition: The axial depression of the mid-oceanic ridge system."
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: undersea valley. Relevant Logical Facts:   - definition: The axial depression of the mid-oceanic ridge system.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rift valley",
+  "uri": "http://kbpedia.org/kko/rc/RiftValley",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.",
+    "subclass of: plate tectonics"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: rift valley. Relevant Logical Facts:   - definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.   - subclass of: plate tectonics
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Based on my synthesis of knowledge, the answer is A. trench.
+A trench is formed as a result of tectonic plates converging, not diverging. When plates diverge, they move apart, creating a rift valley or an ocean basin, but not a trench.
+==================================================
+==================================================
+ QUERY: Which feature does not form as a result of tectonic plates diverging? A. trench B. rift valley C. ocean basin D. mid-ocean ridge
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "oceanic ridge",
+  "uri": "http://kbpedia.org/kko/rc/OceanicRidge",
+  "score": 1.0,
+  "triples": [
+    "definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine."
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: oceanic ridge. Relevant Logical Facts: - definition: A mid-ocean ridge is an underwater mountain system formed by plate tectonics. It consists of various mountains linked in chains, typically having a valley known as a rift running along its spine.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "undersea valley",
+  "uri": "http://kbpedia.org/kko/rc/Valley-Undersea",
+  "score": 1.0,
+  "triples": [
+    "definition: The axial depression of the mid-oceanic ridge system."
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: undersea valley. Relevant Logical Facts: - definition: The axial depression of the mid-oceanic ridge system.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "rift valley",
+  "uri": "http://kbpedia.org/kko/rc/RiftValley",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults."
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: rift valley. Relevant Logical Facts: - definition: A specialization of Valley and Fault_Topographical. Each instance of RiftValley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "oceanic plateau",
+  "uri": "http://kbpedia.org/kko/rc/OceanicPlateau",
+  "score": 1.0,
+  "triples": [
+    "definition: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed."
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: oceanic plateau. Relevant Logical Facts: - definition: An oceanic plateau (also submarine plateau) is a large, relatively flat submarine region that rises well above the level of the ambient seabed.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "seamount",
+  "uri": "http://kbpedia.org/kko/rc/Seamount",
+  "score": 1.0,
+  "triples": [
+    "definition: A Seamount is an underwater Mountain rising from the seafloor that does not reach to the surface of the EarthsOceanSea."
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: seamount. Relevant Logical Facts: - definition: A Seamount is an underwater Mountain rising from the seafloor that does not reach to the surface of the EarthsOceanSea.
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+1. Tectonic plates diverging results in the formation of a rift valley (Global).
+2. A rift valley is an elongated depression, trough, or graben in the earth's crust, bounded on both sides by normal faults (Global).
+3. A mid-ocean ridge is formed by plate tectonics and consists of various mountains linked in chains, typically having a valley known as a rift running along its spine (Global).
+4. The axial depression of the mid-oceanic ridge system is a valley (Global).
+5. A trench is formed as a result of tectonic plates converging, not diverging (Choice A).
+6. A mid-ocean ridge is an underwater mountain system formed by plate tectonics (Global).
+7. Oceanic ridges are characterized by the presence of a mid-ocean ridge (Global).
+8. A mid-ocean ridge is not formed as a result of tectonic plates converging (Global).
+9. Oceanic ridges are formed by the movement of tectonic plates away from each other (Global).
+10. A mid-ocean ridge is a feature that forms as a result of tectonic plates diverging (Global).
+11. A mid-ocean ridge is characterized by the presence of a rift valley (Global).
+12. Oceanic ridges are not formed as a result of tectonic plates colliding (Global).
+13. A mid-ocean ridge is a feature that is formed by the movement of tectonic plates away from each other (Global).
+14. Oceanic ridges are characterized by the presence of a mid-ocean ridge (Global).
+15. A mid-ocean ridge is a feature that is formed as a result of tectonic plates diverging (Global).
+16. Oceanic ridges are not formed as a result of tectonic plates converging (Global).
+17. A mid-ocean ridge is characterized by the presence of a rift valley (Global).
+18. A mid-ocean ridge is a feature that is formed by the movement of tectonic plates away from each other (Global).
+19. Oceanic ridges are characterized by the presence of a mid-ocean ridge (Global).
+20. A mid-ocean ridge is a feature that forms as a result of tectonic plates diverging (Global).
+21. A trench is formed as a result of tectonic plates converging (Choice A).
+==================================================
+==================================================
+ QUERY: A student planted two bean seeds in two identical pots containing the same type of soil. He placed one pot in a closet and the other near a sunny window. Each day, he poured 15 milliliters of water into each pot. Which factor was different for the two pots?
+A. amount of water
+B. amount of light
+C. type of soil
+D. type of seed
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "bean plant",
+  "uri": "http://kbpedia.org/kko/rc/BeanPlant",
+  "score": 1.0,
+  "triples": [
+    "definition: Individual bean plants.",
+    "subclass of: leguminous plant",
+    "has subclass: Black-eyed pea"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: bean plant. Relevant Logical Facts:   - definition: Individual bean plants.   - subclass of: leguminous plant   - has subclass: Black-eyed pea
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "bean (food)",
+  "uri": "http://kbpedia.org/kko/rc/Bean-Foodstuff",
+  "score": 1.0,
+  "triples": [
+    "definition: Food derived from the seed of a bean plant.",
+    "subclass of: edible rich in protein",
+    "subclass of: vegetable",
+    "subclass of: food item",
+    "subclass of: fruit and vegetable food group",
+    "subclass of: grocery",
+    "subclass of: produce",
+    "has subclass: chickpea",
+    "sibling concept: dairy product",
+    "sibling concept: milk",
+    "sibling concept: powdered milk",
+    "sibling concept: soybean (food)",
+    "sibling concept: artichoke"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: bean (food). Relevant Logical Facts:   - definition: Food derived from the seed of a bean plant.   - subclass of: edible rich in protein   - subclass of: vegetable   - subclass of: food item   - subclass of: fruit and vegetable food group   - subclass of: grocery   - subclass of: produce   - has subclass: chickpea   - sibling concept: dairy product   - sibling concept: milk   - sibling concept: powdered milk   - sibling concept: soybean (food)   - sibling concept: artichoke
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "type of soil",
+  "uri": "http://kbpedia.org/kko/rc/TypeOfSoil",
+  "score": 1.0,
+  "triples": [
+    "definition: Types of soil."
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: type of soil. Relevant Logical Facts:   - definition: Types of soil.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "grass seed",
+  "uri": "http://kbpedia.org/kko/rc/GrassSeed",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all grass seeds. A type of Seed and ExternalAnatomicalPart. \\",
+    "subclass of: external anatomical part",
+    "subclass of: seed",
+    "subclass of: organism part",
+    "subclass of: plant organ",
+    "sibling concept: abdomen",
+    "sibling concept: alimentary canal",
+    "sibling concept: amniotic sac",
+    "sibling concept: ankle",
+    "sibling concept: anther"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: grass seed. Relevant Logical Facts:   - definition: The collection of all grass seeds. A type of Seed and ExternalAnatomicalPart. \   - subclass of: external anatomical part   - subclass of: seed   - subclass of: organism part   - subclass of: plant organ   - sibling concept: abdomen   - sibling concept: alimentary canal   - sibling concept: amniotic sac   - sibling concept: ankle   - sibling concept: anther
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "ratio quantity",
+  "uri": "http://kbpedia.org/kko/rc/RatioQuantity",
+  "score": 1.0,
+  "triples": [
+    "subclass of: multi dimensional quantity",
+    "subclass of: quantity",
+    "subclass of: measurable quantity",
+    "subclass of: scalar or vector interval",
+    "has subclass: elastic modulus",
+    "has subclass: concentration strength",
+    "has subclass: density",
+    "has subclass: money rate",
+    "has subclass: per capita frequency",
+    "has subclass: population density",
+    "has subclass: pressure",
+    "has subclass: proportion",
+    "has subclass: rate",
+    "has subclass: ratio of primitive quantities",
+    "sibling concept: bit rate",
+    "sibling concept: chemical purity",
+    "sibling concept: computer memory capacity",
+    "sibling concept: density",
+    "sibling concept: dipole moment"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: ratio quantity. Relevant Logical Facts:   - subclass of: multi dimensional quantity   - subclass of: quantity   - subclass of: measurable quantity   - subclass of: scalar or vector interval   - has subclass: elastic modulus   - has subclass: concentration strength   - has subclass: density   - has subclass: money rate   - has subclass: per capita frequency   - has subclass: population density   - has subclass: pressure   - has subclass: proportion   - has subclass: rate   - has subclass: ratio of primitive quantities   - sibling concept: bit rate   - sibling concept: chemical purity   - sibling concept: computer memory capacity   - sibling concept: density   - sibling concept: dipole moment
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Based on my synthesis of knowledge, the answer is B. amount of light.
+The two pots differed in the amount of light they received, with one being placed near a sunny window and the other in a closet.
+==================================================
+==================================================
+ QUERY: Which factor was different for the two pots? A. amount of water B. amount of light C. type of soil D. type of seed
+==================================================
+
+--- RETRIEVED CONTEXT (Top 10 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "type of soil",
+  "uri": "http://kbpedia.org/kko/rc/TypeOfSoil",
+  "score": 1.0,
+  "triples": [
+    "definition: Types of soil.",
+    "subclass of: dirt or soil",
+    "subclass of: earth or stone",
+    "subclass of: earthen substance",
+    "subclass of: opaque thing",
+    "sibling concept: dirt or soil",
+    "sibling concept: clay soil",
+    "sibling concept: dirt",
+    "sibling concept: fill dirt",
+    "sibling concept: ground freezing"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: type of soil. Relevant Logical Facts: - definition: Types of soil. - subclass of: dirt or soil - subclass of: earth or stone - subclass of: earthen substance - subclass of: opaque thing - sibling concept: dirt or soil - sibling concept: clay soil - sibling concept: dirt - sibling concept: fill dirt - sibling concept: ground freezing
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "millet plant",
+  "uri": "http://kbpedia.org/kko/rc/MilletPlant",
+  "score": 1.0,
+  "triples": [
+    "definition: Individual millet plants.",
+    "subclass of: cereal plant",
+    "subclass of: crop plant",
+    "subclass of: edible plant",
+    "subclass of: grass family",
+    "sibling concept: barley",
+    "sibling concept: corn plant",
+    "sibling concept: oat plant",
+    "sibling concept: rice plant",
+    "sibling concept: rye plant"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: millet plant. Relevant Logical Facts: - definition: Individual millet plants. - subclass of: cereal plant - subclass of: crop plant - subclass of: edible plant - subclass of: grass family - sibling concept: barley - sibling concept: corn plant - sibling concept: oat plant - sibling concept: rice plant - sibling concept: rye plant
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "soil test",
+  "uri": "http://kbpedia.org/kko/rc/SoilTest",
+  "score": 1.0,
+  "triples": [
+    "definition: In agriculture, a soil test is the analysis of a soil sample to determine nutrient and contaminated content, composition, and other characteristics such as the acidity or pH level. A soil test can determine fertility, or the expected growth potential of the soil which indicates nutrient deficiencies, potential toxicities from excessive fertility and inhibitions from the presence of non-essential t",
+    "subclass of: dirt or soil",
+    "subclass of: soil measuring equipment",
+    "subclass of: earth or stone",
+    "subclass of: earthen substance",
+    "subclass of: opaque thing",
+    "subclass of: measuring or testing instrument",
+    "sibling concept: dirt or soil",
+    "sibling concept: clay soil",
+    "sibling concept: dirt",
+    "sibling concept: fill dirt",
+    "sibling concept: ground freezing"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: soil test. Relevant Logical Facts: - definition: In agriculture, a soil test is the analysis of a soil sample to determine nutrient and contaminated content, composition, and other characteristics such as the acidity or pH level. A soil test can determine fertility, or the expected growth potential of the soil which indicates nutrient deficiencies, potential toxicities from excessive fertility and inhibitions from the presence of non-essential t - subclass of: dirt or soil - subclass of: soil measuring equipment - subclass of: earth or stone - subclass of: earthen substance - subclass of: opaque thing - subclass of: measuring or testing instrument - sibling concept: dirt or soil - sibling concept: clay soil - sibling concept: dirt - sibling concept: fill dirt - sibling concept: ground freezing
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "grass seed",
+  "uri": "http://kbpedia.org/kko/rc/GrassSeed",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all grass seeds. A type of Seed and ExternalAnatomicalPart. \\",
+    "subclass of: external anatomical part",
+    "subclass of: seed",
+    "subclass of: organism part",
+    "subclass of: plant organ",
+    "sibling concept: abdomen",
+    "sibling concept: alimentary canal",
+    "sibling concept: amniotic sac",
+    "sibling concept: ankle",
+    "sibling concept: anther"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: grass seed. Relevant Logical Facts: - definition: The collection of all grass seeds. A type of Seed and ExternalAnatomicalPart. \ - subclass of: external anatomical part - subclass of: seed - subclass of: organism part - subclass of: plant organ - sibling concept: abdomen - sibling concept: alimentary canal - sibling concept: amniotic sac - sibling concept: ankle - sibling concept: anther
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant pot",
+  "uri": "http://kbpedia.org/kko/rc/PlantPot",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all pots for plants. A type of StorageConstruct and NonPoweredDevice. The collection PlantPot is an ArtifactTypeByGenericCategory and a SpatiallyDisjointObjectType.",
+    "subclass of: household furnishings",
+    "subclass of: non-powered device",
+    "subclass of: storage device",
+    "subclass of: consumer good",
+    "subclass of: furniture and furnishing product",
+    "subclass of: device",
+    "subclass of: container product",
+    "has subclass: flower pot",
+    "sibling concept: bathroom furnishings",
+    "sibling concept: beds and mattresses market category",
+    "sibling concept: carpet",
+    "sibling concept: drapery hook",
+    "sibling concept: dish"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: plant pot. Relevant Logical Facts: - definition: The collection of all pots for plants. A type of StorageConstruct and NonPoweredDevice. The collection PlantPot is an ArtifactTypeByGenericCategory and a SpatiallyDisjointObjectType. - subclass of: household furnishings - subclass of: non-powered device - subclass of: storage device - subclass of: consumer good - subclass of: furniture and furnishing product - subclass of: device - subclass of: container product - has subclass: flower pot - sibling concept: bathroom furnishings - sibling concept: beds and mattresses market category - sibling concept: carpet - sibling concept: drapery hook - sibling concept: dish
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "Water content",
+  "uri": "http://kbpedia.org/kko/rc/WaterContent",
+  "score": 1.0,
+  "triples": [
+    "definition: Water content or moisture content is the quantity of water contained in a material, such as soil (called soil moisture), rock, ceramics, crops, or wood. Water content is used in a wide range of scientific and technical areas, and is expressed as a ratio, which can range from 0 (completely dry) to the value of the materials' porosity at saturation.",
+    "subclass of: tangible physical quantity",
+    "subclass of: water",
+    "subclass of: physical measurable quantity",
+    "subclass of: raw materials",
+    "subclass of: achromatism",
+    "sibling concept: absorbency",
+    "sibling concept: chemical purity",
+    "sibling concept: level of compressibility",
+    "sibling concept: concentration strength",
+    "sibling concept: density"
+  ]
+}
+[Item 6]
+[Chunk Score: 1.0000] KBPedia Concept: Water content. Relevant Logical Facts: - definition: Water content or moisture content is the quantity of water contained in a material, such as soil (called soil moisture), rock, ceramics, crops, or wood. Water content is used in a wide range of scientific and technical areas, and is expressed as a ratio, which can range from 0 (completely dry) to the value of the materials' porosity at saturation. - subclass of: tangible physical quantity - subclass of: water - subclass of: physical measurable quantity - subclass of: raw materials - subclass of: achromatism - sibling concept: absorbency - sibling concept: chemical purity - sibling concept: level of compressibility - sibling concept: concentration strength - sibling concept: density
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "spermatophyte",
+  "uri": "http://kbpedia.org/kko/rc/Spermatophyte",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of land plants that produce seeds.",
+    "subclass of: embryophyte subkingdom",
+    "subclass of: the plant kingdom",
+    "has subclass: floral plant",
+    "has subclass: gymnosperm",
+    "sibling concept: vascular plant"
+  ]
+}
+[Item 7]
+[Chunk Score: 1.0000] KBPedia Concept: spermatophyte. Relevant Logical Facts: - definition: The collection of land plants that produce seeds. - subclass of: embryophyte subkingdom - subclass of: the plant kingdom - has subclass: floral plant - has subclass: gymnosperm - sibling concept: vascular plant
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "water scarcity",
+  "uri": "http://kbpedia.org/kko/rc/WaterScarcity",
+  "score": 1.0,
+  "triples": [
+    "definition: Water scarcity is the lack of sufficient available water resources to meet the demands of water usage within a region. It already affects every continent and around 2.8 billion people around the world at least one month out of every year. More than 1.2 billion people lack access to clean drinking water. Water scarcity involves water stress, water shortage or deficits, and water crisis.",
+    "subclass of: scarcity",
+    "subclass of: shortage"
+  ]
+}
+[Item 8]
+[Chunk Score: 1.0000] KBPedia Concept: water scarcity. Relevant Logical Facts: - definition: Water scarcity is the lack of sufficient available water resources to meet the demands of water usage within a region. It already affects every continent and around 2.8 billion people around the world at least one month out of every year. More than 1.2 billion people lack access to clean drinking water. Water scarcity involves water stress, water shortage or deficits, and water crisis. - subclass of: scarcity - subclass of: shortage
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "light source",
+  "uri": "http://kbpedia.org/kko/rc/LightSource",
+  "score": 1.0,
+  "triples": [
+    "definition: This is a list of sources of light, including both natural and artificial processes that emit light. This article focuses on sources that produce wavelengths from about 390 to 700 nanometers called visible light.",
+    "subclass of: light",
+    "subclass of: electromagnetic radiation",
+    "subclass of: energy",
+    "sibling concept: lighting",
+    "sibling concept: photochemistry",
+    "sibling concept: Rayleigh scattering",
+    "sibling concept: shadow",
+    "sibling concept: spectrum"
+  ]
+}
+[Item 9]
+[Chunk Score: 1.0000] KBPedia Concept: light source. Relevant Logical Facts: - definition: This is a list of sources of light, including both natural and artificial processes that emit light. This article focuses on sources that produce wavelengths from about 390 to 700 nanometers called visible light. - subclass of: light - subclass of: electromagnetic radiation - subclass of: energy - sibling concept: lighting - sibling concept: photochemistry - sibling concept: Rayleigh scattering - sibling concept: shadow - sibling concept: spectrum
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "lighting",
+  "uri": "http://kbpedia.org/kko/rc/Lighting",
+  "score": 1.0,
+  "triples": [
+    "definition: Lighting or illumination is the deliberate use of light to achieve a practical or aesthetic effect. Lighting includes the use of both artificial light sources like lamps and light fixtures, as well as natural illumination by capturing daylight. Daylighting (using windows, skylights, or light shelves) is sometimes used as the main source of light during daytime in buildings.",
+    "subclass of: light",
+    "subclass of: electromagnetic radiation",
+    "subclass of: energy",
+    "has subclass: non electrical lighting device",
+    "sibling concept: light source",
+    "sibling concept: photochemistry",
+    "sibling concept: Rayleigh scattering",
+    "sibling concept: shadow",
+    "sibling concept: spectrum"
+  ]
+}
+[Item 10]
+[Chunk Score: 1.0000] KBPedia Concept: lighting. Relevant Logical Facts: - definition: Lighting or illumination is the deliberate use of light to achieve a practical or aesthetic effect. Lighting includes the use of both artificial light sources like lamps and light fixtures, as well as natural illumination by capturing daylight. Daylighting (using windows, skylights, or light shelves) is sometimes used as the main source of light during daytime in buildings. - subclass of: light - subclass of: electromagnetic radiation - subclass of: energy - has subclass: non electrical lighting device - sibling concept: light source - sibling concept: photochemistry - sibling concept: Rayleigh scattering - sibling concept: shadow - sibling concept: spectrum
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+1. The student placed one pot in a closet and the other near a sunny window. (Global)
+2. The closet is a location with limited or no natural light. (Global)
+3. The sunny window is a location with abundant natural light. (Global)
+4. The amount of light is a factor that can affect plant growth. (Global)
+5. The type of soil is the same for both pots. (Global)
+6. The amount of water poured into each pot is the same. (Global)
+7. The type of seed planted in each pot is the same. (Global)
+8. The closet has a different lighting condition compared to the sunny window. (Choice B)
+9. The closet has limited or no light, which is different from the sunny window. (Choice B)
+10. The closet's lighting condition is a factor that differs from the sunny window. (Choice B)
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: plant cell wall. Relevant Logical Facts:   - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.   - subclass of: structural cell part   - subclass of: external anatomical part
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cytoplasmic part",
+  "uri": "http://kbpedia.org/kko/rc/CytoplasmicPart",
+  "score": 1.0,
+  "triples": [
+    "definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.",
+    "subclass of: cytoplasm",
+    "subclass of: cell part",
+    "subclass of: protoplasm",
+    "sibling concept: cytosol"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: cytoplasmic part. Relevant Logical Facts:   - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.   - subclass of: cytoplasm   - subclass of: cell part   - subclass of: protoplasm   - sibling concept: cytosol
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "anucleated cell",
+  "uri": "http://kbpedia.org/kko/rc/AnucleatedCell",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.",
+    "subclass of: cell",
+    "subclass of: living thing",
+    "has subclass: prokaryotic organism",
+    "sibling concept: cell capable of further differentiation",
+    "sibling concept: cell line",
+    "sibling concept: diploid cell",
+    "sibling concept: eukaryotic cell",
+    "sibling concept: haploid cell"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: anucleated cell. Relevant Logical Facts:   - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.   - subclass of: cell   - subclass of: living thing   - has subclass: prokaryotic organism   - sibling concept: cell capable of further differentiation   - sibling concept: cell line   - sibling concept: diploid cell   - sibling concept: eukaryotic cell   - sibling concept: haploid cell
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.",
+    "subclass of: microscopic object",
+    "subclass of: organic matter",
+    "subclass of: parts",
+    "subclass of: object types",
+    "subclass of: shaped thing",
+    "subclass of: three dimensional thing",
+    "subclass of: material",
+    "has subclass: aster (cell part)",
+    "has subclass: axon",
+    "has subclass: biological membrane stuff",
+    "has subclass: bacterial capsule",
+    "has subclass: structural cell part",
+    "has subclass: cell plate",
+    "has subclass: chromatin",
+    "has subclass: chromosome",
+    "has subclass: cytoplasm",
+    "has subclass: intracellular part",
+    "has subclass: membrane",
+    "has subclass: microtubule",
+    "sibling concept: atomic nucleus",
+    "sibling concept: chemical object",
+    "sibling concept: microorganism",
+    "sibling concept: nanotube",
+    "sibling concept: polymer molecule"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: cell part. Relevant Logical Facts:   - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.   - subclass of: microscopic object   - subclass of: organic matter   - subclass of: parts   - subclass of: object types   - subclass of: shaped thing   - subclass of: three dimensional thing   - subclass of: material   - has subclass: aster (cell part)   - has subclass: axon   - has subclass: biological membrane stuff   - has subclass: bacterial capsule   - has subclass: structural cell part   - has subclass: cell plate   - has subclass: chromatin   - has subclass: chromosome   - has subclass: cytoplasm   - has subclass: intracellular part   - has subclass: membrane   - has subclass: microtubule   - sibling concept: atomic nucleus   - sibling concept: chemical object   - sibling concept: microorganism   - sibling concept: nanotube   - sibling concept: polymer molecule
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell",
+  "uri": "http://kbpedia.org/kko/rc/Cell",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.",
+    "subclass of: living thing",
+    "subclass of: biological matter",
+    "subclass of: finite spatial thing",
+    "subclass of: naturally-occurring tangible substance",
+    "subclass of: organic matter",
+    "subclass of: temporally continuous thing",
+    "has subclass: anucleated cell",
+    "has subclass: cell capable of further differentiation",
+    "has subclass: cell line",
+    "has subclass: diploid cell",
+    "has subclass: eukaryotic cell",
+    "has subclass: haploid cell",
+    "has subclass: aura: heterotrophic cell",
+    "has subclass: prokaryotic organism",
+    "has subclass: single-cell organism",
+    "has subclass: somatic cell",
+    "has subclass: stem cell",
+    "sibling concept: aerobic thing",
+    "sibling concept: anaerobic thing",
+    "sibling concept: animal or body part",
+    "sibling concept: asexual organism",
+    "sibling concept: tissue"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: cell. Relevant Logical Facts:   - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.   - subclass of: living thing   - subclass of: biological matter   - subclass of: finite spatial thing   - subclass of: naturally-occurring tangible substance   - subclass of: organic matter   - subclass of: temporally continuous thing   - has subclass: anucleated cell   - has subclass: cell capable of further differentiation   - has subclass: cell line   - has subclass: diploid cell   - has subclass: eukaryotic cell   - has subclass: haploid cell   - has subclass: aura: heterotrophic cell   - has subclass: prokaryotic organism   - has subclass: single-cell organism   - has subclass: somatic cell   - has subclass: stem cell   - sibling concept: aerobic thing   - sibling concept: anaerobic thing   - sibling concept: animal or body part   - sibling concept: asexual organism   - sibling concept: tissue
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Based on my synthesis of knowledge, the answer is B. cell wall.
+The cell wall of a plant cell provides mechanical support, similar to the function of an animal skeleton, which also provides structural support and protection for the organism.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: botanical cell",
+    "subclass of: cell wall",
+    "subclass of: eukaryotic cell",
+    "subclass of: plant or part of a plant",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part",
+    "sibling concept: bacterial cell wall",
+    "sibling concept: prokaryotic cell wall"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts: - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues. - subclass of: botanical cell - subclass of: cell wall - subclass of: eukaryotic cell - subclass of: plant or part of a plant - subclass of: structural cell part - subclass of: external anatomical part - sibling concept: bacterial cell wall - sibling concept: prokaryotic cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cytoplasmic part",
+  "uri": "http://kbpedia.org/kko/rc/CytoplasmicPart",
+  "score": 1.0,
+  "triples": [
+    "definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.",
+    "subclass of: cytoplasm",
+    "subclass of: cell part",
+    "subclass of: protoplasm",
+    "sibling concept: cytosol"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: cytoplasmic part. Relevant Logical Facts: - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures. - subclass of: cytoplasm - subclass of: cell part - subclass of: protoplasm - sibling concept: cytosol
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell",
+  "uri": "http://kbpedia.org/kko/rc/Cell",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.",
+    "subclass of: living thing",
+    "subclass of: biological matter",
+    "subclass of: finite spatial thing",
+    "subclass of: naturally-occurring tangible substance",
+    "subclass of: organic matter",
+    "subclass of: temporally continuous thing",
+    "has subclass: anucleated cell",
+    "has subclass: cell capable of further differentiation",
+    "has subclass: cell line",
+    "has subclass: diploid cell",
+    "has subclass: eukaryotic cell",
+    "has subclass: haploid cell",
+    "has subclass: aura: heterotrophic cell",
+    "has subclass: prokaryotic organism",
+    "has subclass: single-cell organism",
+    "has subclass: somatic cell",
+    "has subclass: stem cell",
+    "sibling concept: aerobic thing",
+    "sibling concept: anaerobic thing",
+    "sibling concept: animal or body part",
+    "sibling concept: asexual organism",
+    "sibling concept: tissue"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: cell. Relevant Logical Facts: - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells. - subclass of: living thing - subclass of: biological matter - subclass of: finite spatial thing - subclass of: naturally-occurring tangible substance - subclass of: organic matter - subclass of: temporally continuous thing - has subclass: anucleated cell - has subclass: cell capable of further differentiation - has subclass: cell line - has subclass: diploid cell - has subclass: eukaryotic cell - has subclass: haploid cell - has subclass: aura: heterotrophic cell - has subclass: prokaryotic organism - has subclass: single-cell organism - has subclass: somatic cell - has subclass: stem cell - sibling concept: aerobic thing - sibling concept: anaerobic thing - sibling concept: animal or body part - sibling concept: asexual organism - sibling concept: tissue
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane (biological)",
+  "uri": "http://kbpedia.org/kko/rc/BiologicalMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use",
+    "subclass of: biological membrane stuff",
+    "subclass of: cell part",
+    "subclass of: fluid substance",
+    "subclass of: lipid bilayer",
+    "subclass of: membrane",
+    "has subclass: cell membrane"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: membrane (biological). Relevant Logical Facts: - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use - subclass of: biological membrane stuff - subclass of: cell part - subclass of: fluid substance - subclass of: lipid bilayer - subclass of: membrane - has subclass: cell membrane
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "protoplasm",
+  "uri": "http://kbpedia.org/kko/rc/Protoplasm",
+  "score": 1.0,
+  "triples": [
+    "definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm.",
+    "subclass of: cell part",
+    "subclass of: internal body part",
+    "subclass of: microscopic object",
+    "subclass of: organic matter",
+    "subclass of: parts",
+    "subclass of: organism part",
+    "has subclass: cytoplasm",
+    "has subclass: cytoplasm layer",
+    "has subclass: nucleoplasm",
+    "sibling concept: aster (cell part)",
+    "sibling concept: axon",
+    "sibling concept: biological membrane stuff",
+    "sibling concept: bacterial capsule",
+    "sibling concept: structural cell part"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: protoplasm. Relevant Logical Facts: - definition: The living part of the cell within the plasma membrane. That within the nucleus is the Nucleoplasm, that without is the Cytoplasm. - subclass of: cell part - subclass of: internal body part - subclass of: microscopic object - subclass of: organic matter - subclass of: parts - subclass of: organism part - has subclass: cytoplasm - has subclass: cytoplasm layer - has subclass: nucleoplasm - sibling concept: aster (cell part) - sibling concept: axon - sibling concept: biological membrane stuff - sibling concept: bacterial capsule - sibling concept: structural cell part
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+1. The cell wall provides mechanical support to non-woody plant tissues (Global).
+2. The cell wall is composed primarily of cellulose microfibrils (Global).
+3. The cell wall is somewhat rigid but elastic due to its hydrated nature (Global).
+4. The cell wall experiences pressure from the cell contents (Global).
+5. The cell wall is a structural cell part (Global).
+6. The cell wall is an external anatomical part (Global).
+7. The cell wall is a subclass of the cell wall (Global).
+8. The cell wall is a subclass of the eukaryotic cell (Global).
+9. The cell wall is a subclass of the plant or part of a plant (Global).
+10. The cell wall is a subclass of the structural cell part (Global).
+11. The cell wall is a subclass of the external anatomical part (Global).
+12. The cell wall is a sibling concept of the bacterial cell wall (Global).
+13. The cell wall is a sibling concept of the prokaryotic cell part (Global).
+14. The cell wall is a covering of botanical cells, external to the plasma membrane (Global).
+15. The cell wall is composed of cellulose microfibrils, somewhat rigid but elastic due to its hydrated nature, and experiences pressure from the cell contents (Global).
+16. The cell wall provides mechanical support to non-woody plant tissues (Choice B).
+17. The cell wall is a structural component that provides mechanical support (Choice B).
+18. The cell wall is a rigid but elastic structure that experiences pressure from the cell contents (Choice B).
+19. The cell wall is a component of the plant cell that provides mechanical support (Choice B).
+20. The cell wall is a structural component that provides mechanical support to non-woody plant tissues (Choice B).
+21. The cell wall is a component of the plant cell that provides mechanical support (Choice B).
+==================================================
+==================================================
+ QUERY: Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "sample",
+  "uri": "http://kbpedia.org/kko/rc/ExtractedSample",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: sample. Relevant Logical Facts:   - definition: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "comparison",
+  "uri": "http://kbpedia.org/kko/rc/Comparison-Examination",
+  "score": 1.0,
+  "triples": [
+    "definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences."
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: comparison. Relevant Logical Facts:   - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "process",
+  "uri": "http://kbpedia.org/kko/rc/Process",
+  "score": 1.0,
+  "triples": [
+    "definition: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, base"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: process. Relevant Logical Facts:   - definition: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, base
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "research method",
+  "uri": "http://kbpedia.org/kko/rc/ResearchMethod",
+  "score": 1.0,
+  "triples": [
+    "definition: Instances of research methods."
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: research method. Relevant Logical Facts:   - definition: Instances of research methods.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "observational study",
+  "uri": "http://kbpedia.org/kko/rc/ObservationalStudy",
+  "score": 1.0,
+  "triples": [
+    "definition: In fields such as epidemiology, social sciences, psychology and statistics, an observational study draws inferences from a sample to a population where the independent variable is not under the control of the researcher. One common observational study is about the possible effect of a treatment on subjects, where the assignment of subjects into a treated group versus a control group is outside the"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: observational study. Relevant Logical Facts:   - definition: In fields such as epidemiology, social sciences, psychology and statistics, an observational study draws inferences from a sample to a population where the independent variable is not under the control of the researcher. One common observational study is about the possible effect of a treatment on subjects, where the assignment of subjects into a treated group versus a control group is outside the
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Based on my synthesis of knowledge, the answer is B. making sure the same foods are eaten.
+This is because replicating the exact same foods eaten by Janette would be difficult, as it would require Carmen to have access to the same food sources and preparation methods, which may not be feasible. This introduces variability in the experiment, making it harder to replicate.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A) cell membrane B) cell wall C) chloroplast D) nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.",
+    "subclass of: microscopic object",
+    "subclass of: organic matter"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: cell part. Relevant Logical Facts: - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc. - subclass of: microscopic object - subclass of: organic matter
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: botanical cell",
+    "subclass of: cell wall"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts: - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues. - subclass of: botanical cell - subclass of: cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell membrane",
+  "uri": "http://kbpedia.org/kko/rc/CellMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells.",
+    "subclass of: membrane (biological)",
+    "subclass of: structural cell part"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: cell membrane. Relevant Logical Facts: - definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells. - subclass of: membrane (biological) - subclass of: structural cell part
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "biological membrane stuff",
+  "uri": "http://kbpedia.org/kko/rc/BiologicalMembrane-Stuff",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein. The corresponding \\",
+    "subclass of: cell part",
+    "subclass of: fluid substance"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: biological membrane stuff. Relevant Logical Facts: - definition: This is the collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein. The corresponding \ - subclass of: cell part - subclass of: fluid substance
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell wall",
+  "uri": "http://kbpedia.org/kko/rc/CellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: cell wall. Relevant Logical Facts: - definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells. - subclass of: structural cell part - subclass of: external anatomical part
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+1. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. (Global)
+2. Cell walls do not occur in animal cells. (Global)
+3. The cell wall provides mechanical support to non-woody plant tissues. (Global)
+4. The cell wall is composed primarily of cellulose microfibrils. (Global)
+5. The cell wall is somewhat rigid but elastic due to its hydrated nature. (Global)
+6. The cell wall experiences pressure from the cell contents. (Global)
+7. The cell wall is a structural component of plant cells. (Choice B)
+8. The cell wall is external to the plasma membrane. (Choice B)
+9. The cell wall is a covering of botanical cells. (Choice B)
+10. The cell wall provides mechanical support to plant tissues. (Choice B)
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A) cell membrane B) cell wall C) chloroplast D) nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.",
+    "subclass of: microscopic object",
+    "subclass of: organic matter"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: cell part. Relevant Logical Facts: - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc. - subclass of: microscopic object - subclass of: organic matter
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: botanical cell",
+    "subclass of: cell wall"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts: - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues. - subclass of: botanical cell - subclass of: cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell membrane",
+  "uri": "http://kbpedia.org/kko/rc/CellMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells.",
+    "subclass of: membrane (biological)",
+    "subclass of: structural cell part"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: cell membrane. Relevant Logical Facts: - definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells. - subclass of: membrane (biological) - subclass of: structural cell part
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "biological membrane stuff",
+  "uri": "http://kbpedia.org/kko/rc/BiologicalMembrane-Stuff",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein. The corresponding \\",
+    "subclass of: cell part",
+    "subclass of: fluid substance"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: biological membrane stuff. Relevant Logical Facts: - definition: This is the collection of all LipidBilayers that are parts of Cells, making up the various membrane structures therein. The corresponding \ - subclass of: cell part - subclass of: fluid substance
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell wall",
+  "uri": "http://kbpedia.org/kko/rc/CellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells.",
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues."
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: cell wall. Relevant Logical Facts: - definition: The collection of all cell walls. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. Notably, cell walls do not occur in animal cells. - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+1. Cell walls are external coverings of some types of cells, used both to afford limited protection to the cell and to let in and retain water. (Global)
+2. Cell walls do not occur in animal cells. (Global)
+3. Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. (Global)
+4. These characteristics provide some mechanical support to non-woody plant tissues. (Global)
+5. The cell wall provides mechanical support. (Global)
+6. The cell wall is composed primarily of cellulose microfibrils. (Global)
+7. The cell wall is external to the plasma membrane. (Global)
+8. The cell wall is a covering of botanical cells. (Global)
+9. The cell wall is used to let in and retain water. (Global)
+10. The cell wall affords limited protection to the cell. (Global)
+11. The cell wall is a structure that provides mechanical support to non-woody plant tissues. (Choice B)
+12. The cell wall is composed of cellulose microfibrils, which provide rigidity and elasticity. (Choice B)
+13. The cell wall experiences pressure from the cell contents. (Choice B)
+14. The cell wall is external to the plasma membrane, providing a barrier between the cell and its environment. (Choice B)
+15. The cell wall is a characteristic feature of plant cells, distinguishing them from animal cells. (Choice B)
+16. The cell wall provides structural support to the plant cell. (Choice B)
+17. The cell wall is composed of cellulose, which is a polysaccharide. (Choice B)
+18. The cell wall is a complex structure that provides mechanical support and protection to the plant cell. (Choice B)
+19. The cell wall is a key component of plant cell structure and function. (Choice B)
+20. The cell wall is a feature that is unique to plant cells. (Choice B)
+21. The cell wall is a structure that is composed of cellulose microfibrils and other organic compounds. (Choice B)
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A) cell membrane B) cell wall C) chloroplast D) nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.",
+    "subclass of: microscopic object",
+    "subclass of: organic matter"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: cell part. Relevant Logical Facts: - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc. - subclass of: microscopic object - subclass of: organic matter
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: botanical cell",
+    "subclass of: cell wall"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts: - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues. - subclass of: botanical cell - subclass of: cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell",
+  "uri": "http://kbpedia.org/kko/rc/Cell",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.",
+    "subclass of: living thing"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: cell. Relevant Logical Facts: - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells. - subclass of: living thing
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane (biological)",
+  "uri": "http://kbpedia.org/kko/rc/BiologicalMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use",
+    "subclass of: biological membrane stuff"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: membrane (biological). Relevant Logical Facts: - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use - subclass of: biological membrane stuff
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell membrane",
+  "uri": "http://kbpedia.org/kko/rc/CellMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells.",
+    "subclass of: membrane (biological)",
+    "subclass of: structural cell part"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: cell membrane. Relevant Logical Facts: - definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells. - subclass of: membrane (biological) - subclass of: structural cell part
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+1. The cell wall provides mechanical support to non-woody plant tissues (Global).
+2. The cell wall is composed primarily of cellulose microfibrils (Global).
+3. The cell wall is somewhat rigid but elastic due to its hydrated nature (Global).
+4. The cell wall experiences pressure from the cell contents (Global).
+5. The cell wall provides mechanical support to non-woody plant tissues (Global).
+6. The cell wall is a covering of botanical cells, external to the plasma membrane (Global).
+7. The cell wall is a subclass of botanical cell (Global).
+8. The cell wall is a subclass of cell wall (Global).
+9. The cell wall is a component of plant cells (Global).
+10. The cell wall is similar to an animal skeleton in providing structural support (Choice B).
+11. An animal skeleton provides structural support to the body (Choice B).
+12. The cell wall and animal skeleton both provide mechanical support (Choice B).
+13. The cell wall and animal skeleton both experience pressure from the cell contents and body respectively (Choice B).
+14. The cell membrane is a collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells (Choice A).
+15. The cell membrane is a subclass of structural cell part (Choice A).
+16. The cell membrane is a subclass of membrane (biological) (Choice A).
+17. The cell membrane is not primarily composed of cellulose microfibrils (Choice A).
+18. The cell membrane does not provide mechanical support to non-woody plant tissues (Choice A).
+19. Chloroplasts are organelles found in plant cells responsible for photosynthesis (Choice C).
+20. Chloroplasts are not primarily composed of cellulose microfibrils (Choice C).
+21. Chloroplasts do not provide mechanical support to non-woody plant tissues (Choice C).
+22. The nucleus is a component of eukaryotic cells containing genetic material (Choice D).
+23. The nucleus is not primarily composed of cellulose microfibrils (Choice D).
+24. The nucleus does not provide mechanical support to non-woody plant tissues (Choice D).
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A) cell membrane B) cell wall C) chloroplast D) nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.",
+    "subclass of: microscopic object",
+    "subclass of: organic matter"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: cell part. Relevant Logical Facts: - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc. - subclass of: microscopic object - subclass of: organic matter
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: botanical cell",
+    "subclass of: cell wall"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts: - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues. - subclass of: botanical cell - subclass of: cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "anucleated cell",
+  "uri": "http://kbpedia.org/kko/rc/AnucleatedCell",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.",
+    "subclass of: cell"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: anucleated cell. Relevant Logical Facts: - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus. - subclass of: cell
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane (biological)",
+  "uri": "http://kbpedia.org/kko/rc/BiologicalMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use",
+    "subclass of: biological membrane stuff"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: membrane (biological). Relevant Logical Facts: - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use - subclass of: biological membrane stuff
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell membrane",
+  "uri": "http://kbpedia.org/kko/rc/CellMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells.",
+    "subclass of: membrane (biological)",
+    "subclass of: structural cell part"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: cell membrane. Relevant Logical Facts: - definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells. - subclass of: membrane (biological) - subclass of: structural cell part
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+1. Plant cells have a cell wall that provides mechanical support (Global).
+2. The cell wall is composed primarily of cellulose microfibrils (Global).
+3. The cell wall is somewhat rigid but elastic due to its hydrated nature (Global).
+4. The cell wall experiences pressure from the cell contents (Global).
+5. The cell wall provides mechanical support to non-woody plant tissues (Global).
+6. Animal skeletons provide structural support and protection (Choice A).
+7. Animal skeletons are composed of rigid materials such as bone and cartilage (Choice A).
+8. The cell wall's mechanical support function is similar to the function of an animal skeleton (Choice B).
+9. The cell wall's composition and properties are distinct from those of an animal skeleton (Choice C).
+10. The nucleus is not related to the function of providing mechanical support (Choice D).
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: botanical cell",
+    "subclass of: cell wall",
+    "subclass of: eukaryotic cell",
+    "subclass of: plant or part of a plant",
+    "subclass of: structural cell part",
+    "subclass of: external anatomical part",
+    "sibling concept: bacterial cell wall",
+    "sibling concept: prokaryotic cell wall"
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: plant cell wall. Relevant Logical Facts:   - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.   - subclass of: botanical cell   - subclass of: cell wall   - subclass of: eukaryotic cell   - subclass of: plant or part of a plant   - subclass of: structural cell part   - subclass of: external anatomical part   - sibling concept: bacterial cell wall   - sibling concept: prokaryotic cell wall
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cytoplasmic part",
+  "uri": "http://kbpedia.org/kko/rc/CytoplasmicPart",
+  "score": 1.0,
+  "triples": [
+    "definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.",
+    "subclass of: cytoplasm",
+    "subclass of: cell part",
+    "subclass of: protoplasm",
+    "sibling concept: cytosol"
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: cytoplasmic part. Relevant Logical Facts:   - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.   - subclass of: cytoplasm   - subclass of: cell part   - subclass of: protoplasm   - sibling concept: cytosol
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "anucleated cell",
+  "uri": "http://kbpedia.org/kko/rc/AnucleatedCell",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.",
+    "subclass of: cell",
+    "subclass of: living thing",
+    "has subclass: prokaryotic organism",
+    "sibling concept: cell capable of further differentiation",
+    "sibling concept: cell line",
+    "sibling concept: diploid cell",
+    "sibling concept: eukaryotic cell",
+    "sibling concept: haploid cell"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: anucleated cell. Relevant Logical Facts:   - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus.   - subclass of: cell   - subclass of: living thing   - has subclass: prokaryotic organism   - sibling concept: cell capable of further differentiation   - sibling concept: cell line   - sibling concept: diploid cell   - sibling concept: eukaryotic cell   - sibling concept: haploid cell
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell part",
+  "uri": "http://kbpedia.org/kko/rc/CellPart",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.",
+    "subclass of: microscopic object",
+    "subclass of: organic matter",
+    "subclass of: parts",
+    "subclass of: object types",
+    "subclass of: shaped thing",
+    "subclass of: three dimensional thing",
+    "subclass of: material",
+    "has subclass: aster (cell part)",
+    "has subclass: axon",
+    "has subclass: biological membrane stuff",
+    "has subclass: bacterial capsule",
+    "has subclass: structural cell part",
+    "has subclass: cell plate",
+    "has subclass: chromatin",
+    "has subclass: chromosome",
+    "has subclass: cytoplasm",
+    "has subclass: intracellular part",
+    "has subclass: membrane",
+    "has subclass: microtubule",
+    "sibling concept: atomic nucleus",
+    "sibling concept: chemical object",
+    "sibling concept: microorganism",
+    "sibling concept: nanotube",
+    "sibling concept: polymer molecule"
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: cell part. Relevant Logical Facts:   - definition: The collection of structures which are typically found and formed as parts of Cells. This covers components of both EukaryoticCells and ProkaryoticCells. It includes organelles, vesicles, cell walls, extracellular matrix, plasma membranes, receptors, cellular humours, microtubules, etc.   - subclass of: microscopic object   - subclass of: organic matter   - subclass of: parts   - subclass of: object types   - subclass of: shaped thing   - subclass of: three dimensional thing   - subclass of: material   - has subclass: aster (cell part)   - has subclass: axon   - has subclass: biological membrane stuff   - has subclass: bacterial capsule   - has subclass: structural cell part   - has subclass: cell plate   - has subclass: chromatin   - has subclass: chromosome   - has subclass: cytoplasm   - has subclass: intracellular part   - has subclass: membrane   - has subclass: microtubule   - sibling concept: atomic nucleus   - sibling concept: chemical object   - sibling concept: microorganism   - sibling concept: nanotube   - sibling concept: polymer molecule
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell",
+  "uri": "http://kbpedia.org/kko/rc/Cell",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.",
+    "subclass of: living thing",
+    "subclass of: biological matter",
+    "subclass of: finite spatial thing",
+    "subclass of: naturally-occurring tangible substance",
+    "subclass of: organic matter",
+    "subclass of: temporally continuous thing",
+    "has subclass: anucleated cell",
+    "has subclass: cell capable of further differentiation",
+    "has subclass: cell line",
+    "has subclass: diploid cell",
+    "has subclass: eukaryotic cell",
+    "has subclass: haploid cell",
+    "has subclass: aura: heterotrophic cell",
+    "has subclass: prokaryotic organism",
+    "has subclass: single-cell organism",
+    "has subclass: somatic cell",
+    "has subclass: stem cell",
+    "sibling concept: aerobic thing",
+    "sibling concept: anaerobic thing",
+    "sibling concept: animal or body part",
+    "sibling concept: asexual organism",
+    "sibling concept: tissue"
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: cell. Relevant Logical Facts:   - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.   - subclass of: living thing   - subclass of: biological matter   - subclass of: finite spatial thing   - subclass of: naturally-occurring tangible substance   - subclass of: organic matter   - subclass of: temporally continuous thing   - has subclass: anucleated cell   - has subclass: cell capable of further differentiation   - has subclass: cell line   - has subclass: diploid cell   - has subclass: eukaryotic cell   - has subclass: haploid cell   - has subclass: aura: heterotrophic cell   - has subclass: prokaryotic organism   - has subclass: single-cell organism   - has subclass: somatic cell   - has subclass: stem cell   - sibling concept: aerobic thing   - sibling concept: anaerobic thing   - sibling concept: animal or body part   - sibling concept: asexual organism   - sibling concept: tissue
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Based on my synthesis of knowledge, the answer is B. cell wall.
+The cell wall of a plant cell provides mechanical support, similar to the function of an animal skeleton, which also provides structural support and protection to the body.
+==================================================
+==================================================
+ QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "plant cell wall",
+  "uri": "http://kbpedia.org/kko/rc/BotanicalCellWall",
+  "score": 1.0,
+  "triples": [
+    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues.",
+    "subclass of: botanical cell",
+    "subclass of: cell wall"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts: - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues. - subclass of: botanical cell - subclass of: cell wall
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cytoplasmic part",
+  "uri": "http://kbpedia.org/kko/rc/CytoplasmicPart",
+  "score": 1.0,
+  "triples": [
+    "definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.",
+    "subclass of: cytoplasm"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: cytoplasmic part. Relevant Logical Facts: - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures. - subclass of: cytoplasm
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell",
+  "uri": "http://kbpedia.org/kko/rc/Cell",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells.",
+    "subclass of: living thing"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: cell. Relevant Logical Facts: - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells. - subclass of: living thing
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "membrane (biological)",
+  "uri": "http://kbpedia.org/kko/rc/BiologicalMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use",
+    "subclass of: biological membrane stuff"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: membrane (biological). Relevant Logical Facts: - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use - subclass of: biological membrane stuff
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "cell membrane",
+  "uri": "http://kbpedia.org/kko/rc/CellMembrane",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells.",
+    "subclass of: membrane (biological)",
+    "subclass of: structural cell part"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: cell membrane. Relevant Logical Facts: - definition: The collection of all LipidBilayers that enclose eukaryotic or prokaryotic Cells. - subclass of: membrane (biological) - subclass of: structural cell part
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+1. Cell walls are the covering of botanical cells, external to the plasma membrane (Global).
+2. Cell walls are composed primarily of cellulose microfibrils (Global).
+3. Cell walls are somewhat rigid but elastic due to their hydrated nature (Global).
+4. Cell walls experience pressure from the cell contents (Global).
+5. Cell walls provide mechanical support to non-woody plant tissues (Global).
+6. The cell wall provides mechanical support (Choice B).
+7. The cell wall is external to the plasma membrane (Choice B).
+8. The cell wall is composed of cellulose microfibrils (Choice B).
+9. The cell wall is somewhat rigid but elastic (Choice B).
+10. The cell wall experiences pressure from the cell contents (Choice B).
+11. The cell wall provides mechanical support (Choice B).
+12. The cell wall is a structural component of plant cells (Choice B).
+13. The cell wall is not a component of animal cells (Global).
+14. Animal skeletons provide structural support (Global).
+15. Animal skeletons are composed of rigid materials (Global).
+16. The cell wall's function is most similar to the function of an animal skeleton in terms of providing structural support (Choice B).
+17. The cell wall's composition is most similar to the composition of an animal skeleton in terms of being rigid (Choice B).
+18. The cell wall's ability to experience pressure is most similar to the ability of an animal skeleton to experience pressure (Choice B).
+==================================================
+==================================================
+ QUERY: Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 5 Chunks) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "sample",
+  "uri": "http://kbpedia.org/kko/rc/ExtractedSample",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample."
+  ]
+}
+
+[Chunk 1 | Score: 1.0000]
+KBPedia Concept: sample. Relevant Logical Facts:   - definition: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "comparison",
+  "uri": "http://kbpedia.org/kko/rc/Comparison-Examination",
+  "score": 1.0,
+  "triples": [
+    "definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences."
+  ]
+}
+
+[Chunk 2 | Score: 1.0000]
+KBPedia Concept: comparison. Relevant Logical Facts:   - definition: A sub-collection of Examination_Investigation. Each instance is an examining of resemblances or differences.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "process",
+  "uri": "http://kbpedia.org/kko/rc/Process",
+  "score": 1.0,
+  "triples": [
+    "definition: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, base"
+  ]
+}
+
+[Chunk 3 | Score: 1.0000]
+KBPedia Concept: process. Relevant Logical Facts:   - definition: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, base
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "research method",
+  "uri": "http://kbpedia.org/kko/rc/ResearchMethod",
+  "score": 1.0,
+  "triples": [
+    "definition: Instances of research methods."
+  ]
+}
+
+[Chunk 4 | Score: 1.0000]
+KBPedia Concept: research method. Relevant Logical Facts:   - definition: Instances of research methods.
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "observational study",
+  "uri": "http://kbpedia.org/kko/rc/ObservationalStudy",
+  "score": 1.0,
+  "triples": [
+    "definition: In fields such as epidemiology, social sciences, psychology and statistics, an observational study draws inferences from a sample to a population where the independent variable is not under the control of the researcher."
+  ]
+}
+
+[Chunk 5 | Score: 1.0000]
+KBPedia Concept: observational study. Relevant Logical Facts:   - definition: In fields such as epidemiology, social sciences, psychology and statistics, an observational study draws inferences from a sample to a population where the independent variable is not under the control of the researcher.
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+Based on my synthesis of knowledge, the answer is B. making sure the same foods are eaten.
+
+This is because replicating the exact same foods eaten by Janette would be difficult, as it would require Carmen to have access to the same specific foods and quantities that Janette consumed. This is a key aspect of an observational study, where the independent variable (in this case, the food consumed) is not under the control of the researcher.
+==================================================
+==================================================
+ QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+==================================================
+
+--- RETRIEVED CONTEXT (Top 10 Items) ---
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "statistical method",
+  "uri": "http://kbpedia.org/kko/rc/StatisticalMethod",
+  "score": 1.0,
+  "triples": [
+    "definition: Statistics offers methods to estimate and correct for any bias within the sample and data collection procedures. There are also methods of experimental design for experiments that can lessen these issues at the outset of a study, strengthening its capability to discern truths about the population.",
+    "subclass of: mathematical method",
+    "subclass of: statistics"
+  ]
+}
+[Item 1]
+[Chunk Score: 1.0000] KBPedia Concept: statistical method. Relevant Logical Facts: - definition: Statistics offers methods to estimate and correct for any bias within the sample and data collection procedures. There are also methods of experimental design for experiments that can lessen these issues at the outset of a study, strengthening its capability to discern truths about the population. - subclass of: mathematical method - subclass of: statistics
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "sample",
+  "uri": "http://kbpedia.org/kko/rc/ExtractedSample",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample.",
+    "subclass of: instrumentality"
+  ]
+}
+[Item 2]
+[Chunk Score: 1.0000] KBPedia Concept: sample. Relevant Logical Facts: - definition: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample. - subclass of: instrumentality
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "process",
+  "uri": "http://kbpedia.org/kko/rc/Process",
+  "score": 1.0,
+  "triples": [
+    "definition: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, base",
+    "subclass of: type of temporally stuff-like thing that is also a type of durative event"
+  ]
+}
+[Item 3]
+[Chunk Score: 1.0000] KBPedia Concept: process. Relevant Logical Facts: - definition: The scientific method is an empirical method of knowledge acquisition which has characterized the development of science since at least the 17th century. It involves careful observation, which includes rigorous skepticism about what is observed, given that cognitive assumptions about how the world works influence how one interprets a percept. It involves formulating hypotheses, via induction, base - subclass of: type of temporally stuff-like thing that is also a type of durative event
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "level of substance in system",
+  "uri": "http://kbpedia.org/kko/rc/LevelOfSubstanceInSystem",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of PhysicalQuantity, each instance of LevelOfSubstanceInSystem is a qualitative or quantitative \\",
+    "subclass of: biological quantity",
+    "subclass of: tangible physical quantity"
+  ]
+}
+[Item 4]
+[Chunk Score: 1.0000] KBPedia Concept: level of substance in system. Relevant Logical Facts: - definition: A specialization of PhysicalQuantity, each instance of LevelOfSubstanceInSystem is a qualitative or quantitative \ - subclass of: biological quantity - subclass of: tangible physical quantity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "sampling",
+  "uri": "http://kbpedia.org/kko/rc/TakingASample",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of events in which a portion of some substance which is to be tested is separated out from the larger mass of it.",
+    "subclass of: physical creation event",
+    "subclass of: purposeful composite physical and mental activity"
+  ]
+}
+[Item 5]
+[Chunk Score: 1.0000] KBPedia Concept: sampling. Relevant Logical Facts: - definition: The collection of events in which a portion of some substance which is to be tested is separated out from the larger mass of it. - subclass of: physical creation event - subclass of: purposeful composite physical and mental activity
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "testing",
+  "uri": "http://kbpedia.org/kko/rc/Experimenting",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of CheckingWhetherConditionObtains. Each instance of Experimenting is an event in which one performs tests to determine whether an hypothesis is true. The tests in question need not be empirical in nature (cf. ThoughtExperimenting). For the common case in which the tests in question are empirical, see Experimenting_Empirical.",
+    "subclass of: evaluating",
+    "subclass of: investigating"
+  ]
+}
+[Item 6]
+[Chunk Score: 1.0000] KBPedia Concept: testing. Relevant Logical Facts: - definition: A specialization of CheckingWhetherConditionObtains. Each instance of Experimenting is an event in which one performs tests to determine whether an hypothesis is true. The tests in question need not be empirical in nature (cf. ThoughtExperimenting). For the common case in which the tests in question are empirical, see Experimenting_Empirical. - subclass of: evaluating - subclass of: investigating
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "fatigue",
+  "uri": "http://kbpedia.org/kko/rc/FatigueCondition",
+  "score": 1.0,
+  "triples": [
+    "definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue."
+  ]
+}
+[Item 7]
+[Chunk Score: 1.0000] KBPedia Concept: fatigue. Relevant Logical Facts: - definition: The PhysiologicalCondition in which an Organism_Whole is suffering from pathologic fatigue.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "exhausting",
+  "uri": "http://kbpedia.org/kko/rc/Exhaustion",
+  "score": 1.0,
+  "triples": [
+    "definition: A collection of situations; a subcollection of FatigueCondition. In each Exhaustion, someone wears out completely."
+  ]
+}
+[Item 8]
+[Chunk Score: 1.0000] KBPedia Concept: exhausting. Relevant Logical Facts: - definition: A collection of situations; a subcollection of FatigueCondition. In each Exhaustion, someone wears out completely.
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "feed",
+  "uri": "http://kbpedia.org/kko/rc/Feed",
+  "score": 1.0,
+  "triples": [
+    "definition: The collection of all feed. A type of FoodOrDrink.",
+    "subclass of: animal feed"
+  ]
+}
+[Item 9]
+[Chunk Score: 1.0000] KBPedia Concept: feed. Relevant Logical Facts: - definition: The collection of all feed. A type of FoodOrDrink. - subclass of: animal feed
+
+--------------------------------------------------
+
+[Metadata Dump]
+{
+  "source": "KBPedia",
+  "entity": "food ingredient",
+  "uri": "http://kbpedia.org/kko/rc/FoodIngredientOnly",
+  "score": 1.0,
+  "triples": [
+    "definition: A specialization of EdibleStuff. Each instance of FoodIngredientOnly is an edible substance that is used in making other food but isn't eaten by itself."
+  ]
+}
+[Item 10]
+[Chunk Score: 1.0000] KBPedia Concept: food ingredient. Relevant Logical Facts: - definition: A specialization of EdibleStuff. Each instance of FoodIngredientOnly is an edible substance that is used in making other food but isn't eaten by itself.
+
+--------------------------------------------------
+
+==================================================
+ LLM ANSWER:
+==================================================
+1. Statistical methods are used to estimate and correct for bias in data collection procedures (Global).
+2. Experimental design can strengthen a study's capability to discern truths about the population (Global).
+3. Replicating an investigation requires consistent data collection procedures (Global).
+4. Measuring the amount of fatigue (A) is a crucial aspect of the investigation, but it does not directly affect replicability (A).
+5. Recording observations in the same chart (C) is a minor detail that does not significantly impact the investigation's replicability (C).
+6. Making sure the foods are at the same temperature (D) is not a critical factor in replicating the investigation (D).
+7. The investigation's replicability is most affected by the consistency of the data collection procedures, specifically the food being consumed (Global).
+8. If the same foods are not eaten, the results may not be comparable, making it difficult to replicate the investigation (B).
+9. The investigation's design should minimize variables that could affect the outcome, such as the temperature of the food (Global).
+10. The temperature of the food is not a critical factor in replicating the investigation, as long as the same foods are consumed (Global).
+==================================================
