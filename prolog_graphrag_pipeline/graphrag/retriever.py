@@ -290,24 +290,45 @@ def generate(llm, retriever, query, original_query: str = "") -> dict:
     if hasattr(retriever, 'llm'):
         retriever.llm = llm
 
-    rag_template = RagTemplate(template=GRAPHRAG_TEMPLATE, expected_inputs=['query_text', 'context'])
-    
-    graph_rag = GraphRAG(llm=llm, retriever=retriever, prompt_template=rag_template)
-
-    # Pass original_query (full MCQ prompt) through retriever_config so patched_vector_cypher_search
-    # can forward it to the KBPedia LLM filter. Falls back to query if not provided.
     retriever_config = {'top_k': 5}
     if original_query:
         retriever_config['original_query'] = original_query
 
-    graph_rag_results = graph_rag.search(
-        query, 
-        retriever_config=retriever_config, 
-        return_context=True
-    )
+    # Run retrieval
+    retrieved_result = retriever.search(query, **retriever_config)
+    retrieved_context = retrieved_result
+
+    # Build context string for the LLM
+    context_str = ""
+    if retrieved_context and hasattr(retrieved_context, 'items'):
+        context_str = "\n".join([item.content for item in retrieved_context.items])
+        
+    # Call LLM directly with System/User messages to prevent fact hallucination/repetition
+    from llm_config import get_openai_client, MODEL_NAME
+    try:
+        from .config import GRAPHRAG_SYSTEM_PROMPT
+    except ImportError:
+        from config import GRAPHRAG_SYSTEM_PROMPT
+
+    client = get_openai_client()
     
-    retrieved_context = graph_rag_results.retriever_result
-    answer = graph_rag_results.answer
+    messages = [
+        {"role": "system", "content": GRAPHRAG_SYSTEM_PROMPT},
+        {"role": "user", "content": "Acknowledge these strict instructions. You must extract unbiased facts and aggressively deduplicate any repeating concepts."},
+        {"role": "assistant", "content": "I understand and will follow all instructions strictly. I will extract unbiased, reasoning-ready facts, end them with parenthetical tags like (Global) or (Choice A), and absolutely will not repeat the same fact in different words. Please provide the Question and Context."},
+        {"role": "user", "content": f"### QUESTION:\n{original_query if original_query else query}\n\n### CONTEXT:\n{context_str}\n\n**LOGICAL EVIDENCE**"}
+    ]
+    
+    try:
+        response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=messages,
+            temperature=0.0
+        )
+        answer = response.choices[0].message.content
+    except Exception as e:
+        print(f"Error calling LLM for Logical Evidence: {e}")
+        answer = "No logical evidence available."
 
     # Enrich context with metadata for the LLM
     final_contexts = []
