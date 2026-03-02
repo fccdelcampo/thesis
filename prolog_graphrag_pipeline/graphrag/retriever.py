@@ -14,7 +14,7 @@ from neo4j_graphrag.generation import GraphRAG
 from neo4j_graphrag.generation.prompts import RagTemplate
 from neo4j_graphrag.types import RetrieverResult, RetrieverResultItem
 
-from .config import RETRIEVAL_QUERY, RETRIEVER, GRAPHRAG_TEMPLATE
+from .config import RETRIEVAL_QUERY, RETRIEVER, GRAPHRAG_SYSTEM_PROMPT
 
 # ... (db health check omitted)
 
