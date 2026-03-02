@@ -7068,4 +7068,146 @@ Traceback (most recent call last):
     if lock.acquire(block, timeout):
        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 KeyboardInterrupt
-AI2 ARC:   0%|                                                                       | 0/100 [00:00<?, ?it/s]
+AI2 ARC:   0%|                                                                       | 0/100 [00:00<?, ?it/s]AI2 ARC:   0%|                                                                       | 0/100 [00:00<?, ?it/s]AI2 ARC:   1%|6                                                            | 1/100 [00:37<1:01:03, 37.01s/it]AI2 ARC:   1%|6                                                            | 1/100 [00:45<1:14:17, 45.03s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 97, in run_benchmarks
+    ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 261, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 240, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 144, in run_test_case
+    gr_result = run_pipeline_safe(run_graphrag, question)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 123, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 502, in run_pipeline
+    result = generate_answer(question, retriever, retriever_llm, original_query=question)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 418, in generate_answer
+    return generate(llm, retriever, query, original_query=original_query)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\llm.py", line 19, in generate
+    graph_rag_results = graph_rag.search(
+                        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\generation\graphrag.py", line 151, in search
+    retriever_result: RetrieverResult = self.retriever.search(
+                                        ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\retriever.py", line 167, in search
+    kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query, seeded_entities=list(extracted_entities))
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 470, in search
+    batch_results = self.filter_triples_batch(query_text, batch_data, original_query=filter_query)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\kbpedia_retriever.py", line 294, in filter_triples_batch
+    raw = self.llm.invoke(prompt)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 227, in invoke
+    return self._openai_invoke(input, message_history, system_instruction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 203, in _openai_invoke
+    thread.join(timeout=timeout_sec + 5) # Slight buffer for thread overhead
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1130, in join
+    self._wait_for_tstate_lock(timeout=max(timeout, 0))
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1146, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt
+AI2 ARC:   0%|                                                                 | 0/100 [00:00<?, ?it/s]AI2 ARC:   1%|5                                                        | 1/100 [00:28<46:32, 28.21s/it]AI2 ARC:   1%|5                                                        | 1/100 [00:28<47:08, 28.57s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 97, in run_benchmarks
+    ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 261, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 240, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 144, in run_test_case
+    gr_result = run_pipeline_safe(run_graphrag, question)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 123, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 489, in run_pipeline
+    encoder_llm, retriever_llm, embedder = initialize_models()
+                                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\graphrag_pipeline\graphrag\graphrag_driver.py", line 345, in initialize_models
+    encoder_llm = DebugOllamaLLM(
+                  ^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\llm\ollama_llm.py", line 97, in __init__
+    self.async_client = ollama.AsyncClient(
+                        ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 703, in __init__
+    super().__init__(httpx.AsyncClient, host, **kwargs)
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\ollama\_client.py", line 111, in __init__
+    self._client = client(
+                   ^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 1402, in __init__
+    self._transport = self._init_transport(
+                      ^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_client.py", line 1445, in _init_transport
+    return AsyncHTTPTransport(
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_transports\default.py", line 297, in __init__
+    ssl_context = create_ssl_context(verify=verify, cert=cert, trust_env=trust_env)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\httpx\_config.py", line 40, in create_ssl_context
+    ctx = ssl.create_default_context(cafile=certifi.where())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\ssl.py", line 708, in create_default_context
+    context.load_verify_locations(cafile, capath, cadata)
+KeyboardInterrupt
+AI2 ARC:   0%|                                                                 | 0/100 [00:00<?, ?it/s]AI2 ARC:   1%|5                                                        | 1/100 [00:35<58:31, 35.47s/it]AI2 ARC:   1%|5                                                      | 1/100 [01:08<1:53:42, 68.92s/it]
+Traceback (most recent call last):
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 191, in <module>
+    run_hallucination_evaluation_pipeline(
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 164, in run_hallucination_evaluation_pipeline
+    run_benchmarks(test_size=test_size, start_at=start_at, benchmarks=benchmarks)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\main_driver.py", line 97, in run_benchmarks
+    ai2_arc.main(test_size=test_size, start_idx=current_start_at)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 261, in main
+    run_test_cases(test_cases, start_idx=start_idx)
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 240, in run_test_cases
+    gr_t, pgr_t, tuned_t = run_test_case(t, i)
+                           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 149, in run_test_case
+    pgr_result = run_pipeline_safe(run_prolog_graphrag, question, flag="prolog")
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\hallucination_evaluation_pipeline\code\ai2_arc.py", line 123, in run_pipeline_safe
+    result = pipeline_fn(question, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 19, in run_pipeline
+    graphrag_output = graphrag_driver.run_pipeline(user_prompt) if flag != "q" else None
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 473, in run_pipeline
+    generation_result = generate(llm=retriever_llm, retriever=retriever, query=query, original_query=user_question)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\retriever.py", line 303, in generate
+    graph_rag_results = graph_rag.search(
+                        ^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\.venv\Lib\site-packages\neo4j_graphrag\generation\graphrag.py", line 174, in search
+    llm_response = self.llm.invoke(
+                   ^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 253, in invoke
+    return self._openai_invoke(input, message_history, system_instruction)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\graphrag\graphrag_driver.py", line 235, in _openai_invoke
+    thread.join(timeout=(timeout_sec * (max_retries + 1)) + 30) # Wait for all retries
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1130, in join
+    self._wait_for_tstate_lock(timeout=max(timeout, 0))
+  File "C:\Users\John Reniel\AppData\Local\Programs\Python\Python312\Lib\threading.py", line 1146, in _wait_for_tstate_lock
+    if lock.acquire(block, timeout):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

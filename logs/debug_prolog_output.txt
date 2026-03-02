@@ -127963,3 +127963,1110 @@ DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — quer
 DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
 DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
 DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 100 AI2 ARC test cases (starting from index 0).
+
+================================================================================
+[AI2 ARC #0] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['plant cell wall', 'cytoplasmic part', 'anucleated cell', 'cell part', 'cell', 'membrane (biological)', 'plastid', 'plant physiology', 'protoplasm', 'cellulose']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "plant cell wall": [\n    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (bu'...
+DEBUG: Batch LLM filter kept 3/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'cytoplasmic part'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'anucleated cell'
+DEBUG: Batch LLM filter kept 25/25 triple(s) for 'cell part'
+DEBUG: Batch LLM filter kept 23/23 triple(s) for 'cell'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+[0s] Waiting for indexes... Status: ['POPULATING', 'POPULATING']
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "This is a multiple choice question. The options must be preserved in the question field.",
+  "question": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'This is a multiple choice question. The options must be preserved in the question field.', 'question': 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following parts of a plant cell has a function that is most similar' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Computing query embeddings to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: [KBPedia] Extracted 4 MCQ choices for independent vector search.
+DEBUG: KBPedia matched 30 total concept(s) across 5 search(es).
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+DEBUG: Buffered 16 raw triple(s) for 'cell membrane'
+DEBUG: Buffered 15 raw triple(s) for 'membrane'
+DEBUG: Buffered 15 raw triple(s) for 'biological membrane stuff'
+DEBUG: Buffered 10 raw triple(s) for 'membrane protein complex'
+DEBUG: Buffered 13 raw triple(s) for 'cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'prokaryotic cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'bacterial cell wall'
+DEBUG: Buffered 13 raw triple(s) for 'back wall'
+DEBUG: Buffered 11 raw triple(s) for 'chloroplast'
+DEBUG: Buffered 6 raw triple(s) for 'chromoplast'
+DEBUG: Buffered 8 raw triple(s) for 'leucoplast'
+DEBUG: Buffered 15 raw triple(s) for 'photosynthetic pigment'
+DEBUG: Buffered 14 raw triple(s) for 'chlorophyll'
+DEBUG: Buffered 11 raw triple(s) for 'nucleus'
+DEBUG: Buffered 10 raw triple(s) for 'nuclear part'
+DEBUG: Buffered 9 raw triple(s) for 'nuclear substructure'
+DEBUG: Buffered 10 raw triple(s) for 'nuclear envelope'
+DEBUG: Buffered 11 raw triple(s) for 'atomic nucleus'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 23, 24, 25, 26, 27] from 28 candidates.
+DEBUG: End-filter kept 24/28 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "cell wall": [\n    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elas'...
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 1/5 triple(s) for 'cytoplasmic part'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'anucleated cell'
+DEBUG: Batch LLM filter kept 23/23 triple(s) for 'cell'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'membrane (biological)'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: [LocalDocs VectorCypher] Extracted 4 MCQ choices for independent search.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+
+================================================================================
+GRAPHRAG LOGICAL EVIDENCE
+================================================================================
+**LOGICAL EVIDENCE**
+
+1. Cell walls are the covering of botanical cells, external to the plasma membrane.
+2. Cell walls are composed primarily of cellulose microfibrils and provide some mechanical support to non-woody plant tissues.
+3. The cell wall is somewhat rigid (but elastic due to its hydrated nature) and experiences pressure from the cell contents.
+4. The cell wall is a structural cell part and an external anatomical part.
+5. The cell wall is a subclass of the cell wall, which is a subclass of the eukaryotic cell.
+6. The cell wall is a subclass of the plant or part of a plant.
+7. The cell wall provides mechanical support to non-woody plant tissues.
+8. The cell wall is composed of cellulose microfibrils.
+9. The cell wall is external to the plasma membrane.
+10. The cell wall is a covering of botanical cells.
+11. The cell wall is somewhat rigid (but elastic due to its hydrated nature).
+12. The cell wall experiences pressure from the cell contents.
+13. The cell wall provides some mechanical support to non-woody plant tissues.
+14. The cell wall is a structural component of plant cells.
+15. The cell wall is a subclass of the botanical cell.
+16. The cell wall is a subclass of the cell.
+17. The cell wall is a subclass of the living thing.
+18. The cell wall is a subclass of the biological matter.
+19. The cell wall is a subclass of the finite spatial thing.
+20. The cell wall is a subclass of the naturally-occurring tangible substance.
+21. The cell wall is a subclass of the organic matter.
+22. The cell wall is a subclass of the temporally continuous thing.
+23. The cell wall is a subclass of the eukaryotic cell.
+24. The cell wall is a subclass of the plant or part of a plant.
+25. The cell wall is a subclass of the structural cell part.
+26. The cell wall is a subclass of the external anatomical part.
+27. The cell wall is a subclass of the cell wall.
+28. The cell wall is a subclass of the eukaryotic cell.
+29. The cell wall is a subclass of the plant or part of a plant.
+30. The cell wall is a subclass of the structural cell part.
+31. The cell wall is a subclass of the external anatomical part.
+32. The cell wall is a subclass of the cell wall.
+33. The cell wall is a subclass of the eukaryotic cell.
+34. The cell wall is a subclass of the plant or part of a plant.
+35. The cell wall is a subclass of the structural cell part.
+36. The cell wall is a subclass of the external anatomical part.
+37. The cell wall is a subclass of the cell wall.
+38. The cell wall is a subclass of the eukaryotic cell.
+39. The cell wall is a subclass of the plant or part of a plant.
+40. The cell wall is a subclass of the structural cell part.
+41. The cell wall is a subclass of the external anatomical part.
+42. The cell wall is a subclass of the cell wall.
+43. The cell wall is a subclass of the eukaryotic cell.
+44. The cell wall is a subclass of the plant or part of a plant.
+45. The cell wall is a subclass of the structural cell part.
+46. The cell wall is a subclass of the external anatomical part.
+47. The cell wall is a subclass of the cell wall.
+48. The cell wall is a subclass of the eukaryotic cell.
+49. The cell wall is a subclass of the plant or part of a plant.
+50. The cell wall is a subclass of the structural cell part.
+51. The cell wall is a subclass of the external anatomical part.
+52. The cell wall is a subclass of the cell wall.
+53. The cell wall is a subclass of the eukaryotic cell.
+54. The cell wall is a subclass of the plant or part of a plant.
+55. The cell wall is a subclass of the structural cell part.
+56. The cell wall is a subclass of the external anatomical part.
+57. The cell wall is a subclass of the cell wall.
+58. The cell wall is a subclass of the eukaryotic cell.
+59. The cell wall is a subclass of the plant or part of a plant.
+60. The cell wall is a subclass of the structural cell part.
+61. The cell wall is a subclass of the external anatomical part.
+62. The cell wall is a subclass of the cell wall.
+63. The cell wall is a subclass of the eukaryotic cell.
+64. The cell wall is a subclass of the plant or part of a plant.
+65. The cell wall is a subclass of the structural cell part.
+66. The cell wall is a subclass of the external anatomical part.
+67. The cell wall is a subclass of the cell wall.
+68. The cell wall is a subclass of the eukaryotic cell.
+69. The cell wall is a subclass of the plant or part of a plant.
+70. The cell wall is a subclass of the structural cell part.
+71. The cell wall is a subclass of the external anatomical part.
+72. The cell wall is a subclass of the cell wall.
+73. The cell wall is a subclass of the eukaryotic cell.
+74. The cell wall is a subclass of the plant or part of a plant.
+75. The cell wall is a subclass of the structural cell part.
+76. The cell wall is a subclass of the external anatomical part.
+77. The cell wall is a subclass of the cell wall.
+78. The cell wall is a subclass of the eukaryotic cell.
+79. The cell wall is a subclass of the plant or part of a plant.
+80. The cell wall is a subclass of the structural cell part.
+81. The cell wall is a subclass of the external anatomical part.
+82. The cell wall is a subclass of the cell wall.
+83. The cell wall is a subclass of the eukaryotic cell.
+84. The cell wall is a subclass of the plant or part of a plant.
+85. The cell wall is a subclass of the structural cell part.
+86. The cell wall is a subclass of the external anatomical part.
+87. The cell wall is a subclass of the cell wall.
+88. The cell wall is a subclass of the eukaryotic cell.
+89. The cell wall is a subclass of the plant or part of a plant.
+90. The cell wall is a subclass of the structural cell part.
+91. The cell wall is a subclass of the external anatomical part.
+92. The cell wall is a subclass of the cell wall.
+93. The cell wall is a subclass of the eukaryotic cell.
+94. The cell wall is a subclass of the plant or part of a plant.
+95. The cell wall is a subclass of the structural cell part.
+96. The cell wall is a subclass of the external anatomical part.
+97. The cell wall is a subclass of the cell wall.
+98. The cell wall is a subclass of the eukaryotic cell.
+99. The cell wall is a subclass of the plant or part of a plant.
+100. The cell wall is a subclass of the structural cell part.
+101. The cell wall is a subclass of the external anatomical part.
+102. The cell wall is a subclass of the cell wall.
+103. The cell wall is a subclass of the eukaryotic cell.
+104. The cell wall is a subclass of the plant or part of a plant.
+105. The cell wall is a subclass of the structural cell part.
+106. The cell wall is a subclass of the external anatomical part.
+107. The cell wall is a subclass of the cell wall.
+108. The cell wall is a subclass of the eukaryotic cell.
+109. The cell wall is a subclass of the plant or part of a plant.
+110. The cell wall is a subclass of the structural cell part.
+111. The cell wall is a subclass of the external anatomical part.
+112. The cell wall is a subclass of the cell wall.
+113. The cell wall is a subclass of the eukaryotic cell.
+114. The cell wall is a subclass of the plant or part of a plant.
+115. The cell wall is a subclass of the structural cell part.
+116. The cell wall is a subclass of the external anatomical part.
+117. The cell wall is a subclass of the cell wall.
+118. The cell wall is a subclass of the eukaryotic cell.
+119. The cell wall is a subclass of the plant or part of a plant.
+120. The cell wall is a subclass of the structural cell part.
+121. The cell wall is a subclass of the external anatomical part.
+122. The cell wall is a subclass of the cell wall.
+123. The cell wall is a subclass of the eukaryotic cell.
+124. The cell wall is a subclass of the plant or part of a plant.
+125. The cell wall is a subclass of the structural cell part.
+126. The cell wall is a subclass of the external anatomical part.
+127. The cell wall is a subclass of the cell wall.
+128. The cell wall is a subclass of the eukaryotic cell.
+129. The cell wall is a subclass of the plant or part of a plant.
+130. The cell wall is a subclass of the structural cell part.
+131. The cell wall is a subclass of the external anatomical part.
+132. The cell wall is a subclass of the cell wall.
+133. The cell wall is a subclass of the eukaryotic cell.
+134. The cell wall is a subclass of the plant or part of a plant.
+135. The cell wall is
+================================================================================
+
+DEBUG: Transferring evidence to Prolog engine...
+
+DEBUG: SKIP_LOGICAL_EVIDENCE_LLM=True — passing raw triples to Prolog.
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+**Retrieved Context:**
+[Chunk Score: 1.0000] KBPedia Concept: plant cell wall. Relevant Logical Facts: - definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic due to their hydrated nature), and experience pressure from the cell contents. these characteristics provide some mechanical support to non-woody plant tissues. - subclass of: botanical cell - subclass of: cell wall - subclass of: eukaryotic cell - subclass of: plant or part of a plant - subclass of: structural cell part - subclass of: external anatomical part - sibling concept: bacterial cell wall - sibling concept: prokaryotic cell wall
+
+[Chunk Score: 1.0000] KBPedia Concept: cytoplasmic part. Relevant Logical Facts: - definition: Any constituent part of the cytoplasm, all of the contents of a cell excluding the plasma membrane and nucleus, but including other subcellular structures.
+
+[Chunk Score: 1.0000] KBPedia Concept: anucleated cell. Relevant Logical Facts: - definition: A specialization of Cell. Each instance of AnucleatedCell is a cell without a nucleus. - subclass of: cell - subclass of: living thing - has subclass: prokaryotic organism - sibling concept: cell capable of further differentiation - sibling concept: cell line - sibling concept: diploid cell - sibling concept: eukaryotic cell - sibling concept: haploid cell
+
+[Chunk Score: 1.0000] KBPedia Concept: cell. Relevant Logical Facts: - definition: The collection of living cells; a specialization of BiologicalLivingObject. Each instance of Cell is one of the basic structural units of nearly all living things, consisting (at least) of cytoplasm bounded by a cell membrane. Only the living structures viruses, mitochondria, and plastids are not composed of cells. - subclass of: living thing - subclass of: biological matter - subclass of: finite spatial thing - subclass of: naturally-occurring tangible substance - subclass of: organic matter - subclass of: temporally continuous thing - has subclass: anucleated cell - has subclass: cell capable of further differentiation - has subclass: cell line - has subclass: diploid cell - has subclass: eukaryotic cell - has subclass: haploid cell - has subclass: aura: heterotrophic cell - has subclass: prokaryotic organism - has subclass: single-cell organism - has subclass: somatic cell - has subclass: stem cell - sibling concept: aerobic thing - sibling concept: anaerobic thing - sibling concept: animal or body part - sibling concept: asexual organism - sibling concept: tissue
+
+[Chunk Score: 1.0000] KBPedia Concept: membrane (biological). Relevant Logical Facts: - definition: This is the collection of membranes which grow as parts of living Cells. It not only includes the outermost CellMembrane, but also the NuclearEnvelope, inner and outer mitocondrial membranes, etc. Note that this is the constant to use when representing facts that hold of BiologicalMembranes qua objects and not of the membrane stuff out of which they consist. To represent facts about the later, use - subclass of: biological membrane stuff - subclass of: cell part - subclass of: fluid substance - subclass of: lipid bilayer - subclass of: membrane - has subclass: cell membrane
+
+**Context from Prompt:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+is_cell_wall(cell_wall).
+is_cell_wall(cell_membrane).
+
+provides_mechanical_support(animal_skeleton).
+
+answer(OptionLetter) :- choice(OptionLetter, Material), is_cell_wall(Material), provides_mechanical_support(animal_skeleton).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+is_cell_wall(cell_wall).
+is_cell_wall(cell_membrane).
+
+provides_mechanical_support(animal_skeleton).
+
+answer(OptionLetter) :- choice(OptionLetter, Material), is_cell_wall(Material), provides_mechanical_support(animal_skeleton).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for a, because\n      choice holds for a, and cell_membrane, and\n      is_cell_wall holds for cell_membrane, and\n      provides_mechanical_support holds for animal_skeleton\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for a, because
+      choice holds for a, and cell_membrane, and
+      is_cell_wall holds for cell_membrane, and
+      provides_mechanical_support holds for animal_skeleton
+
+
+**Explainer Output:** 
+**Conclusion:** The answer is A, which corresponds to the cell membrane.
+
+**Logical Explanation:** The solver determined this by following a logical chain:
+
+Because the choice is for the cell membrane (Option A), and the cell membrane is a type of cell wall (as indicated by the fact that it is a cell wall), and the cell wall provides mechanical support similar to that of an animal skeleton, the system concluded that the answer is indeed the cell membrane.
+
+**FINAL LLM OUTPUT:
+Based on my synthesis of knowledge, the answer is B. cell membrane. The cell membrane is identified as a type of cell wall, which provides mechanical support similar to that of an animal skeleton, thus supporting the conclusion that the cell membrane is the correct answer. This conclusion is supported by the fact that the cell membrane is a type of cell wall, as indicated in the retrieved knowledge.
+====The pipeline executed in 3.6405 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | CORRECT |   12.1s
+Prolog          | Predicted: [B]   | CORRECT |   24.2s
+Tuned LLM       | Predicted: [B]   | CORRECT |    0.7s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #1] Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods e...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['sample', 'comparison', 'process', 'research method', 'observational study', 'long-term study', 'drive', 'statistical method', 'scientific observation', 'trouble']
+DEBUG: Buffered 10 raw triple(s) for 'sample'
+DEBUG: Buffered 3 raw triple(s) for 'comparison'
+DEBUG: Buffered 11 raw triple(s) for 'process'
+DEBUG: Buffered 23 raw triple(s) for 'research method'
+DEBUG: Buffered 13 raw triple(s) for 'observational study'
+DEBUG: Buffered 4 raw triple(s) for 'long-term study'
+DEBUG: Buffered 8 raw triple(s) for 'drive'
+DEBUG: Buffered 10 raw triple(s) for 'statistical method'
+DEBUG: Buffered 11 raw triple(s) for 'scientific observation'
+DEBUG: Buffered 11 raw triple(s) for 'trouble'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 7, 8] from 10 candidates.
+DEBUG: End-filter kept 8/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 100 AI2 ARC test cases (starting from index 0).
+
+================================================================================
+[AI2 ARC #0] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['plant cell wall', 'cytoplasmic part', 'anucleated cell', 'cell part', 'cell', 'membrane (biological)', 'plastid', 'plant physiology', 'protoplasm', 'cellulose']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "cell wall": ["definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elastic d'...
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 1/5 triple(s) for 'cytoplasmic part'
+DEBUG: Batch LLM filter kept 1/9 triple(s) for 'anucleated cell'
+DEBUG: Batch LLM filter kept 1/25 triple(s) for 'cell part'
+DEBUG: Batch LLM filter kept 1/23 triple(s) for 'cell'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "This is a multiple choice question. The options must be preserved in the question field.",
+  "question": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'This is a multiple choice question. The options must be preserved in the question field.', 'question': 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following parts of a plant cell has a function that is most similar' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Computing query embeddings to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: [KBPedia] Extracted 4 MCQ choices for independent vector search.
+DEBUG: KBPedia matched 30 total concept(s) across 5 search(es).
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+DEBUG: Buffered 16 raw triple(s) for 'cell membrane'
+DEBUG: Buffered 15 raw triple(s) for 'membrane'
+DEBUG: Buffered 15 raw triple(s) for 'biological membrane stuff'
+DEBUG: Buffered 10 raw triple(s) for 'membrane protein complex'
+DEBUG: Buffered 13 raw triple(s) for 'cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'prokaryotic cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'bacterial cell wall'
+DEBUG: Buffered 13 raw triple(s) for 'back wall'
+DEBUG: Buffered 11 raw triple(s) for 'chloroplast'
+DEBUG: Buffered 6 raw triple(s) for 'chromoplast'
+DEBUG: Buffered 8 raw triple(s) for 'leucoplast'
+DEBUG: Buffered 15 raw triple(s) for 'photosynthetic pigment'
+DEBUG: Buffered 14 raw triple(s) for 'chlorophyll'
+DEBUG: Buffered 11 raw triple(s) for 'nucleus'
+DEBUG: Buffered 10 raw triple(s) for 'nuclear part'
+DEBUG: Buffered 9 raw triple(s) for 'nuclear substructure'
+DEBUG: Buffered 10 raw triple(s) for 'nuclear envelope'
+DEBUG: Buffered 11 raw triple(s) for 'atomic nucleus'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 4, 5, 6, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 19, 20, 21, 23, 24, 25, 26, 27] from 28 candidates.
+DEBUG: End-filter kept 24/28 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "cell wall": [\n    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elas'...
+DEBUG: Batch LLM filter kept 1/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'cytoplasmic part'
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'anucleated cell'
+DEBUG: Batch LLM filter kept 23/23 triple(s) for 'cell'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'membrane (biological)'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: [LocalDocs VectorCypher] Extracted 4 MCQ choices for independent search.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+
+================================================================================
+GRAPHRAG LOGICAL EVIDENCE
+================================================================================
+**LOGICAL EVIDENCE**
+
+1. Cell walls are the covering of botanical cells, external to the plasma membrane.
+2. Cell walls are composed primarily of cellulose microfibrils and are somewhat rigid (but elastic due to their hydrated nature).
+3. Cell walls provide some mechanical support to non-woody plant tissues.
+4. The cell wall is a structure external to the plasma membrane.
+5. The cell wall is composed of cellulose microfibrils.
+6. The cell wall provides mechanical support to plant tissues.
+7. The cell wall is a characteristic feature of plant cells.
+8. The cell wall is external to the cell membrane.
+9. The cell wall is a rigid structure (but elastic due to its hydrated nature).
+10. The cell wall is composed of cellulose microfibrils and other substances.
+11. The cell wall provides structural support to plant cells.
+12. The cell wall is a key feature of plant cell anatomy.
+13. The cell wall is a component of the plant cell.
+14. The cell wall is external to the cell.
+15. The cell wall is a structure that provides mechanical support to plant cells.
+================================================================================
+
+DEBUG: Transferring evidence to Prolog engine...
+
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+**Retrieved Context:**
+**LOGICAL EVIDENCE**
+
+1. Cell walls are the covering of botanical cells, external to the plasma membrane.
+2. Cell walls are composed primarily of cellulose microfibrils and are somewhat rigid (but elastic due to their hydrated nature).
+3. Cell walls provide some mechanical support to non-woody plant tissues.
+4. The cell wall is a structure external to the plasma membrane.
+5. The cell wall is composed of cellulose microfibrils.
+6. The cell wall provides mechanical support to plant tissues.
+7. The cell wall is a characteristic feature of plant cells.
+8. The cell wall is external to the cell membrane.
+9. The cell wall is a rigid structure (but elastic due to its hydrated nature).
+10. The cell wall is composed of cellulose microfibrils and other substances.
+11. The cell wall provides structural support to plant cells.
+12. The cell wall is a key feature of plant cell anatomy.
+13. The cell wall is a component of the plant cell.
+14. The cell wall is external to the cell.
+15. The cell wall is a structure that provides mechanical support to plant cells.
+**Context from Prompt:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+provides_structural_support(animal_skeleton).
+provides_structural_support(cell_wall).
+
+answer(OptionLetter) :- choice(OptionLetter, Part), provides_structural_support(Part).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+provides_structural_support(animal_skeleton).
+provides_structural_support(cell_wall).
+
+answer(OptionLetter) :- choice(OptionLetter, Part), provides_structural_support(Part).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for b, because\n      choice holds for b, and cell_wall, and\n      provides_structural_support holds for cell_wall\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for b, because
+      choice holds for b, and cell_wall, and
+      provides_structural_support holds for cell_wall
+
+
+**Explainer Output:** 
+**Conclusion:** The part of a plant cell that has a function most similar to the function of an animal skeleton is the cell wall.
+
+**Logical Explanation:** The solver arrived at this conclusion by analyzing the relationships between the different parts of a plant cell and their structural support functions. Here's the step-by-step reasoning:
+
+* The system verified that the cell wall is indeed a part of a plant cell, as established by the choice(b, cell_wall) fact.
+* The solver then checked if the cell wall provides structural support, which is a key function of an animal skeleton. This is where the provides_structural_support(cell_wall) fact comes into play.
+* Since both conditions were met, the system concluded that the cell wall is the part of a plant cell that has a function most similar to the function of an animal skeleton, as defined by the answer(OptionLetter) rule.
+
+**FINAL LLM OUTPUT:
+Based on my synthesis of knowledge, the answer is B. cell wall. The cell wall provides structural support to plant cells, which is a function most similar to the function of an animal skeleton. This conclusion is supported by the facts that the cell wall is a rigid structure (but elastic due to its hydrated nature) and provides mechanical support to plant tissues.
+====The pipeline executed in 2.9085 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | CORRECT |   14.0s
+Prolog          | Predicted: [B]   | CORRECT |   13.6s
+Tuned LLM       | Predicted: [B]   | CORRECT |    0.6s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #1] Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods e...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+C:\Users\John Reniel\thesis\thesis\tuned_pipeline
+
+============================================================
+STEP 2: Running Benchmark Evaluators: ['ai2_arc', 'openbookqa', 'mmlu']
+============================================================
+
+--- AI2 ARC ---
+Loaded 100 AI2 ARC test cases (starting from index 0).
+
+================================================================================
+[AI2 ARC #0] Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+...
+Correct Answer: [B]
+--------------------------------------------------------------------------------
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['plant cell wall', 'cytoplasmic part', 'anucleated cell', 'cell part', 'cell', 'membrane (biological)', 'plastid', 'plant physiology', 'protoplasm', 'cellulose']
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9] from 10 candidates.
+DEBUG: End-filter kept 10/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "plant cell wall": [\n    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (bu'...
+DEBUG: Batch LLM filter kept 3/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 0/5 triple(s) for 'cytoplasmic part'
+DEBUG: Batch LLM filter kept 0/9 triple(s) for 'anucleated cell'
+DEBUG: Batch LLM filter kept 0/25 triple(s) for 'cell part'
+DEBUG: Batch LLM filter kept 0/23 triple(s) for 'cell'
+DEBUG: Removed 4 concept(s) with 0 surviving triples.
+DEBUG: KBPedia found 1 grounded concept contexts.
+DEBUG: KBPedia returned 1 items.
+DEBUG: Merged Result Count: 1
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG: Initializing new Neo4j driver...
+DEBUG: Neo4j driver initialized and connected.
+DEBUG: Re-initializing pipelines due to missing LLM or new driver...
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+Pre-flight check: Database connection verified.
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "This is a multiple choice question. The options must be preserved in the question field.",
+  "question": "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus",
+  "context": []
+}
+DEBUG: Parsed JSON: {'rationale': 'This is a multiple choice question. The options must be preserved in the question field.', 'question': 'Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus', 'context': []}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton? A. cell membrane B. cell wall C. chloroplast D. nucleus
+DEBUG: EXTRACTED CONTEXT (Len: 0): []
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which of the following parts of a plant cell has a function that is most similar' | context items=0
+DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Computing query embeddings to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: [KBPedia] Extracted 4 MCQ choices for independent vector search.
+DEBUG: KBPedia matched 30 total concept(s) across 5 search(es).
+DEBUG: Buffered 9 raw triple(s) for 'plant cell wall'
+DEBUG: Buffered 5 raw triple(s) for 'cytoplasmic part'
+DEBUG: Buffered 9 raw triple(s) for 'anucleated cell'
+DEBUG: Buffered 25 raw triple(s) for 'cell part'
+DEBUG: Buffered 23 raw triple(s) for 'cell'
+DEBUG: Buffered 7 raw triple(s) for 'membrane (biological)'
+DEBUG: Buffered 13 raw triple(s) for 'plastid'
+DEBUG: Buffered 14 raw triple(s) for 'plant physiology'
+DEBUG: Buffered 15 raw triple(s) for 'protoplasm'
+DEBUG: Buffered 8 raw triple(s) for 'cellulose'
+DEBUG: Buffered 16 raw triple(s) for 'cell membrane'
+DEBUG: Buffered 15 raw triple(s) for 'membrane'
+DEBUG: Buffered 15 raw triple(s) for 'biological membrane stuff'
+DEBUG: Buffered 10 raw triple(s) for 'membrane protein complex'
+DEBUG: Buffered 13 raw triple(s) for 'cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'prokaryotic cell wall'
+DEBUG: Buffered 7 raw triple(s) for 'bacterial cell wall'
+DEBUG: Buffered 13 raw triple(s) for 'back wall'
+DEBUG: Buffered 11 raw triple(s) for 'chloroplast'
+DEBUG: Buffered 6 raw triple(s) for 'chromoplast'
+DEBUG: Buffered 8 raw triple(s) for 'leucoplast'
+DEBUG: Buffered 15 raw triple(s) for 'photosynthetic pigment'
+DEBUG: Buffered 14 raw triple(s) for 'chlorophyll'
+DEBUG: Buffered 11 raw triple(s) for 'nucleus'
+DEBUG: Buffered 10 raw triple(s) for 'nuclear part'
+DEBUG: Buffered 9 raw triple(s) for 'nuclear substructure'
+DEBUG: Buffered 10 raw triple(s) for 'nuclear envelope'
+DEBUG: Buffered 11 raw triple(s) for 'atomic nucleus'
+DEBUG: End-filter LLM kept indices: [0, 1, 4, 5, 8, 9, 10, 11, 12, 13, 14, 15, 16, 18, 20, 21, 23, 24, 25, 26, 27] from 28 candidates.
+DEBUG: End-filter kept 21/28 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "cell wall": [\n    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elas'...
+DEBUG: Batch triple filter raw response: '{\n  "cell wall": [\n    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elas'...
+DEBUG: Batch triple filter raw response: '{\n  "cell wall": [\n    "definition: Cell walls are the covering of botanical cells, external to the plasma membrane. They are composed primarily of cellulose microfibrils, are somewhat rigid (but elas'...
+DEBUG: Batch LLM filter kept 9/9 triple(s) for 'plant cell wall'
+DEBUG: Batch LLM filter kept 5/5 triple(s) for 'cytoplasmic part'
+DEBUG: Batch LLM filter kept 23/23 triple(s) for 'cell'
+DEBUG: Batch LLM filter kept 7/7 triple(s) for 'membrane (biological)'
+DEBUG: Batch LLM filter kept 15/15 triple(s) for 'protoplasm'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: [LocalDocs VectorCypher] Extracted 4 MCQ choices for independent search.
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: generate done. Returning result.
+
+================================================================================
+GRAPHRAG LOGICAL EVIDENCE
+================================================================================
+## Global Context
+1. Plant cells have a cell wall that provides mechanical support to non-woody plant tissues.
+2. The cell wall is composed primarily of cellulose microfibrils and is somewhat rigid but elastic due to its hydrated nature.
+3. The cell wall experiences pressure from the cell contents.
+
+## Choice B
+4. The cell wall is a structural cell part that is external to the plasma membrane.
+
+## Choice C
+5. Chloroplasts are not related to the function of an animal skeleton.
+
+## Choice D
+6. The nucleus is not related to the function of an animal skeleton.
+
+## Choice A
+7. The cell membrane is not the correct answer, but it is a part of the cell that is related to the function of an animal skeleton in that it provides structural support to the cell.
+
+## Choice B
+8. The cell wall provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton.
+
+## Global Context
+9. Plant cells have a cell wall that is composed primarily of cellulose microfibrils.
+
+## Choice B
+10. The cell wall is a structural cell part that provides mechanical support to non-woody plant tissues.
+
+## Choice A
+11. The cell membrane is a part of the cell that is related to the function of an animal skeleton in that it provides structural support to the cell.
+
+## Choice B
+12. The cell wall provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton.
+
+## Global Context
+13. The cell wall is a structural cell part that is external to the plasma membrane.
+
+## Choice B
+14. The cell wall provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton.
+
+## Choice A
+15. The cell membrane is a part of the cell that is related to the function of an animal skeleton in that it provides structural support to the cell.
+
+## Choice B
+16. The cell wall is a structural cell part that provides mechanical support to non-woody plant tissues.
+
+## Choice A
+17. The cell wall provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton.
+
+## Choice B
+18. The cell wall is a structural cell part that is external to the plasma membrane.
+
+## Choice A
+19. The cell membrane is a part of the cell that is related to the function of an animal skeleton in that it provides structural support to the cell.
+
+## Choice B
+20. The cell wall provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton.
+
+## Choice A
+21. The cell wall is a structural cell part that provides mechanical support to non-woody plant tissues.
+================================================================================
+
+DEBUG: Transferring evidence to Prolog engine...
+
+Attempting to load s(CASP)...
+s(CASP) loaded successfully.
+**User Question:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+**Retrieved Context:**
+## Global Context
+1. Plant cells have a cell wall that provides mechanical support to non-woody plant tissues.
+2. The cell wall is composed primarily of cellulose microfibrils and is somewhat rigid but elastic due to its hydrated nature.
+3. The cell wall experiences pressure from the cell contents.
+
+## Choice B
+4. The cell wall is a structural cell part that is external to the plasma membrane.
+
+## Choice C
+5. Chloroplasts are not related to the function of an animal skeleton.
+
+## Choice D
+6. The nucleus is not related to the function of an animal skeleton.
+
+## Choice A
+7. The cell membrane is not the correct answer, but it is a part of the cell that is related to the function of an animal skeleton in that it provides structural support to the cell.
+
+## Choice B
+8. The cell wall provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton.
+
+## Global Context
+9. Plant cells have a cell wall that is composed primarily of cellulose microfibrils.
+
+## Choice B
+10. The cell wall is a structural cell part that provides mechanical support to non-woody plant tissues.
+
+## Choice A
+11. The cell membrane is a part of the cell that is related to the function of an animal skeleton in that it provides structural support to the cell.
+
+## Choice B
+12. The cell wall provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton.
+
+## Global Context
+13. The cell wall is a structural cell part that is external to the plasma membrane.
+
+## Choice B
+14. The cell wall provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton.
+
+## Choice A
+15. The cell membrane is a part of the cell that is related to the function of an animal skeleton in that it provides structural support to the cell.
+
+## Choice B
+16. The cell wall is a structural cell part that provides mechanical support to non-woody plant tissues.
+
+## Choice A
+17. The cell wall provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton.
+
+## Choice B
+18. The cell wall is a structural cell part that is external to the plasma membrane.
+
+## Choice A
+19. The cell membrane is a part of the cell that is related to the function of an animal skeleton in that it provides structural support to the cell.
+
+## Choice B
+20. The cell wall provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton.
+
+## Choice A
+21. The cell wall is a structural cell part that provides mechanical support to non-woody plant tissues.
+**Context from Prompt:**
+Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?
+A. cell membrane
+B. cell wall
+C. chloroplast
+D. nucleus
+Generating Prolog...
+Iteration 0 | Extracted Database:
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+provides_mechanical_support(cell_wall).
+provides_mechanical_support(animal_skeleton).
+
+answer(OptionLetter) :- choice(OptionLetter, Component), provides_mechanical_support(Component).
+
+Iteration 0 | Extracted Query:
+answer(OptionLetter).
+
+Iteration 0 | Prolog code generation success
+**Extracted database:**
+choice(a, cell_membrane).
+choice(b, cell_wall).
+choice(c, chloroplast).
+choice(d, nucleus).
+
+provides_mechanical_support(cell_wall).
+provides_mechanical_support(animal_skeleton).
+
+answer(OptionLetter) :- choice(OptionLetter, Component), provides_mechanical_support(Component).
+**Extracted query:**
+answer(OptionLetter).
+Generating s(CASP) wrapper...
+**Wrapper:** 
+
+explain(Explanation) :-
+    % 1. Run the solver - wrap query in parenthesis so commas are not evaluated as separate arguments
+    scasp((answer(OptionLetter)), [tree(Tree)]),
+    
+    % 2. Capture the human-readable output into a string
+    with_output_to(string(Explanation), 
+        human_justification_tree(Tree, [tree_style(human)])
+    ).
+
+Consulting database...
+Querying database...
+**Query Results:** 
+{'truth': True, 'Explanation': '   answer holds for b, because\n      choice holds for b, and cell_wall, and\n      provides_mechanical_support holds for cell_wall\n\n'}
+truth Found: True
+**Human-Readable Explanation**
+   answer holds for b, because
+      choice holds for b, and cell_wall, and
+      provides_mechanical_support holds for cell_wall
+
+
+**Explainer Output:** 
+**Conclusion:** The correct answer is B, the cell wall.
+
+**Logical Path:** The solver arrived at this conclusion by identifying the component that provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton.
+
+The system concluded that the cell wall is the correct answer because:
+
+- The cell wall is identified as the component related to option B.
+- The cell wall is known to provide mechanical support to non-woody plant tissues.
+- This mechanical support is similar to the function of an animal skeleton.
+
+Therefore, the solver determined that option B, the cell wall, is the correct answer.
+
+**FINAL LLM OUTPUT:
+Based on my synthesis of knowledge, the answer is B. the cell wall. The cell wall is identified as the component that provides mechanical support to non-woody plant tissues, which is similar to the function of an animal skeleton. This conclusion is supported by the retrieved knowledge that the cell wall is a structural cell part that provides mechanical support to non-woody plant tissues (items 4, 10, 13, 16, 18, 20, and 21).
+====The pipeline executed in 4.8268 seconds. Prolog verified: True===
+
+--- PIPELINE COMPARISON ---
+GraphRAG        | Predicted: [B]   | CORRECT |   12.9s
+Prolog          | Predicted: [B]   | CORRECT |   21.3s
+Tuned LLM       | Predicted: [B]   | CORRECT |    1.2s
+================================================================================
+
+
+================================================================================
+[AI2 ARC #1] Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods e...
+Correct Answer: [A]
+--------------------------------------------------------------------------------
+DEBUG: Stale local documents cleared (KBPedia preserved).
+Together AI embedder loaded (intfloat/multilingual-e5-large-instruct).
+DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...
+Creating indexes with dimension: 1024...
+Index creation commands sent.
+Database is ready for retrieval.
+DEBUG: --- Starting Local Vector Similarity Search for: 'Janette conducts an investigation to see which foods make her feel more fatigued. She eats one of four different foods each day at the same time for four days and then records how she feels. She asks her friend Carmen to do the same investigation to see if she gets similar results. Which would make the investigation most difficult to replicate?
+A. measuring the amount of fatigue
+B. making sure the same foods are eaten
+C. recording observations in the same chart
+D. making sure the foods are at the same temperature' ---
+DEBUG: [KBPedia] Computing query embedding to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: KBPedia matched 10 concept(s) via vector similarity: ['sample', 'comparison', 'process', 'research method', 'observational study', 'long-term study', 'drive', 'statistical method', 'scientific observation', 'trouble']
+DEBUG: Buffered 10 raw triple(s) for 'sample'
+DEBUG: Buffered 3 raw triple(s) for 'comparison'
+DEBUG: Buffered 11 raw triple(s) for 'process'
+DEBUG: Buffered 23 raw triple(s) for 'research method'
+DEBUG: Buffered 13 raw triple(s) for 'observational study'
+DEBUG: Buffered 4 raw triple(s) for 'long-term study'
+DEBUG: Buffered 8 raw triple(s) for 'drive'
+DEBUG: Buffered 10 raw triple(s) for 'statistical method'
+DEBUG: Buffered 11 raw triple(s) for 'scientific observation'
+DEBUG: Buffered 11 raw triple(s) for 'trouble'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 3, 4, 5, 7, 8] from 10 candidates.
+DEBUG: End-filter kept 8/10 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "sample": ["definition: The collection of all samples of some PartiallyTangible stuff, to be used for study. The result of any successful TakingASample."],\n  "comparison": ["definition: A sub-coll'...
+DEBUG: Batch LLM filter kept 1/10 triple(s) for 'sample'
+DEBUG: Batch LLM filter kept 1/3 triple(s) for 'comparison'
+DEBUG: Batch LLM filter kept 1/11 triple(s) for 'process'
+DEBUG: Batch LLM filter kept 1/23 triple(s) for 'research method'
+DEBUG: Batch LLM filter kept 1/13 triple(s) for 'observational study'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: KBPedia returned 5 items.
+DEBUG: Merged Result Count: 5
+Done. Check 'debug_rag_output.txt' for the context and answer.
+DEBUG [run_pipeline]: Clearing local data...
+WARNING: Clearing pipeline data (preserving KBPedia)...
+Database cleared successfully (KBPedia preserved).
+DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...
+LLM Response: {
+  "rationale": "Identifying the factor that would make the investigation most difficult to replicate.",
+  "question": "Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature",
+  "context": [
+    "Janette conducts an investigation to see which foods make her feel more fatigued.",
+    "She eats one of four different foods each day at the same time for four days and then records how she feels.",
+    "She asks her friend Carmen to do the same investigation to see if she gets similar results."
+  ]
+}
+DEBUG: Parsed JSON: {'rationale': 'Identifying the factor that would make the investigation most difficult to replicate.', 'question': 'Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature', 'context': ['Janette conducts an investigation to see which foods make her feel more fatigued.', 'She eats one of four different foods each day at the same time for four days and then records how she feels.', 'She asks her friend Carmen to do the same investigation to see if she gets similar results.']}
+DEBUG: Normalized keys: ['rationale', 'question', 'context']
+DEBUG: EXTRACTED QUERY: Which would make the investigation most difficult to replicate? A) measuring the amount of fatigue B) making sure the same foods are eaten C) recording observations in the same chart D) making sure the foods are at the same temperature
+DEBUG: EXTRACTED CONTEXT (Len: 3): ['Janette conducts an investigation to see which foods make her feel more fatigued.', 'She eats one of four different foods each day at the same time for four days and then records how she feels.', 'She asks her friend Carmen to do the same investigation to see if she gets similar results.']
+DEBUG [run_pipeline]: extract_query_and_context done. query='Which would make the investigation most difficult to replicate? A) measuring the' | context items=3
+DEBUG [run_pipeline]: Starting process_context (KG ingestion) with 3 text chunk(s)...
+Processing text context: Janette conducts an investigation to see which foods make her feel more fatigued.
+Text context processed: run_id='1764b701-bbc8-4f87-871d-ea505ea7b222' result={'resolver': {'number_of_nodes_to_resolve': 4, 'number_of_created_nodes': 4}}
+Processing text context: She eats one of four different foods each day at the same time for four days and then records how she feels.
+Text context processed: run_id='bdfe115e-71ec-4114-86dd-ef9f036b43e6' result={'resolver': {'number_of_nodes_to_resolve': 9, 'number_of_created_nodes': 9}}
+Processing text context: She asks her friend Carmen to do the same investigation to see if she gets similar results.
+Text context processed: run_id='1bed42a5-cec5-46ab-bfaa-468328187eab' result={'resolver': {'number_of_nodes_to_resolve': 14, 'number_of_created_nodes': 13}}
+DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...
+DEBUG [run_pipeline]: Sleep done.
+DEBUG [run_pipeline]: Starting generate (retriever + LLM)...
+DEBUG: [KBPedia] Computing query embeddings to search KBPedia concepts...
+DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.
+DEBUG: [KBPedia] Extracted 4 MCQ choices for independent vector search.
+DEBUG: KBPedia matched 30 total concept(s) across 5 search(es).
+DEBUG: Buffered 10 raw triple(s) for 'statistical method'
+DEBUG: Buffered 10 raw triple(s) for 'sample'
+DEBUG: Buffered 11 raw triple(s) for 'process'
+DEBUG: Buffered 11 raw triple(s) for 'scientific observation'
+DEBUG: Buffered 12 raw triple(s) for 'level of substance in system'
+DEBUG: Buffered 16 raw triple(s) for 'sampling'
+DEBUG: Buffered 3 raw triple(s) for 'comparison'
+DEBUG: Buffered 14 raw triple(s) for 'testing'
+DEBUG: Buffered 4 raw triple(s) for 'long-term study'
+DEBUG: Buffered 23 raw triple(s) for 'sensor'
+DEBUG: Buffered 10 raw triple(s) for 'fatigue'
+DEBUG: Buffered 4 raw triple(s) for 'exhausting'
+DEBUG: Buffered 10 raw triple(s) for 'aircraft weight measurement'
+DEBUG: Buffered 9 raw triple(s) for 'mechanical test'
+DEBUG: Buffered 14 raw triple(s) for 'strength'
+DEBUG: Buffered 9 raw triple(s) for 'food event'
+DEBUG: Buffered 8 raw triple(s) for 'feed'
+DEBUG: Buffered 24 raw triple(s) for 'food ingredient'
+DEBUG: Buffered 26 raw triple(s) for 'cuisine'
+DEBUG: Buffered 7 raw triple(s) for 'topics of 'consuming foods''
+DEBUG: Buffered 8 raw triple(s) for 'chart'
+DEBUG: Buffered 8 raw triple(s) for 'chart pattern'
+DEBUG: Buffered 6 raw triple(s) for 'record'
+DEBUG: Buffered 10 raw triple(s) for 'organizational chart'
+DEBUG: Buffered 8 raw triple(s) for 'statistical charts and diagrams'
+DEBUG: Buffered 12 raw triple(s) for 'heating food'
+DEBUG: Buffered 19 raw triple(s) for 'cooking'
+DEBUG: Buffered 16 raw triple(s) for 'temperature change'
+DEBUG: Buffered 14 raw triple(s) for 'temperature gauge'
+DEBUG: Buffered 10 raw triple(s) for 'boiling food'
+DEBUG: End-filter LLM kept indices: [0, 1, 2, 4, 5, 7, 10, 15, 16, 17, 20, 22, 25, 27, 28] from 30 candidates.
+DEBUG: End-filter kept 15/30 concepts.
+DEBUG: Batch sending 5 concepts to LLM triple filter...
+DEBUG: Batch triple filter raw response: '{\n  "sample": [\n    "definition: The collection of all samples of some PartiallyTangible stuff, to be used for study.",\n    "has subclass: sample (statistics)"\n  ],\n  "sampling": [\n    "definition: Th'...
+DEBUG: Batch LLM filter kept 1/10 triple(s) for 'statistical method'
+DEBUG: Batch LLM filter kept 2/10 triple(s) for 'sample'
+DEBUG: Batch LLM filter kept 1/11 triple(s) for 'process'
+DEBUG: Batch LLM filter kept 12/12 triple(s) for 'level of substance in system'
+DEBUG: Batch LLM filter kept 1/16 triple(s) for 'sampling'
+DEBUG: KBPedia found 5 grounded concept contexts.
+DEBUG: [LocalDocs VectorCypher] Extracted 4 MCQ choices for independent search.
