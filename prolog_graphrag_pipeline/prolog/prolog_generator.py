@@ -2,6 +2,54 @@ import janus_swi as janus
 import re
 import sys
 
+
+def _sanitize_multiword_atoms(code: str) -> str:
+    """Syntax-safety net: ensure all predicate arguments are valid Prolog atoms.
+
+    ONLY converts spaces→underscores and lowercases multi-word phrases to prevent
+    'Syntax error: Operator expected'. Does NOT condense or truncate atoms —
+    that is the Prolog generator LLM's job via the system prompt instruction
+    'Condense long phrases into 3-5 critical words'.
+
+    Handles:
+      - Spaces in lowercase atom:   'choice(a, cell membrane)'  → 'choice(a, cell_membrane)'
+      - Capitalized sentence atom:  'choice(a, Liquid water)'   → 'choice(a, liquid_water)'
+      - Single-word Prolog variable: 'CellPart', 'X', '_'      → unchanged (variable)
+    """
+    def _fix_args(match: re.Match) -> str:
+        pred = match.group(1)
+        open_p = match.group(2)
+        args_str = match.group(3)
+        close_p = match.group(4)
+
+        new_args = []
+        for arg in args_str.split(','):
+            arg = arg.strip()
+            if not arg:
+                continue
+
+            # Single-word uppercase/underscore-prefixed token → Prolog variable, leave as-is
+            is_variable = (arg[0].isupper() or arg[0] == '_') and ' ' not in arg
+            if is_variable:
+                new_args.append(arg)
+                continue
+
+            # Already single-quoted → leave as-is
+            if arg.startswith("'") or arg.startswith('"'):
+                new_args.append(arg)
+                continue
+
+            # Fix spaces (including capitalized multi-word phrases)
+            if ' ' in arg or (arg[0].isupper()):
+                arg = re.sub(r'\s+', '_', arg).lower()
+
+            new_args.append(arg)
+        return f"{pred}{open_p}{', '.join(new_args)}{close_p}"
+
+    return re.sub(r'([a-z_][a-z0-9_]*)(\()([^()]+)(\))', _fix_args, code)
+
+
+
 def capture_db_and_query(answer_text: str) -> tuple[str, str]:
     import re
 
@@ -18,6 +66,10 @@ def capture_db_and_query(answer_text: str) -> tuple[str, str]:
     if not query_match:
         raise ValueError("Query not found in LLM's response. Ensure you wrap your goal strictly inside `<query>` tags.")
     query = query_match.group(1).strip()
+
+    # Sanitize multi-word atoms (e.g. "cell membrane" -> "cell_membrane")
+    db = _sanitize_multiword_atoms(db)
+    query = _sanitize_multiword_atoms(query)
 
     return {"database": db, "query": query}
 
