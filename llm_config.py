@@ -68,7 +68,7 @@ def retry_with_exponential_backoff(
 if USE_TOGETHER_API:
     BASE_URL = "https://api.together.xyz/v1"
     API_KEY = os.environ.get("TOGETHER_API_KEY", "")
-    MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo"
+    MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" 
     EMBED_MODEL = "intfloat/multilingual-e5-large-instruct"
     EMBED_DIM = 1024
     if not API_KEY:

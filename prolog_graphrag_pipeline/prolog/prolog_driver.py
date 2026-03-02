@@ -81,7 +81,7 @@ def use_scasp():
             print(f"CRITICAL ERROR: Failed to install or load s(CASP): {e}")
             SCASP_AVAILABLE = False
 
-def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt: str) -> str:
+def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt: str, graphrag_answer: str = "") -> str:
     start_time = time.perf_counter()
     
     # Ensure s(CASP) is loaded
@@ -195,7 +195,7 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
         final_answer = {"text_answer": "Error: Prolog generation failed and LLM fallback is disabled."}
     else:
         print("\n**FINAL LLM OUTPUT:")
-        final_answer = llm.generate(user_question, retrieved_context, explainer_output, flag="synthesis", verified_choice=verified_choice)
+        final_answer = llm.generate(user_question, retrieved_context, explainer_output, flag="synthesis", verified_choice=verified_choice, context_from_prompt=context_from_prompt, graphrag_answer=graphrag_answer)
         
         if final_answer:
             print(final_answer["text_answer"])

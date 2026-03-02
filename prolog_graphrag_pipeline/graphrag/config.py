@@ -15,7 +15,7 @@ ENABLE_WIKIDATA_FALLBACK = True
 # Coarse concept-level filtering before triple filtering.
 # Default: False (faster, collapses redundant LLM turn).
 ENABLE_KBPEDIA_CONCEPT_FILTER = True
-ENABLE_LLM_FILTERING = False
+ENABLE_LLM_FILTERING = True
 
 
 class RETRIEVER_OPTIONS(Enum):

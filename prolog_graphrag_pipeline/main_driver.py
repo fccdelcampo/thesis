@@ -67,7 +67,8 @@ def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include
     else:
         retrieved_context_str = str(retrieved_context) if retrieved_context else ""
 
-    pgr_results = prolog_driver.run_pipeline(user_question=user_prompt, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt) if flag != "q" else None
+    graphrag_answer = graphrag_output.get("answer", "") if graphrag_output else ""
+    pgr_results = prolog_driver.run_pipeline(user_question=user_prompt, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt, graphrag_answer=graphrag_answer) if flag != "q" else None
  
     return {
         "answer": pgr_results['text_answer'] if pgr_results else "Error generating answer",

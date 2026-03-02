@@ -283,6 +283,65 @@ answer(OptionLetter).
 </query>
 ---
 """},
+
+    # Example 5: Scientific Reasoning MCQ (Domain-Specific)
+    {
+        "role": "user",
+        "content": """
+Context: Metals are good conductors of heat because they contain free-moving electrons that transfer kinetic energy quickly. Wood is a poor conductor of heat because its molecules are tightly bound and do not transfer energy efficiently. Rubber is an insulator. Glass conducts heat poorly.
+
+Question: A chef needs to pick a material for a pot handle that stays cool while cooking. Which material would be the best choice?
+A. copper
+B. aluminum
+C. wood
+D. steel
+        """
+    },
+    {"role": "assistant", "content": r"""
+<reasoning_step>
+Encode the four choices.
+choice(a, copper).
+choice(b, aluminum).
+choice(c, wood).
+choice(d, steel).
+</reasoning_step>
+
+<reasoning_step>
+Encode conductivity from context.
+is_conductor(copper).
+is_conductor(aluminum).
+is_conductor(steel).
+is_insulator(wood).
+</reasoning_step>
+
+<reasoning_step>
+The chef needs a handle that stays cool, meaning it should NOT conduct heat well.
+A poor conductor (insulator) stays cool. From context, wood is a poor conductor.
+stays_cool(Material) :- is_insulator(Material).
+answer(OptionLetter) :- choice(OptionLetter, Material), stays_cool(Material).
+</reasoning_step>
+
+<database>
+choice(a, copper).
+choice(b, aluminum).
+choice(c, wood).
+choice(d, steel).
+
+is_conductor(copper).
+is_conductor(aluminum).
+is_conductor(steel).
+is_insulator(wood).
+
+stays_cool(Material) :- is_insulator(Material).
+
+answer(OptionLetter) :- choice(OptionLetter, Material), stays_cool(Material).
+</database>
+
+<query>
+answer(OptionLetter).
+</query>
+---
+"""},
 ]
 EXPLAINER_SYSTEM_PROMPT = rf"""
 ### Role
