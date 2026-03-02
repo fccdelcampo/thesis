@@ -484,7 +484,7 @@ Example:
             summary_lines.append(f"[{idx}] {c['name']}: {defn}")
         summary_text = "\n".join(summary_lines)
 
-        prompt = f"""You are filtering knowledge graph concepts for a Prolog-based question-answering system.
+        prompt = f"""You are filtering knowledge graph concepts for a Prolog-based QA system.
 
 User question: "{filter_query}"{mcq_hint}
 
@@ -492,15 +492,19 @@ Candidates (index: concept name: short definition):
 {summary_text}
 
 ### Decision Criteria
-Keep a concept if ANY of the following is true:
-1. Its name or definition directly relates to the question topic.
+You MUST select the minimal set of highly relevant concepts.
+
+CRITICAL DEDUPLICATION RULES:
+1. If multiple candidates represent the EXACT SAME real-world entity or idea (e.g., "cell membrane", "membrane (biological)", "membrane protein complex"), you MUST keep ONLY ONE (the most comprehensive/common). Reject the rest.
+2. Never keep highly redundant concepts that just add noise.
+3. Reject concepts that are clearly off-topic or coincidental word matches.
+
+RELEVANCE RULES (Keep if true AND not redundant):
+1. Its name or definition strictly relates to the question topic.
 2. Its name or definition relates to ANY of the MCQ answer choices listed above.
-3. It provides a fact or rule that could help the Prolog engine derive an answer.
+3. It provides a fact crucial for the Prolog engine to derive an answer.
 
-Reject a concept ONLY if it is clearly off-topic (e.g., unrelated domain, coincidental word match with no logical connection).
-When in doubt, KEEP IT — missing a concept is worse than keeping an extra one.
-
-Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7, 11]
+Return a JSON list of the RELEVANT indices (integers). Example: [0, 2, 4, 7]
 Output ONLY the JSON list, nothing else.
 """
         max_retries = 3

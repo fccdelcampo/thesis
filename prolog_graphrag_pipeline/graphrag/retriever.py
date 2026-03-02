@@ -131,48 +131,11 @@ def patched_hybrid_search(self, query_text, top_k=8, **kwargs):
     return RetrieverResult(items=unique_items[:top_k * 2], metadata={})
 
 def expand_query(self, query):
-    if not hasattr(self, 'llm') or not self.llm:
-        return query
-    
-    prompt = f"""
-    ### Task
-    Analyze the user's query and generate a list of **Specific, Distinct Concepts** or **Entities** for a Knowledge Graph lookup.
-    
-    ### User Query
-    "{query}"
-    
-    ### Instructions
-    1. Identify the core domain (e.g., "Number Theory").
-    2. List 3-5 specific concepts (e.g., "Integer", "Successor function").
-    3. **CRITICAL**: Exclude generic words like "Number", "Line", "System", "of", "the" unless they are part of a highly specific phrase.
-    4. **CRITICAL**: EXCLUDE irrelevant terms (e.g. "fax", "phone").
-    5. Format the output as a JSON object with a list of strings "concepts".
+    """Bypass LLM query expansion.
+    The pipeline now relies on independent vector searches for each MCQ choice
+    to guarantee comprehensive coverage, rather than LLM-extracted keywords.
     """
-    try:
-        response_text = self.llm.invoke(prompt).content.strip()
-        if "```json" in response_text:
-            response_text = response_text.split("```json")[1].split("```")[0].strip()
-        elif "```" in response_text:
-            response_text = response_text.split("```")[1].split("```")[0].strip()
-            
-        data = json.loads(response_text)
-        concepts = data.get("concepts", [])
-        
-        filtered_concepts = []
-        stop_words = {'of', 'the', 'a', 'an', 'in', 'on', 'at', 'to', 'for', 'is', 'are', 'what', 'next', 'number'}
-        for c in concepts:
-            if c.lower() not in stop_words:
-                filtered_concepts.append(f'"{c}"')
-
-        if filtered_concepts:
-            lucene_query = " OR ".join(filtered_concepts)
-            print(f"DEBUG: LLM Expanded Concepts: {concepts}")
-            return lucene_query
-        
-        return query
-    except Exception as e:
-        print(f"DEBUG: Query expansion failed: {e}")
-        return query
+    return query
 
 def patched_vector_cypher_search(self, query_text, top_k=8, **kwargs):
     import re

@@ -20,7 +20,7 @@ ENABLE_LLM_FILTERING = True
 # When True, skip the GRAPHRAG_TEMPLATE LLM distillation step and pass raw retrieved
 # triples/chunks directly to the Prolog generator instead of LLM-summarized evidence.
 # This avoids an intermediate LLM bottleneck but gives Prolog more raw noise to parse.
-SKIP_LOGICAL_EVIDENCE_LLM = True
+SKIP_LOGICAL_EVIDENCE_LLM = False
 
 
 class RETRIEVER_OPTIONS(Enum):
@@ -136,15 +136,20 @@ Each item must be a standalone factual statement or conditional rule (If X, then
    - CORRECT: "The Moon has no air and negligible gravity."
 4. **REASONING-READY**: Include only facts that, combined with common sense or basic domain reasoning, can lead to identifying the correct answer or eliminating incorrect ones.
 5. **FACTUAL**: Use clear, neutral, declarative English. No opinions, no speculation, no persuasive framing.
-6. **EVIDENCE QUOTAS (CRITICAL)**:
+6. **EVIDENCE QUOTAS & FORMATTING (CRITICAL)**:
    - **IF MULTIPLE CHOICE (has A, B, C, D options)**:
-     - Provide **1 to 4 logical facts** explicitly investigating/defining EACH specific choice (e.g., if Choice A is 'trench', give 1-4 facts about trenches).
-     - Provide **2 to 5 global/unstructured facts** that set up the premise, rules, or environment of the overarching question.
+     - You MUST use Markdown subheaders to separate your evidence:
+       `## Global Context` (2 to 5 unstructured facts setting up the overarching premise)
+       `## Choice A` (1 to 4 logical facts explicitly investigating/defining Choice A)
+       `## Choice B` (1 to 4 logical facts explicitly investigating/defining Choice B)
+       `## Choice C` (1 to 4 logical facts explicitly investigating/defining Choice C)
+       `## Choice D` (1 to 4 logical facts explicitly investigating/defining Choice D)
+     - Continue your numbered bullet points sequentially across all subheaders.
      - Maximum total items allowed: 21.
    - **IF OPEN-ENDED**:
-     - Simply list all facts and rules relevant to the query to a maximum of 15 facts.
+     - Do not use subheaders. Simply list all facts and rules relevant to the query to a maximum of 15 facts.
 7. **GROUNDED**: Only use facts from the Context. You may add at most ONE universally accepted scientific truth as a "missing link" if the Context is incomplete.
-8. **NO FINAL ANSWER LINE**: End after the last numbered item.
+8. **NO FINAL ANSWER LINE**: End immediately after the last numbered item.
 
 ---
 ### QUESTION:
@@ -153,7 +158,7 @@ Each item must be a standalone factual statement or conditional rule (If X, then
 ### CONTEXT:
 {context}
 
-'''
+**LOGICAL EVIDENCE**'''
 
 
 DOC_PATH = Path(__file__).resolve().parents[2] / "documents"
