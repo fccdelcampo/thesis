@@ -1,5 +1,6 @@
 import sys
 import os
+import json
 
 # Ensure project root is on the path so llm_config can be imported
 _project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -7,6 +8,8 @@ if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
 from llm_config import MODEL_NAME, get_openai_client
+from .llm import decide_fallback
+from .config import FALLBACK_SYSTEM_PROMPT
 
 try:
     from .config import LLM_SYSTEM_PROMPT, LLM_MESSAGES
@@ -21,6 +24,16 @@ except ImportError:
 from typing import Optional, Union, List
 
 client = get_openai_client()
+
+def decide_fallback(question: str):
+   
+    response = client.chat.completions.create(
+            model=MODEL_NAME,
+            messages=FALLBACK_SYSTEM_PROMPT + [{"role": "user", "content": question}],
+            temperature=0.0,
+        )
+    content = json.load(response.choices[0].message.content)
+    return content["route_to"] == "g" # True means fallback to GraphRAG
 
 
 def generate(user_question: str, retrieved_context: Optional[str], explainer_output: Optional[str], flag: str, sample_mode: bool = False, include_conclusion: bool = True, context_from_prompt: str = "", verified_choice: Optional[str] = None, graphrag_answer: str = "") -> Union[dict, List[dict]]:

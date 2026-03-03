@@ -81,7 +81,7 @@ def use_scasp():
             print(f"CRITICAL ERROR: Failed to install or load s(CASP): {e}")
             SCASP_AVAILABLE = False
 
-def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt: str, graphrag_answer: str = "") -> str:
+def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt: str) -> dict:
     start_time = time.perf_counter()
     
     # Ensure s(CASP) is loaded
@@ -119,6 +119,7 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
 
     prolog_error: str | None = None  # None = success; str = error message on failure
     verified_choice: Optional[str] = None
+    database, query, explainer_output, human_readable_explanation, retrieved_values, prolog_error = None, None, None, None, None, None
 
     # ── Attempt Prolog-verified path ───────────────────────────────────
     try:
@@ -134,8 +135,6 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
             raise RuntimeError("s(CASP) library is specifically required for this pipeline. Execution aborted.")
 
         wrapper = ""
-        human_readable_explanation = ""
-        retrieved_values = ""
 
         print("Generating s(CASP) wrapper...")
         wrapper = generate_safe_scasp_wrapper(query)
@@ -190,7 +189,7 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
             raise gen_err
 
     # ── Final synthesis (always runs unless fallback disabled) ───────────────
-    if prolog_error is not None and not ALLOW_LLM_FALLBACK:
+    if prolog_error and not ALLOW_LLM_FALLBACK:
         print("\n**LLM FALLBACK DISABLED: Skipping final synthesis because Prolog failed.")
         final_answer = {"text_answer": "Error: Prolog generation failed and LLM fallback is disabled."}
     else:
@@ -205,10 +204,14 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
     duration = end_time - start_time
     print(f"====The pipeline executed in {duration:.4f} seconds. Prolog verified: {prolog_error is None}===")
 
-    result_dict = final_answer if final_answer else {"text_answer": "Error: Final LLM failed to generate answer."}
-    if isinstance(result_dict, dict):
-        result_dict["prolog_error"] = prolog_error  # None = verified; str = fallback reason
-        result_dict["prolog_explanation"] = human_readable_explanation if 'human_readable_explanation' in locals() else ""
+    result_dict = {
+        "text_answer": {"text_answer": "Error: Final LLM failed to generate answer."} if isinstance(result_dict, dict) else None,
+        "database": database if database else "No database correctly generated.",
+        "query": query if query else "No query correctly generated.",
+        "prolog_explanation": human_readable_explanation if human_readable_explanation else "No s(cASP) explanation generated.",
+        "explainer_output": explainer_output if explainer_output else "No explainer output correctly generated",
+        "prolog_error": prolog_error if prolog_error else "No Prolog error met."
+    }
     return result_dict
 
 

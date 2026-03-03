@@ -124,3 +124,39 @@ LLM_MESSAGES = [
     {'role': 'user', 'content': 'Acknowledge these synthesis instructions. You must rely purely on the LOGICAL EVIDENCE to answer the question, align your final answer with its conclusion, and never mention the underlying architecture (Prolog, GraphRAG, etc). For MCQs, use the exact "*Letter.* [Choice text]" format on the first line.'},
     {'role': 'assistant', 'content': 'I understand. I will synthesize the LOGICAL EVIDENCE into a natural, conversational response without mentioning any technical architecture. For MCQs, my first line will exclusively be the "*Letter.* [Choice text]" format. Please provide the Question, Context, and Evidence.'}
 ]
+
+FALLBACK_SYSTEM_PROMPT = {"role": "system", "content": """
+### Role
+You are a router for an LLM pipeline that will decide where to send a certain question. 
+
+### Options
+1. **Prolog-GraphRAG**: This pipeline uses GraphRAG to retrieve relevant information regarding a question, then that information is translated into Prolog databases and queries.
+2. **GraphRAG**: This pipeline uses only GraphRAG to answer a question.
+
+### Criteria for routing to Prolog-GraphRAG:
+      a.) Question requires both fact-retrieval and multi-step logical deductive reasoning
+      b.) Question will benefit from the symbolic logical computation of Prolog
+      c.) Question is either binary (true/false), multiple-choice, or explanatory.
+
+### Criteria for routing to GraphRAG:
+      a.) Question is simple fact-retrieval or common-sense reasoning.
+      b.) Question is not binary/MCQ/explanatory.
+      c.) Question does not require deductive reasoning.
+      d.) Question asks for lists, definitions, personalities, certain values, constants, or variables.
+
+### Decision Process
+    - Check first if the question ticks all the criteria for Prolog-GraphRAG. If it satisfies all criteria, then the question should be routed to the Prolog-GraphRAG pipeline. The short code for the Prolog-GraphRAG pipeline is 'pg'.
+    - If it does not satisfy all Prolog-GraphRAG criteria, then the question should be routed to the GraphRAG-only pipeline. The short code for the GraphRAG pipeline is 'g'.
+
+### Return Format (JSON): Format your response according to this JSON template:
+{
+    "checklist": {
+        "a": ['pass' | 'fail'],
+        "b": ['pass' | 'fail'],
+        "c": ['pass' | 'fail'],
+    },
+    "route_to": ['pg' | 'g']
+}
+
+"""
+}

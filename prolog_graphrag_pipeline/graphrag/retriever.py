@@ -285,7 +285,7 @@ def create_retriever(driver, embedder):
     # This section is removed as it's no longer needed with the new patching approach.
 
 
-def generate(llm, retriever, query, original_query: str = "") -> dict:
+def generate(llm, retriever, query, original_query: str = "", fallback: bool = False) -> dict:
     # If the retriever is our EnhancedRetriever, inject the LLM
     if hasattr(retriever, 'llm'):
         retriever.llm = llm
@@ -306,17 +306,17 @@ def generate(llm, retriever, query, original_query: str = "") -> dict:
     # Call LLM directly with System/User messages to prevent fact hallucination/repetition
     from llm_config import get_openai_client, MODEL_NAME
     try:
-        from .config import GRAPHRAG_SYSTEM_PROMPT
+        from .config import GRAPHRAG_SYSTEM_PROMPT, GRAPHRAG_FALLBACK_SYSTEM_PROMPT
     except ImportError:
-        from config import GRAPHRAG_SYSTEM_PROMPT
+        from config import GRAPHRAG_SYSTEM_PROMPT, GRAPHRAG_FALLBACK_SYSTEM_PROMPT
 
     client = get_openai_client()
     
     messages = [
-        {"role": "system", "content": GRAPHRAG_SYSTEM_PROMPT},
+        {"role": "system", "content": GRAPHRAG_SYSTEM_PROMPT if not fallback else GRAPHRAG_FALLBACK_SYSTEM_PROMPT},
         {"role": "user", "content": "Acknowledge these strict instructions. You must extract unbiased facts and aggressively deduplicate any repeating concepts."},
         {"role": "assistant", "content": "I understand and will follow all instructions strictly. I will extract unbiased, reasoning-ready facts, end them with parenthetical tags like (Global) or (Choice A), and absolutely will not repeat the same fact in different words. Please provide the Question and Context."},
-        {"role": "user", "content": f"### QUESTION:\n{original_query if original_query else query}\n\n### CONTEXT:\n{context_str}\n\n**LOGICAL EVIDENCE**"}
+        {"role": "user", "content": f"### QUESTION:\n{original_query if original_query else query}\n\n### CONTEXT:\n{context_str}"}
     ]
     
     try:

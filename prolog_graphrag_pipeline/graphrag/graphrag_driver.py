@@ -441,7 +441,7 @@ def init_globals():
 def generate_answer(query, retriever, llm, original_query: str = "") -> dict:
     return generate(llm, retriever, query, original_query=original_query)
 
-def run_pipeline(user_question) -> dict:
+def run_pipeline(user_question, fallback: bool = False) -> dict:
     init_globals()
     
     # 1. Clear stale Neo4j data from previous questions to prevent irrelevant retrieval
@@ -470,7 +470,7 @@ def run_pipeline(user_question) -> dict:
         print("DEBUG [run_pipeline]: Sleep done.", flush=True)
 
     print("DEBUG [run_pipeline]: Starting generate (retriever + LLM)...", flush=True)
-    generation_result = generate(llm=retriever_llm, retriever=retriever, query=query, original_query=user_question)
+    generation_result = generate(llm=retriever_llm, retriever=retriever, query=query, original_query=user_question, fallback=fallback)
     print("DEBUG [run_pipeline]: generate done. Returning result.", flush=True)
     
     # generation_result is a dict: {'answer': str, 'contexts': list}
