@@ -14,7 +14,7 @@ from neo4j_graphrag.generation import GraphRAG
 from neo4j_graphrag.generation.prompts import RagTemplate
 from neo4j_graphrag.types import RetrieverResult, RetrieverResultItem
 
-from .config import RETRIEVAL_QUERY, RETRIEVER, GRAPHRAG_SYSTEM_PROMPT
+from .config import RETRIEVAL_QUERY, RETRIEVER
 
 # ... (db health check omitted)
 
@@ -26,7 +26,7 @@ def check_db_health(driver):
     """Verifies the driver can connect to Neo4j."""
     try:
         driver.verify_connectivity()
-        print("Pre-flight check: Database connection verified.")
+        print("Pre-flight check: Database connDEBUG PROLOG-GRAPHRAG:Initializing new Neo4j driver...ection verified.")
         return True
     except (ServiceUnavailable, AuthError) as e:
         print(f"Pre-flight check failed: {e}")
@@ -55,7 +55,7 @@ def create_indexes(driver):
         CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS 
         FOR (n:Chunk) ON EACH [n.text]
     """, database_="neo4j")
-    print("Index creation commands sent.")
+    # print("PROLOG-GRAPHRAG: Index creation commands sent.")
 
 def wait_for_indexes(driver, timeout=30):
     target_indexes = ['documentsVectorIndex', 'documentsFulltextIndex']
@@ -98,6 +98,12 @@ def patched_hybrid_search(self, query_text, top_k=8, **kwargs):
     original_query = kwargs.get("original_query", "")
     all_items = []
     
+    # --- NEW CODE: Inject Prolog logic filter ---
+    # if "filters" not in kwargs:
+    #     kwargs["filters"] = {}
+    # kwargs["filters"]["subgraph"] = "prolog-graphrag"
+    # --------------------------------------------
+    
     # 1. Main query search
     res_main = self._original_search(query_text=safe_query, top_k=top_k, **kwargs)
     if res_main and res_main.items:
@@ -106,7 +112,7 @@ def patched_hybrid_search(self, query_text, top_k=8, **kwargs):
     # 2. MCQ choices search
     mcq_choices = re.findall(r'\b[A-D][.)]\s*(.+)', original_query)
     if mcq_choices:
-        print(f"DEBUG: [LocalDocs Hybrid] Extracted {len(mcq_choices)} MCQ choices for independent search.", flush=True)
+        print(f"DEBUG PROLOG-GRAPHRAG:[LocalDocs Hybrid] Extracted {len(mcq_choices)} MCQ choices for independent search.", flush=True)
         choice_k = max(2, top_k // 2)
         for choice in mcq_choices:
             safe_choice = _sanitize_lucene_query(choice.strip())
@@ -143,6 +149,12 @@ def patched_vector_cypher_search(self, query_text, top_k=8, **kwargs):
     # `original_query` carries the full user prompt (with MCQ choices) for LLM filtering.
     # `query_text` is the extracted question stem (used for embedding/entity extraction).
     original_query = kwargs.pop("original_query", query_text)
+    
+    # --- NEW CODE: Inject Baseline filter ---
+    # if "filters" not in kwargs:
+    #     kwargs["filters"] = {}
+    # kwargs["filters"]["subgraph"] in ["prolog-graphrag", "kbpedia"]
+    # ----------------------------------------
 
     # 1. KBPedia Search (via Neo4j)
     kb_items = []
@@ -170,7 +182,7 @@ def patched_vector_cypher_search(self, query_text, top_k=8, **kwargs):
         # Search MCQ choices
         mcq_choices = re.findall(r'\b[A-D][.)]\s*(.+)', original_query)
         if mcq_choices:
-            print(f"DEBUG: [LocalDocs VectorCypher] Extracted {len(mcq_choices)} MCQ choices for independent search.", flush=True)
+            print(f"DEBUG PROLOG-GRAPHRAG:[LocalDocs VectorCypher] Extracted {len(mcq_choices)} MCQ choices for independent search.", flush=True)
             choice_k = max(2, top_k // 2)
             for choice in mcq_choices:
                 res_choice = self._original_search(query_text=choice.strip(), top_k=choice_k, **kwargs)
@@ -198,7 +210,7 @@ def patched_vector_cypher_search(self, query_text, top_k=8, **kwargs):
                 filtered_items.append(item)
         local_items = filtered_items
     except Exception as e:
-        print(f"DEBUG: Main retriever failed: {e}")
+        print(f"DEBUG PROLOG-GRAPHRAG:Main retriever failed: {e}")
         
     all_items = kb_items + local_items
     for item in all_items:
@@ -250,7 +262,8 @@ def create_retriever(driver, embedder):
             vector_index_name="documentsVectorIndex",
             fulltext_index_name="documentsFulltextIndex",
             embedder=embedder,
-            return_properties=["text", "id"] 
+            return_properties=["text", "id"],
+            
         )
         # Monkey-patch
         r._original_search = r.search
@@ -263,14 +276,15 @@ def create_retriever(driver, embedder):
             vector_index_name="documentsVectorIndex",
             fulltext_index_name="documentsFulltextIndex",
             retrieval_query=RETRIEVAL_QUERY,
-            embedder=embedder
+            embedder=embedder,
+            
         )
     elif RETRIEVER.value == "VectorCypherRetriever":
         r = VectorCypherRetriever(
             driver=driver,
             index_name="documentsVectorIndex",
             retrieval_query=RETRIEVAL_QUERY,
-            embedder=embedder
+            embedder=embedder,
         )
         r._driver = driver  # Store driver ref for KBPedia Neo4j queries
         r.llm = None # Initialize llm attribute for patching
@@ -285,7 +299,7 @@ def create_retriever(driver, embedder):
     # This section is removed as it's no longer needed with the new patching approach.
 
 
-def generate(llm, retriever, query, original_query: str = "", fallback: bool = False) -> dict:
+def generate(llm, retriever, query, original_query: str = "", fallback: str = "prolog-graphrag") -> dict:
     # If the retriever is our EnhancedRetriever, inject the LLM
     if hasattr(retriever, 'llm'):
         retriever.llm = llm
@@ -323,7 +337,8 @@ def generate(llm, retriever, query, original_query: str = "", fallback: bool = F
         response = client.chat.completions.create(
             model=MODEL_NAME,
             messages=messages,
-            temperature=0.0
+            temperature=0.3,
+            logprobs=True
         )
         answer = response.choices[0].message.content
     except Exception as e:

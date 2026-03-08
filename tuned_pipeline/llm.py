@@ -21,18 +21,18 @@ except ImportError:
 client = get_openai_client()
 
 
-def generate(user_question: str):
+def generate(question: str):
+    print(f"FINAL PROMPT (Tuned): {question}")
     try:
         answer = dict()
         response = client.chat.completions.create(
             model=MODEL_NAME,
-            messages=LLM_MESSAGES + [{"role": "user", "content": user_question}],
-            temperature=1.0,
+            messages=LLM_MESSAGES + [{"role": "user", "content": question}],
+            temperature=0.3,
+            logprobs=True
         )
-        answer['text_answer'] = response.choices[0].message.content
-        # logprobs not universally supported across providers
-        answer['logprobs'] = None
-        return answer
+        answer = response.choices[0].message.content
+        return { "answer": answer }
     except Exception as e:
         print(f"Error during LLM interaction ({MODEL_NAME}): {e}")
-        return None
+        return {}

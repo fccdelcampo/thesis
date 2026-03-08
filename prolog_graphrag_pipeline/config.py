@@ -1,15 +1,3 @@
-PROMPT_RECONSTRUCTOR_SYSTEM_PROMPT = """
-
-"""
-
-PROMPT_RECONSTRUCTOR_FEW_SHOT_EXAMPLES = [
-    
-]
-
-PROMPT_RECONSTRUCTOR_MESSAGES = [
-    {'role': 'system', 'content': PROMPT_RECONSTRUCTOR_SYSTEM_PROMPT},
-] + PROMPT_RECONSTRUCTOR_FEW_SHOT_EXAMPLES
-
 LLM_SYSTEM_PROMPT = """
 ### Role
 You are an Expert Knowledge Synthesizer. Your mission is to provide clear, accurate, and direct answers to user questions based on provided logical evidence. You act as the human-facing interface of a complex reasoning system.
@@ -125,38 +113,97 @@ LLM_MESSAGES = [
     {'role': 'assistant', 'content': 'I understand. I will synthesize the LOGICAL EVIDENCE into a natural, conversational response without mentioning any technical architecture. For MCQs, my first line will exclusively be the "*Letter.* [Choice text]" format. Please provide the Question, Context, and Evidence.'}
 ]
 
-FALLBACK_SYSTEM_PROMPT = {"role": "system", "content": """
-### Role
-You are a router for an LLM pipeline that will decide where to send a certain question. 
-
-### Options
-1. **Prolog-GraphRAG**: This pipeline uses GraphRAG to retrieve relevant information regarding a question, then that information is translated into Prolog databases and queries.
-2. **GraphRAG**: This pipeline uses only GraphRAG to answer a question.
-
-### Criteria for routing to Prolog-GraphRAG:
-      a.) Question requires both fact-retrieval and multi-step logical deductive reasoning
-      b.) Question will benefit from the symbolic logical computation of Prolog
-      c.) Question is either binary (true/false), multiple-choice, or explanatory.
-
-### Criteria for routing to GraphRAG:
-      a.) Question is simple fact-retrieval or common-sense reasoning.
-      b.) Question is not binary/MCQ/explanatory.
-      c.) Question does not require deductive reasoning.
-      d.) Question asks for lists, definitions, personalities, certain values, constants, or variables.
-
-### Decision Process
-    - Check first if the question ticks all the criteria for Prolog-GraphRAG. If it satisfies all criteria, then the question should be routed to the Prolog-GraphRAG pipeline. The short code for the Prolog-GraphRAG pipeline is 'pg'.
-    - If it does not satisfy all Prolog-GraphRAG criteria, then the question should be routed to the GraphRAG-only pipeline. The short code for the GraphRAG pipeline is 'g'.
-
-### Return Format (JSON): Format your response according to this JSON template:
-{
-    "checklist": {
-        "a": ['pass' | 'fail'],
-        "b": ['pass' | 'fail'],
-        "c": ['pass' | 'fail'],
-    },
-    "route_to": ['pg' | 'g']
-}
-
+LLM_SYSTEM_PROMPT_FALLBACK = [
+    {'role': 'system', 'content': 
+    """
+Answer the question given to you.
+"The answer is [Letter]. [Exact choice text]."
+Where [Letter] is one of A, B, C, D matching the question's options, and [Exact choice text] is that choice verbatim.
 """
+    }
+]
+
+FALLBACK_SYSTEM_PROMPT = [{"role": "system", "content": """
+### Role
+You are an intelligent routing agent for an advanced Question-Answering pipeline. Your job is to analyze incoming questions and route them to one of two backend pipelines: "Prolog-GraphRAG" or "tuned".
+
+### Pipelines Overview
+1. **Tuned**: The fallback for extremely basic questions, universally known trivial facts, or simple vocabulary definitions that an LLM can confidently answer from its intrinsic weights without any reasoning or external retrieval.
+   - *Examples:* "What is the capital of France?", "What is the freezing point of water?", "Define the word 'photosynthesis'."
+2. **Prolog-GraphRAG**: The primary engine for complex QA. It retrieves graph data and translates it into Prolog for logical execution, or simply traverses the graph to find answers. It handles fact-retrieval, multi-hop logic, constraint satisfaction, and scientific reasoning.
+   - *Examples:* "If A is the parent company of B, and B acquired C, does A own C?", "What were the main causes of the 2008 financial crisis according to the text?", "Based on the prerequisites graph, can a student take Physics 301 if they only passed Math 101?"
+
+### Routing Criteria for Prolog-GraphRAG (Broad & Inclusive)
+Route the question to `prolog-graphrag` if it meets ANY of the following criteria (it only needs to pass one):
+- **Requires External Context:** The question asks about specific documents, recent events, niche academic facts, or specific entities that require looking up information.
+- **Scientific/Academic Reasoning:** The question involves physics, chemistry, biology, law, or mathematics beyond a grade-school level.
+- **Logical Paths or Rules:** The answer requires connecting 2 or more entities, applying rules, or understanding hierarchies.
+
+### 🚫 STRICT EXCLUSIONS (When to route to Tuned instead)
+Route to **tuned** ONLY if the question is so basic, isolated, and universally known that looking it up in a knowledge graph or applying symbolic logic would be a complete waste of compute. 
+
+### Return Format
+You must respond ONLY with a valid JSON object following this schema. 
+{
+    "reasoning": "Briefly explain your thought process. Evaluate if it needs external context, reasoning, or if it is purely trivial general knowledge.",
+    "checklist": {
+        "requires_external_context_or_retrieval": "pass" | "fail",
+        "involves_reasoning_or_rules": "pass" | "fail",
+        "is_beyond_simple_general_knowledge": "pass" | "fail"
+    },
+    "route_to": "prolog-graphrag" | "tuned"
 }
+"""}]
+
+FALLBACK_MESSAGES = FALLBACK_SYSTEM_PROMPT + [
+    
+    # Example 1: Complex Science (Passes all -> Prolog-GraphRAG)
+    {"role": "user", "content": "In a cell's signaling pathway, Protein Kinase A (PKA) activates Phosphorylase Kinase, which then activates Glycogen Phosphorylase, causing glycogen breakdown. Insulin signaling activates Phosphodiesterase, which inhibits PKA. If a cell is treated with a drug that completely blocks Phosphodiesterase, and insulin is then introduced, will glycogen breakdown occur?"},
+    {"role": "assistant", "content": """{
+    "reasoning": "This question requires tracing a multi-step biological pathway  with positive and negative regulatory rules. It requires academic reasoning and applying constraints to a system. It easily belongs in Prolog-GraphRAG.",
+    "checklist": {
+        "requires_external_context_or_retrieval": "pass",
+        "involves_reasoning_or_rules": "pass",
+        "is_beyond_simple_general_knowledge": "pass"
+    },
+    "route_to": "prolog-graphrag"
+}"""},
+
+    # Example 2: External Retrieval / Summarization (Passes Context -> Prolog-GraphRAG)
+    # Focus: Shows the LLM that mere retrieval now triggers Prolog-GraphRAG, even without complex logic.
+    {"role": "user", "content": "According to the provided quarterly earnings transcript, what were the three main reasons the CEO gave for the decline in European market sales?"},
+    {"role": "assistant", "content": """{
+    "reasoning": "This query explicitly requires retrieving facts from a specific, external document (the earnings transcript). While it doesn't require complex deductive logic, it relies heavily on external context and graph retrieval. Under the broad routing criteria, this must go to Prolog-GraphRAG.",
+    "checklist": {
+        "requires_external_context_or_retrieval": "pass",
+        "involves_reasoning_or_rules": "fail",
+        "is_beyond_simple_general_knowledge": "pass"
+    },
+    "route_to": "prolog-graphrag"
+}"""},
+
+    # Example 3: Formal Logic (Passes Logic -> Prolog-GraphRAG)
+    {"role": "user", "content": "In a formal logic system, premise 1 is 'All widgets are gadgets.' Premise 2 is 'All gadgets are gizmos.' Premise 3 is 'Item X is a widget.' Therefore, is Item X a gizmo? Provide a true/false answer and explain."},
+    {"role": "assistant", "content": """{
+    "reasoning": "This question requires evaluating a deductive syllogism based on transitive properties and subsets . Even if no external document is needed, it involves strict rules and multi-step reasoning, making Prolog-GraphRAG the correct choice.",
+    "checklist": {
+        "requires_external_context_or_retrieval": "fail",
+        "involves_reasoning_or_rules": "pass",
+        "is_beyond_simple_general_knowledge": "pass"
+    },
+    "route_to": "prolog-graphrag"
+}"""},
+
+    # Example 4: Trivial General Knowledge (Fails all -> Tuned)
+    # Focus: The only type of question that escapes the Prolog-GraphRAG net.
+    {"role": "user", "content": "Which part of a plant is primarily responsible for absorbing water and nutrients from the soil? (A) The stem (B) The leaves (C) The roots (D) The flower"},
+    {"role": "assistant", "content": """{
+    "reasoning": "This is a standard grade-school science question testing universally known, basic factual knowledge about plant anatomy . It does not require searching an external knowledge graph, nor does it require multi-step reasoning. It can be handled by the base tuned model.",
+    "checklist": {
+        "requires_external_context_or_retrieval": "fail",
+        "involves_reasoning_or_rules": "fail",
+        "is_beyond_simple_general_knowledge": "fail"
+    },
+    "route_to": "tuned"
+}"""}
+]

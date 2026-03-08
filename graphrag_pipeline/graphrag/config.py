@@ -4,6 +4,7 @@ from enum import Enum
 NEO4J_URI = "neo4j://127.0.0.1:7687"
 NEO4J_USERNAME = "neo4j"
 NEO4J_PASSWORD = "graphrag"
+DB_NAME = "graphrag-kg"
 
 class RETRIEVER_OPTIONS(Enum):
   HybridCypherRetriever = "HybridCypherRetriever"
@@ -11,9 +12,11 @@ class RETRIEVER_OPTIONS(Enum):
   VectorCypherRetriever = "VectorCypherRetriever"
   
 RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
+LLAMA_3_ENABLED = True
 
 ENABLE_WIKIDATA_FETCHING = True
-ENABLE_LLM_FILTERING = True
+ENABLE_LLM_FILTERING = False
+ENABLE_LOCAL_DOCUMENT_RETRIEVAL = False
 
 class SCHEMA_TYPE(Enum):
   STATIC = "Static Schema"
@@ -168,17 +171,12 @@ RETURN
 
 GRAPHRAG_TEMPLATE = '''
 ### ROLE
-You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
+You are to answer the question you are prompted with.
 
-### STRICT INSTRUCTIONS
-1. **Answer First**: Your response MUST begin with EXACTLY this phrase on the VERY FIRST LINE:
-   "Based on my synthesis of knowledge, the answer is [Letter]. [Exact choice text]."
-   Where [Letter] is one of A, B, C, D and [Exact choice text] is that choice verbatim.
-2. **Ignore Irrelevant Facts**: Only use facts that logically connect to solve the query.
-3. **No Hallucinations**: If context fails completely, infer from general knowledge but still use the required format.
-4. **No "None of the above"**: Always pick the best matching choice from the options given.
-5. After the first line, add a brief 1-2 sentence explanation.
-
+### STRICT INSTRUCTION:
+**Answer First**: Your response MUST begin with EXACTLY this phrase on the VERY FIRST LINE:
+"Based on my synthesis of knowledge, the answer is [Letter]. [Exact choice text]."
+Where [Letter] is one of A, B, C, D and [Exact choice text] is that choice verbatim.
 
 ### Question:
 {query_text}
@@ -189,7 +187,7 @@ You are an expert Educational AI Assistant answering a student's question based 
 ### Answer:
 '''
 
-DOC_PATH = Path(__file__).resolve().parents[2] / "documents"
+DOC_PATH = Path(__file__).resolve().parents[2] / "documents/science_mds"
 
 ENCODER_SYSTEM_PROMPT = '''
 ### ROLE

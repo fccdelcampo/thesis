@@ -13,11 +13,11 @@ from ragas.embeddings import LangchainEmbeddingsWrapper
 _project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".."))
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
-from llm_config import MODEL_NAME
+from llm_config import MODEL_NAME, RAGAS_MODEL_NAME
 EMBED_MODEL_NAME = "nomic-embed-text"
 
 # Add aliases for RAGAS
-RAGAS_LLM_MODEL = MODEL_NAME
+RAGAS_LLM_MODEL = RAGAS_MODEL_NAME
 RAGAS_EMBEDDINGS_MODEL = EMBED_MODEL_NAME
 
 def get_ragas_llm():

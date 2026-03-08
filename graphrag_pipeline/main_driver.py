@@ -1,8 +1,8 @@
-from graphrag.config import NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD
-from graphrag.graphrag_driver import *
-from graphrag.retriever import create_retriever
-from graphrag.encoder import extract_query_and_context, process_context
-from llm import generate
+from .graphrag.config import NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD
+from .graphrag.graphrag_driver import *
+from .graphrag.retriever import create_retriever
+from .graphrag.encoder import extract_query_and_context, process_context
+from .llm import generate
 import neo4j
 import json
 
@@ -16,11 +16,32 @@ encoder_llm, retriever_llm, embedder = initialize_models()
 kg_builder_pdf, kg_builder_text = setup_kg_pipeline(encoder_llm, embedder)
 
 retriever = create_retriever(neo4j_driver, embedder)
+_persistent_loop = None
+PROCESS_CONTEXT = False
 
-def run_pipeline(user_question):
-    return generate(retriever_llm, retriever, user_question)
+def _run_async(coro):
+    """Run an async coroutine using a persistent event loop (avoids httpx cleanup crash)."""
+    global _persistent_loop
+    if _persistent_loop is None or _persistent_loop.is_closed():
+        _persistent_loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(_persistent_loop)
+    return _persistent_loop.run_until_complete(coro)
 
-run_pipeline("What is the capital of France?")
+def run_pipeline(question: str) -> dict:
+    """_summary_
+
+    Args:
+        question (str): The question to be answered.
+
+    Returns:
+        dict: A dictionary of keys "answer" and "contexts", where "answer" is the final answer string and "contexts" is a list of retrieved context strings.
+    """
+    if PROCESS_CONTEXT:
+        _run_async(process_context(neo4j_driver, kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=[]))
+    return generate(retriever_llm, retriever, question)
+
+_run_async(process_context(neo4j_driver, kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=[]))
+# run_pipeline("What is the capital of France?")
     
 # def load_test_cases(name: str, start: int, end: int) -> dict:
 #     test_cases = []

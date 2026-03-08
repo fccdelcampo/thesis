@@ -10,10 +10,10 @@ _project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
-from llm_config import MODEL_NAME, USE_TOGETHER_API, get_openai_client, log_llm_event, retry_with_exponential_backoff
+from llm_config import PROLOG_GENERATOR_NAME, MODEL_NAME, USE_TOGETHER_API, get_openai_client, log_llm_event, retry_with_exponential_backoff
 
 # Prolog code generation and NL tasks both use the configured model
-PROLOG_MODEL = MODEL_NAME
+PROLOG_MODEL = PROLOG_GENERATOR_NAME
 NL_MODEL = MODEL_NAME
 LLM_TIMEOUT = 120  # seconds per LLM call (2 minutes)
 DEBUG_FILE = "debug.txt"
@@ -208,7 +208,7 @@ def generate_response(prompt: str, flag: str) -> dict:
 
     if error_holder[0]:
         print(f"Error during LLM interaction: {error_holder[0]}")
-        return None
+        return {}
 
     response = result_holder[0]
     if response is None:
@@ -220,7 +220,7 @@ def generate_response(prompt: str, flag: str) -> dict:
         return answer
     except Exception as e:
         print(f"Error during LLM interaction: {e}")
-        return None
+        return {}
     
 # import ollama
 # response = ollama.chat(

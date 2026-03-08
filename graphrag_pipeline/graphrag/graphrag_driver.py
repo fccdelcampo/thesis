@@ -6,6 +6,7 @@ from neo4j_graphrag.experimental.pipeline.kg_builder import SimpleKGPipeline
 import os
 import glob
 from .config import PROMPT_TEMPLATE, NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD, SCHEMA_CONFIG, STATIC_SCHEMA # added dot for relative import, assuming config.py is in the same directory as graphrag_driver.py
+from .encoder import process_context
 # However, this will fail when you run this file directly. For debugging purposes, you can run 'python -m graphrag-pipeline.graphrag.graphrag_driver' in the terminal.
 import asyncio
 
@@ -191,7 +192,7 @@ class DebugOllamaLLM(OllamaLLM):
                     resp = _client.chat.completions.create(
                         model=MODEL,
                         messages=messages,
-                        temperature=0.0,
+                        temperature=0.3,
                         timeout=timeout_sec
                     )
                     result_holder[0] = resp
@@ -314,7 +315,7 @@ def ensure_driver_connected():
                 neo4j_driver.verify_connectivity()
                 return False
 
-            print("DEBUG: Initializing new Neo4j driver...", flush=True)
+            # print("DEBUG GRAPHRAG:Initializing new Neo4j driver...", flush=True)
             neo4j_driver = neo4j.GraphDatabase.driver(
                 NEO4J_URI, 
                 auth=(NEO4J_USERNAME, NEO4J_PASSWORD),
@@ -323,7 +324,7 @@ def ensure_driver_connected():
                 encrypted=False
             )
             neo4j_driver.verify_connectivity()
-            print("DEBUG: Neo4j driver initialized and connected.", flush=True)
+            # print("DEBUG GRAPHRAG:Neo4j driver initialized and connected.", flush=True)
             return True
         except Exception as e:
             print(f"CRITICAL ERROR: Could not connect to Neo4j (attempt {attempt+1}/{MAX_RETRIES}): {e}", flush=True)
@@ -372,15 +373,16 @@ def initialize_models():
     if USE_TOGETHER_API:
         from llm_config import EMBED_MODEL
         embedder = TogetherAIEmbeddings()
-        print(f"Together AI embedder loaded ({EMBED_MODEL}).")
+        # print(f"Together AI embedder loaded ({EMBED_MODEL}).")
     else:
         from llm_config import EMBED_MODEL
         embedder = OllamaEmbeddings(model=EMBED_MODEL)
-        print("Ollama embedder loaded.")
+        # print("Ollama embedder loaded.")
 
     return encoder_llm, retriever_llm, embedder
 
-def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
+def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline:
+    ensure_driver_connected()
     
     chunk_splitter = FixedSizeSplitter(chunk_size=450, chunk_overlap=50) # changed from 2000 and 200 to smaller sizes for better context handling
     
@@ -394,7 +396,7 @@ def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
         prompt_template=PROMPT_TEMPLATE,
         from_pdf=True,
         text_splitter=chunk_splitter,
-        on_error="IGNORE"
+        on_error="IGNORE",
     )
     
     kg_builder_text = SimpleKGPipeline(
@@ -405,7 +407,8 @@ def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
         prompt_template=PROMPT_TEMPLATE,
         from_pdf=False,
         text_splitter=chunk_splitter,
-        on_error="IGNORE"
+        on_error="IGNORE",
+        
     )
     
     return kg_builder_pdf, kg_builder_text
@@ -468,9 +471,19 @@ def clear_local_data():
     try:
         with neo4j_driver.session(database="neo4j") as session:
             session.run("MATCH (n) WHERE NOT n:KBPediaConcept DETACH DELETE n")
-        print("DEBUG: Stale local documents cleared (KBPedia preserved).", flush=True)
+        # print("DEBUG GRAPHRAG:Stale local documents cleared (KBPedia preserved).", flush=True)
     except Exception as e:
-        print(f"DEBUG: clear_local_data failed (non-fatal): {e}", flush=True)
+        # print(f"DEBUG GRAPHRAG:clear_local_data failed (non-fatal): {e}", flush=True)
+        pass
+
+
+def _run_async(coro):
+    """Run an async coroutine using a persistent event loop (avoids httpx cleanup crash)."""
+    global _persistent_loop
+    if _persistent_loop is None or _persistent_loop.is_closed():
+        _persistent_loop = asyncio.new_event_loop()
+        asyncio.set_event_loop(_persistent_loop)
+    return _persistent_loop.run_until_complete(coro)
 
 
 def run_pipeline(question: str) -> dict:
@@ -483,7 +496,7 @@ def run_pipeline(question: str) -> dict:
         ensure_driver_connected()
 
         # 0. Clear any stale local documents from a previous (possibly interrupted) run
-        clear_local_data()
+        # clear_local_data()
 
         # 1. Initialize models
         encoder_llm, retriever_llm, embedder = initialize_models()

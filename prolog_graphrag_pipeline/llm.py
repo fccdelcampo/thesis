@@ -1,6 +1,8 @@
 import sys
 import os
 import json
+from typing import Literal
+from pydantic import BaseModel
 
 # Ensure project root is on the path so llm_config can be imported
 _project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
@@ -8,46 +10,80 @@ if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
 
 from llm_config import MODEL_NAME, get_openai_client
-from .llm import decide_fallback
-from .config import FALLBACK_SYSTEM_PROMPT
+from .config import FALLBACK_MESSAGES
 
 try:
-    from .config import LLM_SYSTEM_PROMPT, LLM_MESSAGES
+    from .config import LLM_SYSTEM_PROMPT, LLM_MESSAGES, LLM_SYSTEM_PROMPT_FALLBACK
     from .prompt_reconstructor import reconstruct_prompt
 except ImportError:
     project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
     if project_root not in sys.path:
         sys.path.insert(0, project_root)
-    from prolog_graphrag_pipeline.config import LLM_SYSTEM_PROMPT, LLM_MESSAGES
+    from prolog_graphrag_pipeline.config import LLM_SYSTEM_PROMPT, LLM_MESSAGES, LLM_SYSTEM_PROMPT_FALLBACK
     from prolog_graphrag_pipeline.prompt_reconstructor import reconstruct_prompt
 
 from typing import Optional, Union, List
 
 client = get_openai_client()
 
+class Reasoning(BaseModel):
+    reasoning: str
+    
+class Checklist(BaseModel):
+    requires_external_context_or_retrieval: Literal["pass", "fail"]
+    involves_reasoning_or_rules: Literal["pass", "fail"]
+    is_beyond_simple_general_knowledge: Literal["pass", "fail"]
+
+class RoutingResponse(BaseModel):
+    reasoning: Reasoning
+    checklist: Checklist
+    route_to: Literal["prolog-graphrag", "graphrag", "tuned"]
+    
 def decide_fallback(question: str):
-   
     response = client.chat.completions.create(
             model=MODEL_NAME,
-            messages=FALLBACK_SYSTEM_PROMPT + [{"role": "user", "content": question}],
-            temperature=0.0,
+            messages=FALLBACK_MESSAGES + [{"role": "user", "content": question}],
+            temperature=0.7,
+            response_format={
+                "type": "json_schema",
+                "json_schema": {
+                    "name": "routing_schema",
+                    "strict": True,
+                    "schema": RoutingResponse.model_json_schema()
+                }
+            }
         )
-    content = json.load(response.choices[0].message.content)
-    return content["route_to"] == "g" # True means fallback to GraphRAG
+    content_str = response.choices[0].message.content
+    print(f"\nFALLBACK RESPONSE: \n{content_str}")
+    try:
+        data = json.loads(content_str)
+    except json.JSONDecodeError:
+        # Handle cases where the model might still fail or return an empty string
+        print("Failed to decode JSON:", content_str)
+        return False
+    return data["route_to"] # True means fallback to GraphRAG
 
 
-def generate(user_question: str, retrieved_context: Optional[str], explainer_output: Optional[str], flag: str, sample_mode: bool = False, include_conclusion: bool = True, context_from_prompt: str = "", verified_choice: Optional[str] = None, graphrag_answer: str = "") -> Union[dict, List[dict]]:
-    final_prompt = reconstruct_prompt(user_question=user_question, retrieved_context=retrieved_context, explainer_output=explainer_output, flag=flag, context_from_prompt=context_from_prompt, verified_choice=verified_choice, graphrag_answer=graphrag_answer)
-
+def generate(question: str, retrieved_context: Optional[str], explainer_output: Optional[str] | None, flag: str, sample_mode: bool = False, fallback: str = "prolog-graphrag") -> Union[dict, List[dict]]:
+    if fallback != "prolog-graphrag":
+        final_prompt = question
+        messages = LLM_SYSTEM_PROMPT_FALLBACK + [{"role": "user", "content": final_prompt}]
+    else:
+        final_prompt = reconstruct_prompt(question=question, retrieved_context=retrieved_context, explainer_output=explainer_output, flag=flag)
+        messages = LLM_MESSAGES + [{"role": "user", "content": final_prompt}]
+        
+    print(f"FINAL PROMPT:\n{final_prompt}")
+    
     def _do_call_llm():
         response = client.chat.completions.create(
             model=MODEL_NAME,
-            messages=LLM_MESSAGES + [{"role": "user", "content": final_prompt}],
-            temperature=0.0,
+            messages=messages,
+            temperature=0.3,
+            logprobs=True
         )
         answer = dict()
         answer['text_answer'] = response.choices[0].message.content
-        answer['logprobs'] = None
+        answer['logprobs'] = response.choices[0].logprobs.content
         return answer
 
     def _call_llm():
@@ -65,7 +101,6 @@ def generate(user_question: str, retrieved_context: Optional[str], explainer_out
                 pass
             raise
 
-
     if sample_mode:
         sequences = []
         for i in range(5):
@@ -73,11 +108,11 @@ def generate(user_question: str, retrieved_context: Optional[str], explainer_out
                 sequences.append(_call_llm())
             except Exception as e:
                 print(f"Error during LLM interaction ({MODEL_NAME}): {e}")
-                return None
+                return {}
         return sequences
     else:
         try:
             return _call_llm()
         except Exception as e:
             print(f"Error during LLM interaction ({MODEL_NAME}): {e}")
-            return None
+            return {}

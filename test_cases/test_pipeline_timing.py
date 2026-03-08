@@ -110,7 +110,7 @@ def run_timing_test(iteration, total_times):
     
     # 3. Prolog Generation
     t4 = time.perf_counter()
-    database, prolog_query = generate_prolog_code(user_question=question, retrieved_context=retrieved_context_str, most_recent_error=None)
+    database, prolog_query = generate_prolog_code(question=question, retrieved_context=retrieved_context_str, most_recent_error=None)
     t5 = time.perf_counter()
     times['3. Prolog DB Generation (LLM)'] = t5 - t4
     print(f"[Done] 3. Prolog DB Generation (LLM): {times['3. Prolog DB Generation (LLM)']:.2f}s")
@@ -130,7 +130,7 @@ def run_timing_test(iteration, total_times):
     # 5. Explainer LLM
     t8 = time.perf_counter()
     explainer_output = generate_explanation(
-        user_question=question,
+        question=question,
         retrieved_context=retrieved_context_str,
         database=database,
         query=prolog_query,
@@ -144,7 +144,7 @@ def run_timing_test(iteration, total_times):
     # 6. Final Synthesis LLM
     t10 = time.perf_counter()
     final_answer = llm.generate(
-        user_question=question,
+        question=question,
         retrieved_context=retrieved_context_str,
         explainer_output=explainer_output,
         flag="synthesis"

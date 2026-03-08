@@ -1,4 +1,4 @@
-from .config import RETRIEVAL_QUERY, RETRIEVER
+from .config import RETRIEVAL_QUERY, RETRIEVER, ENABLE_LOCAL_DOCUMENT_RETRIEVAL
 from neo4j_graphrag.retrievers import HybridRetriever
 from neo4j_graphrag.retrievers import HybridCypherRetriever
 from neo4j_graphrag.retrievers import VectorCypherRetriever
@@ -26,7 +26,7 @@ def create_indexes(driver):
     from llm_config import EMBED_DIM
     embedding_dimension = EMBED_DIM
 
-    print(f"Creating indexes with dimension: {embedding_dimension}...")
+    # print(f"Creating indexes with dimension: {embedding_dimension}...")
 
     driver.execute_query(f"""
         CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS
@@ -41,7 +41,7 @@ def create_indexes(driver):
         CREATE FULLTEXT INDEX documentsFulltextIndex IF NOT EXISTS 
         FOR (n:Chunk) ON EACH [n.text]
     """, database_="neo4j")
-    print("Index creation commands sent.")
+    # print("GRAPHRAG: Index creation commands sent.")
 
 def wait_for_indexes(driver, timeout=30):
     target_indexes = ['documentsVectorIndex', 'documentsFulltextIndex']
@@ -59,7 +59,7 @@ def wait_for_indexes(driver, timeout=30):
         
         states = [record["state"] for record in records]
         if len(states) == 2 and all(s == "ONLINE" for s in states):
-            print("Database is ready for retrieval.")
+            # print("Database is ready for retrieval.")
             break
             
         elapsed = int(time.time() - start_time)
@@ -67,8 +67,14 @@ def wait_for_indexes(driver, timeout=30):
         time.sleep(2)
 
 class CleanTextRetriever(HybridRetriever):
+    
     # We override 'search' (Public API) instead of 'get_search_results' (Internal API)
     def search(self, query_text, top_k=8, **kwargs):
+        # ---> ADD THIS BLOCK <---
+        # if "filters" not in kwargs:
+        #     kwargs["filters"] = {}
+        # kwargs["filters"]["subgraph"] = "graphrag"
+        # ------------------------
         result = super().search(query_text=query_text, top_k=top_k, **kwargs)
         
         # Now it is safe to iterate over .items
@@ -102,76 +108,84 @@ class EnhancedRetriever(VectorCypherRetriever):
     Also filters out low-quality/noise chunks.
     """
     def __init__(self, driver, index_name, retrieval_query, embedder, llm=None):
-        super().__init__(driver=driver, index_name=index_name, retrieval_query=retrieval_query, embedder=embedder)
+        super().__init__(driver=driver, index_name=index_name, retrieval_query=retrieval_query, embedder=embedder, )
         self.driver = driver
         self.llm = llm
 
-    def search(self, query_text, top_k=8, **kwargs):
+    def search(self, query_text, top_k=8, mode: str = "disable_kbpedia", **kwargs):
         # `original_query` carries the full MCQ prompt (with answer options) for LLM filtering.
         original_query = kwargs.pop("original_query", query_text)
+        
+        # ---> ADD THIS BLOCK to filter the initial vector search <---
+        # if "filters" not in kwargs:
+        #     kwargs["filters"] = {}
+        # kwargs["filters"]["subgraph"] = "graphrag"
+        # ------------------------------------------------------------
 
-        # 1. Local Vector Search (Local Documents)
         local_items = []
         extracted_entities = set()
-        
-        try:
-            print(f"DEBUG: --- Starting Local Vector Similarity Search for: '{query_text}' ---", flush=True)
-            local_result = super().search(query_text=query_text, top_k=8, **kwargs)
+        # 1. Local Vector Search (Local Documents)
+        if ENABLE_LOCAL_DOCUMENT_RETRIEVAL:
             
-            if local_result and local_result.items:
-                for idx, item in enumerate(local_result.items):
-                    clean_text = ""
-                    # Fix Content: Unwrap if it is a Neo4j Record string representation
-                    if item.metadata and 'local_context' in item.metadata:
-                        local_ctx = item.metadata['local_context']
-                        if local_ctx and isinstance(local_ctx, list) and len(local_ctx) > 0:
-                            clean_text = local_ctx[0].get('text')
-                            if clean_text:
-                                item.content = clean_text
-                                
-                            # Extract entities for KBPedia
-                            for ctx in local_ctx:
-                                if ctx.get('entity'): extracted_entities.add(ctx['entity'])
-                                if ctx.get('target'): extracted_entities.add(ctx['target'])
-                                
-                    elif item.content and "<Record" in str(item.content):
-                        try:
-                           import re
-                           match = re.search(r"text='(.*?)'", item.content)
-                           if match:
-                               clean_text = match.group(1)
-                               item.content = clean_text
-                        except:
-                            pass
-                            
-                    # Clean newlines from content
-                    if item.content:
-                        item.content = item.content.replace('\n', ' ').replace('  ', ' ')
-                        
-                    local_items.append(item)
-                    print(f"DEBUG: Vector Match #{idx+1} (Score: {item.metadata.get('score', 0):.3f}): {item.content[:100]}...", flush=True)
+            try:
+                print(f"DEBUG GRAPHRAG:--- Starting Local Vector Similarity Search ---", flush=True)
+                local_result = super().search(query_text=query_text, top_k=8, **kwargs)
                 
-                print(f"DEBUG: Local Vector Search finished. Returned {len(local_items)} chunks.", flush=True)
-                print(f"DEBUG: Entities seeded from Vector Search: {list(extracted_entities)}", flush=True)
+                if local_result and local_result.items:
+                    for idx, item in enumerate(local_result.items):
+                        clean_text = ""
+                        # Fix Content: Unwrap if it is a Neo4j Record string representation
+                        if item.metadata and 'local_context' in item.metadata:
+                            local_ctx = item.metadata['local_context']
+                            if local_ctx and isinstance(local_ctx, list) and len(local_ctx) > 0:
+                                clean_text = local_ctx[0].get('text')
+                                if clean_text:
+                                    item.content = clean_text
+                                    
+                                # Extract entities for KBPedia
+                                for ctx in local_ctx:
+                                    if ctx.get('entity'): extracted_entities.add(ctx['entity'])
+                                    if ctx.get('target'): extracted_entities.add(ctx['target'])
+                                    
+                        elif item.content and "<Record" in str(item.content):
+                            try:
+                                import re
+                                match = re.search(r"text='(.*?)'", item.content)
+                                if match:
+                                    clean_text = match.group(1)
+                                    item.content = clean_text
+                            except:
+                                pass
+                                
+                        # Clean newlines from content
+                        if item.content:
+                            item.content = item.content.replace('\n', ' ').replace('  ', ' ')
+                            
+                        local_items.append(item)
+                        print(f"DEBUG GRAPHRAG:Vector Match #{idx+1} (Score: {item.metadata.get('score', 0):.3f}): {item.content[:100]}...", flush=True)
+                    
+                    print(f"DEBUG GRAPHRAG:Local Vector Search finished. Returned {len(local_items)} chunks.", flush=True)
+                    print(f"DEBUG GRAPHRAG:Entities seeded from Vector Search: {list(extracted_entities)}", flush=True)
 
-        except Exception as e:
-            print(f"DEBUG: Main retriever failed: {e}")
+            except Exception as e:
+                print(f"DEBUG GRAPHRAG:Main retriever failed: {e}")
 
         # 2. KBPedia Search (Global Knowledge via Neo4j)
         kb_items = []
-        if self.llm:
-            if not hasattr(self, 'kbpedia_retriever'):
-                from graphrag_pipeline.graphrag.kbpedia_retriever import KBPediaRetriever
-                self.kbpedia_retriever = KBPediaRetriever(driver=self.driver, llm=self.llm, top_k=top_k)
+        if mode == "enable_kbpedia":
+            if self.llm:
+                if not hasattr(self, 'kbpedia_retriever'):
+                    from graphrag_pipeline.graphrag.kbpedia_retriever import KBPediaRetriever
+                    self.kbpedia_retriever = KBPediaRetriever(driver=self.driver, llm=self.llm, top_k=top_k)
 
-            kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query, seeded_entities=list(extracted_entities))
-            if kb_result and kb_result.items:
-                for item in kb_result.items:
-                    kb_items.append(RetrieverResultItem(
-                        content=item.content,
-                        metadata=item.metadata
-                    ))
-                print(f"DEBUG: KBPedia returned {len(kb_items)} items.")
+                kb_result = self.kbpedia_retriever.search(query_text, top_k=top_k, original_query=original_query, seeded_entities=list(extracted_entities))
+                if kb_result and kb_result.items:
+                    for item in kb_result.items:
+                        kb_items.append(RetrieverResultItem(
+                            content=item.content,
+                            metadata=item.metadata
+                        ))
+                    print(f"DEBUG GRAPHRAG:KBPedia returned {len(kb_items)} items.")
             
         # 3. Merge and Rerank
         all_items = kb_items + local_items
@@ -192,7 +206,7 @@ class EnhancedRetriever(VectorCypherRetriever):
                 seen_content.add(sig)
                 unique_items.append(item)
         
-        print(f"DEBUG: Merged Result Count: {len(unique_items)}")
+        # print(f"DEBUG GRAPHRAG:Merged Result Count: {len(unique_items)}")
         
         return RetrieverResult(items=unique_items[:8], metadata={})
 
@@ -253,7 +267,8 @@ def get_retriever(driver, embedder):
             vector_index_name="documentsVectorIndex",
             fulltext_index_name="documentsFulltextIndex",
             embedder=embedder,
-            return_properties=["text", "id"] 
+            return_properties=["text", "id"],
+             
         )
     elif RETRIEVER.value == "HybridCypherRetriever":
         return HybridCypherRetriever(
@@ -261,14 +276,14 @@ def get_retriever(driver, embedder):
             vector_index_name="documentsVectorIndex",
             fulltext_index_name="documentsFulltextIndex",
             retrieval_query=RETRIEVAL_QUERY,
-            embedder=embedder
+            embedder=embedder,
+            
         )
     elif RETRIEVER.value == "VectorCypherRetriever":
 
         return EnhancedRetriever(
             driver=driver,
             index_name="documentsVectorIndex",
-
             retrieval_query=RETRIEVAL_QUERY,
             embedder=embedder
         )

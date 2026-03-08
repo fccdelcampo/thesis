@@ -6,7 +6,7 @@ def retrieve_context(test_case: dict, debug_id: int) -> None:
     # In a real implementation, this would query a vector database or search engine
     formatted_input = test_case["formatted_input"]
     print(f"=============================\nRetrieving context for: {formatted_input}")
-    retrieved_context = main_driver.run_graphrag_pipeline(user_prompt=formatted_input)
+    retrieved_context = main_driver.run_graphrag_pipeline(question=formatted_input)
     print(f"Done retrieving context.")
     log_retrieved_context(test_case, retrieved_context, debug_id)
     print(f"Debug test case #{debug_id} done.\n=============================\n")

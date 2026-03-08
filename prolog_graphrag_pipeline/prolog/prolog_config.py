@@ -9,26 +9,37 @@ GENERATOR_SYSTEM_PROMPT = r"""
 ### Role
 You are an expert Prolog programmer specializing in Knowledge Representation for the s(CASP) solver.
 
+### Input Structure
+You will receive five distinct pieces of information to build your logic from:
+1. **User Question**: The primary query or multiple-choice question to solve.
+2. **Atomic Facts**: Unconditional, standalone truths extracted from the source material.
+3. **Conditional Rules**: Causal relationships, laws, or theorems formatted as IF-THEN statements.
+4. **Exceptions**: Boundary conditions, caveats, or limitations to the rules.
+5. **Logical Gaps**: Missing premises or external requirements identified during extraction.
+
 ### Task
-Translate the provided Context into a formal Prolog database. Generate rules (Head :- Body.) rather than just facts.
+Translate the provided inputs into a formal Prolog database. Generate rules (Head :- Body.) rather than just facts.
+
+**CRITICAL FALLBACK INSTRUCTION**: If the four context fields (Facts, Rules, Exceptions, Gaps) are empty, return "None", or lack sufficient information to prove the query, you MUST rely entirely on your own internal expert knowledge to generate the correct clauses, rules, and query. Do not overthink or fail if the explicit context is missing; simply formulate the standard domain logic and commonsense rules required to definitively answer the User Question.
 
 ### Execution Flow
-1. Use a SEPARATE <reasoning_step> tag for each logical leap. Explain in English, then provide Prolog code.
-2. Formulate implicit domain rules if necessary.
-3. Output the full <database>.
-4. Output the <query>.
+1. Start with a <planning> block. Explicitly map out the logical architecture: identify the target query, the grounded facts you have (or need to supply from internal knowledge), and the specific IF-THEN rules required to connect those facts to the query. 
+2. Use a SEPARATE <reasoning_step> tag for each logical leap. Explain in English, then provide Prolog code snippets.
+3. Formulate implicit domain rules if necessary.
+4. Output the full <database>.
+5. Output the <query>.
 
 ### Syntactic Requirements (s(CASP) Specific)
 - Disjunction: NEVER use `;`. Use multiple separate rules with the same head instead.
 - Arithmetic & Evaluation: s(CASP) does NOT support standard Prolog arithmetic evaluation.
-   - NEVER use `is`, , `>=`, `=:=`, `=\\=`, `<`, `>`, `<=`.
+   - NEVER use `is`, `=`, `>=`, `=:=`, `=\=`, `<`, `>`, `<=`.
    - USE CLP(Q) constraints instead: `#=`, `#<>`, `#<`, `#>`, `#=<`, `#>=`. Example: `X #= Y + 1`.
-- Negation: Use `not`. NEVER use `\\+`.
+- Negation: Use `not`. NEVER use `\+`.
 - Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
 - Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
 - Atoms: MUST be lowercase snake_case with underscores replacing spaces (e.g., `cell_wall`, `cell_membrane`). NEVER use spaces inside atoms — `choice(a, cell membrane)` is a SYNTAX ERROR. Write `choice(a, cell_membrane)` instead.
-- Grounding: EVERY fact argument must be a lowercase atom. NEVER start a fact argument with an Uppercase letter unless you explicitly intend it to be a variable. CamelCase names (e.g., `PlantCell`) are treated as Variables and will trigger "Singleton variable" warnings.
-- Variables: MUST start with an Uppercase letter (e.g., `X`, `Animal`). Use `_` for singletons.
+- Grounding: EVERY fact argument must be a lowercase atom. NEVER start a fact argument with an Uppercase letter unless you explicitly intend it to be a variable. CamelCase names (e.g., `PlantCell`) are treated as Variables and will break the logic.
+- Variables: MUST start with an Uppercase letter (e.g., `X`, `Animal`). 
 - Meaningful Atoms: Use snake_case atoms that accurately reflect the phrasing in the text. Condense long phrases into 3-5 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
 - Closed-World: EVERY predicate in a body MUST be defined as a fact or rule head somewhere in the database.
 - Contiguous: Group ALL clauses for the same predicate together. Do NOT alternate between predicates (e.g., `p(a). q(b). p(c).` is forbidden; write `p(a). p(c). q(b).` instead).
@@ -53,13 +64,19 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
    - The <query> queries the primary target entity state.
 
 ### Warning Avoidance (CRITICAL)
-- **NO SINGLETONS**: If you start a concept name with an Uppercase letter in a fact (e.g., `can_be_controlled(RecordingObservations).`), Prolog treats it as a variable. This triggers "Singleton variable" warnings and usually makes the logic fail. **ALWAYS use lowercase snake_case for facts.**
+- **AVOID SINGLETON VARIABLES WARNINGS**: In Prolog, a singleton variables warning triggers when a variable appears exactly once in a clause. This usually indicates a logical error. To prevent this:
+  1. **Never capitalize atoms:** `can_be_controlled(RecordingObservations).` treats `RecordingObservations` as a variable. If it's only used once, it triggers a singleton warning. Always use lowercase `recording_observations`.
+  2. **Prefix unused variables with an underscore:** If a rule requires a variable that is only used once in that specific clause, you MUST prefix it with an underscore (e.g., `_Target`) or use the anonymous variable `_`. Example CORRECT: `is_colored(Item) :- has_property(Item, _Color).` Example WRONG: `is_colored(Item) :- has_property(Item, Color).`
 - **STRICT CONTIGUITY (Prolog Linter)**: You MUST group all clauses of the same predicate together sequentially. Do NOT alternate between different predicates. 
   - WRONG: `p(a). q(b). p(c).`
   - CORRECT: `p(a). p(c). q(b).`
 - **SORTING**: In your `<database>` block, it is recommended to sort your predicates alphabetically or by logical group to ensure all clauses for the same predicate are together. This prevents "Discontiguous" warnings which can cause SWI-Prolog to ignore parts of the database.
 
 ### Output Format (Strict)
+<planning>
+[Map out the query format, the required facts, and the rules needed to bridge them. State explicitly if you are relying on internal knowledge due to empty context.]
+</planning>
+
 <reasoning_step>
 [Reasoning in English]
 [Prolog code snippets]
@@ -77,15 +94,58 @@ Translate the provided Context into a formal Prolog database. Generate rules (He
 1. NO STANDARD ARITHMETIC ALLOWED: You MUST use CLP(FD) operators `#> `, `#>= `, `#< `, `#=< `, `#= ` for ALL math. `>` and `<` will instantly crash the parser!
 2. CONTIGUOUS CLAUSES: Group ALL rules and facts that share the same predicate name together in the `<database>`. Do NOT scatter them.
 ---
+
+### FINAL VALIDATION CHECKLIST (RUN BEFORE OUTPUT)
+
+Verify the following:
+
+✓ <planning> block is included and logically sound
+✓ No `;`
+✓ No `is`, `<`, `>`, `>=`, `=<`
+✓ Only CLP operators (`#=`, `#>`, etc.)
+✓ No `\+`
+✓ No `option`
+✓ All atoms are lowercase snake_case
+✓ Singletons (variables appearing only once) are prefixed with `_`
+✓ No undefined predicates
+✓ Clauses are contiguous
+✓ Exactly four `choice/2` facts for MCQ
+✓ Query matches the required format
+
+If any rule fails, correct the program before producing the final output.
 """
 
 GENERATOR_FEW_SHOT_EXAMPLES = [
-    # Example 1: Freeform / Recursive Logic
     {"role": "user", "content": """
-Context: In a food web, grass is a producer. Grasshoppers eat grass. Frogs eat grasshoppers. Snakes eat frogs. 
-Question: If the grass is contaminated, are the snakes affected?
+Now, process the following: 
+
+User Question: If the grass is contaminated, are the snakes affected?
+
+Context:
+1. [ATOMIC FACTS]:
+    - In a food web, grass is a producer.
+    - Grasshoppers eat grass.
+    - Frogs eat grasshoppers.
+    - Snakes eat frogs.
+
+2. [CONDITIONAL RULES]:
+    - None
+
+3. [EXCEPTIONS]:
+    - None
+
+4. [LOGICAL GAPS]:
+    - None
 """},
     {"role": "assistant", "content": r"""
+<planning>
+1. Target Query: The user wants to know if the snake is affected by the contamination, so the query will be `affected(snake).`.
+2. Grounded Facts: I need to extract the food chain relationships (`eats(grasshopper, grass)`, `eats(frog, grasshopper)`, `eats(snake, frog)`) and the initial state (`is_contaminated(grass)`).
+3. IF-THEN Rules: I must define a recursive rule for `affected/1` to model the propagation through the food web. 
+   - Base case: IF a species is directly contaminated, THEN it is affected.
+   - Recursive case: IF a predator eats a prey AND the prey is affected, THEN the predator is affected.
+</planning>
+
 <reasoning_step>
 Encode relationships and premise.
 eats(grasshopper, grass).
@@ -105,6 +165,7 @@ eats(grasshopper, grass).
 eats(frog, grasshopper).
 eats(snake, frog).
 is_contaminated(grass).
+
 affected(Species) :- is_contaminated(Species).
 affected(Predator) :- eats(Predator, Prey), affected(Prey).
 </database>
@@ -119,19 +180,37 @@ affected(snake).
     {
         "role": "user", 
         "content": """
-Question: If two rocks are lacking magnetic properties and far apart, can a magnetic effect pull them together? 
+Now, process the following: 
+User Question: 
+If two rocks are lacking magnetic properties and far apart, can a magnetic effect pull them together? 
 
-Retrieved Context: 
-LOGICAL EVIDENCE:
-1. A magnetic effect can pull two objects together.
-2. Magnetic properties are necessary for a magnetic force to act between two rocks.
-3. Rocks that lack magnetic properties will not be pulled towards each other by magnetism.
-4. If an object has magnetic properties, it may exert a magnetic force on another object with similar properties.
+Context: 
+1. [ATOMIC FACTS]:
+    - A magnetic effect can pull two objects together.
+
+2. [CONDITIONAL RULES]:
+    - Magnetic properties are necessary for a magnetic force to act between two rocks.
+    - Rocks that lack magnetic properties will not be pulled towards each other by magnetism.
+    - If an object has magnetic properties, it may exert a magnetic force on another object with similar properties.
+
+3. [EXCEPTIONS]:
+    - None
+
+4. [LOGICAL GAPS]:
+    - None
         """
         },
     {
         "role": "assistant", 
         "content": r"""
+<planning>
+1. Target Query: This is a binary True/False question. I need to test the relationship between two specific instances. The query will be `pulled_together(rock_one, rock_two).`.
+2. Grounded Facts: I must instantiate the objects and their states exactly as described in the question: `lacks_magnetic_properties(rock_one)`, `lacks_magnetic_properties(rock_two)`, and `far_apart(rock_one, rock_two)`.
+3. IF-THEN Rules: I need to map the retrieved context to logical conditions.
+   - Negative constraint (classical negation): IF a rock lacks magnetic properties, THEN it cannot be pulled by magnetism. I will use the anonymous variable `_` for the other object to strictly prevent singleton variable warnings.
+   - Positive condition: IF object A and object B both have magnetic properties, THEN they can be pulled together.
+</planning>
+
 <reasoning_step>
 Encode specific instances for this binary question.
 lacks_magnetic_properties(rock_one).
@@ -176,16 +255,40 @@ pulled_together(rock_one, rock_two).
     {
         "role": "user", 
         "content": """
-Context: A trench forms when one plate moves under another at a subduction zone (plate convergence). A rift valley forms when tectonic plates diverge. An ocean basin forms when tectonic plates diverge, creating new crust. Mid-ocean ridges are areas where tectonic plates diverge.
+Now, process the following: 
 
-Question: Which feature does not form as a result of tectonic plates diverging?
+User Question:
+Which feature does not form as a result of tectonic plates diverging?
 A. trench
 B. rift valley
 C. ocean basin
 D. mid-ocean ridge
-        """
-        },
-    {"role": "assistant", "content": r"""
+
+Context: 
+1. [ATOMIC FACTS]:
+    - Mid-ocean ridges are areas where tectonic plates diverge.
+    - Diverging tectonic plates create new crust.
+
+2. [CONDITIONAL RULES]:
+    - A trench forms when one plate moves under another at a subduction zone (plate convergence).
+    - A rift valley forms when tectonic plates diverge.
+    - An ocean basin forms when tectonic plates diverge.
+
+3. [EXCEPTIONS]:
+    - None
+
+4. [LOGICAL GAPS]:
+    - None        
+    """},
+    {
+        "role": "assistant", 
+        "content": r"""
+<planning>
+1. Target Query: This is a Multiple-Choice Question. The query MUST strictly be `answer(OptionLetter).`.
+2. Grounded Facts: I need to encode exactly four options as `choice/2` facts using lowercase snake_case (e.g., `choice(a, trench)`). I also need to extract the geologic formation processes from the context into relational facts like `forms_from(Feature, Process)`.
+3. IF-THEN Rules: I must define an `answer/1` rule that links the correct `OptionLetter` to the right feature. Because the question asks for the feature that does NOT form from diverging plates, the rule must unify the choice and use negation (`not forms_from(Feature, plate_divergence)`).
+</planning>
+
 <reasoning_step>
 Encode options.
 choice(a, trench).
@@ -227,21 +330,39 @@ answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(Ge
 answer(OptionLetter).
 </query>
 ---
-"""},
+"""
+    },
 
     # Example 4: Multiple-Choice Logic (Different Domain)
     {
         "role": "user", 
         "content": """
-Context: Mammals are warm-blooded vertebrates that have hair. Dogs, cats, and humans are mammals. Frogs are amphibians, which are cold-blooded.
+Now, process the following:
 
-Question: Which of the following animals is NOT a mammal?
+User Question: 
+Which of the following animals is NOT a mammal?
 A. dog
 B. cat
 C. human
 D. frog
-        """
-        },
+
+Context: 
+1. [ATOMIC FACTS]:
+    - Dogs are mammals.
+    - Cats are mammals.
+    - Humans are mammals.
+    - Frogs are amphibians.
+
+2. [CONDITIONAL RULES]:
+    - Mammals are warm-blooded vertebrates that have hair.
+    - Amphibians are cold-blooded.
+
+3. [EXCEPTIONS]:
+    - None
+
+4. [LOGICAL GAPS]:
+    - None        
+"""},
     {"role": "assistant", "content": r"""
 <reasoning_step>
 Encode options.
@@ -284,20 +405,45 @@ answer(OptionLetter).
 ---
 """},
 
-    # Example 5: Scientific Reasoning MCQ (Domain-Specific)
     {
         "role": "user",
         "content": """
-Context: Metals are good conductors of heat because they contain free-moving electrons that transfer kinetic energy quickly. Wood is a poor conductor of heat because its molecules are tightly bound and do not transfer energy efficiently. Rubber is an insulator. Glass conducts heat poorly.
+Now, process the following:
 
-Question: A chef needs to pick a material for a pot handle that stays cool while cooking. Which material would be the best choice?
+User Question: A chef needs to pick a material for a pot handle that stays cool while cooking. Which material would be the best choice?
 A. copper
 B. aluminum
 C. wood
 D. steel
-        """
-    },
-    {"role": "assistant", "content": r"""
+
+Context:
+1. [ATOMIC FACTS]:
+    - Metals are good conductors of heat.
+    - Metals contain free-moving electrons.
+    - Wood is a poor conductor of heat.
+    - Wood's molecules are tightly bound.
+    - Rubber is an insulator.
+    - Glass conducts heat poorly.
+
+2. [CONDITIONAL RULES]:
+    - Free-moving electrons transfer kinetic energy quickly.
+    - Molecules that are tightly bound do not transfer energy efficiently.
+
+3. [EXCEPTIONS]:
+    - None
+
+4. [LOGICAL GAPS]:
+    - None     
+"""},
+    {
+        "role": "assistant", 
+        "content": r"""
+<planning>
+1. Target Query: This is a Multiple-Choice Question. The query MUST strictly be `answer(OptionLetter).`.
+2. Grounded Facts: I need to encode the exactly four choices (`copper`, `aluminum`, `wood`, `steel`) as `choice/2` facts. The context states wood is a poor conductor (insulator) and metals are good conductors. There is a Logical Gap: the context does not explicitly classify the options. Following my fallback instructions, I will rely on my internal knowledge to classify copper, aluminum, and steel as metals (conductors), and wood as an insulator.
+3. IF-THEN Rules: I need to define a rule for the goal. IF a material is an insulator (poor conductor), THEN it stays cool. The final bridging rule: IF a material stays cool and matches an option, THEN it is the correct answer.
+</planning>
+
 <reasoning_step>
 Encode the four choices.
 choice(a, copper).
@@ -307,7 +453,7 @@ choice(d, steel).
 </reasoning_step>
 
 <reasoning_step>
-Encode conductivity from context.
+Encode conductivity from context and internal knowledge.
 is_conductor(copper).
 is_conductor(aluminum).
 is_conductor(steel).
@@ -341,7 +487,245 @@ answer(OptionLetter) :- choice(OptionLetter, Material), stays_cool(Material).
 answer(OptionLetter).
 </query>
 ---
-"""},
+"""
+    },
+    
+    # Example 6: Atomic Facts Only (Grade 12 Chemistry)
+    {
+        "role": "user",
+        "content": """
+Now, process the following:
+
+User Question: Based on the dominant intermolecular forces present, which of the following substances will require the greatest amount of thermal energy to undergo a phase transition from liquid to gas at standard pressure?
+A. methane
+B. hydrogen sulfide
+C. water
+D. neon
+
+Context:
+1. [ATOMIC FACTS]:
+   - Water molecules exhibit hydrogen bonding.
+   - Methane molecules exhibit only London dispersion forces.
+   - Hydrogen sulfide molecules exhibit dipole-dipole interactions.
+   - Neon atoms exhibit only London dispersion forces.
+   - Hydrogen bonding is a stronger intermolecular force than both dipole-dipole interactions and London dispersion forces.
+   - A stronger intermolecular force requires a greater amount of thermal energy to overcome.
+   - The boiling point of a liquid is directly proportional to the amount of thermal energy required to overcome its intermolecular forces.
+
+2. [CONDITIONAL RULES]:
+   - None
+
+3. [EXCEPTIONS]:
+   - None
+
+4. [LOGICAL GAPS]:
+   - None
+        """
+    },
+    {
+        "role": "assistant",
+        "content": r"""
+<planning>
+1. Target Query: This is an MCQ. The query MUST be `answer(OptionLetter).`.
+2. Grounded Facts: I need to encode the four choices (`methane`, `hydrogen_sulfide`, `water`, `neon`). I will encode the atomic facts mapping substances to their intermolecular forces (e.g., `has_imf(water, hydrogen_bond)`), and the relative strength of those forces (`stronger_than(hydrogen_bond, dipole_dipole)`).
+3. IF-THEN Rules: The Conditional Rules field is empty, but the Atomic Facts implicitly outline a chain of logic. I must formulate the rules: IF a substance has the strongest IMF, THEN it requires the greatest thermal energy to overcome. IF it requires the greatest energy, THEN it is the correct answer.
+</planning>
+
+<reasoning_step>
+Encode the four choices.
+choice(a, methane).
+choice(b, hydrogen_sulfide).
+choice(c, water).
+choice(d, neon).
+</reasoning_step>
+
+<reasoning_step>
+Encode the atomic facts about intermolecular forces (IMFs) and their relative strengths.
+has_imf(hydrogen_sulfide, dipole_dipole).
+has_imf(methane, london_dispersion).
+has_imf(neon, london_dispersion).
+has_imf(water, hydrogen_bond).
+
+stronger_than(hydrogen_bond, dipole_dipole).
+stronger_than(hydrogen_bond, london_dispersion).
+</reasoning_step>
+
+<reasoning_step>
+Formulate rules to determine the highest boiling point based on the strongest IMF.
+requires_greatest_energy(Substance) :- 
+    has_imf(Substance, hydrogen_bond).
+
+answer(OptionLetter) :- 
+    choice(OptionLetter, Substance), 
+    requires_greatest_energy(Substance).
+</reasoning_step>
+
+<database>
+choice(a, methane).
+choice(b, hydrogen_sulfide).
+choice(c, water).
+choice(d, neon).
+
+has_imf(hydrogen_sulfide, dipole_dipole).
+has_imf(methane, london_dispersion).
+has_imf(neon, london_dispersion).
+has_imf(water, hydrogen_bond).
+
+stronger_than(hydrogen_bond, dipole_dipole).
+stronger_than(hydrogen_bond, london_dispersion).
+
+requires_greatest_energy(Substance) :- has_imf(Substance, hydrogen_bond).
+
+answer(OptionLetter) :- choice(OptionLetter, Substance), requires_greatest_energy(Substance).
+</database>
+
+<query>
+answer(OptionLetter).
+</query>
+---
+"""
+    },
+
+# Example 7: Atomic Facts & Logical Gaps Only (Grade 12 Physics)
+    {
+        "role": "user",
+        "content": """
+Now, process the following:
+
+Question: A proton is moving horizontally to the right through a uniform magnetic field that is directed perpendicular to the proton's velocity and straight into the page. Does the proton experience an upward magnetic force?
+
+Context:
+1. [ATOMIC FACTS]:
+   - The particle in motion is a proton.
+   - A proton is a positively charged particle.
+   - The velocity vector of the particle is directed to the right.
+   - The magnetic field vector is directed into the page.
+
+2. [CONDITIONAL RULES]:
+   - None
+
+3. [EXCEPTIONS]:
+   - None
+
+4. [LOGICAL GAPS]:
+   - The context does not provide the Right-Hand Rule (Lorentz force vector cross product) required to determine the spatial direction of the magnetic force exerted on a moving charge.
+        """
+    },
+    {
+        "role": "assistant",
+        "content": r"""
+<planning>
+1. Target Query: This is a binary (True/False) question testing a specific spatial relationship. The query will be `experiences_force_direction(proton, up).`.
+2. Grounded Facts: I will encode the proton's properties and the environmental vectors provided in the Atomic Facts: `charge(proton, positive)`, `velocity_direction(proton, right)`, and `magnetic_field_direction(into_page)`.
+3. IF-THEN Rules: The Conditional Rules are empty, but the Logical Gaps explicitly call out the missing Right-Hand Rule. I will use my internal knowledge of physics to supply this rule: IF the charge is positive, velocity is right, and the B-field is into the page, THEN the resulting cross-product force vector points up.
+</planning>
+
+<reasoning_step>
+Encode the atomic facts about the particle and the vectors.
+charge(proton, positive).
+magnetic_field_direction(into_page).
+velocity_direction(proton, right).
+</reasoning_step>
+
+<reasoning_step>
+Bridge the logical gap by applying the Right-Hand Rule for a positive charge moving perpendicular to a magnetic field.
+experiences_force_direction(Particle, up) :- 
+    charge(Particle, positive),
+    velocity_direction(Particle, right),
+    magnetic_field_direction(into_page).
+</reasoning_step>
+
+<database>
+charge(proton, positive).
+magnetic_field_direction(into_page).
+velocity_direction(proton, right).
+
+experiences_force_direction(Particle, up) :- 
+    charge(Particle, positive),
+    velocity_direction(Particle, right),
+    magnetic_field_direction(into_page).
+</database>
+
+<query>
+experiences_force_direction(proton, up).
+</query>
+---
+"""
+    },
+    
+    # Example 8: Zero Context (Internal Knowledge Fallback - Grade 12 Biology)
+    {
+        "role": "user",
+        "content": """
+Now, process the following:
+
+User Question: 
+During aerobic cellular respiration, which of the following pathways directly acts as the final electron acceptor and consumes oxygen?
+A. glycolysis
+B. krebs cycle
+C. electron transport chain
+D. lactic acid fermentation
+
+Context:
+1. [ATOMIC FACTS]:
+   - None
+
+2. [CONDITIONAL RULES]:
+   - None
+
+3. [EXCEPTIONS]:
+   - None
+
+4. [LOGICAL GAPS]:
+   - None
+        """
+    },
+    {
+        "role": "assistant",
+        "content": r"""
+<planning>
+1. Target Query: This is an MCQ. The query MUST strictly be `answer(OptionLetter).`.
+2. Grounded Facts: I need to encode the exactly four choices (`glycolysis`, `krebs_cycle`, `electron_transport_chain`, `lactic_acid_fermentation`) as `choice/2` facts. All four context fields are explicitly "None". Following my critical fallback instructions, I MUST rely entirely on my internal expert knowledge of cellular respiration to evaluate these options.
+3. IF-THEN Rules: I will formulate the biological fact from my internal knowledge: The electron transport chain is the specific stage that directly consumes oxygen as the final electron acceptor. The bridging rule will be: IF a biological process directly consumes oxygen, THEN it is the correct answer.
+</planning>
+
+<reasoning_step>
+Encode the four choices as lowercase snake_case atoms.
+choice(a, glycolysis).
+choice(b, krebs_cycle).
+choice(c, electron_transport_chain).
+choice(d, lactic_acid_fermentation).
+</reasoning_step>
+
+<reasoning_step>
+Rely on internal expert knowledge to state which process consumes oxygen.
+consumes_oxygen_directly(electron_transport_chain).
+</reasoning_step>
+
+<reasoning_step>
+Formulate the final bridging rule to unify the correct choice.
+answer(OptionLetter) :- 
+    choice(OptionLetter, Process), 
+    consumes_oxygen_directly(Process).
+</reasoning_step>
+
+<database>
+choice(a, glycolysis).
+choice(b, krebs_cycle).
+choice(c, electron_transport_chain).
+choice(d, lactic_acid_fermentation).
+
+consumes_oxygen_directly(electron_transport_chain).
+
+answer(OptionLetter) :- choice(OptionLetter, Process), consumes_oxygen_directly(Process).
+</database>
+
+<query>
+answer(OptionLetter).
+</query>
+---
+"""
+    }
 ]
 EXPLAINER_SYSTEM_PROMPT = rf"""
 ### Role

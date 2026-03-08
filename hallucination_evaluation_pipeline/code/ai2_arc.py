@@ -15,7 +15,7 @@ import sys
 import re
 import pandas as pd
 from tqdm import tqdm
-from typing import Union
+from typing import Union, Literal
 
 # Add project root to sys.path
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), "../.."))
@@ -34,7 +34,7 @@ except ImportError:
 
 # Paths
 TEST_CASES_DIR = os.path.join(project_root, "test_cases")
-RESULTS_DIR = os.path.join(project_root, "hallucination_evaluation_results")
+RESULTS_DIR = os.path.join(project_root, "hallucination_evaluation_results/data")
 LOGS_DIR = os.path.join(project_root, "logs")
 
 # Hallucination threshold
@@ -115,14 +115,14 @@ def score_answer(predicted: str, correct: str) -> float:
     return 1.0 if predicted.upper() == correct.upper() else 0.0
 
 
-def run_pipeline_safe(pipeline_fn, question: str, **kwargs) -> dict:
+def run_pipeline_safe(pipeline, pipeline_fn, question: str, **kwargs) -> dict:
     """Safely run a pipeline, returning empty dict on failure. Injects 'elapsed' key."""
     import time
     t0 = time.perf_counter()
     try:
         result = pipeline_fn(question, **kwargs)
     except Exception as e:
-        print(f"  Pipeline error: {e}")
+        print(f"  Pipeline error in {pipeline} pipeline: {e}")
         result = {"answer": "", "contexts": [], "text_answer": ""}
     result["elapsed"] = time.perf_counter() - t0
     return result
@@ -134,24 +134,26 @@ def run_test_case(test_case: dict, test_case_id: int):
     """
     question = test_case.get("formatted_input", "")
     correct_answer = test_case.get("correct_answer", "")
+    test_case_id = test_case.get("id", test_case_id)  # Use provided ID or fallback to index
     
     print(f"\n" + "="*80)
-    print(f"[AI2 ARC #{test_case_id}] {question[:120]}...")
+    print(f"[AI2 ARC #{test_case_id}] {question}...")
     print(f"Correct Answer: [{correct_answer}]")
     print("-" * 80)
 
-    # 1. GraphRAG Pipeline
-    gr_result = run_pipeline_safe(run_graphrag, question)
+    # 1. Prolog GraphRAG Pipeline
+    pgr_result = run_pipeline_safe(pipeline="prolog_graphrag", pipeline_fn=run_prolog_graphrag, question=question, flag="x")
+    pgr_letter = extract_answer_letter(pgr_result.get("answer", ""))
+    pgr_score = score_answer(pgr_letter, correct_answer)
+    pgr_used = pgr_result.get("fallback")
+    
+    # 2. GraphRAG Pipeline
+    gr_result = run_pipeline_safe(pipeline="graphrag", pipeline_fn=run_graphrag, question=question)
     gr_letter = extract_answer_letter(gr_result.get("answer", ""))
     gr_score = score_answer(gr_letter, correct_answer)
     
-    # 2. Prolog GraphRAG Pipeline
-    pgr_result = run_pipeline_safe(run_prolog_graphrag, question, flag="prolog")
-    pgr_letter = extract_answer_letter(pgr_result.get("answer", ""))
-    pgr_score = score_answer(pgr_letter, correct_answer)
-    
     # 3. Tuned Pipeline 
-    tuned_result = run_pipeline_safe(run_tuned_pipeline, question)
+    tuned_result = run_pipeline_safe(pipeline="tuned", pipeline_fn=run_tuned_pipeline, question=question)
     tuned_letter = extract_answer_letter(tuned_result.get("answer", ""))
     tuned_score = score_answer(tuned_letter, correct_answer)
     
@@ -169,10 +171,11 @@ def run_test_case(test_case: dict, test_case_id: int):
     print(format_res("GraphRAG",  gr_letter,    gr_score,    gr_time))
     print(format_res("Prolog",    pgr_letter,   pgr_score,   pgr_time))
     print(format_res("Tuned LLM", tuned_letter, tuned_score, tuned_time))
+    print(f"FALLBACK PIPELINE: {pgr_used}")
     print("=" * 80 + "\n")
 
     # Log scores
-    log_results(test_case_id, tuned_score, gr_score, pgr_score)
+    log_results(test_case_id, tuned_score, gr_score, pgr_score, pgr_used)
 
     # Log Q&A details per pipeline
     gr_label    = "0" if gr_score    >= THRESHOLD else "1"
@@ -187,7 +190,7 @@ def run_test_case(test_case: dict, test_case_id: int):
 
 
 def log_results(test_case_id: int, tuned_score: Union[float, int], 
-                graphrag_score: Union[float, int], prolog_graphrag_score: Union[float, int]) -> None:
+                graphrag_score: Union[float, int], prolog_graphrag_score: Union[float, int], fallback: Literal['yes', 'no']) -> None:
     """
     Logs results of the evaluations in the appropriate CSV files in hallucination_evaluation_results/
     """
@@ -201,7 +204,8 @@ def log_results(test_case_id: int, tuned_score: Union[float, int],
         "graphrag_score": [graphrag_score],
         "graphrag_label": [0 if graphrag_score >= THRESHOLD else 1],
         "prolog_graphrag_score": [prolog_graphrag_score],
-        "prolog_graphrag_label": [0 if prolog_graphrag_score >= THRESHOLD else 1]
+        "prolog_graphrag_label": [0 if prolog_graphrag_score >= THRESHOLD else 1],
+        "fallback": [fallback]
     })
     
     header = not os.path.exists(file_path) or os.path.getsize(file_path) == 0
@@ -260,7 +264,7 @@ def main(test_size: int = 1000, start_idx: int = 0):
         return
     run_test_cases(test_cases, start_idx=start_idx)
     print(f"AI2 ARC evaluation complete. Results saved to {RESULTS_DIR}/ai2_arc_scores.csv")
-
+ 
 
 if __name__ == "__main__":
     import argparse

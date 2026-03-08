@@ -29,7 +29,7 @@ def evaluate(prompt: str, answer: str) -> float:
 
 
 def sample_sequences(prompt: str, flag: str) -> dict:
-    return main_driver.run_pipeline(user_prompt=prompt, flag=flag, sample_mode=True)
+    return main_driver.run_pipeline(question=prompt, flag=flag, sample_mode=True)
 
 def check_entailment(seq1: str, seq2: str) -> bool:
     prompt = f"""

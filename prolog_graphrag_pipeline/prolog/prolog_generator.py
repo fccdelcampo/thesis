@@ -185,13 +185,13 @@ def _inject_inline_errors(code: str, last_error: str) -> str:
     return "\n".join(new_lines)
 
 
-def generate_prolog_generation_prompt(user_question: str, retrieved_context: str, error_history: list, previous_code: str = None) -> str:
+def generate_prolog_generation_prompt(question: str, retrieved_context: str, error_history: list, previous_code: str = None) -> str:
     prompt = f"""Now, process the following:
+User Question:
+{question}
+
 Context:
 {retrieved_context}
-
-User Question:
-{user_question}
 
 CRITICAL REMINDER — LETTER ASSIGNMENT:
 Re-read the User Question above carefully. The choices are labeled exactly as they appear (A, B, C, D).
@@ -292,9 +292,9 @@ Answer with ONLY one word: YES or NO.
         return False
 
 
-def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_context: str, error_history: list, previous_code: str = None, last_attempt_tracker: list = None):
+def _run_prolog_attempt(generate_fn, i: int, question: str, retrieved_context: str, error_history: list, previous_code: str = None, last_attempt_tracker: list = None):
     """Single attempt of Prolog code generation + validation."""
-    prompt = generate_prolog_generation_prompt(user_question, retrieved_context, error_history, previous_code)
+    prompt = generate_prolog_generation_prompt(question, retrieved_context, error_history, previous_code)
 
     try:
         answer = generate_fn(prompt=prompt, flag="prolog")
@@ -420,7 +420,7 @@ def _run_prolog_attempt(generate_fn, i: int, user_question: str, retrieved_conte
     return database, query
 
 
-def generate_prolog_code(user_question: str, retrieved_context: str, most_recent_error: Optional[str]) -> tuple:
+def generate_prolog_code(question: str, retrieved_context: str, most_recent_error: Optional[str]) -> tuple:
     # ── Resolve the generate function once ───────────────────────────────────
     try:
         from .prolog_llms import generate as generate_fn
@@ -446,7 +446,7 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
 
     for i in range(NORMAL_ATTEMPTS):
         try:
-            return _run_prolog_attempt(generate_fn, i, user_question, retrieved_context, error_history, last_attempt_tracker[0], last_attempt_tracker)
+            return _run_prolog_attempt(generate_fn, i, question, retrieved_context, error_history, last_attempt_tracker[0], last_attempt_tracker)
         except ValueError as e:
             err_str = str(e)
             print(f"Iteration {i} | Validation Error: {err_str}")
@@ -502,7 +502,7 @@ def generate_prolog_code(user_question: str, retrieved_context: str, most_recent
         print(f"[Prolog retry] LLM says YES — granting {EXTENSION_ATTEMPTS} extension attempts.")
         for i in range(NORMAL_ATTEMPTS, NORMAL_ATTEMPTS + EXTENSION_ATTEMPTS):
             try:
-                return _run_prolog_attempt(generate_fn, i, user_question, retrieved_context, error_history, last_attempt_tracker[0], last_attempt_tracker)
+                return _run_prolog_attempt(generate_fn, i, question, retrieved_context, error_history, last_attempt_tracker[0], last_attempt_tracker)
             except ValueError as e:
                 err_str = str(e)
                 print(f"Extension {i} | Validation Error: {err_str}")

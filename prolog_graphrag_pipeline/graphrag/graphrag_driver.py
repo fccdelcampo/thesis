@@ -3,8 +3,10 @@ from neo4j_graphrag.llm import OllamaLLM
 from neo4j_graphrag.embeddings.ollama import OllamaEmbeddings
 from neo4j_graphrag.experimental.components.text_splitters.fixed_size_splitter import FixedSizeSplitter
 from neo4j_graphrag.experimental.pipeline.kg_builder import SimpleKGPipeline
+from neo4j_graphrag.generation import GraphRAG
 from .encoder import process_pdf_documents, process_text_context, process_context, extract_query_and_context
 from .retriever import generate, create_retriever
+from .config import GRAPHRAG_TEMPLATE, GRAPHRAG_FALLBACK_TEMPLATE
 import os
 import glob
 from .config import PROMPT_TEMPLATE, NEO4J_URI, NEO4J_USERNAME, NEO4J_PASSWORD, SCHEMA_CONFIG, STATIC_SCHEMA # added dot for relative import, assuming config.py is in the same directory as graphrag_driver.py
@@ -13,6 +15,9 @@ import asyncio
 import time
 import threading
 import sys
+from tenacity import retry, wait_exponential, stop_after_attempt, retry_if_exception_type
+from openai import RateLimitError, APITimeoutError, APIConnectionError
+from neo4j_graphrag.experimental.pipeline.kg_builder import SimpleKGPipeline
 
 # Persistent event loop to avoid "RuntimeError: Event loop is closed" on Windows.
 # asyncio.run() creates and destroys a new loop each call, but httpx/httpcore
@@ -36,7 +41,7 @@ sys.path.append(str(Path(__file__).resolve().parents[1]))
 _project_root = str(Path(__file__).resolve().parents[2])
 if _project_root not in sys.path:
     sys.path.insert(0, _project_root)
-from llm_config import MODEL_NAME as _LLM_MODEL, USE_TOGETHER_API, get_openai_client, BASE_URL, API_KEY, log_llm_event, retry_with_exponential_backoff
+from llm_config import ENCODER_MODEL_NAME as _LLM_MODEL, USE_TOGETHER_API, get_openai_client, BASE_URL, API_KEY, log_llm_event, retry_with_exponential_backoff
 
 if USE_TOGETHER_API:
     from neo4j_graphrag.embeddings.base import Embedder
@@ -208,13 +213,21 @@ class DebugOllamaLLM(OllamaLLM):
         error_holder = [None]
 
         def _do_invoke():
-            return _client.chat.completions.create(
+            response = _client.chat.completions.create(
                 model=ENCODER_MODEL,
                 messages=messages,
-                temperature=0.0,
+                temperature=0.3,
                 timeout=timeout_sec,
-                max_tokens=2048
+                max_tokens=2048,
+                logprobs=True
             )
+            
+            response.content = {
+                "answer": response.choices[0].message.content,
+                "logprobs": response.choices[0].logprobs.token_logprobs
+            }
+            
+            return response
 
         def _target():
             try:
@@ -343,6 +356,28 @@ def initialize_models():
         }
     )
 
+    original_invoke = encoder_llm.invoke
+
+    # 2. Define the retry rules using Tenacity decorators
+    @retry(
+        # Wait exponentially: 2s, 4s, 8s, 16s... up to a max of 60 seconds per wait
+        wait=wait_exponential(multiplier=1, min=2, max=60),
+        
+        # Give up completely after 8 failed attempts to prevent infinite hangs
+        stop=stop_after_attempt(8),
+        
+        # ONLY retry on network or rate limit errors (don't retry on bad prompts)
+        retry=retry_if_exception_type((RateLimitError, APITimeoutError, APIConnectionError)),
+        
+        reraise=True # If it fails 8 times, raise the error so you know it died
+    )
+    def robust_invoke(*args, **kwargs):
+        print("DEBUG PROLOG-GRAPHRAG:Sending chunk to LLM...")
+        return original_invoke(*args, **kwargs)
+
+    # 3. Apply the monkey-patch to your LLM instance
+    encoder_llm.invoke = robust_invoke
+    
     retriever_llm = DebugOllamaLLM(
         model_name=RETRIEVER_MODEL,
         model_params={
@@ -360,7 +395,7 @@ def initialize_models():
     if USE_TOGETHER_API:
         from llm_config import EMBED_MODEL
         embedder = TogetherAIEmbeddings()
-        print(f"Together AI embedder loaded ({EMBED_MODEL}).")
+        # print(f"Together AI embedder loaded ({EMBED_MODEL}).")
     else:
         from llm_config import EMBED_MODEL
         embedder = OllamaEmbeddings(model=EMBED_MODEL)
@@ -402,7 +437,8 @@ def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
         from_pdf=True,
         text_splitter=chunk_splitter,
         perform_entity_resolution=True,
-        on_error="IGNORE"
+        on_error="IGNORE",
+        
     )
     
     kg_builder_text = SimpleKGPipeline(
@@ -415,7 +451,8 @@ def setup_kg_pipeline(llm, embedder) -> SimpleKGPipeline    :
         from_pdf=False,
         text_splitter=chunk_splitter,
         perform_entity_resolution=True,
-        on_error="IGNORE"
+        on_error="IGNORE",
+        
     )
     
     return kg_builder_pdf, kg_builder_text
@@ -426,6 +463,7 @@ embedder = None
 kg_builder_pdf = None
 kg_builder_text = None
 retriever = None
+PROCESS_CONTEXT = False
 
 def init_globals():
     global encoder_llm, retriever_llm, embedder, kg_builder_pdf, kg_builder_text, retriever, neo4j_driver
@@ -433,7 +471,7 @@ def init_globals():
     driver_recreated = ensure_driver_connected()
 
     if encoder_llm is None or driver_recreated:
-        print("DEBUG: Re-initializing pipelines due to missing LLM or new driver...", flush=True)
+        # print("DEBUG PROLOG-GRAPHRAG:Re-initializing pipelines due to missing LLM or new driver...", flush=True)
         encoder_llm, retriever_llm, embedder = initialize_models()
         kg_builder_pdf, kg_builder_text = setup_kg_pipeline(encoder_llm, embedder)
         retriever = create_retriever(neo4j_driver, embedder)
@@ -441,17 +479,17 @@ def init_globals():
 def generate_answer(query, retriever, llm, original_query: str = "") -> dict:
     return generate(llm, retriever, query, original_query=original_query)
 
-def run_pipeline(user_question, fallback: bool = False) -> dict:
+def run_pipeline(question: str, fallback: str) -> dict:
     init_globals()
     
     # 1. Clear stale Neo4j data from previous questions to prevent irrelevant retrieval
-    print("DEBUG [run_pipeline]: Clearing local data...", flush=True)
-    clear_local_data()
-    print("DEBUG [run_pipeline]: Local data cleared. Starting extract_query_and_context...", flush=True)
+    # print("DEBUG PROLOG-GRAPHRAG [run_pipeline]: Clearing local data...", flush=True)
+    # clear_local_data()
+    # print("DEBUG PROLOG-GRAPHRAG [run_pipeline]: Local data cleared. Starting extract_query_and_context...", flush=True)
     
     # 2. Extract query and context from user input
-    query, text_context = extract_query_and_context(user_question)
-    print(f"DEBUG [run_pipeline]: extract_query_and_context done. query={repr(query[:80])} | context items={len(text_context) if isinstance(text_context, list) else 'str'}", flush=True)
+    query, text_context = extract_query_and_context(question)
+    # print(f"DEBUG PROLOG-GRAPHRAG [run_pipeline]: extract_query_and_context done. query={repr(query[:80])} | context items={len(text_context) if isinstance(text_context, list) else 'str'}", flush=True)
     
     # 3. OPT3: Only ingest into the KG if the encoder actually found real context
     #    (e.g. a passage-based question). For self-contained MCQs, context is empty —
@@ -460,63 +498,55 @@ def run_pipeline(user_question, fallback: bool = False) -> dict:
     context_was_extracted = bool(text_context)  # True only if encoder found real facts/passages
     
     if not context_was_extracted:
-        print("DEBUG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.", flush=True)
-        text_context = [user_question]  # keep for logging/reference, but don't ingest
+        # print("DEBUG PROLOG-GRAPHRAG [run_pipeline]: No extracted context (MCQ). Skipping KG ingestion — querying KBPedia directly.", flush=True)
+        text_context = [question]  # keep for logging/reference, but don't ingest
     else:
-        print(f"DEBUG [run_pipeline]: Starting process_context (KG ingestion) with {len(text_context)} text chunk(s)...", flush=True)
-        _run_async(process_context(kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
-        print("DEBUG [run_pipeline]: process_context done. Sleeping 2s for index update...", flush=True)
+        # print(f"DEBUG PROLOG-GRAPHRAG [run_pipeline]: Starting process_context (KG ingestion) with {len(text_context)} text chunk(s)...", flush=True)
+        if PROCESS_CONTEXT:
+            _run_async(process_context(neo4j_driver, kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=text_context))
+            # print("DEBUG PROLOG-GRAPHRAG [run_pipeline]: process_context done. Sleeping 2s for index update...", flush=True)
         time.sleep(2) # Allow vector index to update
-        print("DEBUG [run_pipeline]: Sleep done.", flush=True)
+        # print("DEBUG PROLOG-GRAPHRAG [run_pipeline]: Sleep done.", flush=True)
 
-    print("DEBUG [run_pipeline]: Starting generate (retriever + LLM)...", flush=True)
-    generation_result = generate(llm=retriever_llm, retriever=retriever, query=query, original_query=user_question, fallback=fallback)
-    print("DEBUG [run_pipeline]: generate done. Returning result.", flush=True)
+    # print("DEBUG PROLOG-GRAPHRAG [run_pipeline]: Starting generate (retriever + LLM)...", flush=True)
+    success = False
+    graph_rag = GraphRAG(llm=retriever_llm, retriever=retriever, prompt_template=GRAPHRAG_TEMPLATE if fallback == "prolog-graphrag" else GRAPHRAG_FALLBACK_TEMPLATE)
+    try:
+        graph_rag_results = graph_rag.search(query, retriever_config={'top_k': 5}, return_context=True)
+        retriever_result = graph_rag_results.retriever_result
+        print(f"RESULTS:\n{retriever_result}")
+        answer_dict = graph_rag_results.answer
+        answer = answer_dict.get("answer", "") if isinstance(answer_dict, dict) else str(answer_dict)
+        logprobs = answer_dict.get("logprobs", {}) if isinstance(answer_dict, dict) else {}
+        # print(f"ANSWER:\n{answer}")
+        # print("DEBUG PROLOG-GRAPHRAG [run_pipeline]: generate done. Returning result.", flush=True)
+        success = True
+    except Exception as e:
+        print(f"ERROR during generation: {e}", flush=True)
+        generation_result = {"answer": f"Error during generation: {e}", "retriever_results": []}
     
-    # generation_result is a dict: {'answer': str, 'contexts': list}
     return {
         "query": query,
         "text_context": text_context,
-        "answer": generation_result.get("answer", "No answer generated."),
-        "contexts": generation_result.get("contexts", [])
+        "answer": answer if success else "Error during generation.",
+        "logprobs": logprobs if success else [],
+        "retriever_results": retriever_result if success else [],
     }
+    
 
 async def test_process_pdf_context(kg_builder_pdf: SimpleKGPipeline):
     await process_pdf_documents(kg_builder_pdf)
     
+    
 async def test_process_text_context(kg_builder_text: SimpleKGPipeline, query: str):
     await process_text_context(kg_builder_text)
     
-def test_extract_query_and_context(user_prompt: str):
-    query, context = extract_query_and_context(user_prompt)
+    
+def test_extract_query_and_context(question: str):
+    query, context = extract_query_and_context(question)
     print(f"Extracted query: {query}")
     print(f"Extracted context: {context}")
     return query, context
-    
-async def perform_tests():
-    # 1. Initialize models and pipelines
-    llm, retriever_llm, embedder = initialize_models()
-    kg_builder_pdf, kg_builder_text = setup_kg_pipeline(llm, embedder)
-    
-    # 2. Extract Phase (Synchronous)
-    print("--- Testing extract_query_and_context ---")
-    question = "What object found on the solid glass table was able to unlock the fifteen-inch door?"
-    # "Which of the following sets is defined by the Well-Ordering Principle as having a guaranteed smallest element? A) Empty sets B) Sets of negative integers C) Nonempty sets of nonnegative integers D) Sets of positive rationals"
-    
-    # Corrected: Removed the extra comma that was making this a tuple
-    query, context = test_extract_query_and_context(question)
-
-    # 3. Processing Phase (Asynchronous)
-    # Corrected: Do NOT use 'await' INSIDE asyncio.gather. 
-    # Pass the coroutines themselves to gather.
-    print("\n--- Starting Knowledge Graph Ingestion ---")
-    
-    await asyncio.gather(
-        test_process_pdf_context(kg_builder_pdf),
-        # process_text_context(kg_builder_text, context)
-    )
-    
-    print("\n--- All tests completed ---")
 
 
 def ensure_driver_connected():
@@ -530,7 +560,7 @@ def ensure_driver_connected():
                 neo4j_driver.verify_connectivity()
                 return False
 
-            print("DEBUG: Initializing new Neo4j driver...", flush=True)
+            # print("DEBUG PROLOG-GRAPHRAG:Initializing new Neo4j driver...", flush=True)
             neo4j_driver = neo4j.GraphDatabase.driver(
                 NEO4J_URI, 
                 auth=(NEO4J_USERNAME, NEO4J_PASSWORD),
@@ -539,7 +569,7 @@ def ensure_driver_connected():
                 encrypted=False
             )
             neo4j_driver.verify_connectivity()
-            print("DEBUG: Neo4j driver initialized and connected.", flush=True)
+            # print("DEBUG PROLOG-GRAPHRAG:Neo4j driver initialized and connected.", flush=True)
             return True
         except Exception as e:
             print(f"CRITICAL ERROR: Could not connect to Neo4j (attempt {attempt+1}/{MAX_RETRIES}): {e}", flush=True)
@@ -574,12 +604,12 @@ def clear_local_data():
 
 def main():
     # Uncomment to clear data before running tests
-    # clear_local_data() 
-    _run_async(perform_tests())
+    clear_local_data() 
+    # _run_async(perform_tests())
+    pass
 
 
 if __name__ == "__main__":
-    main()
-    
-# def generate_context(query, retriever, llm) -> str:
-#     return generate(llm, retriever, query)
+    init_globals()
+    _run_async(process_context(neo4j_driver, kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=[]))
+    print("Initial context processing done. You can now call run_pipeline(question) with your queries.")

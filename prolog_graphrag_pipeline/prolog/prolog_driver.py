@@ -81,7 +81,7 @@ def use_scasp():
             print(f"CRITICAL ERROR: Failed to install or load s(CASP): {e}")
             SCASP_AVAILABLE = False
 
-def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt: str) -> dict:
+def run_pipeline(question: str, retrieved_context: str) -> dict:
     start_time = time.perf_counter()
     
     # Ensure s(CASP) is loaded
@@ -92,20 +92,13 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
         retrieved_context = "\n".join(retrieved_context)
     if not retrieved_context:
         retrieved_context = ""
-        
-    if isinstance(context_from_prompt, list):
-        context_from_prompt = "\n".join(context_from_prompt)
-    if not context_from_prompt:
-        context_from_prompt = "NONE"
+    
 
-    print(f"**User Question:**\n{user_question}")
+    print(f"**User Question:**\n{question}")
     
     # Safely print retrieved context to avoid Windows charmap encoding errors with chars like \u2192 (→)
     safe_context = retrieved_context.encode('utf-8', errors='replace').decode('utf-8')
     print(f"**Retrieved Context:**\n{safe_context}")
-    
-    safe_prompt_context = context_from_prompt.encode('utf-8', errors='replace').decode('utf-8')
-    print(f"**Context from Prompt:**\n{safe_prompt_context}")
 
     # Re-prime Ollama's KV cache with the static few-shot prefix.
     # GraphRAG (same model) runs just before us and evicts the cache.
@@ -115,16 +108,16 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
     warmup_prolog_model()
 
     print("Generating Prolog...")
-    final_context = retrieved_context + "\n" + context_from_prompt
+    final_context = retrieved_context + "\n"
 
     prolog_error: str | None = None  # None = success; str = error message on failure
-    verified_choice: Optional[str] = None
-    database, query, explainer_output, human_readable_explanation, retrieved_values, prolog_error = None, None, None, None, None, None
+    database, query, explainer_output, human_readable_explanation, prolog_error = None, None, None, None, None
+    retrieved_values = ""
 
     # ── Attempt Prolog-verified path ───────────────────────────────────
     try:
         database, query = generate_prolog_code(
-            user_question=user_question,
+            question=question,
             retrieved_context=final_context,
             most_recent_error=None,
         )
@@ -138,12 +131,13 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
 
         print("Generating s(CASP) wrapper...")
         wrapper = generate_safe_scasp_wrapper(query)
-        print(f"**Wrapper:** \n{wrapper}")
+        # print(f"**Wrapper:** \n{wrapper}")
         final_query = f"explain(Explanation)."
         
         print("Consulting database...", flush=True)
         janus.consult("user", database + "\n" + wrapper)
         try:
+        # if True:
             print("Querying database...", flush=True)
             result = janus.query_once(final_query)
             print(f"**Query Results:** \n{result}", flush=True)
@@ -155,8 +149,6 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
                         print(f"{arg} Found: {val}")    
                         retrieved_values += f"{arg}: {val} "
                         # Capture specifically which multiple-choice letter was proven
-                        if isinstance(val, str) and len(val) == 1 and val.lower() in "abcd":
-                            verified_choice = val.lower()
                 
                 if SCASP_AVAILABLE and 'Explanation' in result:
                     print("**Human-Readable Explanation**")
@@ -165,10 +157,11 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
             else:
                 print("No solution found.")
         except Exception as e:
+        # else:
             print(f"Error: {e}")
             
         explainer_output = generate_explanation(
-            user_question=user_question,
+            question=question,
             retrieved_context=retrieved_context,
             database=database,
             query=query,
@@ -179,7 +172,7 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
             print(f"**Explainer Output:** \n{explainer_output}")
         else:
             print("ERROR: Explainer failed to generate output.")
-
+    # else:
     except Exception as gen_err:
         # ── Graceful fallback: Prolog generation failed ──────────────────────
         prolog_error = str(gen_err)
@@ -187,30 +180,23 @@ def run_pipeline(user_question: str, retrieved_context: str, context_from_prompt
         explainer_output = None  # No Prolog proof; LLM will answer from context alone
         if not ALLOW_LLM_FALLBACK:
             raise gen_err
-
+    final_answer = None
     # ── Final synthesis (always runs unless fallback disabled) ───────────────
     if prolog_error and not ALLOW_LLM_FALLBACK:
         print("\n**LLM FALLBACK DISABLED: Skipping final synthesis because Prolog failed.")
         final_answer = {"text_answer": "Error: Prolog generation failed and LLM fallback is disabled."}
     else:
-        print("\n**FINAL LLM OUTPUT:")
-        final_answer = llm.generate(user_question, retrieved_context, explainer_output, flag="synthesis", verified_choice=verified_choice, context_from_prompt=context_from_prompt, graphrag_answer=graphrag_answer)
-        
-        if final_answer:
-            print(final_answer["text_answer"])
-        else:
-            print("ERROR: Final LLM failed to generate answer.")
-    end_time = time.perf_counter()
-    duration = end_time - start_time
-    print(f"====The pipeline executed in {duration:.4f} seconds. Prolog verified: {prolog_error is None}===")
+        # print("\n**FINAL LLM OUTPUT:")
+        final_answer = llm.generate(question, retrieved_context, explainer_output=None, flag="synthesis", fallback = True)
 
+    
     result_dict = {
-        "text_answer": {"text_answer": "Error: Final LLM failed to generate answer."} if isinstance(result_dict, dict) else None,
+        "final_answer": None if prolog_error else final_answer,
         "database": database if database else "No database correctly generated.",
         "query": query if query else "No query correctly generated.",
         "prolog_explanation": human_readable_explanation if human_readable_explanation else "No s(cASP) explanation generated.",
         "explainer_output": explainer_output if explainer_output else "No explainer output correctly generated",
-        "prolog_error": prolog_error if prolog_error else "No Prolog error met."
+        "prolog_error": prolog_error if prolog_error else None
     }
     return result_dict
 
@@ -295,17 +281,17 @@ if __name__ == "__main__":
     for test in tests[:1]:
         decoder_explanation = run_pipeline(test["question"], test["context"], "")
     
-# user_question = "Will prices go up if people are reluctant to take out loans?"
+# question = "Will prices go up if people are reluctant to take out loans?"
 # retrieved_context = "When interest rates are high, people will be less likely to take out loans. When people take less loan out, demand for goods decrease. When demand for goods decrease, interest rates spike up. Prices go down when demand is down."
-# run_prolog_pipeline(user_question, retrieved_context)
+# run_prolog_pipeline(question, retrieved_context)
 
-# user_question = "Who does Vito believe he should keep closer?"
+# question = "Who does Vito believe he should keep closer?"
 # retrieved_context = "Tomasinno is the friend of Vito. Solozzo is the enemy of Vito. Vito believes that he should keep his enemies closer than his friends."
-# run_prolog_pipeline(user_question, retrieved_context)
+# run_prolog_pipeline(question, retrieved_context)
 
-# user_question = "If the grass is contaminated, are the snakes affected?"
+# question = "If the grass is contaminated, are the snakes affected?"
 # retrieved_context = "In a food web, grass is a producer. Grasshoppers eat grass. Frogs eat grasshoppers. Snakes eat frogs. "
-# run_prolog_pipeline(user_question, retrieved_context)
+# run_prolog_pipeline(question, retrieved_context)
 
         
         

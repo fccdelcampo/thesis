@@ -1,9 +1,11 @@
 from pathlib import Path
 from enum import Enum
+from neo4j_graphrag.generation.prompts import RagTemplate
 
-NEO4J_URI = "bolt://127.0.0.1:7687"
+NEO4J_URI = "neo4j://127.0.0.1:7687"
 NEO4J_USERNAME = "neo4j"
 NEO4J_PASSWORD = "graphrag"
+DB_NAME = "graphrag-kg"
 
 # Global Knowledge Source Configuration
 GLOBAL_KB = "KBPEDIA"
@@ -28,6 +30,8 @@ class RETRIEVER_OPTIONS(Enum):
   HybridRetriever = "HybridRetriever"
   VectorCypherRetriever = "VectorCypherRetriever"
   
+  
+RETRIEVER = RETRIEVER_OPTIONS.HybridRetriever
 
 class SCHEMA_TYPE(Enum):
   STATIC = "Static Schema"
@@ -88,8 +92,6 @@ For each relationship include: logic_intent (FACT | RULE | EXCEPTION) and a natu
 Output JSON ONLY. No markdown, no preamble.
 '''
 
-RETRIEVER = RETRIEVER_OPTIONS.VectorCypherRetriever
-
 RETRIEVAL_QUERY = '''
 // Part A: Local Document Retrieval (Vector/Keyword matches passed as `node`)
 RETURN 
@@ -107,35 +109,47 @@ RETURN
 # 3. If the context contains multiple objects or events, do NOT mix them up. 
 # 4. If the answer is not in the context, say "I don't know."
 
-# GRAPHRAG_TEMPLATE = '''
-# # INSTRUCTIONS:
-# Answer the Question using the following Context. Only respond with information mentioned in the Context. Do not inject any speculative information not mentioned.
-
-# # Question:
-# {query_text}
-
-# # Context:
-# {context}
-
-# # Answer:
-# '''
-
-GRAPHRAG_SYSTEM_PROMPT = '''
+GRAPHRAG_TEMPLATE_STR = '''
 ### ROLE
-You are an Unbiased Logic Extraction Agent. Your sole purpose is to extract factual logical building blocks from the Retrieved Context that are strictly relevant to the User Query.
+You are a rigorous Logic Extraction Agent. Your purpose is to extract and structure factual and logical building blocks from the Retrieved Context to evaluate the User Query. These blocks will be used by a strict logical reasoning engine, so absolute precision, deduplication, and adherence to format are required.
 
-### STRICT CONSTRAINTS & FORMATTING
-1. **UNBIASED EXTRACTION**: You MUST extract specific facts for ALL of the concepts or answer options mentioned in the query. Do NOT assume one choice is correct and ignore the others. Provide the facts for all choices to let the Prolog engine make the decision.
-2. **NO REFERENCING THE PROMPT OR EXCLUDING CHOICES**: Never write "Option B is incorrect because..." or "Chloroplasts are not related to the function of...". Simply define what the thing IS in isolation based purely on the evidence.
-3. **NO TAGS OR LABELS**: Write the facts as natural language declarative sentences. DO NOT include subheaders, choice labels like "(Choice A)", or prefixes like "(Global)". Just the facts.
-4. **CRITICAL DEDUPLICATION**: You MUST merge closely related statements. DO NOT repeat the exact same fact in different words. 
-   - WRONG: "The cell wall provides support." "The plant cell wall gives mechanical support."
-   - CORRECT: "The cell wall provides mechanical support."
-5. **GROUNDED**: Only use facts explicitly found in the Context. You may add at most ONE universally accepted scientific truth as a "missing link" if the Context is incomplete.
-6. **FORMAT**: Output ONLY a single numbered list of the facts. Do not include introductory filler or final conclusion lines.
+### EXTRACTION CATEGORIES
+You MUST categorize the extracted knowledge into the following four exact sections. 
+
+1. [ATOMIC FACTS]: Unconditional, standalone truths extracted directly from the Context for ALL concepts in the query. (e.g., "The cell wall provides mechanical support.")
+2. [CONDITIONAL RULES]: Causal relationships, laws, or theorems explicitly found in the Context. Format these as IF-THEN statements. (e.g., "IF an object has mass, THEN it exerts gravity.")
+3. [EXCEPTIONS]: Explicit boundary conditions, caveats, or exceptions to the rules mentioned in the Context. (e.g., "EXCEPT when the system is in a vacuum.")
+4. [LOGICAL GAPS]: Essential missing premises or bridging facts NOT found in the Context that are strictly necessary to definitively answer the User Query or complete the logical chain.
+
+### STRICT CONSTRAINTS
+1. UNBIASED EXTRACTION: Extract information relevant to ALL options or concepts in the User Query. Do not assume an answer prematurely; let the reasoning engine decide.
+2. NO META-COMMENTARY: Do not write "Option B is incorrect because..." Just state the facts and rules in isolation.
+3. CRITICAL DEDUPLICATION: Merge identical or highly similar statements. Do not repeat the exact same fact in different words.
+4. GROUNDING: The first three categories MUST be strictly grounded in the provided Context. Category 4 is the ONLY place you may state external missing requirements.
+
+### FORMAT
+Output ONLY the ATOMIC FACTS, CONDITIONAL RULES, EXCEPTIONS, and LOGICAL GAPS with a bulleted list under each. If a section has no entries based on the Context, write "None". Do not include introductory filler or a final conclusion. Follow this answer format:
+
+1. [ATOMIC FACTS]:
+   List of atomic facts
+2. [CONDITIONAL RULES]:
+   List of conditional rules
+3. [EXCEPTIONS]:
+   List of exceptipns
+4. [LOGICAL GAPS]:
+   List of logical gaps
+   
+### Question:
+{query_text}
+
+### Context:
+{context}
+
+### Answer:
 '''
 
-GRAPHRAG_FALLBACK_SYSTEM_PROMPT = """
+
+GRAPHRAG_FALLBACK_TEMPLATE_STR = """
 ### ROLE
 You are an expert Educational AI Assistant answering a student's question based ONLY on the provided Context.
 
@@ -148,7 +162,6 @@ You are an expert Educational AI Assistant answering a student's question based 
 4. **No "None of the above"**: Always pick the best matching choice from the options given.
 5. After the first line, add a brief 1-2 sentence explanation.
 
-
 ### Question:
 {query_text}
 
@@ -158,8 +171,10 @@ You are an expert Educational AI Assistant answering a student's question based 
 ### Answer:
 """
 
+GRAPHRAG_TEMPLATE = RagTemplate(template=GRAPHRAG_TEMPLATE_STR, expected_inputs=['query_text', 'context'])
+GRAPHRAG_FALLBACK_TEMPLATE = RagTemplate(template=GRAPHRAG_FALLBACK_TEMPLATE_STR, expected_inputs=['query_text', 'context'])
 
-DOC_PATH = Path(__file__).resolve().parents[2] / "documents"
+DOC_PATH = Path(__file__).resolve().parents[2] / "documents/science_mds"
 
 ENCODER_SYSTEM_PROMPT = '''
 ### ROLE

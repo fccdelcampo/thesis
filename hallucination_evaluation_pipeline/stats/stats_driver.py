@@ -32,12 +32,12 @@ DATA_DIR = ROOT / "hallucination_evaluation_results/data"
 def ensure_csv_headers():
     """Ensure all stats CSV files have their proper headers before writing data."""
     headers = {
-        "answer_relevancy_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
-        "context_recall_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
-        "faithfulness_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
-        "ai2_arc_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
-        "mmlu_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
-        "openbookqa_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "answer_relevancy_scores.csv": "test_case_id,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "context_recall_scores.csv": "test_case_id,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "faithfulness_scores.csv": "test_case_id,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "ai2_arc_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label,fallback\n",
+        "mmlu_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label,fallback\n",
+        "openbookqa_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label,fallback\n",
         "normality_test_results.csv": "pipeline,eval_name,p_value,normality\n",
         "hypothesis_test_results.csv": "eval_name,p_value,interpretation\n",
         "posthoc_test_results.csv": "eval_name,loser,winner,p_value\n",
@@ -55,12 +55,12 @@ def clear_datasets():
     if password != CLEAR_DATA_PASSWORD:
         sys.exit("Incorrect password.")
     headers = {
-        "answer_relevancy_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
-        "context_recall_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
-        "faithfulness_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
-        "ai2_arc_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
-        "mmlu_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
-        "openbookqa_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "answer_relevancy_scores.csv": "test_case_id,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "context_recall_scores.csv": "test_case_id,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "faithfulness_scores.csv": "test_case_id,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label\n",
+        "ai2_arc_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label,fallback\n",
+        "mmlu_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label,fallback\n",
+        "openbookqa_scores.csv": "test_case_id,tuned_score,tuned_label,graphrag_score,graphrag_label,prolog_graphrag_score,prolog_graphrag_label,fallback\n",
         "normality_test_results.csv": "pipeline,eval_name,p_value,normality\n",
         "hypothesis_test_results.csv": "eval_name,p_value,interpretation\n",
         "posthoc_test_results.csv": "eval_name,loser,winner,p_value\n",

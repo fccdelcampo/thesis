@@ -40,7 +40,7 @@ def generate_with_ollama(messages) -> Optional[str]:
         return None
     
     
-def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
+def extract_query_and_context(question: str) -> tuple[str, str]:
     most_recent_error = None
     
     # Create a fresh conversation history for this specific extraction attempt
@@ -49,7 +49,7 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
     for i in range(5):
         try:
             # Construct the prompt
-            prompt_content = user_prompt
+            prompt_content = question
             if most_recent_error:
                 prompt_content += f"\nYour latest output had error/s. Fix them according to the following error message:\n{most_recent_error}"
             
@@ -66,14 +66,14 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
             
             try:
                 extracted_data = json.loads(response)
-                print(f"DEBUG: Parsed JSON: {extracted_data}")
+                # print(f"DEBUG GRAPHRAG:Parsed JSON: {extracted_data}")
 
                 if not isinstance(extracted_data, dict):
                     raise ValueError(f"Expected dict, got {type(extracted_data)}")
 
                 # Normalize keys (handle case variations)
                 data = {k.lower(): v for k, v in extracted_data.items()}
-                print(f"DEBUG: Normalized keys: {list(data.keys())}")
+                # print(f"DEBUG GRAPHRAG:Normalized keys: {list(data.keys())}")
                 
                 # Map alternative keys to standard keys
                 if "cleaned_query" in data and "question" not in data:
@@ -84,8 +84,8 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
                 if "question" not in data or "context" not in data:
                      raise ValueError(f"Missing required keys 'question' or 'context' in JSON response. Keys found: {list(data.keys())}")
                 
-                print(f"DEBUG: EXTRACTED QUERY: {data.get('question', 'N/A')}")
-                print(f"DEBUG: EXTRACTED CONTEXT (Len: {len(data.get('context', []))}): {data.get('context', [])}")
+                # print(f"DEBUG GRAPHRAG:EXTRACTED QUERY: {data.get('question', 'N/A')}")
+                # print(f"DEBUG GRAPHRAG:EXTRACTED CONTEXT (Len: {len(data.get('context', []))}): {data.get('context', [])}")
                 return data["question"], data["context"]
             except json.JSONDecodeError as e:
                 print(f"JSON decoding error: {e}")
@@ -93,7 +93,7 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
                 most_recent_error = f"JSON Decode Error: {e}"
                 
         except Exception as e:
-            print(f"DEBUG: Exception in loop: {type(e).__name__}: {e}")
+            # print(f"DEBUG GRAPHRAG:Exception in loop: {type(e).__name__}: {e}")
             import traceback
             traceback.print_exc()
             most_recent_error = str(e)
@@ -115,8 +115,29 @@ async def process_text_context(kg_builder_text: SimpleKGPipeline, texts: list[st
         print(f"Processing text context: {text}")
         text_result = await kg_builder_text.run_async(text=text)
         print(f"Text context processed: {text_result}")
+        
+async def process_markdown_documents(kg_builder_text: SimpleKGPipeline):
+    print(DOC_PATH)
+    paths = glob.glob(os.path.join(DOC_PATH, "*.md"))
+    print("PATHS: ", paths)
+    for path in paths:
+        markdown_text = ""
+        with open(path, "r", encoding="utf-8") as f:
+            markdown_text = f.read()
+        print(f"Processing markdown document: {path}")
+        text_result = await kg_builder_text.run_async(text=markdown_text)
+        print(f"Text context processed: {text_result}")
 
-async def process_context(kg_builder_pdf, kg_builder_text, texts):
-    await asyncio.gather(process_pdf_documents(kg_builder_pdf))
+async def process_context(driver, kg_builder_pdf, kg_builder_text, texts):
+    await asyncio.gather(process_pdf_documents(kg_builder_pdf), process_markdown_documents(kg_builder_text))
     if texts:
         await asyncio.gather(process_text_context(kg_builder_text, texts))
+        
+    # driver.execute_query("""
+    #     MATCH (n) 
+    #     WHERE n.subgraph IS NULL 
+    #     AND coalesce(n.source, '') <> 'KBPedia' 
+    #     // Also exclude by label if KBPedia uses a specific one, e.g., AND NOT n:KBPediaNode
+    #     SET n.subgraph = 'graphrag'
+    # """)
+        

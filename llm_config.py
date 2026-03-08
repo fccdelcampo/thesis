@@ -65,10 +65,14 @@ def retry_with_exponential_backoff(
     return wrapper
 
 # ── Model / Endpoint Configuration ──────────────────────────────────────────
+ENABLE_LLAMA_3 = True
 if USE_TOGETHER_API:
     BASE_URL = "https://api.together.xyz/v1"
     API_KEY = os.environ.get("TOGETHER_API_KEY", "")
-    MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" 
+    RAGAS_MODEL_NAME = "meta-llama/Llama-3.3-70B-Instruct-Turbo"
+    ENCODER_MODEL_NAME = "meta-llama/Llama-3.3-70B-Instruct-Turbo"
+    MODEL_NAME = "meta-llama/Meta-Llama-3.1-8B-Instruct-Turbo" if not ENABLE_LLAMA_3 else "meta-llama/Meta-Llama-3-8B-Instruct-Lite"
+    PROLOG_GENERATOR_NAME = "meta-llama/Llama-4-Maverick-17B-128E-Instruct-FP8"
     EMBED_MODEL = "intfloat/multilingual-e5-large-instruct"
     EMBED_DIM = 1024
     if not API_KEY:

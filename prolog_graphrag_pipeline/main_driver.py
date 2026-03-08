@@ -11,92 +11,159 @@ except ImportError:
     from llm import generate
     from prompt_reconstructor import reconstruct_prompt
     from graphrag.config import SKIP_LOGICAL_EVIDENCE_LLM
+    
+import time
+from typing import Literal
 
-def run_pipeline(user_prompt: str, flag: str, sample_mode: bool = False, include_conclusion: bool = True) -> dict:
+def run_pipeline(question: str, flag: Literal['q', r"x\c", "x"], sample_mode: bool = False) -> dict:
+    start_time = time.perf_counter()
+    
     if flag != "q":
         pass
     
     # Separate inference run for deciding if pipeline would fall back to GraphRAG
-    fallback = decide_fallback(user_prompt)
-
-    graphrag_output = graphrag_driver.run_pipeline(user_question=user_prompt, fallback=fallback) if flag != "q" else None
-    
-    if flag != "q" and graphrag_output:
-        # Print the intermediate GraphRAG logical evidence to the terminal for transparency
-        print("\n" + "="*80)
-        print("GRAPHRAG LOGICAL EVIDENCE")
-        print("="*80)
-        print(graphrag_output.get("answer", "No evidence found."))
-        print("="*80 + "\n")
-        print("DEBUG: Transferring evidence to Prolog engine...\n")
-        query = graphrag_output.get("query", user_prompt)
-        context_from_prompt = graphrag_output.get("text_context", "")
-        retrieved_context = graphrag_output.get("contexts", [])  # raw RetrieverResultItem list
+    fallback = decide_fallback(question)
+    print(f"    Question: {question}")
+    if fallback == "prolog-graphrag":
+        print("     Fallback decision: NO — proceeding with Prolog inference.\n")
+    elif fallback == "graphrag":
+        print("     Fallback decision: YES — skipping Prolog and using GraphRAG answer directly.\n")
+    elif fallback == "tuned":
+        print("     Fallback decision: YES — skipping Prolog and using LLM answer directly.\n")
     else:
-        query = user_prompt
-        context_from_prompt = ""
-        retrieved_context = []
+        raise ValueError(f"Invalid fallback {fallback}")
+    # fallback = "prolog-graphrag"
+    if fallback == "tuned":
+        llm_output = generate(question, retrieved_context=None, explainer_output=None, fallback=fallback, flag=flag, sample_mode=sample_mode)
+        final_answer = llm_output["text_answer"]
+        logprobs = llm_output["logprobs"]
         
-    # ── Split KBPedia vs Wikidata retrieved items ────────────────────────────
-    if isinstance(retrieved_context, list):
-        kbpedia_items = []
-        wikidata_items = []
-        raw_context_strings = []
-        for item in retrieved_context:
-            src = ""
-            if hasattr(item, "metadata"):
-                src = (item.metadata or {}).get("source", "")
-            elif isinstance(item, dict):
-                src = item.get("metadata", {}).get("source", "")
-            item_str = str(item)
-            raw_context_strings.append(item_str)
-            if src == "Wikidata":
-                wikidata_items.append(item_str)
-            else:
-                kbpedia_items.append(item_str)
-
-        if SKIP_LOGICAL_EVIDENCE_LLM:
-            # Bypass the GRAPHRAG_TEMPLATE LLM step — pass raw triples directly to Prolog.
-            # This is richer and avoids the intermediate LLM bottleneck.
-            retrieved_context_str = "\n".join(raw_context_strings)
-            print("DEBUG: SKIP_LOGICAL_EVIDENCE_LLM=True — passing raw triples to Prolog.")
+        # Return different dicts depending on sample_mode
+        if not sample_mode:
+            return {
+                "answer": final_answer,
+                "logprobs": logprobs,
+                "database": None,
+                "query": None,
+                "contexts": None,
+                "prolog_explanation": None,
+                "explainer_output": None,
+                "prolog_error": None,
+                "fallback": fallback
+            }
         else:
-            # Default: use the LLM-distilled logical evidence text as context
-            retrieved_context_str = graphrag_output.get("answer", "") if graphrag_output else ""
-
-        # Append Wikidata facts to context_from_prompt so they reach the synthesis LLM
-        if wikidata_items:
-            wikidata_block = "\n\nWikidata Background Facts (for context, not Prolog logic):\n" + "\n".join(wikidata_items)
-            context_from_prompt = (context_from_prompt or "") + wikidata_block
+            return {
+                "answers": [output["text_answer"] for output in llm_output],
+                "logprobs": [output["logprobs"] for output in llm_output]
+            }
     else:
-        retrieved_context_str = str(retrieved_context) if retrieved_context else ""
+        graphrag_output = graphrag_driver.run_pipeline(question=question, fallback=fallback) if flag != "q" else None
+        graphrag_answer = graphrag_output.get("answer", "") if graphrag_output else ""
+        graphrag_logprobs = graphrag_output.get("logprobs", []) if graphrag_output else {}
+        graphrag_retriever_results = graphrag_output.get("retriever_results", []) if graphrag_output else []
+        query = graphrag_output.get("query", question) if graphrag_output else question
+        
+        if flag != "q" and graphrag_output and fallback == "prolog-graphrag":
+            # Print the intermediate GraphRAG logical evidence to the terminal for transparency
+            print("\n" + "="*80)
+            print("GRAPHRAG CONDENSED CONTEXT")
+            print("="*80)
+            print(graphrag_output.get("answer", "No condensed context found."))
+            print("="*80 + "\n")
+            print("DEBUG PROLOG-GRAPHRAG:Transferring evidence to Prolog engine...\n")
+            condensed_context = graphrag_output.get("answer", [])  # raw RetrieverResultItem list
+            raw_context_strings = graphrag_output.get("retriever_results", [])  # raw strings from retriever for LLM input
+        else:
+            condensed_context = ""
+            raw_context_strings = []
+            
+        # ── Split KBPedia vs Wikidata retrieved items ────────────────────────────
+        if isinstance(raw_context_strings, list):
+            kbpedia_items = []
+            wikidata_items = []
+            raw_context_strings = []
+            for item in condensed_context:
+                src = ""
+                if hasattr(item, "metadata"):
+                    src = (item.metadata or {}).get("source", "")
+                elif isinstance(item, dict):
+                    src = item.get("metadata", {}).get("source", "")
+                item_str = str(item)
+                raw_context_strings.append(item_str)
+                if src == "Wikidata":
+                    wikidata_items.append(item_str)
+                else:
+                    kbpedia_items.append(item_str)
 
-    # graphrag_answer is always the LLM-generated answer (for the synthesis LLM fallback)
-    graphrag_answer = graphrag_output.get("answer", "") if graphrag_output else ""
-    pgr_results = {}
-    if not fallback:
-        pgr_results = prolog_driver.run_pipeline(user_question=user_prompt, retrieved_context=retrieved_context_str, context_from_prompt=context_from_prompt) if flag != "q" else None
-    
-    return {
-        "answer": pgr_results['text_answer'] if pgr_results else "Error generating answer",
-        "database": pgr_results.get("database", "") if pgr_results else "No database generated.",
-        "query": pgr_results.get("query", "") if pgr_results else "No query generated.",
-        "contexts": retrieved_context if isinstance(retrieved_context, list) else [retrieved_context] if retrieved_context else [],
-        "context_from_prompt": context_from_prompt,
-        "prolog_explanation": pgr_results.get("prolog_explanation", "") if pgr_results else "",
-        "explainer_output": pgr_results.get("explainer_output", "") if pgr_results else "No explainer output generated.",
-        "prolog_error": pgr_results.get("prolog_error") if pgr_results else "Prolog skipped"
-    }
+            if SKIP_LOGICAL_EVIDENCE_LLM:
+                # Bypass the GRAPHRAG_TEMPLATE LLM step — pass raw triples directly to Prolog.
+                # This is richer and avoids the intermediate LLM bottleneck.
+                retrieved_context_str = "\n".join(raw_context_strings)
+                print("DEBUG PROLOG-GRAPHRAG:SKIP_LOGICAL_EVIDENCE_LLM=True — passing raw triples to Prolog.")
+            else:
+                # Default: use the LLM-distilled logical evidence text as context
+                retrieved_context_str = condensed_context if graphrag_output else ""
+
+            # Append Wikidata facts to context_from_prompt so they reach the synthesis LLM
+            if wikidata_items:
+                wikidata_block = "\n\nWikidata Background Facts (for context, not Prolog logic):\n" + "\n".join(wikidata_items)
+                # context_from_prompt = (context_from_prompt or "") + wikidata_block
+        else:
+            retrieved_context_str = str(condensed_context) if condensed_context else ""
+
+        pgr_results = {}
+        prolog_error, explainer_output, final_answer = None, None, None
+        llm_logprobs = []
+        if fallback == "prolog-graphrag":
+            try:
+                pgr_results = prolog_driver.run_pipeline(question=question, retrieved_context=retrieved_context_str) if flag != "q" else None
+            except Exception as e:
+                prolog_error = f"Error occurred while running Prolog pipeline: {e}"
+            else:
+                explainer_output = pgr_results.get("explainer_output", "") if pgr_results else ""
+                llm_output = generate(question, retrieved_context_str, explainer_output, flag=flag, sample_mode=sample_mode) if prolog_error is None else pgr_results.get("final_answer", "")
+                final_answer = llm_output.get("text_answer", {"text_answer": "Error generating answer"}) if llm_output else {"text_answer": "Error generating answer"}
+                llm_logprobs = llm_output.get("logprobs", []) if llm_output else {}
+        else:
+            prolog_error = "Pipeline decided to fallback to GraphRAG, skipping Prolog execution."
+            explainer_output = "No explainer output since Prolog was skipped."
+
+            final_answer = graphrag_output.get("answer", {"text_answer": "Error generating answer"}) if graphrag_output else {"text_answer": "Error generating answer"}
+
+        logprobs = llm_logprobs if fallback == "prolog-graphrag" else graphrag_logprobs
+        print(f"PROLOG ERROR: {prolog_error}" if prolog_error else "Prolog executed successfully without errors.")
+        print(f"**FINAL LLM OUTPUT: \n{final_answer}**")
+        end_time = time.perf_counter()
+        duration = end_time - start_time
+        print(f"====The pipeline executed in {duration:.4f} seconds. Prolog verified: {prolog_error is None}===")
+        
+        if not sample_mode:
+            return {
+                "answer": final_answer if final_answer else "Error generating answer",
+                "logprobs": logprobs,
+                "database": pgr_results.get("database", "") if pgr_results else "No database generated.",
+                "query": query,
+                "contexts": retrieved_context_str if isinstance(retrieved_context_str, list) else [condensed_context] if condensed_context else [],
+                "prolog_explanation": pgr_results.get("prolog_explanation", "") if pgr_results else "",
+                "explainer_output": pgr_results.get("explainer_output", "") if pgr_results else "No explainer output generated.",
+                "prolog_error": pgr_results.get("prolog_error") if pgr_results else None,
+                "fallback": fallback
+            }
+        else:
+            return {
+                "answers": [output["text_answer"] for output in llm_output],
+                "logprobs": [output["logprobs"] for output in llm_output]
+            }
 
     
-def run_graphrag_pipeline(user_prompt: str) -> dict:
+def run_graphrag_pipeline(question: str) -> dict:
     """Wrapper function to run the entire pipeline with a given prompt and flag."""
-    return run_pipeline(user_prompt, flag="")
+    return run_pipeline(question, flag="")
 
 if __name__ == "__main__":
     prompt = "Which of the following parts of a plant cell has a function that is most similar to the function of an animal skeleton?"
     print(f"--- Running Pipeline with prompt: '{prompt}' ---")
     # flag default to empty string to run everything
-    output = run_pipeline(prompt, flag="", include_conclusion=True)
+    output = run_pipeline(prompt, flag="x")
     print("\n--- Final Answer ---")
     print(output.get("answer"))

@@ -98,11 +98,11 @@ class KBPediaRetriever:
                 KBPediaRetriever._index_verified = True
                 return True
             else:
-                print("DEBUG: KBPedia vector index 'kbpediaConceptVectorIndex' not found. "
+                print("DEBUG PROLOG-GRAPHRAG:KBPedia vector index 'kbpediaConceptVectorIndex' not found. "
                       "Run kbpedia_loader.py first to embed KBPedia concepts.")
                 return False
         except Exception as e:
-            print(f"DEBUG: Error verifying KBPedia vector index: {e}")
+            print(f"DEBUG PROLOG-GRAPHRAG:Error verifying KBPedia vector index: {e}")
             return False
 
     def _vector_search(self, query_vector: List[float], limit: int = 5) -> List[Dict[str, Any]]:
@@ -133,7 +133,7 @@ class KBPediaRetriever:
                 })
             return results
         except Exception as e:
-            print(f"DEBUG: KBPedia concept vector search error: {e}")
+            print(f"DEBUG PROLOG-GRAPHRAG:KBPedia concept vector search error: {e}")
             return []
 
     def extract_entities(self, query: str) -> List[str]:
@@ -179,9 +179,9 @@ Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
                     if isinstance(parsed, list):
                         llm_entities = [str(item).lower() for item in parsed]
                 else:
-                    print(f"DEBUG: Entity extraction LLM returned no JSON array. Raw: {repr(res_text[:100])}")
+                    print(f"DEBUG PROLOG-GRAPHRAG:Entity extraction LLM returned no JSON array. Raw: {repr(res_text[:100])}")
             except Exception as e:
-                print(f"DEBUG: KBPedia entity extraction LLM failed: {e}")
+                print(f"DEBUG PROLOG-GRAPHRAG:KBPedia entity extraction LLM failed: {e}")
 
         # --- 3. Fallback ---
         # If LLM fails or is missing, use basic word splitting for the stem
@@ -224,7 +224,7 @@ Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
             if words:
                 # Sort by length descending — longer word = more specific/rare
                 longest_word = sorted(words, key=len, reverse=True)[0]
-                print(f"DEBUG: KBPedia exact search failed for '{search_term}'. Trying longest-word fallback: '{longest_word}'", flush=True)
+                print(f"DEBUG PROLOG-GRAPHRAG:KBPedia exact search failed for '{search_term}'. Trying longest-word fallback: '{longest_word}'", flush=True)
                 results = self._fulltext_search(longest_word, limit=limit)
 
         return results
@@ -262,7 +262,7 @@ Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
                 })
             return results
         except Exception as e:
-            print(f"DEBUG: KBPedia concept search error for '{safe_term}': {e}")
+            print(f"DEBUG PROLOG-GRAPHRAG:KBPedia concept search error for '{safe_term}': {e}")
             return []
 
     def get_neighborhood(self, uri: str) -> List[str]:
@@ -286,7 +286,7 @@ Example: ["plant cell", "structural support", "cell wall", "chloroplast"]"""
                         triples.append(f"subclass of: {a['name']}")
             return triples
         except Exception as e:
-            print(f"DEBUG: KBPedia neighborhood error: {e}")
+            print(f"DEBUG PROLOG-GRAPHRAG:KBPedia neighborhood error: {e}")
             return []
 
     def filter_triples_for_query(self, query: str, entity_label: str, triples: List[str], original_query: str = "") -> List[str]:
@@ -316,7 +316,7 @@ If none are relevant, output an empty list [].
             raw = self.llm.invoke(prompt)
             # .content may exist (LLM response object) or it may already be a plain string
             res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
-            print(f"DEBUG: Triple filter raw response for '{entity_label}': {repr(res[:200])}", flush=True)
+            print(f"DEBUG PROLOG-GRAPHRAG:Triple filter raw response for '{entity_label}': {repr(res[:200])}", flush=True)
 
             # Strip markdown code fences
             if "```json" in res:
@@ -331,14 +331,14 @@ If none are relevant, output an empty list [].
             if bracket_start != -1 and bracket_end != -1:
                 res = res[bracket_start:bracket_end + 1]
             elif not res:
-                print(f"DEBUG: Triple filter got empty response for '{entity_label}'. Using all raw triples.", flush=True)
+                print(f"DEBUG PROLOG-GRAPHRAG:Triple filter got empty response for '{entity_label}'. Using all raw triples.", flush=True)
                 return triples
 
             filtered = json.loads(res)
             if isinstance(filtered, list):
                 return filtered
         except Exception as e:
-            print(f"DEBUG: Triple filtering failed for '{entity_label}': {e}. Using all raw triples.", flush=True)
+            print(f"DEBUG PROLOG-GRAPHRAG:Triple filtering failed for '{entity_label}': {e}. Using all raw triples.", flush=True)
 
         return triples
 
@@ -395,7 +395,7 @@ Example:
                 
                 res = (raw.content if hasattr(raw, 'content') else str(raw)).strip()
                 safe_res = str(res[:200]).encode('ascii', 'replace').decode('ascii')
-                print(f"DEBUG: Batch triple filter raw response: {repr(safe_res)}...", flush=True)
+                print(f"DEBUG PROLOG-GRAPHRAG:Batch triple filter raw response: {repr(safe_res)}...", flush=True)
 
                 if "```json" in res:
                     res = res.split("```json")[1].split("```")[0].strip()
@@ -407,7 +407,7 @@ Example:
                 if bracket_start != -1 and bracket_end != -1:
                     res = res[bracket_start:bracket_end + 1]
                 elif not res:
-                    print(f"DEBUG: Batch triple filter got empty response. Using all raw triples.", flush=True)
+                    print(f"DEBUG PROLOG-GRAPHRAG:Batch triple filter got empty response. Using all raw triples.", flush=True)
                     return result_map
 
                 filtered = _safe_parse_json(res, expect=dict)
@@ -420,11 +420,11 @@ Example:
                             result_map[name] = cleaned_triples
                     return result_map # Return immediately on success
             except Exception as e:
-                print(f"DEBUG: Batch triple filtering attempt {attempt + 1}/{max_retries} failed: {e}", flush=True)
+                print(f"DEBUG PROLOG-GRAPHRAG:Batch triple filtering attempt {attempt + 1}/{max_retries} failed: {e}", flush=True)
                 if attempt < max_retries - 1:
                     time.sleep(3)
                 else:
-                    print(f"DEBUG: All {max_retries} batch filtering attempts failed. Using all raw triples.", flush=True)
+                    print(f"DEBUG PROLOG-GRAPHRAG:All {max_retries} batch filtering attempts failed. Using all raw triples.", flush=True)
 
         return result_map
 
@@ -501,14 +501,14 @@ Output ONLY the JSON list, nothing else.
                 indices = _safe_parse_json(res, expect=list)
                 if not isinstance(indices, list):
                     raise ValueError(f"LLM did not return a list: {repr(res[:100])}")
-                print(f"DEBUG: End-filter LLM kept indices: {indices} from {len(candidates)} candidates.", flush=True)
+                print(f"DEBUG PROLOG-GRAPHRAG:End-filter LLM kept indices: {indices} from {len(candidates)} candidates.", flush=True)
                 return [candidates[i] for i in indices if isinstance(i, int) and 0 <= i < len(candidates)]
             except Exception as e:
-                print(f"DEBUG: End-filter LLM attempt {attempt + 1}/{max_retries} failed: {e}.", flush=True)
+                print(f"DEBUG PROLOG-GRAPHRAG:End-filter LLM attempt {attempt + 1}/{max_retries} failed: {e}.", flush=True)
                 if attempt < max_retries - 1:
                     time.sleep(3)
                 else:
-                    print(f"DEBUG: All {max_retries} end-filter attempts failed. Returning all candidates.", flush=True)
+                    print(f"DEBUG PROLOG-GRAPHRAG:All {max_retries} end-filter attempts failed. Returning all candidates.", flush=True)
         return candidates
 
     def search(self, query_text: str, top_k: int = 5, original_query: str = "", seeded_entities: List[str] = None) -> Any:
@@ -521,7 +521,7 @@ Output ONLY the JSON list, nothing else.
         filter_query = original_query if original_query else query_text
 
         # ── Vector Search ───────────────────────────────────────────────────
-        print(f"DEBUG: [KBPedia] Computing query embeddings to search KBPedia concepts...", flush=True)
+        print(f"DEBUG PROLOG-GRAPHRAG:[KBPedia] Computing query embeddings to search KBPedia concepts...", flush=True)
         matches = []
         try:
             # Prepare the embedder function once
@@ -530,7 +530,7 @@ Output ONLY the JSON list, nothing else.
                 embedder_fn = lambda text: self.embedder.embed_query("query: " + text)
             else:
                 from sentence_transformers import SentenceTransformer
-                print("DEBUG: Pipeline embedder missing, falling back to local SentenceTransformer.", flush=True)
+                print("DEBUG PROLOG-GRAPHRAG:Pipeline embedder missing, falling back to local SentenceTransformer.", flush=True)
                 temp_embedder = SentenceTransformer("all-MiniLM-L6-v2")
                 embedder_fn = lambda text: temp_embedder.encode(text).tolist()
 
@@ -538,7 +538,7 @@ Output ONLY the JSON list, nothing else.
             search_strings = [(query_text, top_k * 2)]
             extracted_concepts = self.extract_entities(filter_query)
             if extracted_concepts:
-                print(f"DEBUG: [KBPedia] Extracted {len(extracted_concepts)} concepts for independent vector search: {extracted_concepts}", flush=True)
+                print(f"DEBUG PROLOG-GRAPHRAG:[KBPedia] Extracted {len(extracted_concepts)} concepts for independent vector search: {extracted_concepts}", flush=True)
                 concept_limit = max(2, top_k)
                 for concept in extracted_concepts:
                     # Don't re-search the whole query if it somehow got returned
@@ -552,16 +552,16 @@ Output ONLY the JSON list, nothing else.
                 matches.extend(sub_matches)
 
         except Exception as e:
-            print(f"DEBUG: KBPedia embedding/search failed: {e}", flush=True)
+            print(f"DEBUG PROLOG-GRAPHRAG:KBPedia embedding/search failed: {e}", flush=True)
 
         seen_uris = set()
         candidates = []  # list of {name, uri, definition, triples}
         items = []       # final result items
 
         if not matches:
-            print(f"DEBUG: KBPedia has no vector matches for '{query_text}'.", flush=True)
+            print(f"DEBUG PROLOG-GRAPHRAG:KBPedia has no vector matches for '{query_text}'.", flush=True)
         else:
-            print(f"DEBUG: KBPedia matched {len(matches)} total concept(s) across {len(search_strings)} search(es).", flush=True)
+            print(f"DEBUG PROLOG-GRAPHRAG:KBPedia matched {len(matches)} total concept(s) across {len(search_strings)} search(es).", flush=True)
 
         for match in matches:
             uri = match["uri"]
@@ -580,7 +580,7 @@ Output ONLY the JSON list, nothing else.
             raw_triples = [t for t in raw_triples if not mcq_pattern.match(t)]
 
             if not raw_triples:
-                print(f"DEBUG: No raw triples for '{match['name']}' ({uri}), skipping.", flush=True)
+                print(f"DEBUG PROLOG-GRAPHRAG:No raw triples for '{match['name']}' ({uri}), skipping.", flush=True)
                 continue
 
             # Buffer raw candidates for a single end-of-loop LLM pass
@@ -595,13 +595,13 @@ Output ONLY the JSON list, nothing else.
         if candidates and self.llm:
             # Enforce coarse filter similar to pure GraphRAG's standard behavior
             filtered_candidates = self._filter_concepts_once(query_text, candidates, original_query=filter_query)
-            print(f"DEBUG: End-filter kept {len(filtered_candidates)}/{len(candidates)} concepts.", flush=True)
+            print(f"DEBUG PROLOG-GRAPHRAG:End-filter kept {len(filtered_candidates)}/{len(candidates)} concepts.", flush=True)
             filtered_concepts_to_use = filtered_candidates
             
             if filtered_concepts_to_use:
                 # Prepare batch payload
                 batch_data = [{"name": c["name"], "triples": c["triples"]} for c in filtered_concepts_to_use]
-                print(f"DEBUG: Batch sending {len(batch_data)} concepts to LLM triple filter...", flush=True)
+                print(f"DEBUG PROLOG-GRAPHRAG:Batch sending {len(batch_data)} concepts to LLM triple filter...", flush=True)
                 
                 # Use unified batch filter
                 batch_results = self.filter_triples_batch(query_text, batch_data, original_query=filter_query)
@@ -609,7 +609,7 @@ Output ONLY the JSON list, nothing else.
                 # Reassign filtered triples back to the candidates
                 for c in filtered_concepts_to_use:
                     selected = batch_results.get(c["name"], c["triples"])
-                    print(f"DEBUG: Batch LLM filter kept {len(selected)}/{len(c['triples'])} triple(s) for '{c['name']}'", flush=True)
+                    print(f"DEBUG PROLOG-GRAPHRAG:Batch LLM filter kept {len(selected)}/{len(c['triples'])} triple(s) for '{c['name']}'", flush=True)
                     c["triples"] = selected
 
                 # Remove concepts where LLM filter kept 0 triples
@@ -628,5 +628,5 @@ Output ONLY the JSON list, nothing else.
                           "uri": c["uri"], "score": 1.0, "triples": selected_triples},
             ))
 
-        print(f"DEBUG: KBPedia found {len(items)} grounded concept contexts.", flush=True)
+        print(f"DEBUG PROLOG-GRAPHRAG:KBPedia found {len(items)} grounded concept contexts.", flush=True)
         return RetrieverResult(items=items, metadata={})

@@ -44,17 +44,17 @@ def generate_with_ollama(messages) -> Optional[str]:
         return response.choices[0].message.content
     except Exception as e:
         print(f"Error during LLM interaction ({MODEL_NAME}): {e}")
-        return None
+        return {}
     
     
-def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
+def extract_query_and_context(question: str) -> tuple[str, str]:
     most_recent_error = None
     
     current_messages = list(BASE_OLLAMA_MESSAGES)
 
     for i in range(5):
         try:
-            prompt_content = user_prompt
+            prompt_content = question
             if most_recent_error:
                 prompt_content += f"\nYour latest output had error/s. Fix them according to the following error message:\n{most_recent_error}"
             
@@ -65,21 +65,21 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
             
             response = generate_with_ollama(current_messages)
             safe_response = str(response).encode('ascii', 'replace').decode('ascii')
-            print("LLM Response:", safe_response) # verbose
+            # print("LLM Response:", safe_response) # verbose
             
             if response is None:
                 raise ValueError("Failed to get a response from the LLM.")
             
             try:
                 extracted_data = json.loads(response)
-                print(f"DEBUG: Parsed JSON: {extracted_data}")
+                # print(f"DEBUG PROLOG-GRAPHRAG:Parsed JSON: {extracted_data}")
 
                 if not isinstance(extracted_data, dict):
                     raise ValueError(f"Expected dict, got {type(extracted_data)}")
 
                 # Normalize keys (handle case variations)
                 data = {k.lower(): v for k, v in extracted_data.items()}
-                print(f"DEBUG: Normalized keys: {list(data.keys())}")
+                # print(f"DEBUG PROLOG-GRAPHRAG:Normalized keys: {list(data.keys())}")
                 
                 # Map alternative keys to standard keys
                 if "cleaned_query" in data and "question" not in data:
@@ -91,8 +91,8 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
                      raise ValueError(f"Missing required keys 'question' or 'context' in JSON response. Keys found: {list(data.keys())}")
                 
                 safe_query = str(data.get('question', 'N/A')).encode('ascii', 'replace').decode('ascii')
-                print(f"DEBUG: EXTRACTED QUERY: {safe_query}")
-                print(f"DEBUG: EXTRACTED CONTEXT (Len: {len(data.get('context', []))}): {data.get('context', [])}")
+                # print(f"DEBUG PROLOG-GRAPHRAG:EXTRACTED QUERY: {safe_query}")
+                # print(f"DEBUG PROLOG-GRAPHRAG:EXTRACTED CONTEXT (Len: {len(data.get('context', []))}): {data.get('context', [])}")
                 return data["question"], data["context"]
             except json.JSONDecodeError as e:
                 print(f"JSON decoding error: {e}")
@@ -100,7 +100,7 @@ def extract_query_and_context(user_prompt: str) -> tuple[str, str]:
                 most_recent_error = f"JSON Decode Error: {e}"
                 
         except Exception as e:
-            print(f"DEBUG: Exception in loop: {type(e).__name__}: {e}")
+            print(f"DEBUG PROLOG-GRAPHRAG:Exception in loop: {type(e).__name__}: {e}")
             import traceback
             traceback.print_exc()
             most_recent_error = str(e)
@@ -123,12 +123,30 @@ async def process_text_context(kg_builder_text: SimpleKGPipeline, texts: list[st
         text_result = await kg_builder_text.run_async(text=text)
         print(f"Text context processed: {text_result}")
 
-async def process_context(kg_builder_pdf, kg_builder_text, texts):
-    # await asyncio.gather(process_pdf_documents(kg_builder_pdf)) # DISABLE PDF INGESTION FOR SPEED
-    if texts:
-        await asyncio.gather(process_text_context(kg_builder_text, texts))
+async def process_markdown_documents(kg_builder_text: SimpleKGPipeline):
+    print(DOC_PATH)
+    paths = glob.glob(os.path.join(DOC_PATH, "*.md"))
+    print("PATHS: ", paths)
+    for path in paths:
+        markdown_text = ""
+        with open(path, "r", encoding="utf-8") as f:
+            markdown_text = f.read()
+        print(f"Processing markdown document: {path}")
+        text_result = await kg_builder_text.run_async(text=markdown_text)
+        print(f"Text context processed: {text_result}")
+
+async def process_context(driver, kg_builder_pdf, kg_builder_text, texts):
+    await asyncio.gather(process_markdown_documents(kg_builder_text))
+    # if texts:
+    #     await asyncio.gather(process_text_context(kg_builder_text, texts))
         
-        
+    # driver.execute_query("""
+    #     MATCH (n) 
+    #     WHERE n.subgraph IS NULL 
+    #     AND coalesce(n.source, '') <> 'KBPedia' 
+    #     // Also exclude by label if KBPedia uses a specific one, e.g., AND NOT n:KBPediaNode
+    #     SET n.subgraph = 'prolog-graphrag'
+    # """)
         
 # query, context = extract_query_and_context("Francis is a student studying computer science. Like any CS major, he is interested in machine learning and artificial intelligence. What courses should he take to specialize in these fields?")
 # print("Extracted Query:", query)
