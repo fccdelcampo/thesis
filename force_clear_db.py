@@ -44,4 +44,5 @@ def force_clear_database():
         print(f"Error clearing database: {e}")
 
 if __name__ == "__main__":
-    force_clear_database()
+    # force_clear_database()
+    pass

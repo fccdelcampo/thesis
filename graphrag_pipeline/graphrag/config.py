@@ -16,7 +16,7 @@ LLAMA_3_ENABLED = True
 
 ENABLE_WIKIDATA_FETCHING = True
 ENABLE_LLM_FILTERING = False
-ENABLE_LOCAL_DOCUMENT_RETRIEVAL = False
+ENABLE_LOCAL_DOCUMENT_RETRIEVAL = True
 
 class SCHEMA_TYPE(Enum):
   STATIC = "Static Schema"
@@ -174,9 +174,13 @@ GRAPHRAG_TEMPLATE = '''
 You are to answer the question you are prompted with.
 
 ### STRICT INSTRUCTION:
-**Answer First**: Your response MUST begin with EXACTLY this phrase on the VERY FIRST LINE:
-"Based on my synthesis of knowledge, the answer is [Letter]. [Exact choice text]."
-Where [Letter] is one of A, B, C, D and [Exact choice text] is that choice verbatim.
+There are three main question types you may encounter:
+1. MULTIPLE-CHOICE QUESTIONS: Letter of the answer first. Your response MUST begin with EXACTLY this phrase on the VERY FIRST LINE:
+    "Based on my synthesis of knowledge, the answer is [Letter]. [Exact choice text]."
+    Where [Letter] is one of A, B, C, D and [Exact choice text] is that choice verbatim.
+    Then, give an explanation.
+2. BINARY (True/False) QUESTIONS: "True/False" First. Your response MUST begin with EXACTLY either "True." or "False.". Then, give an explanation.
+3. EXPLANATORY QUESTIONS: You can answer in any way you want.
 
 ### Question:
 {query_text}

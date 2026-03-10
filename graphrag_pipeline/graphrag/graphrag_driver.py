@@ -502,7 +502,7 @@ def run_pipeline(question: str) -> dict:
         encoder_llm, retriever_llm, embedder = initialize_models()
 
         # 2. Ensure indexes exist (self-healing for new Neo4j instances)
-        print("DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...", flush=True)
+        # print("DEBUG [graphrag run_pipeline]: Verifying Neo4j indexes...", flush=True)
         create_indexes(neo4j_driver)
         wait_for_indexes(neo4j_driver, timeout=30)
 

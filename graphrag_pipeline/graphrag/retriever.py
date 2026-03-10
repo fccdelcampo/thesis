@@ -12,7 +12,7 @@ def check_db_health(driver):
     """Verifies the driver can connect to Neo4j."""
     try:
         driver.verify_connectivity()
-        print("Pre-flight check: Database connection verified.")
+        # print("Pre-flight check: Database connection verified.")
         return True
     except (ServiceUnavailable, AuthError) as e:
         print(f"Pre-flight check failed: {e}")
@@ -63,7 +63,7 @@ def wait_for_indexes(driver, timeout=30):
             break
             
         elapsed = int(time.time() - start_time)
-        print(f"[{elapsed}s] Waiting for indexes... Status: {states}")
+        # print(f"[{elapsed}s] Waiting for indexes... Status: {states}")
         time.sleep(2)
 
 class CleanTextRetriever(HybridRetriever):
@@ -108,7 +108,7 @@ class EnhancedRetriever(VectorCypherRetriever):
     Also filters out low-quality/noise chunks.
     """
     def __init__(self, driver, index_name, retrieval_query, embedder, llm=None):
-        super().__init__(driver=driver, index_name=index_name, retrieval_query=retrieval_query, embedder=embedder, )
+        super().__init__(driver=driver, index_name=index_name, retrieval_query=retrieval_query, embedder=embedder)
         self.driver = driver
         self.llm = llm
 
@@ -128,7 +128,7 @@ class EnhancedRetriever(VectorCypherRetriever):
         if ENABLE_LOCAL_DOCUMENT_RETRIEVAL:
             
             try:
-                print(f"DEBUG GRAPHRAG:--- Starting Local Vector Similarity Search ---", flush=True)
+                # print(f"DEBUG GRAPHRAG:--- Starting Local Vector Similarity Search ---", flush=True)
                 local_result = super().search(query_text=query_text, top_k=8, **kwargs)
                 
                 if local_result and local_result.items:
@@ -162,10 +162,10 @@ class EnhancedRetriever(VectorCypherRetriever):
                             item.content = item.content.replace('\n', ' ').replace('  ', ' ')
                             
                         local_items.append(item)
-                        print(f"DEBUG GRAPHRAG:Vector Match #{idx+1} (Score: {item.metadata.get('score', 0):.3f}): {item.content[:100]}...", flush=True)
+                        # print(f"DEBUG GRAPHRAG:Vector Match #{idx+1} (Score: {item.metadata.get('score', 0):.3f}): {item.content[:100]}...", flush=True)
                     
-                    print(f"DEBUG GRAPHRAG:Local Vector Search finished. Returned {len(local_items)} chunks.", flush=True)
-                    print(f"DEBUG GRAPHRAG:Entities seeded from Vector Search: {list(extracted_entities)}", flush=True)
+                    # print(f"DEBUG GRAPHRAG:Local Vector Search finished. Returned {len(local_items)} chunks.", flush=True)
+                    # print(f"DEBUG GRAPHRAG:Entities seeded from Vector Search: {list(extracted_entities)}", flush=True)
 
             except Exception as e:
                 print(f"DEBUG GRAPHRAG:Main retriever failed: {e}")

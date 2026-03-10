@@ -26,7 +26,7 @@ def check_db_health(driver):
     """Verifies the driver can connect to Neo4j."""
     try:
         driver.verify_connectivity()
-        print("Pre-flight check: Database connDEBUG PROLOG-GRAPHRAG:Initializing new Neo4j driver...ection verified.")
+        print("DEBUG PROLOG-GRAPHRAG:Initializing new Neo4j driver...\nPre-flight check: Database connection verified.")
         return True
     except (ServiceUnavailable, AuthError) as e:
         print(f"Pre-flight check failed: {e}")
@@ -40,7 +40,7 @@ def create_indexes(driver):
     from llm_config import EMBED_DIM
     embedding_dimension = EMBED_DIM
 
-    print(f"Creating indexes with dimension: {embedding_dimension}...")
+    # print(f"Creating indexes with dimension: {embedding_dimension}...")
 
     driver.execute_query(f"""
         CREATE VECTOR INDEX documentsVectorIndex IF NOT EXISTS
@@ -73,11 +73,11 @@ def wait_for_indexes(driver, timeout=30):
         
         states = [record["state"] for record in records]
         if len(states) == 2 and all(s == "ONLINE" for s in states):
-            print("Database is ready for retrieval.")
+            # print("Database is ready for retrieval.")
             break
             
         elapsed = int(time.time() - start_time)
-        print(f"[{elapsed}s] Waiting for indexes... Status: {states}")
+        # print(f"[{elapsed}s] Waiting for indexes... Status: {states}")
         time.sleep(2)
 
 def _sanitize_lucene_query(query_text: str) -> str:

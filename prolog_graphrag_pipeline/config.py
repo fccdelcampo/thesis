@@ -15,10 +15,21 @@ You are an Expert Knowledge Synthesizer. Your mission is to provide clear, accur
    - **DO NOT** mention "Prolog," "s(CASP)," "GraphRAG," "Justification Trees," or "Databases."
    - **DO NOT** use code-like syntax such as parent(x,y) or not(affected(snake)).
 
-4. **Answer First, Explain After:** For multiple-choice questions (MCQs), you must CAREFULLY read the User Question to see which Letter corresponds to which Choice. STRICTLY use this EXACT format on the very first line, then explain on the next line:
-*Letter.* [Choice text]
-[Your brief explanation on the next line]
+4. **Answer First:** There are two main question types you may encounter:
+    - EXPLANATORY QUESTIONS: State the conclusion plainly.
+    
+5. **Explanation After Answer:** After you state the main answer, give an explanation.
+    - If the Logical Evidence is available, use it to craft an explanation for why the conclusion holds.
+    - If the Logical Evidence is not available, you must rely on your internal knowledge to create an explanation for your answer.
+
+### CRITICAL INSTRUCTION
+    - If the logical path provides a letter choice, but the question itself is not multiple-choice, you should mention the text of the letter option, but not the letter itself.
 """
+# TODO ADD LATER
+# - MULTIPLE-CHOICE QUESTIONS: Letter of the answer first. Your response MUST begin with EXACTLY this phrase on the VERY FIRST LINE:
+#         "Based on my synthesis of knowledge, the answer is [Letter]. [Exact choice text]."
+#         Where [Letter] is one of A, B, C, D and [Exact choice text] is that choice verbatim. 
+#     - BINARY (Yes/No) QUESTIONS: "Yes/No" First. Your response MUST begin with EXACTLY either "Yes." or "No." Then using the logical evidence (if any), craft an explanation for why the conclusion holds.
 
 # Apply the new format to the examples
 LLM_FEW_SHOT_EXAMPLES = [
@@ -26,29 +37,29 @@ LLM_FEW_SHOT_EXAMPLES = [
     {"role": "user", "content": rf"""
 ### FINAL SYNTHESIS TASK
 
-**USER QUESTION:** Who is Alice's brother?
-**CONTEXT:** Bob is Alice's brother. Amanda is Alice's sister.
-**CONCLUSION:** The logic identifies Bob as the brother of Alice (and Amanda).
-**LOGICAL EVIDENCE:**
-The solver successfully verified the brother relationship through the following deductive steps:
+USER QUESTION: Who is Alice's brother?
 
-1. **Identity and Gender Verification:** The system first confirms that Bob is identified as male, which is a primary requirement for the "brother" relationship.
-2. **Establishing Siblinghood:** To be a brother, Bob must also be a sibling to the individual in question (Amanda). The solver established this by looking for a shared parent:
+CONCLUSION: The logic identifies Bob as the brother of Alice (and Amanda).
+LOGICAL EVIDENCE: The solver successfully verified the brother relationship through the following deductive steps:
+
+1. **The Context:** Bob is Alice's brother. Amanda is Alice's sister.
+2. **Identity and Gender Verification:** The system first confirms that Bob is identified as male, which is a primary requirement for the "brother" relationship.
+3. **Establishing Siblinghood:** To be a brother, Bob must also be a sibling to the individual in question (Amanda). The solver established this by looking for a shared parent:
     - It identifies a common parent, p1, who is the parent of both Bob and Amanda.
     - Since they share a parent and are not the same person, the logic confirms they are siblings.
-3. **Synthesizing the Relationship:** By combining the facts that Bob is male and that Bob and Amanda share a sibling bond, the solver concludes that the "brother" relationship holds true for Bob.
----
+4. **Synthesizing the Relationship:** By combining the facts that Bob is male and that Bob and Amanda share a sibling bond, the solver concludes that the "brother" relationship holds true for Bob.
+
 ### INSTRUCTION:
 Provide a final, coherent response to the User Question. Use the Logical Evidence to explain the "why" behind the Conclusion. If the Conclusion is not explicitly specified, infer what the conclusion should be.
      """},
     {"role": "assistant", "content": rf"""
+Based on my synthesis of knowledge, the answer is Bob.
+
 This relationship is confirmed by verifying two key factors based on the records:
-1. **Gender:** Bob is identified as male, fulfilling the primary requirement for a brother.
-2. **Shared Lineage:** Both Bob and Alice share a common parent. Because they share this biological link but are distinct individuals, they are officially recognized as siblings.
+1. Gender: Bob is identified as male, fulfilling the primary requirement for a brother.
+2. Shared Lineage: Both Bob and Alice share a common parent. Because they share this biological link but are distinct individuals, they are officially recognized as siblings.
 
 Since Bob is a male who shares a sibling bond with Alice, he fits the criteria.
-
-Final Answer: Bob is Alice's brother.
      """
      },
     
@@ -56,51 +67,111 @@ Final Answer: Bob is Alice's brother.
     {"role": "user", "content": rf"""
 ### FINAL SYNTHESIS TASK
 
-**USER QUESTION:** Is Maria the grandmother of Dan?
-**CONTEXT:** Maria is the mother of Chloe. Chloe is the mother of Dan.
-**CONCLUSION:** Yes, the logic confirms that Maria is the grandmother of Dan.
-**LOGICAL EVIDENCE:**
-The solver reached this conclusion by identifying a direct multi-generational connection between the individuals involved:
+USER QUESTION: Is Maria the grandmother of Dan?
 
-1. **Primary Rule:** The system defines a "grandmother" as someone who is the parent of a person who is, in turn, the parent of the grandchild. This creates a logical chain requiring an "intermediate parent."
-2. **The First Link (Generation 1):** The solver verifies the initial relationship that Maria is the parent of Chloe.
-3. **The Second Link (Generation 2):** The solver then verifies the connecting relationship that Chloe is the parent of Dan.
-4. **Verification of the Chain:** By identifying Chloe as the necessary intermediate link (the person who connects Maria to Dan), the solver satisfies the requirement for the grandmother relationship.
----
+CONCLUSION: Yes, the logic confirms that Maria is the grandmother of Dan.
+
+LOGICAL EVIDENCE: The solver reached this conclusion by identifying a direct multi-generational connection between the individuals involved:
+
+1. **The Context:** Maria is the mother of Chloe. Chloe is the mother of Dan.
+2. **Primary Rule:** The system defines a "grandmother" as someone who is the parent of a person who is, in turn, the parent of the grandchild. This creates a logical chain requiring an "intermediate parent."
+3. **The First Link (Generation 1):** The solver verifies the initial relationship that Maria is the parent of Chloe.
+4. **The Second Link (Generation 2):** The solver then verifies the connecting relationship that Chloe is the parent of Dan.
+5. **Verification of the Chain:** By identifying Chloe as the necessary intermediate link (the person who connects Maria to Dan), the solver satisfies the requirement for the grandmother relationship.
+
 ### INSTRUCTION:
 Provide a final, coherent response to the User Question. Use the Logical Evidence to explain the "why" behind the Conclusion. If the Conclusion is not explicitly specified, infer what the conclusion should be.
      """},
     {"role": "assistant", "content": rf"""
+Yes. Maria is the grandmother of Dan.
+
 This is confirmed by a clear, two-step familial connection that satisfies the definition of a grandmother:
-- **The First Generation:** Maria is the mother of Chloe.
-- **The Second Generation:** Chloe, in turn, is the mother of Dan.
+- The First Generation: Maria is the mother of Chloe.
+- The Second Generation Chloe, in turn, is the mother of Dan.
 
 By acting as the "intermediate" link between the two, Chloe connects the generations. Since Maria is the parent of Dan's parent, the grandmother relationship is fully established.  
-
-Final Answer: Yes, Maria is the grandmother of Dan.
      """
      },
     
-    # Example 3 - Multiple Choice
+    # Example 3 - Free Form
     {"role": "user", "content": rf"""
 ### FINAL SYNTHESIS TASK
 
-**USER QUESTION:** What is the capital of France?
-A. London
-B. Paris
-C. Berlin
-D. Madrid
-Answer with the letter only (A, B, C, or D).
-**CONTEXT:** Paris is the capital and most populous city of France.
-**LOGICAL EVIDENCE:**
-The solver identified Paris as the capital of France based on geographical records.
----
+USER QUESTION: Based on the provided texts, which specific projections of a nerve cell serve as the location where ligands bind to receptors to receive information?
+
+CONCLUSION: The specific projection of a nerve cell where ligands bind to receptors to receive information is the dendrites.
+
+LOGICAL EVIDENCE: The solver arrived at this conclusion by tracing the logical connections between the provided facts and rules:
+
+The system first identified the dendrites as the location where signals are received, as stated in the atomic facts. Then, it applied the conditional rule that if a signal arrives at the plasma membrane, it binds to a receptor in the plasma membrane. Since the dendrites receive signals, they must bind to receptors in the plasma membrane, which is the definition of receives_signals_through_ligand_receptor_binding. Therefore, the dendrites are the location where ligands bind to receptors to receive information.
+
 ### INSTRUCTION:
-Provide a final, coherent response to the User Question. Use the Logical Evidence to explain the "why" behind the Conclusion. If the Conclusion is not explicitly specified, infer what the conclusion should be. Ensure the tone is natural and free of any technical jargon related to logic programming or databases.
+Provide a final, coherent response to the User Question. Use the Logical Evidence to explain the "why" behind the Conclusion. If the Conclusion is not explicitly specified, infer what the conclusion should be.  
      """},
     {"role": "assistant", "content": rf"""
-*B.* Paris.
-Paris is officially recognized as both the capital and the most populous city of France, making it the correct choice.
+Based on my synthesis of knowledge, the answer is the dendrites.
+
+This conclusion is reached by connecting the structural role of the nerve cell's projections with the chemical process of signaling:
+    - Primary Reception Site: Documentation identifies the dendrites as the specific regions of the neuron designated for receiving incoming signals.
+    - Binding Mechanism: According to biological rules, when a signal arrives at these projections, it must interact with receptors located on the plasma membrane.
+    - Information Transfer: Because dendrites are the entry point for these signals, they serve as the functional site where ligands (signaling molecules) bind to these receptors, allowing the cell to receive and process new information.
+     """
+     },
+    
+    # Example 4 - Explanatory
+    {"role": "user", "content": rf"""
+### FINAL SYNTHESIS TASK
+
+USER QUESTION: During DNA replication, how does the structural change initiated by helicase interact with the functional limitations of DNA polymerase to affect how new strands are created?
+
+CONCLUSION: The replication process is successful, and new strands are created.
+
+LOGICAL EVIDENCE:
+**Logical Path:** The solver reached this conclusion by identifying the necessary conditions for DNA replication to occur:
+
+1. **Helicase's Role:** Helicase separates the parental strands, opening the DNA for DNA polymerase to access.
+2. **DNA Polymerase's Function:** DNA polymerase synthesizes new strands in the 5' to 3' direction, using the parent DNA strands as a pattern.
+3. **Antiparallel Nature:** The parent DNA strands are antiparallel, which allows DNA polymerase to access the template strands.
+4. **Combining Conditions:** The system concludes that the replication process is successful because helicase separates the parental strands, DNA polymerase synthesizes new strands, and the antiparallel nature of the parent DNA strands is maintained.
+
+### INSTRUCTION:
+Provide a final, coherent response to the User Question. Use the Logical Evidence to explain the "why" behind the Conclusion. If the Conclusion is not explicitly specified, infer what the conclusion should be.
+"""},
+    {"role": "assistant", "content": rf"""
+The replication process is successful, and new strands are created through the coordination of mechanical unwinding and directional synthesis.
+
+This outcome is the result of how the cellular machinery overcomes the physical constraints of the DNA molecule:
+    - Structural Opening: The process begins when the enzyme helicase physically separates the two parental strands. This structural change is essential because it exposes the internal genetic sequence, providing the necessary access for synthesis to occur.
+    - Directional Constraints: While the DNA is opened, the synthesis is governed by a specific functional limitation: new strands can only be built in one specific direction (5' to 3').
+    - Antiparallel Alignment: Because the two original parent strands run in opposite directions (antiparallel), the opening created by the helicase allows the synthesis enzymes to utilize both strands as templates simultaneously.
+
+By maintaining this antiparallel orientation while the structure is being unwound, the system ensures that the directional requirements of the synthesis process are met on both sides of the opening, resulting in the successful creation of two new DNA molecules.
+     """
+     },
+    
+    # Example 5 - Binary
+    {"role": "user", "content": rf"""
+### FINAL SYNTHESIS TASK
+
+USER QUESTION: Based on the definition of vectors provided in the text, does the result calculated for v_2 constitute a complete velocity vector?
+
+CONCLUSION: The result calculated for v_2 does not constitute a complete velocity vector.
+
+LOGICAL EVIDENCE:
+
+**Logical Path:** The system evaluated the completeness of the velocity vector v_2 and found it lacking. The reason for this is that v_2 only has a magnitude, but its direction is unknown. According to the definition of a complete velocity vector, it requires both a known magnitude and a known direction. Since v_2's direction is unknown, it does not meet the criteria for a complete velocity vector.
+
+### INSTRUCTION:
+Provide a final, coherent response to the User Question. Use the Logical Evidence to explain the "why" behind the Conclusion. If the Conclusion is not explicitly specified, infer what the conclusion should be.
+"""},
+    {"role": "assistant", "content": rf"""
+No.
+
+The result calculated for v_2 does not constitute a complete velocity vector based on the established requirements for vector quantities:
+    - Necessary Components: By definition, a complete velocity vector must possess both a specific magnitude (numerical value or speed) and a clear direction.
+    - Missing Data: While the calculation for v_2 successfully provides the magnitude, the direction remains unknown.
+
+Because one of the two essential criteria is missing, the value is considered incomplete and cannot be classified as a full vector.
      """
      }
 ]
@@ -109,19 +180,24 @@ Paris is officially recognized as both the capital and the most populous city of
 LLM_MESSAGES = [
     {'role': 'system', 'content': LLM_SYSTEM_PROMPT},
 ] + LLM_FEW_SHOT_EXAMPLES + [
-    {'role': 'user', 'content': 'Acknowledge these synthesis instructions. You must rely purely on the LOGICAL EVIDENCE to answer the question, align your final answer with its conclusion, and never mention the underlying architecture (Prolog, GraphRAG, etc). For MCQs, use the exact "*Letter.* [Choice text]" format on the first line.'},
-    {'role': 'assistant', 'content': 'I understand. I will synthesize the LOGICAL EVIDENCE into a natural, conversational response without mentioning any technical architecture. For MCQs, my first line will exclusively be the "*Letter.* [Choice text]" format. Please provide the Question, Context, and Evidence.'}
+    {'role': 'user', 'content': 'Acknowledge these synthesis instructions. You must rely purely on the LOGICAL EVIDENCE to answer the question, align your final answer with its conclusion, and never mention the underlying architecture (Prolog, GraphRAG, etc).'},
+    {'role': 'assistant', 'content': 'I understand. I will synthesize the LOGICAL EVIDENCE into a natural, conversational response without mentioning any technical architecture. Please provide the Question, Context, and Evidence.'}
 ]
 
 LLM_SYSTEM_PROMPT_FALLBACK = [
     {'role': 'system', 'content': 
     """
 Answer the question given to you.
-"The answer is [Letter]. [Exact choice text]."
-Where [Letter] is one of A, B, C, D matching the question's options, and [Exact choice text] is that choice verbatim.
+If the question is a yes/no question, plainly state your answer (e.g. "yes.").
+Then, explain your answer.
 """
     }
 ]
+#TODO ADD LATER
+# Answer the question given to you.
+# "The answer is [Letter]. [Exact choice text]."
+# Where [Letter] is one of A, B, C, D matching the question's options, and [Exact choice text] is that choice verbatim.
+# """
 
 FALLBACK_SYSTEM_PROMPT = [{"role": "system", "content": """
 ### Role

@@ -11,7 +11,7 @@ You are an expert Prolog programmer specializing in Knowledge Representation for
 
 ### Input Structure
 You will receive five distinct pieces of information to build your logic from:
-1. **User Question**: The primary query or multiple-choice question to solve.
+1. **User Question**: The primary question to solve, which can be yes/no or explanatory question.
 2. **Atomic Facts**: Unconditional, standalone truths extracted from the source material.
 3. **Conditional Rules**: Causal relationships, laws, or theorems formatted as IF-THEN statements.
 4. **Exceptions**: Boundary conditions, caveats, or limitations to the rules.
@@ -36,8 +36,8 @@ Translate the provided inputs into a formal Prolog database. Generate rules (Hea
    - USE CLP(Q) constraints instead: `#=`, `#<>`, `#<`, `#>`, `#=<`, `#>=`. Example: `X #= Y + 1`.
 - Negation: Use `not`. NEVER use `\+`.
 - Classical Negation: Use `-` prefix (e.g., `-mortal(X).`).
-- Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. Use `choice` or `mcq_choice` instead.
-- Atoms: MUST be lowercase snake_case with underscores replacing spaces (e.g., `cell_wall`, `cell_membrane`). NEVER use spaces inside atoms — `choice(a, cell membrane)` is a SYNTAX ERROR. Write `choice(a, cell_membrane)` instead.
+- Banned Predicates: NEVER use `option`. It conflicts with the SWI-Prolog standard library. If writing an MCQ, use `choice` instead.
+- Atoms: MUST be lowercase snake_case with underscores replacing spaces (e.g., `cell_wall`, `cell_membrane`). NEVER use spaces inside atoms — `choice(a, cell membrane)` is a SYNTAX ERROR. Write `has_part(cell, cell_membrane)` instead.
 - Grounding: EVERY fact argument must be a lowercase atom. NEVER start a fact argument with an Uppercase letter unless you explicitly intend it to be a variable. CamelCase names (e.g., `PlantCell`) are treated as Variables and will break the logic.
 - Variables: MUST start with an Uppercase letter (e.g., `X`, `Animal`). 
 - Meaningful Atoms: Use snake_case atoms that accurately reflect the phrasing in the text. Condense long phrases into 3-5 critical words (e.g., `eliminating_a_source_from_consideration` -> `eliminate_source`). The meaning must remain clear.
@@ -47,6 +47,7 @@ Translate the provided inputs into a formal Prolog database. Generate rules (Hea
 
 ### Query Formatting by Question Type
 1. **Multiple-Choice Questions (MCQ):**
+   - A question is only multiple-choice if it has a number of lettered options (e.g. "A. gravity B. weak nuclear force C. strong nuclear force D. electromagnetism").
    - Encode EXACTLY FOUR choices as facts. The description MUST be a grounded lowercase snake_case atom derived from the ACTUAL option text, NEVER an uppercase variable!
    - Example CORRECT: `choice(a, eliminating_a_source).`
    - Example WRONG: `choice(a, A).` (This will trivially unify with anything and fail the proof!)
@@ -54,13 +55,15 @@ Translate the provided inputs into a formal Prolog database. Generate rules (Hea
    - You MUST define an `answer/1` rule that unifies with the correct option letter.
    - **CRITICAL:** Your logic MUST uniquely identify EXACTLY ONE correct choice. Do not write generic rules that might accidentally evaluate to true for multiple incorrect options. You must explicitly differentiate the correct target from the distractors based on the domain rules.
    - Example DB Rule: `answer(OptionLetter) :- choice(OptionLetter, Target), matches_criteria(Target).`
-   - The <query> MUST ALWAYS BE EXACTLY: `answer(OptionLetter).`
+   - IF the question is an MCQ, the <query> MUST strictly be: answer(OptionLetter). Do NOT use this format for Binary or Freeform questions.
 2. **Binary (True/False) Questions:**
+   - A question is only binary if it asks whether a certain condition holds or not -- where you can only answer "yes" or "no".
    - Define specific instances from the question (e.g., `rock_one`, `rock_two`).
    - Write rules defining the condition context (e.g., `pulled_together(A, B) :- ...`).
    - The <query> MUST test the fully grounded relationship directly (e.g., `pulled_together(rock_one, rock_two).`).
-3. **Freeform / Open Logic:**
-   - Define relationships and rules governing propagation or constraints.
+3. **Freeform / Explanatory:**
+   - A question is free-form only if either it doesn't have explicit multiple choices or if it specifically asks you the "why" behind a certain phenomenon or concept.
+   - Define facts, relationships and rules using the atomic facts, conditional rules, and exceptions. If there are any logical gaps, rely on your knowledge to generate more facts or rules necessary to answer the question.
    - The <query> queries the primary target entity state.
 
 ### Warning Avoidance (CRITICAL)
@@ -74,7 +77,9 @@ Translate the provided inputs into a formal Prolog database. Generate rules (Hea
 
 ### Output Format (Strict)
 <planning>
-[Map out the query format, the required facts, and the rules needed to bridge them. State explicitly if you are relying on internal knowledge due to empty context.]
+[1. Question Type: Explicitly state if the User Question is MCQ, Binary, or Freeform based on the rules above.]
+[2. Architecture: Map out the target query format specific to that question type.]
+[3. Logic: State the grounded facts you have and the rules needed to bridge them.]
 </planning>
 
 <reasoning_step>
@@ -100,6 +105,7 @@ Translate the provided inputs into a formal Prolog database. Generate rules (Hea
 Verify the following:
 
 ✓ <planning> block is included and logically sound
+✓ Your database and query are appropriate for the question type
 ✓ No `;`
 ✓ No `is`, `<`, `>`, `>=`, `=<`
 ✓ Only CLP operators (`#=`, `#>`, etc.)
@@ -114,6 +120,17 @@ Verify the following:
 
 If any rule fails, correct the program before producing the final output.
 """
+# TODO ADD LATER
+# 1. **Multiple-Choice Questions (MCQ):**
+#    - A question is only multiple-choice if it has a number of lettered options (e.g. "A. gravity B. weak nuclear force C. strong nuclear force D. electromagnetism").
+#    - Encode EXACTLY FOUR choices as facts. The description MUST be a grounded lowercase snake_case atom derived from the ACTUAL option text, NEVER an uppercase variable!
+#    - Example CORRECT: `choice(a, eliminating_a_source).`
+#    - Example WRONG: `choice(a, A).` (This will trivially unify with anything and fail the proof!)
+#    - Encode retrieved domain knowledge as facts and rules.
+#    - You MUST define an `answer/1` rule that unifies with the correct option letter.
+#    - **CRITICAL:** Your logic MUST uniquely identify EXACTLY ONE correct choice. Do not write generic rules that might accidentally evaluate to true for multiple incorrect options. You must explicitly differentiate the correct target from the distractors based on the domain rules.
+#    - Example DB Rule: `answer(OptionLetter) :- choice(OptionLetter, Target), matches_criteria(Target).`
+#    - IF the question is an MCQ, the <query> MUST strictly be: answer(OptionLetter). Do NOT use this format for Binary or Freeform questions.
 
 GENERATOR_FEW_SHOT_EXAMPLES = [
     {"role": "user", "content": """
@@ -252,159 +269,160 @@ pulled_together(rock_one, rock_two).
     },
 
     # Example 3: Multiple-Choice Logic
-    {
-        "role": "user", 
-        "content": """
-Now, process the following: 
+#     {
+#         "role": "user", 
+#         "content": """
+# Now, process the following: 
 
-User Question:
-Which feature does not form as a result of tectonic plates diverging?
-A. trench
-B. rift valley
-C. ocean basin
-D. mid-ocean ridge
+# User Question:
+# Which feature does not form as a result of tectonic plates diverging?
+# A. trench
+# B. rift valley
+# C. ocean basin
+# D. mid-ocean ridge
 
-Context: 
-1. [ATOMIC FACTS]:
-    - Mid-ocean ridges are areas where tectonic plates diverge.
-    - Diverging tectonic plates create new crust.
+# Context: 
+# 1. [ATOMIC FACTS]:
+#     - Mid-ocean ridges are areas where tectonic plates diverge.
+#     - Diverging tectonic plates create new crust.
 
-2. [CONDITIONAL RULES]:
-    - A trench forms when one plate moves under another at a subduction zone (plate convergence).
-    - A rift valley forms when tectonic plates diverge.
-    - An ocean basin forms when tectonic plates diverge.
+# 2. [CONDITIONAL RULES]:
+#     - A trench forms when one plate moves under another at a subduction zone (plate convergence).
+#     - A rift valley forms when tectonic plates diverge.
+#     - An ocean basin forms when tectonic plates diverge.
 
-3. [EXCEPTIONS]:
-    - None
+# 3. [EXCEPTIONS]:
+#     - None
 
-4. [LOGICAL GAPS]:
-    - None        
-    """},
-    {
-        "role": "assistant", 
-        "content": r"""
-<planning>
-1. Target Query: This is a Multiple-Choice Question. The query MUST strictly be `answer(OptionLetter).`.
-2. Grounded Facts: I need to encode exactly four options as `choice/2` facts using lowercase snake_case (e.g., `choice(a, trench)`). I also need to extract the geologic formation processes from the context into relational facts like `forms_from(Feature, Process)`.
-3. IF-THEN Rules: I must define an `answer/1` rule that links the correct `OptionLetter` to the right feature. Because the question asks for the feature that does NOT form from diverging plates, the rule must unify the choice and use negation (`not forms_from(Feature, plate_divergence)`).
-</planning>
+# 4. [LOGICAL GAPS]:
+#     - None        
+#     """},
+#     {
+#         "role": "assistant", 
+#         "content": r"""
+# <planning>
+# 1. Target Query: This is a Multiple-Choice Question. The query MUST strictly be `answer(OptionLetter).`.
+# 2. Grounded Facts: I need to encode exactly four options as `choice/2` facts using lowercase snake_case (e.g., `choice(a, trench)`). I also need to extract the geologic formation processes from the context into relational facts like `forms_from(Feature, Process)`.
+# 3. IF-THEN Rules: I must define an `answer/1` rule that links the correct `OptionLetter` to the right feature. Because the question asks for the feature that does NOT form from diverging plates, the rule must unify the choice and use negation (`not forms_from(Feature, plate_divergence)`).
+# </planning>
 
-<reasoning_step>
-Encode options.
-choice(a, trench).
-choice(b, rift_valley).
-choice(c, ocean_basin).
-choice(d, mid_ocean_ridge).
-</reasoning_step>
+# <reasoning_step>
+# Encode options.
+# choice(a, trench).
+# choice(b, rift_valley).
+# choice(c, ocean_basin).
+# choice(d, mid_ocean_ridge).
+# </reasoning_step>
 
-<reasoning_step>
-Encode formation logic explicitly from context.
-forms_from(trench, subduction_zone).
-forms_from(trench, plate_convergence).
-forms_from(rift_valley, plate_divergence).
-forms_from(ocean_basin, plate_divergence).
-forms_from(mid_ocean_ridge, plate_divergence).
-</reasoning_step>
+# <reasoning_step>
+# Encode formation logic explicitly from context.
+# forms_from(trench, subduction_zone).
+# forms_from(trench, plate_convergence).
+# forms_from(rift_valley, plate_divergence).
+# forms_from(ocean_basin, plate_divergence).
+# forms_from(mid_ocean_ridge, plate_divergence).
+# </reasoning_step>
 
-<reasoning_step>
-Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with plate_divergence.
-answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
-</reasoning_step>
+# <reasoning_step>
+# Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with plate_divergence.
+# answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+# </reasoning_step>
 
-<database>
-choice(a, trench).
-choice(b, rift_valley).
-choice(c, ocean_basin).
-choice(d, mid_ocean_ridge).
+# <database>
+# choice(a, trench).
+# choice(b, rift_valley).
+# choice(c, ocean_basin).
+# choice(d, mid_ocean_ridge).
 
-forms_from(trench, subduction_zone).
-forms_from(trench, plate_convergence).
-forms_from(rift_valley, plate_divergence).
-forms_from(ocean_basin, plate_divergence).
-forms_from(mid_ocean_ridge, plate_divergence).
+# forms_from(trench, subduction_zone).
+# forms_from(trench, plate_convergence).
+# forms_from(rift_valley, plate_divergence).
+# forms_from(ocean_basin, plate_divergence).
+# forms_from(mid_ocean_ridge, plate_divergence).
 
-answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
-</database>
+# answer(OptionLetter) :- choice(OptionLetter, GeologicFeature), not forms_from(GeologicFeature, plate_divergence).
+# </database>
 
-<query>
-answer(OptionLetter).
-</query>
----
-"""
-    },
+# <query>
+# answer(OptionLetter).
+# </query>
+# ---
+# """
+#     },
 
     # Example 4: Multiple-Choice Logic (Different Domain)
-    {
-        "role": "user", 
-        "content": """
-Now, process the following:
+#     {
+#         "role": "user", 
+#         "content": """
+# Now, process the following:
 
-User Question: 
-Which of the following animals is NOT a mammal?
-A. dog
-B. cat
-C. human
-D. frog
+# User Question: 
+# Which of the following animals is NOT a mammal?
+# A. dog
+# B. cat
+# C. human
+# D. frog
 
-Context: 
-1. [ATOMIC FACTS]:
-    - Dogs are mammals.
-    - Cats are mammals.
-    - Humans are mammals.
-    - Frogs are amphibians.
+# Context: 
+# 1. [ATOMIC FACTS]:
+#     - Dogs are mammals.
+#     - Cats are mammals.
+#     - Humans are mammals.
+#     - Frogs are amphibians.
 
-2. [CONDITIONAL RULES]:
-    - Mammals are warm-blooded vertebrates that have hair.
-    - Amphibians are cold-blooded.
+# 2. [CONDITIONAL RULES]:
+#     - Mammals are warm-blooded vertebrates that have hair.
+#     - Amphibians are cold-blooded.
 
-3. [EXCEPTIONS]:
-    - None
+# 3. [EXCEPTIONS]:
+#     - None
 
-4. [LOGICAL GAPS]:
-    - None        
-"""},
-    {"role": "assistant", "content": r"""
-<reasoning_step>
-Encode options.
-choice(a, dog).
-choice(b, cat).
-choice(c, human).
-choice(d, frog).
-</reasoning_step>
+# 4. [LOGICAL GAPS]:
+#     - None        
+# """},
+#     {"role": "assistant", "content": r"""
+# <reasoning_step>
+# Encode options.
+# choice(a, dog).
+# choice(b, cat).
+# choice(c, human).
+# choice(d, frog).
+# </reasoning_step>
 
-<reasoning_step>
-Encode biological classifications explicitly from context.
-is_mammal(dog).
-is_mammal(cat).
-is_mammal(human).
-is_amphibian(frog).
-</reasoning_step>
+# <reasoning_step>
+# Encode biological classifications explicitly from context.
+# is_mammal(dog).
+# is_mammal(cat).
+# is_mammal(human).
+# is_amphibian(frog).
+# </reasoning_step>
 
-<reasoning_step>
-Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with being a mammal.
-answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
-</reasoning_step>
+# <reasoning_step>
+# Define an `answer/1` rule that unifies with the correct option for the choice NOT associated with being a mammal.
+# answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+# </reasoning_step>
 
-<database>
-choice(a, dog).
-choice(b, cat).
-choice(c, human).
-choice(d, frog).
+# <database>
+# choice(a, dog).
+# choice(b, cat).
+# choice(c, human).
+# choice(d, frog).
 
-is_mammal(dog).
-is_mammal(cat).
-is_mammal(human).
-is_amphibian(frog).
+# is_mammal(dog).
+# is_mammal(cat).
+# is_mammal(human).
+# is_amphibian(frog).
 
-answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
-</database>
+# answer(OptionLetter) :- choice(OptionLetter, Animal), not is_mammal(Animal).
+# </database>
 
-<query>
-answer(OptionLetter).
-</query>
----
-"""},
+# <query>
+# answer(OptionLetter).
+# </query>
+# ---
+# """},
 
+    # MCQ
     {
         "role": "user",
         "content": """
@@ -698,7 +716,7 @@ choice(d, lactic_acid_fermentation).
 </reasoning_step>
 
 <reasoning_step>
-Rely on internal expert knowledge to state which process consumes oxygen.
+Relying on internal expert knowledge, I know that the electron transport chain consumes oxygen directly. I can now state which process consumes oxygen.
 consumes_oxygen_directly(electron_transport_chain).
 </reasoning_step>
 
@@ -725,8 +743,146 @@ answer(OptionLetter).
 </query>
 ---
 """
+    },
+    
+    # Example 9: Free-Form/Explanatory Question (Physics for Dummies)
+    {
+        "role": "user",
+        "content": """
+Now, process the following:
+
+User Question: 
+According to the provided texts, is the measured duration of an object's 'period' ($T$) considered to be an absolute value based on a fixed universal standard?
+
+Context:
+1. [ATOMIC FACTS]:
+   * There are no true physical absolute measures.
+   * No fixed frame of reference has been found.
+   * The period of an object is measured in seconds and denoted by $T$.
+   * The period $T$ is the time it takes for an object to complete a cycle.
+2. [CONDITIONAL RULES]:
+   * IF a force is applied to an object over a period of time, THEN the impulse is equal to the change in momentum.
+   * IF an object moves around a full circle, THEN it completes a cycle and the time taken is called the period $T$.
+3. [EXCEPTIONS]:
+   * None
+4. [LOGICAL GAPS]:
+   * The definition of an absolute value in the context of the measured duration of an object's period $T$.
+   * The relationship between the measured duration of an object's period $T$ and a fixed universal standard.
+        """
+    },
+    {
+        "role": "assistant",
+        "content": r"""
+<planning>
+1. Target Query: This is a boolean verification question. The query MUST strictly be `is_absolute_value(period_t).`.
+2. Grounded Facts: I need to encode the explicitly extracted facts that `period_t` is a physical measure, and that true physical absolute measures and fixed frames of reference do not exist (`false`).
+3. IF-THEN Rules: I will formulate the bridging rule based on the logical gaps: IF a measure is to be considered an absolute value based on a fixed universal standard, THEN true physical absolute measures and a fixed frame of reference must exist.
+</planning>
+
+<reasoning_step>
+Encode the facts from the context.
+measure(period_t).
+absolute_measures_exist(false).
+fixed_frame_of_reference_exists(false).
+</reasoning_step>
+
+<reasoning_step>
+Formulate the final conditional rule. A measure is an absolute value if absolute measures and fixed frames of reference exist.
+is_absolute_value(M) :-
+measure(M),
+absolute_measures_exist(true),
+fixed_frame_of_reference_exists(true).
+</reasoning_step>
+
+<database>
+measure(period_t).
+absolute_measures_exist(false).
+fixed_frame_of_reference_exists(false).
+
+is_absolute_value(M) :-
+measure(M),
+absolute_measures_exist(true),
+fixed_frame_of_reference_exists(true).
+</database>
+
+<query>
+is_absolute_value(period_t).
+</query>
+"""
+    },
+    
+    # Example 10: Free-Form/Explanatory Question (Biology for Dummies)
+    {
+        "role": "user",
+        "content": """
+Now, process the following:
+
+What specific chemical mechanism is used to link the foundational units of the material that reinforces skin cells and provides their toughness?
+
+Context:
+1. [ATOMIC FACTS]:
+   * Skin cells need lots of the protein keratin.
+   * Keratin is a protein that provides toughness to skin cells.
+   * The matrix of bone cells consists of collagen hardened by calcium and phosphate crystals.
+2. [CONDITIONAL RULES]:
+   * IF a cell needs to perform a specific job, THEN it requires a specific protein.
+   * IF a cell is a skin cell, THEN it needs lots of the protein keratin.
+3. [EXCEPTIONS]:
+   * None
+4. [LOGICAL GAPS]:
+   * The specific chemical mechanism used to link the foundational units of the material that reinforces skin cells is not mentioned in the provided context.
+   * The relationship between keratin and the toughness of skin cells is mentioned, but the exact chemical mechanism of how keratin provides this toughness is not specified.
+        """
+    },
+    {
+        "role": "assistant",
+        "content": r"""
+<planning>
+
+Target Query: The user is asking for a specific entity (a chemical mechanism). The query MUST strictly be chemical_mechanism(keratin, Mechanism)..
+
+Grounded Facts: I need to encode the extracted text showing that keratin is the protein that provides toughness to skin_cells. The exact chemical mechanism is identified as a logical gap.
+
+IF-THEN Rules: Following critical fallback instructions, I will formulate the biological fact from my internal knowledge: Keratin is a protein, and the foundational units of all proteins (amino acids) are linked together by peptide bonds. The bridging rule will be: IF a material is a protein, THEN its foundational units are linked by peptide bonds.
+</planning>
+
+<reasoning_step>
+Encode the explicitly extracted facts defining the material and its biological category.
+reinforces(keratin, skin_cells).
+is_type(keratin, protein).
+</reasoning_step>
+
+<reasoning_step>
+Rely on internal expert knowledge to fill the logical gap regarding how the foundational units of this category are linked.
+links_foundational_units(protein, peptide_bond).
+</reasoning_step>
+
+<reasoning_step>
+Formulate the minimalist bridging rule to unify the specific material with the underlying chemical mechanism, avoiding unnecessary recursive logic.
+chemical_mechanism(Material, Mechanism) :-
+is_type(Material, Category),
+links_foundational_units(Category, Mechanism).
+</reasoning_step>
+
+<database>
+reinforces(keratin, skin_cells).
+is_type(keratin, protein).
+
+links_foundational_units(protein, peptide_bond).
+
+chemical_mechanism(Material, Mechanism) :-
+is_type(Material, Category),
+links_foundational_units(Category, Mechanism).
+</database>
+
+<query>
+chemical_mechanism(keratin, Mechanism).
+</query>
+"""
     }
 ]
+
+
 EXPLAINER_SYSTEM_PROMPT = rf"""
 ### Role
 You are a Logical Translator. Take the formal output of a Prolog s(CASP) solver and transform it into a clear, step-by-step natural language explanation in relation to the query and to arrive at an answer.

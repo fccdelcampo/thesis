@@ -37,6 +37,14 @@ def generate(llm, retriever, query, original_query: str = "") -> dict:
     first_run_answer = graph_rag_results.answer
     retrieved_context = graph_rag_results.retriever_result
     
+    # print("=========(driver) GRAPHRAG RETRIEVED CONTEXT:========")
+    # print(graph_rag_results)
+    # print()
+    # print(f"{graph_rag_results.retriever_result}")
+    # print()
+    # print(f"{graph_rag_results.retriever_result.items}")
+    # print("=====================================================")
+    
     if ENABLE_DUAL_INFERENCE_PASS:
         # --- WIKIDATA INJECTION ---
         try:

@@ -62,12 +62,12 @@ def use_scasp():
     if SCASP_AVAILABLE:
         return
         
-    print("Attempting to load s(CASP)...")
+    # print("Attempting to load s(CASP)...")
     try:
         # Try to load first
         list(janus.query("use_module(library(scasp))."))
         janus.query_once("use_module(library(scasp/human)).")
-        print("s(CASP) loaded successfully.")
+        # print("s(CASP) loaded successfully.")
         SCASP_AVAILABLE = True
     except Exception:
         print("s(CASP) not found locally. Attempting installation...")
@@ -98,7 +98,7 @@ def run_pipeline(question: str, retrieved_context: str) -> dict:
     
     # Safely print retrieved context to avoid Windows charmap encoding errors with chars like \u2192 (→)
     safe_context = retrieved_context.encode('utf-8', errors='replace').decode('utf-8')
-    print(f"**Retrieved Context:**\n{safe_context}")
+    # print(f"**Retrieved Context:**\n{safe_context}")
 
     # Re-prime Ollama's KV cache with the static few-shot prefix.
     # GraphRAG (same model) runs just before us and evicts the cache.
@@ -107,7 +107,7 @@ def run_pipeline(question: str, retrieved_context: str) -> dict:
     reset_kv_cache_flag()
     warmup_prolog_model()
 
-    print("Generating Prolog...")
+    # print("Generating Prolog...")
     final_context = retrieved_context + "\n"
 
     prolog_error: str | None = None  # None = success; str = error message on failure
@@ -121,15 +121,15 @@ def run_pipeline(question: str, retrieved_context: str) -> dict:
             retrieved_context=final_context,
             most_recent_error=None,
         )
-        print(f"**Extracted database:**\n{database}")
-        print(f"**Extracted query:**\n{query}")
+        # print(f"**Extracted database:**\n{database}")
+        # print(f"**Extracted query:**\n{query}")
 
         if not SCASP_AVAILABLE:
             raise RuntimeError("s(CASP) library is specifically required for this pipeline. Execution aborted.")
 
         wrapper = ""
 
-        print("Generating s(CASP) wrapper...")
+        # print("Generating s(CASP) wrapper...")
         wrapper = generate_safe_scasp_wrapper(query)
         # print(f"**Wrapper:** \n{wrapper}")
         final_query = f"explain(Explanation)."
@@ -138,7 +138,7 @@ def run_pipeline(question: str, retrieved_context: str) -> dict:
         janus.consult("user", database + "\n" + wrapper)
         try:
         # if True:
-            print("Querying database...", flush=True)
+            # print("Querying database...", flush=True)
             result = janus.query_once(final_query)
             print(f"**Query Results:** \n{result}", flush=True)
             
@@ -169,7 +169,8 @@ def run_pipeline(question: str, retrieved_context: str) -> dict:
             human_readable_explanation=human_readable_explanation,
         )
         if explainer_output:
-            print(f"**Explainer Output:** \n{explainer_output}")
+            # print(f"**Explainer Output:** \n{explainer_output}")
+            pass
         else:
             print("ERROR: Explainer failed to generate output.")
     # else:

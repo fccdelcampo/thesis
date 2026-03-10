@@ -511,10 +511,11 @@ def run_pipeline(question: str, fallback: str) -> dict:
     # print("DEBUG PROLOG-GRAPHRAG [run_pipeline]: Starting generate (retriever + LLM)...", flush=True)
     success = False
     graph_rag = GraphRAG(llm=retriever_llm, retriever=retriever, prompt_template=GRAPHRAG_TEMPLATE if fallback == "prolog-graphrag" else GRAPHRAG_FALLBACK_TEMPLATE)
+    retriever_result = []
     try:
         graph_rag_results = graph_rag.search(query, retriever_config={'top_k': 5}, return_context=True)
         retriever_result = graph_rag_results.retriever_result
-        print(f"RESULTS:\n{retriever_result}")
+        # print(f"RESULTS:\n{retriever_result}")
         answer_dict = graph_rag_results.answer
         answer = answer_dict.get("answer", "") if isinstance(answer_dict, dict) else str(answer_dict)
         logprobs = answer_dict.get("logprobs", {}) if isinstance(answer_dict, dict) else {}
@@ -530,7 +531,7 @@ def run_pipeline(question: str, fallback: str) -> dict:
         "text_context": text_context,
         "answer": answer if success else "Error during generation.",
         "logprobs": logprobs if success else [],
-        "retriever_results": retriever_result if success else [],
+        "retriever_results": retriever_result,
     }
     
 
@@ -604,7 +605,7 @@ def clear_local_data():
 
 def main():
     # Uncomment to clear data before running tests
-    clear_local_data() 
+    # clear_local_data() 
     # _run_async(perform_tests())
     pass
 

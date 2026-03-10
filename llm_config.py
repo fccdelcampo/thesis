@@ -66,6 +66,7 @@ def retry_with_exponential_backoff(
 
 # ── Model / Endpoint Configuration ──────────────────────────────────────────
 ENABLE_LLAMA_3 = True
+USE_OPENAI_API = True
 if USE_TOGETHER_API:
     BASE_URL = "https://api.together.xyz/v1"
     API_KEY = os.environ.get("TOGETHER_API_KEY", "")

@@ -24,14 +24,14 @@ def run_pipeline(question: str, flag: Literal['q', r"x\c", "x"], sample_mode: bo
     # Separate inference run for deciding if pipeline would fall back to GraphRAG
     fallback = decide_fallback(question)
     print(f"    Question: {question}")
-    if fallback == "prolog-graphrag":
-        print("     Fallback decision: NO — proceeding with Prolog inference.\n")
-    elif fallback == "graphrag":
-        print("     Fallback decision: YES — skipping Prolog and using GraphRAG answer directly.\n")
-    elif fallback == "tuned":
-        print("     Fallback decision: YES — skipping Prolog and using LLM answer directly.\n")
-    else:
-        raise ValueError(f"Invalid fallback {fallback}")
+    # if fallback == "prolog-graphrag":
+    #     # print("     Fallback decision: NO — proceeding with Prolog inference.\n")
+    # elif fallback == "graphrag":
+    #     # print("     Fallback decision: YES — skipping Prolog and using GraphRAG answer directly.\n")
+    # elif fallback == "tuned":
+    #     # print("     Fallback decision: YES — skipping Prolog and using LLM answer directly.\n")
+    # else:
+    #     raise ValueError(f"Invalid fallback {fallback}")
     # fallback = "prolog-graphrag"
     if fallback == "tuned":
         llm_output = generate(question, retrieved_context=None, explainer_output=None, fallback=fallback, flag=flag, sample_mode=sample_mode)
@@ -62,8 +62,10 @@ def run_pipeline(question: str, flag: Literal['q', r"x\c", "x"], sample_mode: bo
         graphrag_logprobs = graphrag_output.get("logprobs", []) if graphrag_output else {}
         graphrag_retriever_results = graphrag_output.get("retriever_results", []) if graphrag_output else []
         query = graphrag_output.get("query", question) if graphrag_output else question
+        raw_context_strings = []
+        condensed_context = ""
         
-        if flag != "q" and graphrag_output and fallback == "prolog-graphrag":
+        if flag != "q" and graphrag_output and fallback != "tuned":
             # Print the intermediate GraphRAG logical evidence to the terminal for transparency
             print("\n" + "="*80)
             print("GRAPHRAG CONDENSED CONTEXT")
@@ -71,8 +73,8 @@ def run_pipeline(question: str, flag: Literal['q', r"x\c", "x"], sample_mode: bo
             print(graphrag_output.get("answer", "No condensed context found."))
             print("="*80 + "\n")
             print("DEBUG PROLOG-GRAPHRAG:Transferring evidence to Prolog engine...\n")
-            condensed_context = graphrag_output.get("answer", [])  # raw RetrieverResultItem list
-            raw_context_strings = graphrag_output.get("retriever_results", [])  # raw strings from retriever for LLM input
+            condensed_context = graphrag_answer
+            raw_context_strings = graphrag_retriever_results
         else:
             condensed_context = ""
             raw_context_strings = []
@@ -81,8 +83,7 @@ def run_pipeline(question: str, flag: Literal['q', r"x\c", "x"], sample_mode: bo
         if isinstance(raw_context_strings, list):
             kbpedia_items = []
             wikidata_items = []
-            raw_context_strings = []
-            for item in condensed_context:
+            for item in graphrag_retriever_results:
                 src = ""
                 if hasattr(item, "metadata"):
                     src = (item.metadata or {}).get("source", "")
@@ -95,28 +96,28 @@ def run_pipeline(question: str, flag: Literal['q', r"x\c", "x"], sample_mode: bo
                 else:
                     kbpedia_items.append(item_str)
 
-            if SKIP_LOGICAL_EVIDENCE_LLM:
-                # Bypass the GRAPHRAG_TEMPLATE LLM step — pass raw triples directly to Prolog.
-                # This is richer and avoids the intermediate LLM bottleneck.
-                retrieved_context_str = "\n".join(raw_context_strings)
-                print("DEBUG PROLOG-GRAPHRAG:SKIP_LOGICAL_EVIDENCE_LLM=True — passing raw triples to Prolog.")
-            else:
-                # Default: use the LLM-distilled logical evidence text as context
-                retrieved_context_str = condensed_context if graphrag_output else ""
+            # if SKIP_LOGICAL_EVIDENCE_LLM:
+            #     # Bypass the GRAPHRAG_TEMPLATE LLM step — pass raw triples directly to Prolog.
+            #     # This is richer and avoids the intermediate LLM bottleneck.
+            #     retrieved_context_str = "\n".join(raw_context_strings)
+            #     print("DEBUG PROLOG-GRAPHRAG:SKIP_LOGICAL_EVIDENCE_LLM=True — passing raw triples to Prolog.")
+            # else:
+            #     # Default: use the LLM-distilled logical evidence text as context
+            #     retrieved_context_str = condensed_context if graphrag_output else ""
 
             # Append Wikidata facts to context_from_prompt so they reach the synthesis LLM
             if wikidata_items:
                 wikidata_block = "\n\nWikidata Background Facts (for context, not Prolog logic):\n" + "\n".join(wikidata_items)
                 # context_from_prompt = (context_from_prompt or "") + wikidata_block
         else:
-            retrieved_context_str = str(condensed_context) if condensed_context else ""
+            retrieved_context_str = raw_context_strings
 
         pgr_results = {}
         prolog_error, explainer_output, final_answer = None, None, None
         llm_logprobs = []
         if fallback == "prolog-graphrag":
             try:
-                pgr_results = prolog_driver.run_pipeline(question=question, retrieved_context=retrieved_context_str) if flag != "q" else None
+                pgr_results = prolog_driver.run_pipeline(question=question, retrieved_context=condensed_context) if flag != "q" else None
             except Exception as e:
                 prolog_error = f"Error occurred while running Prolog pipeline: {e}"
             else:
@@ -143,7 +144,8 @@ def run_pipeline(question: str, flag: Literal['q', r"x\c", "x"], sample_mode: bo
                 "logprobs": logprobs,
                 "database": pgr_results.get("database", "") if pgr_results else "No database generated.",
                 "query": query,
-                "contexts": retrieved_context_str if isinstance(retrieved_context_str, list) else [condensed_context] if condensed_context else [],
+                "condensed_context": condensed_context,
+                "contexts": retrieved_context_str,
                 "prolog_explanation": pgr_results.get("prolog_explanation", "") if pgr_results else "",
                 "explainer_output": pgr_results.get("explainer_output", "") if pgr_results else "No explainer output generated.",
                 "prolog_error": pgr_results.get("prolog_error") if pgr_results else None,

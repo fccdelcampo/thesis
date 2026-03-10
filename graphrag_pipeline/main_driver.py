@@ -40,7 +40,7 @@ def run_pipeline(question: str) -> dict:
         _run_async(process_context(neo4j_driver, kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=[]))
     return generate(retriever_llm, retriever, question)
 
-_run_async(process_context(neo4j_driver, kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=[]))
+# _run_async(process_context(neo4j_driver, kg_builder_pdf=kg_builder_pdf, kg_builder_text=kg_builder_text, texts=[]))
 # run_pipeline("What is the capital of France?")
     
 # def load_test_cases(name: str, start: int, end: int) -> dict:
