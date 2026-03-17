@@ -11961,3 +11961,16 @@ Traceback (most recent call last):
     if lock.acquire(block, timeout):
        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 KeyboardInterrupt
+Traceback (most recent call last):
+  File "c:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 2, in <module>
+    from .graphrag import graphrag_driver
+ImportError: attempted relative import with no known parent package
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\main_driver.py", line 11, in <module>
+    from llm import generate
+  File "c:\Users\John Reniel\thesis\thesis\prolog_graphrag_pipeline\llm.py", line 13, in <module>
+    from .config import FALLBACK_MESSAGES
+ImportError: attempted relative import with no known parent package
