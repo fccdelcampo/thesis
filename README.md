@@ -25,11 +25,9 @@ Three systems are compared:
 
 | System | Folder | Description |
 |---|---|---|
-| **Llama 3 8B** | n/a | Baseline LLM without retrieval |
+| **Llama 3 8B** | `tuned_pipeline/` | Baseline LLM without retrieval |
 | **GraphRAG-only** | `graphrag_pipeline/` | Llama 3 8B with graph-based retrieval |
 | **Prolog-GraphRAG** | `prolog_graphrag_pipeline/` | GraphRAG plus Prolog-based symbolic reasoning |
-
-`tuned_pipeline/` holds an additional tuned variant.
 
 ## Pipeline Architecture
 
@@ -130,7 +128,7 @@ python -m graphrag_pipeline.main_driver [args]
 - Test sets: `test_cases/`
 
 ### 3. Calibration (Semantic Entropy)
-- Calibration compared across all three systems, with J-statistic
+- Calibration compared across three prompt configurations: question only, question + GraphRAG context, and question + GraphRAG context + Prolog-GraphRAG results
 - Test cases drawn from the RAGAS dataset
 - Code: `explainability_evaluation_pipeline/code/`
 
@@ -142,8 +140,6 @@ python -m graphrag_pipeline.main_driver [args]
 Results (CSVs and plots) are stored in `hallucination_evaluation_results/` and `explainability_evaluation_results/`.
 
 ## Results
-
-> Fill in once finalized.
 
 | Evaluation | Llama 3 8B | GraphRAG-only | Prolog-GraphRAG |
 |---|---|---|---|
@@ -177,7 +173,7 @@ Results (CSVs and plots) are stored in `hallucination_evaluation_results/` and `
 
 ## License
 
-MIT. Source documents in `documents/` (MIT OCW game theory chapters, "... for Dummies" science books) belong to their respective owners and are subject to their own terms.
+MIT. Source documents in `documents/` ("... for Dummies" science books) belong to their respective owners and are subject to their own terms.
 
 ## Contact
 
