@@ -95,14 +95,6 @@ pip install -r requirements.txt
 pip install -r prolog_graphrag_pipeline/requirements.txt
 ```
 
-### Knowledge sources
-
-The retrieval stage uses KBpedia (see `kbpedia_reference_concepts_linkage.n3` in the repo root) and Wikidata. [Describe any one-time setup, e.g. loading KBpedia via `kbpedia_loader.py`.]
-
-### Configuration
-
-Set pipeline options in `prolog_graphrag_pipeline/config.py` and `prolog_graphrag_pipeline/prolog/prolog_config.py`. [Describe required environment variables or API keys.]
-
 ## Usage
 
 > Replace the commands below with the actual arguments of your drivers.
